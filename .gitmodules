@@ -1,0 +1,3 @@
+[submodule "tileserver/vector-tiles-sample"]
+	path = tileserver/vector-tiles-sample
+	url = https://github.com/klokantech/vector-tiles-sample.git
