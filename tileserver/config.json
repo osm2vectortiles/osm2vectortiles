@@ -1,0 +1,11 @@
+{
+  "/": {
+    "source": "tmstyle:///data/countries.tm2"
+  },
+  "/vector": {
+    "source": "mbtiles:///data/countries.mbtiles"
+  },
+  "/raster": {
+    "source": "tmstyle:///data/countries.tm2"
+  }
+}

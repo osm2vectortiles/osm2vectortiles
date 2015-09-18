@@ -8,18 +8,16 @@ RUN mkdir -p /tmp/mapbox-studio-default-fonts && \
     cp /tmp/mapbox-studio-default-fonts/**/*.ttf /fonts && \
     rm -rf /tmp/mapbox-studio-default-fonts
 
-ENV MAPNIK_FONT_PATH=/fonts
-
 RUN npm install -g tessera
 RUN npm install -g mbtiles \
 		   tilelive-tmstyle \
 	 	   tilelive-http
 
-COPY run_tessera.sh /usr/src/app/run_tessera.sh
-
+COPY config.json /usr/src/app/config.json
 VOLUME /data
 
-EXPOSE 80
-EXPOSE 8080
+ENV MAPNIK_FONT_PATH=/fonts
+ENV PORT=80
 
-CMD ["/usr/src/app/run_tessera.sh"]
+EXPOSE 80
+CMD ["tessera", "-c", "/usr/src/app/config.json"]
