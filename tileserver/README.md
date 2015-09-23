@@ -16,7 +16,7 @@ The container will complain about missing `tm2` style projects.
 
 Mount your `mbtiles` files and `tm2` style projects into the `/data` volume.
 
-![Configured volumes for container](screenshots/tileserver_kitematic_volumes.png)
+![Configured volumes for container](screenshots/tileserver_kitematic_volumes_configured.png)
 
 Now restart the container. You should be up and running serving generated raster tiles.
 
