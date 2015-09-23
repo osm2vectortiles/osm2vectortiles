@@ -51,3 +51,8 @@ Given the current folder contains the following files and directories.
 
 The original source `mapbox:///klokantech.97cbd1e1` in the `project.yml` will
 now be replaced with `mbtiles:///data/countries.mbtiles`.
+
+## Test
+
+Run `test.sh` to execute and test the tileserver container with the
+[vector-tiles-sample](https://github.com/klokantech/vector-tiles-sample) project.
