@@ -25,7 +25,7 @@ VOLUME /data
 ENV SOURCE_DATA_DIR=/data
 
 # destination of modified tm2 projects
-VOLUME /project
+RUN mkdir -p /project
 ENV DEST_DATA_DIR=/project
 
 EXPOSE 80
