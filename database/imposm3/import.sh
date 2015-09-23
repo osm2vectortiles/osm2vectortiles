@@ -10,9 +10,9 @@ IMPOSM_BIN=${IMPOSM_BIN:-/imposm3}
 IMPOSM_CACHE_DIR=$DATA_DIR/cache
 MAPPING_JSON=${MAPPING_JSON:-/usr/src/app/mapping.json}
 
-DB_NAME=${DB_NAME:-osm}
-DB_USER=${DB_USER:-osm}
-DB_PASS=${DB_PASS:-osm}
+DB_NAME=osm
+DB_USER=osm
+DB_PASS=osm
 
 if [[ $TYPE == 'metro' ]]; then
     TYPE_DIR=$METRO_DIR

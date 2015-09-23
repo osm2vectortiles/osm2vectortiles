@@ -22,13 +22,13 @@ RUN mkdir -p /opt/imposm \
     && GOPATH=/opt/imposm go get imposm3 \
     && GOPATH=/opt/imposm go build -o /usr/src/app/imposm3 imposm3 \
     && cd / \
-    && rm -rf /opt/imposm \
+    && rm -rf /opt/imposm
 
 RUN apt-get purge -y --auto-remove golang git mercurial
-ENV IMPOSM_BIN=/usr/src/app/imposm
+ENV IMPOSM_BIN=/usr/src/app/imposm3
 
-COPY import.sh /usr/src/app
-COPY mapping.json /usr/src/app
+COPY import.sh /usr/src/app/
+COPY mapping.json /usr/src/app/
 ENV MAPPING_JSON=/usr/src/app/mapping.json
 WORKDIR /usr/src/app
 
