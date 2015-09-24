@@ -94,3 +94,21 @@ as well as imposm settings.
 | `IMPOSM_CACHE_DIR` | /data/cache               | Imposm cache directory  |
 | `IMPOSM_BIN`       | /usr/src/app/imposm3      | Imposm executable path  |
 | `MAPPING_JSON`     | /usr/src/app/mapping.json | Imposm mapping config   |
+
+## Develop tm2source Projects with Mapbox Container
+
+To develop our tm2source projects we use Mapbox in a Docker container on a more powerful server.
+To access the container from outside you should expose port 3000.
+
+
+```bash
+docker run --rm --name mapbox \
+    -v /data/projects:/data/projects \
+    -p 3000:3000 \
+    --link postgis:db \
+    osm2vectortiles/mapbox-studio-classic
+```
+
+Configuring the PostGIS hostname and port in tm2source layers is difficult without inspecting the linked
+container. Therefore the easiest way is to expose the port 5432 on the PostGIS container and connect
+to it directly.
