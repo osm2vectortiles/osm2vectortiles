@@ -1,19 +1,21 @@
-#!/bin/sh
-set -e
+#!/bin/bash
+set -o errexit
+set -o pipefail
+set -o nounset
 
-# Perform all actions as $POSTGRES_USER
+# perform all actions as $POSTGRES_USER
 export PGUSER="$POSTGRES_USER"
 
-# Create the 'template_postgis' template db
+# create the 'template_postgis' template db
 psql --dbname="$POSTGRES_DB" <<- 'EOSQL'
 CREATE DATABASE template_postgis;
 UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template_postgis';
 EOSQL
 
-# Load PostGIS into both template_database and $POSTGRES_DB
+# load PostGIS into both template_database and $POSTGRES_DB
 cd "/usr/share/postgresql/$PG_MAJOR/contrib/postgis-$POSTGIS_MAJOR"
 for DB in template_postgis "$POSTGRES_DB"; do
-	echo "Loading PostGIS into $DB via CREATE EXTENSION"
+	echo "Loading PostGIS into $DB"
 	psql --dbname="$DB" <<-'EOSQL'
 		CREATE EXTENSION postgis;
 		CREATE EXTENSION hstore;
@@ -22,3 +24,6 @@ for DB in template_postgis "$POSTGRES_DB"; do
 		CREATE EXTENSION postgis_tiger_geocoder;
 	EOSQL
 done
+
+echo "Loading vt-util functions into template_postgis"
+psql --dbname="template_postgis" -f "$VT_UTIL_DIR/postgis-vt-util.sql"
