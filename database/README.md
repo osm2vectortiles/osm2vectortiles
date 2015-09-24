@@ -17,7 +17,7 @@ On first startup the container will automatically create a OSM database from
 the modified PostGIS template containing the additional hstore extension and
 the [postgis-vt-util](https://github.com/mapbox/postgis-vt-util) functions from Mapbox.
 
-```
+```bash
 docker run --name postgis \
     -v /data/pgdata:/var/lib/postgresql/data \
     -e POSTGRES_USER=postgres \
@@ -50,6 +50,15 @@ the [mdillon/postgis](https://hub.docker.com/r/mdillon/postgis/) image.
 
 ## Run the Imposm  Import
 
+Download OSM areas from [Geofabrik](http://download.geofabrik.de/)
+or [Mapzen](https://mapzen.com/data/metro-extracts).
+
+Example of downloading a Metro extract of Zurich Switzerland.
+
+```bash
+wget https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf
+```
+
 Mount the import data directory containing the PBF files to import
 and the imposm cache directory to speed up multiple runs.
 
@@ -58,13 +67,30 @@ as `db`.
 The container will use a custom mapping.json to import the data into
 the `db` database container.
 
-```
+```bash
 docker run --rm --name imposm \
     -v /data/import:/data/import \
-    -v /data/imposm-cache:/data/imposm \
-    -t osm2vectortiles/imposm \
+    -v /data/cache:/data/cache \
     --link postgis:db \
+    -e OSM_DB=osm \
+    -e OSM_USER=osm \
+    -e OSM_PASSWORD=osm \
     osm2vectortiles/imposm3
 ```
 
 This will take a long time depending on the data you want to import.
+
+### Customize Import
+
+You can configure the database settings where the data should be imported
+as well as imposm settings.
+
+| Env                | Default                   | Description             |
+|--------------------|---------------------------|-------------------------|
+| `OSM_DB`           | osm                       | Database name           |
+| `OSM_USER`         | osm                       | Database owner          |
+| `OSM_PASSWORD`     | osm                       | Database owner password |
+| `IMPORT_DATA_DIR`  | /data/import              | PBF import directory    |
+| `IMPOSM_CACHE_DIR` | /data/cache               | Imposm cache directory  |
+| `IMPOSM_BIN`       | /usr/src/app/imposm3      | Imposm executable path  |
+| `MAPPING_JSON`     | /usr/src/app/mapping.json | Imposm mapping config   |

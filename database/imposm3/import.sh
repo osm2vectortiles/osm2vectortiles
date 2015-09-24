@@ -3,35 +3,30 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-TYPE=$1
-AREA=$2
-
-DATA_DIR=${DATA_DIR:-/data}
-METRO_DIR=$DATA_DIR/metro
+IMPORT_DATA_DIR=${IMPORT_DATA_DIR:-/data/import}
+IMPOSM_CACHE_DIR=${IMPOSM_CACHE_DIR:-/data/cache}
 
 IMPOSM_BIN=${IMPOSM_BIN:-/imposm3}
-IMPOSM_CACHE_DIR=$DATA_DIR/cache
 MAPPING_JSON=${MAPPING_JSON:-/usr/src/app/mapping.json}
 
-DB_NAME=osm
-DB_USER=osm
-DB_PASS=osm
-
-if [[ $TYPE == 'metro' ]]; then
-    TYPE_DIR=$METRO_DIR
-    FILENAME=${AREA}.osm.pbf
-    URL="https://s3.amazonaws.com/metro-extracts.mapzen.com/${FILENAME}"
-fi
-
-PBF_FILEPATH=$TYPE_DIR/$FILENAME
-DIR=$(dirname $PBF_FILEPATH)
-
-mkdir -p $DIR
-cd $DIR && curl -O $URL
-
-mkdir -p $IMPOSM_CACHE_DIR
+OSM_DB=${OSM_DB:-osm}
+OSM_USER=${OSM_USER:-osm}
+OSM_PASSWORD=${OSM_PASSWORD:-osm}
 
 DB_SCHEMA=public
-PG_CONNECT="postgis://$DB_USER:$DB_PASS@$DB_PORT_5432_TCP_ADDR/$DB_NAME"
-$IMPOSM_BIN import -connection $PG_CONNECT -mapping $MAPPING_JSON -appendcache -cachedir=$IMPOSM_CACHE_DIR -read $PBF_FILEPATH
-$IMPOSM_BIN import -connection $PG_CONNECT -mapping $MAPPING_JSON -appendcache -cachedir=$IMPOSM_CACHE_DIR -write -dbschema-import=${DB_SCHEMA}
+PG_CONNECT="postgis://$OSM_USER:$OSM_PASSWORD@$DB_PORT_5432_TCP_ADDR/$OSM_DB"
+
+if [ "$(ls -A $IMPORT_DATA_DIR/*.pbf 2> /dev/null)" ]; then
+    for PBF_FILE in "$IMPORT_DATA_DIR"/*.pbf; do
+        $IMPOSM_BIN import -connection $PG_CONNECT -mapping $MAPPING_JSON -appendcache -cachedir=$IMPOSM_CACHE_DIR -read $PBF_FILE
+        $IMPOSM_BIN import -connection $PG_CONNECT -mapping $MAPPING_JSON -appendcache -cachedir=$IMPOSM_CACHE_DIR -write -dbschema-import=${DB_SCHEMA}
+    done
+else
+    echo "No PBF files for import found."
+    echo "Please mount the $IMPORT_DATA_DIR volume to a folder containing OSM PBF files."
+    exit 404
+fi
+
+if ! [ "$(ls -A $IMPORT_DATA_DIR)" ]; then
+    echo "To speed up imposm import over subsequent runs you should mount the $IMPOSM_CACHE_DIR to a empty folder."
+fi

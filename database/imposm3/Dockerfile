@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 ENV IMPOSM_VERSION 32623ccce097584be79ec8617dfae42d595ac2b8
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Build imposm3 binary and clean up afterwards
+# build imposm3 binary and clean up afterwards
 RUN mkdir -p /usr/src/app
 RUN apt-get update && \
     apt-get install -y golang \
@@ -32,7 +32,10 @@ COPY mapping.json /usr/src/app/
 ENV MAPPING_JSON=/usr/src/app/mapping.json
 WORKDIR /usr/src/app
 
-VOLUME /data
-ENV DATA_DIR=/data
+VOLUME /data/import
+ENV IMPORT_DATA_DIR=/data/import
+
+VOLUME /data/cache
+ENV IMPOSM_CACHE_DIR=/data/cache
 
 CMD ["./import.sh"]
