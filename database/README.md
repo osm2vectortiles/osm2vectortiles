@@ -3,6 +3,9 @@
 Infrastructure to create a docker based OSM Postgis database
 to create vector tiles from.
 
+The database is separated from the import process. You can switch
+out the database container with a existing database.
+
 # Import
 
 ## Run the PostGIS container
