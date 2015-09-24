@@ -97,9 +97,12 @@ as well as imposm settings.
 
 ## Develop tm2source Projects with Mapbox Container
 
-To develop our tm2source projects we use Mapbox in a Docker container on a more powerful server.
+To develop our tm2source projects you can use Mapbox in a Docker container on a more powerful server
+or simply to ensure you develop in the same environment.
 To access the container from outside you should expose port 3000.
 
+You should map the directory where you keep your `tm2source` projects to `/data/projects` and
+open it in Mapbox Studio.
 
 ```bash
 docker run --rm --name mapbox \
