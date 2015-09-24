@@ -10,37 +10,61 @@ out the database container with a existing database.
 
 ## Run the PostGIS container
 
-Mount the folder where the database data should be stored in.
+Mount the folder where the database data should be stored in
+and start the database container.
+
+On first startup the container will automatically create a OSM database from
+the modified PostGIS template containing the additional hstore extension and
+the [postgis-vt-util](https://github.com/mapbox/postgis-vt-util) functions from Mapbox.
 
 ```
 docker run --name postgis \
-    -v $(pwd):/var/lib/postgresql/data
+    -v /data/pgdata:/var/lib/postgresql/data \
+    -e POSTGRES_USER=postgres \
+    -e POSTGRES_PASSWORD=postgres \
+    -e OSM_DB=osm \
+    -e OSM_USER=osm \
+    -e OSM_PASSWORD=osm \
     -d osm2vectortiles/postgis
 ```
 
-## Run the imposm import
+### Customize OSM database
 
-Mount the imposm cache.
-Supports metro extracts for now.
-https://mapzen.com/data/metro-extracts
+You can configure the database settings via environment variables.
 
+| Env            | Default | Description             |
+|----------------|---------|-------------------------|
+| `OSM_DB`       | osm     | Database name           |
+| `OSM_USER`     | osm     | Database owner          |
+| `OSM_PASSWORD` | osm     | Database owner password |
+
+More configuration options are supported through the
+[official Postgres Docker image](https://hub.docker.com/_/postgres/) and
+the [mdillon/postgis](https://hub.docker.com/r/mdillon/postgis/) image.
+
+| Env                 | Default | Description                |
+|---------------------|---------|----------------------------|
+| `POSTGRES_USER`     | osm     | Database admin             |
+| `POSTGRES_PASSWORD` | osm     | Database admin password    |
+| `PGDATA`            | osm     | Location of database files |
+
+## Run the Imposm  Import
+
+Mount the import data directory containing the PBF files to import
+and the imposm cache directory to speed up multiple runs.
+
+You also need to link our previously created `postgis` database container
+as `db`.
+The container will use a custom mapping.json to import the data into
+the `db` database container.
 
 ```
 docker run --rm --name imposm \
-    -v $(pwd):/data \
+    -v /data/import:/data/import \
+    -v /data/imposm-cache:/data/imposm \
     -t osm2vectortiles/imposm \
-    import.sh metro zurich_switzerland
+    --link postgis:db \
+    osm2vectortiles/imposm3
 ```
 
-## Docker Build
-
-The Postgis container is based of [mdillon/postgis](https://github.com/appropriate/docker-postgis)
-with the additional `hstore` extension.
-
-```
-cd postgis
-docker build -t osm2vectortiles/postgis
-```
-
-The imposm3 container is based of
-[wilsaj/everything-is-osm](https://github.com/wilsaj/everything-is-osm/tree/master/docker/imposm3).
+This will take a long time depending on the data you want to import.
