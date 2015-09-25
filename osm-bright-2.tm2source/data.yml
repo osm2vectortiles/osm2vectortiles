@@ -7,9 +7,9 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 7.2441
-  - 46.8362
-  - 10
+  - 8.6655
+  - 47.3031
+  - 12
 description: OSM Bright 2
 Layer: 
   - id: admin
@@ -75,6 +75,7 @@ Layer:
               WHEN type IN ('sand') THEN 'sand'
               WHEN type IN ('school', 'university') THEN 'school'
               WHEN type IN ('wood') THEN 'wood'
+              WHEN type IN ('forest') THEN 'wood'
               ELSE 'other' END AS class
             FROM osm_landusages_gen0
             WHERE geometry && !bbox!
@@ -93,6 +94,7 @@ Layer:
               WHEN type IN ('sand') THEN 'sand'
               WHEN type IN ('school', 'university') THEN 'school'
               WHEN type IN ('wood') THEN 'wood'
+              WHEN type IN ('forest') THEN 'wood'
               ELSE 'other' END AS class
             FROM osm_landusages_gen1
             WHERE geometry && !bbox!
@@ -111,6 +113,7 @@ Layer:
               WHEN type IN ('sand') THEN 'sand'
               WHEN type IN ('school', 'university') THEN 'school'
               WHEN type IN ('wood') THEN 'wood'
+              WHEN type IN ('forest') THEN 'wood'
               ELSE 'other' END AS class
             FROM osm_landusages
             WHERE geometry && !bbox!
@@ -863,22 +866,22 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-         (
-                  select geometry, osm_id, type, type as class from osm_waterways
-                    where type in ('river', 'canal')
-                    and z(!scale_denominator!) >= 8
-                    and geometry && !bbox!
-                  union all
-                  select geometry, osm_id, type, type as class from osm_waterways
-                    where type in ('stream', 'stream_intermittent')
-                    and z(!scale_denominator!) >= 13
-                    and geometry && !bbox!
-                  union all
-                  select geometry, osm_id, type, type as class from osm_waterways
-                    where type in ('drain', 'ditch')
-                    and z(!scale_denominator!) >= 15
-                    and geometry && !bbox!
-                ) AS data
+        (
+                 select geometry, osm_id, type, type as class from osm_waterways
+                   where type in ('river', 'canal')
+                   and z(!scale_denominator!) >= 8
+                   and geometry && !bbox!
+                 union all
+                 select geometry, osm_id, type, type as class from osm_waterways
+                   where type in ('stream', 'stream_intermittent')
+                   and z(!scale_denominator!) >= 13
+                   and geometry && !bbox!
+                 union all
+                 select geometry, osm_id, type, type as class from osm_waterways
+                   where type in ('drain', 'ditch')
+                   and z(!scale_denominator!) >= 15
+                   and geometry && !bbox!
+               ) AS data
       type: postgis
       user: osm
     description: ''
