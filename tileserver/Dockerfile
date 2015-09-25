@@ -8,6 +8,15 @@ RUN mkdir -p /tmp/mapbox-studio-default-fonts && \
     cp /tmp/mapbox-studio-default-fonts/**/*.otf /fonts && \
     cp /tmp/mapbox-studio-default-fonts/**/*.ttf /fonts && \
     rm -rf /tmp/mapbox-studio-default-fonts
+
+# download fonts required for osm bright
+RUN wget --quiet -P /fonts https://github.com/aaronlidman/Toner-for-Tilemill/raw/master/toner4tilemill/fonts/Arial-Bold.ttf && \
+    wget --quiet -P /fonts https://github.com/aaronlidman/Toner-for-Tilemill/raw/master/toner4tilemill/fonts/Arial-Regular.ttf && \
+    wget --quiet -P /fonts https://github.com/aaronlidman/Toner-for-Tilemill/raw/master/toner4tilemill/fonts/Arial-Unicode-Bold-Italic.ttf && \
+    wget --quiet -P /fonts https://github.com/aaronlidman/Toner-for-Tilemill/raw/master/toner4tilemill/fonts/Arial-Unicode-Bold.ttf && \
+    wget --quiet -P /fonts https://github.com/aaronlidman/Toner-for-Tilemill/raw/master/toner4tilemill/fonts/Arial-Unicode-Italic.ttf && \
+    wget --quiet -P /fonts https://github.com/aaronlidman/Toner-for-Tilemill/raw/master/toner4tilemill/fonts/Arial-Unicode-Regular.ttf
+
 ENV MAPNIK_FONT_PATH=/fonts
 
 # only install minimal amount of tessera packages
