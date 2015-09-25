@@ -1,15 +1,18 @@
 _prefs: 
   disabled: 
     - poi_label
+    - place_label
+    - state_label
+    - country_label
   inspector: false
   mapid: ''
   rev: ''
   saveCenter: true
 attribution: ''
 center: 
-  - 131.8874
-  - 43.1234
-  - 12
+  - 8.3853
+  - 46.878
+  - 9
 description: OSM Bright 2
 Layer: 
   - id: landuse
@@ -18,12 +21,12 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 'postgis.osm2vectortiles.org'
-      user: osm
+      host: postgis.osm2vectortiles.org
       key_field: osm_id
       max_size: 512
-      password: 'osm'
+      password: osm
       port: ''
+      srid: ''
       table: |-
         ( SELECT * FROM (
             -- landuse_gen0
@@ -82,6 +85,7 @@ Layer:
          ORDER BY area DESC
         ) AS data
       type: postgis
+      user: osm
     description: ''
     fields: 
       area: Number
@@ -97,12 +101,12 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 'postgis.osm2vectortiles.org'
-      user: osm
+      host: postgis.osm2vectortiles.org
       key_field: ''
       max_size: 512
-      password: 'osm'
+      password: osm
       port: ''
+      srid: ''
       table: |-
         ( SELECT geometry, osm_id, type
           FROM osm_aeroways
@@ -110,6 +114,7 @@ Layer:
             AND z(!scale_denominator!) >= 12
         ) AS data
       type: postgis
+      user: osm
     description: ''
     fields: 
       osm_id: Number
@@ -123,12 +128,12 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 'postgis.osm2vectortiles.org'
-      user: osm
+      host: postgis.osm2vectortiles.org
       key_field: osm_id
       max_size: 512
-      password: 'osm'
+      password: osm
       port: ''
+      srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, name, area
             FROM osm_buildings
@@ -137,6 +142,7 @@ Layer:
             ORDER BY ST_YMin(ST_Envelope(geometry)) DESC
         ) AS data
       type: postgis
+      user: osm
     description: ''
     fields: 
       area: Number
@@ -152,12 +158,12 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 'postgis.osm2vectortiles.org'
-      user: osm
+      host: postgis.osm2vectortiles.org
       key_field: osm_id
       max_size: 512
-      password: 'osm'
+      password: osm
       port: ''
+      srid: ''
       table: |-
         ( SELECT geometry, osm_id, type,
             CASE
@@ -177,6 +183,7 @@ Layer:
             ORDER BY area DESC
         ) AS data
       type: postgis
+      user: osm
     description: ''
     fields: 
       class: String
@@ -191,12 +198,12 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 'postgis.osm2vectortiles.org'
-      user: osm
+      host: postgis.osm2vectortiles.org
       key_field: osm_id
       max_size: 512
-      password: 'osm'
+      password: osm
       port: ''
+      srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, 0 as bridge, access, render, layer, tunnel,
           CASE
@@ -226,6 +233,7 @@ Layer:
           ORDER BY layer ASC, render ASC
         ) AS data
       type: postgis
+      user: osm
     description: ''
     fields: 
       access: String
@@ -245,12 +253,12 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 'postgis.osm2vectortiles.org'
-      user: osm
+      host: postgis.osm2vectortiles.org
       key_field: osm_id
       max_size: 512
-      password: 'osm'
+      password: osm
       port: ''
+      srid: ''
       table: |-
         ( SELECT * FROM (
             -- roads_low
@@ -308,6 +316,7 @@ Layer:
           ) AS QUERY
         ) AS data
       type: postgis
+      user: osm
     description: ''
     fields: 
       access: String
@@ -326,12 +335,12 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 'postgis.osm2vectortiles.org'
-      user: osm
+      host: postgis.osm2vectortiles.org
       key_field: osm_id
       max_size: 512
-      password: 'osm'
+      password: osm
       port: ''
+      srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, bridge, access, render, layer, 0 as tunnel,
           CASE
@@ -361,6 +370,7 @@ Layer:
           ORDER BY layer ASC, render ASC
         ) AS data
       type: postgis
+      user: osm
     description: ''
     fields: 
       access: String
@@ -380,12 +390,12 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 'postgis.osm2vectortiles.org'
-      user: osm
+      host: postgis.osm2vectortiles.org
       key_field: ''
       max_size: 512
-      password: 'osm'
+      password: osm
       port: ''
+      srid: ''
       table: |-
         (
           /* TODO get real name_en/name_de/name_es */
@@ -421,6 +431,7 @@ Layer:
             and geometry && !bbox!
         ) AS data
       type: postgis
+      user: osm
     description: ''
     fields: 
       name: String
@@ -435,12 +446,12 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 'postgis.osm2vectortiles.org'
-      user: osm
+      host: postgis.osm2vectortiles.org
       key_field: ''
       max_size: 512
-      password: 'osm'
+      password: osm
       port: ''
+      srid: ''
       table: |-
         (
           /* TODO get real name_en/name_de/name_es */
@@ -450,6 +461,7 @@ Layer:
             and geometry && !bbox!
         ) AS data
       type: postgis
+      user: osm
     description: ''
     fields: 
       area: Number
@@ -464,12 +476,12 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 'postgis.osm2vectortiles.org'
-      user: osm
+      host: postgis.osm2vectortiles.org
       key_field: ''
       max_size: 512
-      password: 'osm'
+      password: osm
       port: ''
+      srid: ''
       table: |-
         /* TODO get real name_en/name_de/name_es */
         /* TODO calculate real ranks and ldir */
@@ -499,6 +511,7 @@ Layer:
           ORDER BY population DESC NULLS LAST, osm_id
         ) AS data
       type: postgis
+      user: osm
     description: ''
     fields: 
       capital: String
@@ -519,12 +532,12 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 'postgis.osm2vectortiles.org'
-      user: osm
+      host: postgis.osm2vectortiles.org
       key_field: ''
       max_size: 512
-      password: 'osm'
+      password: osm
       port: ''
+      srid: ''
       table: |-
         (
           /* TODO calculate real ranks */
@@ -540,6 +553,7 @@ Layer:
             and geometry && !bbox!
         ) AS data
       type: postgis
+      user: osm
     description: ''
     fields: 
       localrank: Number
@@ -557,12 +571,12 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 'postgis.osm2vectortiles.org'
-      user: osm
+      host: postgis.osm2vectortiles.org
       key_field: ''
       max_size: 512
-      password: 'osm'
+      password: osm
       port: ''
+      srid: ''
       table: |-
         (
           select geometry, osm_id,
@@ -663,6 +677,7 @@ Layer:
             and geometry && !bbox!
         ) AS data
       type: postgis
+      user: osm
     description: ''
     fields: 
       class: String
@@ -680,12 +695,12 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 'postgis.osm2vectortiles.org'
-      user: osm
+      host: postgis.osm2vectortiles.org
       key_field: ''
       max_size: 512
-      password: 'osm'
+      password: osm
       port: ''
+      srid: ''
       table: |-
         (
           select geometry, osm_id,
@@ -710,6 +725,7 @@ Layer:
             and geometry && !bbox!
         ) AS data
       type: postgis
+      user: osm
     description: ''
     fields: 
       class: String
