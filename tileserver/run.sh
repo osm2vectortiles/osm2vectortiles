@@ -27,7 +27,7 @@ project_config_file="${project_dir%%/}/project.yml"
 vectortiles_name="${project_name%.tm2}.mbtiles"
 mbtiles_file="${source_data_dir%%/}/$vectortiles_name"
 
-echo "Found project ${project_name}.tm2"
+echo "Found project ${project_name}"
 
 # project config will be copied to new folder because we
 # modify the source configuration of the style and don't want
@@ -44,11 +44,14 @@ rm -f "${dest_project_dir%%/}/project.xml"
 # this allows developing rapidyl with an external source and then use the
 # mbtiles for dependency free deployment
 if [ -f "$mbtiles_file" ]; then
+    echo "Associating $vectortiles_name with $project_name"
     replace_expr="s|source: \".*\"|source: \"mbtiles://$mbtiles_file\"|g"
     sed -e "$replace_expr" $project_config_file > $dest_project_config_file
+else
+    echo "No mbtiles matching project $project_name found."
+    echo "Please name the mbtiles file the same as your style project."
+    exit 500
 fi
-
-echo "Associating $vectortiles_name with $project_name"
 
 exec tessera "tmstyle://$dest_project_dir" \
     --port $port \
