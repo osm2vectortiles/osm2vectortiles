@@ -6,8 +6,8 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 8.6655
-  - 47.3031
+  - 8.7122
+  - 47.3237
   - 12
 description: OSM Bright 2
 Layer: 
@@ -681,6 +681,103 @@ Layer:
       type: String
     properties: 
       "buffer-size": 64
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: water_label
+    Datasource: 
+      dbname: osm
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: ''
+      geometry_table: ''
+      host: postgis.osm2vectortiles.org
+      key_field: ''
+      max_size: 512
+      password: osm
+      port: 5432
+      srid: ''
+      table: |-
+          (
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area >= 5000000000
+                    and z(!scale_denominator!) >= 5
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 5000000000 and area >= 1500000000
+                    and z(!scale_denominator!) >= 5
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 1500000000 and area >= 500000000
+                    and z(!scale_denominator!) >= 8
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 500000000 and area >= 100000000
+                    and z(!scale_denominator!) >= 9
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 100000000 and area >= 40000000
+                    and z(!scale_denominator!) >= 10
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 40000000 and area >= 20000000
+                    and z(!scale_denominator!) >= 11
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 20000000 and area >= 10000000
+                    and z(!scale_denominator!) >= 12
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 10000000 and area >= 5000000
+                    and z(!scale_denominator!) >= 13
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 5000000 and area >= 1000000
+                    and z(!scale_denominator!) >= 14
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 1000000 and area >= 500000
+                    and z(!scale_denominator!) >= 15
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 500000 and area >= 100000
+                    and z(!scale_denominator!) >= 16
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 100000
+                    and z(!scale_denominator!) >= 17
+                    and geometry && !bbox!
+                ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      area: Number
+      name: String
+      name_en: String
+      osm_id: Number
+    properties: 
+      "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: poi_label
     Datasource: 
