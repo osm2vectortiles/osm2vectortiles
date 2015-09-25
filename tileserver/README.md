@@ -8,8 +8,7 @@ a raster tile server.
 
 ## Kitematic Usage
 
-Start a new container by searching for `lukasmartinelli/tileserver`
-(in future `geometalab/tileserver`).
+Start a new container by searching for `osm2vectortiles/tileserver`.
 The container will complain about missing `tm2` style projects.
 
 ![Container started unsucessfully](screenshots/tileserver_kitematic_started.png)
