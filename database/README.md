@@ -32,21 +32,21 @@ docker run --name postgis \
 
 You can configure the database settings via environment variables.
 
-| Env            | Default | Description             |
-|----------------|---------|-------------------------|
-| `OSM_DB`       | osm     | Database name           |
-| `OSM_USER`     | osm     | Database owner          |
-| `OSM_PASSWORD` | osm     | Database owner password |
+| Env            | Default   | Description             |
+|----------------|-----------|-------------------------|
+| `OSM_DB`       | `osm`     | Database name           |
+| `OSM_USER`     | `osm`     | Database owner          |
+| `OSM_PASSWORD` | `osm`     | Database owner password |
 
 More configuration options are supported through the
 [official Postgres Docker image](https://hub.docker.com/_/postgres/) and
 the [mdillon/postgis](https://hub.docker.com/r/mdillon/postgis/) image.
 
-| Env                 | Default | Description                |
-|---------------------|---------|----------------------------|
-| `POSTGRES_USER`     | osm     | Database admin             |
-| `POSTGRES_PASSWORD` | osm     | Database admin password    |
-| `PGDATA`            | osm     | Location of database files |
+| Env                 | Default                    | Description                |
+|---------------------|----------------------------|----------------------------|
+| `POSTGRES_USER`     | `postgres`                 | Database admin             |
+| `POSTGRES_PASSWORD` | no password                | Database admin password    |
+| `PGDATA`            | `/var/lib/postgresql/data` | Location of database files |
 
 ## Run the Imposm  Import
 
