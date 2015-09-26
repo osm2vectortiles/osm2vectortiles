@@ -13,9 +13,14 @@ source_cache_size=${SOURCE_CACHE_SIZE:-10}
 
 # find first tm2 project
 if [ "$(ls -A $source_data_dir)" ]; then
-    for _project_dir in "$source_data_dir"/*.tm2; do
-        [ -d "${_project_dir}" ] && project_dir="${_project_dir}" && break
-    done
+    if [ -d "$source_data_dir"/*.tm2 ]; then
+        for _project_dir in "$source_data_dir"/*.tm2; do
+            [ -d "${_project_dir}" ] && project_dir="${_project_dir}" && break
+        done
+    else
+        echo "No tm2 projects found. Please add a tm2 project to your mounted folder."
+        exit 404
+    fi
 else
     echo "No tm2 projects found. Please mount the $source_data_dir volume to a folder containing tm2 projects."
     exit 404
