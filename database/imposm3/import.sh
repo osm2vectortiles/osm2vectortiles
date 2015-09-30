@@ -19,7 +19,7 @@ PG_CONNECT="postgis://$OSM_USER:$OSM_PASSWORD@$DB_PORT_5432_TCP_ADDR/$OSM_DB"
 if [ "$(ls -A $IMPORT_DATA_DIR/*.pbf 2> /dev/null)" ]; then
     for PBF_FILE in "$IMPORT_DATA_DIR"/*.pbf; do
         $IMPOSM_BIN import -connection $PG_CONNECT -mapping $MAPPING_JSON -appendcache -cachedir=$IMPOSM_CACHE_DIR -read $PBF_FILE
-        $IMPOSM_BIN import -connection $PG_CONNECT -mapping $MAPPING_JSON -appendcache -cachedir=$IMPOSM_CACHE_DIR -write -dbschema-import=${DB_SCHEMA}
+        $IMPOSM_BIN import -connection $PG_CONNECT -mapping $MAPPING_JSON -appendcache -cachedir=$IMPOSM_CACHE_DIR -write -diff -dbschema-import=${DB_SCHEMA}
     done
 else
     echo "No PBF files for import found."
