@@ -13,4 +13,29 @@ OSM_PASSWORD=${OSM_PASSWORD:-osm}
 DB_SCHEMA=public
 PG_CONNECT="postgis://$OSM_USER:$OSM_PASSWORD@$DB_PORT_5432_TCP_ADDR/$OSM_DB"
 
+# project config will be copied to new folder because we # modify the source configuration 
+DEST_PROJECT_DIR="/project"
+DEST_PROJECT_FILE ="${DEST_PROJECT_DIR%%/}/project.yml"
+cp -rf "$SOURCE_PROJECT_DIR" "$DEST_PROJECT_DIR"
+
+# project.yml is single source of truth, therefore the mapnik
+# stylesheet is not necessary
+rm -f "${DEST_PROJECT_DIR%%/}/project.xml"
+
+# replace database connection with postgis container connection
+echo "Set connection string $PG_CONNECT"
+REPLACE_EXPR_1="s|host: .*|host: $DB_PORT_5432_TCP_ADDR|g"
+REPLACE_EXPR_2="s|port: .*|port: $DB_PORT_5432_TCP_PORT|g"
+REPLACE_EXPR_3="s|dbname: .*|dbname: $OSM_DB|g"
+REPLACE_EXPR_4="s|user: .*|user: $OSM_USER|g"
+REPLACE_EXPR_5="s|password: .*|password: $OSM_PASSWORD|g"
+
+sed -i "$REPLACE_EXPR_1" "$DEST_PROJECT_FILE"
+sed -i "$REPLACE_EXPR_2" "$DEST_PROJECT_FILE"
+sed -i "$REPLACE_EXPR_3" "$DEST_PROJECT_FILE"
+sed -i "$REPLACE_EXPR_4" "$DEST_PROJECT_FILE"
+sed -i "$REPLACE_EXPR_5" "$DEST_PROJECT_FILE"
+
+cat "$DEST_PROJECT_FILE"
+
 tl copy "tmsource://$SOURCE_PROJECT_DIR" "mbtiles://$EXPORT_DIR/tiles.mbtiles"
