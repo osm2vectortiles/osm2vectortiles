@@ -12,7 +12,11 @@ OSM_PASSWORD=${OSM_PASSWORD:-osm}
 
 DB_SCHEMA=public
 
-# project config will be copied to new folder because we # modify the source configuration 
+MIN_ZOOM=${MIN_ZOOM:-0}
+MAX_ZOOM=${MAX_ZOOM:-14}
+BBOX=${BBOX:--180, -85.0511, 180, 85.0511}
+
+# project config will be copied to new folder because we # modify the source configuration
 DEST_PROJECT_DIR="/project"
 DEST_PROJECT_FILE="${DEST_PROJECT_DIR%%/}/data.yml"
 cp -rf "$SOURCE_PROJECT_DIR" "$DEST_PROJECT_DIR"
@@ -34,4 +38,4 @@ sed -i "$REPLACE_EXPR_3" "$DEST_PROJECT_FILE"
 sed -i "$REPLACE_EXPR_4" "$DEST_PROJECT_FILE"
 sed -i "$REPLACE_EXPR_5" "$DEST_PROJECT_FILE"
 
-exec tl copy -s pyramid "tmsource://$SOURCE_PROJECT_DIR" "mbtiles://$EXPORT_DIR/tiles.mbtiles"
+exec tl copy -b "$BBOX" --min-zoom $MIN_ZOOM --max-zoom $MAX_ZOOM "tmsource://$SOURCE_PROJECT_DIR" "mbtiles://$EXPORT_DIR/tiles.mbtiles"
