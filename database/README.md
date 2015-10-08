@@ -20,11 +20,6 @@ the [postgis-vt-util](https://github.com/mapbox/postgis-vt-util) functions from 
 ```bash
 docker run --name postgis \
     -v /data/pgdata:/var/lib/postgresql/data \
-    -e POSTGRES_USER=postgres \
-    -e POSTGRES_PASSWORD=postgres \
-    -e OSM_DB=osm \
-    -e OSM_USER=osm \
-    -e OSM_PASSWORD=osm \
     -d osm2vectortiles/postgis
 ```
 
@@ -72,9 +67,6 @@ docker run --rm --name imposm \
     -v /data/import:/data/import \
     -v /data/cache:/data/cache \
     --link postgis:db \
-    -e OSM_DB=osm \
-    -e OSM_USER=osm \
-    -e OSM_PASSWORD=osm \
     osm2vectortiles/imposm3
 ```
 
