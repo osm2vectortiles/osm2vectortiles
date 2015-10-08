@@ -38,4 +38,4 @@ sed -i "$REPLACE_EXPR_3" "$DEST_PROJECT_FILE"
 sed -i "$REPLACE_EXPR_4" "$DEST_PROJECT_FILE"
 sed -i "$REPLACE_EXPR_5" "$DEST_PROJECT_FILE"
 
-exec tl copy -b "$BBOX" --min-zoom $MIN_ZOOM --max-zoom $MAX_ZOOM "tmsource://$SOURCE_PROJECT_DIR" "mbtiles://$EXPORT_DIR/tiles.mbtiles"
+exec tl copy -b "$BBOX" --min-zoom $MIN_ZOOM --max-zoom $MAX_ZOOM "tmsource://$DEST_PROJECT_DIR" "mbtiles://$EXPORT_DIR/tiles.mbtiles"
