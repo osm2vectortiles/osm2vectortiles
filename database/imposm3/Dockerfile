@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 
-ENV IMPOSM_VERSION 32623ccce097584be79ec8617dfae42d595ac2b8
+ENV IMPOSM_VERSION 4195e24dee253c802b08b6046f7d03337525f1f9
 ENV DEBIAN_FRONTEND=noninteractive
 
 # build imposm3 binary and clean up afterwards
