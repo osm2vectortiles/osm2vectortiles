@@ -43,6 +43,7 @@ The results are stored in the results directory. Just open the index.html file a
 #### Zooming in from zoom level 10 to 22
 
 50 concurrent users:
+```bash
 ================================================================================
 ---- Global Information --------------------------------------------------------
 > request count                                      10350 (OK=10348  KO=2     )
@@ -62,8 +63,10 @@ The results are stored in the results directory. Just open the index.html file a
 > java.util.concurrent.TimeoutException: Request timed out to ec      2 (100.0%)
 2-52-30-184-45.eu-west-1.compute.amazonaws.com/52.30.184.45:80...
 ================================================================================
+```
 
 100 concurrent users:
+```bash
 ================================================================================
 ---- Global Information --------------------------------------------------------
 > request count                                      20700 (OK=20643  KO=57    )
@@ -83,8 +86,10 @@ The results are stored in the results directory. Just open the index.html file a
 > java.util.concurrent.TimeoutException: Request timed out to ec     57 (100.0%)
 2-52-30-184-45.eu-west-1.compute.amazonaws.com/52.30.184.45:80...
 ================================================================================
+```
 
 150 concurrent users:
+```bash
 ================================================================================
 ---- Global Information --------------------------------------------------------
 > request count                                      31050 (OK=30719  KO=331   )
@@ -104,8 +109,10 @@ The results are stored in the results directory. Just open the index.html file a
 > java.util.concurrent.TimeoutException: Request timed out to ec    331 (100.0%)
 2-52-30-184-45.eu-west-1.compute.amazonaws.com/52.30.184.45:80...
 ================================================================================
+```
 
 200 concurrent users:
+```bash
 ================================================================================
 ---- Global Information --------------------------------------------------------
 > request count                                      41393 (OK=39942  KO=1451  )
@@ -129,4 +136,4 @@ ute.amazonaws.com
 > java.net.UnknownHostException: ec2-52-30-184-45.eu-west-1.comp      1 ( 0.07%)
 ute.amazonaws.com: unknown error
 ================================================================================
-
+```
