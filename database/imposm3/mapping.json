@@ -71,58 +71,57 @@
                 },
                 {
                     "args": {
-                        "ranks": [
-                            "pedestrian",
-                            "footway",
-                            "playground",
-                            "park",
-                            "forest",
-                            "cemetery",
-                            "farmyard",
-                            "farm",
-                            "farmland",
-                            "wood",
-                            "meadow",
-                            "grass",
-                            "wetland",
-                            "village_green",
-                            "recreation_ground",
-                            "garden",
-                            "sports_centre",
-                            "pitch",
-                            "common",
-                            "allotments",
-                            "golf_course",
-                            "university",
-                            "school",
-                            "college",
-                            "library",
-                            "baracks",
-                            "fuel",
-                            "parking",
-                            "nature_reserve",
-                            "cinema",
-                            "theatre",
-                            "place_of_worship",
-                            "hospital",
-                            "scrub",
-                            "orchard",
-                            "vineyard",
-                            "zoo",
-                            "quarry",
-                            "residential",
-                            "retail",
-                            "commercial",
-                            "industrial",
-                            "railway",
-                            "heath",
+                        "values": [
+                            "land",
                             "island",
-                            "land"
+                            "heath",
+                            "railway",
+                            "industrial",
+                            "commercial",
+                            "retail",
+                            "residential",
+                            "quarry",
+                            "zoo",
+                            "vineyard",
+                            "orchard",
+                            "scrub",
+                            "hospital",
+                            "place_of_worship",
+                            "theatre",
+                            "cinema",
+                            "nature_reserve",
+                            "parking",
+                            "fuel",
+                            "baracks",
+                            "library",
+                            "college",
+                            "school",
+                            "university",
+                            "golf_course",
+                            "allotments",
+                            "common",
+                            "pitch",
+                            "sports_centre",
+                            "garden",
+                            "recreation_ground",
+                            "village_green",
+                            "wetland",
+                            "grass",
+                            "meadow",
+                            "wood",
+                            "farmland",
+                            "farm",
+                            "farmyard",
+                            "cemetery",
+                            "forest",
+                            "park",
+                            "playground",
+                            "footway",
+                            "pedestrian"
                         ]
                     },
-                    "type": "zorder",
-                    "name": "z_order",
-                    "key": "z_order"
+                    "type": "enumerate",
+                    "name": "z_order"
                 }
             ],
             "type": "polygon",
@@ -222,11 +221,6 @@
                     "key": "name"
                 },
                 {
-                    "type": "pseudoarea",
-                    "name": "area",
-                    "key": "area"
-                },
-                {
                     "type": "mapping_value",
                     "name": "type",
                     "key": null
@@ -263,22 +257,21 @@
                 },
                 {
                     "args": {
-                        "ranks": [
-                            "country",
-                            "state",
-                            "region",
-                            "county",
-                            "city",
-                            "town",
-                            "village",
-                            "hamlet",
+                        "values": [
+                            "locality",
                             "suburb",
-                            "locality"
+                            "hamlet",
+                            "village",
+                            "town",
+                            "city",
+                            "county",
+                            "region",
+                            "state",
+                            "country"
                         ]
                     },
-                    "type": "zorder",
-                    "name": "z_order",
-                    "key": "z_order"
+                    "type": "enumerate",
+                    "name": "z_order"
                 },
                 {
                     "type": "integer",
@@ -710,14 +703,9 @@
                     "key": "ref"
                 },
                 {
-                    "type": "integer",
-                    "name": "layer",
-                    "key": "layer"
-                },
-                {
                     "type": "wayzorder",
                     "name": "z_order",
-                    "key": "z_order"
+                    "key": "layer"
                 },
                 {
                     "type": "string",
@@ -790,150 +778,6 @@
                         ]
                     }
                 }
-            }
-        },
-        "motorways": {
-            "fields": [
-                {
-                    "type": "id",
-                    "name": "osm_id",
-                    "key": null
-                },
-                {
-                    "type": "geometry",
-                    "name": "geometry",
-                    "key": null
-                },
-                {
-                    "type": "mapping_value",
-                    "name": "type",
-                    "key": null
-                },
-                {
-                    "type": "string",
-                    "name": "name",
-                    "key": "name"
-                },
-                {
-                    "type": "direction",
-                    "name": "oneway",
-                    "key": "oneway"
-                },
-                {
-                    "type": "string",
-                    "name": "ref",
-                    "key": "ref"
-                }
-            ],
-            "type": "linestring",
-            "filters": {
-                "exclude_tags": [
-                    ["area", "yes"]
-                ]
-            },
-            "mapping": {
-                "highway": [
-                  "motorway",
-                  "motorway_link",
-                  "trunk",
-                  "trunk_link"
-                ]
-            }
-        },
-        "mainroads": {
-            "fields": [
-                {
-                    "type": "id",
-                    "name": "osm_id",
-                    "key": null
-                },
-                {
-                    "type": "geometry",
-                    "name": "geometry",
-                    "key": null
-                },
-                {
-                    "type": "mapping_value",
-                    "name": "type",
-                    "key": null
-                },
-                {
-                    "type": "string",
-                    "name": "name",
-                    "key": "name"
-                },
-                {
-                    "type": "direction",
-                    "name": "oneway",
-                    "key": "oneway"
-                }
-            ],
-            "type": "linestring",
-            "filters": {
-                "exclude_tags": [
-                    ["area", "yes"]
-                ]
-            },
-            "mapping": {
-                "highway": [
-                  "primary",
-                  "primary_link",
-                  "secondary",
-                  "secondary_link",
-                  "tertiary",
-                  "tertiary_link"
-                ]
-            }
-        },
-        "minorroads": {
-            "fields": [
-                {
-                    "type": "id",
-                    "name": "osm_id",
-                    "key": null
-                },
-                {
-                    "type": "geometry",
-                    "name": "geometry",
-                    "key": null
-                },
-                {
-                    "type": "mapping_value",
-                    "name": "type",
-                    "key": null
-                },
-                {
-                    "type": "string",
-                    "name": "name",
-                    "key": "name"
-                },
-                {
-                    "type": "direction",
-                    "name": "oneway",
-                    "key": "oneway"
-                }
-            ],
-            "type": "linestring",
-            "filters": {
-                "exclude_tags": [
-                    ["area", "yes"]
-                ]
-            },
-            "mapping": {
-                "highway": [
-                  "road",
-                  "path",
-                  "track",
-                  "service",
-                  "footway",
-                  "bridleway",
-                  "cycleway",
-                  "steps",
-                  "pedestrian",
-                  "living_street",
-                  "unclassified",
-                  "residential"
-                ]
             }
         },
         "housenumbers": {
