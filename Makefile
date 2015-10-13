@@ -39,7 +39,7 @@ test: build export
 export: import
 	docker run --rm \
 		-v $(EXPORT_DATA_DIR):/data/export \
-		-v $(CWD)/osm-bright-2.tm2source:/project \
+		-v $(CWD)/osm-bright-2.tm2source:/data/tm2source \
 		-e MIN_ZOOM=12 \
 		-e MAX_ZOOM=14 \
 		-e BBOX=$(ZURICH_BBOX) \

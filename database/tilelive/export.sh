@@ -18,7 +18,7 @@ readonly MIN_ZOOM=${MIN_ZOOM:-0}
 readonly MAX_ZOOM=${MAX_ZOOM:-14}
 readonly BBOX=${BBOX:-"-180, -85.0511, 180, 85.0511"}
 
-readonly DEST_PROJECT_DIR="/project"
+readonly DEST_PROJECT_DIR="/tmp/project"
 readonly DEST_PROJECT_FILE="${DEST_PROJECT_DIR%%/}/data.yml"
 
 # project config will be copied to new folder because we
