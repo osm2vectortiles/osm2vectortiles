@@ -1,4 +1,4 @@
-# osm2vectortiles
+# osm2vectortiles [![Build Status](https://travis-ci.org/geometalab/osm2vectortiles.svg)](https://travis-ci.org/geometalab/osm2vectortiles)
 
 Create [Mapbox Streets](https://www.mapbox.com/developers/vector-tiles/mapbox-streets-v5) compatible vector tiles for custom styling with [Mapbox Studio Classic](https://www.mapbox.com/mapbox-studio-classic/) and provide easy deployment methods.
 
