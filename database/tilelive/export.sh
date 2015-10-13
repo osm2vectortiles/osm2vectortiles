@@ -3,39 +3,63 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-SOURCE_PROJECT_DIR=${SOURCE_PROJECT_DIR:-/data/tm2source}
-EXPORT_DIR=${EXPORT_DIR:-/data/export}
+readonly SOURCE_PROJECT_DIR=${SOURCE_PROJECT_DIR:-/data/tm2source}
+readonly EXPORT_DIR=${EXPORT_DIR:-/data/export}
 
-OSM_DB=${OSM_DB:-osm}
-OSM_USER=${OSM_USER:-osm}
-OSM_PASSWORD=${OSM_PASSWORD:-osm}
+readonly OSM_HOST=$DB_PORT_5432_TCP_ADDR
+readonly OSM_PORT=$DB_PORT_5432_TCP_PORT
+readonly OSM_DB=${OSM_DB:-osm}
+readonly OSM_USER=${OSM_USER:-osm}
+readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
 
-DB_SCHEMA=public
+readonly DB_SCHEMA=public
 
-MIN_ZOOM=${MIN_ZOOM:-0}
-MAX_ZOOM=${MAX_ZOOM:-14}
-BBOX=${BBOX:--180, -85.0511, 180, 85.0511}
+readonly MIN_ZOOM=${MIN_ZOOM:-0}
+readonly MAX_ZOOM=${MAX_ZOOM:-14}
+readonly BBOX=${BBOX:-"-180, -85.0511, 180, 85.0511"}
 
-# project config will be copied to new folder because we # modify the source configuration
-DEST_PROJECT_DIR="/project"
-DEST_PROJECT_FILE="${DEST_PROJECT_DIR%%/}/data.yml"
-cp -rf "$SOURCE_PROJECT_DIR" "$DEST_PROJECT_DIR"
+readonly DEST_PROJECT_DIR="/project"
+readonly DEST_PROJECT_FILE="${DEST_PROJECT_DIR%%/}/data.yml"
+
+# project config will be copied to new folder because we
+# modify the source configuration
+function copy_source_project() {
+    cp -rf "$SOURCE_PROJECT_DIR" "$DEST_PROJECT_DIR"
+}
 
 # project.yml is single source of truth, therefore the mapnik
 # stylesheet is not necessary
-rm -f "${DEST_PROJECT_DIR%%/}/project.xml"
+function cleanup_dest_project() {
+    rm -f "${DEST_PROJECT_DIR%%/}/project.xml"
+}
 
 # replace database connection with postgis container connection
-REPLACE_EXPR_1="s|host: .*|host: $DB_PORT_5432_TCP_ADDR|g"
-REPLACE_EXPR_2="s|port: .*|port: $DB_PORT_5432_TCP_PORT|g"
-REPLACE_EXPR_3="s|dbname: .*|dbname: $OSM_DB|g"
-REPLACE_EXPR_4="s|user: .*|user: $OSM_USER|g"
-REPLACE_EXPR_5="s|password: .*|password: $OSM_PASSWORD|g"
+function replace_db_connection() {
+    local replace_expr_1="s|host: .*|host: \"$OSM_HOST\"|g"
+    local replace_expr_2="s|port: .*|port: \"$OSM_PORT\"|g"
+    local replace_expr_3="s|dbname: .*|dbname: \"$OSM_DB\"|g"
+    local replace_expr_4="s|user: .*|user: \"$OSM_USER\"|g"
+    local replace_expr_5="s|password: .*|password: \"$OSM_PASSWORD\"|g"
 
-sed -i "$REPLACE_EXPR_1" "$DEST_PROJECT_FILE"
-sed -i "$REPLACE_EXPR_2" "$DEST_PROJECT_FILE"
-sed -i "$REPLACE_EXPR_3" "$DEST_PROJECT_FILE"
-sed -i "$REPLACE_EXPR_4" "$DEST_PROJECT_FILE"
-sed -i "$REPLACE_EXPR_5" "$DEST_PROJECT_FILE"
+    sed -i "$replace_expr_1" "$DEST_PROJECT_FILE"
+    sed -i "$replace_expr_2" "$DEST_PROJECT_FILE"
+    sed -i "$replace_expr_3" "$DEST_PROJECT_FILE"
+    sed -i "$replace_expr_4" "$DEST_PROJECT_FILE"
+    sed -i "$replace_expr_5" "$DEST_PROJECT_FILE"
+}
 
-exec tl copy -b "$BBOX" --min-zoom $MIN_ZOOM --max-zoom $MAX_ZOOM "tmsource://$DEST_PROJECT_DIR" "mbtiles://$EXPORT_DIR/tiles.mbtiles"
+function export_mbtiles() {
+    local mbtiles_name=="tiles.mbtiles"
+    local source="tmsource://$DEST_PROJECT_DIR"
+    local sink="mbtiles://$EXPORT_DIR/$mbtiles_name"
+    exec tl copy -b "$BBOX" --min-zoom $MIN_ZOOM --max-zoom $MAX_ZOOM $source $sink
+}
+
+function main() {
+    copy_source_project
+    cleanup_dest_project
+    replace_db_connection
+    export_mbtiles
+}
+
+main
