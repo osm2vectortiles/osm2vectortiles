@@ -1,32 +1,25 @@
-FROM ubuntu:14.04
+FROM golang:1.4
 
-ENV IMPOSM_VERSION 32623ccce097584be79ec8617dfae42d595ac2b8
-ENV DEBIAN_FRONTEND=noninteractive
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y \
+      libprotobuf-dev libleveldb-dev libgeos-dev \
+      --no-install-recommends
+RUN ln -s /usr/lib/libgeos_c.so /usr/lib/libgeos.so
 
-# build imposm3 binary and clean up afterwards
+WORKDIR $GOPATH
+RUN go get github.com/omniscale/imposm3 \
+    && go install github.com/omniscale/imposm3
+
+# Purge no longer needed packages to keep image small.
+# Protobuf and LevelDB dependencies cannot be removed
+# because they are dynamically linked.
+RUN apt-get purge -y --auto-remove \
+    g++ gcc libc6-dev make git \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV IMPOSM_BIN=imposm3
+
 RUN mkdir -p /usr/src/app
-RUN apt-get update && \
-    apt-get install -y golang \
-     git \
-     libgeos++-dev \
-     libleveldb-dev \
-     libprotobuf-dev \
-     libsqlite3-dev \
-     mercurial \
-     curl
-
-RUN mkdir -p /opt/imposm \
-    && git clone https://github.com/omniscale/imposm3 /opt/imposm/src/imposm3 \
-    && cd /opt/imposm/src/imposm3 \
-    && git checkout $IMPOSM_VERSION \
-    && GOPATH=/opt/imposm go get imposm3 \
-    && GOPATH=/opt/imposm go build -o /usr/src/app/imposm3 imposm3 \
-    && cd / \
-    && rm -rf /opt/imposm
-
-RUN apt-get purge -y --auto-remove golang git mercurial
-ENV IMPOSM_BIN=/usr/src/app/imposm3
-
 COPY import.sh /usr/src/app/
 COPY mapping.json /usr/src/app/
 ENV MAPPING_JSON=/usr/src/app/mapping.json
