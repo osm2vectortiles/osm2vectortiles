@@ -34,6 +34,8 @@ prepare:
 
 build: docker
 
+test: build export
+
 export: import
 	docker run --rm \
 		-v $(pwd)/export3:/data/export \
@@ -68,4 +70,4 @@ import: prepare docker
 		-e OSM_PASSWORD=$(OSM_PASSWORD) \
 		osm2vectortiles/imposm3
 
-default: build
+default: test
