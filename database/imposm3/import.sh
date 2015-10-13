@@ -34,7 +34,7 @@ function import_change() {
 }
 
 function check_persistent_cache_dir() {
-    if ! [ "$(ls -A $IMPORT_CACHE_DIR)" ]; then
+    if ! [ "$(ls -A $IMPOSM_CACHE_DIR)" ]; then
         echo "To support importing OSM chage files you should mount the $IMPOSM_CACHE_DIR to a persistent folder."
         exit 400
     fi
