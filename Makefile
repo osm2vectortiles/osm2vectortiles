@@ -42,7 +42,7 @@ export: import
 		-v $(pwd)/osm-bright-2.tm2source:/project \
 		-e MIN_ZOOM=12 \
 		-e MAX_ZOOM=14 \
-		-e BBOX="$(ZURICH_BBOX)" \
+		-e BBOX=$(ZURICH_BBOX) \
 		-e OSM_DB=$(OSM_DB) \
 		-e OSM_USER=$(OSM_USER) \
 		-e OSM_PASSWORD=$(OSM_PASSWORD) \
