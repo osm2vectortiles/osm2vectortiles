@@ -115,3 +115,17 @@ docker run --rm --name mapbox \
 Configuring the PostGIS hostname and port in tm2source layers is difficult without inspecting the linked
 container. Therefore the easiest way is to expose the port 5432 on the PostGIS container and connect
 to it directly.
+
+## Export Tiles
+
+```
+docker run --rm \
+	-v /data/export3:/data/export
+	-v /home/core/kartotherian/osm-bright.tm2source:/project \
+	-e MIN_ZOOM=0 \
+	-e MAX_ZOOM=12 \
+	-e BBOX="5.6470 45.6601 10.7886 48.0487" \
+	--name export \
+	--link postgis:db \
+	osm2vectortiles/tilelive
+```
