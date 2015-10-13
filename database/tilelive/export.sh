@@ -14,6 +14,7 @@ readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
 
 readonly DB_SCHEMA=public
 
+readonly RENDER_SCHEME=${RENDER_SCHEME:-pyramid}
 readonly MIN_ZOOM=${MIN_ZOOM:-0}
 readonly MAX_ZOOM=${MAX_ZOOM:-14}
 readonly BBOX=${BBOX:-"-180, -85.0511, 180, 85.0511"}
@@ -52,7 +53,7 @@ function export_mbtiles() {
     local mbtiles_name=="tiles.mbtiles"
     local source="tmsource://$DEST_PROJECT_DIR"
     local sink="mbtiles://$EXPORT_DIR/$mbtiles_name"
-    exec tl copy -b "$BBOX" --min-zoom $MIN_ZOOM --max-zoom $MAX_ZOOM $source $sink
+    exec tl copy -s "$RENDER_SCHEME" -b "$BBOX" --min-zoom $MIN_ZOOM --max-zoom $MAX_ZOOM $source $sink
 }
 
 function main() {
