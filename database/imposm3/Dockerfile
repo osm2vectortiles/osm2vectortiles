@@ -10,6 +10,11 @@ WORKDIR $GOPATH
 RUN go get github.com/omniscale/imposm3 \
     && go install github.com/omniscale/imposm3
 
+RUN apt-get purge -y --auto-remove \
+    g++ gcc libc6-dev make git \
+    libprotobuf-dev libleveldb-dev libgeos-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV IMPOSM_BIN=imposm3
 
 RUN mkdir -p /usr/src/app
