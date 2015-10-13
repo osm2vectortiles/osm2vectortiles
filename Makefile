@@ -35,8 +35,9 @@ import: prepare docker
 		-e OSM_USER=$(OSM_USER) \
 		-e OSM_PASSWORD=$(OSM_PASSWORD) \
 		-d $(POSTGIS_IMAGE); \
+    echo "Wait until PostGIS is initialized"; \
 	sleep 20; \
-    @echo "Wait until PostGIS is initialized"; \
+	docker logs postgis; \
 	docker run --rm --name imposm \
 		-v $(IMPORT_DATA_DIR):/data/import \
 		-v $(IMPORT_CACHE_DIR):/data/cache \
