@@ -1,0 +1,6 @@
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t osm2vectortiles/postgis ./database/postgis
+  - docker build -t osm2vectortiles/imposm3 ./database/imposm3
