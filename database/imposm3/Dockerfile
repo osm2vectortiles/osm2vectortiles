@@ -10,9 +10,11 @@ WORKDIR $GOPATH
 RUN go get github.com/omniscale/imposm3 \
     && go install github.com/omniscale/imposm3
 
+# Purge no longer needed packages to keep image small.
+# Protobuf and LevelDB dependencies cannot be removed
+# because they are dynamically linked.
 RUN apt-get purge -y --auto-remove \
     g++ gcc libc6-dev make git \
-    libprotobuf-dev libleveldb-dev libgeos-dev \
     && rm -rf /var/lib/apt/lists/*
 
 ENV IMPOSM_BIN=imposm3
