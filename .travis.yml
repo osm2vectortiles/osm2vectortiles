@@ -5,4 +5,4 @@ services:
 before_script:
   - make build
 script:
-  - make import
+  - make test
