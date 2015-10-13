@@ -11,7 +11,7 @@ IMPORT_CACHE_DIR = $(CWD)/cache
 
 OSM_DB = "osm_zurich"
 OSM_USER = "osm"
-OSM_PASSWORD = "7G@VNDYa&Zp<726x"
+OSM_PASSWORD = "suisse"
 ZURICH_PBF = https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf
 ZURICH_BBOX = "8.4039 47.3137 8.6531 47.4578"
 
