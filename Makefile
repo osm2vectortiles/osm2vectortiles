@@ -21,22 +21,22 @@ imposm3:
 docker: postgis imposm3
 
 prepare:
-	mkdir -p $(PGDATA_DIR)
-	mkdir -p $(IMPORT_DATA_DIR)
-	mkdir -p $(IMPORT_CACHE_DIR)
+	mkdir -p $(PGDATA_DIR); \
+    mkdir -p $(IMPORT_DATA_DIR); \
+	mkdir -p $(IMPORT_CACHE_DIR);
 
 build: docker
 
 import: prepare docker
-	wget --directory-prefix $(IMPORT_DATA_DIR) --no-clobber $(ZURICH_PBF)
+	wget --directory-prefix $(IMPORT_DATA_DIR) --no-clobber $(ZURICH_PBF); \
 	docker run --name postgis \
 		-v $(PGDATA_DIR):/var/lib/postgresql/data \
 		-e OSM_DB=$(OSM_DB) \
 		-e OSM_USER=$(OSM_USER) \
 		-e OSM_PASSWORD=$(OSM_PASSWORD) \
-		-d $(POSTGIS_IMAGE)
-	sleep 20
-    @echo "Wait until PostGIS is initialized"
+		-d $(POSTGIS_IMAGE); \
+	sleep 20; \
+    @echo "Wait until PostGIS is initialized"; \
 	docker run --rm --name imposm \
 		-v $(IMPORT_DATA_DIR):/data/import \
 		-v $(IMPORT_CACHE_DIR):/data/cache \
