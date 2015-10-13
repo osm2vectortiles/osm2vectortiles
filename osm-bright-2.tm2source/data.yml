@@ -254,7 +254,7 @@ Layer:
       port: ''
       srid: ''
       table: |-
-        ( SELECT geometry, osm_id, type, name, area
+        ( SELECT geometry, osm_id, type, name
             FROM osm_buildings
             WHERE geometry && !bbox!
               AND z(!scale_denominator!) >= 12
@@ -324,7 +324,7 @@ Layer:
       port: ''
       srid: ''
       table: |-
-        ( SELECT geometry, osm_id, type, 0 as bridge, access, render, layer, tunnel,
+        ( SELECT geometry, osm_id, type, 0 as bridge, access, render, z_order, tunnel,
           CASE
             WHEN type IN ('motorway', 'trunk') THEN 'motorway'
             WHEN type IN ('primary', 'secondary', 'tertiary') THEN 'main'
@@ -349,7 +349,7 @@ Layer:
               AND tunnel = 1
           ) AS tunnels
           WHERE z(!scale_denominator!) > 10
-          ORDER BY layer ASC, render ASC
+          ORDER BY z_order ASC, render ASC
         ) AS data
       type: postgis
       user: osm
@@ -358,7 +358,7 @@ Layer:
       access: String
       bridge: Number
       class: String
-      layer: Number
+      z_order: Number
       osm_id: Number
       render: String
       tunnel: Number
@@ -461,7 +461,7 @@ Layer:
       port: ''
       srid: ''
       table: |-
-        ( SELECT geometry, osm_id, type, bridge, access, render, layer, 0 as tunnel,
+        ( SELECT geometry, osm_id, type, bridge, access, render, z_order, 0 as tunnel,
           CASE
             WHEN type IN ('motorway', 'trunk') THEN 'motorway'
             WHEN type IN ('primary', 'secondary', 'tertiary') THEN 'main'
@@ -486,7 +486,7 @@ Layer:
               AND bridge = 1
           ) as bridges
           WHERE z(!scale_denominator!) > 10
-          ORDER BY layer ASC, render ASC
+          ORDER BY z_order ASC, render ASC
         ) AS data
       type: postgis
       user: osm
@@ -495,7 +495,7 @@ Layer:
       access: String
       bridge: Number
       class: String
-      layer: Number
+      z_order: Number
       osm_id: Number
       render: String
       tunnel: Number
