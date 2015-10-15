@@ -3,29 +3,76 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-IMPORT_DATA_DIR=${IMPORT_DATA_DIR:-/data/import}
-IMPOSM_CACHE_DIR=${IMPOSM_CACHE_DIR:-/data/cache}
+readonly IMPORT_DATA_DIR=${IMPORT_DATA_DIR:-/data/import}
+readonly IMPOSM_CACHE_DIR=${IMPOSM_CACHE_DIR:-/data/cache}
 
-IMPOSM_BIN=${IMPOSM_BIN:-/imposm3}
-MAPPING_JSON=${MAPPING_JSON:-/usr/src/app/mapping.json}
+readonly IMPOSM_BIN=${IMPOSM_BIN:-/imposm3}
+readonly MAPPING_JSON=${MAPPING_JSON:-/usr/src/app/mapping.json}
+readonly PBF_DOWNLOAD_URL=${PBF_DOWNLOAD_URL:-false}
 
-OSM_DB=${OSM_DB:-osm}
-OSM_USER=${OSM_USER:-osm}
-OSM_PASSWORD=${OSM_PASSWORD:-osm}
+readonly OSM_DB=${OSM_DB:-osm}
+readonly OSM_USER=${OSM_USER:-osm}
+readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
 
-DB_SCHEMA=public
-PG_CONNECT="postgis://$OSM_USER:$OSM_PASSWORD@$DB_PORT_5432_TCP_ADDR/$OSM_DB"
+readonly DB_SCHEMA=${OSM_SCHEMA:-public}
+readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
+readonly PG_CONNECT="postgis://$OSM_USER:$OSM_PASSWORD@$DB_HOST/$OSM_DB"
 
-if [ "$(ls -A $IMPORT_DATA_DIR/*.pbf 2> /dev/null)" ]; then
-    for PBF_FILE in "$IMPORT_DATA_DIR"/*.pbf; do
-        $IMPOSM_BIN import -connection $PG_CONNECT -mapping $MAPPING_JSON -overwritecache -cachedir=$IMPOSM_CACHE_DIR -read $PBF_FILE -write -dbschema-import=${DB_SCHEMA}
-    done
-else
-    echo "No PBF files for import found."
-    echo "Please mount the $IMPORT_DATA_DIR volume to a folder containing OSM PBF files."
-    exit 404
-fi
+function download_pbf() {
+    local pbf_url=$1
+	wget --directory-prefix "$IMPORT_DATA_DIR" --no-clobber "$pbf_url"
+}
 
-if ! [ "$(ls -A $IMPORT_DATA_DIR)" ]; then
-    echo "To speed up imposm import over subsequent runs you should mount the $IMPOSM_CACHE_DIR to a empty folder."
-fi
+function import_pbf() {
+    local pbf_file=$1
+    $IMPOSM_BIN import -connection $PG_CONNECT -mapping $MAPPING_JSON \
+        -appendcache -cachedir=$IMPOSM_CACHE_DIR \
+        -read $pbf_file \
+        -write -diff -dbschema-import=${DB_SCHEMA} -optimize
+}
+
+function import_change() {
+    local changes_file=$1
+    $IMPOSM_BIN diff -connection $PG_CONNECT -mapping $MAPPING_JSON \
+        -appendcache -cachedir=$IMPOSM_CACHE_DIR \
+        -dbschema-import=${DB_SCHEMA} \
+        $changes_file
+}
+
+function import_all_changes() {
+    if [ "$(ls -A $IMPORT_DATA_DIR/*osc.gz 2> /dev/null)" ]; then
+        echo "OSM change files found. Only changes are imported, initial import is skipped."
+
+        local change_file
+        for change_file in "$IMPORT_DATA_DIR"/*.osc.gz; do
+            import_change $change_file
+        done
+        exit 0
+    fi
+}
+
+function import_single_pbf() {
+    if [ "$(ls -A $IMPORT_DATA_DIR/*.pbf 2> /dev/null)" ]; then
+        local pbf_file
+        for pbf_file in "$IMPORT_DATA_DIR"/*.pbf; do
+            import_pbf $pbf_file
+            break
+        done
+        exit 0
+    else
+        echo "No PBF files for import found."
+        echo "Please mount the $IMPORT_DATA_DIR volume to a folder containing OSM PBF files."
+        exit 404
+    fi
+}
+
+function main() {
+    if ! [ $PBF_DOWNLOAD_URL = false ]; then
+        download_pbf $PBF_DOWNLOAD_URL
+    fi
+
+    import_all_changes
+    import_single_pbf
+}
+
+main
