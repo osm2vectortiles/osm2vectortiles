@@ -50,7 +50,7 @@ function replace_db_connection() {
 }
 
 function export_mbtiles() {
-    local mbtiles_name=="tiles.mbtiles"
+    local mbtiles_name="tiles.mbtiles"
     local source="tmsource://$DEST_PROJECT_DIR"
     local sink="mbtiles://$EXPORT_DIR/$mbtiles_name"
     exec tl copy -s "$RENDER_SCHEME" -b "$BBOX" --min-zoom $MIN_ZOOM --max-zoom $MAX_ZOOM $source $sink
