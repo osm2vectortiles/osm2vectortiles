@@ -27,6 +27,14 @@ imposm3:
     OSM_USER: "osm"
     OSM_PASSWORD: "suisse"
     PBF_DOWNLOAD_URL: "https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf"
+import_water:
+  build: ./database/import_water
+  links:
+  - postgis:db
+  environment:
+    OSM_DB: "osm_zurich"
+    OSM_USER: "osm"
+    OSM_PASSWORD: "suisse"
 tilelive:
   build: ./database/tilelive
   volumes:
