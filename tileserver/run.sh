@@ -83,4 +83,4 @@ function serve_style() {
         --source-cache-size $SOURCE_CACHE_SIZE
 }
 
-serve_style $DEST_PROJECT_DIR"
+serve_style "$DEST_PROJECT_DIR"
