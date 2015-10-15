@@ -5,11 +5,9 @@ set -o nounset
 
 source_data_dir=${SOURCE_DATA_DIR:-/data}
 dest_data_dir=${DEST_DATA_DIR:-/project}
-port=${PORT:-8080}
+port=${PORT:-80}
 cache_size=${CACHE_SIZE:-10}
 source_cache_size=${SOURCE_CACHE_SIZE:-10}
-
-
 
 # find first tm2 project
 if [ "$(ls -A $source_data_dir)" ]; then
@@ -18,8 +16,23 @@ if [ "$(ls -A $source_data_dir)" ]; then
             [ -d "${_project_dir}" ] && project_dir="${_project_dir}" && break
         done
     else
-        echo "No tm2 projects found. Please add a tm2 project to your mounted folder."
-        exit 404
+        mbtiles_file=""
+        for _mbtiles_file in "$source_data_dir"/*.mbtiles; do
+            mbtiles_file="${_mbtiles_file}"
+            break
+        done
+
+        if [ -f "$mbtiles_file" ]; then
+            echo "The mbtiles file is now served with X-Ray styles"
+
+            exec tessera "xray+mbtiles://$mbtiles_file" \
+                --port $port \
+                --cache-size $cache_size \
+                --source-cache-size $source_cache_size
+        else
+            echo "No tm2 projects found. Please add a tm2 project to your mounted folder."
+            exit 404
+        fi
     fi
 else
     echo "No tm2 projects found. Please mount the $source_data_dir volume to a folder containing tm2 projects."

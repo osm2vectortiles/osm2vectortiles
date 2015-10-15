@@ -24,6 +24,7 @@ ENV MAPNIK_FONT_PATH=/fonts
 RUN npm install -g tessera
 RUN npm install -g mbtiles \
            tilelive-tmstyle \
+           tilelive-xray \
            tilelive-http
 
 RUN mkdir -p /usr/src/app
