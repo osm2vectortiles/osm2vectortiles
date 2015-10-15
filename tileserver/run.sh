@@ -9,6 +9,14 @@ readonly PORT=${PORT:-80}
 readonly CACHE_SIZE=${CACHE_SIZE:-10}
 readonly SOURCE_CACHE_SIZE=${SOURCE_CACHE_SIZE:-10}
 
+function serve_xray() {
+    local mbtiles_file=$1
+    exec tessera "xray+mbtiles://$mbtiles_file" \
+        --PORT $PORT \
+        --cache-size $CACHE_SIZE \
+        --source-cache-size $SOURCE_CACHE_SIZE
+}
+
 # find first tm2 project
 if [ "$(ls -A $SOURCE_DATA_DIR)" ]; then
     if [ -d "$SOURCE_DATA_DIR"/*.tm2 ]; then
@@ -24,11 +32,7 @@ if [ "$(ls -A $SOURCE_DATA_DIR)" ]; then
 
         if [ -f "$MBTILES_FILE" ]; then
             echo "The mbtiles file is now served with X-Ray styles"
-
-            exec tessera "xray+mbtiles://$MBTILES_FILE" \
-                --PORT $PORT \
-                --cache-size $CACHE_SIZE \
-                --source-cache-size $SOURCE_CACHE_SIZE
+            serve_xray "$MBTILES_FILE"
         else
             echo "No tm2 projects found. Please add a tm2 project to your mounted folder."
             exit 404
@@ -71,7 +75,12 @@ else
     exit 500
 fi
 
-exec tessera "tmstyle://$DEST_PROJECT_DIR" \
-    --PORT $PORT \
-    --cache-size $CACHE_SIZE \
-    --source-cache-size $SOURCE_CACHE_SIZE
+function serve_style() {
+    local style_dir=$1
+    exec tessera "tmstyle://$style_dir" \
+        --PORT $PORT \
+        --cache-size $CACHE_SIZE \
+        --source-cache-size $SOURCE_CACHE_SIZE
+}
+
+serve_style $DEST_PROJECT_DIR"
