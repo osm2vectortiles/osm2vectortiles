@@ -41,3 +41,9 @@ tilelive:
     BBOX: "8.4039 47.3137 8.6531 47.4578"
     MIN_ZOOM: "0"
     MAX_ZOOM: "14"
+tileserver:
+  build: ./tileserver
+  volumes:
+   - ./export:/data
+  ports:
+   - "80:80"
