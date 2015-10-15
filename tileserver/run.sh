@@ -3,11 +3,11 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-SOURCE_DATA_DIR=${SOURCE_DATA_DIR:-/data}
-DEST_DATA_DIR=${DEST_DATA_DIR:-/project}
-PORT=${PORT:-80}
-CACHE_SIZE=${CACHE_SIZE:-10}
-SOURCE_CACHE_SIZE=${SOURCE_CACHE_SIZE:-10}
+readonly SOURCE_DATA_DIR=${SOURCE_DATA_DIR:-/data}
+readonly DEST_DATA_DIR=${DEST_DATA_DIR:-/project}
+readonly PORT=${PORT:-80}
+readonly CACHE_SIZE=${CACHE_SIZE:-10}
+readonly SOURCE_CACHE_SIZE=${SOURCE_CACHE_SIZE:-10}
 
 # find first tm2 project
 if [ "$(ls -A $SOURCE_DATA_DIR)" ]; then
