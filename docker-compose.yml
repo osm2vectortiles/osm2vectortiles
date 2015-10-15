@@ -1,0 +1,40 @@
+pgdata:
+  image: "tianon/true"
+  volumes:
+  - /var/lib/postgresql/data
+import_cache:
+  image: "tianon/true"
+  volumes:
+  - /data/import
+postgis:
+  build: ./database/postgis
+  volumes_from:
+   - pgdata
+  environment:
+    OSM_DB: "osm_zurich"
+    OSM_USER: "osm"
+    OSM_PASSWORD: "suisse"
+imposm3:
+  build: ./database/imposm3
+  volumes:
+   - ./import:/data/import
+  volumes_from:
+   - import_cache
+  links:
+   - postgis:db
+  environment:
+    OSM_DB: "osm_zurich"
+    OSM_USER: "osm"
+    OSM_PASSWORD: "suisse"
+    PBF_DOWNLOAD_URL: "https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf"
+
+# tilelive:
+#   build: ./database/tilelive
+#   volumes:
+#       - ./osm-bright-2.tm2source:/data/export
+#   links:
+#    - postgis
+#   environment:
+#     OSM_DB: "osm_zurich"
+#     OSM_USER: "osm"
+#     OSM_PASSWORD: "7G@VNDYa&Zp<726x"
