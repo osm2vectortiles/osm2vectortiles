@@ -7,11 +7,13 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 install:
-  - docker-compose build postgis
+  - docker-compose build
 before_script:
   - docker-compose up -d postgis
+  - sleep 10
 script:
   - docker-compose run imposm3
   - docker-compose run tilelive
   - docker-compose up -d tileserver
-  - curl "http://localhost:80/index.json"
+  - sleep 5
+  - curl "http://localhost:8080/index.json"
