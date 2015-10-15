@@ -59,3 +59,15 @@ The import container will automatically download a PBF of Zurich for testing.
 ```
 docker-compose run imposm3
 ```
+
+Export the data as MBTiles file to the `export` directory.
+
+```
+docker-compose run tilelive
+```
+
+Run the tileserver from `export` directory.
+
+```
+docker-compose up tileserver
+```
