@@ -13,3 +13,5 @@ before_script:
 script:
   - docker-compose run imposm3
   - docker-compose run tilelive
+  - docker-compose up -d tileserver
+  - curl "http://localhost:80/index.json"
