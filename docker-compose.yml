@@ -27,14 +27,17 @@ imposm3:
     OSM_USER: "osm"
     OSM_PASSWORD: "suisse"
     PBF_DOWNLOAD_URL: "https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf"
-
-# tilelive:
-#   build: ./database/tilelive
-#   volumes:
-#       - ./osm-bright-2.tm2source:/data/export
-#   links:
-#    - postgis
-#   environment:
-#     OSM_DB: "osm_zurich"
-#     OSM_USER: "osm"
-#     OSM_PASSWORD: "7G@VNDYa&Zp<726x"
+tilelive:
+  build: ./database/tilelive
+  volumes:
+   - ./osm-bright-2.tm2source:/data/tm2source
+   - ./export:/data/export
+  links:
+   - postgis:db
+  environment:
+    OSM_DB: "osm_zurich"
+    OSM_USER: "osm"
+    OSM_PASSWORD: "suisse"
+    BBOX: "8.4039 47.3137 8.6531 47.4578"
+    MIN_ZOOM: "0"
+    MAX_ZOOM: "14"

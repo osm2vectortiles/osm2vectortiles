@@ -12,3 +12,4 @@ before_script:
   - docker-compose up -d postgis
 script:
   - docker-compose run imposm3
+  - docker-compose run tilelive
