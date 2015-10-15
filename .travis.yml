@@ -7,7 +7,7 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - npm install -g pixelmatch
-  - mkdir -p ./export && cd ./export && git clone https://github.com/mapbox/mapbox-studio-osm-bright.tm2.git
+  - mkdir -p export && git clone https://github.com/mapbox/mapbox-studio-osm-bright.tm2.git export/mapbox-studio-osm-bright.tm2
 install:
   - docker-compose build
 before_script:
@@ -15,6 +15,9 @@ before_script:
   - sleep 5
 script:
   - docker-compose run imposm3
+  - tree
   - docker-compose run tilelive && mv export/tiles.mbtiles export/mapbox-studio-osm-bright.mbtiles
   - docker-compose up -d tileserver && sleep 1
-  - bash ./test/scrape_diff_test.sh
+  - bash test/scrape_diff_test.sh
+after_script:
+  - bash test/upload_diffs_github.sh
