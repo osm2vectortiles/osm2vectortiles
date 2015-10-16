@@ -9,4 +9,7 @@ RUN mkdir -p /usr/src/app
 COPY import.sh /usr/src/app/
 WORKDIR /usr/src/app
 
+VOLUME /data/import
+ENV IMPORT_DATA_DIR=/data/import
+
 CMD ["./import.sh"]
