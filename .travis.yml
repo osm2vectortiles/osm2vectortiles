@@ -1,19 +1,25 @@
 sudo: required
-language: bash
+language: node_js
+node_js:
+  - "0.12"
 services:
   - docker
 before_install:
   - curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
+  - npm install -g pixelmatch
+  - mkdir -p export && git clone https://github.com/mapbox/mapbox-studio-osm-bright.tm2.git export/mapbox-studio-osm-bright.tm2
 install:
   - docker-compose build
 before_script:
   - docker-compose up -d postgis
-  - sleep 10
+  - sleep 5
 script:
   - docker-compose run imposm3
-  - docker-compose run tilelive
-  - docker-compose up -d tileserver
-  - sleep 5
-  - curl "http://localhost:8080/index.json"
+  - docker-compose run tilelive && mv export/tiles.mbtiles export/mapbox-studio-osm-bright.mbtiles
+  - docker-compose up -d tileserver && sleep 1
+  - bash test/scrape_diff_test.sh
+after_script:
+  - ls -la test
+  - bash test/upload_diffs_github.sh
