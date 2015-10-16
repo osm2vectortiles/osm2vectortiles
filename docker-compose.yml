@@ -2,7 +2,7 @@ pgdata:
   image: "tianon/true"
   volumes:
   - /var/lib/postgresql/data
-import_cache:
+cache:
   image: "tianon/true"
   volumes:
   - /data/import
@@ -21,7 +21,7 @@ imposm3:
   volumes:
    - ./import:/data/import
   volumes_from:
-   - import_cache
+   - cache
   links:
    - postgis:db
   environment:
@@ -54,3 +54,9 @@ tilelive:
     BBOX: "8.4039 47.3137 8.6531 47.4578"
     MIN_ZOOM: "0"
     MAX_ZOOM: "14"
+tileserver:
+  build: ./tileserver
+  volumes:
+   - ./export:/data
+  ports:
+   - "8080:80"
