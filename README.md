@@ -64,7 +64,7 @@ Import SHP files from the local `import` directory. Or if there is now shapefile
 
 ```
 docker-compose run importwater
-``
+```
 
 Export the data as MBTiles file to the `export` directory.
 
