@@ -59,3 +59,9 @@ The import container will automatically download a PBF of Zurich for testing.
 ```
 docker-compose run imposm3
 ```
+
+Import SHP files from the local `import` directory. Or if there is now shapefile available the container will automatically download the water polygons shapefile from [OpenStreetMapData.com](http://openstreetmapdata.com/)
+
+```
+docker-compose run importwater
+```

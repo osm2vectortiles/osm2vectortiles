@@ -32,7 +32,7 @@ imposm3:
 importwater:
   build: ./database/importwater
   volumes:
-  - /Users/manuel/water:/data/import
+  - ./import:/data/import
   links:
   - postgis:db
   environment:
