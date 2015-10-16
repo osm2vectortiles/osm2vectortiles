@@ -27,14 +27,17 @@ imposm3:
     OSM_USER: "osm"
     OSM_PASSWORD: "suisse"
     PBF_DOWNLOAD_URL: "https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf"
-import_water:
+importwater:
   build: ./database/import_water
+  volumes:
+  - ./data/import:/data/import
   links:
   - postgis:db
   environment:
     OSM_DB: "osm_zurich"
     OSM_USER: "osm"
     OSM_PASSWORD: "suisse"
+    WATER_SHP_DOWNLOAD_URL: "http://data.openstreetmapdata.com/water-polygons-split-3857.zip"
 tilelive:
   build: ./database/tilelive
   volumes:

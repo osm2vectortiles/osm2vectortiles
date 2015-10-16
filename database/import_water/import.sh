@@ -8,12 +8,12 @@ readonly OSM_USER=${OSM_USER:-osm}
 readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
 
 readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
-readonly DATADIR=/usr/src/app/data
+readonly DATADIR=/data/import
 
 function download_shp() {
 	mkdir $DATADIR
 	cd $DATADIR
-	wget http://data.openstreetmapdata.com/water-polygons-split-3857.zip
+	wget $WATER_SHP_DOWNLOAD_URL
 	unzip water-polygons-split-3857.zip
 	rm water-polygons-split-3857.zip
 }
@@ -24,7 +24,7 @@ function import_shp() {
 }
 
 function main() {
-	download_shp
+	#download_shp
     import_shp
 }
 
