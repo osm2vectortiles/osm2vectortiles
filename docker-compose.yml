@@ -11,7 +11,7 @@ postgis:
   volumes_from:
    - pgdata
   ports:
-   - "5432:5432"
+   - "5432"
   environment:
     OSM_DB: "osm_zurich"
     OSM_USER: "osm"
