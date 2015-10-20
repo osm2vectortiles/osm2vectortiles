@@ -19,7 +19,7 @@ postgis:
 imposm3:
   build: ./import/imposm3
   volumes:
-   - ./volumes/imposm3:/data/import
+   - ./volumes/import:/data/import
   volumes_from:
    - cache
   links:
@@ -44,7 +44,7 @@ worker:
   build: ./export/worker
   volumes:
    - ./open-streets.tm2source:/data/tm2source
-   - ./volumes/worker:/data/export
+   - ./volumes/export:/data/export
   links:
    - postgis:db
   environment:
@@ -57,6 +57,6 @@ worker:
 tileserver:
   build: ./tileserver
   volumes:
-   - ./export:/data
+   - ./volumes/export:/data
   ports:
    - "8080:80"

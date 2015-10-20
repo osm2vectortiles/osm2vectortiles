@@ -20,7 +20,7 @@ readonly PG_CONNECT="postgis://$OSM_USER:$OSM_PASSWORD@$DB_HOST/$OSM_DB"
 
 function download_pbf() {
     local pbf_url=$1
-	wget --directory-prefix "$IMPORT_DATA_DIR" --no-clobber "$pbf_url"
+	wget -q  --directory-prefix "$IMPORT_DATA_DIR" --no-clobber "$pbf_url"
 }
 
 function import_pbf() {
