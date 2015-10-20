@@ -26,7 +26,7 @@ imposm3:
     OSM_DB: "osm_zurich"
     OSM_USER: "osm"
     OSM_PASSWORD: "suisse"
-    PBF_DOWNLOAD_URL: "https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf"
+    PBF_DOWNLOAD_URL: "http://download.geofabrik.de/europe/switzerland-latest.osm.pbf"
 tilelive:
   build: ./database/tilelive
   volumes:
@@ -38,8 +38,9 @@ tilelive:
     OSM_DB: "osm_zurich"
     OSM_USER: "osm"
     OSM_PASSWORD: "suisse"
-    BBOX: "8.4039 47.3137 8.6531 47.4578"
-    MIN_ZOOM: "0"
+    BBOX: "8.4375 46.07323062540838 9.84375 47.040182144806664"
+    SCHEME: "pyramid"
+    MIN_ZOOM: "8"
     MAX_ZOOM: "14"
 tileserver:
   build: ./tileserver
