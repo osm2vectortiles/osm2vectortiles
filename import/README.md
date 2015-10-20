@@ -87,6 +87,26 @@ as well as imposm settings.
 | `IMPOSM_BIN`       | /usr/src/app/imposm3      | Imposm executable path  |
 | `MAPPING_JSON`     | /usr/src/app/mapping.json | Imposm mapping config   |
 
+## Run the Water Polygon Import
+
+Download OSM water polygon data from [OpenStreetMapData](http://openstreetmapdata.com/data/water-polygons) (Mercator Version).
+
+```bash
+wget http://data.openstreetmapdata.com/water-polygons-split-3857.zip
+```
+
+Mount the import data directory containing the SHP files to import.
+
+You also need to link our previously created `postgis` database container
+as `db`.
+
+```bash
+docker run --rm --name importwater \
+    -v $(pwd)/import:/data/import \
+    --link postgis:db \
+    osm2vectortiles/importwater
+```
+
 ## Develop tm2source Projects with Mapbox Container
 
 To develop our tm2source projects you can use Mapbox in a Docker container on a more powerful server
