@@ -10,14 +10,16 @@ postgis:
   build: ./database/postgis
   volumes_from:
    - pgdata
+  ports:
+   - "5432"
   environment:
     OSM_DB: "osm_zurich"
     OSM_USER: "osm"
     OSM_PASSWORD: "suisse"
 imposm3:
-  build: ./database/imposm3
+  build: ./import/imposm3
   volumes:
-   - ./import:/data/import
+   - ./volumes/import:/data/import
   volumes_from:
    - cache
   links:
@@ -26,12 +28,23 @@ imposm3:
     OSM_DB: "osm_zurich"
     OSM_USER: "osm"
     OSM_PASSWORD: "suisse"
-    PBF_DOWNLOAD_URL: "http://download.geofabrik.de/europe/switzerland-latest.osm.pbf"
-tilelive:
-  build: ./database/tilelive
+    PBF_DOWNLOAD_URL: "https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf"
+water:
+  build: ./import/water
   volumes:
-   - ./osm-bright-2.tm2source:/data/tm2source
-   - ./export:/data/export
+  - ./volumes/water:/data/import
+  links:
+  - postgis:db
+  environment:
+    OSM_DB: "osm_zurich"
+    OSM_USER: "osm"
+    OSM_PASSWORD: "suisse"
+    # WATER_SHP_DOWNLOAD_URL: "http://data.openstreetmapdata.com/water-polygons-split-3857.zip"
+worker:
+  build: ./export/worker
+  volumes:
+   - ./open-streets.tm2source:/data/tm2source
+   - ./volumes/export:/data/export
   links:
    - postgis:db
   environment:
@@ -45,6 +58,6 @@ tilelive:
 tileserver:
   build: ./tileserver
   volumes:
-   - ./export:/data
+   - ./volumes/export:/data
   ports:
    - "8080:80"

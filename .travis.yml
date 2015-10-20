@@ -13,7 +13,7 @@ before_script:
   - sleep 10
 script:
   - docker-compose run imposm3
-  - docker-compose run tilelive
+  - docker-compose run worker
   - docker-compose up -d tileserver
   - sleep 5
   - curl "http://localhost:8080/index.json"
