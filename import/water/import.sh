@@ -24,6 +24,11 @@ function import_shp() {
 	shp2pgsql -g way $shp_file | PG_PASSWORD=$OSM_PASSWORD psql --host="$DB_HOST" --port=5432 --dbname="$OSM_DB" --username="$OSM_USER"
 }
 
+function create_index() {
+	local index_command="CREATE INDEX water_polygons_index ON water_polygons USING gist (way) WITH (FILLFACTOR=100);"
+	echo $index_command | PG_PASSWORD=$OSM_PASSWORD psql --host="$DB_HOST" --port=5432 --dbname="$OSM_DB" --username="$OSM_USER"
+}
+
 function main() {
     if ! [ $WATER_SHP_DOWNLOAD_URL = false ]; then
     	download_shp $WATER_SHP_DOWNLOAD_URL
@@ -39,6 +44,9 @@ function main() {
     echo "Found shp file $shp_file"
 
     import_shp $shp_file
+
+    echo "Create index water_polygons_index on table water_polygons"
+    create_index
 }
 
 main
