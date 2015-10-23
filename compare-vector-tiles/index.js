@@ -1,156 +1,46 @@
 var fs = require('fs');
+var mkdirp = require('mkdirp');
 var VectorTile = require('vector-tile').VectorTile;
 var Protobuf = require('pbf');
+var tileInformation = require('./tileInformation.js');
+var http = require('http');
 
-function getTileInfo(layers) {
-	var layerCount = 0;
-	var featureCount = 0;
-	var classSet = new Set();
-	var typeSet = new Set();
+var urls = ['0:0:0', '1:1:0', '2:2:0', '3:4:2', '4:8:5', '5:16:11', '6:33:22', '7:67:44', '8:134:89', '9:268:179', '10:536:358', '11:1072:717', '12:2145:1434', '13:4290:2868', '14:8580:5737', '15:17161:11474'];
 
-	for(var i in layers) {
-		++layerCount;
-		var layer = layers[i];
-		featureCount += layer.length;
-		for(var j = 0; j < layer.length; ++j) {
-			var feature = layer.feature(j);
-			if(feature.properties.class) {
-				classSet.add(feature.properties.class);
-			}
-			if(feature.properties.type) {
-				typeSet.add(feature.properties.class);
-			}
-		}
-	}
-	return { "layers": layerCount, "features": featureCount, "classes": classSet.size, "types": typeSet.size };
+function processTiles(directory, name) {
+	urls.forEach(function(url) {
+		var filePath = directory + url + ".vector.pbf";
+		var tile = new VectorTile(new Protobuf(fs.readFileSync(filePath)));
+		var url1 = url.replace(':', '/');
+		var url2 = url1.replace(':', '/');
+		var output = tileInformation.printOutput(tile.layers, name, url2);
+		writeOutput(output, name, url);
+	});
+	console.log("Output for style " + name + " written.");
 }
 
-function containsClass(classSet, className) {
-	var containsClass = false;
-	for(var item of classSet) {
-		if(item.name === className) {
-			containsClass = true;
-			return containsClass;
+function writeOutput(output, dirname, name) {
+	mkdirp('./output/' + dirname, function(err) {
+		if(err) {
+			console.log("Error creating dir: " + err);
 		} else {
-			containsClass = false;
+			var filename = "./output/" + dirname + "/"+ name;
+			fs.writeFile(filename, output, function(err) {
+			    if(err) {
+			        console.log("Error writing file: " + err);
+			    }
+			});
+
 		}
-	}
-	return containsClass;
+	});
 }
 
-function addType(classSet, className, type) {
-	for(var item of classSet) {
-		if(item.name === className) {
-			if(type) {
-				item.types.add(type);
-			} else {
-				item.types.add("no type");
-			}
-		}
-	}
-	return classSet;
+function generateOutputFiles(styles) {
+	styles.forEach(function(style) {
+		var directory = 'vector-tiles/' + style + '/';
+		processTiles(directory, style);
+	});
 }
 
-function addClass(classSet, className, type) {
-	var layerClass = {
-		"name": className,
-		"types": new Set()
-	};
-
-	if(type) {
-		layerClass.types.add(type);
-	} else {
-		layerClass.types.add("no type");
-		//layerClass.types.add(layer.feature(i).properties);
-	}
-	classSet.add(layerClass);
-	return classSet;
-}
-
-function getSortedItems(unsortedItems, sortByName) {
-	var sortedItems = [];
-	for(var unsortedItem of unsortedItems) {
-		sortedItems.push(unsortedItem);
-	}
-	if(sortByName) {
-		sortedItems.sort(function(a, b) { 
-		    if(a.name > b.name) {
-		      return 1;
-		    }
-		    if (a.name < b.name) {
-		      return -1;
-		    }
-			return 0;
-		});
-	} else {
-		sortedItems.sort();
-	}
-	return sortedItems;
-}
-
-function getSortedLayers(layers) {
-	var sortedLayerNames = [];
-	for(var i in layers) {
-		sortedLayerNames.push(i);
-	}
-	sortedLayerNames.sort();
-	var sortedLayers = [];
-	for(var layerName of sortedLayerNames) {
-		sortedLayers.push({"name": layerName, "layer": layers[layerName]});
-	}
-	return sortedLayers;
-}
-
-function getLayerResult(layerObject, amountOfFeatures) {
-	console.log("\n" + layerObject.name + " (features: " + amountOfFeatures + ")");
-
-	var classSet = new Set();
-	for(var j=0; j < layerObject.layer.length; ++j) {
-		var properties = layerObject.layer.feature(j).properties;
-		var className = properties.class;
-		var type = properties.type;
-		if(className) {
-			if(containsClass(classSet, className)){
-				classSet = addType(classSet, className, type);
-			} else {
-				classSet = addClass(classSet, className, type);
-			}
-		}
-	}
-	return classSet;
-}
-
-function printLayerResult(classSet) {
-	if(classSet.size === 0) {
-		console.log("\t"+" no class")
-	} else {
-		for(var item of getSortedItems(classSet, true)) {
-			console.log("\t"+item.name);
-			for(var sortedType of getSortedItems(item.types)) {
-				console.log("\t" + "\t" + sortedType);
-			}
-		}
-	}
-}
-
-function printProlog(layers) {
-	var tileInfo = getTileInfo(layers);
-	console.log("name: open-streets");
-	console.log("tile: 10/4141/5356");
-	console.log("features: " + tileInfo.features);
-	console.log("layers: " + tileInfo.layers);
-	console.log("classes: " + tileInfo.classes);
-	console.log("types: " + tileInfo.types);
-}
-
-function printResult(layers) {
-	var layerArray = getSortedLayers(layers);
-	for(var i in layerArray) {
-		var layerObject = layerArray[i];
-		printLayerResult(getLayerResult(layerObject, layers[layerObject.name].length));
-	}
-}
-
-var tile = new VectorTile(new Protobuf(fs.readFileSync('./vector.pbf')));
-printProlog(tile.layers);
-printResult(tile.layers);
+var styles = ['open-streets', 'mapbox-streets-v5', 'mapbox-streets-v6'];
+generateOutputFiles(styles);
