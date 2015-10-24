@@ -53,7 +53,17 @@ function export_mbtiles() {
     local mbtiles_name="tiles.mbtiles"
     local source="tmsource://$DEST_PROJECT_DIR"
     local sink="mbtiles://$EXPORT_DIR/$mbtiles_name"
-    exec tl copy -s "$RENDER_SCHEME" -b "$BBOX" --min-zoom $MIN_ZOOM --max-zoom $MAX_ZOOM $source $sink
+
+    if [ -z "$AWS_ACCESS_KEY" ]; then
+        echo "Do not use AWS SQS to process jobs"
+        exec tl copy -s "$RENDER_SCHEME" -b "$BBOX" --min-zoom $MIN_ZOOM --max-zoom $MAX_ZOOM $source $sink
+    else
+        echo "Using AWS SQS to work through jobs"
+        export SOURCE="$source"
+        export SINK="$sink"
+        export MBTILES_PATH="$EXPORT_DIR/$mbtiles_name"
+        exec python execute_jobs.py
+    fi
 }
 
 function main() {

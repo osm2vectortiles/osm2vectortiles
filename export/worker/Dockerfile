@@ -11,6 +11,13 @@ RUN npm install -g tl \
 	   tilelive-bridge \
 	   tilelive-mapnik
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        python \
+        python-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install boto
+
 # custom tm2source project
 VOLUME /data/tm2source
 ENV SOURCE_PROJECT_DIR=/data/tm2source
@@ -20,5 +27,6 @@ VOLUME /data/export
 ENV EXPORT_DIR=/data/export
 
 COPY export.sh /usr/src/app/export.sh
+COPY execute_jobs.py /usr/src/app/execute_jobs.py
 
 CMD ["/usr/src/app/export.sh"]
