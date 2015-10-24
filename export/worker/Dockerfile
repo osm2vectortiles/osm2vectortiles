@@ -16,7 +16,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python-pip \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install boto
+COPY requirements.txt /usr/src/app/requirements.txt
+RUN pip install -r requirements.txt
 
 # custom tm2source project
 VOLUME /data/tm2source
@@ -26,7 +27,6 @@ ENV SOURCE_PROJECT_DIR=/data/tm2source
 VOLUME /data/export
 ENV EXPORT_DIR=/data/export
 
-COPY export.sh /usr/src/app/export.sh
-COPY execute_jobs.py /usr/src/app/execute_jobs.py
-
+COPY export.py /usr/src/app/
+COPY export.sh /usr/src/app/
 CMD ["/usr/src/app/export.sh"]

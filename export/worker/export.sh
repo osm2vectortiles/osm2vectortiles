@@ -22,6 +22,8 @@ readonly BBOX=${BBOX:-"-180, -85.0511, 180, 85.0511"}
 readonly DEST_PROJECT_DIR="/tmp/project"
 readonly DEST_PROJECT_FILE="${DEST_PROJECT_DIR%%/}/data.yml"
 
+readonly QUEUE_NAME=${QUEUE_NAME:-osm2vectortiles_jobs}
+
 # project config will be copied to new folder because we
 # modify the source configuration
 function copy_source_project() {
@@ -55,14 +57,10 @@ function export_mbtiles() {
     local sink="mbtiles://$EXPORT_DIR/$mbtiles_name"
 
     if [ -z "$AWS_ACCESS_KEY" ]; then
-        echo "Do not use AWS SQS to process jobs"
-        exec tl copy -s "$RENDER_SCHEME" -b "$BBOX" --min-zoom $MIN_ZOOM --max-zoom $MAX_ZOOM $source $sink
+        exec python export.py local "$EXPORT_DIR/$mbtiles_name" --tm2source $DEST_PROJECT_DIR --bbox "$BBOX" --min_zoom "$MIN_ZOOM" --max_zoom "$MAX_ZOOM"
     else
         echo "Using AWS SQS to work through jobs"
-        export SOURCE="$source"
-        export SINK="$sink"
-        export MBTILES_PATH="$EXPORT_DIR/$mbtiles_name"
-        exec python execute_jobs.py
+        exec python export.py remote "$QUEUE_NAME" --tm2source $DEST_PROJECT_DIR
     fi
 }
 

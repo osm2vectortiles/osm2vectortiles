@@ -43,10 +43,10 @@ water:
 jobmaker:
   build: ./export/jobmaker
   environment:
+    AWS_ACCESS_KEY:
+    AWS_SECRET_ACCESS_KEY:
     AWS_REGION: "eu-central-1"
-    AWS_ACCESS_KEY: "request-access-key-from-lukas"
-    AWS_SECRET_ACCESS_KEY: "request-secret-key-from-lukas"
-    TASK_ZOOM_LEVEL: 8,
+    TASK_ZOOM_LEVEL: 8
     QUEUE_NAME: "osm2vectortiles_jobs"
 worker:
   build: ./export/worker
@@ -56,6 +56,9 @@ worker:
   links:
    - postgis:db
   environment:
+    AWS_ACCESS_KEY:
+    AWS_SECRET_ACCESS_KEY:
+    AWS_REGION: "eu-central-1"
     OSM_DB: "osm_zurich"
     OSM_USER: "osm"
     OSM_PASSWORD: "suisse"
