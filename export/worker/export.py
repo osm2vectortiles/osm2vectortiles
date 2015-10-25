@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-"""Export vector tiles from OpenStreetMap
+"""Wrapper around tilelive for exporting vector tiles from tm2source.
 
 Usage:
   export.py local <mbtiles_file> --tm2source=<tm2source> [--bbox=<bbox>] [--min_zoom=<min_zoom>] [--max_zoom=<max_zoom>] [--render_scheme=<scheme>]
-  export.py remote <sqs_queue> --tm2source=<tm2source> [--render_scheme=<scheme>]
+  export.py remote <sqs_queue> --tm2source=<tm2source> [--bucket=<bucket>] [--render_scheme=<scheme>]
   export.py (-h | --help)
   export.py --version
 
@@ -15,6 +15,8 @@ Options:
   --max_zoom=<max_zoom>     Maximum zoom  [default: 12].
   --render_scheme=<scheme>  Either pyramid or scanline [default: pyramid]
   --tm2source=<tm2source>   Directory of tm2source
+  --bucket=<bucket>         S3 Bucket name for storing results [default: osm2vectortiles-jobs]
+
 """
 import subprocess
 import os
@@ -44,7 +46,6 @@ def create_tilelive_command(tm2source, mbtiles_file, bbox,
 
 
 def export_local(tilelive_command):
-    print(tilelive_command)
     proc = subprocess.Popen(
         tilelive_command,
         stdout=subprocess.PIPE,
@@ -63,31 +64,42 @@ def export_local(tilelive_command):
 
 def connect_job_queue(queue_name):
     conn = boto.sqs.connect_to_region(
-        region_name=os.getenv('AWS_REGION', 'eu-central-1'),
-        aws_access_key_id=os.environ['AWS_ACCESS_KEY'],
-        aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY']
+        region_name=os.getenv('AWS_REGION', 'eu-central-1')
     )
-    queue = conn.get_queue(queue_name)
-    return queue
+    return conn.get_queue(queue_name)
 
 
-def export_remote(tm2source, sqs_queue, render_scheme):
-    timeout = int(os.getenv('JOB_TIMEOUT', 15 * 60))
+def connect_s3(bucket_name):
+    conn = boto.s3.connect_to_region(
+        region_name=os.getenv('AWS_REGION', 'eu-central-1')
+    )
+    return conn.get_bucket(bucket_name)
+
+
+def upload_mbtiles(bucket, mbtiles_file):
+    print("Upload mbtiles {}".format(mbtiles_file))
+
+    keyname = os.path.basename(mbtiles_file)
+    obj = bucket.new_key(keyname)
+    obj.set_contents_from_filename(mbtiles_file)
+
+
+def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
+    bucket = connect_s3(bucket_name)
     queue = connect_job_queue(sqs_queue)
+    timeout = int(os.getenv('JOB_TIMEOUT', 15 * 60))
 
     while True:
         message = queue.read(visibility_timeout=timeout)
-        print(message)
         if message:
             body = json.loads(message.get_body())
-            print(body)
 
+            mbtiles_file = '{}_{}.mbtiles'.format(body['x'], body['y'])
             bounds = body['bounds']
             bbox = '{} {} {} {}'.format(
-                bounds[0][0], bounds[0][1],
-                bounds[1][0], bounds[1][1]
+                bounds['west'], bounds['south'],
+                bounds['east'], bounds['north']
             )
-            mbtiles_file = '{}_{}.mbtiles'.format(body['x'], body['y'])
 
             tilelive_command = create_tilelive_command(
                 tm2source,
@@ -99,26 +111,34 @@ def export_remote(tm2source, sqs_queue, render_scheme):
             )
             export_local(tilelive_command)
             print("Executed job and exportet to " + mbtiles_file)
+            upload_mbtiles(bucket, mbtiles_file)
             queue.delete_message(message)
+        else:
+            print('No jobs to read')
+            break
 
 
-if __name__ == '__main__':
-    arguments = docopt(__doc__, version='0.1')
-    print(arguments)
-    if arguments.get('local'):
+def main(args):
+    if args.get('local'):
         tilelive_command = create_tilelive_command(
-            arguments['--tm2source'],
-            arguments['<mbtiles_file>'],
-            arguments['--bbox'],
-            arguments['--min_zoom'],
-            arguments['--max_zoom'],
-            arguments['--render_scheme']
+            args['--tm2source'],
+            args['<mbtiles_file>'],
+            args['--bbox'],
+            args['--min_zoom'],
+            args['--max_zoom'],
+            args['--render_scheme']
         )
         export_local(tilelive_command)
 
-    if arguments.get('remote'):
+    if args.get('remote'):
         export_remote(
-            arguments['--tm2source'],
-            arguments['<sqs_queue>'],
-            arguments['--render_scheme']
+            args['--tm2source'],
+            args['<sqs_queue>'],
+            args['--render_scheme'],
+            args['--bucket'],
         )
+
+
+if __name__ == '__main__':
+    args = docopt(__doc__, version='0.1')
+    main(args)

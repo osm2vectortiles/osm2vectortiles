@@ -30,8 +30,6 @@ def tiles_for_zoom_level(zoom_level):
 def connect_job_queue():
     conn = boto.sqs.connect_to_region(
         region_name=os.getenv('AWS_REGION', 'eu-central-1'),
-        aws_access_key_id=os.getenv('AWS_ACCESS_KEY', ''),
-        aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY', '')
     )
     queue_name = os.getenv('QUEUE_NAME', 'osm2vectortiles_jobs')
     queue = conn.get_queue(queue_name)
@@ -44,10 +42,12 @@ def create_job(x, y, min_zoom, max_zoom, bounds):
         'y': tile.y,
         'min_zoom': tile.z,
         'max_zoom': 14,
-        'bounds': [
-            [bounds.west, bounds.south],
-            [bounds.east, bounds.north]
-        ]
+        'bounds': {
+            'west': bounds.west,
+            'south': bounds.south,
+            'east': bounds.east,
+            'north': bounds.north
+        }
     }
 
     msg = Message()
