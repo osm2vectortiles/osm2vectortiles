@@ -6,6 +6,10 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
+  - mkdir -p ./import
+  - wget -nc -P ./import "https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf"
+  - wget -nc -P ./import "http://data.openstreetmapdata.com/water-polygons-split-3857.zip" && cd ./import && unzip -o water-polygons-split-3857.zip
+
 install:
   - docker-compose build
 before_script:
@@ -17,3 +21,7 @@ script:
   - docker-compose up -d tileserver
   - sleep 5
   - curl "http://localhost:8080/index.json"
+cache:
+  directories:
+    - ./cache
+
