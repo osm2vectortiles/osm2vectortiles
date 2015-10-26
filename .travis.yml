@@ -6,19 +6,21 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  - mkdir -p ./import
-  - wget -nc -P ./import "https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf"
-  - wget -nc -P ./import "http://data.openstreetmapdata.com/water-polygons-split-3857.zip" && cd ./import && unzip -o water-polygons-split-3857.zip
-
+  - mkdir -p TRAVIS_BUILD_DIR/import
+  - wget -nc -P "$TRAVIS_BUILD_DIR/import" "https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf"
+  - wget -nc -P "$TRAVIS_BUILD_DIR/import" "http://data.openstreetmapdata.com/water-polygons-split-3857.zip"
+  - unzip -fj "$TRAVIS_BUILD_DIR/import/water-polygons-split-3857.zip" -d "$TRAVIS_BUILD_DIR/import"
+  - ls -la "$TRAVIS_BUILD_DIR/import"
 install:
   - docker-compose build
 before_script:
   - docker-compose up -d postgis
   - sleep 10
 script:
-  - docker-compose run imposm3
-  - docker-compose run worker
-  - docker-compose up -d tileserver
+  - docker-compose run import-water
+  - docker-compose run import
+  - docker-compose run export
+  - docker-compose up -d serve
   - sleep 5
   - curl "http://localhost:8080/index.json"
 cache:
