@@ -1,0 +1,943 @@
+_prefs: 
+  disabled: []
+  inspector: false
+  mapid: ''
+  rev: ''
+  saveCenter: true
+attribution: ''
+center: 
+  - 8.7122
+  - 47.3237
+  - 12
+description: OSM Bright 2
+Layer: 
+  - id: landuse
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: osm_id
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        ( SELECT * FROM (
+            -- landuse_gen0
+            SELECT geometry, osm_id, type, area,
+            CASE
+              WHEN type IN ('cemetery','christian', 'jewish') THEN 'cemetery'
+              WHEN type IN ('hospital') THEN 'hospital'
+              WHEN type IN ('industrial') THEN 'industrial'
+              WHEN type IN ('park', 'dog_park', 'common', 'garden', 'golf_course', 'playground', 'recreation_ground', 'nature_reserve', 'sports_centre', 'zoo', 'village_green') THEN 'park'
+              WHEN type IN ('parking') THEN 'parking'
+              WHEN type IN ('athletics', 'chess', 'pitch') THEN 'pitch'
+              WHEN type IN ('sand') THEN 'sand'
+              WHEN type IN ('school', 'college', 'university') THEN 'school'
+              WHEN type IN ('wood', 'forest') THEN 'wood'
+              WHEN type IN ('orchard', 'farm', 'farmland', 'farmyard', 'allotments', 'vineyard', 'plant_nursery') THEN 'agriculture'
+              WHEN type IN ('meadow', 'grass', 'grassland') THEN 'grass'
+              WHEN type IN ('scrub') THEN 'scrub'
+              END AS class
+            FROM osm_landusages_gen0
+            WHERE geometry && !bbox!
+              AND z(!scale_denominator!) BETWEEN 4 AND 9
+        
+            -- landuse_gen1
+            UNION ALL
+            SELECT geometry, osm_id, type, area,
+            CASE
+              WHEN type IN ('cemetery','christian', 'jewish') THEN 'cemetery'
+              WHEN type IN ('hospital') THEN 'hospital'
+              WHEN type IN ('industrial') THEN 'industrial'
+              WHEN type IN ('park', 'dog_park', 'common', 'garden', 'golf_course', 'playground', 'recreation_ground', 'nature_reserve', 'sports_centre', 'zoo', 'village_green') THEN 'park'
+              WHEN type IN ('parking') THEN 'parking'
+              WHEN type IN ('athletics', 'chess', 'pitch') THEN 'pitch'
+              WHEN type IN ('sand') THEN 'sand'
+              WHEN type IN ('school', 'college', 'university') THEN 'school'
+              WHEN type IN ('wood', 'forest') THEN 'wood'
+              WHEN type IN ('orchard', 'farm', 'farmland', 'farmyard', 'allotments', 'vineyard', 'plant_nursery') THEN 'agriculture'
+              WHEN type IN ('meadow', 'grass', 'grassland') THEN 'grass'
+              WHEN type IN ('scrub') THEN 'scrub'
+              END AS class
+            FROM osm_landusages_gen1
+            WHERE geometry && !bbox!
+              AND z(!scale_denominator!) BETWEEN 10 AND 12
+        
+            -- landuse
+            UNION ALL
+            SELECT geometry, osm_id, type, area,
+            CASE
+              WHEN type IN ('cemetery','christian', 'jewish') THEN 'cemetery'
+              WHEN type IN ('hospital') THEN 'hospital'
+              WHEN type IN ('industrial') THEN 'industrial'
+              WHEN type IN ('park', 'dog_park', 'common', 'garden', 'golf_course', 'playground', 'recreation_ground', 'nature_reserve', 'sports_centre', 'zoo', 'village_green') THEN 'park'
+              WHEN type IN ('parking') THEN 'parking'
+              WHEN type IN ('athletics', 'chess', 'pitch') THEN 'pitch'
+              WHEN type IN ('sand') THEN 'sand'
+              WHEN type IN ('school', 'college', 'university') THEN 'school'
+              WHEN type IN ('wood', 'forest') THEN 'wood'
+              WHEN type IN ('orchard', 'farm', 'farmland', 'farmyard', 'allotments', 'vineyard', 'plant_nursery') THEN 'agriculture'
+              WHEN type IN ('meadow', 'grass', 'grassland') THEN 'grass'
+              WHEN type IN ('scrub') THEN 'scrub'
+              END AS class
+            FROM osm_landusages
+            WHERE geometry && !bbox!
+              AND z(!scale_denominator!) > 12
+          ) AS QUERY
+         ORDER BY area DESC
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      area: Number
+      class: String
+      osm_id: Number
+      type: String
+    properties: 
+      "buffer-size": 8
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: waterway
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: ''
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: ''
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        (
+                 select geometry, osm_id, type, type as class from osm_waterways
+                   where type in ('river', 'canal')
+                   and z(!scale_denominator!) >= 8
+                   and geometry && !bbox!
+                 union all
+                 select geometry, osm_id, type, type as class from osm_waterways
+                   where type in ('stream', 'stream_intermittent')
+                   and z(!scale_denominator!) >= 13
+                   and geometry && !bbox!
+                 union all
+                 select geometry, osm_id, type, type as class from osm_waterways
+                   where type in ('drain', 'ditch')
+                   and z(!scale_denominator!) >= 15
+                   and geometry && !bbox!
+               ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      class: String
+      osm_id: Number
+      type: String
+    properties: 
+      "buffer-size": 8
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: water
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: ''
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: ''
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        (
+                select 0 as osm_id, way from water_polygons
+                  where way && !bbox!
+                ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      osm_id: Number
+    properties: 
+      "buffer-size": 8
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: aeroway
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: ''
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        ( SELECT geometry, osm_id, type
+          FROM osm_aeroways
+          WHERE geometry && !bbox!
+            AND z(!scale_denominator!) >= 12
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      osm_id: Number
+      type: String
+    properties: 
+      "buffer-size": 8
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: building
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: osm_id
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        ( SELECT geometry, osm_id, type, name
+            FROM osm_buildings
+            WHERE geometry && !bbox!
+              AND z(!scale_denominator!) >= 12
+            ORDER BY ST_YMin(ST_Envelope(geometry)) DESC
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      area: Number
+      name: String
+      osm_id: Number
+      type: String
+    properties: 
+      "buffer-size": 8
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: landuse_overlay
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: osm_id
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        ( SELECT geometry, osm_id, type,
+            CASE
+              WHEN type IN ('cemetery') THEN 'cemetery'
+              WHEN type IN ('hospital') THEN 'hospital'
+              WHEN type IN ('industrial') THEN 'industrial'
+              WHEN type IN ('park', 'common', 'garden', 'playground') THEN 'park'
+              WHEN type IN ('parking') THEN 'parking'
+              WHEN type IN ('pitch') THEN 'pitch'
+              WHEN type IN ('sand') THEN 'sand'
+              WHEN type IN ('school', 'university') THEN 'school'
+              WHEN type IN ('wood') THEN 'wood'
+              ELSE 'other' END AS class
+            FROM osm_landusages
+            WHERE geometry && !bbox!
+              AND z(!scale_denominator!) > 6
+            ORDER BY area DESC
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      class: String
+      osm_id: Number
+      type: String
+    properties: 
+      "buffer-size": 8
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: tunnel
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: osm_id
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        ( SELECT geometry, osm_id, type, 0 as bridge, access, render, z_order, tunnel,
+          CASE
+            WHEN type IN ('motorway', 'trunk') THEN 'motorway'
+            WHEN type IN ('primary', 'secondary', 'tertiary') THEN 'main'
+            WHEN type IN ('motorway_link', 'trunk_link', 'primary_link', 'tertiary_link') THEN 'motorway_link'
+            WHEN type IN ('secondary_link', 'residential', 'unclassified', 'road') THEN 'street'
+            WHEN type IN ('living_street', 'pedestrian') THEN 'street_limited'        
+            WHEN type IN ('service', 'track') THEN 'service'
+            WHEN type IN ('path', 'cycleway', 'footway', 'steps', 'bridleway') THEN 'path'
+            WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'major_rail'
+            ELSE 'other' END AS class
+          FROM (
+            SELECT *, '1_outline' AS render FROM osm_roads
+            WHERE geometry && !bbox!
+              AND tunnel = 1
+            UNION ALL
+            SELECT *, '2_line' AS render FROM osm_roads
+            WHERE geometry && !bbox!
+              AND tunnel = 1
+            UNION ALL
+            SELECT *, '3_inline' AS render FROM osm_roads
+            WHERE geometry && !bbox!
+              AND tunnel = 1
+          ) AS tunnels
+          WHERE z(!scale_denominator!) > 10
+          ORDER BY z_order ASC, render ASC
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      access: String
+      bridge: Number
+      class: String
+      z_order: Number
+      osm_id: Number
+      render: String
+      tunnel: Number
+      type: String
+    properties: 
+      "buffer-size": 8
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: road
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: osm_id
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        ( SELECT * FROM (
+            -- roads_low
+            SELECT geometry, osm_id, type, tunnel, bridge, access, 'fill' AS render,
+              CASE
+                WHEN type IN ('motorway', 'trunk') THEN 'motorway'
+                WHEN type IN ('primary', 'secondary', 'tertiary') THEN 'main'
+                WHEN type IN ('motorway_link', 'trunk_link') THEN 'motorway_link'
+                WHEN type IN ('primary_link', 'secondary_link', 'tertiary_link', 'residential', 'unclassified', 'road') THEN 'street'
+                WHEN type IN ('living_street', 'pedestrian') THEN 'street_limited'        
+                WHEN type IN ('service', 'track') THEN 'service'
+                WHEN type IN ('path', 'cycleway', 'footway', 'steps', 'bridleway') THEN 'path'
+                WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'major_rail'
+                ELSE 'other' END AS class
+            FROM osm_roads_gen0
+            WHERE geometry && !bbox!
+              AND z(!scale_denominator!) BETWEEN 5 AND 8
+        
+            -- roads_med
+            UNION ALL  
+            SELECT geometry, osm_id, type, tunnel, bridge, access, 'fill' AS render,
+              CASE
+                WHEN type IN ('motorway', 'trunk') THEN 'motorway'
+                WHEN type IN ('primary', 'secondary', 'tertiary') THEN 'main'
+                WHEN type IN ('motorway_link', 'trunk_link') THEN 'motorway_link'
+                WHEN type IN ('primary_link', 'secondary_link', 'tertiary_link', 'residential', 'unclassified', 'road') THEN 'street'
+                WHEN type IN ('living_street', 'pedestrian') THEN 'street_limited'        
+                WHEN type IN ('service', 'track') THEN 'service'
+                WHEN type IN ('path', 'cycleway', 'footway', 'steps', 'bridleway') THEN 'path'
+                WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'major_rail'
+                ELSE 'other' END AS class
+            FROM osm_roads_gen1
+            WHERE geometry && !bbox!
+              AND type IN ('motorway', 'trunk', 'primary', 'secondary', 'motorway_link', 'trunk_link')
+              AND z(!scale_denominator!) BETWEEN 9 AND 10
+          
+            -- roads_high
+            UNION ALL
+            SELECT geometry, osm_id, type, tunnel, bridge, access, 'fill' AS render,
+              CASE
+                WHEN type IN ('motorway', 'trunk') THEN 'motorway'
+                WHEN type IN ('primary', 'secondary', 'tertiary') THEN 'main'
+                WHEN type IN ('motorway_link', 'trunk_link') THEN 'motorway_link'
+                WHEN type IN ('primary_link', 'secondary_link', 'tertiary_link', 'residential', 'unclassified', 'road') THEN 'street'
+                WHEN type IN ('living_street', 'pedestrian') THEN 'street_limited'        
+                WHEN type IN ('service', 'track') THEN 'service'
+                WHEN type IN ('path', 'cycleway', 'footway', 'steps', 'bridleway') THEN 'path'
+                WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'major_rail'
+                ELSE 'other' END AS class
+            FROM osm_roads
+            WHERE geometry && !bbox!
+              AND bridge = 0
+              AND tunnel = 0
+              AND z(!scale_denominator!) > 10
+          ) AS QUERY
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      access: String
+      bridge: Number
+      class: String
+      osm_id: Number
+      render: String
+      tunnel: Number
+      type: String
+    properties: 
+      "buffer-size": 8
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: bridge
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: osm_id
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        ( SELECT geometry, osm_id, type, bridge, access, render, z_order, 0 as tunnel,
+          CASE
+            WHEN type IN ('motorway', 'trunk') THEN 'motorway'
+            WHEN type IN ('primary', 'secondary', 'tertiary') THEN 'main'
+            WHEN type IN ('motorway_link', 'trunk_link', 'primary_link', 'tertiary_link') THEN 'motorway_link'
+            WHEN type IN ('secondary_link', 'residential', 'unclassified', 'road') THEN 'street'
+            WHEN type IN ('living_street', 'pedestrian') THEN 'street_limited'        
+            WHEN type IN ('service', 'track') THEN 'service'
+            WHEN type IN ('path', 'cycleway', 'footway', 'steps', 'bridleway') THEN 'path'
+            WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'major_rail'
+            ELSE 'other' END AS class
+          FROM (
+            SELECT *, '1_outline' AS render FROM osm_roads
+            WHERE geometry && !bbox!
+              AND bridge = 1
+            UNION ALL
+            SELECT *, '2_line' AS render FROM osm_roads
+            WHERE geometry && !bbox!
+              AND bridge = 1
+            UNION ALL
+            SELECT *, '3_inline' AS render FROM osm_roads
+            WHERE geometry && !bbox!
+              AND bridge = 1
+          ) as bridges
+          WHERE z(!scale_denominator!) > 10
+          ORDER BY z_order ASC, render ASC
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      access: String
+      bridge: Number
+      class: String
+      z_order: Number
+      osm_id: Number
+      render: String
+      tunnel: Number
+      type: String
+    properties: 
+      "buffer-size": 8
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: admin
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: ''
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: ''
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        (
+                  /* TODO calculate maritime */
+                  select geometry, osm_id, admin_level, 0 as disputed, 0 as maritime
+                    from osm_admin
+                    where admin_level = 2
+                    and geometry && !bbox!
+                  union all
+                  select geometry, osm_id, admin_level, 0 as disputed, 0 as maritime
+                    from osm_admin
+                    where admin_level = 4
+                    and z(!scale_denominator!) >= 5
+                    and geometry && !bbox!
+                ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      admin_level: Number
+      disputed: Number
+      maritime: Number
+      osm_id: Number
+    properties: 
+      "buffer-size": 8
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: country_label
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: ''
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        (
+          /* TODO get real name_en/name_de/name_es */
+          /* TODO improve ranking */
+          select geometry, osm_id, name, 1 as rank from osm_places
+            where type = 'country' and
+            population >= 250000000
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id, name, 2 as rank from osm_places
+            where type = 'country' and
+            population >= 100000000 and population < 250000000
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id, name, 3 as rank from osm_places
+            where type = 'country' and
+            population >= 50000000 and population < 100000000
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id, name, 4 as rank from osm_places
+            where type = 'country' and
+            population >= 25000000 and population < 50000000
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id, name, 5 as rank from osm_places
+            where type = 'country' and
+            population >= 10000000 and population < 25000000
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id, name, 6 as rank from osm_places
+            where type = 'country' and
+            population < 10000000
+            and geometry && !bbox!
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      name: String
+      osm_id: Number
+      rank: Number
+    properties: 
+      "buffer-size": 64
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: state_label
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: ''
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        (
+          /* TODO get real name_en/name_de/name_es */
+          /* TODO get real area */
+          select geometry, osm_id, name, 0 as area from osm_places
+            where type = 'state'
+            and geometry && !bbox!
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      area: Number
+      name: String
+      osm_id: Number
+    properties: 
+      "buffer-size": 64
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: place_label
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: ''
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        /* TODO get real name_en/name_de/name_es */
+        /* TODO calculate real ranks and ldir */
+        ( SELECT * FROM (
+            SELECT DISTINCT ON(LabelGrid(geometry, 64)) *
+            FROM (
+              select geometry, osm_id, name, name as name_en, type, population,
+                null as capital, 'SE' as ldir, 1 as localrank, null as scalerank
+                from osm_places
+                where type = 'city'
+                and geometry && !bbox!
+              union all
+              select geometry, osm_id, name, name as name_en, type, population,
+                null as capital, 'SE' as ldir, 1 as localrank, null as scalerank
+                from osm_places
+                where type = 'town' and z(!scale_denominator!) >= 7
+                and geometry && !bbox!
+              union all
+              select geometry, osm_id, name, name as name_en, type, population,
+                null as capital, 'SE' as ldir, 1 as localrank, null as scalerank
+                from osm_places
+                where type in ('hamlet', 'suburb','neighbourhood') and z(!scale_denominator!) >= 10
+                and geometry && !bbox!
+            ) AS places
+            ORDER BY LabelGrid(geometry, 64), population DESC NULLS LAST, osm_id
+          ) AS ordered
+          ORDER BY population DESC NULLS LAST, osm_id
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      capital: String
+      ldir: String
+      localrank: Number
+      name: String
+      name_en: String
+      osm_id: Number
+      population: Number
+      scalerank: String
+      type: String
+    properties: 
+      "buffer-size": 64
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: water_label
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: ''
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: ''
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+          (
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area >= 5000000000
+                    and z(!scale_denominator!) >= 5
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 5000000000 and area >= 1500000000
+                    and z(!scale_denominator!) >= 5
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 1500000000 and area >= 500000000
+                    and z(!scale_denominator!) >= 8
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 500000000 and area >= 100000000
+                    and z(!scale_denominator!) >= 9
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 100000000 and area >= 40000000
+                    and z(!scale_denominator!) >= 10
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 40000000 and area >= 20000000
+                    and z(!scale_denominator!) >= 11
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 20000000 and area >= 10000000
+                    and z(!scale_denominator!) >= 12
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 10000000 and area >= 5000000
+                    and z(!scale_denominator!) >= 13
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 5000000 and area >= 1000000
+                    and z(!scale_denominator!) >= 14
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 1000000 and area >= 500000
+                    and z(!scale_denominator!) >= 15
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 500000 and area >= 100000
+                    and z(!scale_denominator!) >= 16
+                    and geometry && !bbox!
+                  union all
+                  select ST_PointOnSurface(geometry) as geometry, osm_id,
+                    name, name as name_en, area from osm_waterareas
+                    where area < 100000
+                    and z(!scale_denominator!) >= 17
+                    and geometry && !bbox!
+                ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      area: Number
+      name: String
+      name_en: String
+      osm_id: Number
+    properties: 
+      "buffer-size": 8
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: poi_label
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: ''
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        (
+          /* TODO calculate real ranks */
+          /* TODO improve assigning maki icon */
+          select geometry, osm_id,
+            name, type, 3 as scalerank, 1 as localrank,
+            (CASE WHEN replace(type, '_', '-') in ('airfield','london-underground','airport','marker','alcohol-shop','marker-stroked','america-football','minefield','art-gallery','mobilephone','bakery','monument','bank','museum','bar','music','baseball','oil-well','basketball','park2','beer','park','bicycle','parking','building','parking-garage','bus','pharmacy','cafe','pitch','camera','place-of-worship','campsite','playground','car','police','cemetery','polling-place','chemist','post','cinema','prison','circle','rail','circle-stroked','rail-above','city','rail-light','clothing-store','rail-metro','college','rail-underground','commercial','religious-christian','cricket','religious-jewish','cross','religious-muslim','dam','restaurant','danger','roadblock','disability','rocket','dog-park','school','embassy','scooter','emergency-telephone','shop','entrance','skiing','farm','slaughterhouse','fast-food','soccer','ferry','square','fire-station','square-stroked','fuel','star','garden','star-stroked','gift','suitcase','golf','swimming','grocery','telephone','hairdresser','tennis','harbor','theatre','heart','toilets','heliport','town','hospital','town-hall','ice-cream','triangle','industrial','triangle-stroked','land-use','village','laundry','warehouse','library','waste-basket','lighthouse','water','lodging','wetland','logging','zoo')
+            THEN replace(type, '_', '-')
+            ELSE null
+            END) as maki
+            from osm_amenities
+            where z(!scale_denominator!) >= 16
+            and geometry && !bbox!
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      localrank: Number
+      maki: String
+      name: String
+      osm_id: Number
+      scalerank: Number
+      type: String
+    properties: 
+      "buffer-size": 64
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: road_label
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: ''
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        (
+          select geometry, osm_id,
+            name, ref, char_length(ref) as reflen,
+            round(MercLength(geometry)) as len, 'motorway' as class
+            from osm_roads
+            where bridge = 0 and tunnel = 0 and type in ('motorway')
+            and z(!scale_denominator!) >= 5
+            and linelabel(z(!scale_denominator!), name, geometry)
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id,
+            name, ref, char_length(ref) as reflen,
+            round(MercLength(geometry)) as len, 'motorway_link' as class
+            from osm_roads
+            where bridge = 0 and tunnel = 0 and type in ('motorway_link')
+            and z(!scale_denominator!) >= 13
+            and linelabel(z(!scale_denominator!), name, geometry)
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id,
+            name, ref, char_length(ref) as reflen,
+            round(MercLength(geometry)) as len, 'main' as class
+            from osm_roads
+            where bridge = 0 and tunnel = 0 and type in ('primary',
+            'primary_link', 'trunk', 'trunk_link')
+            and z(!scale_denominator!) >= 5
+            and linelabel(z(!scale_denominator!), name, geometry)
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id,
+            name, ref, char_length(ref) as reflen,
+            round(MercLength(geometry)) as len, 'main' as class
+            from osm_roads
+            where bridge = 0 and tunnel = 0 and type in ('secondary',
+            'secondary_link')
+            and z(!scale_denominator!) >= 9
+            and linelabel(z(!scale_denominator!), name, geometry)
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id,
+            name, ref, char_length(ref) as reflen,
+            round(MercLength(geometry)) as len, 'main' as class
+            from osm_roads
+            where bridge = 0 and tunnel = 0 and type in ('tertiary',
+            'tertiary_link')
+            and z(!scale_denominator!) >= 12
+            and linelabel(z(!scale_denominator!), name, geometry)
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id,
+            name, ref, char_length(ref) as reflen,
+            round(MercLength(geometry)) as len, 'street' as class
+            from osm_roads
+            where bridge = 0 and tunnel = 0 and type in ('residential',
+            'unclassified', 'living_street')
+            and z(!scale_denominator!) >= 12
+            and linelabel(z(!scale_denominator!), name, geometry)
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id,
+            name, ref, char_length(ref) as reflen,
+            round(MercLength(geometry)) as len, 'street_limited' as class
+            from osm_roads
+            where bridge = 0 and tunnel = 0 and (type in ('pedestrian',
+            'construction') or access = 'private')
+            and z(!scale_denominator!) >= 12
+            and linelabel(z(!scale_denominator!), name, geometry)
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id,
+            name, ref, char_length(ref) as reflen,
+            round(MercLength(geometry)) as len, 'service' as class
+            from osm_roads
+            where bridge = 0 and tunnel = 0 and type in ('service',
+            'track')
+            and z(!scale_denominator!) >= 15
+            and linelabel(z(!scale_denominator!), name, geometry)
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id,
+            name, ref, char_length(ref) as reflen,
+            round(MercLength(geometry)) as len, 'driveway' as class
+            from osm_roads
+            where bridge = 0 and tunnel = 0 and type in ('driveway')
+            and z(!scale_denominator!) >= 15
+            and linelabel(z(!scale_denominator!), name, geometry)
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id,
+            name, ref, char_length(ref) as reflen,
+            round(MercLength(geometry)) as len, 'path' as class
+            from osm_roads
+            where bridge = 0 and tunnel = 0 and type in ('path',
+            'cycleway', 'ski', 'steps', 'bridleway')
+            and z(!scale_denominator!) >= 15
+            and linelabel(z(!scale_denominator!), name, geometry)
+            and geometry && !bbox!
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      class: String
+      len: Number
+      name: String
+      osm_id: Number
+      ref: String
+      reflen: Number
+    properties: 
+      "buffer-size": 64
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: waterway_label
+    Datasource: 
+      dbname: osm_zurich
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: ''
+      max_size: 512
+      password: suisse
+      port: 32768
+      srid: ''
+      table: |-
+        (
+          select geometry, osm_id,
+            name, type, type as class from osm_waterways
+            where type in ('river', 'canal')
+            and z(!scale_denominator!) >= 8
+            and linelabel(z(!scale_denominator!), name, geometry)
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id,
+            name, type, type as class from osm_waterways
+            where type in ('stream', 'stream_intermittent')
+            and z(!scale_denominator!) >= 13
+            and linelabel(z(!scale_denominator!), name, geometry)
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id,
+            name, type, type as class from osm_waterways
+            where type in ('drain', 'ditch')
+            and z(!scale_denominator!) >= 15
+            and linelabel(z(!scale_denominator!), name, geometry)
+            and geometry && !bbox!
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      class: String
+      name: String
+      osm_id: Number
+      type: String
+    properties: 
+      "buffer-size": 64
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+maxzoom: 14
+minzoom: 0
+name: OSM Bright 2
