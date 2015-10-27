@@ -50,7 +50,7 @@ function main() {
     echo "Importing $land_polygons into table $land_table"
     import_shp $land_polygons
 
-    echo "Create index on table $table_name"
+    echo "Create index on table $land_table"
     create_index $land_table
 }
 
