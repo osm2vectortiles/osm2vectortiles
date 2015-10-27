@@ -3,6 +3,7 @@ function getTileInfo(layers) {
 	var featureCount = 0;
 	var classSet = new Set();
 	var typeSet = new Set();
+	var attributeSet = new Set();
 
 	for(var i in layers) {
 		++layerCount;
@@ -10,6 +11,11 @@ function getTileInfo(layers) {
 		featureCount += layer.length;
 		for(var j = 0; j < layer.length; ++j) {
 			var feature = layer.feature(j);
+			for(var property in feature.properties) {
+				if(feature.properties.hasOwnProperty(property)) {
+					attributeSet.add(property);
+				}
+			}
 			if(feature.properties.class) {
 				classSet.add(feature.properties.class);
 			}
@@ -18,7 +24,7 @@ function getTileInfo(layers) {
 			}
 		}
 	}
-	return { "layers": layerCount, "features": featureCount, "classes": classSet.size, "types": typeSet.size };
+	return { "layers": layerCount, "features": featureCount, "classes": classSet.size, "types": typeSet.size, "attributes": getSortedSet(attributeSet) };
 }
 
 function containsClass(classSet, className) {
@@ -34,7 +40,18 @@ function containsClass(classSet, className) {
 	return containsClass;
 }
 
-function addType(classSet, className, type) {
+function addProperties(layerClass, properties) {
+	for(var property in properties) {
+		if(properties.hasOwnProperty(property)) {
+			if(!(property === 'class' || property === 'type')) {
+				layerClass.attributes.add(property);
+			}
+		}
+	}
+	return layerClass;
+}
+
+function addType(classSet, className, type, properties) {
 	for(var item of classSet) {
 		if(item.name === className) {
 			if(type) {
@@ -42,25 +59,41 @@ function addType(classSet, className, type) {
 			} else {
 				item.types.add("no type");
 			}
+			item = addProperties(item, properties);
 		}
 	}
 	return classSet;
 }
 
-function addClass(classSet, className, type) {
+function addClass(classSet, className, type, properties) {
 	var layerClass = {
 		"name": className,
-		"types": new Set()
+		"types": new Set(),
+		"attributes": new Set()
 	};
+
+	if(className === 'admin' || className === 'marine_label') {
+		console.log(properties);
+	}
 
 	if(type) {
 		layerClass.types.add(type);
 	} else {
 		layerClass.types.add("no type");
-		//layerClass.types.add(layer.feature(i).properties);
 	}
+
+	layerClass = addProperties(layerClass, properties);
 	classSet.add(layerClass);
 	return classSet;
+}
+
+function getSortedSet(unsortedSet) {
+	var sortedArray = [];
+	unsortedSet.forEach(function(item) {
+		sortedArray.push(item);
+	});
+	sortedArray.sort();
+	return sortedArray;
 }
 
 function getSortedItems(unsortedItems, sortByName) {
@@ -98,7 +131,7 @@ function getSortedLayers(layers) {
 }
 
 function getLayerResult(layerObject, amountOfFeatures) {
-	output += "\n" + layerObject.name + " (features: " + amountOfFeatures + ")" + "\n";
+	output += "\n" + "#" + layerObject.name + " (features: " + amountOfFeatures + ")" + "\n";
 
 	var classSet = new Set();
 	for(var j=0; j < layerObject.layer.length; ++j) {
@@ -107,9 +140,9 @@ function getLayerResult(layerObject, amountOfFeatures) {
 		var type = properties.type;
 		if(className) {
 			if(containsClass(classSet, className)){
-				classSet = addType(classSet, className, type);
+				classSet = addType(classSet, className, type, properties);
 			} else {
-				classSet = addClass(classSet, className, type);
+				classSet = addClass(classSet, className, type, properties);
 			}
 		}
 	}
@@ -117,11 +150,23 @@ function getLayerResult(layerObject, amountOfFeatures) {
 }
 
 function printLayerResult(classSet) {
+	var attributeSet = new Set();
+	classSet.forEach(function(item) {
+		item.attributes.forEach(function(attribute) {
+			attributeSet.add(attribute);
+		});
+	});
+	
+	getSortedSet(attributeSet).forEach(function(attribute) {
+		output += "\t"+"[" + attribute + "]" + "\n";
+	});
+
 	if(classSet.size === 0) {
 		output += "\t"+" no class" + "\n";
 	} else {
 		for(var item of getSortedItems(classSet, true)) {
-			output += "\t"+item.name + "\n";
+
+			output += "\t" + item.name + "\n";
 			for(var sortedType of getSortedItems(item.types)) {
 				output += "\t" + "\t" + sortedType + "\n";
 			}
@@ -137,6 +182,10 @@ function printProlog(layers, name, tileNumber) {
 	output += "layers: " + tileInfo.layers + "\n";
 	output += "classes: " + tileInfo.classes + "\n";
 	output += "types: " + tileInfo.types + "\n";
+	output += "common attributes over all layers:" + "\n";
+	tileInfo.attributes.forEach(function(attribute) {
+		output += "\t" + "[" + attribute + "]" + "\n";
+	});
 }
 
 function printResult(layers) {

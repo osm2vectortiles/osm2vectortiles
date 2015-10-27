@@ -30,7 +30,6 @@ function writeOutput(output, dirname, name) {
 			        console.log("Error writing file: " + err);
 			    }
 			});
-
 		}
 	});
 }
