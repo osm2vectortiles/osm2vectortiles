@@ -1,6 +1,7 @@
 # osm2vectortiles [![Build Status](https://travis-ci.org/geometalab/osm2vectortiles.svg)](https://travis-ci.org/geometalab/osm2vectortiles)
 
-Create [Mapbox Streets](https://www.mapbox.com/developers/vector-tiles/mapbox-streets-v5) compatible vector tiles for custom styling with [Mapbox Studio Classic](https://www.mapbox.com/mapbox-studio-classic/) and provide easy deployment methods.
+Create [Mapbox Streets](https://www.mapbox.com/developers/vector-tiles/mapbox-streets-v5) compatible vector tiles for custom
+styling with [Mapbox Studio Classic](https://www.mapbox.com/mapbox-studio-classic/) and provide easy deployment methods.
 
 ## Get started
 
@@ -27,25 +28,22 @@ The mapping is optimized for fast generation of vectortiles.
 
 ### Export
 
-Export toolchain consisting of a custom `tm2source` project based on the import mapping and
-tools to scale exporting of the vectortiles horizontally.
+Export toolchain consisting of [our custom tm2source project](https://github.com/geometalab/open-streets.tm2source)
+based on the import mapping and tools to scale exporting of the vectortiles horizontally.
 
 ![Export Step](https://github.com/manuelroth/osm2vectortiles-thesis/raw/master/source/figures/export_step.png)
 
-### Tileserver
+### Serve
 
 A very easy tileserver where you can simply drop in your `tm2` style project and our produced `mbtiles` file
 and it will serve a custom styled OSM map.
 
 ![Tileserver Step](https://github.com/manuelroth/osm2vectortiles-thesis/raw/master/source/figures/tileserver_step.png)
 
-## Flow
-
-![High level flow of the two containers](https://cloud.githubusercontent.com/assets/59284/9849871/2a7b56a0-5aef-11e5-8f79-b3fd673bd0e6.jpg)
-
 ## Development
 
 We use Docker extensively for development and deployment.
+The easiest way to get started is using [Docker Compose](https://www.docker.com/docker-compose).
 
 Start up your PostGIS container with the data container attached.
 
@@ -53,27 +51,34 @@ Start up your PostGIS container with the data container attached.
 docker-compose up -d postgis
 ```
 
-Import PBF files from the local `import` directory.
-The import container will automatically download a PBF of Zurich for testing.
+In order to render the oceans you need to import the water polygons
+from [OpenStreetMapData.com](http://openstreetmapdata.com/data/water-polygons).
+Run the `import-water` container.
 
 ```
-docker-compose run imposm3
+docker-compose up import-water
 ```
 
-Import SHP files from the local `import` directory. Or if there is now shapefile available the container will automatically download the water polygons shapefile from [OpenStreetMapData.com](http://openstreetmapdata.com/data/water-polygons)
+Download a PBF and put it into the local `import` directory.
 
 ```
-docker-compose run importwater
+wget https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf
+```
+
+Now you need to import the PBF files into PostGIS.
+
+```
+docker-compose up import
 ```
 
 Export the data as MBTiles file to the `export` directory.
 
 ```
-docker-compose run tilelive
+docker-compose up export
 ```
 
-Run the tileserver from `export` directory.
+Serve the tiles as raster tiles from `export` directory.
 
 ```
-docker-compose up tileserver
+docker-compose up serve
 ```

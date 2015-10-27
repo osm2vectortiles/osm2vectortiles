@@ -5,58 +5,38 @@ pgdata:
 cache:
   image: "tianon/true"
   volumes:
-  - /data/import
+  - /data/cache
 postgis:
-  build: ./database/postgis
+  build: ./src/postgis
   volumes_from:
    - pgdata
   ports:
    - "5432"
-  environment:
-    OSM_DB: "osm_zurich"
-    OSM_USER: "osm"
-    OSM_PASSWORD: "suisse"
-imposm3:
-  build: ./import/imposm3
+import:
+  build: ./src/import
   volumes:
-   - ./volumes/import:/data/import
+   - ./import:/data/import
   volumes_from:
    - cache
   links:
    - postgis:db
-  environment:
-    OSM_DB: "osm_zurich"
-    OSM_USER: "osm"
-    OSM_PASSWORD: "suisse"
-    PBF_DOWNLOAD_URL: "https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf"
-water:
-  build: ./import/water
-  volumes:
-  - ./volumes/water:/data/import
+import-water:
+  build: ./src/import-water
   links:
   - postgis:db
-  environment:
-    OSM_DB: "osm_zurich"
-    OSM_USER: "osm"
-    OSM_PASSWORD: "suisse"
-    # WATER_SHP_DOWNLOAD_URL: "http://data.openstreetmapdata.com/water-polygons-split-3857.zip"
-worker:
-  build: ./export/worker
+export:
+  build: ./src/export
   volumes:
-   - ./open-streets.tm2source:/data/tm2source
-   - ./volumes/export:/data/export
+   - ./export:/data/export
   links:
    - postgis:db
   environment:
-    OSM_DB: "osm_zurich"
-    OSM_USER: "osm"
-    OSM_PASSWORD: "suisse"
     BBOX: "8.4039 47.3137 8.6531 47.4578"
     MIN_ZOOM: "0"
     MAX_ZOOM: "14"
-tileserver:
-  build: ./tileserver
+serve:
+  build: ./src/serve
   volumes:
-   - ./volumes/export:/data
+   - ./export:/data
   ports:
    - "8080:80"
