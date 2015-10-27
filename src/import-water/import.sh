@@ -17,33 +17,41 @@ function import_shp() {
 }
 
 function create_index() {
-	local index_command="CREATE INDEX water_polygons_index ON water_polygons USING gist (way) WITH (FILLFACTOR=100);"
+    local table=$1
+    local index_name="$table"_index
+	local index_command="CREATE INDEX $index_name ON $table USING gist (way) WITH (FILLFACTOR=100);"
 	echo $index_command | PG_PASSWORD=$OSM_PASSWORD psql --host="$DB_HOST" --port=5432 --dbname="$OSM_DB" --username="$OSM_USER"
 }
 
-function drop_water() {
-	local drop_command="DROP TABLE IF EXISTS water_polygons;"
+function drop_table() {
+    local table=$1
+	local drop_command="DROP TABLE IF EXISTS $table;"
 	echo $drop_command | PG_PASSWORD=$OSM_PASSWORD psql --host="$DB_HOST" --port=5432 --dbname="$OSM_DB" --username="$OSM_USER"
 }
 
 function main() {
-    local shp_file
-    local _shp_file
-    for _shp_file in "$IMPORT_DATA_DIR"/*.shp; do
-        shp_file=$_shp_file
-        break
-    done
-    echo "Found shp file $shp_file"
+    local water_polygons="$IMPORT_DATA_DIR/water_polygons.shp"
+    local land_polygons="$IMPORT_DATA_DIR/land_polygons.shp"
 
-    local table_name="water_polygons"
-    echo "Removing existing table $table_name"
-    drop_water
+    local water_table="water_polygons"
+    echo "Removing existing table $water_table"
+    drop_table $water_table
 
-    echo "Importing $shp_file into table $table_name"
-    import_shp $shp_file
+    echo "Importing $water_polygons into table $water_table"
+    import_shp $water_polygons
 
-    echo "Create index water_polygons_index on table $table_name"
-    create_index
+    echo "Create index on table $water_table"
+    create_index $water_table
+
+    local land_table="land_polygons"
+    echo "Removing existing table $land_polygons"
+    drop_table $land_table
+
+    echo "Importing $land_polygons into table $land_table"
+    import_shp $land_polygons
+
+    echo "Create index on table $table_name"
+    create_index $land_table
 }
 
 main
