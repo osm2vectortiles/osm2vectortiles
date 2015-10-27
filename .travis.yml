@@ -6,15 +6,18 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  - curl -o ./volumes/water/water-polygons-split-3857.zip -L http://data.openstreetmapdata.com/water-polygons-split-3857.zip  
-install:
+  - wget -nc -P "$HOME/cache" "https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf"
+  - mkdir -p "$TRAVIS_BUILD_DIR/import" && cp "$HOME/cache/zurich_switzerland.osm.pbf" "$TRAVIS_BUILD_DIR/import"
   - docker-compose build
-before_script:
+script:
   - docker-compose up -d postgis
   - sleep 10
-script:
-  - docker-compose run imposm3
-  - docker-compose run worker
-  - docker-compose up -d tileserver
+  - docker-compose run import-water
+  - docker-compose run import
+  - docker-compose run export
+  - docker-compose up -d serve
   - sleep 5
   - curl "http://localhost:8080/index.json"
+cache:
+  directories:
+    - $HOME/cache
