@@ -11,17 +11,9 @@ readonly OSM_DB=${OSM_DB:-osm}
 readonly OSM_USER=${OSM_USER:-osm}
 readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
 
-function download_shp() {
-	local pbf_url=$1
-	wget --directory-prefix "$IMPORT_DATA_DIR" --no-clobber "$pbf_url"
-	cd $IMPORT_DATA_DIR
-	unzip water-polygons-split-3857.zip
-	rm water-polygons-split-3857.zip
-}
-
 function import_shp() {
 	local shp_file=$1
-	shp2pgsql -g way $shp_file | PG_PASSWORD=$OSM_PASSWORD psql --host="$DB_HOST" --port=5432 --dbname="$OSM_DB" --username="$OSM_USER"
+	shp2pgsql -g way "$shp_file" | PG_PASSWORD=$OSM_PASSWORD psql --host="$DB_HOST" --port=5432 --dbname="$OSM_DB" --username="$OSM_USER"
 }
 
 function create_index() {
@@ -29,23 +21,28 @@ function create_index() {
 	echo $index_command | PG_PASSWORD=$OSM_PASSWORD psql --host="$DB_HOST" --port=5432 --dbname="$OSM_DB" --username="$OSM_USER"
 }
 
-function main() {
-    if ! [ $WATER_SHP_DOWNLOAD_URL = false ]; then
-    	download_shp $WATER_SHP_DOWNLOAD_URL
-    fi
+function drop_water() {
+	local drop_command="DROP TABLE IF EXISTS water_polygons;"
+	echo $drop_command | PG_PASSWORD=$OSM_PASSWORD psql --host="$DB_HOST" --port=5432 --dbname="$OSM_DB" --username="$OSM_USER"
+}
 
+function main() {
     local shp_file
     local _shp_file
     for _shp_file in "$IMPORT_DATA_DIR"/*.shp; do
-	shp_file=$_shp_file
-	break
+        shp_file=$_shp_file
+        break
     done
-
     echo "Found shp file $shp_file"
 
+    local table_name="water_polygons"
+    echo "Removing existing table $table_name"
+    drop_water
+
+    echo "Importing $shp_file into table $table_name"
     import_shp $shp_file
 
-    echo "Create index water_polygons_index on table water_polygons"
+    echo "Create index water_polygons_index on table $table_name"
     create_index
 }
 

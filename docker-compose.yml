@@ -30,8 +30,6 @@ import:
     OSM_PASSWORD: "suisse"
 import-water:
   build: ./src/import-water
-  volumes:
-  - ./import:/data/import
   links:
   - postgis:db
   environment:
