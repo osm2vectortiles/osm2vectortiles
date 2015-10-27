@@ -8,12 +8,10 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
   - wget -nc -P "$HOME/cache" "https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf"
   - mkdir -p "$TRAVIS_BUILD_DIR/import" && cp "$HOME/cache/zurich_switzerland.osm.pbf" "$TRAVIS_BUILD_DIR/import"
-install:
   - docker-compose build
-before_script:
+script:
   - docker-compose up -d postgis
   - sleep 10
-script:
   - docker-compose run import-water
   - docker-compose run import
   - docker-compose run export
