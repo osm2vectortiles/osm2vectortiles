@@ -31,6 +31,7 @@ enqueue-jobs:
     AWS_SECRET_ACCESS_KEY:
     AWS_REGION: "eu-central-1"
     TASK_ZOOM_LEVEL: 8
+    QUEUE_NAME: "osm2vectortiles_jobs"
 export:
   build: ./src/export
   volumes:

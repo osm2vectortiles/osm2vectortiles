@@ -63,16 +63,15 @@ def export_local(tilelive_command):
 
 
 def connect_job_queue(queue_name):
-    conn = boto.sqs.connect_to_region(
-        region_name=os.getenv('AWS_REGION', 'eu-central-1')
-    )
-    return conn.get_queue(queue_name)
+    conn = boto.sqs.connect_to_region(os.getenv('AWS_REGION', 'eu-central-1'))
+    queue = conn.get_queue(queue_name)
+    if queue is None:
+        raise ValueError('Could not connect to queue {}'.format(queue_name))
+    return queue
 
 
 def connect_s3(bucket_name):
-    conn = boto.s3.connect_to_region(
-        region_name=os.getenv('AWS_REGION', 'eu-central-1')
-    )
+    conn = boto.s3.connect_to_region(os.getenv('AWS_REGION', 'eu-central-1'))
     return conn.get_bucket(bucket_name)
 
 
@@ -94,7 +93,13 @@ def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
         if message:
             body = json.loads(message.get_body())
 
-            mbtiles_file = '{}_{}.mbtiles'.format(body['x'], body['y'])
+            mbtiles_file = '{}_{}_z{}-z{}.mbtiles'.format(
+                body['x'],
+                body['y'],
+                body['min_zoom'],
+                body['max_zoom']
+            )
+
             bounds = body['bounds']
             bbox = '{} {} {} {}'.format(
                 bounds['west'], bounds['south'],

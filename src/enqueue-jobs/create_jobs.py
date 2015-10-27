@@ -18,6 +18,7 @@ def all_descendant_tiles(x, y, zoom, max_zoom):
             yield from all_descendant_tiles(child_tile.x, child_tile.y,
                                             child_tile.z, max_zoom)
 
+
 def tiles_for_zoom_level(zoom_level):
     # Only switzerland for now
     tiles = all_descendant_tiles(x=33, y=22, zoom=6, max_zoom=zoom_level)
@@ -28,11 +29,12 @@ def tiles_for_zoom_level(zoom_level):
 
 
 def connect_job_queue():
-    conn = boto.sqs.connect_to_region(
-        region_name=os.getenv('AWS_REGION', 'eu-central-1'),
-    )
+    conn = boto.sqs.connect_to_region(os.getenv('AWS_REGION', 'eu-central-1'))
     queue_name = os.getenv('QUEUE_NAME', 'osm2vectortiles_jobs')
     queue = conn.get_queue(queue_name)
+    if queue is None:
+        raise ValueError('Could not connect to queue {}'.format(queue_name))
+
     return queue
 
 
