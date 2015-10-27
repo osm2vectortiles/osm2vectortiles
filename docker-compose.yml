@@ -12,10 +12,6 @@ postgis:
    - pgdata
   ports:
    - "5432"
-  environment:
-    OSM_DB: "osm_zurich"
-    OSM_USER: "osm"
-    OSM_PASSWORD: "suisse"
 import:
   build: ./src/import
   volumes:
@@ -24,18 +20,10 @@ import:
    - cache
   links:
    - postgis:db
-  environment:
-    OSM_DB: "osm_zurich"
-    OSM_USER: "osm"
-    OSM_PASSWORD: "suisse"
 import-water:
   build: ./src/import-water
   links:
   - postgis:db
-  environment:
-    OSM_DB: "osm_zurich"
-    OSM_USER: "osm"
-    OSM_PASSWORD: "suisse"
 export:
   build: ./src/export
   volumes:
@@ -43,9 +31,6 @@ export:
   links:
    - postgis:db
   environment:
-    OSM_DB: "osm_zurich"
-    OSM_USER: "osm"
-    OSM_PASSWORD: "suisse"
     BBOX: "8.4039 47.3137 8.6531 47.4578"
     MIN_ZOOM: "0"
     MAX_ZOOM: "14"

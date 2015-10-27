@@ -13,7 +13,7 @@ readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
 
 function import_shp() {
 	local shp_file=$1
-	shp2pgsql -g way "$shp_file" | PG_PASSWORD=$OSM_PASSWORD psql --host="$DB_HOST" --port=5432 --dbname="$OSM_DB" --username="$OSM_USER"
+	shp2pgsql -g way "$shp_file" | PG_PASSWORD=$OSM_PASSWORD psql --host="$DB_HOST" --port=5432 --dbname="$OSM_DB" --username="$OSM_USER" | grep -v "INSERT 0 1"
 }
 
 function create_index() {
