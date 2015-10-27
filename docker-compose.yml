@@ -25,7 +25,7 @@ import-water:
   links:
   - postgis:db
 enqueue-jobs:
-  build: ./export/jobmaker
+  build: ./src/enqueue-jobs
   environment:
     AWS_ACCESS_KEY_ID:
     AWS_SECRET_ACCESS_KEY:
