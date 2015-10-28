@@ -6,8 +6,8 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 8.5322
-  - 47.3517
+  - 8.5323
+  - 47.3516
   - 14
 description: OSM Bright 2
 Layer: 
@@ -211,8 +211,10 @@ Layer:
               when type in ('gate', 'spikes', 'bollard', 'lift_gate', 'kissing_gate') then 'gate'
               when type in ('hedge') then 'hedge'
             end AS class, osm_id
-          FROM osm_barrierways
-        ) AS data
+          from osm_barrierways
+          where geometry && !bbox!
+            and z(!scale_denominator!) >= 14
+        ) as data
       type: postgis
       user: osm
     description: ''
