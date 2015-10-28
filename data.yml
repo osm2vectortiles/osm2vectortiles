@@ -6,22 +6,22 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 8.7122
-  - 47.3237
-  - 12
+  - 8.5312
+  - 47.3491
+  - 14
 description: OSM Bright 2
 Layer: 
-  - id: landuse
+- id: landuse
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
       host: 192.168.99.100
       key_field: osm_id
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         ( SELECT * FROM (
@@ -102,15 +102,15 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: waterway
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
       geometry_table: ''
       host: 192.168.99.100
       key_field: ''
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         (
@@ -141,15 +141,15 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: water
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
       geometry_table: ''
       host: 192.168.99.100
       key_field: ''
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         (
@@ -166,15 +166,15 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: aeroway
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
       host: 192.168.99.100
       key_field: ''
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type
@@ -193,15 +193,15 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: building
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
       host: 192.168.99.100
       key_field: osm_id
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, name
@@ -214,7 +214,6 @@ Layer:
       user: osm
     description: ''
     fields: 
-      area: Number
       name: String
       osm_id: Number
       type: String
@@ -223,15 +222,15 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: landuse_overlay
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
       host: 192.168.99.100
       key_field: osm_id
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type,
@@ -263,15 +262,15 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: tunnel
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
       host: 192.168.99.100
       key_field: osm_id
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, 0 as bridge, access, render, z_order, tunnel,
@@ -308,25 +307,25 @@ Layer:
       access: String
       bridge: Number
       class: String
-      z_order: Number
       osm_id: Number
       render: String
       tunnel: Number
       type: String
+      z_order: Number
     properties: 
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: road
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
       host: 192.168.99.100
       key_field: osm_id
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         ( SELECT * FROM (
@@ -400,15 +399,15 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: bridge
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
       host: 192.168.99.100
       key_field: osm_id
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, bridge, access, render, z_order, 0 as tunnel,
@@ -445,25 +444,25 @@ Layer:
       access: String
       bridge: Number
       class: String
-      z_order: Number
       osm_id: Number
       render: String
       tunnel: Number
       type: String
+      z_order: Number
     properties: 
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: admin
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
       geometry_table: ''
       host: 192.168.99.100
       key_field: ''
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         (
@@ -492,15 +491,15 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: country_label
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
       host: 192.168.99.100
       key_field: ''
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         (
@@ -548,15 +547,15 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: state_label
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
       host: 192.168.99.100
       key_field: ''
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         (
@@ -578,15 +577,15 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: place_label
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
       host: 192.168.99.100
       key_field: ''
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         /* TODO get real name_en/name_de/name_es */
@@ -632,92 +631,119 @@ Layer:
     properties: 
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
-  - id: water_label
+  - id: housenum_label
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
       geometry_table: ''
       host: 192.168.99.100
       key_field: ''
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
-          (
-                  select ST_PointOnSurface(geometry) as geometry, osm_id,
-                    name, name as name_en, area from osm_waterareas
-                    where area >= 5000000000
-                    and z(!scale_denominator!) >= 5
-                    and geometry && !bbox!
-                  union all
-                  select ST_PointOnSurface(geometry) as geometry, osm_id,
-                    name, name as name_en, area from osm_waterareas
-                    where area < 5000000000 and area >= 1500000000
-                    and z(!scale_denominator!) >= 5
-                    and geometry && !bbox!
-                  union all
-                  select ST_PointOnSurface(geometry) as geometry, osm_id,
-                    name, name as name_en, area from osm_waterareas
-                    where area < 1500000000 and area >= 500000000
-                    and z(!scale_denominator!) >= 8
-                    and geometry && !bbox!
-                  union all
-                  select ST_PointOnSurface(geometry) as geometry, osm_id,
-                    name, name as name_en, area from osm_waterareas
-                    where area < 500000000 and area >= 100000000
-                    and z(!scale_denominator!) >= 9
-                    and geometry && !bbox!
-                  union all
-                  select ST_PointOnSurface(geometry) as geometry, osm_id,
-                    name, name as name_en, area from osm_waterareas
-                    where area < 100000000 and area >= 40000000
-                    and z(!scale_denominator!) >= 10
-                    and geometry && !bbox!
-                  union all
-                  select ST_PointOnSurface(geometry) as geometry, osm_id,
-                    name, name as name_en, area from osm_waterareas
-                    where area < 40000000 and area >= 20000000
-                    and z(!scale_denominator!) >= 11
-                    and geometry && !bbox!
-                  union all
-                  select ST_PointOnSurface(geometry) as geometry, osm_id,
-                    name, name as name_en, area from osm_waterareas
-                    where area < 20000000 and area >= 10000000
-                    and z(!scale_denominator!) >= 12
-                    and geometry && !bbox!
-                  union all
-                  select ST_PointOnSurface(geometry) as geometry, osm_id,
-                    name, name as name_en, area from osm_waterareas
-                    where area < 10000000 and area >= 5000000
-                    and z(!scale_denominator!) >= 13
-                    and geometry && !bbox!
-                  union all
-                  select ST_PointOnSurface(geometry) as geometry, osm_id,
-                    name, name as name_en, area from osm_waterareas
-                    where area < 5000000 and area >= 1000000
-                    and z(!scale_denominator!) >= 14
-                    and geometry && !bbox!
-                  union all
-                  select ST_PointOnSurface(geometry) as geometry, osm_id,
-                    name, name as name_en, area from osm_waterareas
-                    where area < 1000000 and area >= 500000
-                    and z(!scale_denominator!) >= 15
-                    and geometry && !bbox!
-                  union all
-                  select ST_PointOnSurface(geometry) as geometry, osm_id,
-                    name, name as name_en, area from osm_waterareas
-                    where area < 500000 and area >= 100000
-                    and z(!scale_denominator!) >= 16
-                    and geometry && !bbox!
-                  union all
-                  select ST_PointOnSurface(geometry) as geometry, osm_id,
-                    name, name as name_en, area from osm_waterareas
-                    where area < 100000
-                    and z(!scale_denominator!) >= 17
-                    and geometry && !bbox!
-                ) AS data
+        (
+          select geometry, type as house_num, osm_id from osm_housenumbers
+          where geometry && !bbox!
+            and z(!scale_denominator!) = 14
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      house_num: String
+      osm_id: Number
+    properties: 
+      "buffer-size": 8
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: water_label
+    Datasource: 
+      dbname: osm
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: ''
+      geometry_table: ''
+      host: 192.168.99.100
+      key_field: ''
+      max_size: 512
+      password: osm
+      port: 32769
+      srid: ''
+      table: |-
+        (
+                select ST_PointOnSurface(geometry) as geometry, osm_id,
+                  name, name as name_en, area from osm_waterareas
+                  where area >= 5000000000
+                  and z(!scale_denominator!) >= 5
+                  and geometry && !bbox!
+                union all
+                select ST_PointOnSurface(geometry) as geometry, osm_id,
+                  name, name as name_en, area from osm_waterareas
+                  where area < 5000000000 and area >= 1500000000
+                  and z(!scale_denominator!) >= 5
+                  and geometry && !bbox!
+                union all
+                select ST_PointOnSurface(geometry) as geometry, osm_id,
+                  name, name as name_en, area from osm_waterareas
+                  where area < 1500000000 and area >= 500000000
+                  and z(!scale_denominator!) >= 8
+                  and geometry && !bbox!
+                union all
+                select ST_PointOnSurface(geometry) as geometry, osm_id,
+                  name, name as name_en, area from osm_waterareas
+                  where area < 500000000 and area >= 100000000
+                  and z(!scale_denominator!) >= 9
+                  and geometry && !bbox!
+                union all
+                select ST_PointOnSurface(geometry) as geometry, osm_id,
+                  name, name as name_en, area from osm_waterareas
+                  where area < 100000000 and area >= 40000000
+                  and z(!scale_denominator!) >= 10
+                  and geometry && !bbox!
+                union all
+                select ST_PointOnSurface(geometry) as geometry, osm_id,
+                  name, name as name_en, area from osm_waterareas
+                  where area < 40000000 and area >= 20000000
+                  and z(!scale_denominator!) >= 11
+                  and geometry && !bbox!
+                union all
+                select ST_PointOnSurface(geometry) as geometry, osm_id,
+                  name, name as name_en, area from osm_waterareas
+                  where area < 20000000 and area >= 10000000
+                  and z(!scale_denominator!) >= 12
+                  and geometry && !bbox!
+                union all
+                select ST_PointOnSurface(geometry) as geometry, osm_id,
+                  name, name as name_en, area from osm_waterareas
+                  where area < 10000000 and area >= 5000000
+                  and z(!scale_denominator!) >= 13
+                  and geometry && !bbox!
+                union all
+                select ST_PointOnSurface(geometry) as geometry, osm_id,
+                  name, name as name_en, area from osm_waterareas
+                  where area < 5000000 and area >= 1000000
+                  and z(!scale_denominator!) >= 14
+                  and geometry && !bbox!
+                union all
+                select ST_PointOnSurface(geometry) as geometry, osm_id,
+                  name, name as name_en, area from osm_waterareas
+                  where area < 1000000 and area >= 500000
+                  and z(!scale_denominator!) >= 15
+                  and geometry && !bbox!
+                union all
+                select ST_PointOnSurface(geometry) as geometry, osm_id,
+                  name, name as name_en, area from osm_waterareas
+                  where area < 500000 and area >= 100000
+                  and z(!scale_denominator!) >= 16
+                  and geometry && !bbox!
+                union all
+                select ST_PointOnSurface(geometry) as geometry, osm_id,
+                  name, name as name_en, area from osm_waterareas
+                  where area < 100000
+                  and z(!scale_denominator!) >= 17
+                  and geometry && !bbox!
+              ) AS data
       type: postgis
       user: osm
     description: ''
@@ -731,15 +757,15 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: poi_label
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
       host: 192.168.99.100
       key_field: ''
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         (
@@ -770,15 +796,15 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: road_label
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
       host: 192.168.99.100
       key_field: ''
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         (
@@ -894,15 +920,15 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: waterway_label
     Datasource: 
-      dbname: osm_zurich
+      dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
       host: 192.168.99.100
       key_field: ''
       max_size: 512
-      password: suisse
-      port: 32768
+      password: osm
+      port: 32769
       srid: ''
       table: |-
         (
