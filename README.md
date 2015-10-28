@@ -1,40 +1,30 @@
-# Compare vector tiles
+# open-streets.tm2source
 
-A vector tile can have multiple layers(admin, landuse, water), each layer can have a class(park, wood) and every class can have a type(nature_reserve, forest).
+[Mapbox Steets v5](https://www.mapbox.com/developers/vector-tiles/mapbox-streets-v5/) compatible data source.
 
-To compare two styles just click on the green compare pull request button and choose which styles you want to compare.
+## Requirements
 
-Ouput structure:
+See [osm2vectortiles documentation](https://github.com/geometalab/osm2vectortiles) for details.
 
+## Layers
+
+Because this data source is compatible with Mapbox Streets v5 all layers your can find in Mapbox Streets v5 are also available in this source. 
+For more information, please check out the documentation of [Mapbox Streets v5](https://www.mapbox.com/developers/vector-tiles/mapbox-streets-v5/)
+
+## Editing
+
+If you want to edit this data source, you need some OSM data on your local machine. Follow the documentation of the [osm2vectortiles project](https://github.com/geometalab/osm2vectortiles) to set everything up.
+
+- Install the latest [Mapbox Studio Classic](https://www.mapbox.com/mapbox-studio-classic/)
+- Clone this repository and edit the data.yml file with connection information for your postgis database.
+
+```bash
+host: <your host>
+port: <your port>
+dbname: <your dbname>
+password: <your password>
 ```
-[style-name]
-[tile-number z/y/x]
-[amount-features]
-[amount-layers]
-[amount-classes]
-[amount-types]
+- Add this repository as a data source in Mapbox Studio Classic. Now, you should see your data as "x-ray" outlines. 
 
-[layer]
-    [class]
-        [type]
-```
-
-Output sample:
-
-```
-name: mapbox-streets-v5
-tile: 7/67/44
-features: 2298
-layers: 9
-classes: 6
-types: 3
-
-landuse (features: 1314)
-	park
-		nature_reserve
-		park
-	wood
-		forest
-		wood
-
-```
+To see the data in style:
+- Open any style in Mapbox Studio Classic and change source to this repository under layers.
