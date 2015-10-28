@@ -6,8 +6,8 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 8.5323
-  - 47.3516
+  - 8.5393
+  - 47.3777
   - 14
 description: OSM Bright 2
 Layer: 
@@ -21,7 +21,7 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         ( SELECT * FROM (
@@ -110,7 +110,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         (
@@ -149,7 +149,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         (
@@ -174,7 +174,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type
@@ -201,7 +201,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         (
@@ -234,7 +234,7 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, name
@@ -263,7 +263,7 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type,
@@ -303,7 +303,7 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, 0 as bridge, access, render, z_order, tunnel,
@@ -358,7 +358,7 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         ( SELECT * FROM (
@@ -440,7 +440,7 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, bridge, access, render, z_order, 0 as tunnel,
@@ -495,7 +495,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         (
@@ -532,7 +532,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         (
@@ -588,7 +588,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         (
@@ -618,7 +618,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         /* TODO get real name_en/name_de/name_es */
@@ -674,7 +674,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         (
@@ -771,7 +771,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         (
@@ -782,6 +782,26 @@ Layer:
             1 as localrank, type as maki
             from osm_amenities
             where z(!scale_denominator!) >= 14
+            and geometry && !bbox!
+          union all
+            select geometry, osm_id,
+            name as name, name as name_de, 
+            name as name_en, name as name_es,
+            name as name_fr, 'Rail Station' as type, 3 as scalerank, 
+            1 as localrank, 'rail' as maki
+            from osm_transport_points
+            where type='station'
+            and z(!scale_denominator!) >= 14
+            and geometry && !bbox!
+          union all
+            select geometry, osm_id,
+            name as name, name as name_de, 
+            name as name_en, name as name_es,
+            name as name_fr, 'Rail Station' as type, 3 as scalerank, 
+            1 as localrank, 'entrance' as maki
+            from osm_transport_points
+            where type='subway_entrance'
+            and z(!scale_denominator!) >= 14
             and geometry && !bbox!
         ) AS data
       type: postgis
@@ -811,7 +831,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         (
@@ -935,7 +955,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         (
@@ -981,7 +1001,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32769
+      port: 32770
       srid: ''
       table: |-
         (
