@@ -6,8 +6,8 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 8.5393
-  - 47.3777
+  - 8.5361
+  - 47.3576
   - 14
 description: OSM Bright 2
 Layer: 
@@ -153,9 +153,21 @@ Layer:
       srid: ''
       table: |-
         (
-                select 0 as osm_id, way from water_polygons
-                  where way && !bbox!
-                ) AS data
+          /*select 0 as osm_id, way from water_polygons
+          where way && !bbox!
+          union all*/
+          select geometry, osm_id from osm_waterareas_gen1
+          where geometry && !bbox!
+          and z(!scale_denominator!) between 3 and 9
+          union all
+          select geometry, osm_id from osm_waterareas_gen0
+          where geometry && !bbox!
+          and z(!scale_denominator!) between 9 and 12
+          union all
+          select geometry, osm_id from osm_waterareas
+          where geometry && !bbox!
+          and z(!scale_denominator!) > 12
+        ) AS data
       type: postgis
       user: osm
     description: ''
