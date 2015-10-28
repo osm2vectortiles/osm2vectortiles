@@ -121,11 +121,15 @@ function getLayerResult(layerObject, amountOfFeatures) {
 	output += "\n" + "#" + layerObject.name + " (features: " + amountOfFeatures + ")" + "\n";
 
 	var classSet = new Set();
+	var typeSet = new Set();
 	var attributeSet = new Set();
 	for(var j=0; j < layerObject.layer.length; ++j) {
 		var properties = layerObject.layer.feature(j).properties;
 		var className = properties.class;
 		var type = properties.type;
+		if(type) {
+			typeSet.add(type);
+		}
 		attributeSet = addProperties(attributeSet, properties);
 		if(className) {
 			if(containsClass(classSet, className)){
@@ -138,14 +142,17 @@ function getLayerResult(layerObject, amountOfFeatures) {
 	getSortedSet(attributeSet).forEach(function(attribute) {
 		output += "\t"+"[" + attribute + "]" + "\n";
 	});
-	return classSet;
+	return {"classes": classSet, "types": getSortedSet(typeSet)};
 }
 
-function printLayerResult(classSet) {
-	if(classSet.size === 0) {
+function printLayerResult(classes) {
+	if(classes.classes.size === 0) {
 		output += "\t"+" no class" + "\n";
+		classes.types.forEach(function(type) {
+			output += "\t" + "\t" + type + "\n";
+		});
 	} else {
-		for(var item of getSortedItems(classSet, true)) {
+		for(var item of getSortedItems(classes.classes, true)) {
 			output += "\t" + item.name + "\n";
 			for(var sortedType of getSortedItems(item.types)) {
 				output += "\t" + "\t" + sortedType + "\n";
