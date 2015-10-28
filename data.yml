@@ -6,12 +6,12 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 8.5312
-  - 47.3491
+  - 8.5244
+  - 47.3725
   - 14
 description: OSM Bright 2
 Layer: 
-- id: landuse
+  - id: landuse
     Datasource: 
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
@@ -647,7 +647,7 @@ Layer:
         (
           select geometry, type as house_num, osm_id from osm_housenumbers
           where geometry && !bbox!
-            and z(!scale_denominator!) = 14
+            and z(!scale_denominator!) >= 14
         ) AS data
       type: postgis
       user: osm
@@ -769,16 +769,13 @@ Layer:
       srid: ''
       table: |-
         (
-          /* TODO calculate real ranks */
-          /* TODO improve assigning maki icon */
           select geometry, osm_id,
-            name, type, 3 as scalerank, 1 as localrank,
-            (CASE WHEN replace(type, '_', '-') in ('airfield','london-underground','airport','marker','alcohol-shop','marker-stroked','america-football','minefield','art-gallery','mobilephone','bakery','monument','bank','museum','bar','music','baseball','oil-well','basketball','park2','beer','park','bicycle','parking','building','parking-garage','bus','pharmacy','cafe','pitch','camera','place-of-worship','campsite','playground','car','police','cemetery','polling-place','chemist','post','cinema','prison','circle','rail','circle-stroked','rail-above','city','rail-light','clothing-store','rail-metro','college','rail-underground','commercial','religious-christian','cricket','religious-jewish','cross','religious-muslim','dam','restaurant','danger','roadblock','disability','rocket','dog-park','school','embassy','scooter','emergency-telephone','shop','entrance','skiing','farm','slaughterhouse','fast-food','soccer','ferry','square','fire-station','square-stroked','fuel','star','garden','star-stroked','gift','suitcase','golf','swimming','grocery','telephone','hairdresser','tennis','harbor','theatre','heart','toilets','heliport','town','hospital','town-hall','ice-cream','triangle','industrial','triangle-stroked','land-use','village','laundry','warehouse','library','waste-basket','lighthouse','water','lodging','wetland','logging','zoo')
-            THEN replace(type, '_', '-')
-            ELSE null
-            END) as maki
+            name as name, name as name_de, 
+            name as name_en, name as name_es,
+            name as name_fr, type, 3 as scalerank, 
+            1 as localrank, type as maki
             from osm_amenities
-            where z(!scale_denominator!) >= 16
+            where z(!scale_denominator!) >= 14
             and geometry && !bbox!
         ) AS data
       type: postgis
@@ -788,6 +785,10 @@ Layer:
       localrank: Number
       maki: String
       name: String
+      name_de: String
+      name_en: String
+      name_es: String
+      name_fr: String
       osm_id: Number
       scalerank: Number
       type: String
