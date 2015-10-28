@@ -799,8 +799,8 @@ Layer:
             select geometry, osm_id,
             name as name, name as name_de, 
             name as name_en, name as name_es,
-            name as name_fr, 'Rail Station' as type, 3 as scalerank, 
-            1 as localrank, 'rail' as maki
+            name as name_fr, 'Rail Station' as type, 1 as scalerank, 
+            0 as localrank, 'rail' as maki
             from osm_transport_points
             where type='station'
             and z(!scale_denominator!) >= 14
@@ -809,8 +809,8 @@ Layer:
             select geometry, osm_id,
             name as name, name as name_de, 
             name as name_en, name as name_es,
-            name as name_fr, 'Rail Station' as type, 3 as scalerank, 
-            1 as localrank, 'entrance' as maki
+            name as name_fr, 'Rail Station' as type, 4 as scalerank, 
+            0 as localrank, 'entrance' as maki
             from osm_transport_points
             where type='subway_entrance'
             and z(!scale_denominator!) >= 14
