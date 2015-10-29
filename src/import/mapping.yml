@@ -329,6 +329,44 @@ tables:
       - suburb
       - locality
     type: point
+  tunnels:
+    type: linestring
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: type
+      key: highway
+      type: string
+    - key: oneway
+      name: oneway
+      type: direction
+    - key: layer
+      name: z_order
+      type: wayzorder
+    mapping:
+      tunnel:
+      - __any__
+  bridges:
+    type: linestring
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: type
+      key: highway
+      type: string
+    - key: oneway
+      name: oneway
+      type: direction
+    - key: layer
+      name: z_order
+      type: wayzorder
+    mapping:
+      bridge:
+      - __any__
   roads:
     fields:
     - name: osm_id
