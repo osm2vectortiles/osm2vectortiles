@@ -275,6 +275,24 @@ tables:
       - national_park
       tourism:
       - zoo
+  landusages_overlay:
+    type: polygon
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: type
+      type: mapping_value
+    mapping:
+      natural:
+      - wetland
+      - mud
+      wetland:
+      - marsh
+      - swamp
+      - tidalflat
+      - bog
   places:
     fields:
     - name: osm_id
