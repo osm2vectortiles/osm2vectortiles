@@ -21,7 +21,7 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         (
@@ -108,7 +108,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         (
@@ -147,7 +147,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         (
@@ -184,7 +184,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type
@@ -211,7 +211,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         (
@@ -244,7 +244,7 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, name
@@ -273,15 +273,16 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
-        ( SELECT geometry, osm_id, type,
+        ( 
+          SELECT geometry, osm_id, type,
             CASE
               WHEN type IN ('wetland', 'marsh', 'swamp', 'bog') THEN 'wetland'
               WHEN type IN ('mud', 'tidalflat') THEN 'wetland_noveg'
               END AS class
-            FROM osm_landusages
+            FROM osm_landusages_overlay
             WHERE geometry && !bbox!
               AND z(!scale_denominator!) > 6
         ) AS data
@@ -305,7 +306,7 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, 0 as bridge, access, render, z_order, tunnel,
@@ -360,7 +361,7 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         ( SELECT * FROM (
@@ -442,7 +443,7 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, bridge, access, render, z_order, 0 as tunnel,
@@ -497,7 +498,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         (
@@ -534,7 +535,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         (
@@ -590,7 +591,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         (
@@ -620,7 +621,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         /* TODO get real name_en/name_de/name_es */
@@ -676,7 +677,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         (
@@ -773,7 +774,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         (
@@ -833,7 +834,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         (
@@ -842,26 +843,26 @@ Layer:
             round(MercLength(geometry)) as len, 'motorway' as class
             from osm_roads
             where bridge = 0 and tunnel = 0 and type in ('motorway')
-            and z(!scale_denominator!) >= 5
+            and z(!scale_denominator!) >= 6
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
-          union all
-          select geometry, osm_id,
-            name, ref, char_length(ref) as reflen,
-            round(MercLength(geometry)) as len, 'motorway_link' as class
-            from osm_roads
-            where bridge = 0 and tunnel = 0 and type in ('motorway_link')
-            and z(!scale_denominator!) >= 13
-            and linelabel(z(!scale_denominator!), name, geometry)
-            and geometry && !bbox!
-          union all
+            union all
           select geometry, osm_id,
             name, ref, char_length(ref) as reflen,
             round(MercLength(geometry)) as len, 'main' as class
             from osm_roads
             where bridge = 0 and tunnel = 0 and type in ('primary',
             'primary_link', 'trunk', 'trunk_link')
-            and z(!scale_denominator!) >= 5
+            and z(!scale_denominator!) >= 6
+            and linelabel(z(!scale_denominator!), name, geometry)
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id,
+            name, ref, char_length(ref) as reflen,
+            round(MercLength(geometry)) as len, 'driveway' as class
+            from osm_roads
+            where bridge = 0 and tunnel = 0 and type in ('driveway')
+            and z(!scale_denominator!) >= 14
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
           union all
@@ -870,18 +871,28 @@ Layer:
             round(MercLength(geometry)) as len, 'main' as class
             from osm_roads
             where bridge = 0 and tunnel = 0 and type in ('secondary',
-            'secondary_link')
+            'secondary_link', 'tertiary', 'tertiary_link')
             and z(!scale_denominator!) >= 9
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
           union all
           select geometry, osm_id,
             name, ref, char_length(ref) as reflen,
-            round(MercLength(geometry)) as len, 'main' as class
+            round(MercLength(geometry)) as len, 'path' as class
             from osm_roads
-            where bridge = 0 and tunnel = 0 and type in ('tertiary',
-            'tertiary_link')
-            and z(!scale_denominator!) >= 12
+            where bridge = 0 and tunnel = 0 and type in ('path',
+            'cycleway', 'ski', 'steps', 'bridleway')
+            and z(!scale_denominator!) >= 15
+            and linelabel(z(!scale_denominator!), name, geometry)
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id,
+            name, ref, char_length(ref) as reflen,
+            round(MercLength(geometry)) as len, 'service' as class
+            from osm_roads
+            where bridge = 0 and tunnel = 0 and type in ('service',
+            'track')
+            and z(!scale_denominator!) >= 15
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
           union all
@@ -907,30 +918,10 @@ Layer:
           union all
           select geometry, osm_id,
             name, ref, char_length(ref) as reflen,
-            round(MercLength(geometry)) as len, 'service' as class
+            round(MercLength(geometry)) as len, 'motorway_link' as class
             from osm_roads
-            where bridge = 0 and tunnel = 0 and type in ('service',
-            'track')
-            and z(!scale_denominator!) >= 15
-            and linelabel(z(!scale_denominator!), name, geometry)
-            and geometry && !bbox!
-          union all
-          select geometry, osm_id,
-            name, ref, char_length(ref) as reflen,
-            round(MercLength(geometry)) as len, 'driveway' as class
-            from osm_roads
-            where bridge = 0 and tunnel = 0 and type in ('driveway')
-            and z(!scale_denominator!) >= 15
-            and linelabel(z(!scale_denominator!), name, geometry)
-            and geometry && !bbox!
-          union all
-          select geometry, osm_id,
-            name, ref, char_length(ref) as reflen,
-            round(MercLength(geometry)) as len, 'path' as class
-            from osm_roads
-            where bridge = 0 and tunnel = 0 and type in ('path',
-            'cycleway', 'ski', 'steps', 'bridleway')
-            and z(!scale_denominator!) >= 15
+            where bridge = 0 and tunnel = 0 and type in ('motorway_link')
+            and z(!scale_denominator!) >= 14
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
         ) AS data
@@ -957,7 +948,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         (
@@ -1003,7 +994,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32771
+      port: 32772
       srid: ''
       table: |-
         (
