@@ -213,13 +213,33 @@ tables:
       - __any__
     type: linestring
   landusages:
+    type: polygon
     fields:
     - name: osm_id
       type: id
     - name: geometry
       type: geometry
-    - name: tag
-      type: hstore_tags
+    - name: landuse
+      key: landuse
+      type: string
+    - name: leisure
+      key: leisure
+      type: string
+    - name: natural
+      key: natural
+      type: mapping_value
+    - name: amenity
+      key: amenity
+      type: string
+    - name: cemetery
+      key: cemetery
+      type: string
+    - name: boundary
+      key: boundary
+      type: string
+    - name: tourism
+      key: tourism
+      type: string
     mapping:
       landuse:
       - allotments
@@ -251,23 +271,22 @@ tables:
       - recreation_ground
       - sports_centre
       - pitch
-      cemetery:
-      - __any__
-      amenity:
-      - hospital
-      boundary:
-      - national_park
-      tourism:
-      - zoo
       natural:
       - glacier
       - sand
       - wood
       - scrub
       amenity:
+      - hospital
       - school
       - college
       - university
+      cemetery:
+      - __any__
+      boundary:
+      - national_park
+      tourism:
+      - zoo
   places:
     fields:
     - name: osm_id
