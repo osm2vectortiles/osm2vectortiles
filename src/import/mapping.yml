@@ -257,6 +257,13 @@ tables:
       - sand
       - wood
       - scrub
+      - wetland
+      - mud
+      wetland:
+      - marsh
+      - swamp
+      - tidalflat
+      - bog
       amenity:
       - hospital
       - school
