@@ -486,3 +486,75 @@ tables:
       - drain
       - ditch
     type: linestring
+  points_of_interest:
+    type: point
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: type
+      type: mapping_value
+    mapping:
+      amenity:
+      - arts_centre
+      - police
+      - fire_station
+      - post_box
+      - post_office
+      - telephone
+      - library
+      - townhall
+      - courthouse
+      - prison
+      - embassy
+      - community_centre
+      - nursing_home
+      - arts_centre
+      - recycling
+      - university
+      - school
+      - kindergarten
+      - college
+      - public_building
+      - pharmacy
+      - hospital
+      - doctors
+      - dentist
+      - veterinary
+      - theatre
+      - nightclub
+      - cinema
+      - restaurant
+      - fast_food
+      - cafe
+      - pub
+      - bar
+      - food_court
+      - biergarten
+      - swimming_pool
+      - shelter
+    leisure:
+      - park
+      - playground
+      - dog_park
+      - sports_centre
+      - pitch
+      - swimming_pool
+      - water_park
+      - golf_course
+      - stadium
+      - ice_rink
+    sport:
+      - swimming
+      - tennis
+    tourism:
+      - hotel
+      - motel
+      - bed_and_breakfast
+      - guest_house
+      - hostel
+      - chalet
+      - camp_site
+      - alpine_hut
+      - caravan_site
