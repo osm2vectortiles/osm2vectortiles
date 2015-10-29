@@ -494,14 +494,25 @@ tables:
       - ditch
     type: linestring
   points_of_interest:
-    type: point
+    type: geometry
     fields:
     - name: osm_id
       type: id
     - name: geometry
       type: geometry
+    - name: name
+      key: name
+      type: string
+    - name: website
+      key: website
+      type: string
+    - name: address
+      key: addr:street
+      type: string
     - name: type
       type: mapping_value
+    - name: area
+      type: pseudoarea
     mapping:
       amenity:
       - arts_centre
