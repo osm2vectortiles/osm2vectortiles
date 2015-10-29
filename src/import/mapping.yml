@@ -12,7 +12,7 @@ generalized_tables:
     tolerance: 200.0
   roads_gen1:
     source: roads
-    sql_filter:
+    sql_filter: |
       type IN (
         'motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary',
         'primary_link', 'secondary', 'secondary_link', 'tertiary', 'tertiary_link')
@@ -305,7 +305,7 @@ tables:
       industrial:
         mapping:
           landuse:
-          -industrial
+          - industrial
       park:
         mapping:
           leisure:
@@ -427,10 +427,6 @@ tables:
       type: string
     - name: class
       type: mapping_key
-    filters:
-      exclude_tags:
-      - - area
-        - 'yes'
     mappings:
       railway:
         mapping:

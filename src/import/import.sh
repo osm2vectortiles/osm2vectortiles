@@ -25,30 +25,10 @@ function download_pbf() {
 
 function import_pbf() {
     local pbf_file=$1
-    $IMPOSM_BIN import -connection $PG_CONNECT -mapping $MAPPING_JSON \
-        -appendcache -cachedir=$IMPOSM_CACHE_DIR \
+    exec $IMPOSM_BIN import -connection $PG_CONNECT -mapping $MAPPING_YAML \
+        -overwritecache -cachedir=$IMPOSM_CACHE_DIR \
         -read $pbf_file \
-        -write -diff -dbschema-import=${DB_SCHEMA} -optimize
-}
-
-function import_change() {
-    local changes_file=$1
-    $IMPOSM_BIN diff -connection $PG_CONNECT -mapping $MAPPING_JSON \
-        -appendcache -cachedir=$IMPOSM_CACHE_DIR \
-        -dbschema-import=${DB_SCHEMA} \
-        $changes_file
-}
-
-function import_all_changes() {
-    if [ "$(ls -A $IMPORT_DATA_DIR/*osc.gz 2> /dev/null)" ]; then
-        echo "OSM change files found. Only changes are imported, initial import is skipped."
-
-        local change_file
-        for change_file in "$IMPORT_DATA_DIR"/*.osc.gz; do
-            import_change $change_file
-        done
-        exit 0
-    fi
+        -write -dbschema-import=${DB_SCHEMA} -optimize
 }
 
 function import_single_pbf() {
@@ -71,7 +51,6 @@ function main() {
         download_pbf $PBF_DOWNLOAD_URL
     fi
 
-    import_all_changes
     import_single_pbf
 }
 
