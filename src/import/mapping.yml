@@ -297,6 +297,18 @@ tables:
     - key: name
       name: name
       type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
     - name: type
       type: mapping_value
     - args:
@@ -377,6 +389,18 @@ tables:
       type: mapping_value
     - key: name
       name: name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
       type: string
     - key: tunnel
       name: tunnel
@@ -533,6 +557,18 @@ tables:
     - key: name
       name: name
       type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
     - name: type
       type: mapping_value
     mapping:
@@ -553,6 +589,18 @@ tables:
       type: geometry
     - name: name
       key: name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_es
+      key: name:es
       type: string
     - name: website
       key: website
