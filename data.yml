@@ -872,7 +872,7 @@ Layer:
             from osm_roads
             where bridge = 0 and tunnel = 0 and type in ('secondary',
             'secondary_link', 'tertiary', 'tertiary_link')
-            and z(!scale_denominator!) >= 9
+            and z(!scale_denominator!) >= 14
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
           union all
@@ -882,7 +882,7 @@ Layer:
             from osm_roads
             where bridge = 0 and tunnel = 0 and type in ('path',
             'cycleway', 'ski', 'steps', 'bridleway')
-            and z(!scale_denominator!) >= 15
+            and z(!scale_denominator!) >= 14
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
           union all
@@ -892,7 +892,7 @@ Layer:
             from osm_roads
             where bridge = 0 and tunnel = 0 and type in ('service',
             'track')
-            and z(!scale_denominator!) >= 15
+            and z(!scale_denominator!) >= 14
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
           union all
@@ -902,7 +902,7 @@ Layer:
             from osm_roads
             where bridge = 0 and tunnel = 0 and type in ('residential',
             'unclassified', 'living_street')
-            and z(!scale_denominator!) >= 12
+            and z(!scale_denominator!) >= 14
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
           union all
@@ -912,7 +912,7 @@ Layer:
             from osm_roads
             where bridge = 0 and tunnel = 0 and (type in ('pedestrian',
             'construction') or access = 'private')
-            and z(!scale_denominator!) >= 12
+            and z(!scale_denominator!) >= 14
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
           union all
