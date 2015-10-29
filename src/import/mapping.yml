@@ -219,27 +219,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
-    - name: landuse
-      key: landuse
-      type: string
-    - name: leisure
-      key: leisure
-      type: string
-    - name: natural
-      key: natural
+    - name: type
       type: mapping_value
-    - name: amenity
-      key: amenity
-      type: string
-    - name: cemetery
-      key: cemetery
-      type: string
-    - name: boundary
-      key: boundary
-      type: string
-    - name: tourism
-      key: tourism
-      type: string
     mapping:
       landuse:
       - allotments
