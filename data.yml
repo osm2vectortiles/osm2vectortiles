@@ -21,73 +21,71 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
-        ( SELECT * FROM (
-            -- landuse_gen0
-            SELECT geometry, osm_id, type, area,
-            CASE
-              WHEN type IN ('orchard', 'farm', 'farmland', 'farmyard', 'allotments', 'vineyard', 'plant_nursery') THEN 'agriculture'
-              WHEN type IN ('cemetery','christian', 'jewish') THEN 'cemetery'
-              WHEN type IN ('glacier') THEN 'glacier'
-              WHEN type IN ('grass', 'grassland', 'meadow') THEN 'grass'
-              WHEN type IN ('hospital') THEN 'hospital'
-              WHEN type IN ('industrial') THEN 'industrial'
-              WHEN type IN ('park', 'dog_park', 'common', 'garden', 'golf_course', 'playground', 'recreation_ground', 'nature_reserve', 'sports_centre', 'village_green', 'zoo') THEN 'park'
-              WHEN type IN ('athletics', 'chess', 'pitch') THEN 'pitch'
-              WHEN type IN ('sand') THEN 'sand'
-              WHEN type IN ('school', 'college', 'university') THEN 'school'
-              WHEN type IN ('scrub') THEN 'scrub'
-              WHEN type IN ('wood', 'forest') THEN 'wood'
-              END AS class
-            FROM osm_landusages_gen0
-            WHERE geometry && !bbox!
-              AND z(!scale_denominator!) BETWEEN 4 AND 9
-        
-            -- landuse_gen1
-            UNION ALL
-            SELECT geometry, osm_id, type, area,
-            CASE
-              WHEN type IN ('orchard', 'farm', 'farmland', 'farmyard', 'allotments', 'vineyard', 'plant_nursery') THEN 'agriculture'
-              WHEN type IN ('cemetery','christian', 'jewish') THEN 'cemetery'
-              WHEN type IN ('glacier') THEN 'glacier'
-              WHEN type IN ('grass', 'grassland', 'meadow') THEN 'grass'
-              WHEN type IN ('hospital') THEN 'hospital'
-              WHEN type IN ('industrial') THEN 'industrial'
-              WHEN type IN ('park', 'dog_park', 'common', 'garden', 'golf_course', 'playground', 'recreation_ground', 'nature_reserve', 'sports_centre', 'village_green', 'zoo') THEN 'park'
-              WHEN type IN ('athletics', 'chess', 'pitch') THEN 'pitch'
-              WHEN type IN ('sand') THEN 'sand'
-              WHEN type IN ('school', 'college', 'university') THEN 'school'
-              WHEN type IN ('scrub') THEN 'scrub'
-              WHEN type IN ('wood', 'forest') THEN 'wood'
-              END AS class
-            FROM osm_landusages_gen1
-            WHERE geometry && !bbox!
-              AND z(!scale_denominator!) BETWEEN 10 AND 12
-        
-            -- landuse
-            UNION ALL
-            SELECT geometry, osm_id, type, area,
-            CASE
-              WHEN type IN ('orchard', 'farm', 'farmland', 'farmyard', 'allotments', 'vineyard', 'plant_nursery') THEN 'agriculture'
-              WHEN type IN ('cemetery','christian', 'jewish') THEN 'cemetery'
-              WHEN type IN ('glacier') THEN 'glacier'
-              WHEN type IN ('grass', 'grassland', 'meadow') THEN 'grass'
-              WHEN type IN ('hospital') THEN 'hospital'
-              WHEN type IN ('industrial') THEN 'industrial'
-              WHEN type IN ('park', 'dog_park', 'common', 'garden', 'golf_course', 'playground', 'recreation_ground', 'nature_reserve', 'sports_centre', 'village_green', 'zoo') THEN 'park'
-              WHEN type IN ('athletics', 'chess', 'pitch') THEN 'pitch'
-              WHEN type IN ('sand') THEN 'sand'
-              WHEN type IN ('school', 'college', 'university') THEN 'school'
-              WHEN type IN ('scrub') THEN 'scrub'
-              WHEN type IN ('wood', 'forest') THEN 'wood'
-              END AS class
-            FROM osm_landusages
-            WHERE geometry && !bbox!
-              AND z(!scale_denominator!) > 12
-          ) AS QUERY
-         ORDER BY area DESC
+        (
+          -- landuse_gen0
+          SELECT geometry, osm_id, type,
+          CASE
+            WHEN type IN ('orchard', 'farm', 'farmland', 'farmyard', 'allotments', 'vineyard', 'plant_nursery') THEN 'agriculture'
+            WHEN type IN ('cemetery','christian', 'jewish') THEN 'cemetery'
+            WHEN type IN ('glacier') THEN 'glacier'
+            WHEN type IN ('grass', 'grassland', 'meadow') THEN 'grass'
+            WHEN type IN ('hospital') THEN 'hospital'
+            WHEN type IN ('industrial') THEN 'industrial'
+            WHEN type IN ('park', 'dog_park', 'common', 'garden', 'golf_course', 'playground', 'recreation_ground', 'nature_reserve', 'sports_centre', 'village_green', 'zoo') THEN 'park'
+            WHEN type IN ('athletics', 'chess', 'pitch') THEN 'pitch'
+            WHEN type IN ('sand') THEN 'sand'
+            WHEN type IN ('school', 'college', 'university') THEN 'school'
+            WHEN type IN ('scrub') THEN 'scrub'
+            WHEN type IN ('wood', 'forest') THEN 'wood'
+            END AS class
+          FROM osm_landusages_gen0
+          WHERE geometry && !bbox!
+            AND z(!scale_denominator!) BETWEEN 4 AND 9
+      
+          -- landuse_gen1
+          UNION ALL
+          SELECT geometry, osm_id, type,
+          CASE
+            WHEN type IN ('orchard', 'farm', 'farmland', 'farmyard', 'allotments', 'vineyard', 'plant_nursery') THEN 'agriculture'
+            WHEN type IN ('cemetery','christian', 'jewish') THEN 'cemetery'
+            WHEN type IN ('glacier') THEN 'glacier'
+            WHEN type IN ('grass', 'grassland', 'meadow') THEN 'grass'
+            WHEN type IN ('hospital') THEN 'hospital'
+            WHEN type IN ('industrial') THEN 'industrial'
+            WHEN type IN ('park', 'dog_park', 'common', 'garden', 'golf_course', 'playground', 'recreation_ground', 'nature_reserve', 'sports_centre', 'village_green', 'zoo') THEN 'park'
+            WHEN type IN ('athletics', 'chess', 'pitch') THEN 'pitch'
+            WHEN type IN ('sand') THEN 'sand'
+            WHEN type IN ('school', 'college', 'university') THEN 'school'
+            WHEN type IN ('scrub') THEN 'scrub'
+            WHEN type IN ('wood', 'forest') THEN 'wood'
+            END AS class
+          FROM osm_landusages_gen1
+          WHERE geometry && !bbox!
+            AND z(!scale_denominator!) BETWEEN 10 AND 12
+      
+          -- landuse
+          UNION ALL
+          SELECT geometry, osm_id, type,
+          CASE
+            WHEN type IN ('orchard', 'farm', 'farmland', 'farmyard', 'allotments', 'vineyard', 'plant_nursery') THEN 'agriculture'
+            WHEN type IN ('cemetery','christian', 'jewish') THEN 'cemetery'
+            WHEN type IN ('glacier') THEN 'glacier'
+            WHEN type IN ('grass', 'grassland', 'meadow') THEN 'grass'
+            WHEN type IN ('hospital') THEN 'hospital'
+            WHEN type IN ('industrial') THEN 'industrial'
+            WHEN type IN ('park', 'dog_park', 'common', 'garden', 'golf_course', 'playground', 'recreation_ground', 'nature_reserve', 'sports_centre', 'village_green', 'zoo') THEN 'park'
+            WHEN type IN ('athletics', 'chess', 'pitch') THEN 'pitch'
+            WHEN type IN ('sand') THEN 'sand'
+            WHEN type IN ('school', 'college', 'university') THEN 'school'
+            WHEN type IN ('scrub') THEN 'scrub'
+            WHEN type IN ('wood', 'forest') THEN 'wood'
+            END AS class
+          FROM osm_landusages
+          WHERE geometry && !bbox!
+            AND z(!scale_denominator!) > 12
         ) AS data
       type: postgis
       user: osm
@@ -110,7 +108,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         (
@@ -149,7 +147,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         (
@@ -186,7 +184,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type
@@ -213,7 +211,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         (
@@ -246,7 +244,7 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, name
@@ -275,25 +273,17 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type,
             CASE
-              WHEN type IN ('cemetery') THEN 'cemetery'
-              WHEN type IN ('hospital') THEN 'hospital'
-              WHEN type IN ('industrial') THEN 'industrial'
-              WHEN type IN ('park', 'common', 'garden', 'playground') THEN 'park'
-              WHEN type IN ('parking') THEN 'parking'
-              WHEN type IN ('pitch') THEN 'pitch'
-              WHEN type IN ('sand') THEN 'sand'
-              WHEN type IN ('school', 'university') THEN 'school'
-              WHEN type IN ('wood') THEN 'wood'
-              ELSE 'other' END AS class
+              WHEN type IN ('wetland', 'marsh', 'swamp', 'bog') THEN 'wetland'
+              WHEN type IN ('mud', 'tidalflat') THEN 'wetland_noveg'
+              END AS class
             FROM osm_landusages
             WHERE geometry && !bbox!
               AND z(!scale_denominator!) > 6
-            ORDER BY area DESC
         ) AS data
       type: postgis
       user: osm
@@ -315,7 +305,7 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, 0 as bridge, access, render, z_order, tunnel,
@@ -370,7 +360,7 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         ( SELECT * FROM (
@@ -452,7 +442,7 @@ Layer:
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, bridge, access, render, z_order, 0 as tunnel,
@@ -507,7 +497,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         (
@@ -544,7 +534,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         (
@@ -600,7 +590,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         (
@@ -630,7 +620,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         /* TODO get real name_en/name_de/name_es */
@@ -686,7 +676,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         (
@@ -783,7 +773,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         (
@@ -843,7 +833,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         (
@@ -967,7 +957,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         (
@@ -1013,7 +1003,7 @@ Layer:
       key_field: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 32771
       srid: ''
       table: |-
         (
