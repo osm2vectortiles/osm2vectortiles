@@ -212,146 +212,146 @@ tables:
       addr:interpolation:
       - __any__
     type: linestring
-  landusages:
+  landusages_agriculture:
     fields:
     - name: osm_id
       type: id
     - name: geometry
       type: geometry
-    - name: class
-      type: mapping_key
-    - args:
-        values:
-        - land
-        - island
-        - heath
-        - railway
-        - industrial
-        - commercial
-        - retail
-        - residential
-        - quarry
-        - zoo
-        - vineyard
-        - orchard
-        - scrub
-        - hospital
-        - place_of_worship
-        - theatre
-        - cinema
-        - nature_reserve
-        - parking
-        - fuel
-        - baracks
-        - library
-        - college
-        - school
-        - university
-        - golf_course
-        - allotments
-        - common
-        - pitch
-        - sports_centre
-        - garden
-        - recreation_ground
-        - village_green
-        - wetland
-        - grass
-        - meadow
-        - wood
-        - farmland
-        - farm
-        - farmyard
-        - cemetery
-        - forest
-        - park
-        - playground
-        - footway
-        - pedestrian
-      name: z_order
-      type: enumerate
-    mappings:
-      agriculture:
-        mapping:
-          landuse:
-          - allotments
-          - farm
-          - farmland
-          - farmyard
-          - orchard
-          - greenhouse_horticulture
-          - plant_nursery
-          - vineyard
+    mapping:
+      landuse:
+      - allotments
+      - farm
+      - farmland
+      - farmyard
+      - orchard
+      - greenhouse_horticulture
+      - plant_nursery
+      - vineyard
+  landusages_cemetry:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    mapping:
+      landuse:
+      - cemetery
       cemetery:
-        mapping:
-          landuse:
-          - cemetery
-          cemetery:
-          - __any__
-      glacier:
-        mapping:
-          natural:
-          - glacier
-      grass:
-        mapping:
-          landuse:
-            - grass
-            - grassland
-            - meadow
-      hospital:
-        mapping:
-          amenity:
-          - hospital
-      industrial:
-        mapping:
-          landuse:
-          - industrial
-      park:
-        mapping:
-          leisure:
-          - park
-          - playground
-          - dog_park
-          - national_reserve
-          - nature_reserve
-          - golf_course
-          - common
-          - garden
-          - recreation_ground
-          - sports_centre
-          boundary:
-          - national_park
-          landuse:
-          - park
-          - village_green
-          - recreation_ground
-          tourism:
-          - zoo
-      pitch:
-        mapping:
-          leisure:
-          - pitch
-      sand:
-        mapping:
-          natural:
-          - sand
-      school:
-        mapping:
-          amenity:
-          - school
-          - college
-          - university
-      scrub:
-        mapping:
-          natural:
-          - scrub
-      wood:
-        mapping:
-          natural:
-          - wood
-          landuse:
-          - forest
-    type: polygon
+      - __any__
+  landusages_glacier:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    mapping:
+      natural:
+      - glacier
+  landusages_grass:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    mapping:
+      landuse:
+        - grass
+        - grassland
+        - meadow
+  landusages_hospital:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    mapping:
+      amenity:
+      - hospital
+  landusages_industrial:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    mapping:
+      landuse:
+      - industrial
+  landusages_park:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    mapping:
+      leisure:
+      - park
+      - playground
+      - dog_park
+      - national_reserve
+      - nature_reserve
+      - golf_course
+      - common
+      - garden
+      - recreation_ground
+      - sports_centre
+      boundary:
+      - national_park
+      landuse:
+      - park
+      - village_green
+      - recreation_ground
+      tourism:
+      - zoo
+  landusages_pitch:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    mapping:
+      leisure:
+      - pitch
+  landusages_sand:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    mapping:
+      natural:
+      - sand
+  landusages_school:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    mapping:
+      amenity:
+      - school
+      - college
+      - university
+  landusages_scrub:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    mapping:
+      natural:
+      - scrub
+  landusages_wood:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    mapping:
+      natural:
+      - wood
+      landuse:
+      - forest
   places:
     fields:
     - name: osm_id
