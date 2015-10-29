@@ -212,12 +212,14 @@ tables:
       addr:interpolation:
       - __any__
     type: linestring
-  landusages_agriculture:
+  landusages:
     fields:
     - name: osm_id
       type: id
     - name: geometry
       type: geometry
+    - name: tag
+      type: hstore_tags
     mapping:
       landuse:
       - allotments
@@ -228,62 +230,15 @@ tables:
       - greenhouse_horticulture
       - plant_nursery
       - vineyard
-  landusages_cemetry:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    mapping:
-      landuse:
-      - cemetery
-      cemetery:
-      - __any__
-  landusages_glacier:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    mapping:
-      natural:
-      - glacier
-  landusages_grass:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    mapping:
-      landuse:
-        - grass
-        - grassland
-        - meadow
-  landusages_hospital:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    mapping:
-      amenity:
-      - hospital
-  landusages_industrial:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    mapping:
-      landuse:
+      - grass
+      - grassland
+      - meadow
       - industrial
-  landusages_park:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    mapping:
+      - park
+      - village_green
+      - recreation_ground
+      - forest
+      - cemetery
       leisure:
       - park
       - playground
@@ -295,63 +250,24 @@ tables:
       - garden
       - recreation_ground
       - sports_centre
+      - pitch
+      cemetery:
+      - __any__
+      amenity:
+      - hospital
       boundary:
       - national_park
-      landuse:
-      - park
-      - village_green
-      - recreation_ground
       tourism:
       - zoo
-  landusages_pitch:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    mapping:
-      leisure:
-      - pitch
-  landusages_sand:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    mapping:
       natural:
+      - glacier
       - sand
-  landusages_school:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    mapping:
+      - wood
+      - scrub
       amenity:
       - school
       - college
       - university
-  landusages_scrub:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    mapping:
-      natural:
-      - scrub
-  landusages_wood:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    mapping:
-      natural:
-      - wood
-      landuse:
-      - forest
   places:
     fields:
     - name: osm_id
