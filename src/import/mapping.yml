@@ -29,9 +29,11 @@ generalized_tables:
   waterways_gen0:
     source: waterways_gen1
     tolerance: 200
+    sql_filter: type IN ('river', 'canal')
   waterways_gen1:
     source: waterways
     tolerance: 50.0
+    sql_filter: type IN ('stream')
 tables:
   admin:
     fields:
@@ -484,6 +486,7 @@ tables:
       - riverbank
     type: polygon
   waterways:
+    type: linestring
     fields:
     - name: osm_id
       type: id
@@ -503,7 +506,6 @@ tables:
       - canal
       - drain
       - ditch
-    type: linestring
   points_of_interest:
     type: geometry
     fields:
