@@ -145,7 +145,7 @@ tables:
       - lift_gate
       - kissing_gate
       - embankment
-      - yes
+      - 'yes'
       - wire_fence
     type: linestring
   barrierareas:
