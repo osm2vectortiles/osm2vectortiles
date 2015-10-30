@@ -6,8 +6,8 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 8.539
-  - 47.3727
+  - 8.5398
+  - 47.3659
   - 14
 description: OSM Bright 2
 Layer: 
@@ -281,7 +281,8 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-        ( SELECT geometry, osm_id, type, 0 as bridge, access, render, z_order, tunnel,
+        ( SELECT geometry,
+          osm_id,
           CASE
             WHEN type IN ('motorway', 'trunk') THEN 'motorway'
             WHEN type IN ('primary', 'secondary', 'tertiary') THEN 'main'
@@ -291,35 +292,23 @@ Layer:
             WHEN type IN ('service', 'track') THEN 'service'
             WHEN type IN ('path', 'cycleway', 'footway', 'steps', 'bridleway') THEN 'path'
             WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'major_rail'
-            ELSE 'other' END AS class
-          FROM (
-            SELECT *, '1_outline' AS render FROM osm_roads
-            WHERE geometry && !bbox!
-              AND tunnel = 1
-            UNION ALL
-            SELECT *, '2_line' AS render FROM osm_roads
-            WHERE geometry && !bbox!
-              AND tunnel = 1
-            UNION ALL
-            SELECT *, '3_inline' AS render FROM osm_roads
-            WHERE geometry && !bbox!
-              AND tunnel = 1
-          ) AS tunnels
-          WHERE z(!scale_denominator!) > 10
-          ORDER BY z_order ASC, render ASC
+            ELSE 'other' END AS class,
+          type,
+          layer,
+          oneway
+          FROM osm_tunnels
+          WHERE z(!scale_denominator!) >= 10 AND geometry && !bbox!
+          ORDER BY layer ASC
         ) AS data
       type: postgis
       user: osm
     description: ''
     fields: 
-      access: String
-      bridge: Number
       class: String
+      layer: Number
+      oneway: Number
       osm_id: Number
-      render: String
-      tunnel: Number
       type: String
-      z_order: Number
     properties: 
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -420,7 +409,8 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-        ( SELECT geometry, osm_id, type, bridge, access, render, z_order, 0 as tunnel,
+        ( SELECT geometry,
+          osm_id,
           CASE
             WHEN type IN ('motorway', 'trunk') THEN 'motorway'
             WHEN type IN ('primary', 'secondary', 'tertiary') THEN 'main'
@@ -430,35 +420,23 @@ Layer:
             WHEN type IN ('service', 'track') THEN 'service'
             WHEN type IN ('path', 'cycleway', 'footway', 'steps', 'bridleway') THEN 'path'
             WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'major_rail'
-            ELSE 'other' END AS class
-          FROM (
-            SELECT *, '1_outline' AS render FROM osm_roads
-            WHERE geometry && !bbox!
-              AND bridge = 1
-            UNION ALL
-            SELECT *, '2_line' AS render FROM osm_roads
-            WHERE geometry && !bbox!
-              AND bridge = 1
-            UNION ALL
-            SELECT *, '3_inline' AS render FROM osm_roads
-            WHERE geometry && !bbox!
-              AND bridge = 1
-          ) as bridges
-          WHERE z(!scale_denominator!) > 10
-          ORDER BY z_order ASC, render ASC
+            ELSE 'other' END AS class,
+          type,
+          layer,
+          oneway
+          FROM osm_bridges
+          WHERE z(!scale_denominator!) >= 12 AND geometry && !bbox!
+          ORDER BY layer ASC
         ) AS data
       type: postgis
       user: osm
     description: ''
     fields: 
-      access: String
-      bridge: Number
       class: String
+      layer: Number
+      oneway: Number
       osm_id: Number
-      render: String
-      tunnel: Number
       type: String
-      z_order: Number
     properties: 
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
