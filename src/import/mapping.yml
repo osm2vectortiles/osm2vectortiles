@@ -652,6 +652,7 @@ tables:
       - nightclub
       - cinema
       - restaurant
+      - recycling
       - fast_food
       - cafe
       - pub
@@ -675,6 +676,9 @@ tables:
       - swimming
       - tennis
       tourism:
+      - attraction
+      - artwork
+      - gallery
       - hotel
       - motel
       - bed_and_breakfast
@@ -684,6 +688,10 @@ tables:
       - camp_site
       - alpine_hut
       - caravan_site
+      - museum
+      - viewpoint
+      - zoo
+      - theme_park
       shop:
       - supermarket
       - bakery
