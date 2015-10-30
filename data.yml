@@ -6,8 +6,8 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 8.5389
-  - 47.372
+  - 8.539
+  - 47.3727
   - 14
 description: OSM Bright 2
 Layer: 
@@ -989,9 +989,16 @@ Layer:
       srid: ''
       table: |-
         (
-          select geometry, type as house_num, osm_id from osm_housenumbers
-          where geometry && !bbox!
-            and z(!scale_denominator!) >= 14
+          select osm_id, geometry, house_num
+          from
+          (
+            select osm_id, geometry, house_num from osm_housenumbers_points
+            where geometry && !bbox! and z(!scale_denominator!) >= 14
+            union all
+            select osm_id, topoint(geometry) as geometry, house_num
+            from osm_housenumbers_areas
+            where geometry && !bbox! and z(!scale_denominator!) >= 14
+          ) as housenumbers
         ) AS data
       type: postgis
       user: osm
