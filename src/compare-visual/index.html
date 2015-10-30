@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Compare Open Streets with Mapbox Streets</title>
+  <meta charset="utf-8" />
+  <script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <style>
+    @import url(https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css);
+    .mapContainer{
+      display: inline-block;
+      width: 50%;
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <script>
+  L.mapbox.accessToken = 'pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w';
+
+  var maps_ = [0, 1];
+
+  //add a map-Container for each element in the initial array
+  d3.select('body').selectAll('.maps').data(maps_).enter().append('div')
+    .attr('class','mapContainer')
+    .attr('id',function(d) { return 'map' + d });
+  //make a map for each element in the initial array AND return the corresponding map-Elements
+  var maps = maps_.map(showMap);
+
+  //function, that adds a leaflet-map to each map-Container
+  function showMap(d){
+
+    var reverseTileserver = location.protocol + '//' + location.hostname + ':3001';
+    var map = L.map('map'+d).setView([47.3774, 8.4766], 12);
+    var dataAttribution = ' | <a href="http://www.openstreetmap.org/">&copy; OpenStreetMap </a>';
+    var mapbox = L.mapbox.tileLayer('morgenkaffee.7fd007c5', {attribution: '<a href="https://www.mapbox.com/map-feedback/">&copy; Mapbox</a>' + dataAttribution });
+    var openstreets = L.mapbox.tileLayer(reverseTileserver + '/index.json', {attribution: '<a href="http://osm2vectortiles.org">&copy; osm2vectortiles</a>' + dataAttribution });
+
+    // Assume first map is Mapbox map
+    if(d === 0) {
+      mapbox.addTo(map);
+    } else {
+      openstreets.addTo(map);
+    }
+
+    var baseLayers = {"Mapbox": mapbox, "Open Streets": openstreets};
+    L.control.layers(baseLayers).addTo(map);
+
+    //add the automatic map-view-updating to the corresponding events
+    map.on("viewreset", reset);
+    map.on("drag", reset);
+    return map;
+  }
+
+  function reset(e){
+    var current = this._container.id.replace('map','');
+    maps_.forEach(function(d) {
+      if(d !== current) {
+        maps[d].setView(maps[current].getCenter(), maps[current].getZoom());
+      }
+    });
+  }
+
+</script>
+ </body>
+</html>
