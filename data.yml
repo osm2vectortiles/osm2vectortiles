@@ -6,8 +6,8 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 8.5398
-  - 47.3659
+  - 8.5396
+  - 47.3664
   - 14
 description: OSM Bright 2
 Layer: 
@@ -331,71 +331,38 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-        ( SELECT * FROM (
-            -- roads_low
-            SELECT geometry, osm_id, type, tunnel, bridge, access, 'fill' AS render,
-              CASE
-                WHEN type IN ('motorway', 'trunk') THEN 'motorway'
-                WHEN type IN ('primary', 'secondary', 'tertiary') THEN 'main'
-                WHEN type IN ('motorway_link', 'trunk_link') THEN 'motorway_link'
-                WHEN type IN ('primary_link', 'secondary_link', 'tertiary_link', 'residential', 'unclassified', 'road') THEN 'street'
-                WHEN type IN ('living_street', 'pedestrian') THEN 'street_limited'        
-                WHEN type IN ('service', 'track') THEN 'service'
-                WHEN type IN ('path', 'cycleway', 'footway', 'steps', 'bridleway') THEN 'path'
-                WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'major_rail'
-                ELSE 'other' END AS class
-            FROM osm_roads_gen0
-            WHERE geometry && !bbox!
+        (
+          SELECT geometry, osm_id, type,
+            CASE
+              WHEN type IN ('motorway', 'trunk') THEN 'motorway'
+              WHEN type IN ('primary', 'secondary', 'tertiary') THEN 'main'
+              WHEN type IN ('motorway_link', 'trunk_link') THEN 'motorway_link'
+              WHEN type IN ('primary_link', 'secondary_link', 'tertiary_link', 'residential', 'unclassified', 'road') THEN 'street'
+              WHEN type IN ('living_street', 'pedestrian') THEN 'street_limited'        
+              WHEN type IN ('service', 'track') THEN 'service'
+              WHEN type IN ('path', 'cycleway', 'footway', 'steps', 'bridleway') THEN 'path'
+              WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'major_rail'
+              ELSE 'other' END AS class
+          FROM (
+              SELECT osm_id, geometry, type FROM osm_roads_gen1
+              WHERE geometry && !bbox!
               AND z(!scale_denominator!) BETWEEN 5 AND 8
-        
-            -- roads_med
-            UNION ALL  
-            SELECT geometry, osm_id, type, tunnel, bridge, access, 'fill' AS render,
-              CASE
-                WHEN type IN ('motorway', 'trunk') THEN 'motorway'
-                WHEN type IN ('primary', 'secondary', 'tertiary') THEN 'main'
-                WHEN type IN ('motorway_link', 'trunk_link') THEN 'motorway_link'
-                WHEN type IN ('primary_link', 'secondary_link', 'tertiary_link', 'residential', 'unclassified', 'road') THEN 'street'
-                WHEN type IN ('living_street', 'pedestrian') THEN 'street_limited'        
-                WHEN type IN ('service', 'track') THEN 'service'
-                WHEN type IN ('path', 'cycleway', 'footway', 'steps', 'bridleway') THEN 'path'
-                WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'major_rail'
-                ELSE 'other' END AS class
-            FROM osm_roads_gen1
-            WHERE geometry && !bbox!
-              AND type IN ('motorway', 'trunk', 'primary', 'secondary', 'motorway_link', 'trunk_link')
+              UNION ALL
+              SELECT osm_id, geometry, type FROM osm_roads_gen0
+              WHERE geometry && !bbox!
               AND z(!scale_denominator!) BETWEEN 9 AND 10
-          
-            -- roads_high
-            UNION ALL
-            SELECT geometry, osm_id, type, tunnel, bridge, access, 'fill' AS render,
-              CASE
-                WHEN type IN ('motorway', 'trunk') THEN 'motorway'
-                WHEN type IN ('primary', 'secondary', 'tertiary') THEN 'main'
-                WHEN type IN ('motorway_link', 'trunk_link') THEN 'motorway_link'
-                WHEN type IN ('primary_link', 'secondary_link', 'tertiary_link', 'residential', 'unclassified', 'road') THEN 'street'
-                WHEN type IN ('living_street', 'pedestrian') THEN 'street_limited'        
-                WHEN type IN ('service', 'track') THEN 'service'
-                WHEN type IN ('path', 'cycleway', 'footway', 'steps', 'bridleway') THEN 'path'
-                WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'major_rail'
-                ELSE 'other' END AS class
-            FROM osm_roads
-            WHERE geometry && !bbox!
-              AND bridge = 0
-              AND tunnel = 0
+              UNION ALL
+              SELECT osm_id, geometry, type FROM osm_roads
+              WHERE geometry && !bbox!
               AND z(!scale_denominator!) > 10
-          ) AS QUERY
+          ) AS roads
         ) AS data
       type: postgis
       user: osm
     description: ''
     fields: 
-      access: String
-      bridge: Number
       class: String
       osm_id: Number
-      render: String
-      tunnel: Number
       type: String
     properties: 
       "buffer-size": 8
@@ -804,7 +771,7 @@ Layer:
             name, ref, char_length(ref) as reflen,
             round(MercLength(geometry)) as len, 'motorway' as class
             from osm_roads
-            where bridge = 0 and tunnel = 0 and type in ('motorway')
+            where type in ('motorway')
             and z(!scale_denominator!) >= 5
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
@@ -813,7 +780,7 @@ Layer:
             name, ref, char_length(ref) as reflen,
             round(MercLength(geometry)) as len, 'motorway_link' as class
             from osm_roads
-            where bridge = 0 and tunnel = 0 and type in ('motorway_link')
+            where type in ('motorway_link')
             and z(!scale_denominator!) >= 13
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
@@ -822,7 +789,7 @@ Layer:
             name, ref, char_length(ref) as reflen,
             round(MercLength(geometry)) as len, 'main' as class
             from osm_roads
-            where bridge = 0 and tunnel = 0 and type in ('primary',
+            where type in ('primary',
             'primary_link', 'trunk', 'trunk_link')
             and z(!scale_denominator!) >= 5
             and linelabel(z(!scale_denominator!), name, geometry)
@@ -832,7 +799,7 @@ Layer:
             name, ref, char_length(ref) as reflen,
             round(MercLength(geometry)) as len, 'main' as class
             from osm_roads
-            where bridge = 0 and tunnel = 0 and type in ('secondary',
+            where type in ('secondary',
             'secondary_link')
             and z(!scale_denominator!) >= 9
             and linelabel(z(!scale_denominator!), name, geometry)
@@ -842,7 +809,7 @@ Layer:
             name, ref, char_length(ref) as reflen,
             round(MercLength(geometry)) as len, 'main' as class
             from osm_roads
-            where bridge = 0 and tunnel = 0 and type in ('tertiary',
+            where type in ('tertiary',
             'tertiary_link')
             and z(!scale_denominator!) >= 12
             and linelabel(z(!scale_denominator!), name, geometry)
@@ -852,8 +819,7 @@ Layer:
             name, ref, char_length(ref) as reflen,
             round(MercLength(geometry)) as len, 'street' as class
             from osm_roads
-            where bridge = 0 and tunnel = 0 and type in ('residential',
-            'unclassified', 'living_street')
+            where type in ('residential', 'unclassified', 'living_street')
             and z(!scale_denominator!) >= 12
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
@@ -862,8 +828,8 @@ Layer:
             name, ref, char_length(ref) as reflen,
             round(MercLength(geometry)) as len, 'street_limited' as class
             from osm_roads
-            where bridge = 0 and tunnel = 0 and (type in ('pedestrian',
-            'construction') or access = 'private')
+            where type in ('pedestrian',
+            'construction', 'private')
             and z(!scale_denominator!) >= 12
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
@@ -872,8 +838,7 @@ Layer:
             name, ref, char_length(ref) as reflen,
             round(MercLength(geometry)) as len, 'service' as class
             from osm_roads
-            where bridge = 0 and tunnel = 0 and type in ('service',
-            'track')
+            where type in ('service', 'track')
             and z(!scale_denominator!) >= 15
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
@@ -882,7 +847,7 @@ Layer:
             name, ref, char_length(ref) as reflen,
             round(MercLength(geometry)) as len, 'driveway' as class
             from osm_roads
-            where bridge = 0 and tunnel = 0 and type in ('driveway')
+            where type in ('driveway')
             and z(!scale_denominator!) >= 15
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
@@ -891,7 +856,7 @@ Layer:
             name, ref, char_length(ref) as reflen,
             round(MercLength(geometry)) as len, 'path' as class
             from osm_roads
-            where bridge = 0 and tunnel = 0 and type in ('path',
+            where type in ('path',
             'cycleway', 'ski', 'steps', 'bridleway')
             and z(!scale_denominator!) >= 15
             and linelabel(z(!scale_denominator!), name, geometry)
