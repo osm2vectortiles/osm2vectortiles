@@ -390,12 +390,6 @@ tables:
     - name: name_es
       key: name:es
       type: string
-    - key: tunnel
-      name: tunnel
-      type: boolint
-    - key: bridge
-      name: bridge
-      type: boolint
     - key: oneway
       name: oneway
       type: direction
@@ -405,12 +399,6 @@ tables:
     - key: layer
       name: z_order
       type: wayzorder
-    - key: access
-      name: access
-      type: string
-    - key: service
-      name: service
-      type: string
     - name: class
       type: mapping_key
     mappings:
@@ -454,6 +442,8 @@ tables:
           - raceway
           man_made:
           - groyne
+          access:
+          - private
   transport_areas:
     fields:
     - name: osm_id
