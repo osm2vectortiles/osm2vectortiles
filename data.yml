@@ -119,9 +119,9 @@ Layer:
       srid: ''
       table: |-
         (
-          /*select 0 as osm_id, way from water_polygons
+          select way as geometry, 0 as osm_id from water_polygons
           where way && !bbox!
-          union all*/
+          union all
           select geometry, osm_id from osm_waterareas_gen1
           where geometry && !bbox!
           and z(!scale_denominator!) between 3 and 9
@@ -750,7 +750,7 @@ Layer:
                 else 4 end
               as scalerank, 
               1 as localrank,
-              type as maki
+              replace(type, '_', '-') as maki
             from (
               select geometry,
               osm_id, name, name_de, name_en, name_es, name_fr, type, 0 as area
