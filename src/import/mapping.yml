@@ -145,9 +145,22 @@ tables:
       - lift_gate
       - kissing_gate
       - embankment
-      - 'yes'
+      - yes
       - wire_fence
     type: linestring
+  barrierareas:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: type
+      type: mapping_value
+    mapping:
+      man_made:
+      - pier
+      - breakwater
+    type: polygon
   buildings:
     fields:
     - name: osm_id
@@ -215,6 +228,7 @@ tables:
       - recreation_ground
       - forest
       - cemetery
+      - beach
       leisure:
       - park
       - playground
@@ -439,7 +453,6 @@ tables:
           - residential
           - raceway
           man_made:
-          - pier
           - groyne
   transport_areas:
     fields:
@@ -792,7 +805,6 @@ tables:
       - community_centre
       - nursing_home
       - arts_centre
-      - recycling
       - university
       - school
       - kindergarten
