@@ -6,8 +6,8 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 8.5277
-  - 47.3649
+  - 8.5389
+  - 47.372
   - 14
 description: OSM Bright 2
 Layer: 
@@ -119,9 +119,9 @@ Layer:
       srid: ''
       table: |-
         (
-          select 0 as osm_id, way from water_polygons
+          /*select 0 as osm_id, way from water_polygons
           where way && !bbox!
-          union all
+          union all*/
           select geometry, osm_id from osm_waterareas_gen1
           where geometry && !bbox!
           and z(!scale_denominator!) between 3 and 9
@@ -747,7 +747,7 @@ Layer:
     Datasource: 
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
-      geometry_field: geometry
+      geometry_field: ''
       geometry_table: ''
       host: db
       key_field: ''
@@ -758,21 +758,32 @@ Layer:
       srid: ''
       table: |-
         (
-          select
-              geometry,
-              osm_id,
+          select geometry, osm_id,
               name,
-              name_de,
-              name_en,
-              name_es,
-              name_fr,
-              type,
-              3 as scalerank, 
+              coalesce(name, name_de) as name_de,
+              coalesce(name, name_en) as name_en,
+              coalesce(name, name_es) as name_es,
+              coalesce(name, name_fr) as name_fr,
+              type,  
+              case
+                when area > 0 then 3
+                when area > 1500 then 2
+                when area > 2500 then 1
+                else 4 end
+              as scalerank, 
               1 as localrank,
               type as maki
-            from osm_points_of_interest
-            where z(!scale_denominator!) >= 14
-            and geometry && !bbox!
+            from (
+              select geometry,
+              osm_id, name, name_de, name_en, name_es, name_fr, type, 0 as area
+              from osm_points_of_interest
+              where z(!scale_denominator!) >= 14 and geometry && !bbox!
+              union all
+              select topoint(geometry) as geometry,
+              osm_id, name, name_de, name_en, name_es, name_fr, type, area
+              from osm_areas_of_interest
+              where z(!scale_denominator!) >= 14 and geometry && !bbox!
+            ) as pois
         ) AS data
       type: postgis
       user: osm
