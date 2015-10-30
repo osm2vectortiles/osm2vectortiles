@@ -163,57 +163,30 @@ tables:
       building:
       - __any__
     type: polygon
-  housenumbers:
-    type: geometry
+  housenumbers_points:
+    type: point
     fields:
     - name: osm_id
       type: id
     - name: geometry
       type: geometry
-    - key: name
-      name: name
-      type: string
-    - name: type
+    - name: house_num
       type: mapping_value
-    - key: addr:street
-      name: addr:street
-      type: string
-    - key: addr:postcode
-      name: addr:postcode
-      type: string
-    - key: addr:city
-      name: addr:city
-      type: string
     mapping:
       addr:housenumber:
       - __any__
-  housenumbers_interpolated:
+  housenumbers_areas:
+    type: polygon
     fields:
     - name: osm_id
       type: id
     - name: geometry
       type: geometry
-    - key: name
-      name: name
-      type: string
-    - name: type
+    - name: house_num
       type: mapping_value
-    - key: addr:street
-      name: addr:street
-      type: string
-    - key: addr:postcode
-      name: addr:postcode
-      type: string
-    - key: addr:city
-      name: addr:city
-      type: string
-    - key: addr:inclusion
-      name: addr:inclusion
-      type: string
     mapping:
-      addr:interpolation:
+      addr:housenumber:
       - __any__
-    type: linestring
   landusages:
     type: polygon
     fields:
@@ -355,7 +328,7 @@ tables:
       name: oneway
       type: direction
     - key: layer
-      name: z_order
+      name: layer
       type: wayzorder
     mapping:
       tunnel:
@@ -374,12 +347,13 @@ tables:
       name: oneway
       type: direction
     - key: layer
-      name: z_order
+      name: layer
       type: wayzorder
     mapping:
       bridge:
       - __any__
   roads:
+    type: linestring
     fields:
     - name: osm_id
       type: id
@@ -467,7 +441,6 @@ tables:
           man_made:
           - pier
           - groyne
-    type: linestring
   transport_areas:
     fields:
     - name: osm_id
