@@ -756,42 +756,53 @@ tables:
     mapping:
       amenity:
       - arts_centre
-      - police
-      - fire_station
-      - post_box
-      - post_office
-      - telephone
-      - library
-      - townhall
-      - courthouse
-      - prison
-      - embassy
-      - community_centre
-      - nursing_home
-      - arts_centre
-      - recycling
-      - university
-      - school
-      - kindergarten
-      - college
-      - public_building
-      - pharmacy
-      - hospital
-      - doctors
-      - dentist
-      - veterinary
-      - theatre
-      - nightclub
-      - cinema
-      - restaurant
-      - fast_food
-      - cafe
-      - pub
       - bar
-      - food_court
+      - bank
+      - bicycle_rental
+      - bus_station
       - biergarten
+      - cafe
+      - cinema
+      - clock
+      - college
+      - courthouse
+      - community_centre
+      - food_court
+      - fire_station
+      - printer
       - swimming_pool
       - shelter
+      - townhall
+      - telephone
+      - dentist
+      - doctors
+      - embassy
+      - fast_food
+      - ferry_terminal
+      - fire_station
+      - fuel
+      - hospital
+      - kindergarten
+      - library
+      - nightclub
+      - nursing_home
+      - place_of_worship
+      - police
+      - post_office
+      - pub
+      - public_building
+      - post_box
+      - post_office
+      - prison
+      - pharmacy
+      - restaurant
+      - recycling
+      - school
+      - social_facility
+      - theatre
+      - university
+      - vending_machine
+      - veterinary
       leisure:
       - park
       - playground
