@@ -17,16 +17,15 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         (
-          -- landuse_gen0
-          SELECT geometry, osm_id, type,
+          SELECT osm_id, geometry,
           CASE
             WHEN type IN ('orchard', 'farm', 'farmland', 'farmyard', 'allotments', 'vineyard', 'plant_nursery') THEN 'agriculture'
             WHEN type IN ('cemetery','christian', 'jewish') THEN 'cemetery'
@@ -41,51 +40,19 @@ Layer:
             WHEN type IN ('scrub') THEN 'scrub'
             WHEN type IN ('wood', 'forest') THEN 'wood'
             END AS class
-          FROM osm_landusages_gen0
-          WHERE geometry && !bbox!
+          FROM (
+            SELECT osm_id, geometry, type FROM osm_landusages_gen0
+            WHERE geometry && !bbox!
             AND z(!scale_denominator!) BETWEEN 4 AND 9
-      
-          -- landuse_gen1
-          UNION ALL
-          SELECT geometry, osm_id, type,
-          CASE
-            WHEN type IN ('orchard', 'farm', 'farmland', 'farmyard', 'allotments', 'vineyard', 'plant_nursery') THEN 'agriculture'
-            WHEN type IN ('cemetery','christian', 'jewish') THEN 'cemetery'
-            WHEN type IN ('glacier') THEN 'glacier'
-            WHEN type IN ('grass', 'grassland', 'meadow') THEN 'grass'
-            WHEN type IN ('hospital') THEN 'hospital'
-            WHEN type IN ('industrial') THEN 'industrial'
-            WHEN type IN ('park', 'dog_park', 'common', 'garden', 'golf_course', 'playground', 'recreation_ground', 'nature_reserve', 'sports_centre', 'village_green', 'zoo') THEN 'park'
-            WHEN type IN ('athletics', 'chess', 'pitch') THEN 'pitch'
-            WHEN type IN ('sand') THEN 'sand'
-            WHEN type IN ('school', 'college', 'university') THEN 'school'
-            WHEN type IN ('scrub') THEN 'scrub'
-            WHEN type IN ('wood', 'forest') THEN 'wood'
-            END AS class
-          FROM osm_landusages_gen1
-          WHERE geometry && !bbox!
+            UNION ALL
+            SELECT osm_id, geometry, type FROM osm_landusages_gen1
+            WHERE geometry && !bbox!
             AND z(!scale_denominator!) BETWEEN 10 AND 12
-      
-          -- landuse
-          UNION ALL
-          SELECT geometry, osm_id, type,
-          CASE
-            WHEN type IN ('orchard', 'farm', 'farmland', 'farmyard', 'allotments', 'vineyard', 'plant_nursery') THEN 'agriculture'
-            WHEN type IN ('cemetery','christian', 'jewish') THEN 'cemetery'
-            WHEN type IN ('glacier') THEN 'glacier'
-            WHEN type IN ('grass', 'grassland', 'meadow') THEN 'grass'
-            WHEN type IN ('hospital') THEN 'hospital'
-            WHEN type IN ('industrial') THEN 'industrial'
-            WHEN type IN ('park', 'dog_park', 'common', 'garden', 'golf_course', 'playground', 'recreation_ground', 'nature_reserve', 'sports_centre', 'village_green', 'zoo') THEN 'park'
-            WHEN type IN ('athletics', 'chess', 'pitch') THEN 'pitch'
-            WHEN type IN ('sand') THEN 'sand'
-            WHEN type IN ('school', 'college', 'university') THEN 'school'
-            WHEN type IN ('scrub') THEN 'scrub'
-            WHEN type IN ('wood', 'forest') THEN 'wood'
-            END AS class
-          FROM osm_landusages
-          WHERE geometry && !bbox!
+            UNION ALL
+            SELECT osm_id, geometry, type FROM osm_landusages
+            WHERE geometry && !bbox!
             AND z(!scale_denominator!) > 12
+          ) AS landusages
         ) AS data
       type: postgis
       user: osm
@@ -104,11 +71,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: ''
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         (
@@ -143,11 +110,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: ''
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         (
@@ -180,11 +147,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: ''
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type
@@ -207,11 +174,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: ''
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         (
@@ -240,11 +207,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, name
@@ -269,11 +236,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         ( 
@@ -302,11 +269,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, 0 as bridge, access, render, z_order, tunnel,
@@ -357,11 +324,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         ( SELECT * FROM (
@@ -439,11 +406,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: osm_id
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         ( SELECT geometry, osm_id, type, bridge, access, render, z_order, 0 as tunnel,
@@ -494,11 +461,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: ''
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         (
@@ -531,11 +498,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: ''
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         (
@@ -587,11 +554,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: ''
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         (
@@ -617,11 +584,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: ''
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         /* TODO get real name_en/name_de/name_es */
@@ -673,11 +640,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: ''
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         (
@@ -770,11 +737,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: ''
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         (
@@ -830,11 +797,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: ''
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         (
@@ -944,11 +911,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: ''
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         (
@@ -990,11 +957,11 @@ Layer:
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
       geometry_table: ''
-      host: 192.168.99.100
+      host: db
       key_field: ''
       max_size: 512
       password: osm
-      port: 32772
+      port: 5432
       srid: ''
       table: |-
         (
