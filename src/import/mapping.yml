@@ -164,6 +164,7 @@ tables:
       - __any__
     type: polygon
   housenumbers:
+    type: geometry
     fields:
     - name: osm_id
       type: id
@@ -186,7 +187,6 @@ tables:
     mapping:
       addr:housenumber:
       - __any__
-    type: point
   housenumbers_interpolated:
     fields:
     - name: osm_id
@@ -522,6 +522,7 @@ tables:
       - subway_entrance
     type: point
   waterareas:
+    type: polygon
     fields:
     - name: osm_id
       type: id
@@ -540,13 +541,21 @@ tables:
       landuse:
       - basin
       - reservoir
+      - pond
       leisure:
+      - swimming_pool
+      water:
       - swimming_pool
       natural:
       - water
+      - bay
       waterway:
+      - river
       - riverbank
-    type: polygon
+      - stream
+      - canal
+      - drain
+      - ditch
   waterways:
     type: linestring
     fields:
