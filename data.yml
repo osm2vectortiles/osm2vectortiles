@@ -118,9 +118,9 @@ Layer:
       srid: ''
       table: |-
         (
-          /*select 0 as osm_id, way from water_polygons
+          select 0 as osm_id, way from water_polygons
           where way && !bbox!
-          union all*/
+          union all
           select geometry, osm_id from osm_waterareas_gen1
           where geometry && !bbox!
           and z(!scale_denominator!) between 3 and 9
