@@ -14,6 +14,26 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+CREATE OR REPLACE FUNCTION classify_landuse(type VARCHAR) RETURNS VARCHAR
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN type IN ('orchard', 'farm', 'farmland', 'farmyard', 'allotments', 'vineyard', 'plant_nursery') THEN 'agriculture'
+        WHEN type IN ('cemetery','christian', 'jewish') THEN 'cemetery'
+        WHEN type IN ('glacier') THEN 'glacier'
+        WHEN type IN ('grass', 'grassland', 'meadow') THEN 'grass'
+        WHEN type IN ('hospital') THEN 'hospital'
+        WHEN type IN ('industrial') THEN 'industrial'
+        WHEN type IN ('park', 'dog_park', 'common', 'garden', 'golf_course', 'playground', 'recreation_ground', 'nature_reserve', 'sports_centre', 'village_green', 'zoo') THEN 'park'
+        WHEN type IN ('athletics', 'chess', 'pitch') THEN 'pitch'
+        WHEN type IN ('sand') THEN 'sand'
+        WHEN type IN ('school', 'college', 'university') THEN 'school'
+        WHEN type IN ('scrub') THEN 'scrub'
+        WHEN type IN ('wood', 'forest') THEN 'wood'
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
 CREATE OR REPLACE FUNCTION maki_label(class VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN
