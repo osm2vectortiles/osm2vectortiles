@@ -48,3 +48,5 @@ mapbox-studio:
    - postgis:db
   ports:
    - "3000:3000"
+verify:
+  build: ./src/verify
