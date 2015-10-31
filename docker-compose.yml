@@ -47,3 +47,11 @@ compare-visual:
    - "4001:3001"
   links:
    - serve:tileserver
+mapbox-studio:
+  build: ./src/mapbox-studio
+  volumes:
+   - ./open-streets.tm2source:/projects/open-streets.tm2source
+  links:
+   - postgis:db
+  ports:
+   - "3000:3000"
