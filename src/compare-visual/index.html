@@ -30,7 +30,7 @@
   //function, that adds a leaflet-map to each map-Container
   function showMap(d){
 
-    var reverseTileserver = location.protocol + '//' + location.hostname + ':3001';
+    var reverseTileserver = location.protocol + '//' + location.hostname + ':4001';
     var map = L.map('map'+d).setView([47.3774, 8.4766], 12);
     var dataAttribution = ' | <a href="http://www.openstreetmap.org/">&copy; OpenStreetMap </a>';
     var mapbox = L.mapbox.tileLayer('morgenkaffee.7fd007c5', {attribution: '<a href="https://www.mapbox.com/map-feedback/">&copy; Mapbox</a>' + dataAttribution });

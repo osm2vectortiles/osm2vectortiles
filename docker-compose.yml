@@ -43,7 +43,7 @@ serve:
 compare-visual:
   build: ./src/compare-visual
   ports:
-   - "3000:3000"
-   - "3001:3001"
+   - "4000:3000"
+   - "4001:3001"
   links:
    - serve:tileserver
