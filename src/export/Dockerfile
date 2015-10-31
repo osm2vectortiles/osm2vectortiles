@@ -12,7 +12,7 @@ RUN npm install -g tl \
 	   tilelive-mapnik
 
 # custom tm2source project
-VOLUME /data/tm2source
+RUN git clone https://github.com/geometalab/open-streets.tm2source /data/tm2source
 ENV SOURCE_PROJECT_DIR=/data/tm2source
 
 # destination for exported vector tiles
