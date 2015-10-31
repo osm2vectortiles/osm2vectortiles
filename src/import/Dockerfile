@@ -21,8 +21,8 @@ ENV IMPOSM_BIN=imposm3
 
 RUN mkdir -p /usr/src/app
 COPY import.sh /usr/src/app/
-COPY mapping.json /usr/src/app/
-ENV MAPPING_JSON=/usr/src/app/mapping.json
+COPY mapping.yml /usr/src/app/
+ENV MAPPING_YAML=/usr/src/app/mapping.yml
 WORKDIR /usr/src/app
 
 VOLUME /data/import
