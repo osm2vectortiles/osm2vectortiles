@@ -6,8 +6,8 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 8.5146
-  - 47.3446
+  - 8.5406
+  - 47.3678
   - 14
 description: OSM Bright 2
 Layer: 
@@ -683,7 +683,8 @@ Layer:
                 when area > 2500 then 1
                 else 4 end
               as scalerank, 
-              1 as localrank,
+              rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
+                           ORDER BY rank_poi(type) ASC) AS localrank,
               maki_label(type) as maki
             from (
               select geometry,

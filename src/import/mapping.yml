@@ -578,7 +578,6 @@ tables:
       - community_centre
       - nursing_home
       - arts_centre
-      - recycling
       - university
       - school
       - kindergarten
@@ -609,6 +608,7 @@ tables:
       - sports_centre
       - pitch
       - swimming_pool
+      - swimming_area
       - water_park
       - golf_course
       - stadium
@@ -790,6 +790,7 @@ tables:
       - sports_centre
       - pitch
       - swimming_pool
+      - swimming_area
       - water_park
       - golf_course
       - stadium
