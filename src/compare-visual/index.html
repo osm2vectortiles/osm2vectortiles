@@ -4,63 +4,43 @@
   <title>Compare Open Streets with Mapbox Streets</title>
   <meta charset="utf-8" />
   <script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
-  <script src="http://d3js.org/d3.v3.min.js"></script>
   <style>
     @import url(https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css);
-    .mapContainer{
-      display: inline-block;
-      width: 50%;
-      height: 500px;
-    }
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+    #map1 { position:absolute; top:0; bottom:0; left:0; right:50%; }
+    #map2 { position:absolute; top:0; bottom:0; left:50%; right:0; }
   </style>
 </head>
 <body>
+  <div id='map1'></div>
+  <div id='map2'></div>
   <script>
   L.mapbox.accessToken = 'pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w';
+  var zurichViewport = [47.3774, 8.4766];
+  var reverseTileserver = location.protocol + '//' + location.hostname + ':4001';
 
-  var maps_ = [0, 1];
+  var map1 = L.mapbox.map('map1', 'morgenkaffee.7fd007c5').setView(zurichViewport, 12);
+  var map2 = L.mapbox.map('map2', reverseTileserver + '/index.json').setView(zurichViewport, 12);
 
-  //add a map-Container for each element in the initial array
-  d3.select('body').selectAll('.maps').data(maps_).enter().append('div')
-    .attr('class','mapContainer')
-    .attr('id',function(d) { return 'map' + d });
-  //make a map for each element in the initial array AND return the corresponding map-Elements
-  var maps = maps_.map(showMap);
+  map1.on('moveend', follow).on('zoomend', follow);
+  map2.on('moveend', follow).on('zoomend', follow);
 
-  //function, that adds a leaflet-map to each map-Container
-  function showMap(d){
-
-    var reverseTileserver = location.protocol + '//' + location.hostname + ':4001';
-    var map = L.map('map'+d).setView([47.3774, 8.4766], 12);
-    var dataAttribution = ' | <a href="http://www.openstreetmap.org/">&copy; OpenStreetMap </a>';
-    var mapbox = L.mapbox.tileLayer('morgenkaffee.7fd007c5', {attribution: '<a href="https://www.mapbox.com/map-feedback/">&copy; Mapbox</a>' + dataAttribution });
-    var openstreets = L.mapbox.tileLayer(reverseTileserver + '/index.json', {attribution: '<a href="http://osm2vectortiles.org">&copy; osm2vectortiles</a>' + dataAttribution });
-
-    // Assume first map is Mapbox map
-    if(d === 0) {
-      mapbox.addTo(map);
-    } else {
-      openstreets.addTo(map);
-    }
-
-    var baseLayers = {"Mapbox": mapbox, "Open Streets": openstreets};
-    L.control.layers(baseLayers).addTo(map);
-
-    //add the automatic map-view-updating to the corresponding events
-    map.on("viewreset", reset);
-    map.on("drag", reset);
-    return map;
+  var quiet = false;
+  function follow(e) {
+      if (quiet) return;
+      quiet = true;
+      if (e.target === map1) sync(map2, e);
+      if (e.target === map2) sync(map1, e);
+      quiet = false;
   }
 
-  function reset(e){
-    var current = this._container.id.replace('map','');
-    maps_.forEach(function(d) {
-      if(d !== current) {
-        maps[d].setView(maps[current].getCenter(), maps[current].getZoom());
-      }
-    });
+  function sync(map, e) {
+      map.setView(e.target.getCenter(), e.target.getZoom(), {
+          animate: false,
+          reset: true
+      });
   }
-
 </script>
  </body>
 </html>
