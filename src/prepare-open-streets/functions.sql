@@ -36,9 +36,47 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
-CREATE OR REPLACE FUNCTION maki_label(class VARCHAR) RETURNS VARCHAR
+CREATE OR REPLACE FUNCTION maki_label(type VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN
-    RETURN REPLACE(class, '_', '-');
+    RETURN CASE
+        WHEN type IN ('supermarket', 'deli', 'delicatessen', 'department_store', 'greengrocer') THEN 'grocery'
+        WHEN type IN ('bag', 'clothes') THEN 'clothing-store'
+        WHEN type IN ('hotel', 'motel', 'bed_and_breakfast', 'guest_house', 'hostel', 'chalet') THEN 'lodging'
+        WHEN type IN ('books') THEN 'library'
+        WHEN type IN ('alcohol', 'beverages', 'wine') THEN 'alcohol-shop'
+        WHEN type IN ('accessories', 'antiques', 'art') THEN 'art-gallery'
+        WHEN type IN ('car', 'car_repair') THEN 'car'
+        WHEN type IN ('chocolate', 'confectionery') THEN 'ice-cream'
+        WHEN type IN ('butcher') THEN 'slaughterhouse'
+        WHEN type IN ('video', 'electronics') THEN 'camera'
+        WHEN type IN ('gift') THEN 'gift'
+        WHEN type IN ('public_building') THEN 'town-hall'
+        WHEN type IN ('kindergarten') THEN 'school'
+        WHEN type IN ('university', 'college') THEN 'college'
+        WHEN type IN ('bed', 'carpet', 'doityourself', 'dry_cleaning', 'erotic', 'fabric', 'garden_centre',
+                      'computer', 'general', 'video_games', 'furniture', 'hardware', 'hearing_aids',
+                      'hifi', 'interior_decoration', 'lamps', 'toys', 'watches', 'weapons') THEN 'shop'
+        WHEN REPLACE(type, '_', '-') IN (
+            'aerialway', 'airfield', 'airport', 'alcohol-shop', 'america-football',
+            'art-gallery', 'bakery', 'bank', 'bar', 'baseball', 'basketball', 'beer',
+            'bicycle', 'building', 'bus', 'cafe', 'camera', 'campsite', 'car', 'cemetery',
+            'chemist', 'cinema', 'circle', 'circle-stroked', 'city', 'clothing-store', 'college',
+            'commercial', 'cricket', 'cross', 'dam', 'danger', 'dentist', 'disability', 'dog-park',
+            'embassy', 'emergency-telephone', 'entrance', 'farm', 'fast-food', 'ferry', 'fire-station',
+            'fuel', 'garden', 'gift', 'golf', 'grocery', 'hairdresser', 'harbor', 'heart', 'heliport',
+            'hospital', 'ice-cream', 'industrial', 'land-use', 'laundry', 'library', 'lighthouse',
+            'lodging', 'logging', 'london-underground', 'marker', 'marker-stroked', 'minefield',
+            'mobilephone', 'monument', 'museum', 'music', 'oil-well', 'park', 'park2', 'parking',
+            'parking-garage', 'pharmacy', 'pitch', 'place-of-worship', 'playground', 'police',
+            'polling-place', 'post', 'prison', 'rail', 'rail-above', 'rail-light', 'rail-metro',
+            'rail-underground', 'religious-christian', 'religious-jewish', 'religious-muslim',
+            'restaurant', 'roadblock', 'rocket', 'school', 'scooter', 'shop', 'skiing', 'slaughterhouse',
+            'soccer', 'square', 'square-stroked', 'star', 'star-stroked', 'suitcase', 'swimming',
+            'telephone', 'tennis', 'theatre', 'toilets', 'town', 'town-hall', 'triangle', 'triangle-stroked',
+            'village', 'warehouse', 'waste-basket', 'water', 'wetland', 'zoo'
+        ) THEN REPLACE(type, '_', '-')
+        ELSE NULL
+    END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
