@@ -28,6 +28,7 @@ export:
   build: ./src/export
   volumes:
    - ./export:/data/export
+   - ./open-streets.tm2source:/data/tm2source
   links:
    - postgis:db
   environment:

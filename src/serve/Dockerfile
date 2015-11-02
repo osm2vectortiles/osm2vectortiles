@@ -25,7 +25,8 @@ RUN npm install -g tessera
 RUN npm install -g mbtiles \
            tilelive-tmstyle \
            tilelive-xray \
-           tilelive-http
+           tilelive-http \
+           git+https://git@github.com/mojodna/node-tilejson.git\#always-xyz
 
 RUN mkdir -p /usr/src/app
 COPY run.sh /usr/src/app/
