@@ -676,7 +676,7 @@ Layer:
               coalesce(name, name_en) as name_en,
               coalesce(name, name_es) as name_es,
               coalesce(name, name_fr) as name_fr,
-              type,  
+              format_type(type) as type,  
               case
                 when area > 0 then 3
                 when area > 1500 then 2

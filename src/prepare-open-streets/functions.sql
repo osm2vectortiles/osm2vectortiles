@@ -37,6 +37,17 @@ $$ LANGUAGE plpgsql IMMUTABLE;
 CREATE OR REPLACE FUNCTION maki_label(class VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN
-    RETURN REPLACE(class, '_', '-');
+    RETURN CASE
+        WHEN class IN ('hotel', 'motel', 'bed_and_breakfast', 'guest_house', 'hostel', 'chalet') THEN 'lodging'
+        WHEN class IN ('alcohol','beverages', 'wine') THEN 'alcohol-shop'
+        ELSE REPLACE(class, '_', '-')
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION format_type(class VARCHAR) RETURNS VARCHAR
+AS $$
+BEGIN
+    RETURN REPLACE(INITCAP(class), '_', ' ');
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
