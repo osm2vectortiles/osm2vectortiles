@@ -7,8 +7,6 @@ import mercantile
 import boto.sqs
 from boto.sqs.message import Message
 
-from water import in_water
-
 
 def all_descendant_tiles(x, y, zoom, max_zoom):
     """Return all subtiles contained within a tile"""
@@ -24,7 +22,7 @@ def tiles_for_zoom_level(zoom_level):
     tiles = all_descendant_tiles(x=33, y=22, zoom=6, max_zoom=zoom_level)
 
     for tile in tiles:
-        if tile.z == zoom_level and not in_water(tile.x, tile.y, tile.z):
+        if tile.z == zoom_level:
             yield tile
 
 
