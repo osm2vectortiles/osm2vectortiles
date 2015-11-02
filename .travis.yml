@@ -13,6 +13,7 @@ script:
   - docker-compose up -d postgis
   - sleep 10
   - docker-compose run import-water
+  - docker-compose run prepare-open-streets
   - docker-compose run import
   - docker-compose run export
   - docker-compose up -d serve
