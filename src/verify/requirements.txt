@@ -1,3 +1,4 @@
 -e git://github.com/mapbox/mbutil.git@master#egg=mbutil
 docopt==0.6.2
 mercantile==0.8.3
+humanize==0.5.1
