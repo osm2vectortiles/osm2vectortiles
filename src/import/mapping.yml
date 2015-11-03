@@ -72,6 +72,8 @@ tables:
     - name: abbr
       key: short_name
       type: string
+    - name: area
+      type: pseudoarea
     mapping:
       boundary:
       - administrative
