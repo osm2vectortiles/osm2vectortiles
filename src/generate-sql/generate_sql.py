@@ -54,4 +54,3 @@ if __name__ == '__main__':
         config = yaml.load(f)
         for cl in find_classifications(config):
             print(cl.generate_sql())
-            print()
