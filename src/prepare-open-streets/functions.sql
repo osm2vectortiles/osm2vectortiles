@@ -30,6 +30,8 @@ BEGIN
         WHEN type IN ('school', 'college', 'university') THEN 'school'
         WHEN type IN ('scrub') THEN 'scrub'
         WHEN type IN ('wood', 'forest') THEN 'wood'
+        WHEN type IN ('wetland', 'swamp', 'bog', 'marsh') THEN 'wetland'
+        WHEN type IN ('mud', 'tidalflat') THEN 'wetland_noveg'
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
