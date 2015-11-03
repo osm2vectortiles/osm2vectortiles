@@ -122,6 +122,11 @@ tables:
     mapping:
       aeroway:
       - runway
+      - aerodrome
+      - terminal
+      - helipad
+      - apron
+      - gate
       - taxiway
     type: linestring
   aero_polygons:
@@ -159,6 +164,11 @@ tables:
     mapping:
       aeroway:
       - runway
+      - aerodrome
+      - terminal
+      - helipad
+      - apron
+      - gate
       - taxiway
     type: polygon
   amenities:
@@ -757,9 +767,11 @@ tables:
     - name: country
       key: addr:country
       type: string
-    - name: network
+    - key: network
+      name: network
       type: string
-    - name: ref
+    - key: ref
+      name: ref
       type: string
     - name: type
       type: mapping_value
@@ -1067,9 +1079,11 @@ tables:
     - name: country
       key: addr:country
       type: string
-    - name: network
+    - key: network
+      name: network
       type: string
-    - name: ref
+    - key: ref
+      name: ref
       type: string
     - name: type
       type: mapping_value
