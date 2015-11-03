@@ -983,6 +983,15 @@ tables:
       - crossing
       - level_crossing
       - subway_entrance
+      barrier:
+      - sally_port
+      - lift_gate
+      - gate
+      - bollard
+      - stile
+      - cycle_barrier
+      - toll_booth
+      - border_control
   poi_points:
     type: point
     fields:
@@ -1293,3 +1302,12 @@ tables:
       - crossing
       - level_crossing
       - subway_entrance
+      barrier:
+      - sally_port
+      - lift_gate
+      - gate
+      - bollard
+      - stile
+      - cycle_barrier
+      - toll_booth
+      - border_control
