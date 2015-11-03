@@ -3,6 +3,7 @@
 Usage:
   generate_diagram.py mapping <mapping_file>
   generate_diagram.py layers <tm2source_file>
+  generate_diagram.py table-layers <tm2source_file> <mapping_file>
   generate_diagram.py (-h | --help)
   generate_diagram.py --version
 Options:
@@ -47,12 +48,30 @@ def find_mappings(config):
 
 def find_referenced_tables(sql_cmd, table_prefix="osm"):
     table_regex = re.compile("FROM {}_(\w*)".format(table_prefix), re.IGNORECASE)
-    matches = table_regex.findall(sql_cmd)
-    return matches
+    for match in table_regex.findall(sql_cmd):
+        yield match.replace('_gen0', '').replace('_gen1', '')
 
 
 def is_generalized_table(table_name):
     return re.match("_gen\d", table_name)
+
+
+def merge_grouped_mappings(mappings):
+    for mapping_group, mapping_value in mappings.items():
+            yield from mapping_value
+
+
+def find_tables(config):
+    for table_name, table_value in config['tables'].items():
+        fields = table_value.get('fields')
+
+        if table_value.get('mappings'):
+            mapping = merge_grouped_mappings(table_value)
+        else:
+            mapping = table_value.get('mapping').items()
+
+        if mapping and fields:
+            yield Table(table_name, fields, mapping, table_value['type'])
 
 
 def find_layers(config):
@@ -60,24 +79,57 @@ def find_layers(config):
         layer_name = layer['id']
         sql_cmd = layer['Datasource']['table']
 
-        tables = [t for t in find_referenced_tables(sql_cmd)
-                if not is_generalized_table(t)]
+        tables = set([t for t in find_referenced_tables(sql_cmd)])
 
         fields = layer['fields'].items()
         yield Layer(layer_name, tables, fields)
+
+
+def generate_table_node(graph, table):
+    field_names = [field['name'] for field in table.fields]
+    node_body = '''<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+  <TR>
+    <TD BGCOLOR="#EEEEEE">{0}</TD>
+  </TR>
+  <TR>
+    <TD>{1}</TD>
+  </TR>
+</TABLE>>'''.format(table.name, '<BR/>'.join(field_names))
+    node_name = 'table_' + table.name
+    graph.node(node_name, node_body, shape='none')
+    return node_name
 
 
 def generate_layer_node(graph, layer):
     field_names = [field_name for field_name, _ in layer.fields]
     node_body = '''<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
   <TR>
-    <TD PORT="name" BGCOLOR="#EEEEEE">#{0}</TD>
+    <TD BGCOLOR="#EEEEEE">{0}</TD>
   </TR>
   <TR>
     <TD>{1}</TD>
   </TR>
-</TABLE>>'''.format(layer.name, '<BR/>'.join(field_names))
-    graph.node(layer.name, node_body, shape='plaintext')
+</TABLE>>'''.format('#' + layer.name, '<BR/>'.join(field_names))
+    node_name = 'layer_' + layer.name
+    graph.node(node_name, node_body, shape='none')
+    return node_name
+
+
+def generate_table_layer_diagram(mapping_config, tm2source_config):
+    graph = Digraph('Layers from Table Mappings', format='png', graph_attr={
+        'rankdir': 'LR'
+    })
+
+    layers = find_layers(tm2source_config)
+    tables = find_tables(mapping_config)
+
+    table_nodes = [generate_table_node(graph, table) for table in tables]
+    for layer in layers:
+        layer_node = generate_layer_node(graph, layer)
+        for table_name in layer.referenced_tables:
+            graph.edge('table_' + table_name, layer_node)
+
+    graph.render(filename='table_layer_diagram', view=True)
 
 
 if __name__ == '__main__':
@@ -94,6 +146,15 @@ if __name__ == '__main__':
                 generate_layer_node(graph, layer)
 
             graph.render(filename='layer_diagram', view=True)
+
+    if args.get('table-layers'):
+        mapping_file = args['<mapping_file>']
+        tm2source_file = args['<tm2source_file>']
+
+        mapping_config = yaml.load(open(mapping_file, 'r'))
+        tm2source_config = yaml.load(open(tm2source_file, 'r'))
+
+        generate_table_layer_diagram(mapping_config, tm2source_config)
 
     if args.get('mapping'):
         mapping_file = args['<mapping_file>']
