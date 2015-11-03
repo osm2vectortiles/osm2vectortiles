@@ -537,6 +537,9 @@ tables:
     - key: bridge
       name: is_bridge
       type: bool
+    - key: service
+      name: service
+      type: string
     - key: name
       name: name
       type: string
