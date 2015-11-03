@@ -33,6 +33,10 @@ generalized_tables:
     source: water_lines
     tolerance: 50.0
     sql_filter: type IN ('stream')
+  buildings_gen0:
+    source: buildings
+    sql_filter: ST_Area(geometry)>1700.000000
+    tolerance: 0.0
 tables:
   admin:
     fields:
@@ -316,32 +320,6 @@ tables:
       type: id
     - name: geometry
       type: geometry
-    - key: name
-      name: name
-      type: string
-    - name: name_int
-      key: int_name
-      type: string
-    - name: name_fr
-      key: name:fr
-      type: string
-    - name: name_en
-      key: name:en
-      type: string
-    - name: name_de
-      key: name:de
-      type: string
-    - name: name_es
-      key: name:es
-      type: string
-    - name: name_ru
-      key: name:ru
-      type: string
-    - name: name_zh
-      key: name:zh
-      type: string
-    - name: type
-      type: mapping_value
     mapping:
       building:
       - __any__
@@ -416,6 +394,13 @@ tables:
       - sand
       - wood
       - scrub
+      - wetland
+      - mud
+      wetland:
+      - marsh
+      - swamp
+      - tidalflat
+      - bog
       amenity:
       - hospital
       - school
@@ -427,24 +412,6 @@ tables:
       - national_park
       tourism:
       - zoo
-  landusages_overlay:
-    type: polygon
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - name: type
-      type: mapping_value
-    mapping:
-      natural:
-      - wetland
-      - mud
-      wetland:
-      - marsh
-      - swamp
-      - tidalflat
-      - bog
   places:
     fields:
     - name: osm_id
