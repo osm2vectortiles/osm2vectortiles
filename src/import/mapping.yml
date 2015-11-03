@@ -429,6 +429,12 @@ tables:
     - key: population
       name: population
       type: integer
+    - key: capital
+      name: is_capital
+      type: bool
+    - key: admin_level
+      name: admin_level
+      type: integer
     mapping:
       place:
       - country
@@ -436,11 +442,15 @@ tables:
       - region
       - county
       - city
+      - district
       - town
       - village
+      - municipality
       - hamlet
       - suburb
+      - neighbourhood
       - locality
+      - dwelling
     type: point
   marine:
     fields:
