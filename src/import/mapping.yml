@@ -43,6 +43,9 @@ tables:
     - key: name
       name: name
       type: string
+    - name: name_int
+      key: int_name
+      type: string
     - name: name_fr
       key: name:fr
       type: string
@@ -87,6 +90,9 @@ tables:
     - key: name
       name: name
       type: string
+    - name: name_int
+      key: int_name
+      type: string
     - name: name_fr
       key: name:fr
       type: string
@@ -120,6 +126,9 @@ tables:
       type: geometry
     - key: name
       name: name
+      type: string
+    - name: name_int
+      key: int_name
       type: string
     - name: name_fr
       key: name:fr
@@ -160,6 +169,9 @@ tables:
       type: geometry
     - key: name
       name: name
+      type: string
+    - name: name_int
+      key: int_name
       type: string
     - name: name_fr
       key: name:fr
@@ -248,6 +260,9 @@ tables:
       type: geometry
     - key: name
       name: name
+      type: string
+    - name: name_int
+      key: int_name
       type: string
     - name: name_fr
       key: name:fr
@@ -381,6 +396,9 @@ tables:
     - key: name
       name: name
       type: string
+    - name: name_int
+      key: int_name
+      type: string
     - name: name_fr
       key: name:fr
       type: string
@@ -458,6 +476,9 @@ tables:
     - key: name
       name: name
       type: string
+    - name: name_int
+      key: int_name
+      type: string
     - name: name_fr
       key: name:fr
       type: string
@@ -528,6 +549,9 @@ tables:
     - key: name
       name: name
       type: string
+    - name: name_int
+      key: int_name
+      type: string
     - name: name_fr
       key: name:fr
       type: string
@@ -567,6 +591,9 @@ tables:
     - key: name
       name: name
       type: string
+    - name: name_int
+      key: int_name
+      type: string
     - name: type
       type: mapping_value
     - key: ref
@@ -599,6 +626,9 @@ tables:
       type: geometry
     - key: name
       name: name
+      type: string
+    - name: name_int
+      key: int_name
       type: string
     - name: name_fr
       key: name:fr
@@ -653,6 +683,9 @@ tables:
     - key: name
       name: name
       type: string
+    - name: name_int
+      key: int_name
+      type: string
     - name: name_fr
       key: name:fr
       type: string
@@ -691,6 +724,9 @@ tables:
       type: geometry
     - name: name
       key: name
+      type: string
+    - name: name_int
+      key: int_name
       type: string
     - name: name_fr
       key: name:fr
@@ -881,6 +917,9 @@ tables:
       type: geometry
     - name: name
       key: name
+      type: string
+    - name: name_int
+      key: int_name
       type: string
     - name: name_fr
       key: name:fr
