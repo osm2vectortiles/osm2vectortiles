@@ -66,6 +66,9 @@ tables:
     - key: admin_level
       name: admin_level
       type: integer
+    - key: ISO3166-1:alpha2
+      name: iso_code
+      type: string
     mapping:
       boundary:
       - administrative
