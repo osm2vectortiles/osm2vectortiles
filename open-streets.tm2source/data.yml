@@ -738,7 +738,8 @@ Layer:
             ref,
             char_length(ref) as reflen,
             round(MercLength(geometry)) as len,
-            classify_road(type) as class
+            classify_road(type) as class,
+            'default' as shield
             FROM osm_roads
             WHERE
             geometry && !bbox! AND
