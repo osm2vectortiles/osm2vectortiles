@@ -214,87 +214,12 @@ tables:
       - police
       - townhall
     type: point
-  barrier_points:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - key: name
-      name: name
-      type: string
-    - name: name_int
-      key: int_name
-      type: string
-    - name: name_fr
-      key: name:fr
-      type: string
-    - name: name_en
-      key: name:en
-      type: string
-    - name: name_de
-      key: name:de
-      type: string
-    - name: name_es
-      key: name:es
-      type: string
-    - name: name_ru
-      key: name:ru
-      type: string
-    - name: name_zh
-      key: name:zh
-      type: string
-    - name: type
-      type: mapping_value
-    mapping:
-      barrier:
-      - block
-      - bollard
-      - cattle_grid
-      - chain
-      - cycle_barrier
-      - entrance
-      - horse_stile
-      - gate
-      - spikes
-      - lift_gate
-      - kissing_gate
-      - fence
-      - 'yes'
-      - wire_fence
-      - toll_booth
-      - stile
-    type: point
   barrier_lines:
     fields:
     - name: osm_id
       type: id
     - name: geometry
       type: geometry
-    - key: name
-      name: name
-      type: string
-    - name: name_int
-      key: int_name
-      type: string
-    - name: name_fr
-      key: name:fr
-      type: string
-    - name: name_en
-      key: name:en
-      type: string
-    - name: name_de
-      key: name:de
-      type: string
-    - name: name_es
-      key: name:es
-      type: string
-    - name: name_ru
-      key: name:ru
-      type: string
-    - name: name_zh
-      key: name:zh
-      type: string
     - name: type
       type: mapping_value
     mapping:
@@ -302,6 +227,7 @@ tables:
       - city_wall
       - fence
       - hedge
+      - hedge_bank
       - retaining_wall
       - wall
       - bollard
@@ -312,6 +238,15 @@ tables:
       - embankment
       - 'yes'
       - wire_fence
+      - stile
+      - entrance
+      - cable_barrier
+      - jersey_barrier
+      - rope
+      - guard_rail
+    man_made:
+      - pier
+      - breakwater
     type: linestring
   barrier_polygons:
     fields:
@@ -322,7 +257,28 @@ tables:
     - name: type
       type: mapping_value
     mapping:
-      man_made:
+      barrier:
+      - city_wall
+      - fence
+      - hedge
+      - hedge_bank
+      - retaining_wall
+      - wall
+      - bollard
+      - gate
+      - spikes
+      - lift_gate
+      - kissing_gate
+      - embankment
+      - 'yes'
+      - wire_fence
+      - stile
+      - entrance
+      - cable_barrier
+      - jersey_barrier
+      - rope
+      - guard_rail
+    man_made:
       - pier
       - breakwater
     type: polygon
