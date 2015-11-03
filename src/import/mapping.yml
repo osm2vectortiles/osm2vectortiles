@@ -68,8 +68,6 @@ tables:
     - name: name_zh
       key: name:zh
       type: string
-    - name: type
-      type: mapping_value
     - key: admin_level
       name: admin_level
       type: integer
@@ -81,9 +79,13 @@ tables:
       type: string
     - name: area
       type: pseudoarea
+    - name: maritime
+      type: boolint
+      key: maritime
     mapping:
       boundary:
       - administrative
+      - maritime
     type: polygon
   aero_lines:
     fields:
