@@ -1,0 +1,168 @@
+classifications:
+  road:
+    highway:
+    - motorway
+    - motorway_link
+    - driveway
+    main:
+    - primary
+    - primary_link
+    - trunk
+    - trunk_link
+    - secondary
+    - secondary_link
+    - tertiary
+    - tertiary_link
+    street:
+    - residential
+    - unclassified
+    - living_street
+    street_limited:
+    - pedestrian
+    - construction
+    - private
+    service:
+    - service
+    - track
+    path:
+    - path
+    - cycleway
+    - ski
+    - steps
+    - bridleway
+    - footway
+    major_rail:
+    - rail
+    - monorail
+    - narrow_gauge
+    - subway
+    minor_rail:
+    - funicular
+    - light_rail
+    - preserved
+    - tram
+  landuse:
+    agriculture:
+    - orchard
+    - farm
+    - farmland
+    - farmyard
+    - allotments
+    - vineyard
+    - plant_nursery
+    cemetery:
+    - cemetery
+    - christian
+    - jewish
+    glacier:
+    - glacier
+    grass:
+    - grass
+    - grassland
+    - meadow
+    hospital:
+    - hospital
+    industrial:
+    - industrial
+    park:
+    - park
+    - dog_park
+    - common
+    - garden
+    - golf_course
+    - playground
+    - recreation_ground
+    - nature_reserve
+    - sports_centre
+    - village_green
+    - zoo
+    pitch:
+    - athletics
+    - chess
+    - pitch
+    sand:
+    - sand
+    school:
+    - school
+    - college
+    - university
+    scrub:
+    - scrub
+    wood:
+    - wood
+    - forest
+    wetland:
+    - wetland
+    - swamp
+    - bog
+    - marsh
+    wetland_noveg:
+    - mud
+    - tidalflat
+  maki_label:
+    grocery:
+    - supermarket
+    - deli
+    - delicatessen
+    - department_store
+    - greengrocer 
+    clothing-store:
+    - bag
+    - clothes 
+    lodging:
+    - hotel
+    - motel
+    - bed_and_breakfast
+    - guest_house
+    - hostel
+    - chalet 
+    library:
+    - books 
+    alcohol-shop:
+    - alcohol
+    - beverages
+    - wine 
+    art-gallery:
+    - accessories
+    - antiques
+    - art 
+    car:
+    - car
+    - car_repair 
+    ice-cream:
+    - chocolate
+    - confectionery 
+    slaughterhouse:
+    - butcher 
+    camera:
+    - video
+    - electronics 
+    gift:
+    - gift 
+    town-hall:
+    - public_building 
+    school:
+    - kindergarten 
+    college:
+    - university
+    - college 
+    shop:
+    - bed
+    - carpet
+    - doityourself
+    - dry_cleaning
+    - erotic
+    - fabric
+    - garden_centre
+    - computer
+    - general
+    - video_games
+    - furniture
+    - hardware
+    - hearing_aids
+    - hifi
+    - interior_decoration
+    - lamps
+    - toys
+    - watches
+    - weapons 
