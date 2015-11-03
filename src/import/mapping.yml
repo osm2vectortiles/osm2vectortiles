@@ -43,6 +43,24 @@ tables:
     - key: name
       name: name
       type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
     - name: type
       type: mapping_value
     - key: admin_level
@@ -61,6 +79,24 @@ tables:
     - key: name
       name: name
       type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
     - name: type
       type: mapping_value
     mapping:
@@ -76,6 +112,24 @@ tables:
       type: geometry
     - key: name
       name: name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
       type: string
     - name: type
       type: mapping_value
@@ -98,6 +152,24 @@ tables:
       type: geometry
     - key: name
       name: name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
       type: string
     - name: type
       type: mapping_value
@@ -168,6 +240,24 @@ tables:
       type: geometry
     - key: name
       name: name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
       type: string
     - name: type
       type: mapping_value
@@ -295,6 +385,12 @@ tables:
     - name: name_es
       key: name:es
       type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
     - name: type
       type: mapping_value
     - args:
@@ -366,6 +462,12 @@ tables:
     - name: name_es
       key: name:es
       type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
     mappings:
       railway:
         mapping:
@@ -417,6 +519,24 @@ tables:
       type: geometry
     - key: name
       name: name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
       type: string
     - name: type
       type: mapping_value
@@ -472,6 +592,24 @@ tables:
     - key: name
       name: name
       type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
     - name: type
       type: mapping_value
     - name: area
@@ -519,6 +657,12 @@ tables:
     - name: name_es
       key: name:es
       type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
     - name: type
       type: mapping_value
     mapping:
@@ -551,6 +695,12 @@ tables:
       type: string
     - name: name_es
       key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
       type: string
     - name: website
       key: website
@@ -735,6 +885,12 @@ tables:
       type: string
     - name: name_es
       key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
       type: string
     - name: website
       key: website
