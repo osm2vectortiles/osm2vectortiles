@@ -17,22 +17,26 @@ generalized_tables:
         'motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary',
         'primary_link', 'secondary', 'secondary_link', 'tertiary', 'tertiary_link', 'railway')
     tolerance: 50.0
-  waterareas_gen0:
-    source: waterareas_gen1
+  water_polygons_gen0:
+    source: water_polygons_gen1
     sql_filter: ST_Area(geometry)>500000.000000
     tolerance: 200.0
-  waterareas_gen1:
-    source: waterareas
+  water_polygons_gen1:
+    source: water_polygons
     sql_filter: ST_Area(geometry)>50000.000000
     tolerance: 50.0
-  waterways_gen0:
-    source: waterways_gen1
+  water_lines_gen0:
+    source: water_lines_gen1
     tolerance: 200
     sql_filter: type IN ('river', 'canal')
-  waterways_gen1:
-    source: waterways
+  water_lines_gen1:
+    source: water_lines
     tolerance: 50.0
     sql_filter: type IN ('stream')
+  buildings_gen0:
+    source: buildings
+    sql_filter: ST_Area(geometry)>1700.000000
+    tolerance: 0.0
 tables:
   admin:
     fields:
@@ -64,8 +68,6 @@ tables:
     - name: name_zh
       key: name:zh
       type: string
-    - name: type
-      type: mapping_value
     - key: admin_level
       name: admin_level
       type: integer
@@ -77,11 +79,15 @@ tables:
       type: string
     - name: area
       type: pseudoarea
+    - name: maritime
+      type: boolint
+      key: maritime
     mapping:
       boundary:
       - administrative
+      - maritime
     type: polygon
-  aeroways:
+  aero_lines:
     fields:
     - name: osm_id
       type: id
@@ -116,8 +122,55 @@ tables:
     mapping:
       aeroway:
       - runway
+      - aerodrome
+      - terminal
+      - helipad
+      - apron
+      - gate
       - taxiway
     type: linestring
+  aero_polygons:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - key: name
+      name: name
+      type: string
+    - name: name_int
+      key: int_name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
+    - name: type
+      type: mapping_value
+    mapping:
+      aeroway:
+      - runway
+      - aerodrome
+      - terminal
+      - helipad
+      - apron
+      - gate
+      - taxiway
+    type: polygon
   amenities:
     fields:
     - name: osm_id
@@ -161,66 +214,12 @@ tables:
       - police
       - townhall
     type: point
-  barrierpoints:
+  barrier_lines:
     fields:
     - name: osm_id
       type: id
     - name: geometry
       type: geometry
-    - key: name
-      name: name
-      type: string
-    - name: name_int
-      key: int_name
-      type: string
-    - name: name_fr
-      key: name:fr
-      type: string
-    - name: name_en
-      key: name:en
-      type: string
-    - name: name_de
-      key: name:de
-      type: string
-    - name: name_es
-      key: name:es
-      type: string
-    - name: name_ru
-      key: name:ru
-      type: string
-    - name: name_zh
-      key: name:zh
-      type: string
-    - name: type
-      type: mapping_value
-    mapping:
-      barrier:
-      - block
-      - bollard
-      - cattle_grid
-      - chain
-      - cycle_barrier
-      - entrance
-      - horse_stile
-      - gate
-      - spikes
-      - lift_gate
-      - kissing_gate
-      - fence
-      - 'yes'
-      - wire_fence
-      - toll_booth
-      - stile
-    type: point
-  barrierways:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - key: name
-      name: name
-      type: string
     - name: type
       type: mapping_value
     mapping:
@@ -228,6 +227,7 @@ tables:
       - city_wall
       - fence
       - hedge
+      - hedge_bank
       - retaining_wall
       - wall
       - bollard
@@ -238,8 +238,17 @@ tables:
       - embankment
       - 'yes'
       - wire_fence
+      - stile
+      - entrance
+      - cable_barrier
+      - jersey_barrier
+      - rope
+      - guard_rail
+    man_made:
+      - pier
+      - breakwater
     type: linestring
-  barrierareas:
+  barrier_polygons:
     fields:
     - name: osm_id
       type: id
@@ -248,7 +257,28 @@ tables:
     - name: type
       type: mapping_value
     mapping:
-      man_made:
+      barrier:
+      - city_wall
+      - fence
+      - hedge
+      - hedge_bank
+      - retaining_wall
+      - wall
+      - bollard
+      - gate
+      - spikes
+      - lift_gate
+      - kissing_gate
+      - embankment
+      - 'yes'
+      - wire_fence
+      - stile
+      - entrance
+      - cable_barrier
+      - jersey_barrier
+      - rope
+      - guard_rail
+    man_made:
       - pier
       - breakwater
     type: polygon
@@ -258,32 +288,6 @@ tables:
       type: id
     - name: geometry
       type: geometry
-    - key: name
-      name: name
-      type: string
-    - name: name_int
-      key: int_name
-      type: string
-    - name: name_fr
-      key: name:fr
-      type: string
-    - name: name_en
-      key: name:en
-      type: string
-    - name: name_de
-      key: name:de
-      type: string
-    - name: name_es
-      key: name:es
-      type: string
-    - name: name_ru
-      key: name:ru
-      type: string
-    - name: name_zh
-      key: name:zh
-      type: string
-    - name: type
-      type: mapping_value
     mapping:
       building:
       - __any__
@@ -300,7 +304,7 @@ tables:
     mapping:
       addr:housenumber:
       - __any__
-  housenumbers_areas:
+  housenumbers_polygons:
     type: polygon
     fields:
     - name: osm_id
@@ -358,6 +362,13 @@ tables:
       - sand
       - wood
       - scrub
+      - wetland
+      - mud
+      wetland:
+      - marsh
+      - swamp
+      - tidalflat
+      - bog
       amenity:
       - hospital
       - school
@@ -369,24 +380,6 @@ tables:
       - national_park
       tourism:
       - zoo
-  landusages_overlay:
-    type: polygon
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - name: type
-      type: mapping_value
-    mapping:
-      natural:
-      - wetland
-      - mud
-      wetland:
-      - marsh
-      - swamp
-      - tidalflat
-      - bog
   places:
     fields:
     - name: osm_id
@@ -436,6 +429,12 @@ tables:
     - key: population
       name: population
       type: integer
+    - key: capital
+      name: is_capital
+      type: bool
+    - key: admin_level
+      name: admin_level
+      type: integer
     mapping:
       place:
       - country
@@ -443,12 +442,53 @@ tables:
       - region
       - county
       - city
+      - district
       - town
       - village
+      - municipality
       - hamlet
       - suburb
+      - neighbourhood
       - locality
+      - dwelling
     type: point
+  marine:
+    fields:
+    - name: geometry
+      type: geometry
+    - key: name
+      name: name
+      type: string
+    - name: name_int
+      key: int_name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
+    - name: type
+      type: mapping_value
+    mapping:
+      place:
+      - ocean
+      - sea
+      natural:
+      - bay
+    type: geometry
   roads:
     type: linestring
     fields:
@@ -473,6 +513,9 @@ tables:
     - key: bridge
       name: is_bridge
       type: bool
+    - key: service
+      name: service
+      type: string
     - key: name
       name: name
       type: string
@@ -540,84 +583,7 @@ tables:
           - groyne
           access:
           - private
-  transport_areas:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - key: name
-      name: name
-      type: string
-    - name: name_int
-      key: int_name
-      type: string
-    - name: name_fr
-      key: name:fr
-      type: string
-    - name: name_en
-      key: name:en
-      type: string
-    - name: name_de
-      key: name:de
-      type: string
-    - name: name_es
-      key: name:es
-      type: string
-    - name: name_ru
-      key: name:ru
-      type: string
-    - name: name_zh
-      key: name:zh
-      type: string
-    - name: type
-      type: mapping_value
-    mapping:
-      aeroway:
-      - aerodrome
-      - terminal
-      - helipad
-      - apron
-      railway:
-      - station
-      - platform
-    type: polygon
-  transport_points:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - key: name
-      name: name
-      type: string
-    - name: name_int
-      key: int_name
-      type: string
-    - name: type
-      type: mapping_value
-    - key: ref
-      name: ref
-      type: string
-    mapping:
-      aeroway:
-      - aerodrome
-      - terminal
-      - helipad
-      - gate
-      highway:
-      - motorway_junction
-      - turning_circle
-      - bus_stop
-      railway:
-      - station
-      - halt
-      - tram_stop
-      - crossing
-      - level_crossing
-      - subway_entrance
-    type: point
-  waterareas:
+  water_polygons:
     type: polygon
     fields:
     - name: osm_id
@@ -673,7 +639,7 @@ tables:
       - canal
       - drain
       - ditch
-  waterways:
+  water_lines:
     type: linestring
     fields:
     - name: osm_id
@@ -715,7 +681,7 @@ tables:
       - canal
       - drain
       - ditch
-  areas_of_interest:
+  poi_polygons:
     type: polygon
     fields:
     - name: osm_id
@@ -749,8 +715,29 @@ tables:
     - name: website
       key: website
       type: string
-    - name: address
+    - name: housenumber
+      key: addr:housenumber
+      type: string
+    - name: street
       key: addr:street
+      type: string
+    - name: place
+      key: addr:place
+      type: string
+    - name: city
+      key: addr:city
+      type: string
+    - name: postcode
+      key: addr:postcode
+      type: string
+    - name: country
+      key: addr:country
+      type: string
+    - key: network
+      name: network
+      type: string
+    - key: ref
+      name: ref
       type: string
     - name: type
       type: mapping_value
@@ -768,6 +755,7 @@ tables:
       - townhall
       - courthouse
       - prison
+      - place_of_worship
       - embassy
       - community_centre
       - nursing_home
@@ -795,6 +783,7 @@ tables:
       - biergarten
       - swimming_pool
       - shelter
+      - grave_yard
       leisure:
       - park
       - playground
@@ -810,6 +799,83 @@ tables:
       sport:
       - swimming
       - tennis
+      - soccer
+      - baseball
+      - basketball
+      - multi
+      - golf
+      - equestrian
+      - athletics
+      - volleyball
+      - climbing
+      - bowls
+      - american_football
+      - skateboard
+      - shooting
+      - skiing
+      - boules
+      - beachvolleyball
+      - cricket
+      - table_tennis
+      - hockey
+      - gymnastics
+      - running
+      - american_football
+      - canoe
+      - rugby_union
+      - skating
+      - scuba_diving
+      - motor
+      - horse_racing
+      - handball
+      - team_handball
+      - karting
+      - cycling
+      - archery
+      - motocross
+      - pelota
+      - rugby
+      - gaelic_games
+      - model_aerodrome
+      - netball
+      - rugby_league
+      - free_flying
+      - rowing
+      - chess
+      - australian_football
+      - cricket_nets
+      - racquet
+      - bmx
+      - sailing
+      - ice_stock
+      - badminton
+      - paddle_tennis
+      - dog_racing
+      - fatsal
+      - billiards
+      - ice_hockey
+      - yoga
+      - disc_golf
+      - orienteering
+      - toboggan
+      - horseshoes
+      - paragliding
+      - korfball
+      - diving
+      - rc_car
+      - canadian_football
+      - field_hockey
+      - shooting_range
+      - boxing
+      - curling
+      - surfing
+      - water_ski
+      - judo
+      - croquet
+      - paintball
+      - climbing_adventure
+      - long_jump
+      - table_soccer
       tourism:
       - attraction
       - artwork
@@ -908,7 +974,35 @@ tables:
       - weapons
       - wholesale
       - wine
-  points_of_interest:
+      aeroway:
+      - aerodrome
+      - terminal
+      - helipad
+      - apron
+      - gate
+      - taxiway
+      highway:
+      - motorway_junction
+      - turning_circle
+      - bus_stop
+      railway:
+      - station
+      - platform
+      - halt
+      - tram_stop
+      - crossing
+      - level_crossing
+      - subway_entrance
+      barrier:
+      - sally_port
+      - lift_gate
+      - gate
+      - bollard
+      - stile
+      - cycle_barrier
+      - toll_booth
+      - border_control
+  poi_points:
     type: point
     fields:
     - name: osm_id
@@ -942,8 +1036,29 @@ tables:
     - name: website
       key: website
       type: string
-    - name: address
+    - name: housenumber
+      key: addr:housenumber
+      type: string
+    - name: street
       key: addr:street
+      type: string
+    - name: place
+      key: addr:place
+      type: string
+    - name: city
+      key: addr:city
+      type: string
+    - name: postcode
+      key: addr:postcode
+      type: string
+    - name: country
+      key: addr:country
+      type: string
+    - key: network
+      name: network
+      type: string
+    - key: ref
+      name: ref
       type: string
     - name: type
       type: mapping_value
@@ -959,6 +1074,7 @@ tables:
       - townhall
       - courthouse
       - prison
+      - place_of_worship
       - embassy
       - community_centre
       - nursing_home
@@ -986,6 +1102,7 @@ tables:
       - biergarten
       - swimming_pool
       - shelter
+      - grave_yard
       leisure:
       - park
       - playground
@@ -1001,6 +1118,83 @@ tables:
       sport:
       - swimming
       - tennis
+      - soccer
+      - baseball
+      - basketball
+      - multi
+      - golf
+      - equestrian
+      - athletics
+      - volleyball
+      - climbing
+      - bowls
+      - american_football
+      - skateboard
+      - shooting
+      - skiing
+      - boules
+      - beachvolleyball
+      - cricket
+      - table_tennis
+      - hockey
+      - gymnastics
+      - running
+      - american_football
+      - canoe
+      - rugby_union
+      - skating
+      - scuba_diving
+      - motor
+      - horse_racing
+      - handball
+      - team_handball
+      - karting
+      - cycling
+      - archery
+      - motocross
+      - pelota
+      - rugby
+      - gaelic_games
+      - model_aerodrome
+      - netball
+      - rugby_league
+      - free_flying
+      - rowing
+      - chess
+      - australian_football
+      - cricket_nets
+      - racquet
+      - bmx
+      - sailing
+      - ice_stock
+      - badminton
+      - paddle_tennis
+      - dog_racing
+      - fatsal
+      - billiards
+      - ice_hockey
+      - yoga
+      - disc_golf
+      - orienteering
+      - toboggan
+      - horseshoes
+      - paragliding
+      - korfball
+      - diving
+      - rc_car
+      - canadian_football
+      - field_hockey
+      - shooting_range
+      - boxing
+      - curling
+      - surfing
+      - water_ski
+      - judo
+      - croquet
+      - paintball
+      - climbing_adventure
+      - long_jump
+      - table_soccer
       tourism:
       - attraction
       - artwork
@@ -1099,3 +1293,31 @@ tables:
       - weapons
       - wholesale
       - wine
+      aeroway:
+      - aerodrome
+      - terminal
+      - helipad
+      - apron
+      - gate
+      - taxiway
+      highway:
+      - motorway_junction
+      - turning_circle
+      - bus_stop
+      railway:
+      - station
+      - platform
+      - halt
+      - tram_stop
+      - crossing
+      - level_crossing
+      - subway_entrance
+      barrier:
+      - sally_port
+      - lift_gate
+      - gate
+      - bollard
+      - stile
+      - cycle_barrier
+      - toll_booth
+      - border_control
