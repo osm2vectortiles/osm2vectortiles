@@ -1,8 +1,10 @@
 classifications:
   road:
-    highway:
+    motorway:
     - motorway
+    motoway_link:
     - motorway_link
+    driveway:
     - driveway
     main:
     - primary
@@ -17,6 +19,8 @@ classifications:
     - residential
     - unclassified
     - living_street
+    - road
+    - raceway
     street_limited:
     - pedestrian
     - construction
@@ -24,6 +28,10 @@ classifications:
     service:
     - service
     - track
+    - alley
+    - spur
+    - siding
+    - crossover
     path:
     - path
     - cycleway
@@ -41,6 +49,23 @@ classifications:
     - light_rail
     - preserved
     - tram
+    - disused
+    - yard
+    aerialway:
+    - chair_lift
+    - mixed_lift
+    - drag_lift
+    - platter
+    - t-bar
+    - magic_carpet
+    - gondola
+    - cable_car
+    - rope_tow
+    - zip_line
+    - j-bar
+    - canopy
+    golf:
+    - hole
   landuse:
     agriculture:
     - orchard
@@ -99,6 +124,33 @@ classifications:
     wetland_noveg:
     - mud
     - tidalflat
+  landuse_overlay:
+    wetland:
+    - wetland
+    - marsh
+    - swamp
+    - bog
+  barrier_line:
+    cliff:
+    - cliff
+    fence:
+    - city_wall
+    - fence
+    - retaining_wall
+    - wall
+    - wire_fence
+    - yes
+    - embankment
+    - cable_barrier
+    - jersey_barrier
+    gate:
+    - gate
+    - entrance
+    - spikes
+    - bollard
+    - lift_gate
+    - kissing_gate
+    - stile
   maki_label:
     grocery:
     - supermarket
