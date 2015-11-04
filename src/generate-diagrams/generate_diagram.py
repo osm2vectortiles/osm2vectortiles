@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-"""Generate diagrams from imposm mapping schema. Only supports YAML.
+"""Generate diagrams from imposm mapping schema and tm2source project.
 Usage:
-  generate_diagram.py mapping <mapping_file>
-  generate_diagram.py layers <tm2source_file>
-  generate_diagram.py table-layers <tm2source_file> <mapping_file>
+  generate_diagram.py mapping-keys <mapping_file>
+  generate_diagram.py mapping-layers <tm2source_file> <mapping_file>
   generate_diagram.py (-h | --help)
   generate_diagram.py --version
 Options:
@@ -55,18 +54,22 @@ def find_mappings(config):
 
 
 def find_referenced_tables(sql_cmd, table_prefix="osm"):
-    table_regex = re.compile("FROM {}_(\w*)".format(table_prefix), re.IGNORECASE)
+    """Find all tables used in SQL FROM statements"""
+
+    regexpr = "FROM {}_(\w*)".format(table_prefix)
+    table_regex = re.compile(regexpr, re.IGNORECASE)
     for match in table_regex.findall(sql_cmd):
-        yield match.replace('_gen0', '').replace('_gen1', '')
+        yield replace_generalization_postfix(match)
 
 
-def is_generalized_table(table_name):
-    return re.match("_gen\d", table_name)
+def replace_generalization_postfix(table_name):
+    return table_name.replace('_gen0', '').replace('_gen1', '')
 
 
 def merge_grouped_mappings(mappings):
+    """Merge multiple mappings into a single mapping for drawing"""
     for mapping_group, mapping_value in mappings.items():
-            yield from mapping_value
+        yield from mapping_value
 
 
 def find_tables(config):
@@ -156,25 +159,12 @@ if __name__ == '__main__':
     mapping_file = args.get('<mapping_file>')
     tm2source_file = args.get('<tm2source_file>')
 
-    if args.get('layers'):
-        tm2source_file = args['<tm2source_file>']
-        graph = Digraph('Layers', format='png', graph_attr={
-            'rankdir': 'LR'
-        })
-        with open(tm2source_file, 'r') as f:
-            config = yaml.load(f)
-            for layer in find_layers(config):
-                generate_layer_node(graph, layer)
-
-            graph.render(filename='layer_diagram', view=True)
-
-    if args.get('table-layers'):
+    if args.get('mapping-layers'):
         mapping_config = yaml.load(open(mapping_file, 'r'))
         tm2source_config = yaml.load(open(tm2source_file, 'r'))
-
         generate_table_layer_diagram(mapping_config, tm2source_config)
 
-    if args.get('mapping'):
+    if args.get('mapping-keys'):
         mapping_config = yaml.load(open(mapping_file, 'r'))
         generate_table_mapping_diagram(mapping_config)
 
