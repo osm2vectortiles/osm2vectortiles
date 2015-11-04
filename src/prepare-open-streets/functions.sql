@@ -125,3 +125,14 @@ BEGIN
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION rank_marine(type VARCHAR) RETURNS INTEGER
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN type IN ('ocean') THEN 1
+        WHEN type IN ('sea') THEN 3
+        WHEN type IN ('bay') THEN 5
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
