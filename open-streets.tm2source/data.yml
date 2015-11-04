@@ -22,7 +22,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
@@ -61,7 +61,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
@@ -103,7 +103,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
@@ -141,7 +141,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
@@ -175,7 +175,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
@@ -210,7 +210,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
@@ -249,7 +249,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
@@ -292,7 +292,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
@@ -326,7 +326,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
@@ -385,7 +385,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         ( 
@@ -419,7 +419,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
@@ -456,7 +456,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
@@ -553,7 +553,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
@@ -590,7 +590,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         ( SELECT * FROM (
@@ -671,7 +671,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
@@ -865,37 +865,53 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
-          select geometry, osm_id,
+          SELECT geometry, osm_id,
               name,
-              coalesce(name, name_en) as name_en,
-              coalesce(name, name_es) as name_es,
-              coalesce(name, name_fr) as name_fr,
-              coalesce(name, name_de) as name_de,
+              coalesce(name, name_en) AS name_en,
+              coalesce(name, name_es) AS name_es,
+              coalesce(name, name_fr) AS name_fr,
+              coalesce(name, name_de) AS name_de,
+              coalesce(name, name_ru) AS name_ru,
+              coalesce(name, name_zh) AS name_zh,
               type,  
-              case
-                when area > 0 then 3
-                when area > 1500 then 2
-                when area > 2500 then 1
-                else 4 end
-              as scalerank, 
+              CASE
+                WHEN area > 0 THEN 3
+                WHEN area > 1500 THEN 2
+                WHEN area > 2500 THEN 1
+                ELSE 4 END
+              AS scalerank,
               rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
                            ORDER BY rank_poi(type) ASC) AS localrank,
-              maki_label(type) as maki
+              maki_label(type) AS maki
             FROM (
-              select geometry,
-              osm_id, name, name_de, name_en, name_es, name_fr, type, 0 as area
-              from osm_poi_points
-              where z(!scale_denominator!) >= 14 and geometry && !bbox!
+              SELECT geometry, osm_id, 
+              name,
+              coalesce(name, name_en) AS name_en,
+              coalesce(name, name_es) AS name_es,
+              coalesce(name, name_fr) AS name_fr,
+              coalesce(name, name_de) AS name_de,
+              coalesce(name, name_ru) AS name_ru,
+              coalesce(name, name_zh) AS name_zh,
+              type, 0 AS area
+              FROM osm_poi_points
+              WHERE z(!scale_denominator!) >= 14 AND geometry && !bbox!
               UNION ALL
-              select topoint(geometry) as geometry,
-              osm_id, name, name_de, name_en, name_es, name_fr, type, area
-              from osm_poi_polygons
-              where z(!scale_denominator!) >= 14 and geometry && !bbox!
-            ) as pois
+              SELECT topoint(geometry) AS geometry, osm_id, 
+              name,
+              coalesce(name, name_en) AS name_en,
+              coalesce(name, name_es) AS name_es,
+              coalesce(name, name_fr) AS name_fr,
+              coalesce(name, name_de) AS name_de,
+              coalesce(name, name_ru) AS name_ru,
+              coalesce(name, name_zh) AS name_zh,
+              type, area
+              FROM osm_poi_polygons
+              WHERE z(!scale_denominator!) >= 14 AND geometry && !bbox!
+            ) AS poi_label
         ) AS data
       type: postgis
       user: osm
@@ -925,16 +941,18 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
-          select geometry, osm_id,
+          SELECT geometry, osm_id,
             name,
             coalesce(name, name_de) as name_de,
             coalesce(name, name_en) as name_en,
             coalesce(name, name_es) as name_es,
             coalesce(name, name_fr) as name_fr,
+            coalesce(name, name_ru) AS name_ru,
+            coalesce(name, name_zh) AS name_zh,
             ref,
             char_length(ref) as reflen,
             round(MercLength(geometry)) as len,
@@ -999,30 +1017,54 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
-          select geometry, osm_id,
-            name, type, type as class from osm_water_lines
-            where type in ('river', 'canal')
-            and z(!scale_denominator!) >= 8
-            and linelabel(z(!scale_denominator!), name, geometry)
-            and geometry && !bbox!
-          union all
-          select geometry, osm_id,
-            name, type, type as class from osm_water_lines
-            where type in ('stream', 'stream_intermittent')
-            and z(!scale_denominator!) >= 13
-            and linelabel(z(!scale_denominator!), name, geometry)
-            and geometry && !bbox!
-          union all
-          select geometry, osm_id,
-            name, type, type as class from osm_water_lines
-            where type in ('drain', 'ditch')
-            and z(!scale_denominator!) >= 15
-            and linelabel(z(!scale_denominator!), name, geometry)
-            and geometry && !bbox!
+          SELECT geometry, osm_id,
+          name,
+          coalesce(name, name_de) as name_de,
+          coalesce(name, name_en) as name_en,
+          coalesce(name, name_es) as name_es,
+          coalesce(name, name_fr) as name_fr,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          type, type as class 
+          FROM osm_water_lines
+          WHERE type in ('river', 'canal')
+            AND z(!scale_denominator!) >= 8
+            AND linelabel(z(!scale_denominator!), name, geometry)
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT geometry, osm_id,
+          name,
+          coalesce(name, name_de) as name_de,
+          coalesce(name, name_en) as name_en,
+          coalesce(name, name_es) as name_es,
+          coalesce(name, name_fr) as name_fr,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          type, type as class 
+          FROM osm_water_lines
+          WHERE type in ('stream', 'stream_intermittent')
+            AND z(!scale_denominator!) >= 13
+            AND linelabel(z(!scale_denominator!), name, geometry)
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT geometry, osm_id,
+          name,
+          coalesce(name, name_de) as name_de,
+          coalesce(name, name_en) as name_en,
+          coalesce(name, name_es) as name_es,
+          coalesce(name, name_fr) as name_fr,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          type, type as class 
+          FROM osm_water_lines
+          WHERE type in ('drain', 'ditch')
+            AND z(!scale_denominator!) >= 15
+            AND linelabel(z(!scale_denominator!), name, geometry)
+            AND geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
@@ -1046,20 +1088,23 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 32770
+      port: 5432
       srid: ''
       table: |-
         (
-          select osm_id, geometry, house_num
-          from
+          SELECT osm_id, geometry, house_num
+          FROM
           (
-            select osm_id, geometry, house_num from osm_housenumbers_points
-            where geometry && !bbox! and z(!scale_denominator!) >= 14
-            union all
-            select osm_id, topoint(geometry) as geometry, house_num
-            from osm_housenumbers_polygons
-            where geometry && !bbox! and z(!scale_denominator!) >= 14
-          ) as housenumbers
+            SELECT osm_id, geometry, house_num 
+            FROM osm_housenumbers_points
+            WHERE geometry && !bbox! 
+              AND z(!scale_denominator!) >= 14
+            UNION ALL
+            SELECT osm_id, topoint(geometry) AS geometry, house_num
+            FROM osm_housenumbers_polygons
+            WHERE geometry && !bbox! 
+              AND z(!scale_denominator!) >= 14
+          ) AS housenumbers
         ) AS data
       type: postgis
       user: osm
