@@ -179,21 +179,17 @@ Layer:
       srid: ''
       table: |-
         (
-          select geometry,
-            case 
-              when type in ('city_wall', 'fence', 'retaining_wall', 'wall', 'wire_fence', 'yes') then 'fence'
-              when type in ('gate', 'spikes', 'bollard', 'lift_gate', 'kissing_gate') then 'gate'
-              when type in ('hedge') then 'hedge'
-            end AS class, osm_id
-          from osm_barrier_lines
-          where geometry && !bbox!
-            and z(!scale_denominator!) >= 14
-          union all
-          select geometry, 'land' as class, osm_id
-          from osm_barrier_polygons
-          where geometry && !bbox!
-            and z(!scale_denominator!) > 14
-        ) as data
+          SELECT osm_id, geometry, classify_barrier_line(type) AS class
+          FROM(
+            SELECT osm_id, geometry, type FROM osm_barrier_lines
+            WHERE geometry && !bbox!
+              AND z(!scale_denominator!) >= 14
+            UNION ALL
+            SELECT osm_id, geometry, type FROM osm_barrier_polygons
+            WHERE geometry && !bbox!
+              AND z(!scale_denominator!) >= 14
+          ) AS barrier_line
+        ) AS data
       type: postgis
       user: osm
     description: ''

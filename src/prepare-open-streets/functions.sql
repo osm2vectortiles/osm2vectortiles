@@ -36,6 +36,19 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+CREATE OR REPLACE FUNCTION classify_barrier_line(type VARCHAR) RETURNS VARCHAR
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN type IN ('cliff') THEN 'cliff'
+        WHEN type IN ('city_wall', 'fence', 'retaining_wall', 'wall', 'wire_fence', 'yes', 'embankment', 'cable_barrier', 'jersey_barrier') THEN 'fence'
+        WHEN type IN ('gate', 'entrance', 'spikes', 'bollard', 'lift_gate', 'kissing_gate', 'stile') THEN 'gate'
+        WHEN type IN ('hedge', 'hedge_bank', 'embankment') THEN 'hedge'
+        WHEN type IN ('pier', 'breakwater') THEN 'land'
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
 CREATE OR REPLACE FUNCTION maki_label(type VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN
