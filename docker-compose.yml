@@ -58,7 +58,7 @@ mapbox-studio:
    - "3000:3000"
 verify:
   build: ./src/verify
-prepare-open-streets:
-  build: ./src/prepare-open-streets
+import-sql:
+  build: ./src/import-sql
   links:
    - postgis:db
