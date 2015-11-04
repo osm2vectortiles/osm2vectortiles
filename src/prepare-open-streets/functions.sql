@@ -2,14 +2,18 @@ CREATE OR REPLACE FUNCTION classify_road(type VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN
     RETURN CASE
-        WHEN type IN ('motorway', 'motorway_link', 'driveway') THEN 'highway'
+        WHEN type IN ('motorway') THEN 'motorway'
+        WHEN type IN ('motorway_link') THEN 'motorway_link'
         WHEN type IN ('primary', 'primary_link', 'trunk', 'trunk_link', 'secondary', 'secondary_link', 'tertiary', 'tertiary_link') THEN 'main'
-        WHEN type IN ('residential', 'unclassified', 'living_street') THEN 'street'
+        WHEN type IN ('residential', 'unclassified', 'living_street', 'road', 'raceway') THEN 'street'
         WHEN type IN ('pedestrian', 'construction', 'private') THEN 'street_limited'
-        WHEN type IN ('service', 'track') THEN 'service'
+        WHEN type IN ('service', 'track', 'alley', 'spur', 'siding', 'crossover') THEN 'service'
+        WHEN type IN ('driveway', 'parking_aisle') THEN 'driveway'
         WHEN type IN ('path', 'cycleway', 'ski', 'steps', 'bridleway', 'footway') THEN 'path'
         WHEN type IN ('rail', 'monorail', 'narrow_gauge', 'subway') THEN 'major_rail'
-        WHEN type IN ('funicular', 'light_rail', 'preserved', 'tram') THEN 'minor_rail'
+        WHEN type IN ('funicular', 'light_rail', 'preserved', 'tram', 'disused', 'yard') THEN 'minor_rail'
+        WHEN type IN ('chair_lift', 'mixed_lift', 'drag_lift', 'platter', 't-bar', 'magic_carpet', 'gondola', 'cable_car', 'rope_tow', 'zip_line', 'j-bar', 'canopy') THEN 'aerialway'
+        WHEN type IN ('hole') THEN 'golf'
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;

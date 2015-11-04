@@ -241,6 +241,7 @@ tables:
       - pier
       - breakwater
       - embankment
+      - groyne
     type: linestring
   barrier_polygons:
     fields:
@@ -277,6 +278,7 @@ tables:
       - pier
       - breakwater
       - embankment
+      - groyne
     type: polygon
   buildings:
     fields:
@@ -549,6 +551,14 @@ tables:
           - funicular
           - monorail
           - disused
+          service:
+          - yard
+          - driveway
+          - alley
+          - spur
+          - siding
+          - crossover
+          - parking_aisle
       roads:
         mapping:
           highway:
@@ -575,10 +585,23 @@ tables:
           - unclassified
           - residential
           - raceway
-          man_made:
-          - groyne
           access:
           - private
+          aerialway:
+          - chair_lift
+          - mixed_lift
+          - drag_lift
+          - platter
+          - t-bar
+          - magic_carpet
+          - gondola
+          - cable_car
+          - rope_tow
+          - zip_line
+          - j-bar
+          - canopy
+          golf:
+          - hole
   water_polygons:
     type: polygon
     fields:
