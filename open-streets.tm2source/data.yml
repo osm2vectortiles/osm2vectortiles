@@ -651,129 +651,77 @@ Layer:
         (
           SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
           name,
+          area,
           coalesce(name, name_en) AS name_en,
           coalesce(name, name_es) AS name_es,
           coalesce(name, name_fr) AS name_fr,
           coalesce(name, name_de) AS name_de,
           coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          area 
-          FROM osm_water_polygons
-          WHERE area >= 5000000000
-            AND z(!scale_denominator!) >= 5
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
-          name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          area
-          FROM osm_water_polygons
-          WHERE area < 5000000000 AND area >= 1500000000
-            AND z(!scale_denominator!) >= 5
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
-          name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          area
-          FROM osm_water_polygons
-          WHERE area < 1500000000 AND area >= 500000000
-            AND z(!scale_denominator!) >= 8
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
-          name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          area 
-          FROM osm_water_polygons
-          WHERE area < 500000000 AND area >= 100000000
-            AND z(!scale_denominator!) >= 9
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
-          name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          area 
-          FROM osm_water_polygons
-          WHERE area < 100000000 AND area >= 40000000
-            AND z(!scale_denominator!) >= 10
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
-          name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          area 
-          FROM osm_water_polygons
-          WHERE area < 40000000 AND area >= 20000000
-            AND z(!scale_denominator!) >= 11
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
-          name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          area 
-          FROM osm_water_polygons
-          WHERE area < 20000000 AND area >= 10000000
-            AND z(!scale_denominator!) >= 12
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
-          name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          area 
-          FROM osm_water_polygons
-          WHERE area < 10000000 AND area >= 5000000
-            AND z(!scale_denominator!) >= 13
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
-          name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          area 
-          FROM osm_water_polygons
-          WHERE area < 5000000 AND area >= 1000000
-            AND z(!scale_denominator!) >= 14
-            AND geometry && !bbox!
+          coalesce(name, name_zh) AS name_zh
+          FROM (
+              SELECT geometry, osm_id, area,
+              name, name_en, name_es, name_fr, name_de, name_ru, name_zh
+              FROM osm_water_polygons
+              WHERE area >= 5000000000
+                AND z(!scale_denominator!) >= 5
+                AND geometry && !bbox!
+              UNION ALL
+              SELECT geometry, osm_id, area,
+              name, name_en, name_es, name_fr, name_de, name_ru, name_zh
+              FROM osm_water_polygons
+              WHERE area < 5000000000 AND area >= 1500000000
+                AND z(!scale_denominator!) >= 5
+                AND geometry && !bbox!
+              UNION ALL
+              SELECT geometry, osm_id, area,
+              name, name_en, name_es, name_fr, name_de, name_ru, name_zh
+              FROM osm_water_polygons
+              WHERE area < 1500000000 AND area >= 500000000
+                AND z(!scale_denominator!) >= 8
+                AND geometry && !bbox!
+              UNION ALL
+              SELECT geometry, osm_id, area
+              name, name_en, name_es, name_fr, name_de, name_ru, name_zh
+              FROM osm_water_polygons
+              WHERE area < 500000000 AND area >= 100000000
+                AND z(!scale_denominator!) >= 9
+                AND geometry && !bbox!
+              UNION ALL
+              SELECT geometry, osm_id, area,
+              name, name_en, name_es, name_fr, name_de, name_ru, name_zh
+              FROM osm_water_polygons
+              WHERE area < 100000000 AND area >= 40000000
+                AND z(!scale_denominator!) >= 10
+                AND geometry && !bbox!
+              UNION ALL
+              SELECT geometry, osm_id, area,
+              name, name_en, name_es, name_fr, name_de, name_ru, name_zh
+              FROM osm_water_polygons
+              WHERE area < 40000000 AND area >= 20000000
+                AND z(!scale_denominator!) >= 11
+                AND geometry && !bbox!
+              UNION ALL
+              SELECT geometry, osm_id, area
+              name, name_en, name_es, name_fr, name_de, name_ru, name_zh
+              FROM osm_water_polygons
+              WHERE area < 20000000 AND area >= 10000000
+                AND z(!scale_denominator!) >= 12
+                AND geometry && !bbox!
+              UNION ALL
+              SELECT geometry, osm_id, area
+              name, name_en, name_es, name_fr, name_de, name_ru, name_zh
+              FROM osm_water_polygons
+              WHERE area < 10000000 AND area >= 5000000
+                AND z(!scale_denominator!) >= 13
+                AND geometry && !bbox!
+              UNION ALL
+              SELECT geometry, osm_id, area
+              name, name_en, name_es, name_fr, name_de, name_ru, name_zh
+              FROM osm_water_polygons
+              WHERE area < 5000000 AND area >= 1000000
+                AND z(!scale_denominator!) >= 14
+                AND geometry && !bbox!
+            )
         ) AS data
       type: postgis
       user: osm
