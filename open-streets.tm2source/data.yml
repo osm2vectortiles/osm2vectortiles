@@ -19,7 +19,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -58,7 +57,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -100,7 +98,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -138,7 +135,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -172,7 +168,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -207,7 +202,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -232,9 +226,7 @@ Layer:
       user: osm
     description: ''
     fields: 
-      name: String
       osm_id: Number
-      type: String
     properties: 
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -246,7 +238,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -277,7 +268,6 @@ Layer:
     fields: 
       class: String
       osm_id: Number
-      type: String
     properties: 
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -289,7 +279,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -323,7 +312,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -382,7 +370,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -416,7 +403,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -453,7 +439,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -537,10 +522,56 @@ Layer:
     description: ''
     fields: 
       name: String
+      name_de: String
+      name_en: String
+      name_es: String
+      name_fr: String
+      name_ru: String
+      name_zh: String
       osm_id: Number
       rank: Number
     properties: 
       "buffer-size": 64
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: marine_label
+    Datasource: 
+      dbname: osm
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: ''
+      geometry_table: ''
+      host: db
+      key_field: ''
+      max_size: 512
+      password: osm
+      port: 5432
+      srid: ''
+      table: |-
+        (
+          SELECT geometry, name, 
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          GeometryType(geometry) as placement,
+          rank_marine(type) as labelrank
+          FROM osm_marine
+          WHERE geometry && !bbox!
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      name: String
+      name_de: String
+      name_en: String
+      name_es: String
+      name_fr: String
+      name_ru: String
+      name_zh: String
+    properties: 
+      "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: state_label
     Datasource: 
@@ -550,7 +581,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -575,6 +605,12 @@ Layer:
     fields: 
       area: Number
       name: String
+      name_de: String
+      name_en: String
+      name_es: String
+      name_fr: String
+      name_ru: String
+      name_zh: String
       osm_id: Number
     properties: 
       "buffer-size": 64
@@ -587,7 +623,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -652,7 +687,12 @@ Layer:
       ldir: String
       localrank: Number
       name: String
+      name_de: String
       name_en: String
+      name_es: String
+      name_fr: String
+      name_ru: String
+      name_zh: String
       osm_id: Number
       population: Number
       scalerank: String
@@ -668,7 +708,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -849,7 +888,12 @@ Layer:
     fields: 
       area: Number
       name: String
+      name_de: String
       name_en: String
+      name_es: String
+      name_fr: String
+      name_ru: String
+      name_zh: String
       osm_id: Number
     properties: 
       "buffer-size": 8
@@ -862,7 +906,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -924,6 +967,8 @@ Layer:
       name_en: String
       name_es: String
       name_fr: String
+      name_ru: String
+      name_zh: String
       osm_id: Number
       scalerank: Number
       type: String
@@ -938,7 +983,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -1000,9 +1044,12 @@ Layer:
       name_en: String
       name_es: String
       name_fr: String
+      name_ru: String
+      name_zh: String
       osm_id: Number
       ref: String
       reflen: Number
+      shield: String
     properties: 
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -1014,7 +1061,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -1072,6 +1118,12 @@ Layer:
     fields: 
       class: String
       name: String
+      name_de: String
+      name_en: String
+      name_es: String
+      name_fr: String
+      name_ru: String
+      name_zh: String
       osm_id: Number
       type: String
     properties: 
@@ -1085,7 +1137,6 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
-      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
