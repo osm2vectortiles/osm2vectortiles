@@ -839,48 +839,6 @@ Layer:
           WHERE area < 5000000 AND area >= 1000000
             AND z(!scale_denominator!) >= 14
             AND geometry && !bbox!
-          UNION ALL
-          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
-          name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          area 
-          FROM osm_water_polygons
-          WHERE area < 1000000 AND area >= 500000
-            AND z(!scale_denominator!) >= 15
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
-          name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          area 
-          FROM osm_water_polygons
-          WHERE area < 500000 AND area >= 100000
-            AND z(!scale_denominator!) >= 16
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
-          name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          area 
-          FROM osm_water_polygons
-          WHERE area < 100000
-            AND z(!scale_denominator!) >= 17
-            AND geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
