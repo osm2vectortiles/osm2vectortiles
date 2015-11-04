@@ -22,7 +22,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
@@ -61,7 +61,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
@@ -103,7 +103,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
@@ -141,7 +141,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
@@ -175,7 +175,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
@@ -210,7 +210,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
@@ -249,7 +249,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
@@ -292,7 +292,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
@@ -326,7 +326,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
@@ -385,7 +385,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         ( 
@@ -419,7 +419,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
@@ -456,77 +456,77 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
           SELECT osm_id, geometry, name,
-          coalesce(name, name_en) as name_en,
-          coalesce(name, name_es) as name_es,
-          coalesce(name, name_fr) as name_fr,
-          coalesce(name, name_de) as name_de,
-          coalesce(name, name_ru) as name_ru,
-          coalesce(name, name_zh) as name_zh,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
           1 AS rank FROM osm_places
           WHERE type = 'country'
             AND population >= 250000000
             AND geometry && !bbox!
           UNION ALL
           SELECT osm_id, geometry, name,
-          coalesce(name, name_en) as name_en,
-          coalesce(name, name_es) as name_es,
-          coalesce(name, name_fr) as name_fr,
-          coalesce(name, name_de) as name_de,
-          coalesce(name, name_ru) as name_ru,
-          coalesce(name, name_zh) as name_zh,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
           2 AS rank FROM osm_places
           WHERE type = 'country'
             AND population >= 100000000 AND population < 250000000
             AND geometry && !bbox!
           UNION ALL
           SELECT osm_id, geometry, name,
-          coalesce(name, name_en) as name_en,
-          coalesce(name, name_es) as name_es,
-          coalesce(name, name_fr) as name_fr,
-          coalesce(name, name_de) as name_de,
-          coalesce(name, name_ru) as name_ru,
-          coalesce(name, name_zh) as name_zh,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
           3 AS rank FROM osm_places
           WHERE type = 'country'
             AND population >= 50000000 AND population < 100000000
             AND geometry && !bbox!
           UNION ALL
           SELECT osm_id, geometry, name,
-          coalesce(name, name_en) as name_en,
-          coalesce(name, name_es) as name_es,
-          coalesce(name, name_fr) as name_fr,
-          coalesce(name, name_de) as name_de,
-          coalesce(name, name_ru) as name_ru,
-          coalesce(name, name_zh) as name_zh,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
           4 AS rank FROM osm_places
           WHERE type = 'country'
             AND population >= 25000000 AND population < 50000000
             AND geometry && !bbox!
           UNION ALL
           SELECT osm_id, geometry, name,
-          coalesce(name, name_en) as name_en,
-          coalesce(name, name_es) as name_es,
-          coalesce(name, name_fr) as name_fr,
-          coalesce(name, name_de) as name_de,
-          coalesce(name, name_ru) as name_ru,
-          coalesce(name, name_zh) as name_zh,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
           5 AS rank FROM osm_places
           WHERE type = 'country'
             AND population >= 10000000 AND population < 25000000
             AND geometry && !bbox!
           UNION ALL
           SELECT osm_id, geometry, name,
-          coalesce(name, name_en) as name_en,
-          coalesce(name, name_es) as name_es,
-          coalesce(name, name_fr) as name_fr,
-          coalesce(name, name_de) as name_de,
-          coalesce(name, name_ru) as name_ru,
-          coalesce(name, name_zh) as name_zh,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
           6 AS rank FROM osm_places
           WHERE type = 'country'
             AND population < 10000000
@@ -553,18 +553,18 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
           SELECT osm_id, geometry,  
           name,
-          coalesce(name, name_en) as name_en,
-          coalesce(name, name_es) as name_es,
-          coalesce(name, name_fr) as name_fr,
-          coalesce(name, name_de) as name_de,
-          coalesce(name, name_ru) as name_ru,
-          coalesce(name, name_zh) as name_zh,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
           0 AS area FROM osm_places
           WHERE type = 'state'
             AND geometry && !bbox!
@@ -590,7 +590,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         ( SELECT * FROM (
@@ -598,12 +598,12 @@ Layer:
             FROM (
               SELECT osm_id, geometry,  
               name,
-              coalesce(name, name_en) as name_en,
-              coalesce(name, name_es) as name_es,
-              coalesce(name, name_fr) as name_fr,
-              coalesce(name, name_de) as name_de,
-              coalesce(name, name_ru) as name_ru,
-              coalesce(name, name_zh) as name_zh, 
+              coalesce(name, name_en) AS name_en,
+              coalesce(name, name_es) AS name_es,
+              coalesce(name, name_fr) AS name_fr,
+              coalesce(name, name_de) AS name_de,
+              coalesce(name, name_ru) AS name_ru,
+              coalesce(name, name_zh) AS name_zh, 
               type, population, is_capital AS capital, 
               'SE' AS ldir, 1 AS localrank, null AS scalerank
               FROM osm_places
@@ -612,12 +612,12 @@ Layer:
               UNION ALL
               SELECT osm_id, geometry, 
               name,
-              coalesce(name, name_en) as name_en,
-              coalesce(name, name_es) as name_es,
-              coalesce(name, name_fr) as name_fr,
-              coalesce(name, name_de) as name_de,
-              coalesce(name, name_ru) as name_ru,
-              coalesce(name, name_zh) as name_zh,  
+              coalesce(name, name_en) AS name_en,
+              coalesce(name, name_es) AS name_es,
+              coalesce(name, name_fr) AS name_fr,
+              coalesce(name, name_de) AS name_de,
+              coalesce(name, name_ru) AS name_ru,
+              coalesce(name, name_zh) AS name_zh,  
               type, population,is_capital AS capital, 
               'SE' AS ldir, 1 AS localrank, null AS scalerank
               FROM osm_places
@@ -627,12 +627,12 @@ Layer:
               UNION ALL
               SELECT osm_id, geometry, 
               name,
-              coalesce(name, name_en) as name_en,
-              coalesce(name, name_es) as name_es,
-              coalesce(name, name_fr) as name_fr,
-              coalesce(name, name_de) as name_de,
-              coalesce(name, name_ru) as name_ru,
-              coalesce(name, name_zh) as name_zh,
+              coalesce(name, name_en) AS name_en,
+              coalesce(name, name_es) AS name_es,
+              coalesce(name, name_fr) AS name_fr,
+              coalesce(name, name_de) AS name_de,
+              coalesce(name, name_ru) AS name_ru,
+              coalesce(name, name_zh) AS name_zh,
               type, population, is_capital AS capital, 
               'SE' AS ldir, 1 AS localrank, null AS scalerank
               FROM osm_places
@@ -671,82 +671,178 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
-                select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_water_polygons
-                  where area >= 5000000000
-                  and z(!scale_denominator!) >= 5
-                  and geometry && !bbox!
-                union all
-                select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_water_polygons
-                  where area < 5000000000 and area >= 1500000000
-                  and z(!scale_denominator!) >= 5
-                  and geometry && !bbox!
-                union all
-                select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_water_polygons
-                  where area < 1500000000 and area >= 500000000
-                  and z(!scale_denominator!) >= 8
-                  and geometry && !bbox!
-                union all
-                select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_water_polygons
-                  where area < 500000000 and area >= 100000000
-                  and z(!scale_denominator!) >= 9
-                  and geometry && !bbox!
-                union all
-                select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_water_polygons
-                  where area < 100000000 and area >= 40000000
-                  and z(!scale_denominator!) >= 10
-                  and geometry && !bbox!
-                union all
-                select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_water_polygons
-                  where area < 40000000 and area >= 20000000
-                  and z(!scale_denominator!) >= 11
-                  and geometry && !bbox!
-                union all
-                select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_water_polygons
-                  where area < 20000000 and area >= 10000000
-                  and z(!scale_denominator!) >= 12
-                  and geometry && !bbox!
-                union all
-                select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_water_polygons
-                  where area < 10000000 and area >= 5000000
-                  and z(!scale_denominator!) >= 13
-                  and geometry && !bbox!
-                union all
-                select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_water_polygons
-                  where area < 5000000 and area >= 1000000
-                  and z(!scale_denominator!) >= 14
-                  and geometry && !bbox!
-                union all
-                select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_water_polygons
-                  where area < 1000000 and area >= 500000
-                  and z(!scale_denominator!) >= 15
-                  and geometry && !bbox!
-                union all
-                select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_water_polygons
-                  where area < 500000 and area >= 100000
-                  and z(!scale_denominator!) >= 16
-                  and geometry && !bbox!
-                union all
-                select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_water_polygons
-                  where area < 100000
-                  and z(!scale_denominator!) >= 17
-                  and geometry && !bbox!
-              ) AS data
+          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
+          name,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          area 
+          FROM osm_water_polygons
+          WHERE area >= 5000000000
+            AND z(!scale_denominator!) >= 5
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
+          name,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          area
+          FROM osm_water_polygons
+          WHERE area < 5000000000 AND area >= 1500000000
+            AND z(!scale_denominator!) >= 5
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
+          name,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          area
+          FROM osm_water_polygons
+          WHERE area < 1500000000 AND area >= 500000000
+            AND z(!scale_denominator!) >= 8
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
+          name,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          area 
+          FROM osm_water_polygons
+          WHERE area < 500000000 AND area >= 100000000
+            AND z(!scale_denominator!) >= 9
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
+          name,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          area 
+          FROM osm_water_polygons
+          WHERE area < 100000000 AND area >= 40000000
+            AND z(!scale_denominator!) >= 10
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
+          name,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          area 
+          FROM osm_water_polygons
+          WHERE area < 40000000 AND area >= 20000000
+            AND z(!scale_denominator!) >= 11
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
+          name,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          area 
+          FROM osm_water_polygons
+          WHERE area < 20000000 AND area >= 10000000
+            AND z(!scale_denominator!) >= 12
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
+          name,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          area 
+          FROM osm_water_polygons
+          WHERE area < 10000000 AND area >= 5000000
+            AND z(!scale_denominator!) >= 13
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
+          name,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          area 
+          FROM osm_water_polygons
+          WHERE area < 5000000 AND area >= 1000000
+            AND z(!scale_denominator!) >= 14
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
+          name,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          area 
+          FROM osm_water_polygons
+          WHERE area < 1000000 AND area >= 500000
+            AND z(!scale_denominator!) >= 15
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
+          name,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          area 
+          FROM osm_water_polygons
+          WHERE area < 500000 AND area >= 100000
+            AND z(!scale_denominator!) >= 16
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
+          name,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+          area 
+          FROM osm_water_polygons
+          WHERE area < 100000
+            AND z(!scale_denominator!) >= 17
+            AND geometry && !bbox!
+        ) AS data
       type: postgis
       user: osm
     description: ''
@@ -769,7 +865,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
@@ -789,12 +885,12 @@ Layer:
               rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
                            ORDER BY rank_poi(type) ASC) AS localrank,
               maki_label(type) as maki
-            from (
+            FROM (
               select geometry,
               osm_id, name, name_de, name_en, name_es, name_fr, type, 0 as area
               from osm_poi_points
               where z(!scale_denominator!) >= 14 and geometry && !bbox!
-              union all
+              UNION ALL
               select topoint(geometry) as geometry,
               osm_id, name, name_de, name_en, name_es, name_fr, type, area
               from osm_poi_polygons
@@ -829,7 +925,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
@@ -903,7 +999,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
@@ -950,7 +1046,7 @@ Layer:
       key_field_as_attribute: ''
       max_size: 512
       password: osm
-      port: 5432
+      port: 32770
       srid: ''
       table: |-
         (
