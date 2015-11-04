@@ -65,21 +65,23 @@ Layer:
       srid: ''
       table: |-
         (
-                 select geometry, osm_id, type, type as class from osm_water_lines
-                   where type in ('river', 'canal')
-                   and z(!scale_denominator!) >= 8
-                   and geometry && !bbox!
-                 union all
-                 select geometry, osm_id, type, type as class from osm_water_lines
-                   where type in ('stream', 'stream_intermittent')
-                   and z(!scale_denominator!) >= 13
-                   and geometry && !bbox!
-                 union all
-                 select geometry, osm_id, type, type as class from osm_water_lines
-                   where type in ('drain', 'ditch')
-                   and z(!scale_denominator!) >= 15
-                   and geometry && !bbox!
-               ) AS data
+          SELECT osm_id, geometry, type, type as class
+          FROM (
+            SELECT osm_id, geometry, type FROM osm_water_lines
+            WHERE type IN ('river', 'canal')
+            AND geometry && !bbox!
+            AND z(!scale_denominator!) >= 8
+            UNION ALL
+            SELECT osm_id, geometry, type FROM osm_water_lines
+            WHERE type IN ('stream', 'stream_intermittent')
+            AND geometry && !bbox!
+            AND z(!scale_denominator!) >= 13
+            UNION ALL
+            SELECT osm_id, geometry, type FROM osm_water_lines
+            WHERE geometry && !bbox!
+            AND z(!scale_denominator!) >= 15
+          ) AS water_lines
+        ) AS data
       type: postgis
       user: osm
     description: ''
