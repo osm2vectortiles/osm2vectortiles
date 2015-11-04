@@ -330,20 +330,35 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id, type,
-          classify_road(type) as class
+          SELECT osm_id, geometry, type, classify_road(type) AS class
           FROM (
-              SELECT osm_id, geometry, type FROM osm_roads_gen1
-              WHERE geometry && !bbox!
-              AND z(!scale_denominator!) BETWEEN 5 AND 8
-              UNION ALL
-              SELECT osm_id, geometry, type FROM osm_roads_gen0
-              WHERE geometry && !bbox!
-              AND z(!scale_denominator!) BETWEEN 9 AND 10
+              SELECT osm_id, geometry, type FROM osm_roads
+              WHERE type IN ('motorway', 'pedestrian', 'construction', 'private', 'primary', 'primary_link', 'trunk', 'trunk_link', 
+                'secondary', 'secondary_link', 'tertiary', 'tertiary_link')
+              AND geometry && !bbox!
+              AND z(!scale_denominator!) >= 5 /* main, motorway, street_limited*/
               UNION ALL
               SELECT osm_id, geometry, type FROM osm_roads
-              WHERE geometry && !bbox!
-              AND z(!scale_denominator!) BETWEEN 10 AND 11
+              WHERE type IN ('motorway_link')
+              AND geometry && !bbox!
+              AND z(!scale_denominator!) >= 9 /* main, motorway, motorway_link, street_limited*/
+              UNION ALL
+              SELECT osm_id, geometry, type FROM osm_roads
+              WHERE type IN ('rail', 'monorail', 'narrow_gauge', 'subway', 'residential', 'unclassified', 'living_street', 'road', 'raceway')
+              AND geometry && !bbox!
+              AND z(!scale_denominator!) >= 12 /* main, mayor_rail, motorway, motorway_link, street, street_limited*/
+              UNION ALL
+              SELECT osm_id, geometry, type FROM osm_roads
+              WHERE type IN ('service', 'track', 'alley', 'spur', 'siding', 'crossover')
+              AND geometry && !bbox!
+              AND z(!scale_denominator!) >= 13 /* main, mayor_rail, service, motorway, motorway_link, street, street_limited*/
+              UNION ALL
+              SELECT osm_id, geometry, type FROM osm_roads
+              WHERE type IN ('path', 'cycleway', 'ski', 'steps', 'bridleway', 'footway', 'funicular', 'light_rail', 'preserved', 
+                'tram', 'disused', 'yard', 'driveway', 'parking_aisle', 'chair_lift', 'mixed_lift', 'drag_lift', 'platter', 't-bar', 
+                'magic_carpet', 'gondola', 'cable_car', 'rope_tow', 'zip_line', 'j-bar', 'canopy', 'hole')
+              AND geometry && !bbox!
+              AND z(!scale_denominator!) >= 14 /* driveway, main, mayor_rail, minor_rail, path, service, motorway, motorway_link, street, street_limited, aerialway, golf*/
               OR (
                 z(!scale_denominator!) > 12 AND NOT is_bridge AND NOT is_tunnel
               )
@@ -373,14 +388,12 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-        ( SELECT geometry,
-          osm_id,
-          classify_road(type) as class,
-          type,
-          layer,
-          oneway
+        ( 
+          SELECT osm_id, geometry, classify_road(type) AS class, type, layer, oneway
           FROM osm_roads
-          WHERE z(!scale_denominator!) >= 12 AND geometry && !bbox! AND is_bridge
+          WHERE z(!scale_denominator!) >= 12 
+            AND geometry && !bbox! 
+            AND is_bridge
           ORDER BY layer ASC
         ) AS data
       type: postgis
