@@ -227,7 +227,6 @@ tables:
       - spikes
       - lift_gate
       - kissing_gate
-      - embankment
       - 'yes'
       - wire_fence
       - stile
@@ -236,9 +235,12 @@ tables:
       - jersey_barrier
       - rope
       - guard_rail
-    man_made:
+      natural:
+      - cliff
+      man_made:
       - pier
       - breakwater
+      - embankment
     type: linestring
   barrier_polygons:
     fields:
@@ -261,7 +263,6 @@ tables:
       - spikes
       - lift_gate
       - kissing_gate
-      - embankment
       - 'yes'
       - wire_fence
       - stile
@@ -270,9 +271,12 @@ tables:
       - jersey_barrier
       - rope
       - guard_rail
-    man_made:
+      natural:
+      - cliff
+      man_made:
       - pier
       - breakwater
+      - embankment
     type: polygon
   buildings:
     fields:
