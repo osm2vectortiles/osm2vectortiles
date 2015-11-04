@@ -825,25 +825,13 @@ Layer:
               maki_label(type) AS maki
             FROM (
               SELECT geometry, osm_id, 
-              name,
-              coalesce(name, name_en) AS name_en,
-              coalesce(name, name_es) AS name_es,
-              coalesce(name, name_fr) AS name_fr,
-              coalesce(name, name_de) AS name_de,
-              coalesce(name, name_ru) AS name_ru,
-              coalesce(name, name_zh) AS name_zh,
+              name, name_en, name_es, name_fr, name_de, name_ru, name_zh,
               type, 0 AS area
               FROM osm_poi_points
               WHERE z(!scale_denominator!) >= 14 AND geometry && !bbox!
               UNION ALL
               SELECT topoint(geometry) AS geometry, osm_id, 
-              name,
-              coalesce(name, name_en) AS name_en,
-              coalesce(name, name_es) AS name_es,
-              coalesce(name, name_fr) AS name_fr,
-              coalesce(name, name_de) AS name_de,
-              coalesce(name, name_ru) AS name_ru,
-              coalesce(name, name_zh) AS name_zh,
+              name, name_en, name_es, name_fr, name_de, name_ru, name_zh,
               type, area
               FROM osm_poi_polygons
               WHERE z(!scale_denominator!) >= 14 AND geometry && !bbox!
