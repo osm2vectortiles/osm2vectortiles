@@ -27,14 +27,22 @@ class TableMapping(object):
         self.table_name = table_name
         self.mappings = mappings
 
+    def _values_label(self, osm_values):
+        return '[{} values]'.format(len(osm_values))
+
     def visualize_mapping(self):
-        subgraph = Digraph(self.table_name)
+        subgraph = Digraph(self.table_name, node_attr={
+            'width:': '20',
+            'fixed_size': 'shape'
+        })
         subgraph.node(self.table_name, shape='box')
 
         for osm_key, osm_values in self.mappings:
             node_name = osm_key.replace(':', '_')
             subgraph.node(node_name, label=osm_key, shape='box')
-            subgraph.edge(node_name, self.table_name)
+
+            subgraph.edge(node_name, self.table_name,
+                          label=self._values_label(osm_values))
 
         return subgraph
 
@@ -131,9 +139,22 @@ def generate_table_layer_diagram(mapping_config, tm2source_config):
 
     graph.render(filename='table_layer_diagram', view=True)
 
+def generate_table_mapping_diagram(mapping_config):
+    graph = Digraph('Imposm Mapping', format='png', graph_attr={
+        'rankdir': 'LR',
+        'ranksep': '3'
+    })
+
+    for table_mapping in find_mappings(mapping_config):
+        graph.subgraph(table_mapping.visualize_mapping())
+
+    graph.render(filename='mapping_graph', view=True)
+
 
 if __name__ == '__main__':
     args = docopt(__doc__, version='0.1')
+    mapping_file = args.get('<mapping_file>')
+    tm2source_file = args.get('<tm2source_file>')
 
     if args.get('layers'):
         tm2source_file = args['<tm2source_file>']
@@ -148,23 +169,12 @@ if __name__ == '__main__':
             graph.render(filename='layer_diagram', view=True)
 
     if args.get('table-layers'):
-        mapping_file = args['<mapping_file>']
-        tm2source_file = args['<tm2source_file>']
-
         mapping_config = yaml.load(open(mapping_file, 'r'))
         tm2source_config = yaml.load(open(tm2source_file, 'r'))
 
         generate_table_layer_diagram(mapping_config, tm2source_config)
 
     if args.get('mapping'):
-        mapping_file = args['<mapping_file>']
-        with open(mapping_file, 'r') as f:
-            config = yaml.load(f)
-            graph = Digraph('Imposm Mapping', format='png', graph_attr={
-                'rankdir': 'LR'
-            })
-            for table_mapping in find_mappings(config):
-                graph.subgraph(table_mapping.visualize_mapping())
-
-            filename = graph.render(filename='mapping_graph', view=True)
+        mapping_config = yaml.load(open(mapping_file, 'r'))
+        generate_table_mapping_diagram(mapping_config)
 
