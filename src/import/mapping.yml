@@ -412,11 +412,15 @@ tables:
       type: mapping_value
     - args:
         values:
+        - dwelling
         - locality
+        - neighbourhood
         - suburb
         - hamlet
+        - municipality
         - village
         - town
+        - district
         - city
         - county
         - region

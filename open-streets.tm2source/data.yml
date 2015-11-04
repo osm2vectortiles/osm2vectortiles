@@ -423,16 +423,16 @@ Layer:
       srid: ''
       table: |-
         (
-          select geometry, osm_id, admin_level, 0 as disputed, maritime
-            from osm_admin
-            where admin_level = 2
-            and geometry && !bbox!
-          union all
-          select geometry, osm_id, admin_level, 0 as disputed, maritime
-            from osm_admin
-            where admin_level = 4
-            and z(!scale_denominator!) >= 5
-            and geometry && !bbox!
+          SELECT osm_id, geometry, admin_level, 0 as disputed, maritime
+          FROM osm_admin
+          WHERE admin_level = 2
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT osm_id, geometry, admin_level, 0 as disputed, maritime
+          FROM osm_admin
+          WHERE admin_level = 4
+            AND z(!scale_denominator!) >= 5
+            AND geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
@@ -460,37 +460,77 @@ Layer:
       srid: ''
       table: |-
         (
-          /* TODO get real name_en/name_de/name_es */
-          /* TODO improve ranking */
-          select geometry, osm_id, name, 1 as rank from osm_places
-            where type = 'country' and
-            population >= 250000000
-            and geometry && !bbox!
-          union all
-          select geometry, osm_id, name, 2 as rank from osm_places
-            where type = 'country' and
-            population >= 100000000 and population < 250000000
-            and geometry && !bbox!
-          union all
-          select geometry, osm_id, name, 3 as rank from osm_places
-            where type = 'country' and
-            population >= 50000000 and population < 100000000
-            and geometry && !bbox!
-          union all
-          select geometry, osm_id, name, 4 as rank from osm_places
-            where type = 'country' and
-            population >= 25000000 and population < 50000000
-            and geometry && !bbox!
-          union all
-          select geometry, osm_id, name, 5 as rank from osm_places
-            where type = 'country' and
-            population >= 10000000 and population < 25000000
-            and geometry && !bbox!
-          union all
-          select geometry, osm_id, name, 6 as rank from osm_places
-            where type = 'country' and
-            population < 10000000
-            and geometry && !bbox!
+          SELECT osm_id, geometry, name,
+          coalesce(name, name_en) as name_en,
+          coalesce(name, name_es) as name_es,
+          coalesce(name, name_fr) as name_fr,
+          coalesce(name, name_de) as name_de,
+          coalesce(name, name_ru) as name_ru,
+          coalesce(name, name_zh) as name_zh,
+          1 AS rank FROM osm_places
+          WHERE type = 'country'
+            AND population >= 250000000
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT osm_id, geometry, name,
+          coalesce(name, name_en) as name_en,
+          coalesce(name, name_es) as name_es,
+          coalesce(name, name_fr) as name_fr,
+          coalesce(name, name_de) as name_de,
+          coalesce(name, name_ru) as name_ru,
+          coalesce(name, name_zh) as name_zh,
+          2 AS rank FROM osm_places
+          WHERE type = 'country'
+            AND population >= 100000000 AND population < 250000000
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT osm_id, geometry, name,
+          coalesce(name, name_en) as name_en,
+          coalesce(name, name_es) as name_es,
+          coalesce(name, name_fr) as name_fr,
+          coalesce(name, name_de) as name_de,
+          coalesce(name, name_ru) as name_ru,
+          coalesce(name, name_zh) as name_zh,
+          3 AS rank FROM osm_places
+          WHERE type = 'country'
+            AND population >= 50000000 AND population < 100000000
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT osm_id, geometry, name,
+          coalesce(name, name_en) as name_en,
+          coalesce(name, name_es) as name_es,
+          coalesce(name, name_fr) as name_fr,
+          coalesce(name, name_de) as name_de,
+          coalesce(name, name_ru) as name_ru,
+          coalesce(name, name_zh) as name_zh,
+          4 AS rank FROM osm_places
+          WHERE type = 'country'
+            AND population >= 25000000 AND population < 50000000
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT osm_id, geometry, name,
+          coalesce(name, name_en) as name_en,
+          coalesce(name, name_es) as name_es,
+          coalesce(name, name_fr) as name_fr,
+          coalesce(name, name_de) as name_de,
+          coalesce(name, name_ru) as name_ru,
+          coalesce(name, name_zh) as name_zh,
+          5 AS rank FROM osm_places
+          WHERE type = 'country'
+            AND population >= 10000000 AND population < 25000000
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT osm_id, geometry, name,
+          coalesce(name, name_en) as name_en,
+          coalesce(name, name_es) as name_es,
+          coalesce(name, name_fr) as name_fr,
+          coalesce(name, name_de) as name_de,
+          coalesce(name, name_ru) as name_ru,
+          coalesce(name, name_zh) as name_zh,
+          6 AS rank FROM osm_places
+          WHERE type = 'country'
+            AND population < 10000000
+            AND geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
@@ -517,11 +557,17 @@ Layer:
       srid: ''
       table: |-
         (
-          /* TODO get real name_en/name_de/name_es */
-          /* TODO get real area */
-          select geometry, osm_id, name, 0 as area from osm_places
-            where type = 'state'
-            and geometry && !bbox!
+          SELECT osm_id, geometry,  
+          name,
+          coalesce(name, name_en) as name_en,
+          coalesce(name, name_es) as name_es,
+          coalesce(name, name_fr) as name_fr,
+          coalesce(name, name_de) as name_de,
+          coalesce(name, name_ru) as name_ru,
+          coalesce(name, name_zh) as name_zh,
+          0 AS area FROM osm_places
+          WHERE type = 'state'
+            AND geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
@@ -547,28 +593,52 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-        /* TODO get real name_en/name_de/name_es */
-        /* TODO calculate real ranks and ldir */
         ( SELECT * FROM (
             SELECT DISTINCT ON(LabelGrid(geometry, 64)) *
             FROM (
-              select geometry, osm_id, name, name as name_en, type, population,
-                null as capital, 'SE' as ldir, 1 as localrank, null as scalerank
-                from osm_places
-                where type = 'city'
-                and geometry && !bbox!
-              union all
-              select geometry, osm_id, name, name as name_en, type, population,
-                null as capital, 'SE' as ldir, 1 as localrank, null as scalerank
-                from osm_places
-                where type = 'town' and z(!scale_denominator!) >= 7
-                and geometry && !bbox!
-              union all
-              select geometry, osm_id, name, name as name_en, type, population,
-                null as capital, 'SE' as ldir, 1 as localrank, null as scalerank
-                from osm_places
-                where type in ('hamlet', 'suburb','neighbourhood') and z(!scale_denominator!) >= 10
-                and geometry && !bbox!
+              SELECT osm_id, geometry,  
+              name,
+              coalesce(name, name_en) as name_en,
+              coalesce(name, name_es) as name_es,
+              coalesce(name, name_fr) as name_fr,
+              coalesce(name, name_de) as name_de,
+              coalesce(name, name_ru) as name_ru,
+              coalesce(name, name_zh) as name_zh, 
+              type, population, is_capital AS capital, 
+              'SE' AS ldir, 1 AS localrank, null AS scalerank
+              FROM osm_places
+              WHERE type = 'city'
+                AND geometry && !bbox!
+              UNION ALL
+              SELECT osm_id, geometry, 
+              name,
+              coalesce(name, name_en) as name_en,
+              coalesce(name, name_es) as name_es,
+              coalesce(name, name_fr) as name_fr,
+              coalesce(name, name_de) as name_de,
+              coalesce(name, name_ru) as name_ru,
+              coalesce(name, name_zh) as name_zh,  
+              type, population,is_capital AS capital, 
+              'SE' AS ldir, 1 AS localrank, null AS scalerank
+              FROM osm_places
+              WHERE type IN ('town', 'district')
+                AND z(!scale_denominator!) >= 7
+                AND geometry && !bbox!
+              UNION ALL
+              SELECT osm_id, geometry, 
+              name,
+              coalesce(name, name_en) as name_en,
+              coalesce(name, name_es) as name_es,
+              coalesce(name, name_fr) as name_fr,
+              coalesce(name, name_de) as name_de,
+              coalesce(name, name_ru) as name_ru,
+              coalesce(name, name_zh) as name_zh,
+              type, population, is_capital AS capital, 
+              'SE' AS ldir, 1 AS localrank, null AS scalerank
+              FROM osm_places
+              WHERE type in ('hamlet', 'suburb','neighbourhood', 'village', 'municipality', 'locality', 'dwelling') 
+                AND z(!scale_denominator!) >= 10
+                AND geometry && !bbox!
             ) AS places
             ORDER BY LabelGrid(geometry, 64), population DESC NULLS LAST, osm_id
           ) AS ordered
@@ -705,10 +775,10 @@ Layer:
         (
           select geometry, osm_id,
               name,
-              coalesce(name, name_de) as name_de,
               coalesce(name, name_en) as name_en,
               coalesce(name, name_es) as name_es,
               coalesce(name, name_fr) as name_fr,
+              coalesce(name, name_de) as name_de,
               type,  
               case
                 when area > 0 then 3
