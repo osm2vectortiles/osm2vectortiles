@@ -6,15 +6,15 @@ Usage:
   generate_diagram.py (-h | --help)
   generate_diagram.py --version
 Options:
-  -h --help                 Show this screen.
-  --version                 Show version.
+  -h --help     Show this screen.
+  --version     Show version.
 """
 import re
 from collections import namedtuple
 
 from docopt import docopt
-import yaml
 from graphviz import Digraph
+import yaml
 
 
 Layer = namedtuple('Layer', ['name', 'referenced_tables', 'fields'])
@@ -29,7 +29,7 @@ def normalize_graphviz_labels(label):
     return label.replace(':', '_')
 
 
-def visualize_mapping(table):
+def generate_mapping_subgraph(table):
     subgraph = Digraph(table.name, node_attr={
         'width:': '20',
         'fixed_size': 'shape'
@@ -90,16 +90,23 @@ def find_layers(config):
         yield Layer(layer_name, tables, fields)
 
 
-def generate_table_node(graph, table):
-    field_names = [field['name'] for field in table.fields]
-    node_body = '''<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+def generate_struct_diagram(heading, body):
+    return '''<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
   <TR>
     <TD BGCOLOR="#EEEEEE">{0}</TD>
   </TR>
   <TR>
     <TD>{1}</TD>
   </TR>
-</TABLE>>'''.format(table.name, '<BR/>'.join(field_names))
+</TABLE>>'''.format(heading, body)
+
+
+def generate_table_node(graph, table):
+    field_names = [field['name'] for field in table.fields]
+    node_body = generate_struct_diagram(
+        table.name,
+        '<BR/>'.join(field_names)
+    )
     node_name = 'table_' + table.name
     graph.node(node_name, node_body, shape='none')
     return node_name
@@ -107,14 +114,10 @@ def generate_table_node(graph, table):
 
 def generate_layer_node(graph, layer):
     field_names = [field_name for field_name, _ in layer.fields]
-    node_body = '''<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-  <TR>
-    <TD BGCOLOR="#EEEEEE">{0}</TD>
-  </TR>
-  <TR>
-    <TD>{1}</TD>
-  </TR>
-</TABLE>>'''.format('#' + layer.name, '<BR/>'.join(field_names))
+    node_body = generate_struct_diagram(
+        '#' + layer.name,
+        '<BR/>'.join(field_names)
+    )
     node_name = 'layer_' + layer.name
     graph.node(node_name, node_body, shape='none')
     return node_name
@@ -128,7 +131,9 @@ def generate_table_layer_diagram(mapping_config, tm2source_config):
     layers = find_layers(tm2source_config)
     tables = find_tables(mapping_config)
 
-    table_nodes = [generate_table_node(graph, table) for table in tables]
+    for table in tables:
+        generate_table_node(graph, table)
+
     for layer in layers:
         layer_node = generate_layer_node(graph, layer)
         for table_name in layer.referenced_tables:
@@ -144,7 +149,7 @@ def generate_table_mapping_diagram(mapping_config):
     })
 
     for table in find_tables(mapping_config):
-        graph.subgraph(visualize_mapping(table))
+        graph.subgraph(generate_mapping_subgraph(table))
 
     graph.render(filename='mapping_graph', view=True)
 
@@ -162,4 +167,3 @@ if __name__ == '__main__':
     if args.get('mapping-keys'):
         mapping_config = yaml.load(open(mapping_file, 'r'))
         generate_table_mapping_diagram(mapping_config)
-
