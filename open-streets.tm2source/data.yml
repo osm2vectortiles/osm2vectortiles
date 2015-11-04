@@ -74,10 +74,6 @@ Layer:
             WHERE type IN ('stream', 'stream_intermittent')
             AND geometry && !bbox!
             AND z(!scale_denominator!) >= 13
-            UNION ALL
-            SELECT osm_id, geometry, type FROM osm_water_lines
-            WHERE geometry && !bbox!
-            AND z(!scale_denominator!) >= 15
           ) AS water_lines
         ) AS data
       type: postgis
@@ -452,70 +448,9 @@ Layer:
           coalesce(name, name_de) AS name_de,
           coalesce(name, name_ru) AS name_ru,
           coalesce(name, name_zh) AS name_zh,
-          1 AS rank FROM osm_places
-          WHERE type = 'country'
-            AND population >= 250000000
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT osm_id, geometry, name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          2 AS rank FROM osm_places
-          WHERE type = 'country'
-            AND population >= 100000000 AND population < 250000000
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT osm_id, geometry, name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          3 AS rank FROM osm_places
-          WHERE type = 'country'
-            AND population >= 50000000 AND population < 100000000
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT osm_id, geometry, name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          4 AS rank FROM osm_places
-          WHERE type = 'country'
-            AND population >= 25000000 AND population < 50000000
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT osm_id, geometry, name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          5 AS rank FROM osm_places
-          WHERE type = 'country'
-            AND population >= 10000000 AND population < 25000000
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT osm_id, geometry, name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          6 AS rank FROM osm_places
-          WHERE type = 'country'
-            AND population < 10000000
-            AND geometry && !bbox!
+          rank_country(population) as rank
+          FROM osm_places
+          WHERE geometry && !bbox! AND type = 'country'
         ) AS data
       type: postgis
       user: osm
