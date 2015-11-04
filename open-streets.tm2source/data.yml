@@ -296,14 +296,11 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT geometry,
-          osm_id,
-          classify_road(type) as class,
-          type,
-          layer,
-          oneway
+          SELECT osm_id, geometry, classify_road(type) AS class, type, layer, oneway
           FROM osm_roads
-          WHERE z(!scale_denominator!) >= 10 AND geometry && !bbox! AND is_tunnel
+          WHERE z(!scale_denominator!) >= 10
+            AND geometry && !bbox!
+            AND is_tunnel
           ORDER BY layer ASC
         ) AS data
       type: postgis
