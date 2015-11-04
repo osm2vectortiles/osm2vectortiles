@@ -107,20 +107,20 @@ Layer:
       srid: ''
       table: |-
         (
-          select way as geometry, 0 as osm_id from water_polygons
-          where way && !bbox!
-          union all
-          select geometry, osm_id from osm_water_polygons_gen1
-          where geometry && !bbox!
-          and z(!scale_denominator!) between 3 and 9
-          union all
-          select geometry, osm_id from osm_water_polygons_gen0
-          where geometry && !bbox!
-          and z(!scale_denominator!) between 9 and 12
-          union all
-          select geometry, osm_id from osm_water_polygons
-          where geometry && !bbox!
-          and z(!scale_denominator!) > 12
+          SELECT 0 AS osm_id, way AS geometry FROM water_polygons
+          WHERE way && !bbox!
+          UNION ALL
+          SELECT osm_id, geometry FROM osm_water_polygons_gen1
+          WHERE geometry && !bbox!
+          AND z(!scale_denominator!) between 3 AND 9
+          UNION ALL
+          SELECT osm_id, geometry FROM osm_water_polygons_gen0
+          WHERE geometry && !bbox!
+          AND z(!scale_denominator!) between 9 AND 12
+          UNION ALL
+          SELECT osm_id, geometry FROM osm_water_polygons
+          WHERE geometry && !bbox!
+          AND z(!scale_denominator!) > 12
         ) AS data
       type: postgis
       user: osm
