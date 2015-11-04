@@ -25,14 +25,6 @@ generalized_tables:
     source: water_polygons
     sql_filter: ST_Area(geometry)>50000.000000
     tolerance: 50.0
-  water_lines_gen0:
-    source: water_lines_gen1
-    tolerance: 200
-    sql_filter: type IN ('river', 'canal')
-  water_lines_gen1:
-    source: water_lines
-    tolerance: 50.0
-    sql_filter: type IN ('stream')
   buildings_gen0:
     source: buildings
     sql_filter: ST_Area(geometry)>1700.000000
@@ -636,6 +628,7 @@ tables:
       - river
       - riverbank
       - stream
+      - stream_intermittent
       - canal
       - drain
       - ditch
@@ -677,6 +670,7 @@ tables:
       - ditch
       waterway:
       - stream
+      - stream_intermittent
       - river
       - canal
       - drain
