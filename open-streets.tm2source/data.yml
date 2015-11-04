@@ -65,17 +65,17 @@ Layer:
       srid: ''
       table: |-
         (
-                 select geometry, osm_id, type, type as class from osm_waterways
+                 select geometry, osm_id, type, type as class from osm_water_lines
                    where type in ('river', 'canal')
                    and z(!scale_denominator!) >= 8
                    and geometry && !bbox!
                  union all
-                 select geometry, osm_id, type, type as class from osm_waterways
+                 select geometry, osm_id, type, type as class from osm_water_lines
                    where type in ('stream', 'stream_intermittent')
                    and z(!scale_denominator!) >= 13
                    and geometry && !bbox!
                  union all
-                 select geometry, osm_id, type, type as class from osm_waterways
+                 select geometry, osm_id, type, type as class from osm_water_lines
                    where type in ('drain', 'ditch')
                    and z(!scale_denominator!) >= 15
                    and geometry && !bbox!
@@ -108,15 +108,15 @@ Layer:
           select way as geometry, 0 as osm_id from water_polygons
           where way && !bbox!
           union all
-          select geometry, osm_id from osm_waterareas_gen1
+          select geometry, osm_id from osm_water_polygons_gen1
           where geometry && !bbox!
           and z(!scale_denominator!) between 3 and 9
           union all
-          select geometry, osm_id from osm_waterareas_gen0
+          select geometry, osm_id from osm_water_polygons_gen0
           where geometry && !bbox!
           and z(!scale_denominator!) between 9 and 12
           union all
-          select geometry, osm_id from osm_waterareas
+          select geometry, osm_id from osm_water_polygons
           where geometry && !bbox!
           and z(!scale_denominator!) > 12
         ) AS data
@@ -142,8 +142,14 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-        ( SELECT geometry, osm_id, type
-          FROM osm_aeroways
+        (
+          SELECT geometry, osm_id, type
+          FROM osm_aero_lines
+          WHERE geometry && !bbox!
+            AND z(!scale_denominator!) >= 12
+          UNION ALL
+          SELECT geometry, osm_id, type
+          FROM osm_aero_polygons
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) >= 12
         ) AS data
@@ -177,12 +183,12 @@ Layer:
               when type in ('gate', 'spikes', 'bollard', 'lift_gate', 'kissing_gate') then 'gate'
               when type in ('hedge') then 'hedge'
             end AS class, osm_id
-          from osm_barrierways
+          from osm_barrier_lines
           where geometry && !bbox!
             and z(!scale_denominator!) >= 14
           union all
           select geometry, 'land' as class, osm_id
-          from osm_barrierareas
+          from osm_barrier_polygons
           where geometry && !bbox!
             and z(!scale_denominator!) > 14
         ) as data
@@ -209,11 +215,19 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-        ( SELECT geometry, osm_id, type, name
+        ( SELECT *
+          FROM (
+            SELECT geometry, osm_id
+            FROM osm_buildings_gen0
+            WHERE geometry && !bbox!
+              AND z(!scale_denominator!) >= 13
+            UNION ALL
+            SELECT geometry, osm_id
             FROM osm_buildings
             WHERE geometry && !bbox!
-              AND z(!scale_denominator!) >= 12
-            ORDER BY ST_YMin(ST_Envelope(geometry)) DESC
+              AND z(!scale_denominator!) >= 14
+          ) as building
+          ORDER BY ST_YMin(ST_Envelope(geometry)) DESC
         ) AS data
       type: postgis
       user: osm
@@ -239,14 +253,27 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-        ( SELECT geometry, osm_id, type,
-            CASE
+        (
+          SELECT osm_id, geometry,
+          CASE
               WHEN type IN ('wetland', 'marsh', 'swamp', 'bog') THEN 'wetland'
               WHEN type IN ('mud', 'tidalflat') THEN 'wetland_noveg'
               END AS class
-            FROM osm_landusages_overlay
+          FROM (
+            SELECT osm_id, geometry, type FROM osm_landusages_gen0
+            WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
+            AND geometry && !bbox!
+            AND z(!scale_denominator!) BETWEEN 7 AND 9
+            UNION ALL
+            SELECT osm_id, geometry, type FROM osm_landusages_gen1
             WHERE geometry && !bbox!
-              AND z(!scale_denominator!) > 6
+            AND z(!scale_denominator!) BETWEEN 10 AND 12
+            UNION ALL
+            SELECT osm_id, geometry, type FROM osm_landusages
+            WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
+            AND geometry && !bbox!
+            AND z(!scale_denominator!) > 12
+          ) AS landuse_overlay
         ) AS data
       type: postgis
       user: osm
@@ -272,7 +299,8 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-        ( SELECT geometry,
+        (
+          SELECT geometry,
           osm_id,
           classify_road(type) as class,
           type,
@@ -389,18 +417,17 @@ Layer:
       srid: ''
       table: |-
         (
-                  /* TODO calculate maritime */
-                  select geometry, osm_id, admin_level, 0 as disputed, 0 as maritime
-                    from osm_admin
-                    where admin_level = 2
-                    and geometry && !bbox!
-                  union all
-                  select geometry, osm_id, admin_level, 0 as disputed, 0 as maritime
-                    from osm_admin
-                    where admin_level = 4
-                    and z(!scale_denominator!) >= 5
-                    and geometry && !bbox!
-                ) AS data
+          select geometry, osm_id, admin_level, 0 as disputed, maritime
+            from osm_admin
+            where admin_level = 2
+            and geometry && !bbox!
+          union all
+          select geometry, osm_id, admin_level, 0 as disputed, maritime
+            from osm_admin
+            where admin_level = 4
+            and z(!scale_denominator!) >= 5
+            and geometry && !bbox!
+        ) AS data
       type: postgis
       user: osm
     description: ''
@@ -573,73 +600,73 @@ Layer:
       table: |-
         (
                 select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_waterareas
+                  name, name as name_en, area from osm_water_polygons
                   where area >= 5000000000
                   and z(!scale_denominator!) >= 5
                   and geometry && !bbox!
                 union all
                 select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_waterareas
+                  name, name as name_en, area from osm_water_polygons
                   where area < 5000000000 and area >= 1500000000
                   and z(!scale_denominator!) >= 5
                   and geometry && !bbox!
                 union all
                 select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_waterareas
+                  name, name as name_en, area from osm_water_polygons
                   where area < 1500000000 and area >= 500000000
                   and z(!scale_denominator!) >= 8
                   and geometry && !bbox!
                 union all
                 select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_waterareas
+                  name, name as name_en, area from osm_water_polygons
                   where area < 500000000 and area >= 100000000
                   and z(!scale_denominator!) >= 9
                   and geometry && !bbox!
                 union all
                 select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_waterareas
+                  name, name as name_en, area from osm_water_polygons
                   where area < 100000000 and area >= 40000000
                   and z(!scale_denominator!) >= 10
                   and geometry && !bbox!
                 union all
                 select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_waterareas
+                  name, name as name_en, area from osm_water_polygons
                   where area < 40000000 and area >= 20000000
                   and z(!scale_denominator!) >= 11
                   and geometry && !bbox!
                 union all
                 select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_waterareas
+                  name, name as name_en, area from osm_water_polygons
                   where area < 20000000 and area >= 10000000
                   and z(!scale_denominator!) >= 12
                   and geometry && !bbox!
                 union all
                 select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_waterareas
+                  name, name as name_en, area from osm_water_polygons
                   where area < 10000000 and area >= 5000000
                   and z(!scale_denominator!) >= 13
                   and geometry && !bbox!
                 union all
                 select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_waterareas
+                  name, name as name_en, area from osm_water_polygons
                   where area < 5000000 and area >= 1000000
                   and z(!scale_denominator!) >= 14
                   and geometry && !bbox!
                 union all
                 select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_waterareas
+                  name, name as name_en, area from osm_water_polygons
                   where area < 1000000 and area >= 500000
                   and z(!scale_denominator!) >= 15
                   and geometry && !bbox!
                 union all
                 select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_waterareas
+                  name, name as name_en, area from osm_water_polygons
                   where area < 500000 and area >= 100000
                   and z(!scale_denominator!) >= 16
                   and geometry && !bbox!
                 union all
                 select ST_PointOnSurface(geometry) as geometry, osm_id,
-                  name, name as name_en, area from osm_waterareas
+                  name, name as name_en, area from osm_water_polygons
                   where area < 100000
                   and z(!scale_denominator!) >= 17
                   and geometry && !bbox!
@@ -689,12 +716,12 @@ Layer:
             from (
               select geometry,
               osm_id, name, name_de, name_en, name_es, name_fr, type, 0 as area
-              from osm_points_of_interest
+              from osm_poi_points
               where z(!scale_denominator!) >= 14 and geometry && !bbox!
               union all
               select topoint(geometry) as geometry,
               osm_id, name, name_de, name_en, name_es, name_fr, type, area
-              from osm_areas_of_interest
+              from osm_poi_polygons
               where z(!scale_denominator!) >= 14 and geometry && !bbox!
             ) as pois
         ) AS data
@@ -805,21 +832,21 @@ Layer:
       table: |-
         (
           select geometry, osm_id,
-            name, type, type as class from osm_waterways
+            name, type, type as class from osm_water_lines
             where type in ('river', 'canal')
             and z(!scale_denominator!) >= 8
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
           union all
           select geometry, osm_id,
-            name, type, type as class from osm_waterways
+            name, type, type as class from osm_water_lines
             where type in ('stream', 'stream_intermittent')
             and z(!scale_denominator!) >= 13
             and linelabel(z(!scale_denominator!), name, geometry)
             and geometry && !bbox!
           union all
           select geometry, osm_id,
-            name, type, type as class from osm_waterways
+            name, type, type as class from osm_water_lines
             where type in ('drain', 'ditch')
             and z(!scale_denominator!) >= 15
             and linelabel(z(!scale_denominator!), name, geometry)
@@ -858,7 +885,7 @@ Layer:
             where geometry && !bbox! and z(!scale_denominator!) >= 14
             union all
             select osm_id, topoint(geometry) as geometry, house_num
-            from osm_housenumbers_areas
+            from osm_housenumbers_polygons
             where geometry && !bbox! and z(!scale_denominator!) >= 14
           ) as housenumbers
         ) AS data
