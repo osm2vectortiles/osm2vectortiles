@@ -36,15 +36,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
-CREATE OR REPLACE FUNCTION classify_barrier_line(type VARCHAR) RETURNS VARCHAR
+CREATE OR REPLACE FUNCTION classify_landuse_overlay(type VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN
     RETURN CASE
-        WHEN type IN ('cliff') THEN 'cliff'
-        WHEN type IN ('city_wall', 'fence', 'retaining_wall', 'wall', 'wire_fence', 'yes', 'embankment', 'cable_barrier', 'jersey_barrier') THEN 'fence'
-        WHEN type IN ('gate', 'entrance', 'spikes', 'bollard', 'lift_gate', 'kissing_gate', 'stile') THEN 'gate'
-        WHEN type IN ('hedge', 'hedge_bank', 'embankment') THEN 'hedge'
-        WHEN type IN ('pier', 'breakwater') THEN 'land'
+        WHEN type IN ('wetland', 'marsh', 'swamp', 'bog') THEN 'wetland'
+        WHEN type IN ('mud', 'tidalflat') THEN 'wetland_noveg'
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
