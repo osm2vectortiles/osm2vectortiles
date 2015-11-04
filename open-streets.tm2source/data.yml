@@ -145,12 +145,12 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id, type
+          SELECT osm_id, geometry, type
           FROM osm_aero_lines
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) >= 12
           UNION ALL
-          SELECT geometry, osm_id, type
+          SELECT osm_id, geometry, type
           FROM osm_aero_polygons
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) >= 12
@@ -180,7 +180,7 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry, classify_barrier_line(type) AS class
-          FROM(
+          FROM (
             SELECT osm_id, geometry, type FROM osm_barrier_lines
             WHERE geometry && !bbox!
               AND z(!scale_denominator!) >= 14
@@ -213,18 +213,19 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-        ( SELECT *
+        (
+          SELECT osm_id, geometry
           FROM (
-            SELECT geometry, osm_id
+            SELECT osm_id, geometry
             FROM osm_buildings_gen0
             WHERE geometry && !bbox!
               AND z(!scale_denominator!) >= 13
             UNION ALL
-            SELECT geometry, osm_id
+            SELECT osm_id, geometry
             FROM osm_buildings
             WHERE geometry && !bbox!
               AND z(!scale_denominator!) >= 14
-          ) as building
+          ) AS building
           ORDER BY ST_YMin(ST_Envelope(geometry)) DESC
         ) AS data
       type: postgis
@@ -252,11 +253,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry,
-          CASE
-              WHEN type IN ('wetland', 'marsh', 'swamp', 'bog') THEN 'wetland'
-              WHEN type IN ('mud', 'tidalflat') THEN 'wetland_noveg'
-              END AS class
+          SELECT osm_id, geometry, classify_landuse_overlay(type) AS class
           FROM (
             SELECT osm_id, geometry, type FROM osm_landusages_gen0
             WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
@@ -264,7 +261,8 @@ Layer:
             AND z(!scale_denominator!) BETWEEN 7 AND 9
             UNION ALL
             SELECT osm_id, geometry, type FROM osm_landusages_gen1
-            WHERE geometry && !bbox!
+            WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
+            AND geometry && !bbox!
             AND z(!scale_denominator!) BETWEEN 10 AND 12
             UNION ALL
             SELECT osm_id, geometry, type FROM osm_landusages
