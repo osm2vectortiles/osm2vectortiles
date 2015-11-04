@@ -7,16 +7,6 @@ generalized_tables:
     source: landusages
     sql_filter: ST_Area(geometry)>50000.000000
     tolerance: 50.0
-  roads_gen0:
-    source: roads_gen1
-    tolerance: 200.0
-  roads_gen1:
-    source: roads
-    sql_filter: |
-      type IN (
-        'motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary',
-        'primary_link', 'secondary', 'secondary_link', 'tertiary', 'tertiary_link', 'railway')
-    tolerance: 50.0
   water_polygons_gen0:
     source: water_polygons_gen1
     sql_filter: ST_Area(geometry)>500000.000000
