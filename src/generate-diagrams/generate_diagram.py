@@ -21,36 +21,30 @@ Layer = namedtuple('Layer', ['name', 'referenced_tables', 'fields'])
 Table = namedtuple('Table', ['name', 'fields', 'mapping', 'type'])
 
 
-class TableMapping(object):
-    def __init__(self, table_name, mappings):
-        self.table_name = table_name
-        self.mappings = mappings
-
-    def _values_label(self, osm_values):
-        return '[{} values]'.format(len(osm_values))
-
-    def visualize_mapping(self):
-        subgraph = Digraph(self.table_name, node_attr={
-            'width:': '20',
-            'fixed_size': 'shape'
-        })
-        subgraph.node(self.table_name, shape='box')
-
-        for osm_key, osm_values in self.mappings:
-            node_name = osm_key.replace(':', '_')
-            subgraph.node(node_name, label=osm_key, shape='box')
-
-            subgraph.edge(node_name, self.table_name,
-                          label=self._values_label(osm_values))
-
-        return subgraph
+def values_label(osm_values):
+    return '[{} values]'.format(len(osm_values))
 
 
-def find_mappings(config):
-    for table_name, table_value in config['tables'].items():
-        mapping = table_value.get('mapping')
-        if mapping:
-            yield TableMapping(table_name, mapping.items())
+def normalize_graphviz_labels(label):
+    return label.replace(':', '_')
+
+
+def visualize_mapping(table):
+    subgraph = Digraph(table.name, node_attr={
+        'width:': '20',
+        'fixed_size': 'shape'
+    })
+
+    subgraph.node(table.name, shape='box')
+
+    for osm_key, osm_values in table.mapping:
+        node_name = 'key_' + normalize_graphviz_labels(osm_key)
+        subgraph.node(node_name, label=osm_key, shape='box')
+
+        subgraph.edge(node_name, table.name,
+                      label=values_label(osm_values), )
+
+    return subgraph
 
 
 def find_referenced_tables(sql_cmd, table_prefix="osm"):
@@ -69,7 +63,7 @@ def replace_generalization_postfix(table_name):
 def merge_grouped_mappings(mappings):
     """Merge multiple mappings into a single mapping for drawing"""
     for mapping_group, mapping_value in mappings.items():
-        yield from mapping_value
+        yield mapping_group, mapping_value['mapping']
 
 
 def find_tables(config):
@@ -77,7 +71,7 @@ def find_tables(config):
         fields = table_value.get('fields')
 
         if table_value.get('mappings'):
-            mapping = merge_grouped_mappings(table_value)
+            mapping = list(merge_grouped_mappings(table_value['mappings']))
         else:
             mapping = table_value.get('mapping').items()
 
@@ -142,14 +136,15 @@ def generate_table_layer_diagram(mapping_config, tm2source_config):
 
     graph.render(filename='table_layer_diagram', view=True)
 
+
 def generate_table_mapping_diagram(mapping_config):
     graph = Digraph('Imposm Mapping', format='png', graph_attr={
         'rankdir': 'LR',
         'ranksep': '3'
     })
 
-    for table_mapping in find_mappings(mapping_config):
-        graph.subgraph(table_mapping.visualize_mapping())
+    for table in find_tables(mapping_config):
+        graph.subgraph(visualize_mapping(table))
 
     graph.render(filename='mapping_graph', view=True)
 
