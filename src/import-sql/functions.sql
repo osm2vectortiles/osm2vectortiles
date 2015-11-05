@@ -21,11 +21,21 @@ BEGIN
     RETURN CASE
         WHEN type IN ('station', 'cemetry') THEN 1
         WHEN type IN ('hospital', 'park', 'university', 'college') THEN 2
-        WHEN type IN ('library', 'townhall', 'hotel', 'museum') THEN 3
+        WHEN type IN ('library', 'townhall', 'museum') THEN 3
         WHEN area > 0 THEN 3
         WHEN area > 1500 THEN 2
         WHEN area > 2500 THEN 1
         ELSE 4
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION classify_road_railway(type VARCHAR, service VARCHAR) RETURNS VARCHAR
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN type = 'rail' AND service IN ('yard', 'siding', 'spur', 'crossover') THEN 'minor_rail'
+        ELSE classify_road(type)
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;

@@ -316,7 +316,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, type, classify_road(type) AS class
+          SELECT osm_id, geometry, type, classify_road_railway(type, service) AS class
           FROM osm_roads
           WHERE geometry && !bbox! AND (
               -- Do not show bridges and tunnels after z12
