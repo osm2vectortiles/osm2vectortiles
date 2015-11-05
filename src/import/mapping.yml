@@ -655,9 +655,6 @@ tables:
     - name: country
       key: addr:country
       type: string
-    - key: network
-      name: network
-      type: string
     - key: ref
       name: ref
       type: string
@@ -998,9 +995,6 @@ tables:
       type: string
     - name: country
       key: addr:country
-      type: string
-    - key: network
-      name: network
       type: string
     - key: ref
       name: ref
