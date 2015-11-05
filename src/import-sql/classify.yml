@@ -152,6 +152,28 @@ classifications:
     - kissing_gate
     - stile
   maki_label:
+    aerialway:
+    - chair_lift
+    - mixed_lift
+    - drag_lift
+    - platter
+    - t-bar
+    - magic_carpet
+    - gondola
+    - cable_car
+    - rope_tow
+    - zip_line
+    - j-bar
+    - canopy
+    airport:
+    - aerodrome
+    - terminal
+    - helipad
+    - apron
+    - gate
+    - taxiway
+    park:
+    - viewpoint
     grocery:
     - supermarket
     - deli
@@ -199,22 +221,162 @@ classifications:
     - university
     - college 
     shop:
+    - accessories
+    - alcohol
+    - antiques
+    - art
+    - bag
+    - bakery
+    - beauty
     - bed
+    - beverages
+    - bicycle
+    - books
+    - boutique
+    - butcher
+    - car
+    - car_repair
     - carpet
+    - charity
+    - chemist
+    - chocolate
+    - clothes
+    - coffee
+    - computer
+    - confectionery
+    - convenience
+    - copyshop
+    - cosmetics
+    - garden_centre
+    - deli
+    - delicatessen
+    - department_store
     - doityourself
     - dry_cleaning
+    - video
+    - electronics
     - erotic
     - fabric
-    - garden_centre
-    - computer
-    - general
-    - video_games
+    - florist
     - furniture
+    - video_games
+    - general
+    - gift
+    - greengrocer
+    - hairdresser
     - hardware
     - hearing_aids
     - hifi
+    - ice_cream
     - interior_decoration
+    - jewelry
+    - kiosk
     - lamps
+    - laundry
+    - mall
+    - massage
+    - mobile_phone
+    - motorcycle
+    - music
+    - musical_instrument
+    - newsagent
+    - optician
+    - outdoor
+    - perfumery
+    - perfume
+    - pet
+    - photo
+    - second_hand
+    - shoes
+    - sports
+    - stationery
+    - supermarket
+    - tailor
+    - tattoo
+    - ticket
+    - tobacco
     - toys
+    - travel_agency
     - watches
-    - weapons 
+    - weapons
+    - wholesale
+    - wine- accessories
+    - alcohol
+    - antiques
+    - art
+    - bag
+    - bakery
+    - beauty
+    - bed
+    - beverages
+    - bicycle
+    - books
+    - boutique
+    - butcher
+    - car
+    - car_repair
+    - carpet
+    - charity
+    - chemist
+    - chocolate
+    - clothes
+    - coffee
+    - computer
+    - confectionery
+    - convenience
+    - copyshop
+    - cosmetics
+    - garden_centre
+    - deli
+    - delicatessen
+    - department_store
+    - doityourself
+    - dry_cleaning
+    - video
+    - electronics
+    - erotic
+    - fabric
+    - florist
+    - furniture
+    - video_games
+    - general
+    - gift
+    - greengrocer
+    - hairdresser
+    - hardware
+    - hearing_aids
+    - hifi
+    - ice_cream
+    - interior_decoration
+    - jewelry
+    - kiosk
+    - lamps
+    - laundry
+    - mall
+    - massage
+    - mobile_phone
+    - motorcycle
+    - music
+    - musical_instrument
+    - newsagent
+    - optician
+    - outdoor
+    - perfumery
+    - perfume
+    - pet
+    - photo
+    - second_hand
+    - shoes
+    - sports
+    - stationery
+    - supermarket
+    - tailor
+    - tattoo
+    - ticket
+    - tobacco
+    - toys
+    - travel_agency
+    - watches
+    - weapons
+    - wholesale
+    - wine 
