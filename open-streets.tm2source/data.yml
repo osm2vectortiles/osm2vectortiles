@@ -342,7 +342,7 @@ Layer:
               z(!scale_denominator!) >= 14
               AND NOT is_bridge AND NOT is_tunnel
             )
-          )
+          ) ORDER BY z_order ASC
         ) AS data
       type: postgis
       user: osm

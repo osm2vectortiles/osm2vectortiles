@@ -407,7 +407,10 @@ tables:
       type: string
     - key: layer
       name: layer
-      type: layer
+      type: integer
+    - key: layer
+      name: z_order
+      type: wayzorder
     - key: tunnel
       name: is_tunnel
       type: bool
