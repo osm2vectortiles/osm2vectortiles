@@ -2,7 +2,8 @@ CREATE OR REPLACE FUNCTION localrank_poi(type VARCHAR) RETURNS INTEGER
 AS $$
 BEGIN
     RETURN CASE
-        WHEN type IN ('station', 'park', 'cemetery', 'nature_reserve', 'garden', 'public_building', 'police', 'townhall', 'courthouse') THEN 10
+        WHEN type IN ('station', 'subway_entrance', 'park', 'cemetery', 'bank', 'supermarket', 'car', 'library', 'university', 'college', 'police', 'townhall', 'courthouse') THEN 2
+        WHEN type IN ('nature_reserve', 'garden', 'public_building') THEN 3
         WHEN type IN ('stadium') THEN 90
         WHEN type IN ('hospital') THEN 100
         WHEN type IN ('zoo') THEN 200
@@ -19,9 +20,10 @@ CREATE OR REPLACE FUNCTION scalerank_poi(type VARCHAR, area REAL) RETURNS INTEGE
 AS $$
 BEGIN
     RETURN CASE
-        WHEN type IN ('station', 'cemetry') THEN 1
+        WHEN type IN ('station', 'cemetery') THEN 1
         WHEN type IN ('hospital', 'park', 'university', 'college') THEN 2
         WHEN type IN ('library', 'townhall', 'museum') THEN 3
+        WHEN type IN ('subway_entrance') THEN 4
         WHEN area > 0 THEN 3
         WHEN area > 1500 THEN 2
         WHEN area > 2500 THEN 1
