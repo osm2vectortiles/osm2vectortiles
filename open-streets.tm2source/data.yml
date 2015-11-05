@@ -324,15 +324,20 @@ Layer:
           )
           AND (
             (
-              classify_road(type) IN ('motorway', 'main')
+              type = 'motorway'
               AND z(!scale_denominator!) >= 5
             )
             OR (
-              type IN ('motorway_link')
+              type IN ('primary', 'primary_link', 'motorway_link')
               AND z(!scale_denominator!) >= 9
             )
             OR (
-              classify_road(type) IN ('major_rail', 'street')
+              type IN ('trunk', 'trunk_link', 'secondary', 'secondary_link')
+              AND z(!scale_denominator!) >= 9
+            )
+            OR (
+              (type IN ('tertiary', 'tertiary_link') OR
+              classify_road(type) IN ('major_rail', 'street'))
               AND z(!scale_denominator!) >= 12
               AND NOT is_bridge AND NOT is_tunnel
             )
@@ -565,57 +570,48 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-        ( SELECT * FROM (
-            SELECT DISTINCT ON(LabelGrid(geometry, 64)) *
-            FROM (
-              SELECT osm_id, geometry,  
-              name,
-              coalesce(name, name_en) AS name_en,
-              coalesce(name, name_es) AS name_es,
-              coalesce(name, name_fr) AS name_fr,
-              coalesce(name, name_de) AS name_de,
-              coalesce(name, name_ru) AS name_ru,
-              coalesce(name, name_zh) AS name_zh, 
-              type, population, is_capital AS capital, 
-              'SE' AS ldir, 1 AS localrank, null AS scalerank
-              FROM osm_places
-              WHERE type = 'city'
-                AND geometry && !bbox!
-              UNION ALL
-              SELECT osm_id, geometry, 
-              name,
-              coalesce(name, name_en) AS name_en,
-              coalesce(name, name_es) AS name_es,
-              coalesce(name, name_fr) AS name_fr,
-              coalesce(name, name_de) AS name_de,
-              coalesce(name, name_ru) AS name_ru,
-              coalesce(name, name_zh) AS name_zh,  
-              type, population,is_capital AS capital, 
-              'SE' AS ldir, 1 AS localrank, null AS scalerank
-              FROM osm_places
-              WHERE type IN ('town', 'district')
-                AND z(!scale_denominator!) >= 7
-                AND geometry && !bbox!
-              UNION ALL
-              SELECT osm_id, geometry, 
-              name,
-              coalesce(name, name_en) AS name_en,
-              coalesce(name, name_es) AS name_es,
-              coalesce(name, name_fr) AS name_fr,
-              coalesce(name, name_de) AS name_de,
-              coalesce(name, name_ru) AS name_ru,
-              coalesce(name, name_zh) AS name_zh,
-              type, population, is_capital AS capital, 
-              'SE' AS ldir, 1 AS localrank, null AS scalerank
-              FROM osm_places
-              WHERE type in ('hamlet', 'suburb','neighbourhood', 'village', 'municipality', 'locality', 'dwelling') 
-                AND z(!scale_denominator!) >= 10
-                AND geometry && !bbox!
-            ) AS places
-            ORDER BY LabelGrid(geometry, 64), population DESC NULLS LAST, osm_id
-          ) AS ordered
-          ORDER BY population DESC NULLS LAST, osm_id
-        ) AS data
+        (
+        SELECT osm_id, geometry,  
+        name,
+        coalesce(name, name_en) AS name_en,
+        coalesce(name, name_es) AS name_es,
+        coalesce(name, name_fr) AS name_fr,
+        coalesce(name, name_de) AS name_de,
+        coalesce(name, name_ru) AS name_ru,
+        coalesce(name, name_zh) AS name_zh, 
+        type, is_capital AS capital, 
+        'SE' AS ldir, 1 AS localrank, null AS scalerank
+        FROM (
+            SELECT * FROM (
+                SELECT DISTINCT ON(LabelGrid(geometry, 64 * !pixel_width!)) *
+                FROM osm_places
+                ORDER BY LabelGrid(geometry, 64 * !pixel_width!), population DESC NULLS LAST, z_order
+            ) AS ordered
+            ORDER BY population DESC NULLS LAST, z_order
+        ) AS places
+        WHERE geometry && !bbox! AND name <> ''
+        AND (
+          (
+            type = 'city'
+            AND z(!scale_denominator!) >= 4
+            -- On zoom 4, display cities with 1M+ population. Decrease by 250k every level
+            AND (population + z(!scale_denominator!) * 250000 - 2000000) > 0
+          )
+          OR (
+            type IN ('town', 'district')
+            AND z(!scale_denominator!) >= 9
+          )
+          OR (
+            type = 'village'
+            AND z(!scale_denominator!) >= 11
+          )
+          OR (
+            type IN ('hamlet', 'suburb','neighbourhood')
+            AND z(!scale_denominator!) >= 13
+          )
+          OR z(!scale_denominator!) >= 14
+        )
+        ) as data
       type: postgis
       user: osm
     description: ''

@@ -40,7 +40,7 @@ $$ LANGUAGE plpgsql IMMUTABLE;
 CREATE OR REPLACE FUNCTION poi_network(type VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN
-    RETURN RETURN CASE
+    RETURN CASE
         WHEN type IN ('station') THEN 'rail'
         ELSE ''
     END;
