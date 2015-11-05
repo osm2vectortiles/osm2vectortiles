@@ -729,7 +729,7 @@ Layer:
               coalesce(name, name_de) AS name_de,
               coalesce(name, name_ru) AS name_ru,
               coalesce(name, name_zh) AS name_zh,
-              type,  
+              format_type(type) as type,
               CASE
                 WHEN area > 0 THEN 3
                 WHEN area > 1500 THEN 2
@@ -738,7 +738,7 @@ Layer:
               AS scalerank,
               rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
                            ORDER BY rank_poi(type) ASC) AS localrank,
-              maki_label(type) AS maki
+              classify_maki_label(type) AS maki
             FROM (
               SELECT geometry, osm_id,
               name, name_en, name_es, name_fr, name_de, name_ru, name_zh,
