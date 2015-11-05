@@ -738,7 +738,7 @@ Layer:
               AS scalerank,
               rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
                            ORDER BY rank_poi(type) ASC) AS localrank,
-              maki_label(type) AS maki
+              classify_maki_label(type) AS maki
             FROM (
               SELECT geometry, osm_id,
               name, name_en, name_es, name_fr, name_de, name_ru, name_zh,
