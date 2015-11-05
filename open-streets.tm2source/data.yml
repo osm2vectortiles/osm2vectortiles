@@ -404,12 +404,13 @@ Layer:
           SELECT osm_id, geometry, admin_level, 0 as disputed, maritime
           FROM osm_admin
           WHERE admin_level = 2
+            AND z(!scale_denominator!) >= 2
             AND geometry && !bbox!
           UNION ALL
           SELECT osm_id, geometry, admin_level, 0 as disputed, maritime
           FROM osm_admin
           WHERE admin_level = 4
-            AND z(!scale_denominator!) >= 5
+            AND z(!scale_denominator!) >= 4
             AND geometry && !bbox!
         ) AS data
       type: postgis
@@ -446,7 +447,9 @@ Layer:
           coalesce(name, name_zh) AS name_zh,
           rank_country(population) as rank
           FROM osm_places
-          WHERE geometry && !bbox! AND type = 'country'
+          WHERE type = 'country' 
+            AND z(!scale_denominator!) >= 2
+            AND geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
@@ -488,7 +491,8 @@ Layer:
           GeometryType(geometry) as placement,
           rank_marine(type) as labelrank
           FROM osm_marine
-          WHERE geometry && !bbox!
+          WHERE z(!scale_denominator!) >= 3
+            AND geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
@@ -518,16 +522,17 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry,  
+          SELECT osm_id, geometry, area,
           name,
           coalesce(name, name_en) AS name_en,
           coalesce(name, name_es) AS name_es,
           coalesce(name, name_fr) AS name_fr,
           coalesce(name, name_de) AS name_de,
           coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
-          0 AS area FROM osm_places
-          WHERE type = 'state'
+          coalesce(name, name_zh) AS name_zh
+          FROM osm_admin
+          WHERE admin_level = 4
+            AND z(!scale_denominator!) >= 4
             AND geometry && !bbox!
         ) AS data
       type: postgis
