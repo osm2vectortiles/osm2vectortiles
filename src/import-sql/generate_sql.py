@@ -7,37 +7,35 @@ Options:
   -h --help                 Show this screen.
   --version                 Show version.
 """
+from collections import namedtuple
 from docopt import docopt
 import yaml
 
 
-class Classification(object):
-    """Classification of a type (YAML key) to a class (YAML values)"""
-    def __init__(self, classification_name, mappings):
-        self.classification_name = classification_name
-        self.mappings = mappings
+Classification = namedtuple('Classification', ['name', 'mappings'])
 
-    def generate_sql(self):
-        generate_when = Classification._generate_when_statement
-        when_statements = [generate_when(cl, val) for cl, val in self.mappings]
 
-        return """CREATE OR REPLACE FUNCTION classify_{0}(type VARCHAR)
+def generate_sql(classification):
+    when_statements = [_generate_when_statement(cl, val) for cl, val in
+                       classification.mappings]
+
+    return """CREATE OR REPLACE FUNCTION classify_{0}(type VARCHAR)
 RETURNS VARCHAR AS $$
-    BEGIN
-        RETURN CASE
+BEGIN
+    RETURN CASE
 {1}
-        END;
     END;
+END;
 $$ LANGUAGE plpgsql IMMUTABLE;
-        """.format(self.classification_name, "\n".join(when_statements))
+    """.format(classification.name, "\n".join(when_statements))
 
-    @staticmethod
-    def _generate_when_statement(class_name, mapping_values):
-        in_statements = ["'{}'".format(value) for value in mapping_values]
-        return " " * 12 + "WHEN type IN ({0}) THEN '{1}'".format(
-            ','.join(in_statements),
-            class_name
-        )
+
+def _generate_when_statement(class_name, mapping_values):
+    in_statements = ["'{}'".format(value) for value in mapping_values]
+    return " " * 12 + "WHEN type IN ({0}) THEN '{1}'".format(
+        ','.join(in_statements),
+        class_name
+    )
 
 
 def find_classifications(config):
@@ -53,4 +51,4 @@ if __name__ == '__main__':
     with open(config_file, 'r') as f:
         config = yaml.load(f)
         for cl in find_classifications(config):
-            print(cl.generate_sql())
+            print(generate_sql(cl))
