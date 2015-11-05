@@ -47,7 +47,7 @@ Layer:
       class: String
       osm_id: Number
     properties: 
-      "buffer-size": 8
+      "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: waterway
     Datasource: 
@@ -86,7 +86,7 @@ Layer:
       osm_id: Number
       type: String
     properties: 
-      "buffer-size": 8
+      "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: water
     Datasource: 
@@ -156,7 +156,7 @@ Layer:
       osm_id: Number
       type: String
     properties: 
-      "buffer-size": 8
+      "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: barrier_line
     Datasource: 
@@ -190,7 +190,7 @@ Layer:
       class: String
       osm_id: Number
     properties: 
-      "buffer-size": 8
+      "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: building
     Datasource: 
@@ -226,7 +226,7 @@ Layer:
     fields: 
       osm_id: Number
     properties: 
-      "buffer-size": 8
+      "buffer-size": 2
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: landuse_overlay
     Datasource: 
@@ -267,7 +267,7 @@ Layer:
       class: String
       osm_id: Number
     properties: 
-      "buffer-size": 8
+      "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: tunnel
     Datasource: 
@@ -300,7 +300,7 @@ Layer:
       osm_id: Number
       type: String
     properties: 
-      "buffer-size": 8
+      "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: road
     Datasource: 
@@ -352,7 +352,7 @@ Layer:
       osm_id: Number
       type: String
     properties: 
-      "buffer-size": 8
+      "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: bridge
     Datasource: 
@@ -385,7 +385,7 @@ Layer:
       osm_id: Number
       type: String
     properties: 
-      "buffer-size": 8
+      "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: admin
     Datasource: 
@@ -421,7 +421,7 @@ Layer:
       maritime: Number
       osm_id: Number
     properties: 
-      "buffer-size": 8
+      "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: country_label
     Datasource: 
@@ -462,7 +462,7 @@ Layer:
       osm_id: Number
       rank: Number
     properties: 
-      "buffer-size": 64
+      "buffer-size": 256
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: marine_label
     Datasource: 
@@ -502,7 +502,7 @@ Layer:
       name_ru: String
       name_zh: String
     properties: 
-      "buffer-size": 8
+      "buffer-size": 256
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: state_label
     Datasource: 
@@ -544,7 +544,7 @@ Layer:
       name_zh: String
       osm_id: Number
     properties: 
-      "buffer-size": 64
+      "buffer-size": 256
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: place_label
     Datasource: 
@@ -629,7 +629,7 @@ Layer:
       scalerank: String
       type: String
     properties: 
-      "buffer-size": 64
+      "buffer-size": 128
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: water_label
     Datasource: 
@@ -705,7 +705,7 @@ Layer:
       name_zh: String
       osm_id: Number
     properties: 
-      "buffer-size": 8
+      "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: poi_label
     Datasource: 
@@ -770,7 +770,7 @@ Layer:
       scalerank: Number
       type: String
     properties: 
-      "buffer-size": 64
+      "buffer-size": 128
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: road_label
     Datasource: 
@@ -848,7 +848,7 @@ Layer:
       reflen: Number
       shield: String
     properties: 
-      "buffer-size": 64
+      "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: waterway_label
     Datasource: 
@@ -904,7 +904,7 @@ Layer:
       osm_id: Number
       type: String
     properties: 
-      "buffer-size": 64
+      "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: housenum_label
     Datasource: 
@@ -941,7 +941,7 @@ Layer:
       house_num: String
       osm_id: Number
     properties: 
-      "buffer-size": 8
+      "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
 maxzoom: 14
 minzoom: 0
