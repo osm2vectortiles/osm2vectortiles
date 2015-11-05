@@ -98,7 +98,6 @@ classifications:
     - playground
     - recreation_ground
     - nature_reserve
-    - sports_centre
     - village_green
     - zoo
     pitch:
@@ -168,79 +167,269 @@ classifications:
     airport:
     - aerodrome
     - terminal
-    - helipad
     - apron
     - gate
     - taxiway
-    park:
-    - viewpoint
+    american-football:
+    - american_football
+    art-gallery:
+    - accessories
+    - antiques
+    - art
+    - artwork
+    - gallery
+    - arts_centre
+    alcohol-shop:
+    - alcohol
+    - beverages
+    - wine
+    amenity:
+    - courthouse
+    - community_centre
+    - nursing_home
+    - veterinary
+    - nightclub
+    - recycling
+    - food_court
+    barrier:
+    - sally_port
+    - lift_gate
+    - gate
+    - bollard
+    - stile
+    - cycle_barrier
+    - toll_booth
+    - border_control
+    bakery:
+    - bakery
+    bank:
+    - bank
+    bar:
+    - bar
+    beer:
+    - biergarten
+    baseball:
+    - baseball
+    basketball:
+    - basketball
+    building:
+    - public_building
+    bus:
+    - bus_stop
+    bicycle:
+    - bicycle
+    cafe:
+    - cafe
+    campsite:
+    - camp_site
+    car:
+    - car
+    - car_repair
+    camera:
+    - video
+    - electronics 
+    cemetery:
+    - grave_yard
+    cinema:
+    - cinema
+    clothing-store:
+    - bag
+    - clothes
+    college:
+    - university
+    - college
+    cricket:
+    - cricket
+    dentist:
+    - dentist
+    - doctor
+    dog-park:
+    - dog_park
+    embassy:
+    - embassy
+    entrance:
+    - subway_entrance
+    ferry:
+    - ferry_terminal
+    fast-food:
+    - fast_food
+    fire-station:
+    - fire_station
+    fuel:
+    - fuel
+    garden:
+    - garden
+    gift:
+    - gift 
+    golf:
+    - golf
+    - golf_course
     grocery:
     - supermarket
     - deli
     - delicatessen
     - department_store
-    - greengrocer 
-    clothing-store:
-    - bag
-    - clothes 
+    - greengrocer
+    sport:
+    - multi
+    - equestrian
+    - athletics
+    - volleyball
+    - climbing
+    - bowls
+    - skateboard
+    - shooting
+    - skiing
+    - boules
+    - beachvolleyball
+    - cricket
+    - table_tennis
+    - hockey
+    - gymnastics
+    - running
+    - canoe
+    - rugby_union
+    - skating
+    - scuba_diving
+    - motor
+    - horse_racing
+    - handball
+    - team_handball
+    - karting
+    - cycling
+    - archery
+    - motocross
+    - pelota
+    - rugby
+    - gaelic_games
+    - model_aerodrome
+    - netball
+    - rugby_league
+    - free_flying
+    - rowing
+    - chess
+    - australian_football
+    - cricket_nets
+    - racquet
+    - bmx
+    - sailing
+    - ice_stock
+    - badminton
+    - paddle_tennis
+    - dog_racing
+    - fatsal
+    - billiards
+    - ice_hockey
+    - yoga
+    - disc_golf
+    - orienteering
+    - toboggan
+    - horseshoes
+    - paragliding
+    - korfball
+    - diving
+    - rc_car
+    - canadian_football
+    - field_hockey
+    - shooting_range
+    - boxing
+    - curling
+    - surfing
+    - water_ski
+    - judo
+    - croquet
+    - paintball
+    - climbing_adventure
+    - long_jump
+    - table_soccer
+    tourism:
+    - attraction
+    - caravan_site
+    - theme_park
+    hairdresser:
+    - hairdresser
+    heliport:
+    - helipad
+    hospital:
+    - hospital
+    highway:
+    - motorway_junction
+    - turning_circle
+    ice-cream:
+    - chocolate
+    - confectionery
+    laundry:
+    - laundry
+    - dry_cleaning
+    library:
+    - books
+    - library
     lodging:
     - hotel
     - motel
     - bed_and_breakfast
     - guest_house
     - hostel
-    - chalet 
-    library:
-    - books 
-    alcohol-shop:
-    - alcohol
-    - beverages
-    - wine 
-    art-gallery:
-    - accessories
-    - antiques
-    - art 
-    car:
-    - car
-    - car_repair 
-    ice-cream:
-    - chocolate
-    - confectionery 
-    slaughterhouse:
-    - butcher 
-    camera:
-    - video
-    - electronics 
-    gift:
-    - gift 
-    town-hall:
-    - public_building 
+    - chalet
+    - alpine_hut
+    - camp_site
+    leisure:
+    - sports_centre
+    - water_park
+    - stadium
+    - ice_rink
+    mobilephone:
+    - mobile_phone
+    monument:
+    - monument
+    museum:
+    - museum
+    music:
+    - music
+    - musical_instrument
+    park:
+    - park
+    - viewpoint
+    pharmacy:
+    - pharmacy
+    pitch:
+    - pitch
+    place-of-worship:
+    - place_of_worship
+    playground:
+    - playground
+    police:
+    - police
+    post:
+    - post_box
+    - post_office
+    prison:
+    - prison
+    rail:
+    - station
+    - platform
+    railway:
+    - halt
+    - tram_stop
+    - crossing
+    - level_crossing
+    - subway_entrance
+    restaurant:
+    - restaurant
     school:
-    - kindergarten 
-    college:
-    - university
-    - college 
+    - school
+    - kindergarten
     shop:
     - accessories
-    - alcohol
     - antiques
     - art
-    - bag
-    - bakery
     - beauty
     - bed
-    - beverages
-    - bicycle
-    - books
     - boutique
-    - butcher
-    - car
-    - car_repair
     - carpet
     - charity
     - chemist
     - chocolate
-    - clothes
     - coffee
     - computer
     - confectionery
@@ -248,13 +437,7 @@ classifications:
     - copyshop
     - cosmetics
     - garden_centre
-    - deli
-    - delicatessen
-    - department_store
     - doityourself
-    - dry_cleaning
-    - video
-    - electronics
     - erotic
     - fabric
     - florist
@@ -262,8 +445,6 @@ classifications:
     - video_games
     - general
     - gift
-    - greengrocer
-    - hairdresser
     - hardware
     - hearing_aids
     - hifi
@@ -272,13 +453,9 @@ classifications:
     - jewelry
     - kiosk
     - lamps
-    - laundry
     - mall
     - massage
-    - mobile_phone
     - motorcycle
-    - music
-    - musical_instrument
     - newsagent
     - optician
     - outdoor
@@ -290,7 +467,6 @@ classifications:
     - shoes
     - sports
     - stationery
-    - supermarket
     - tailor
     - tattoo
     - ticket
@@ -300,83 +476,25 @@ classifications:
     - watches
     - weapons
     - wholesale
-    - wine- accessories
-    - alcohol
-    - antiques
-    - art
-    - bag
-    - bakery
-    - beauty
-    - bed
-    - beverages
-    - bicycle
-    - books
-    - boutique
-    - butcher
-    - car
-    - car_repair
-    - carpet
-    - charity
-    - chemist
-    - chocolate
-    - clothes
-    - coffee
-    - computer
-    - confectionery
-    - convenience
-    - copyshop
-    - cosmetics
-    - garden_centre
-    - deli
-    - delicatessen
-    - department_store
-    - doityourself
-    - dry_cleaning
-    - video
-    - electronics
-    - erotic
-    - fabric
-    - florist
-    - furniture
-    - video_games
-    - general
-    - gift
-    - greengrocer
-    - hairdresser
-    - hardware
-    - hearing_aids
-    - hifi
-    - ice_cream
-    - interior_decoration
-    - jewelry
-    - kiosk
-    - lamps
-    - laundry
-    - mall
-    - massage
-    - mobile_phone
-    - motorcycle
-    - music
-    - musical_instrument
-    - newsagent
-    - optician
-    - outdoor
-    - perfumery
-    - perfume
-    - pet
-    - photo
-    - second_hand
-    - shoes
-    - sports
-    - stationery
-    - supermarket
-    - tailor
-    - tattoo
-    - ticket
-    - tobacco
-    - toys
-    - travel_agency
-    - watches
-    - weapons
-    - wholesale
-    - wine 
+    skiing:
+    - skiing
+    slaughterhouse:
+    - butcher 
+    soccer:
+    - soccer
+    swimming:
+    - swimming_pool
+    - swimming_area
+    - swimming
+    telephone:
+    - telephone
+    tennis:
+    - tennis
+    theater:
+    - theater
+    town-hall:
+    - townhall
+    waste-basket:
+    - waste_basket
+    zoo:
+    - zoo

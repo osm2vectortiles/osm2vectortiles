@@ -706,6 +706,10 @@ tables:
       - swimming_pool
       - shelter
       - grave_yard
+      - bank
+      - ferry_terminal
+      - fuel
+      - waste_basket
       leisure:
       - park
       - playground
@@ -718,6 +722,7 @@ tables:
       - golf_course
       - stadium
       - ice_rink
+      - garden
       sport:
       - swimming
       - tennis
@@ -924,6 +929,21 @@ tables:
       - cycle_barrier
       - toll_booth
       - border_control
+      aerialway:
+      - chair_lift
+      - mixed_lift
+      - drag_lift
+      - platter
+      - t-bar
+      - magic_carpet
+      - gondola
+      - cable_car
+      - rope_tow
+      - zip_line
+      - j-bar
+      - canopy
+      historic:
+      - monument
   poi_points:
     type: point
     fields:
@@ -1025,6 +1045,10 @@ tables:
       - swimming_pool
       - shelter
       - grave_yard
+      - bank
+      - ferry_terminal
+      - fuel
+      - waste_basket
       leisure:
       - park
       - playground
@@ -1037,6 +1061,7 @@ tables:
       - golf_course
       - stadium
       - ice_rink
+      - garden
       sport:
       - swimming
       - tennis
@@ -1243,3 +1268,18 @@ tables:
       - cycle_barrier
       - toll_booth
       - border_control
+      aerialway:
+      - chair_lift
+      - mixed_lift
+      - drag_lift
+      - platter
+      - t-bar
+      - magic_carpet
+      - gondola
+      - cable_car
+      - rope_tow
+      - zip_line
+      - j-bar
+      - canopy
+      historic:
+      - monument
