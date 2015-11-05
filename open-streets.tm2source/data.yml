@@ -807,7 +807,7 @@ Layer:
                   type IN ('motorway', 'primary', 'primary_link', 'trunk',
                       'trunk_link', 'secondary', 'secondary_link'
                     )
-                  AND (name <> '' OR ref <> ''h)
+                  AND (name <> '' OR ref <> '')
                   AND z(!scale_denominator!) >= 11
                 )
                 OR
