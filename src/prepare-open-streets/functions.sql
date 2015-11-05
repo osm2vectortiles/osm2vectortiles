@@ -2,14 +2,18 @@ CREATE OR REPLACE FUNCTION classify_road(type VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN
     RETURN CASE
-        WHEN type IN ('motorway', 'motorway_link', 'driveway') THEN 'highway'
+        WHEN type IN ('motorway') THEN 'motorway'
+        WHEN type IN ('motorway_link') THEN 'motorway_link'
         WHEN type IN ('primary', 'primary_link', 'trunk', 'trunk_link', 'secondary', 'secondary_link', 'tertiary', 'tertiary_link') THEN 'main'
-        WHEN type IN ('residential', 'unclassified', 'living_street') THEN 'street'
+        WHEN type IN ('residential', 'unclassified', 'living_street', 'road', 'raceway') THEN 'street'
         WHEN type IN ('pedestrian', 'construction', 'private') THEN 'street_limited'
-        WHEN type IN ('service', 'track') THEN 'service'
+        WHEN type IN ('service', 'track', 'alley', 'spur', 'siding', 'crossover') THEN 'service'
+        WHEN type IN ('driveway', 'parking_aisle') THEN 'driveway'
         WHEN type IN ('path', 'cycleway', 'ski', 'steps', 'bridleway', 'footway') THEN 'path'
         WHEN type IN ('rail', 'monorail', 'narrow_gauge', 'subway') THEN 'major_rail'
-        WHEN type IN ('funicular', 'light_rail', 'preserved', 'tram') THEN 'minor_rail'
+        WHEN type IN ('funicular', 'light_rail', 'preserved', 'tram', 'disused', 'yard') THEN 'minor_rail'
+        WHEN type IN ('chair_lift', 'mixed_lift', 'drag_lift', 'platter', 't-bar', 'magic_carpet', 'gondola', 'cable_car', 'rope_tow', 'zip_line', 'j-bar', 'canopy') THEN 'aerialway'
+        WHEN type IN ('hole') THEN 'golf'
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
@@ -32,6 +36,29 @@ BEGIN
         WHEN type IN ('wood', 'forest') THEN 'wood'
         WHEN type IN ('wetland', 'swamp', 'bog', 'marsh') THEN 'wetland'
         WHEN type IN ('mud', 'tidalflat') THEN 'wetland_noveg'
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION classify_landuse_overlay(type VARCHAR) RETURNS VARCHAR
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN type IN ('wetland', 'marsh', 'swamp', 'bog') THEN 'wetland'
+        WHEN type IN ('mud', 'tidalflat') THEN 'wetland_noveg'
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION classify_barrier_line(type VARCHAR) RETURNS VARCHAR
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN type IN ('cliff') THEN 'cliff'
+        WHEN type IN ('city_wall', 'fence', 'retaining_wall', 'wall', 'wire_fence', 'yes', 'embankment', 'cable_barrier', 'jersey_barrier') THEN 'fence'
+        WHEN type IN ('gate', 'entrance', 'spikes', 'bollard', 'lift_gate', 'kissing_gate', 'stile') THEN 'gate'
+        WHEN type IN ('hedge', 'hedge_bank', 'embankment') THEN 'hedge'
+        WHEN type IN ('pier', 'breakwater') THEN 'land'
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
@@ -95,6 +122,31 @@ BEGIN
         WHEN type IN ('nature_reserve', 'swimming_area') THEN 500
         WHEN type IN ('attraction') THEN 600
         ELSE 1000
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION rank_country(population INTEGER) RETURNS INTEGER
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN population >= 250000000 THEN 1
+        WHEN population >= 100000000 THEN 2
+        WHEN population >= 50000000 THEN 3
+        WHEN population >= 25000000 THEN 4
+        WHEN population >= 10000000 THEN 5
+        WHEN population < 10000000 THEN 6
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION rank_marine(type VARCHAR) RETURNS INTEGER
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN type IN ('ocean') THEN 1
+        WHEN type IN ('sea') THEN 3
+        WHEN type IN ('bay') THEN 5
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;

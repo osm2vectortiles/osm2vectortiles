@@ -7,16 +7,6 @@ generalized_tables:
     source: landusages
     sql_filter: ST_Area(geometry)>50000.000000
     tolerance: 50.0
-  roads_gen0:
-    source: roads_gen1
-    tolerance: 200.0
-  roads_gen1:
-    source: roads
-    sql_filter: |
-      type IN (
-        'motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary',
-        'primary_link', 'secondary', 'secondary_link', 'tertiary', 'tertiary_link', 'railway')
-    tolerance: 50.0
   water_polygons_gen0:
     source: water_polygons_gen1
     sql_filter: ST_Area(geometry)>500000.000000
@@ -25,14 +15,6 @@ generalized_tables:
     source: water_polygons
     sql_filter: ST_Area(geometry)>50000.000000
     tolerance: 50.0
-  water_lines_gen0:
-    source: water_lines_gen1
-    tolerance: 200
-    sql_filter: type IN ('river', 'canal')
-  water_lines_gen1:
-    source: water_lines
-    tolerance: 50.0
-    sql_filter: type IN ('stream')
   buildings_gen0:
     source: buildings
     sql_filter: ST_Area(geometry)>1700.000000
@@ -171,49 +153,6 @@ tables:
       - gate
       - taxiway
     type: polygon
-  amenities:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - key: name
-      name: name
-      type: string
-    - name: name_int
-      key: int_name
-      type: string
-    - name: name_fr
-      key: name:fr
-      type: string
-    - name: name_en
-      key: name:en
-      type: string
-    - name: name_de
-      key: name:de
-      type: string
-    - name: name_es
-      key: name:es
-      type: string
-    - name: name_ru
-      key: name:ru
-      type: string
-    - name: name_zh
-      key: name:zh
-      type: string
-    - name: type
-      type: mapping_value
-    mapping:
-      amenity:
-      - university
-      - school
-      - library
-      - fuel
-      - hospital
-      - fire_station
-      - police
-      - townhall
-    type: point
   barrier_lines:
     fields:
     - name: osm_id
@@ -235,7 +174,6 @@ tables:
       - spikes
       - lift_gate
       - kissing_gate
-      - embankment
       - 'yes'
       - wire_fence
       - stile
@@ -244,9 +182,13 @@ tables:
       - jersey_barrier
       - rope
       - guard_rail
-    man_made:
+      natural:
+      - cliff
+      man_made:
       - pier
       - breakwater
+      - embankment
+      - groyne
     type: linestring
   barrier_polygons:
     fields:
@@ -269,7 +211,6 @@ tables:
       - spikes
       - lift_gate
       - kissing_gate
-      - embankment
       - 'yes'
       - wire_fence
       - stile
@@ -278,9 +219,13 @@ tables:
       - jersey_barrier
       - rope
       - guard_rail
-    man_made:
+      natural:
+      - cliff
+      man_made:
       - pier
       - breakwater
+      - embankment
+      - groyne
     type: polygon
   buildings:
     fields:
@@ -414,11 +359,15 @@ tables:
       type: mapping_value
     - args:
         values:
+        - dwelling
         - locality
+        - neighbourhood
         - suburb
         - hamlet
+        - municipality
         - village
         - town
+        - district
         - city
         - county
         - region
@@ -553,6 +502,14 @@ tables:
           - funicular
           - monorail
           - disused
+          service:
+          - yard
+          - driveway
+          - alley
+          - spur
+          - siding
+          - crossover
+          - parking_aisle
       roads:
         mapping:
           highway:
@@ -579,10 +536,23 @@ tables:
           - unclassified
           - residential
           - raceway
-          man_made:
-          - groyne
           access:
           - private
+          aerialway:
+          - chair_lift
+          - mixed_lift
+          - drag_lift
+          - platter
+          - t-bar
+          - magic_carpet
+          - gondola
+          - cable_car
+          - rope_tow
+          - zip_line
+          - j-bar
+          - canopy
+          golf:
+          - hole
   water_polygons:
     type: polygon
     fields:
@@ -636,6 +606,7 @@ tables:
       - river
       - riverbank
       - stream
+      - stream_intermittent
       - canal
       - drain
       - ditch
@@ -677,6 +648,7 @@ tables:
       - ditch
       waterway:
       - stream
+      - stream_intermittent
       - river
       - canal
       - drain
