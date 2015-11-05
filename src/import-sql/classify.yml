@@ -208,6 +208,7 @@ classifications:
     - bar
     beer:
     - biergarten
+    - pub
     baseball:
     - baseball
     basketball:
@@ -218,6 +219,7 @@ classifications:
     - bus_stop
     bicycle:
     - bicycle
+    - bicycle_rental
     cafe:
     - cafe
     campsite:
@@ -230,6 +232,7 @@ classifications:
     - electronics 
     cemetery:
     - grave_yard
+    - cemetery
     cinema:
     - cinema
     clothing-store:
@@ -407,13 +410,11 @@ classifications:
     - prison
     rail:
     - station
-    - platform
     railway:
     - halt
     - tram_stop
     - crossing
     - level_crossing
-    - subway_entrance
     restaurant:
     - restaurant
     school:

@@ -726,7 +726,8 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id,
+          SELECT geometry, osm_id, ref, website, poi_network(type) as network,
+              poi_address(housenumber, street, place, city, country, postcode) as address,
               name,
               coalesce(name, name_en) AS name_en,
               coalesce(name, name_es) AS name_es,
@@ -734,34 +735,30 @@ Layer:
               coalesce(name, name_de) AS name_de,
               coalesce(name, name_ru) AS name_ru,
               coalesce(name, name_zh) AS name_zh,
-              format_type(type) as type,
-              CASE
-                WHEN area > 0 THEN 3
-                WHEN area > 1500 THEN 2
-                WHEN area > 2500 THEN 1
-                ELSE 4 END
-              AS scalerank,
+              format_type(type) AS type,
+              scalerank_poi(type, area) AS scalerank,
               rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
-                           ORDER BY rank_poi(type) ASC) AS localrank,
+                           ORDER BY localrank_poi(type) ASC) AS localrank,
               classify_maki_label(type) AS maki
             FROM (
-              SELECT geometry, osm_id,
+              SELECT geometry, osm_id, ref, website, housenumber, street, place, city, country, postcode,
               name, name_en, name_es, name_fr, name_de, name_ru, name_zh,
               type, 0 AS area
               FROM osm_poi_points
-              WHERE z(!scale_denominator!) >= 14 AND geometry && !bbox!
+              WHERE z(!scale_denominator!) >= 14 AND geometry && !bbox! AND name <> ''
               UNION ALL
-              SELECT topoint(geometry) AS geometry, osm_id, 
+              SELECT topoint(geometry) AS geometry, osm_id, ref, website, housenumber, street, place, city, country, postcode,
               name, name_en, name_es, name_fr, name_de, name_ru, name_zh,
               type, area
               FROM osm_poi_polygons
-              WHERE z(!scale_denominator!) >= 14 AND geometry && !bbox!
+              WHERE z(!scale_denominator!) >= 14 AND geometry && !bbox! AND name <> ''
             ) AS poi_label
         ) AS data
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
+      address: String
       localrank: Number
       maki: String
       name: String
@@ -771,9 +768,12 @@ Layer:
       name_fr: String
       name_ru: String
       name_zh: String
+      network: String
       osm_id: Number
+      ref: String
       scalerank: Number
       type: String
+      website: String
     properties: 
       "buffer-size": 128
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over

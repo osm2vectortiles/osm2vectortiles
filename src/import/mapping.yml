@@ -710,6 +710,7 @@ tables:
       - ferry_terminal
       - fuel
       - waste_basket
+      - bicycle_rental
       leisure:
       - park
       - playground
@@ -723,6 +724,8 @@ tables:
       - stadium
       - ice_rink
       - garden
+      landuse:
+      - cemetery
       sport:
       - swimming
       - tennis
@@ -1049,6 +1052,7 @@ tables:
       - ferry_terminal
       - fuel
       - waste_basket
+      - bicycle_rental
       leisure:
       - park
       - playground
@@ -1062,6 +1066,8 @@ tables:
       - stadium
       - ice_rink
       - garden
+      landuse:
+      - cemetery
       sport:
       - swimming
       - tennis
