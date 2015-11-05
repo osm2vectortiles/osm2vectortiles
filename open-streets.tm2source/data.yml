@@ -794,8 +794,8 @@ Layer:
             coalesce(name, name_fr) as name_fr,
             coalesce(name, name_ru) AS name_ru,
             coalesce(name, name_zh) AS name_zh,
-            ref,
-            char_length(ref) as reflen,
+            nullif(ref, '') AS ref,
+            nullif(char_length(ref), 0) AS reflen,
             round(MercLength(geometry)) as len,
             classify_road(type) as class,
             'default' as shield
@@ -807,7 +807,7 @@ Layer:
                   type IN ('motorway', 'primary', 'primary_link', 'trunk',
                       'trunk_link', 'secondary', 'secondary_link'
                     )
-                  AND (name IS NOT NULL OR ref IS NOT NULL)
+                  AND (name <> '' OR ref <> ''h)
                   AND z(!scale_denominator!) >= 11
                 )
                 OR
@@ -816,7 +816,7 @@ Layer:
                       'living_street', 'pedestrian', 'construction', 'rail', 'monorail',
                       'narrow_gauge', 'subway', 'tram'
                     )
-                  AND name IS NOT NULL
+                  AND name <> ''
                   AND z(!scale_denominator!) >= 12
                 )
                 OR
@@ -825,7 +825,7 @@ Layer:
                       'cycleway', 'ski', 'steps', 'bridleway', 'footway', 'funicular',
                       'light_rail', 'preserved'
                     )
-                  AND name IS NOT NULL
+                  AND name <> ''
                   AND z(!scale_denominator!) >= 14
                 )
           )     

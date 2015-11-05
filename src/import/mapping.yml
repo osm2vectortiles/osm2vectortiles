@@ -407,7 +407,7 @@ tables:
       type: string
     - key: layer
       name: layer
-      type: wayzorder
+      type: layer
     - key: tunnel
       name: is_tunnel
       type: bool
