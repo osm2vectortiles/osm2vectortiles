@@ -338,7 +338,7 @@ Layer:
             )
             OR (
               type IN ('primary', 'primary_link', 'motorway_link')
-              AND z(!scale_denominator!) >= 9
+              AND z(!scale_denominator!) >= 7
             )
             OR (
               type IN ('trunk', 'trunk_link', 'secondary', 'secondary_link')
@@ -427,7 +427,7 @@ Layer:
           SELECT osm_id, geometry, admin_level, 0 as disputed, maritime, area
           FROM osm_admin
           WHERE admin_level = 4
-            AND z(!scale_denominator!) >= 4
+            AND z(!scale_denominator!) >= 5
             AND geometry && !bbox!
         ) AS data
       type: postgis
