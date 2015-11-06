@@ -26,49 +26,19 @@ tables:
       type: id
     - name: geometry
       type: geometry
-    - key: name
-      name: name
-      type: string
-    - name: name_int
-      key: int_name
-      type: string
-    - name: name_fr
-      key: name:fr
-      type: string
-    - name: name_en
-      key: name:en
-      type: string
-    - name: name_de
-      key: name:de
-      type: string
-    - name: name_es
-      key: name:es
-      type: string
-    - name: name_ru
-      key: name:ru
-      type: string
-    - name: name_zh
-      key: name:zh
-      type: string
     - key: admin_level
       name: admin_level
       type: integer
-    - key: ISO3166-1:alpha2
-      name: iso_code
-      type: string
-    - name: abbr
-      key: short_name
-      type: string
-    - name: area
-      type: pseudoarea
     - name: maritime
       type: boolint
       key: maritime
+    - name: area
+      type: pseudoarea
     mapping:
       boundary:
       - administrative
       - maritime
-    type: polygon
+    type: linestring
   aero_lines:
     fields:
     - name: osm_id
@@ -277,6 +247,46 @@ tables:
       - national_park
       tourism:
       - zoo
+  countries:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - key: ISO3166-1:alpha2
+      name: iso_code
+      type: string
+    - key: name
+      name: name
+      type: string
+    - name: name_int
+      key: int_name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
+    - key: population
+      name: population
+      type: integer
+    mapping:
+      place:
+      - country
+    type: point
   places:
     fields:
     - name: osm_id
@@ -309,24 +319,6 @@ tables:
       type: string
     - name: type
       type: mapping_value
-    - args:
-        values:
-        - dwelling
-        - locality
-        - neighbourhood
-        - suburb
-        - hamlet
-        - municipality
-        - village
-        - town
-        - district
-        - city
-        - county
-        - region
-        - state
-        - country
-      name: z_order
-      type: enumerate
     - key: population
       name: population
       type: integer
@@ -658,9 +650,6 @@ tables:
     - name: country
       key: addr:country
       type: string
-    - key: network
-      name: network
-      type: string
     - key: ref
       name: ref
       type: string
@@ -709,6 +698,11 @@ tables:
       - swimming_pool
       - shelter
       - grave_yard
+      - bank
+      - ferry_terminal
+      - fuel
+      - waste_basket
+      - bicycle_rental
       leisure:
       - park
       - playground
@@ -721,6 +715,9 @@ tables:
       - golf_course
       - stadium
       - ice_rink
+      - garden
+      landuse:
+      - cemetery
       sport:
       - swimming
       - tennis
@@ -927,6 +924,21 @@ tables:
       - cycle_barrier
       - toll_booth
       - border_control
+      aerialway:
+      - chair_lift
+      - mixed_lift
+      - drag_lift
+      - platter
+      - t-bar
+      - magic_carpet
+      - gondola
+      - cable_car
+      - rope_tow
+      - zip_line
+      - j-bar
+      - canopy
+      historic:
+      - monument
   poi_points:
     type: point
     fields:
@@ -979,9 +991,6 @@ tables:
     - name: country
       key: addr:country
       type: string
-    - key: network
-      name: network
-      type: string
     - key: ref
       name: ref
       type: string
@@ -1028,6 +1037,11 @@ tables:
       - swimming_pool
       - shelter
       - grave_yard
+      - bank
+      - ferry_terminal
+      - fuel
+      - waste_basket
+      - bicycle_rental
       leisure:
       - park
       - playground
@@ -1040,6 +1054,9 @@ tables:
       - golf_course
       - stadium
       - ice_rink
+      - garden
+      landuse:
+      - cemetery
       sport:
       - swimming
       - tennis
@@ -1246,3 +1263,18 @@ tables:
       - cycle_barrier
       - toll_booth
       - border_control
+      aerialway:
+      - chair_lift
+      - mixed_lift
+      - drag_lift
+      - platter
+      - t-bar
+      - magic_carpet
+      - gondola
+      - cable_car
+      - rope_tow
+      - zip_line
+      - j-bar
+      - canopy
+      historic:
+      - monument
