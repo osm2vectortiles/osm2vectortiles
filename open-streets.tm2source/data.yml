@@ -345,8 +345,11 @@ Layer:
               AND z(!scale_denominator!) >= 9
             )
             OR (
-              (type IN ('tertiary', 'tertiary_link') OR
-              classify_road(type) IN ('major_rail', 'street'))
+              type IN ('tertiary', 'teriary_link')
+              AND z(!scale_denominator!) >= 11
+            )
+            OR (
+              classify_road(type) IN ('major_rail', 'street')
               AND z(!scale_denominator!) >= 12
               AND NOT is_bridge AND NOT is_tunnel
             )
@@ -458,17 +461,25 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry, name,
+<<<<<<< d3a79d3c1724d12d0117159111ab44090b1bc52e
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
+=======
+          iso_code as code,
+          coalesce(name, name_en) AS name_en,
+          coalesce(name, name_es) AS name_es,
+          coalesce(name, name_fr) AS name_fr,
+          coalesce(name, name_de) AS name_de,
+          coalesce(name, name_ru) AS name_ru,
+          coalesce(name, name_zh) AS name_zh,
+>>>>>>> Move countries into separate table
           rank_country(population) as scalerank
-          FROM osm_places
-          WHERE type = 'country' 
-            AND z(!scale_denominator!) >= 2
-            AND geometry && !bbox!
+          FROM osm_countries
+          WHERE z(!scale_denominator!) >= 2 AND geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
@@ -481,6 +492,7 @@ Layer:
       name_fr: String
       name_ru: String
       name_zh: String
+      iso_code: Number
       osm_id: Number
       scalerank: Number
     properties: 
@@ -553,16 +565,12 @@ Layer:
         coalesce(NULLIF(name_de, ''), name) AS name_de,
         coalesce(NULLIF(name_ru, ''), name) AS name_ru,
         coalesce(NULLIF(name_zh, ''), name) AS name_zh, 
-        type, is_capital AS capital, 
-        'SE' AS ldir, 1 AS localrank, null AS scalerank
-        FROM (
-            SELECT * FROM (
-                SELECT DISTINCT ON(LabelGrid(geometry, 64 * !pixel_width!)) *
-                FROM osm_places
-                ORDER BY LabelGrid(geometry, 64 * !pixel_width!), population DESC NULLS LAST, z_order
-            ) AS ordered
-            ORDER BY population DESC NULLS LAST, z_order
-        ) AS places
+        type, is_capital AS capital,
+        'SE' AS ldir,
+        scalerank_place(type, population) AS scalerank,
+        rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
+                     ORDER BY population DESC NULLS LAST) as localrank
+        FROM osm_places
         WHERE geometry && !bbox! AND name <> ''
         AND (
           (
@@ -585,6 +593,7 @@ Layer:
           )
           OR z(!scale_denominator!) >= 14
         )
+        ORDER BY population DESC NULLS LAST
         ) as data
       type: postgis
       user: osm

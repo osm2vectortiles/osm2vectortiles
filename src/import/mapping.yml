@@ -29,12 +29,6 @@ tables:
     - key: admin_level
       name: admin_level
       type: integer
-    - key: ISO3166-1:alpha2
-      name: iso_code
-      type: string
-    - name: abbr
-      key: short_name
-      type: string
     - name: maritime
       type: boolint
       key: maritime
@@ -254,6 +248,46 @@ tables:
       - protected_area
       tourism:
       - zoo
+  countries:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - key: ISO3166-1:alpha2
+      name: iso_code
+      type: string
+    - key: name
+      name: name
+      type: string
+    - name: name_int
+      key: int_name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
+    - key: population
+      name: population
+      type: integer
+    mapping:
+      place:
+      - country
+    type: point
   places:
     fields:
     - name: osm_id
@@ -286,24 +320,6 @@ tables:
       type: string
     - name: type
       type: mapping_value
-    - args:
-        values:
-        - dwelling
-        - locality
-        - neighbourhood
-        - suburb
-        - hamlet
-        - municipality
-        - village
-        - town
-        - district
-        - city
-        - county
-        - region
-        - state
-        - country
-      name: z_order
-      type: enumerate
     - key: population
       name: population
       type: integer
