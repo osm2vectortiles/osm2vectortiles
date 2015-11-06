@@ -409,15 +409,31 @@ Layer:
         (
           SELECT osm_id, geometry, admin_level, 0 as disputed, maritime
           FROM osm_admin
-          WHERE admin_level = 2
-            AND z(!scale_denominator!) >= 2
-            AND geometry && !bbox!
-          UNION ALL
-          SELECT osm_id, geometry, admin_level, 0 as disputed, maritime
-          FROM osm_admin
-          WHERE admin_level = 4
-            AND z(!scale_denominator!) >= 4
-            AND geometry && !bbox!
+          WHERE geometry && !bbox! AND (
+            (
+              admin_level >= 2
+              AND z(!scale_denominator!) >= 0
+            )
+            OR
+            (
+              admin_level <= 4
+              AND z(!scale_denominator!) >= 4
+            )
+            OR
+            (
+              admin_level <= 6
+              AND z(!scale_denominator!) >= 6
+            )
+            OR
+            (
+              admin_level <= 8
+              AND z(!scale_denominator!) >= 8
+            )
+            OR
+            (
+              z(!scale_denominator!) < 8
+            )
+          )
         ) AS data
       type: postgis
       user: osm
