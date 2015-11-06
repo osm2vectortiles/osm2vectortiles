@@ -30,7 +30,7 @@ Layer:
           FROM (
             SELECT osm_id, geometry, type FROM osm_landusages_gen0
             WHERE geometry && !bbox!
-            AND z(!scale_denominator!) BETWEEN 4 AND 9
+            AND z(!scale_denominator!) BETWEEN 7 AND 9
             UNION ALL
             SELECT osm_id, geometry, type FROM osm_landusages_gen1
             WHERE geometry && !bbox!
