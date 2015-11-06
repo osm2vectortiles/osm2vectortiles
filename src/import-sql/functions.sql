@@ -16,6 +16,26 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+CREATE OR REPLACE FUNCTION scalerank_place(type VARCHAR, population INTEGER) RETURNS INTEGER
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN type <> 'city' THEN NULL
+        WHEN population > 5000 THEN 9
+        WHEN population > 10000 THEN 8
+        WHEN population > 20000 THEN 7
+        WHEN population > 30000 THEN 6
+        WHEN population > 40000 THEN 5
+        WHEN population > 50000 THEN 4
+        WHEN population > 10000 THEN 3
+        WHEN population > 250000 THEN 2
+        WHEN population > 500000 THEN 1
+        WHEN population > 1000000 THEN 0
+        ELSE NULL
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
 CREATE OR REPLACE FUNCTION scalerank_poi(type VARCHAR, area REAL) RETURNS INTEGER
 AS $$
 BEGIN
