@@ -20,13 +20,10 @@ CREATE OR REPLACE FUNCTION scalerank_poi(type VARCHAR, area REAL) RETURNS INTEGE
 AS $$
 BEGIN
     RETURN CASE
-        WHEN type IN ('station', 'cemetery') THEN 1
-        WHEN type IN ('hospital', 'park', 'university', 'college') THEN 2
-        WHEN type IN ('library', 'townhall', 'museum') THEN 3
-        WHEN type IN ('subway_entrance') THEN 4
-        WHEN area > 0 THEN 3
-        WHEN area > 1500 THEN 2
-        WHEN area > 2500 THEN 1
+        WHEN area > 145000 THEN 1
+        WHEN area > 12780 THEN 2
+        WHEN area > 2960 THEN 3
+        WHEN type IN ('station') THEN 1
         ELSE 4
     END;
 END;
