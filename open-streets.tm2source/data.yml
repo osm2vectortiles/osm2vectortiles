@@ -345,8 +345,11 @@ Layer:
               AND z(!scale_denominator!) >= 9
             )
             OR (
-              (type IN ('tertiary', 'tertiary_link') OR
-              classify_road(type) IN ('major_rail', 'street'))
+              type IN ('tertiary', 'teriary_link')
+              AND z(!scale_denominator!) >= 11
+            )
+            OR (
+              classify_road(type) IN ('major_rail', 'street')
               AND z(!scale_denominator!) >= 12
               AND NOT is_bridge AND NOT is_tunnel
             )
