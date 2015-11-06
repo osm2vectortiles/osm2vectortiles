@@ -110,7 +110,7 @@ Layer:
           UNION ALL
           SELECT osm_id, geometry FROM osm_water_polygons_gen1
           WHERE geometry && !bbox!
-          AND z(!scale_denominator!) between 4 AND 9
+          AND z(!scale_denominator!) between 5 AND 9
           UNION ALL
           SELECT osm_id, geometry FROM osm_water_polygons_gen0
           WHERE geometry && !bbox!
