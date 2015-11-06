@@ -19,6 +19,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -57,6 +58,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -96,6 +98,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -133,6 +136,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -166,6 +170,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -200,6 +205,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -236,6 +242,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -277,6 +284,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -310,6 +318,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -368,6 +377,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -401,44 +411,30 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, admin_level, 0 as disputed, maritime
+          SELECT osm_id, geometry, admin_level, 0 as disputed, maritime, area
           FROM osm_admin
-          WHERE geometry && !bbox! AND (
-            (
-              admin_level >= 2
-              AND z(!scale_denominator!) >= 0
-            )
-            OR
-            (
-              admin_level <= 4
-              AND z(!scale_denominator!) >= 4
-            )
-            OR
-            (
-              admin_level <= 6
-              AND z(!scale_denominator!) >= 6
-            )
-            OR
-            (
-              admin_level <= 8
-              AND z(!scale_denominator!) >= 8
-            )
-            OR
-            (
-              z(!scale_denominator!) < 8
-            )
-          )
+          WHERE admin_level = 2
+            AND z(!scale_denominator!) >= 2
+            AND geometry && !bbox!
+          UNION ALL
+          SELECT osm_id, geometry, admin_level, 0 as disputed, maritime, area
+          FROM osm_admin
+          WHERE admin_level = 4
+            AND z(!scale_denominator!) >= 4
+            AND geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
+      area: Number
       admin_level: Number
       disputed: Number
       maritime: Number
@@ -454,6 +450,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -461,12 +458,12 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry, name,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
+          coalesce(NULLIF(name_en, ''), name) AS name_en,
+          coalesce(NULLIF(name_es, ''), name) AS name_es,
+          coalesce(NULLIF(name_fr, ''), name) AS name_fr,
+          coalesce(NULLIF(name_de, ''), name) AS name_de,
+          coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+          coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           rank_country(population) as scalerank
           FROM osm_places
           WHERE type = 'country' 
@@ -497,6 +494,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -504,12 +502,12 @@ Layer:
       table: |-
         (
           SELECT geometry, name, 
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
+          coalesce(NULLIF(name_en, ''), name) AS name_en,
+          coalesce(NULLIF(name_es, ''), name) AS name_es,
+          coalesce(NULLIF(name_fr, ''), name) AS name_fr,
+          coalesce(NULLIF(name_de, ''), name) AS name_de,
+          coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+          coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           GeometryType(geometry) as placement,
           rank_marine(type) as labelrank
           FROM osm_marine
@@ -540,6 +538,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -548,12 +547,12 @@ Layer:
         (
         SELECT osm_id, geometry,  
         name,
-        coalesce(name, name_en) AS name_en,
-        coalesce(name, name_es) AS name_es,
-        coalesce(name, name_fr) AS name_fr,
-        coalesce(name, name_de) AS name_de,
-        coalesce(name, name_ru) AS name_ru,
-        coalesce(name, name_zh) AS name_zh, 
+        coalesce(NULLIF(name_en, ''), name) AS name_en,
+        coalesce(NULLIF(name_es, ''), name) AS name_es,
+        coalesce(NULLIF(name_fr, ''), name) AS name_fr,
+        coalesce(NULLIF(name_de, ''), name) AS name_de,
+        coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+        coalesce(NULLIF(name_zh, ''), name) AS name_zh, 
         type, is_capital AS capital, 
         'SE' AS ldir, 1 AS localrank, null AS scalerank
         FROM (
@@ -615,6 +614,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -624,12 +624,12 @@ Layer:
           SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
           name,
           area,
-          coalesce(name, name_en) AS name_en,
-          coalesce(name, name_es) AS name_es,
-          coalesce(name, name_fr) AS name_fr,
-          coalesce(name, name_de) AS name_de,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh
+          coalesce(NULLIF(name_en, ''), name) AS name_en,
+          coalesce(NULLIF(name_es, ''), name) AS name_es,
+          coalesce(NULLIF(name_fr, ''), name) AS name_fr,
+          coalesce(NULLIF(name_de, ''), name) AS name_de,
+          coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+          coalesce(NULLIF(name_zh, ''), name) AS name_zh
           FROM osm_water_polygons
           WHERE geometry && !bbox! AND
           (
@@ -691,6 +691,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -700,12 +701,12 @@ Layer:
           SELECT geometry, osm_id, ref, website, poi_network(type) as network,
               poi_address(housenumber, street, place, city, country, postcode) as address,
               name,
-              coalesce(name, name_en) AS name_en,
-              coalesce(name, name_es) AS name_es,
-              coalesce(name, name_fr) AS name_fr,
-              coalesce(name, name_de) AS name_de,
-              coalesce(name, name_ru) AS name_ru,
-              coalesce(name, name_zh) AS name_zh,
+              coalesce(NULLIF(name_en, ''), name) AS name_en,
+              coalesce(NULLIF(name_es, ''), name) AS name_es,
+              coalesce(NULLIF(name_fr, ''), name) AS name_fr,
+              coalesce(NULLIF(name_de, ''), name) AS name_de,
+              coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+              coalesce(NULLIF(name_zh, ''), name) AS name_zh,
               format_type(type) AS type,
               scalerank_poi(type, area) AS scalerank,
               rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
@@ -756,6 +757,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -764,12 +766,12 @@ Layer:
         (
           SELECT geometry, osm_id,
             name,
-            coalesce(name, name_de) as name_de,
-            coalesce(name, name_en) as name_en,
-            coalesce(name, name_es) as name_es,
-            coalesce(name, name_fr) as name_fr,
-            coalesce(name, name_ru) AS name_ru,
-            coalesce(name, name_zh) AS name_zh,
+            coalesce(NULLIF(name_en, ''), name) AS name_en,
+            coalesce(NULLIF(name_es, ''), name) AS name_es,
+            coalesce(NULLIF(name_fr, ''), name) AS name_fr,
+            coalesce(NULLIF(name_de, ''), name) AS name_de,
+            coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+            coalesce(NULLIF(name_zh, ''), name) AS name_zh,
             nullif(ref, '') AS ref,
             nullif(char_length(ref), 0) AS reflen,
             round(MercLength(geometry)) as len,
@@ -834,6 +836,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432
@@ -842,12 +845,12 @@ Layer:
         (
           SELECT geometry, osm_id,
           name,
-          coalesce(name, name_de) as name_de,
-          coalesce(name, name_en) as name_en,
-          coalesce(name, name_es) as name_es,
-          coalesce(name, name_fr) as name_fr,
-          coalesce(name, name_ru) AS name_ru,
-          coalesce(name, name_zh) AS name_zh,
+          coalesce(NULLIF(name_en, ''), name) AS name_en,
+          coalesce(NULLIF(name_es, ''), name) AS name_es,
+          coalesce(NULLIF(name_fr, ''), name) AS name_fr,
+          coalesce(NULLIF(name_de, ''), name) AS name_de,
+          coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+          coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           type, type as class
           FROM osm_water_lines
           WHERE geometry && !bbox! AND (
@@ -890,6 +893,7 @@ Layer:
       geometry_table: ''
       host: db
       key_field: ''
+      key_field_as_attribute: ''
       max_size: 512
       password: osm
       port: 5432

@@ -38,6 +38,8 @@ tables:
     - name: maritime
       type: boolint
       key: maritime
+    - name: area
+      type: pseudoarea
     mapping:
       boundary:
       - administrative
