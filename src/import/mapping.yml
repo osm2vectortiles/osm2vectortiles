@@ -251,6 +251,7 @@ tables:
       - __any__
       boundary:
       - national_park
+      - protected_area
       tourism:
       - zoo
   places:
