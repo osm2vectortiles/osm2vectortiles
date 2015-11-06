@@ -108,11 +108,11 @@ Layer:
           SELECT 0 AS osm_id, way AS geometry FROM water_polygons
           WHERE way && !bbox!
           UNION ALL
-          SELECT osm_id, geometry FROM osm_water_polygons_gen1
+          SELECT osm_id, geometry FROM osm_water_polygons_gen0
           WHERE geometry && !bbox!
           AND z(!scale_denominator!) between 5 AND 9
           UNION ALL
-          SELECT osm_id, geometry FROM osm_water_polygons_gen0
+          SELECT osm_id, geometry FROM osm_water_polygons_gen1
           WHERE geometry && !bbox!
           AND z(!scale_denominator!) between 9 AND 12
           UNION ALL
