@@ -9,6 +9,7 @@ published: true
 Get started styling and using vector tiles.
 
 - [Layer Reference](/docs/layer-reference.html)
+- [Serve tiles with Docker](/docs/tileserver-kitematic.html)
 
 ## Developer Documentation
 
