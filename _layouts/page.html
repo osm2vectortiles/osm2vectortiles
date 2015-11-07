@@ -1,6 +1,11 @@
 ---
 layout: default
 ---
-<div class="docs">
-{{ content }}
-</div>
+
+{% include header.html %}
+<section class="main-content">
+  <div class="docs">
+  {{ content }}
+  </div>
+</section>
+{% include footer.html %}
