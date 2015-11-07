@@ -8,6 +8,28 @@ published: true
 
 Guide about the data inside the vector tiles to help you with styling.
 
+Available layers:
+
+- [#landuse](#landuse)
+- [#waterway](#waterway)
+- [#water](#water)
+- [#aeroway](#aeroway)
+- [#barrier_line](#barrier_line)
+- [#building](#building)
+- [#landuse_overlay](#landuse_overlay)
+- [#tunnel](#tunnel)
+- [#road](#road)
+- [#bridge](#bridge)
+- [#admin](#admin)
+- [#country_label](#country_label)
+- [#marine_label](#marine_label)
+- [#place_label](#place_label)
+- [#water_label](#water_label)
+- [#poi_label](#poi_label)
+- [#road_label](#road_label)
+- [#waterway_label](#waterway_label)
+- [#housenum_label](#housenum_label)
+
 ## #landuse
 
 This layer includes polygons representing both land-use and land-cover.
