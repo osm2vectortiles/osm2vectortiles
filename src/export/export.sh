@@ -61,6 +61,7 @@ function export_mbtiles() {
             --render_scheme="$RENDER_SCHEME"
     else
         echo "Using AWS SQS to work through jobs"
+        export AWS_DEFAULT_REGION="$AWS_REGION"
         exec python export.py remote "$QUEUE_NAME" \
             --tm2source="$DEST_PROJECT_DIR" \
             --bucket="$BUCKET_NAME" \

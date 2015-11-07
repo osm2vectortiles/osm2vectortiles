@@ -18,7 +18,7 @@ Options:
   --bucket=<bucket>         S3 Bucket name for storing results [default: osm2vectortiles-jobs]
 
 """
-import sys
+import watchtower
 import socket
 import time
 import logging
@@ -31,7 +31,10 @@ import json
 import boto.sqs
 from docopt import docopt
 
-logger = logging.getLogger("export")
+
+logging.basicConfig(level=logging.INFO)
+mapnik_logger = logging.getLogger("mapnik")
+export_logger = logging.getLogger("export")
 
 
 def local_ip():
@@ -71,11 +74,12 @@ def export_local(tilelive_command, logging_info):
 
     for line in iter(proc.stdout.readline, ''):
         sanitized_line = regex.sub('Mapnik: ', line.rstrip())
-        logger.info(sanitized_line, extra=logging_info)
+        mapnik_logger.info(sanitized_line, extra=logging_info)
 
     proc.wait()
     end = time.time()
-    logger.info('Elapsed time: {}'.format(end - start), extra=logging_info)
+    export_logger.info('Elapsed time: {}'.format(end - start),
+                       extra=logging_info)
 
     if proc.returncode != 0:
         raise subprocess.CalledProcessError(returncode=proc.returncode,
@@ -96,8 +100,6 @@ def connect_s3(bucket_name):
 
 
 def upload_mbtiles(bucket, mbtiles_file):
-    logger.info("Upload mbtiles {}".format(mbtiles_file))
-
     keyname = os.path.basename(mbtiles_file)
     obj = bucket.new_key(keyname)
     obj.set_contents_from_filename(mbtiles_file)
@@ -107,6 +109,30 @@ def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
     bucket = connect_s3(bucket_name)
     queue = connect_job_queue(sqs_queue)
     timeout = int(os.getenv('JOB_TIMEOUT', 15 * 60))
+
+    def complete_job(task_id, body, logging_info):
+        mbtiles_file = task_id + '.mbtiles'
+        bounds = body['bounds']
+        bbox = '{} {} {} {}'.format(
+            bounds['west'], bounds['south'],
+            bounds['east'], bounds['north']
+        )
+
+        tilelive_command = create_tilelive_command(
+            tm2source,
+            mbtiles_file,
+            bbox,
+            body['min_zoom'],
+            body['max_zoom'],
+            render_scheme
+        )
+
+        export_local(tilelive_command, logging_info)
+        upload_mbtiles(bucket, mbtiles_file)
+        export_logger.info("Upload mbtiles {}".format(mbtiles_file),
+                           extra=logging_info)
+
+        queue.delete_message(message)
 
     while True:
         message = queue.read(visibility_timeout=timeout)
@@ -118,34 +144,17 @@ def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
                 body['min_zoom'],
                 body['max_zoom']
             )
-
-            mbtiles_file = task_id + '.mbtiles'
-            bounds = body['bounds']
-            bbox = '{} {} {} {}'.format(
-                bounds['west'], bounds['south'],
-                bounds['east'], bounds['north']
-            )
-
-            tilelive_command = create_tilelive_command(
-                tm2source,
-                mbtiles_file,
-                bbox,
-                body['min_zoom'],
-                body['max_zoom'],
-                render_scheme
-            )
-
             logging_info = {
                 'ip': local_ip(),
                 'task_id':  task_id
             }
-            export_local(tilelive_command, logging_info)
-
-            logger.info("Executed job and exportet to " + mbtiles_file)
-            upload_mbtiles(bucket, mbtiles_file)
-            queue.delete_message(message)
+            try:
+                complete_job(task_id, body, logging_info)
+            except Exception:
+                export_logger.exception('Could not complete job',
+                                        exc_info=True, extra=logging_info)
         else:
-            logger.info('No jobs to read')
+            print('No jobs to read')
             break
 
 
@@ -159,14 +168,16 @@ def main(args):
             args['--max_zoom'],
             args['--render_scheme']
         )
-        logging.basicConfig(level=logging.INFO)
         export_local(tilelive_command, {})
 
     if args.get('remote'):
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)-15s %(ip)s %(task_id)s %(message)s'
-        )
+        formatter = logging.Formatter('%(ip)s %(task_id)s %(message)s')
+        handler = watchtower.CloudWatchLogHandler()
+        handler .setFormatter(formatter)
+
+        mapnik_logger.addHandler(handler)
+        export_logger.addHandler(handler)
+
         export_remote(
             args['--tm2source'],
             args['<sqs_queue>'],
