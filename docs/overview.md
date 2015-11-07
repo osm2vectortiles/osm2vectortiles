@@ -9,14 +9,12 @@ published: true
 Get started styling and using vector tiles.
 
 - [Layer Reference](/docs/layer-reference.html)
-- [Chapter 2]()
-- [Chapter 3]()
-- [Chapter 4]()
 
 ## Developer Documentation
 
-Want to reuse something or take part in development of osm2vectortiles you
-should take a look at the developer documentation.
+Documentation about the internals of the project targeted at people
+who want to reuse part of our process or want to contribute.
 
-- [Components]()
-
+- [Import OSM data into PostGIS](/docs/import.html)
+- [Develop with Mapbox Studio in Docker](/docs/mapbox-studio-in-docker.html)
+- [Compare visual with Mapbox Streets](/docs/compare-visual.html)
