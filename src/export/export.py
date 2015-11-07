@@ -18,13 +18,24 @@ Options:
   --bucket=<bucket>         S3 Bucket name for storing results [default: osm2vectortiles-jobs]
 
 """
+import sys
+import socket
+import time
+import logging
 import subprocess
+import re
 import os
 import os.path
 import json
 
 import boto.sqs
 from docopt import docopt
+
+logger = logging.getLogger("export")
+
+
+def local_ip():
+    return socket.gethostbyname(socket.gethostname())
 
 
 def create_tilelive_command(tm2source, mbtiles_file, bbox,
@@ -45,7 +56,8 @@ def create_tilelive_command(tm2source, mbtiles_file, bbox,
     return cmd
 
 
-def export_local(tilelive_command):
+def export_local(tilelive_command, logging_info):
+    start = time.time()
     proc = subprocess.Popen(
         tilelive_command,
         stdout=subprocess.PIPE,
@@ -53,10 +65,18 @@ def export_local(tilelive_command):
         bufsize=0,
         universal_newlines=True
     )
+
+    regex = re.compile(r'^Mapnik LOG> \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}: ',
+                       re.IGNORECASE)
+
     for line in iter(proc.stdout.readline, ''):
-        print line.rstrip()
+        sanitized_line = regex.sub('Mapnik: ', line.rstrip())
+        logger.info(sanitized_line, extra=logging_info)
 
     proc.wait()
+    end = time.time()
+    logger.info('Elapsed time: {}'.format(end - start), extra=logging_info)
+
     if proc.returncode != 0:
         raise subprocess.CalledProcessError(returncode=proc.returncode,
                                             cmd=tilelive_command)
@@ -76,7 +96,7 @@ def connect_s3(bucket_name):
 
 
 def upload_mbtiles(bucket, mbtiles_file):
-    print("Upload mbtiles {}".format(mbtiles_file))
+    logger.info("Upload mbtiles {}".format(mbtiles_file))
 
     keyname = os.path.basename(mbtiles_file)
     obj = bucket.new_key(keyname)
@@ -92,14 +112,14 @@ def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
         message = queue.read(visibility_timeout=timeout)
         if message:
             body = json.loads(message.get_body())
-
-            mbtiles_file = '{}_{}_z{}-z{}.mbtiles'.format(
+            task_id = '{}_{}_z{}-z{}'.format(
                 body['x'],
                 body['y'],
                 body['min_zoom'],
                 body['max_zoom']
             )
 
+            mbtiles_file = task_id + '.mbtiles'
             bounds = body['bounds']
             bbox = '{} {} {} {}'.format(
                 bounds['west'], bounds['south'],
@@ -114,12 +134,18 @@ def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
                 body['max_zoom'],
                 render_scheme
             )
-            export_local(tilelive_command)
-            print("Executed job and exportet to " + mbtiles_file)
+
+            logging_info = {
+                'ip': local_ip(),
+                'task_id':  task_id
+            }
+            export_local(tilelive_command, logging_info)
+
+            logger.info("Executed job and exportet to " + mbtiles_file)
             upload_mbtiles(bucket, mbtiles_file)
             queue.delete_message(message)
         else:
-            print('No jobs to read')
+            logger.info('No jobs to read')
             break
 
 
@@ -133,9 +159,14 @@ def main(args):
             args['--max_zoom'],
             args['--render_scheme']
         )
-        export_local(tilelive_command)
+        logging.basicConfig(level=logging.INFO)
+        export_local(tilelive_command, {})
 
     if args.get('remote'):
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(asctime)-15s %(ip)s %(task_id)s %(message)s'
+        )
         export_remote(
             args['--tm2source'],
             args['<sqs_queue>'],
