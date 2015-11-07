@@ -376,3 +376,12 @@ a {
 .docs {
     margin-top: 5rem;
 }
+.contributor__gallery {
+    margin-top: 5rem;
+}
+
+.contributor__image {
+    width: 40%;
+    margin-right: 7%;
+    display: inline-block;
+}
