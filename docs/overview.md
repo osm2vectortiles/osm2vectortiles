@@ -16,6 +16,7 @@ Get started styling and using vector tiles.
 Documentation about the internals of the project targeted at people
 who want to reuse part of our process or want to contribute.
 
+- [Import and Export Process](/docs/docker-based-process.html)
 - [Import OSM data into PostGIS](/docs/import.html)
 - [Imposm Mapping Schema](/docs/imposm-schema.html)
 - [Develop with Mapbox Studio in Docker](/docs/mapbox-studio-in-docker.html)
