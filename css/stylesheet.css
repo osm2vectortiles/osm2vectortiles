@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
 * {
   box-sizing: border-box; }
 
@@ -39,6 +41,102 @@ a {
   border-color: rgba(255, 255, 255, 0.3);
 }
 
+.header__sticky {
+    width: 100%;
+    border-top: 3px solid #159957;
+    border-bottom: 8px solid rgba(40, 40, 40, 0.1)
+    min-height: 20rem;
+    background: #fff;
+    opacity: 0.9;
+
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 50;
+}
+
+.header__wrapper {
+    margin: 0 auto;
+    max-width: 64rem;
+    padding: 1rem 6rem;
+}
+
+.header__brand {
+    font-family: 'Open Sans';
+    color: #777;
+    font-size: 1.2rem;
+    line-height: 1.6em;
+    margin: 0;
+}
+
+.header__brand, .header__nav {
+    display: inline-block;
+}
+
+.header__nav {
+    float: right;
+}
+
+.header__nav-link {
+    font-size: 1.2rem;
+    line-height: 1.6em;
+    padding: 0rem 0.8rem;
+    color: #159957;
+}
+
+.header__nav-link:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+
+
+.action {
+    margin-top: 4rem;
+}
+.action__item {
+    display: inline-block;
+    width: 28%;
+    margin-right: 3%;
+    padding: 0.5rem;
+    background: #eee;
+}
+
+.action__logo {
+    width: 100%;
+    height: 128px;
+}
+
+.action__header {
+    text-align: center;
+}
+
+.action__logo img {
+    display: block;
+    margin: 0 auto;
+    opacity: 0.6;
+}
+
+.action__item:hover .action__logo img {
+    opacity: 0.8;
+}
+
+.action__item:hover {
+    text-decoration: none;
+}
+.action__item:hover .action__header {
+    color: #222;
+}
+
+.header__image {
+    width: 100%;
+    background-color: #57B987;
+    background-image: url('../img/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 27rem;
+}
+
 @media screen and (min-width: 64em) {
   .btn {
     padding: 0.75rem 1rem; } }
@@ -61,11 +159,11 @@ a {
 .page-header {
   color: #fff;
   text-align: center;
-  background-color: #159957;
+  background-color: #57B987;
   background-image: url('../img/bg.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  height: 30rem;
+  height: 27rem;
 }
 
 @media screen and (min-width: 64em) {
@@ -122,8 +220,12 @@ a {
   }
 }
 
-.main-content h3 {
+.main-content h2 {
     font-size: 2.3rem;
+}
+
+.main-content h3 {
+    font-size: 1.6rem;
 }
 
 .main-content p {
