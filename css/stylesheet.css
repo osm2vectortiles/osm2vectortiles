@@ -107,9 +107,6 @@ a {
     height: 128px;
 }
 
-.action__header {
-    text-align: center;
-}
 
 .action__logo img {
     display: block;
@@ -384,4 +381,9 @@ a {
     width: 40%;
     margin-right: 7%;
     display: inline-block;
+}
+
+h3.action__header {
+    margin-top: 1rem;
+    text-align: center;
 }
