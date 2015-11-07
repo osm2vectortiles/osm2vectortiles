@@ -6,7 +6,7 @@ published: true
 
 # Layer Reference
 
-This is an in-depth guide the data inside the Mapbox Streets vector tile source to help with styling. 
+Guide about the data inside the vector tiles to help you with styling.
 
 ## #landuse
 
@@ -19,8 +19,7 @@ It’s common for many different types of landuse/landcover to be overlapping, s
 The main field used for styling the landuse layer is `class`.
 Class is a generalization of the various OSM values described as `types`.
 
-
-| Value              | Types
+| Class              | Aggregated Types
 |--------------------|-----------------------------------------------------------------
 |`agriculture`       | `orchard`, `farm`, `farmland`, `farmyard`, `allotments`, `vineyard`, `plant_nursery`
 |`cemetery`          | `cemetery`, `christian`, `jewish`
@@ -35,6 +34,27 @@ Class is a generalization of the various OSM values described as `types`.
 |`scrub`             | `scrub`
 |`wood`              | `wood`, `forest`,
 
+## #water
+
+This is a simple polygon layer with no differentiating types or classes. Water bodies are filtered
+and simplified according to scale - only oceans and very large lakes are shown at the lowest zoom
+levels, while smaller and smaller lakes and ponds appear as you zoom in.
+
 ## #waterway
 
-The waterway layer contains rivers, streams, canals, etc represented as lines.
+| Column             | Types
+|--------------------|-----------------------------------------------------------------
+|`name`              | Name of the water way. Translations are available in the `name_en`, `name_de`, `name_fr`, `name_es`, `name_ru`, `name_zh` fields.
+
+
+### Types
+
+The `type` column can can contain one of the following types:
+
+- `ditch`
+- `stream`
+- `stream_intermittent`
+- `river`
+- `canal`
+- `drain`
+- `ditch`
