@@ -1,7 +1,6 @@
 #!/bin/bash
 set -o errexit
 set -o pipefail
-set -o nounset
 
 readonly SOURCE_PROJECT_DIR=${SOURCE_PROJECT_DIR:-/data/tm2source}
 readonly EXPORT_DIR=${EXPORT_DIR:-/data/export}

@@ -1,0 +1,502 @@
+classifications:
+  road:
+    motorway:
+    - motorway
+    motorway_link:
+    - motorway_link
+    driveway:
+    - driveway
+    main:
+    - primary
+    - primary_link
+    - trunk
+    - trunk_link
+    - secondary
+    - secondary_link
+    - tertiary
+    - tertiary_link
+    street:
+    - residential
+    - unclassified
+    - living_street
+    - road
+    - raceway
+    street_limited:
+    - pedestrian
+    - construction
+    - private
+    service:
+    - service
+    - track
+    - alley
+    - spur
+    - siding
+    - crossover
+    path:
+    - path
+    - cycleway
+    - ski
+    - steps
+    - bridleway
+    - footway
+    major_rail:
+    - rail
+    - monorail
+    - narrow_gauge
+    - subway
+    minor_rail:
+    - funicular
+    - light_rail
+    - preserved
+    - tram
+    - disused
+    - yard
+    aerialway:
+    - chair_lift
+    - mixed_lift
+    - drag_lift
+    - platter
+    - t-bar
+    - magic_carpet
+    - gondola
+    - cable_car
+    - rope_tow
+    - zip_line
+    - j-bar
+    - canopy
+    golf:
+    - hole
+  landuse:
+    agriculture:
+    - orchard
+    - farm
+    - farmland
+    - farmyard
+    - allotments
+    - vineyard
+    - plant_nursery
+    cemetery:
+    - cemetery
+    - christian
+    - jewish
+    glacier:
+    - glacier
+    grass:
+    - grass
+    - grassland
+    - meadow
+    hospital:
+    - hospital
+    industrial:
+    - industrial
+    park:
+    - park
+    - dog_park
+    - common
+    - garden
+    - golf_course
+    - playground
+    - recreation_ground
+    - nature_reserve
+    - national_park
+    - village_green
+    - zoo
+    pitch:
+    - athletics
+    - chess
+    - pitch
+    sand:
+    - sand
+    school:
+    - school
+    - college
+    - university
+    scrub:
+    - scrub
+    wood:
+    - wood
+    - forest
+    wetland:
+    - wetland
+    - swamp
+    - bog
+    - marsh
+    wetland_noveg:
+    - mud
+    - tidalflat
+  landuse_overlay:
+    wetland:
+    - wetland
+    - marsh
+    - swamp
+    - bog
+  barrier_line:
+    cliff:
+    - cliff
+    fence:
+    - city_wall
+    - fence
+    - retaining_wall
+    - wall
+    - wire_fence
+    - yes
+    - embankment
+    - cable_barrier
+    - jersey_barrier
+    gate:
+    - gate
+    - entrance
+    - spikes
+    - bollard
+    - lift_gate
+    - kissing_gate
+    - stile
+  maki_label:
+    aerialway:
+    - chair_lift
+    - mixed_lift
+    - drag_lift
+    - platter
+    - t-bar
+    - magic_carpet
+    - gondola
+    - cable_car
+    - rope_tow
+    - zip_line
+    - j-bar
+    - canopy
+    airport:
+    - aerodrome
+    - terminal
+    - apron
+    - gate
+    - taxiway
+    american-football:
+    - american_football
+    art-gallery:
+    - accessories
+    - antiques
+    - art
+    - artwork
+    - gallery
+    - arts_centre
+    alcohol-shop:
+    - alcohol
+    - beverages
+    - wine
+    amenity:
+    - courthouse
+    - community_centre
+    - nursing_home
+    - veterinary
+    - nightclub
+    - recycling
+    - food_court
+    barrier:
+    - sally_port
+    - lift_gate
+    - gate
+    - bollard
+    - stile
+    - cycle_barrier
+    - toll_booth
+    - border_control
+    bakery:
+    - bakery
+    bank:
+    - bank
+    bar:
+    - bar
+    beer:
+    - biergarten
+    - pub
+    baseball:
+    - baseball
+    basketball:
+    - basketball
+    building:
+    - public_building
+    bus:
+    - bus_stop
+    bicycle:
+    - bicycle
+    - bicycle_rental
+    cafe:
+    - cafe
+    campsite:
+    - camp_site
+    car:
+    - car
+    - car_repair
+    camera:
+    - video
+    - electronics 
+    cemetery:
+    - grave_yard
+    - cemetery
+    cinema:
+    - cinema
+    clothing-store:
+    - bag
+    - clothes
+    college:
+    - university
+    - college
+    cricket:
+    - cricket
+    dentist:
+    - dentist
+    - doctor
+    dog-park:
+    - dog_park
+    embassy:
+    - embassy
+    entrance:
+    - subway_entrance
+    ferry:
+    - ferry_terminal
+    fast-food:
+    - fast_food
+    fire-station:
+    - fire_station
+    fuel:
+    - fuel
+    garden:
+    - garden
+    gift:
+    - gift 
+    golf:
+    - golf
+    - golf_course
+    grocery:
+    - supermarket
+    - deli
+    - delicatessen
+    - department_store
+    - greengrocer
+    sport:
+    - multi
+    - equestrian
+    - athletics
+    - volleyball
+    - climbing
+    - bowls
+    - skateboard
+    - shooting
+    - skiing
+    - boules
+    - beachvolleyball
+    - cricket
+    - table_tennis
+    - hockey
+    - gymnastics
+    - running
+    - canoe
+    - rugby_union
+    - skating
+    - scuba_diving
+    - motor
+    - horse_racing
+    - handball
+    - team_handball
+    - karting
+    - cycling
+    - archery
+    - motocross
+    - pelota
+    - rugby
+    - gaelic_games
+    - model_aerodrome
+    - netball
+    - rugby_league
+    - free_flying
+    - rowing
+    - chess
+    - australian_football
+    - cricket_nets
+    - racquet
+    - bmx
+    - sailing
+    - ice_stock
+    - badminton
+    - paddle_tennis
+    - dog_racing
+    - fatsal
+    - billiards
+    - ice_hockey
+    - yoga
+    - disc_golf
+    - orienteering
+    - toboggan
+    - horseshoes
+    - paragliding
+    - korfball
+    - diving
+    - rc_car
+    - canadian_football
+    - field_hockey
+    - shooting_range
+    - boxing
+    - curling
+    - surfing
+    - water_ski
+    - judo
+    - croquet
+    - paintball
+    - climbing_adventure
+    - long_jump
+    - table_soccer
+    tourism:
+    - attraction
+    - caravan_site
+    - theme_park
+    hairdresser:
+    - hairdresser
+    heliport:
+    - helipad
+    hospital:
+    - hospital
+    highway:
+    - motorway_junction
+    - turning_circle
+    ice-cream:
+    - chocolate
+    - confectionery
+    laundry:
+    - laundry
+    - dry_cleaning
+    library:
+    - books
+    - library
+    lodging:
+    - hotel
+    - motel
+    - bed_and_breakfast
+    - guest_house
+    - hostel
+    - chalet
+    - alpine_hut
+    - camp_site
+    leisure:
+    - sports_centre
+    - water_park
+    - stadium
+    - ice_rink
+    mobilephone:
+    - mobile_phone
+    monument:
+    - monument
+    museum:
+    - museum
+    music:
+    - music
+    - musical_instrument
+    park:
+    - park
+    - viewpoint
+    pharmacy:
+    - pharmacy
+    pitch:
+    - pitch
+    place-of-worship:
+    - place_of_worship
+    playground:
+    - playground
+    police:
+    - police
+    post:
+    - post_box
+    - post_office
+    prison:
+    - prison
+    rail:
+    - station
+    railway:
+    - halt
+    - tram_stop
+    - crossing
+    - level_crossing
+    restaurant:
+    - restaurant
+    school:
+    - school
+    - kindergarten
+    shop:
+    - accessories
+    - antiques
+    - art
+    - beauty
+    - bed
+    - boutique
+    - carpet
+    - charity
+    - chemist
+    - chocolate
+    - coffee
+    - computer
+    - confectionery
+    - convenience
+    - copyshop
+    - cosmetics
+    - garden_centre
+    - doityourself
+    - erotic
+    - fabric
+    - florist
+    - furniture
+    - video_games
+    - general
+    - gift
+    - hardware
+    - hearing_aids
+    - hifi
+    - ice_cream
+    - interior_decoration
+    - jewelry
+    - kiosk
+    - lamps
+    - mall
+    - massage
+    - motorcycle
+    - newsagent
+    - optician
+    - outdoor
+    - perfumery
+    - perfume
+    - pet
+    - photo
+    - second_hand
+    - shoes
+    - sports
+    - stationery
+    - tailor
+    - tattoo
+    - ticket
+    - tobacco
+    - toys
+    - travel_agency
+    - watches
+    - weapons
+    - wholesale
+    skiing:
+    - skiing
+    slaughterhouse:
+    - butcher 
+    soccer:
+    - soccer
+    swimming:
+    - swimming_pool
+    - swimming_area
+    - swimming
+    telephone:
+    - telephone
+    tennis:
+    - tennis
+    theater:
+    - theater
+    town-hall:
+    - townhall
+    waste-basket:
+    - waste_basket
+    zoo:
+    - zoo

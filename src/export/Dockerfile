@@ -20,7 +20,7 @@ COPY requirements.txt /usr/src/app/requirements.txt
 RUN pip install -r requirements.txt
 
 # custom tm2source project
-RUN git clone https://github.com/geometalab/open-streets.tm2source /data/tm2source
+VOLUME /data/tm2source
 ENV SOURCE_PROJECT_DIR=/data/tm2source
 
 # destination for exported vector tiles

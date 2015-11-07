@@ -36,6 +36,7 @@ export:
   build: ./src/export
   volumes:
    - ./export:/data/export
+   - ./open-streets.tm2source:/data/tm2source
   links:
    - postgis:db
   environment:
@@ -51,6 +52,13 @@ serve:
    - ./export:/data
   ports:
    - "8080:80"
+compare-visual:
+  build: ./src/compare-visual
+  ports:
+   - "4000:3000"
+   - "4001:3001"
+  links:
+   - serve:tileserver
 mapbox-studio:
   build: ./src/mapbox-studio
   volumes:
@@ -59,3 +67,9 @@ mapbox-studio:
    - postgis:db
   ports:
    - "3000:3000"
+verify:
+  build: ./src/verify
+import-sql:
+  build: ./src/import-sql
+  links:
+   - postgis:db
