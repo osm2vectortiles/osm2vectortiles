@@ -18,9 +18,6 @@ pgbouncer:
    - postgis:pg
   ports:
    - "6432"
-  environment:
-    OSM_USER: "osm"
-    OSM_PASS: "osm"
 import:
   build: ./src/import
   volumes:

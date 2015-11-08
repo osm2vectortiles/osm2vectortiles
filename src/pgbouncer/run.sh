@@ -1,43 +1,38 @@
 #!/bin/bash
-set -e
+set -o errexit
+set -o pipefail
+set -o nounset
 
-PG_PORT_5432_TCP_ADDR=${PG_PORT_5432_TCP_ADDR:-}
-PG_PORT_5432_TCP_PORT=${PG_PORT_5432_TCP_PORT:-}
-PG_ENV_POSTGIS_USER=${PG_ENV_POSTGIS_USER:-}
-PG_ENV_POSTGIS_PASS=${PG_ENV_POSTGIS_PASS:-}
+readonly OSM_DB="$PG_PORT_5432_TCP_ADDR"
+readonly OSM_PORT="$PG_PORT_5432_TCP_PORT"
+readonly OSM_USER=${OSM_USER:-osm}
+readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
+readonly PGB_CONF_FILE="/etc/pgbouncer/pgbconf.ini"
+readonly PGB_USERLIST_FILE="/etc/pgbouncer/userlist.txt"
 
-if [ ! -f /etc/pgbouncer/pgbconf.ini ]; then
-cat << EOF > /etc/pgbouncer/pgbconf.ini
-[databases]
-* = host=${PG_PORT_5432_TCP_ADDR} port=${PG_PORT_5432_TCP_PORT}
+function fix_permissions() {
+    chown -R postgres:postgres /etc/pgbouncer
+    chown root:postgres /var/log/postgresql
+    chmod 1775 /var/log/postgresql
+    chmod 640 "$PGB_USERLIST_FILE"
+}
 
-[pgbouncer]
-logfile = /var/log/postgresql/pgbouncer.log
-pidfile = /var/run/postgresql/pgbouncer.pid
-;listen_addr = *
-listen_addr = 0.0.0.0
-listen_port = 6432
-unix_socket_dir = /var/run/postgresql
-;auth_type = any
-auth_type = trust
-auth_file = /etc/pgbouncer/userlist.txt
-pool_mode = session
-server_reset_query = DISCARD ALL
-max_client_conn = 100
-default_pool_size = 20
-ignore_startup_parameters = extra_float_digits
-EOF
-fi
+function run_pgbouncer() {
+    exec /usr/sbin/pgbouncer -u postgres "$PGB_CONF_FILE"
+}
 
-if [ ! -s /etc/pgbouncer/userlist.txt ]
-then
-    echo '"'"${PG_ENV_POSTGRESQL_USER}"'" "'"${PG_ENV_POSTGRESQL_PASS}"'"' >> /etc/pgbouncer/userlist.txt
-    echo '"'"${OSM_USER}"'" "'"${OSM_PASS}"'"' >> /etc/pgbouncer/userlist.txt
-fi
+function configure_db() {
+    sed -i "s/host=osm_db/host=$OSM_DB/g" "$PGB_CONF_FILE"
+    sed -i "s/host=5432/host=$OSM_PORT/g" "$PGB_CONF_FILE"
+}
 
-chown -R postgres:postgres /etc/pgbouncer
-chown root:postgres /var/log/postgresql
-chmod 1775 /var/log/postgresql
-chmod 640 /etc/pgbouncer/userlist.txt
+function configure_user() {
+    if [ ! -s "$PGB_USERLIST_FILE" ]; then
+        echo '"'"${OSM_USER}"'" "'"${OSM_PASSWORD}"'"'  > "$PGB_USERLIST_FILE"
+    fi
+}
 
-/usr/sbin/pgbouncer -u postgres /etc/pgbouncer/pgbconf.ini
+configure_db
+configure_user
+fix_permissions
+run_pgbouncer
