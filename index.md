@@ -1,5 +1,6 @@
 ---
 layout: start
+title: Free Vector Tiles from OpenStreetMap
 published: true
 ---
 
