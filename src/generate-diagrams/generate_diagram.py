@@ -3,11 +3,13 @@
 Usage:
   generate_diagram.py mapping-keys <mapping_file>
   generate_diagram.py mapping-layers <tm2source_file> <mapping_file>
+  generate_diagram.py layers <tm2source_file> [--individual]
   generate_diagram.py (-h | --help)
   generate_diagram.py --version
 Options:
-  -h --help     Show this screen.
-  --version     Show version.
+  -h --help         Show this screen.
+  --version         Show version.
+  --individual      Render each layer into separate file
 """
 import re
 from collections import namedtuple
@@ -113,7 +115,9 @@ def generate_table_node(graph, table):
 
 
 def generate_layer_node(graph, layer):
-    field_names = [field_name for field_name, _ in layer.fields]
+    field_names = sorted(['{}: {}'.format(field_name, field_type)
+                          for field_name, field_type in layer.fields])
+
     node_body = generate_struct_diagram(
         '#' + layer.name,
         '<BR/>'.join(field_names)
@@ -142,6 +146,27 @@ def generate_table_layer_diagram(mapping_config, tm2source_config):
     graph.render(filename='table_layer_diagram', view=True)
 
 
+def generate_layer_diagram(tm2source_config, individual):
+
+    def make_graph():
+        return Digraph('Layers', format='png', graph_attr={
+            'rankdir': 'LR'
+        })
+
+    layers = find_layers(tm2source_config)
+
+    if individual:
+        for layer in layers:
+            graph = make_graph()
+            generate_layer_node(graph, layer)
+            graph.render(filename='layer_' + layer.name, view=False)
+    else:
+        graph = make_graph()
+        for layer in layers:
+            generate_layer_node(graph, layer)
+        graph.render(filename='layers', view=True)
+
+
 def generate_table_mapping_diagram(mapping_config):
     graph = Digraph('Imposm Mapping', format='png', graph_attr={
         'rankdir': 'LR',
@@ -158,6 +183,11 @@ if __name__ == '__main__':
     args = docopt(__doc__, version='0.1')
     mapping_file = args.get('<mapping_file>')
     tm2source_file = args.get('<tm2source_file>')
+
+    if args.get('layers'):
+        tm2source_config = yaml.load(open(tm2source_file, 'r'))
+        generate_layer_diagram(tm2source_config,
+                               individual=args.get('--individual'))
 
     if args.get('mapping-layers'):
         mapping_config = yaml.load(open(mapping_file, 'r'))
