@@ -12,6 +12,12 @@ postgis:
    - pgdata
   ports:
    - "5432"
+pgbouncer:
+  build: ./src/pgbouncer
+  links:
+   - postgis:pg
+  ports:
+   - "6432"
 import:
   build: ./src/import
   volumes:
@@ -24,16 +30,25 @@ import-water:
   build: ./src/import-water
   links:
   - postgis:db
+enqueue-jobs:
+  build: ./src/enqueue-jobs
+  environment:
+    AWS_REGION: "eu-central-1"
+    TASK_ZOOM_LEVEL: 8
+    QUEUE_NAME: "osm2vectortiles_jobs"
 export:
   build: ./src/export
   volumes:
    - ./export:/data/export
    - ./open-streets.tm2source:/data/tm2source
   links:
-   - postgis:db
+   - pgbouncer:db
   environment:
-    BBOX: "8.4039 47.3137 8.6531 47.4578"
-    MIN_ZOOM: "0"
+    AWS_ACCESS_KEY_ID:
+    AWS_SECRET_ACCESS_KEY:
+    AWS_REGION: "eu-central-1"
+    BBOX: "8.4375 46.07323062540838 9.84375 47.040182144806664"
+    MIN_ZOOM: "8"
     MAX_ZOOM: "14"
 serve:
   build: ./src/serve

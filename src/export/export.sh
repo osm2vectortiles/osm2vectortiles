@@ -5,13 +5,11 @@ set -o pipefail
 readonly SOURCE_PROJECT_DIR=${SOURCE_PROJECT_DIR:-/data/tm2source}
 readonly EXPORT_DIR=${EXPORT_DIR:-/data/export}
 
-readonly OSM_HOST=$DB_PORT_5432_TCP_ADDR
-readonly OSM_PORT=$DB_PORT_5432_TCP_PORT
+readonly OSM_HOST=$DB_PORT_6432_TCP_ADDR
+readonly OSM_PORT=$DB_PORT_6432_TCP_PORT
 readonly OSM_DB=${OSM_DB:-osm}
 readonly OSM_USER=${OSM_USER:-osm}
 readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
-
-readonly DB_SCHEMA=public
 
 readonly RENDER_SCHEME=${RENDER_SCHEME:-pyramid}
 readonly MIN_ZOOM=${MIN_ZOOM:-0}
@@ -20,6 +18,9 @@ readonly BBOX=${BBOX:-"-180, -85.0511, 180, 85.0511"}
 
 readonly DEST_PROJECT_DIR="/tmp/project"
 readonly DEST_PROJECT_FILE="${DEST_PROJECT_DIR%%/}/data.yml"
+
+readonly QUEUE_NAME=${QUEUE_NAME:-osm2vectortiles_jobs}
+readonly BUCKET_NAME=${BUCKET_NAME:-osm2vectortiles-jobs}
 
 # project config will be copied to new folder because we
 # modify the source configuration
@@ -50,9 +51,22 @@ function replace_db_connection() {
 
 function export_mbtiles() {
     local mbtiles_name="tiles.mbtiles"
-    local source="tmsource://$DEST_PROJECT_DIR"
-    local sink="mbtiles://$EXPORT_DIR/$mbtiles_name"
-    exec tl copy -s "$RENDER_SCHEME" -b "$BBOX" --min-zoom $MIN_ZOOM --max-zoom $MAX_ZOOM $source $sink
+
+    if [ -z "$AWS_ACCESS_KEY_ID" ]; then
+        exec python export.py local "$EXPORT_DIR/$mbtiles_name" \
+            --tm2source="$DEST_PROJECT_DIR" \
+            --bbox="$BBOX" \
+            --min_zoom="$MIN_ZOOM" \
+            --max_zoom="$MAX_ZOOM" \
+            --render_scheme="$RENDER_SCHEME"
+    else
+        echo "Using AWS SQS to work through jobs"
+        export AWS_DEFAULT_REGION="$AWS_REGION"
+        exec python export.py remote "$QUEUE_NAME" \
+            --tm2source="$DEST_PROJECT_DIR" \
+            --bucket="$BUCKET_NAME" \
+            --render_scheme="$RENDER_SCHEME"
+    fi
 }
 
 function main() {
