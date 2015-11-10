@@ -579,10 +579,20 @@ Layer:
         WHERE geometry && !bbox! AND name <> ''
         AND (
           (
-            type = 'city'
+            scalerank < 3 AND scalerank IS NOT NULL
             AND z(!scale_denominator!) >= 4
-            -- On zoom 4, display cities with 1M+ population. Decrease by 250k every level
-            AND (population + z(!scale_denominator!) * 250000 - 2000000) > 0
+          )
+          OR (
+            scalerank < 8 AND scalerank IS NOT NULL
+            AND z(!scale_denominator!) >= 6
+          )
+          OR (
+            scalerank IS NOT NULL
+            AND z(!scale_denominator!) >= 7
+          )
+          OR (
+            type IN ('city', 'town')
+            AND z(!scale_denominator!) >= 8
           )
           OR (
             type IN ('town', 'district')
@@ -643,20 +653,21 @@ Layer:
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
-          coalesce(NULLIF(name_zh, ''), name) AS name_zh
+          coalesce(NULLIF(name_zh, ''), name) AS name_zh,
+          scalerank
           FROM osm_water_polygons
           WHERE geometry && !bbox! AND
           (
             (
-              area >= 5000000000
+              scalerank IS NOT NULl AND area >= 5000000000
               AND z(!scale_denominator!) >= 5
             )
             OR (
-              area >= 1500000000
+              scalerank IS NOT NULl AND area >= 1500000000
               AND z(!scale_denominator!) >= 8
             )
             OR (
-              area >= 500000000
+              scalerank IS NOT NULl AND area >= 500000000
               AND z(!scale_denominator!) >= 9
             )
             OR (
@@ -691,6 +702,7 @@ Layer:
       name_ru: String
       name_zh: String
       osm_id: Number
+      scalerank: Number
     properties: 
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over

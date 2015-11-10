@@ -544,6 +544,9 @@ tables:
       type: string
     - name: area
       type: pseudoarea
+    - name: scalerank
+      key: scalerank
+      type: integer
     mapping:
       amenity:
       - swimming_pool
