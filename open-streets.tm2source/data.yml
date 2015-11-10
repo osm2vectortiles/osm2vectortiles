@@ -565,10 +565,20 @@ Layer:
         WHERE geometry && !bbox! AND name <> ''
         AND (
           (
-            type = 'city'
+            scalerank < 3 AND scalerank IS NOT NULL
             AND z(!scale_denominator!) >= 4
-            -- On zoom 4, display cities with 1M+ population. Decrease by 250k every level
-            AND (population + z(!scale_denominator!) * 250000 - 2000000) > 0
+          )
+          OR (
+            scalerank < 8 AND scalerank IS NOT NULL
+            AND z(!scale_denominator!) >= 6
+          )
+          OR (
+            scalerank IS NOT NULL
+            AND z(!scale_denominator!) >= 7
+          )
+          OR (
+            type IN ('city', 'town')
+            AND z(!scale_denominator!) >= 8
           )
           OR (
             type IN ('town', 'district')
