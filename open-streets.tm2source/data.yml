@@ -518,7 +518,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT geometry, name, 
+          SELECT osm_id, geometry, name, 
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
@@ -526,15 +526,24 @@ Layer:
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           GeometryType(geometry) as placement,
-          rank_marine(type) as labelrank
+          scalerank as labelrank
           FROM osm_marine
-          WHERE z(!scale_denominator!) >= 3
-            AND geometry && !bbox!
+          WHERE (
+            geometry && !bbox! AND scalerank IS NOT NULL AND (
+                (
+                    scalerank <= 3 AND z(!scale_denominator!) >= 3
+                )
+                OR (
+                    scalerank <= 5 AND z(!scale_denominator!) >= 5
+                )
+            )
+          )
         ) AS data
       type: postgis
       user: osm
     description: ''
     fields: 
+      osm_id: Number
       labelrank: Number
       name: String
       name_de: String
