@@ -6,4 +6,4 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 ENV SQL_FILE=/usr/src/app/update.sql
-CMD ["./rank-places.sh"]
+CMD ["./update-scaleranks.sh"]
