@@ -328,6 +328,9 @@ tables:
     - key: admin_level
       name: admin_level
       type: integer
+    - key: scalerank
+      name: scalerank
+      type: integer
     mapping:
       place:
       - country
