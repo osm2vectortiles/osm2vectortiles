@@ -30,7 +30,21 @@ FROM
 (
     SELECT osm.osm_id, ne.scalerank
     FROM ne_10m_admin_0_countries AS ne, osm_countries AS osm
-    WHERE (ne.name LIKE osm.name OR ne.name LIKE osm.name_en)
+    WHERE (ne.name = osm.name OR ne.name = osm.name_en)
 ) AS improved_countries
 WHERE osm_countries.osm_id = improved_countries.osm_id;
 
+UPDATE osm_water_polygons
+SET scalerank = improved_lakes.scalerank
+FROM
+(
+    SELECT osm.osm_id, ne.scalerank
+    FROM ne_10m_lakes AS ne, osm_countries AS osm
+    WHERE (
+        ne.name = osm.name OR
+        ne.name = osm.name_en OR
+        ne.name_alt = osm.name OR
+        ne.name_alt = osm.name_en
+    )
+) AS improved_lakes
+WHERE osm_water_polygons.osm_id = improved_lakes.osm_id;
