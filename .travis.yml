@@ -14,6 +14,8 @@ script:
   - sleep 10
   - docker-compose run import-water
   - docker-compose run import-sql
+  - docker-compose run import-natural-earth
+  - docker-compose run update-scaleranks
   - docker-compose run import
   - docker-compose run export
   - docker-compose up -d serve
