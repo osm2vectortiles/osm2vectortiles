@@ -423,17 +423,7 @@ Layer:
         (
           SELECT 0 as osm_id, geom, 2 as admin_level, 0 as disputed, 0 as maritime
           FROM ne_10m_admin_0_boundary_lines_land
-          WHERE z(!scale_denominator!) >= 2
-            AND geom && !bbox!
-          UNION ALL
-          SELECT 0 as osm_id, geom, 2 as admin_level, 0 as disputed, 0 as maritime
-          FROM ne_50m_admin_1_states_provinces_lines
-          WHERE z(!scale_denominator!) >= 3
-            AND geom && !bbox!
-          UNION ALL
-          SELECT 0 as osm_id, geom, 4 as admin_level, 0 as disputed, 0 as maritime
-          FROM ne_10m_admin_1_states_provinces_lines_shp
-          WHERE z(!scale_denominator!) >= 4
+          WHERE z(!scale_denominator!) BETWEEN 2 AND 6
             AND geom && !bbox!
           UNION ALL
           SELECT osm_id, geometry AS geom, admin_level, 0 as disputed, maritime
@@ -443,9 +433,26 @@ Layer:
             AND z(!scale_denominator!) >= 2
             AND geometry && !bbox!
           UNION ALL
+          SELECT 0 as osm_id, geom, 4 as admin_level, 0 as disputed, 0 as maritime
+          FROM ne_50m_admin_1_states_provinces_lines
+          WHERE z(!scale_denominator!) = 3
+            AND geom && !bbox!
+          UNION ALL
+          SELECT 0 as osm_id, geom, 4 as admin_level, 0 as disputed, 0 as maritime
+          FROM ne_10m_admin_1_states_provinces_lines_shp
+          WHERE z(!scale_denominator!) BETWEEN 4 AND 6
+            AND geom && !bbox!
+          UNION ALL
+          SELECT osm_id, geometry AS geom, admin_level, 0 as disputed, maritime
+          FROM osm_admin
+          WHERE maritime = 0
+            AND admin_level = 2 OR admin_level = 4
+            AND z(!scale_denominator!) >= 7
+            AND geometry && !bbox!
+          UNION ALL
           SELECT 0 as osm_id, geom, 2 as admin_level, 1 as disputed, 0 as maritime
           FROM ne_10m_admin_0_boundary_lines_disputed_areas
-          WHERE z(!scale_denominator!) >= 7
+          WHERE z(!scale_denominator!) >= 8
             AND geom && !bbox!
         ) AS data
       type: postgis
