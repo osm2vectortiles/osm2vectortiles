@@ -34,6 +34,10 @@ import-natural-earth:
   build: ./src/import-natural-earth
   links:
   - postgis:db
+rank-places:
+  build: ./src/rank-places
+  links:
+  - postgis:db
 enqueue-jobs:
   build: ./src/enqueue-jobs
   environment:
