@@ -6,9 +6,9 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 8.5406
-  - 47.3678
-  - 14
+  - 6.0205
+  - 49.6392
+  - 4
 description: OSM Bright 2
 Layer: 
   - id: landuse
@@ -421,23 +421,37 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, admin_level, 0 as disputed, maritime, area
+          SELECT 0 as osm_id, geom, 2 as admin_level, 0 as disputed, 0 as maritime
+          FROM ne_10m_admin_0_boundary_lines_land
+          WHERE z(!scale_denominator!) >= 2
+            AND geom && !bbox!
+          UNION ALL
+          SELECT 0 as osm_id, geom, 2 as admin_level, 0 as disputed, 0 as maritime
+          FROM ne_50m_admin_1_states_provinces_lines
+          WHERE z(!scale_denominator!) >= 3
+            AND geom && !bbox!
+          UNION ALL
+          SELECT 0 as osm_id, geom, 4 as admin_level, 0 as disputed, 0 as maritime
+          FROM ne_10m_admin_1_states_provinces_lines_shp
+          WHERE z(!scale_denominator!) >= 4
+            AND geom && !bbox!
+          UNION ALL
+          SELECT osm_id, geometry AS geom, admin_level, 0 as disputed, maritime
           FROM osm_admin
-          WHERE admin_level = 2
+          WHERE maritime = 1
+            AND admin_level = 2
             AND z(!scale_denominator!) >= 2
             AND geometry && !bbox!
           UNION ALL
-          SELECT osm_id, geometry, admin_level, 0 as disputed, maritime, area
-          FROM osm_admin
-          WHERE admin_level = 4
-            AND z(!scale_denominator!) >= 5
-            AND geometry && !bbox!
+          SELECT 0 as osm_id, geom, 2 as admin_level, 1 as disputed, 0 as maritime
+          FROM ne_10m_admin_0_boundary_lines_disputed_areas
+          WHERE z(!scale_denominator!) >= 7
+            AND geom && !bbox!
         ) AS data
       type: postgis
       user: osm
     description: ''
-    fields:
-      area: Number
+    fields: 
       admin_level: Number
       disputed: Number
       maritime: Number
@@ -476,6 +490,7 @@ Layer:
       user: osm
     description: ''
     fields: 
+      code: String
       name: String
       name_de: String
       name_en: String
@@ -483,7 +498,6 @@ Layer:
       name_fr: String
       name_ru: String
       name_zh: String
-      iso_code: Number
       osm_id: Number
       scalerank: Number
     properties: 
