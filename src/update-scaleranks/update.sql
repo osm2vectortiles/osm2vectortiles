@@ -20,7 +20,7 @@ UPDATE osm_marine
 SET scalerank = improved_seas.scalerank
 FROM
 (
-    SELECT osm.osm_id, ne.scalerank
+    SELECT osm.osm_id, ne.scalerank + 1 AS scalerank
     FROM ne_10m_geography_marine_polys AS ne, osm_marine AS osm
     WHERE ne.name ILIKE osm.name OR ne.name ILIKE osm.name_en
 ) AS improved_seas
