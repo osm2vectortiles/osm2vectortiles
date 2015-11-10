@@ -325,7 +325,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, type, classify_road_railway(type, service) AS class
+          SELECT osm_id, geometry, type, classify_road_railway(type, service) AS class, oneway
           FROM osm_roads
           WHERE geometry && !bbox! AND (
               -- Do not show bridges and tunnels after z12
@@ -369,6 +369,7 @@ Layer:
       class: String
       osm_id: Number
       type: String
+      oneway: Number
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -525,7 +526,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT geometry, name, 
+          SELECT osm_id, geometry, name, 
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
@@ -533,15 +534,24 @@ Layer:
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           GeometryType(geometry) as placement,
-          rank_marine(type) as labelrank
+          scalerank as labelrank
           FROM osm_marine
-          WHERE z(!scale_denominator!) >= 3
-            AND geometry && !bbox!
+          WHERE (
+            geometry && !bbox! AND scalerank IS NOT NULL AND (
+                (
+                    scalerank <= 3 AND z(!scale_denominator!) >= 3
+                )
+                OR (
+                    scalerank <= 5 AND z(!scale_denominator!) >= 5
+                )
+            )
+          )
         ) AS data
       type: postgis
       user: osm
     description: ''
     fields: 
+      osm_id: Number
       labelrank: Number
       name: String
       name_de: String
