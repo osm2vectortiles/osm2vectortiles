@@ -27,10 +27,10 @@ FROM
 WHERE osm_marine.osm_id = improved_seas.osm_id;
 
 UPDATE osm_countries
-SET scalerank = improved_countries.scalerank
+SET scalerank = improved_countries.labelrank
 FROM
 (
-    SELECT osm.osm_id, ne.scalerank
+    SELECT osm.osm_id, ne.labelrank
     FROM ne_10m_admin_0_countries AS ne, osm_countries AS osm
     WHERE (ne.name ILIKE osm.name OR ne.name ILIKE osm.name_en)
 ) AS improved_countries

@@ -498,7 +498,7 @@ Layer:
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
-          rank_country(population) as scalerank
+          scalerank
           FROM osm_countries
           WHERE z(!scale_denominator!) >= 2 AND geometry && !bbox!
         ) AS data
