@@ -534,14 +534,14 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, name, 
+          SELECT geometry, name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
-          GeometryType(geometry) as placement,
+          lower(GeometryType(geometry)) as placement,
           scalerank as labelrank
           FROM osm_marine
           WHERE (

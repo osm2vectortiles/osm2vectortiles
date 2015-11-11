@@ -389,6 +389,7 @@ tables:
       - sea
       natural:
       - bay
+      - sea
     type: geometry
   roads:
     type: linestring
