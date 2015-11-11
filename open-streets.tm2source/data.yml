@@ -500,7 +500,27 @@ Layer:
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           scalerank
           FROM osm_countries
-          WHERE z(!scale_denominator!) >= 2 AND geometry && !bbox!
+          WHERE (
+            (
+              scalerank <= 4
+              AND z(!scale_denominator!) >= 2 AND geometry && !bbox!
+            )
+            OR
+            (
+              scalerank = 5
+              AND z(!scale_denominator!) >= 4 AND geometry && !bbox!
+            )
+            OR
+            (
+              scalerank = 6
+              AND z(!scale_denominator!) >= 5 AND geometry && !bbox!
+            )
+            OR
+            (
+              scalerank >= 7
+              AND z(!scale_denominator!) >= 6 AND geometry && !bbox!
+            )
+          )
         ) AS data
       type: postgis
       user: osm
