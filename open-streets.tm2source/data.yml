@@ -108,13 +108,21 @@ Layer:
           SELECT 0 AS osm_id, way AS geometry FROM water_polygons
           WHERE way && !bbox!
           UNION ALL
-          SELECT osm_id, geometry FROM osm_water_polygons_gen0
-          WHERE geometry && !bbox!
-          AND z(!scale_denominator!) between 5 AND 9
+          SELECT 0 AS osm_id, geom AS geometry FROM ne_110m_lakes
+          WHERE geom && !bbox!
+            AND z(!scale_denominator!) between 0 AND 2
+          UNION ALL
+          SELECT 0 AS osm_id, geom AS geometry FROM ne_50m_lakes
+          WHERE geom && !bbox!
+            AND z(!scale_denominator!) = 3
+          UNION ALL
+          SELECT 0 AS osm_id, geom AS geometry FROM ne_10m_lakes
+          WHERE geom && !bbox!
+            AND z(!scale_denominator!) BETWEEN 4 AND 5
           UNION ALL
           SELECT osm_id, geometry FROM osm_water_polygons_gen1
           WHERE geometry && !bbox!
-          AND z(!scale_denominator!) between 9 AND 12
+          AND z(!scale_denominator!) BETWEEN 6 AND 12
           UNION ALL
           SELECT osm_id, geometry FROM osm_water_polygons
           WHERE geometry && !bbox!
