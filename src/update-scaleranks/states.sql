@@ -3,17 +3,16 @@ CREATE TABLE osm_states (
     osm_id integer,
     abbreviation varchar(10),
     area integer,
-    name varchar(30),
-    name_en varchar(30),
-    name_de varchar(30),
-    name_fr varchar(30),
-    name_es varchar(30),
-    name_ru varchar(30),
-    name_zh varchar(30),
+    name varchar(100),
+    name_en varchar(100),
+    name_de varchar(100),
+    name_fr varchar(100),
+    name_es varchar(100),
+    name_ru varchar(100),
+    name_zh varchar(100),
     geometry geometry,
     id integer primary key
 );
-SELECT UpdateGeometrySRID('osm_states', 'geometry', 4326);
 
 INSERT INTO osm_states VALUES (305700708, 'N.B.', 72648, 'New Brunswick', 'New Brunswick', 'Neubraunschweig', 'Nouveau-Brunswick', 'Nuevo Brunswick', 'Нью-Брансуик', '新不伦瑞克省', '0101000020E6100000000000001B9850C01C7E87FF78504740', 1);
 INSERT INTO osm_states VALUES (305700704, 'N.S.', 55090, 'Nova Scotia', 'Nova Scotia', 'Neuschottland', 'Nouvelle-Écosse', 'Nueva Escocia', 'Новая Шотландия', '新斯科舍省', '0101000020E6100000000000006A854FC00CEE2B6948994640', 2);
@@ -32,41 +31,41 @@ INSERT INTO osm_states VALUES (316945699, 'Del.', 5322, 'Delaware', 'Delaware', 
 INSERT INTO osm_states VALUES (316987977, 'R.I.', 2656, 'Rhode Island', 'Rhode Island', 'Rhode Island', 'Rhode Island', 'Rhode Island', 'Род-Айленд', '罗得岛州', '0101000020E61000000000000009E551C06CF3534AB5D74440', 18);
 INSERT INTO osm_states VALUES (-58447, 'Eng.', 130395, 'England', 'England', 'England', 'Angleterre', 'Inglaterra', 'Англия', '英格兰', '0101000020E610000000000000009FE5BFC0386874B8304A40', 19);
 INSERT INTO osm_states VALUES (-156393, 'N. Ire.', 13843, 'Northern Ireland', 'Northern Ireland', 'Nordirland', 'Irlande du Nord', 'Irlanda del Norte', 'Северная Ирландия', '北爱尔兰', '0101000020E61000000000000070A11BC0700D820807624B40', 20);
-INSERT INTO osm_states VALUES (502334045, 'undefined', 586373, 'Minas Gerais', 'Minas Gerais', 'Minas Gerais', 'Minas Gerais', 'Minas Gerais', 'Минас-Жерайс', '米纳斯吉拉斯州', '0101000020E610000000000000F22446C0D0A2410B104432C0', 21);
-INSERT INTO osm_states VALUES (539691270, 'undefined', 559906, 'Bahia', 'Bahia', 'Bahia', 'Bahia', 'Bahia', 'Баия', '巴伊亚州', '0101000020E610000000000000580B45C04811BD2A247E27C0', 22);
-INSERT INTO osm_states VALUES (541425925, 'undefined', 252018, 'Piauí­', 'Piauí­', 'Piauí­', 'Piauí­', 'Piauí­', 'Пиауи', '皮奧伊州', '0101000020E6100000000000004E7E45C0B03768F35EA51DC0', 23);
-INSERT INTO osm_states VALUES (539832191, 'undefined', 150233, 'Ceará', 'Ceará', 'Ceará', 'Ceará', 'Ceará', 'Сеара', '塞阿腊州', '0101000020E6100000000000007ACC43C0B0F35B6D884A13C0', 24);
-INSERT INTO osm_states VALUES (539831949, 'undefined', 97587, 'Pernambuco', 'Pernambuco', 'Pernambuco', 'Pernambouc', 'Pernambuco', 'Пернамбуку', '伯南布哥州', '0101000020E6100000000000009C1443C0D81E5D3435DA20C0', 25);
-INSERT INTO osm_states VALUES (539830692, 'undefined', 56518, 'Paraíba', 'Paraíba', 'Paraíba', 'Paraíba', 'Paraíba', 'Параиба', '帕拉伊巴州', '0101000020E610000000000000C06942C0A0BB75320F781CC0', 26);
-INSERT INTO osm_states VALUES (539830860, 'undefined', 52816, 'Rio Grande do Norte', 'Rio Grande do Norte', 'Rio Grande do Norte', 'Rio Grande do Norte', 'Rio Grande do Norte', 'Риу-Гранди-ду-Норти', '北里约格朗德州', '0101000020E6100000000000005E6242C020981586AF1E17C0', 27);
-INSERT INTO osm_states VALUES (504800102, 'undefined', 45758, 'Espírito Santo', 'Espírito Santo', 'Espírito Santo', 'Espírito Santo', 'Espírito Santo', 'Эспириту-Санту', '圣埃斯皮里图州', '0101000020E610000000000000FE2944C0B0C00712C63333C0', 28);
-INSERT INTO osm_states VALUES (541429445, 'undefined', 27621, 'Alagoas', 'Alagoas', 'Alagoas', 'Alagoas', 'Alagoas', 'Алагоас', '阿拉戈斯州', '0101000020E610000000000000165042C0384EAA65350723C0', 29);
-INSERT INTO osm_states VALUES (541429632, 'undefined', 21608, 'Sergipe', 'Sergipe', 'Sergipe', 'Sergipe', 'Sergipe', 'Сержипи', '塞尔希培州', '0101000020E610000000000000AEA842C0A801DD8014F024C0', 30);
-INSERT INTO osm_states VALUES (504799970, 'undefined', 43968, 'Rio de Janeiro', 'Rio de Janeiro', 'Rio de Janeiro', 'Rio de Janeiro', 'Rio de Janeiro', 'Рио-де-Жанейро', '里约热内卢州', '0101000020E610000000000000301545C010426BE78A0936C0', 39);
+INSERT INTO osm_states VALUES (502334045, NULL, 586373, 'Minas Gerais', 'Minas Gerais', 'Minas Gerais', 'Minas Gerais', 'Minas Gerais', 'Минас-Жерайс', '米纳斯吉拉斯州', '0101000020E610000000000000F22446C0D0A2410B104432C0', 21);
+INSERT INTO osm_states VALUES (539691270, NULL, 559906, 'Bahia', 'Bahia', 'Bahia', 'Bahia', 'Bahia', 'Баия', '巴伊亚州', '0101000020E610000000000000580B45C04811BD2A247E27C0', 22);
+INSERT INTO osm_states VALUES (541425925, NULL, 252018, 'Piauí­', 'Piauí­', 'Piauí­', 'Piauí­', 'Piauí­', 'Пиауи', '皮奧伊州', '0101000020E6100000000000004E7E45C0B03768F35EA51DC0', 23);
+INSERT INTO osm_states VALUES (539832191, NULL, 150233, 'Ceará', 'Ceará', 'Ceará', 'Ceará', 'Ceará', 'Сеара', '塞阿腊州', '0101000020E6100000000000007ACC43C0B0F35B6D884A13C0', 24);
+INSERT INTO osm_states VALUES (539831949, NULL, 97587, 'Pernambuco', 'Pernambuco', 'Pernambuco', 'Pernambouc', 'Pernambuco', 'Пернамбуку', '伯南布哥州', '0101000020E6100000000000009C1443C0D81E5D3435DA20C0', 25);
+INSERT INTO osm_states VALUES (539830692, NULL, 56518, 'Paraíba', 'Paraíba', 'Paraíba', 'Paraíba', 'Paraíba', 'Параиба', '帕拉伊巴州', '0101000020E610000000000000C06942C0A0BB75320F781CC0', 26);
+INSERT INTO osm_states VALUES (539830860, NULL, 52816, 'Rio Grande do Norte', 'Rio Grande do Norte', 'Rio Grande do Norte', 'Rio Grande do Norte', 'Rio Grande do Norte', 'Риу-Гранди-ду-Норти', '北里约格朗德州', '0101000020E6100000000000005E6242C020981586AF1E17C0', 27);
+INSERT INTO osm_states VALUES (504800102, NULL, 45758, 'Espírito Santo', 'Espírito Santo', 'Espírito Santo', 'Espírito Santo', 'Espírito Santo', 'Эспириту-Санту', '圣埃斯皮里图州', '0101000020E610000000000000FE2944C0B0C00712C63333C0', 28);
+INSERT INTO osm_states VALUES (541429445, NULL, 27621, 'Alagoas', 'Alagoas', 'Alagoas', 'Alagoas', 'Alagoas', 'Алагоас', '阿拉戈斯州', '0101000020E610000000000000165042C0384EAA65350723C0', 29);
+INSERT INTO osm_states VALUES (541429632, NULL, 21608, 'Sergipe', 'Sergipe', 'Sergipe', 'Sergipe', 'Sergipe', 'Сержипи', '塞尔希培州', '0101000020E610000000000000AEA842C0A801DD8014F024C0', 30);
+INSERT INTO osm_states VALUES (504799970, NULL, 43968, 'Rio de Janeiro', 'Rio de Janeiro', 'Rio de Janeiro', 'Rio de Janeiro', 'Rio de Janeiro', 'Рио-де-Жанейро', '里约热内卢州', '0101000020E610000000000000301545C010426BE78A0936C0', 39);
 INSERT INTO osm_states VALUES (671022, 'Calif.', 409438, 'California', 'California', 'Kalifornien', 'Californie', 'California', 'Калифорния', '加利福尼亚州', '0101000020E610000000000000B9EC5DC0622D696296894240', 42);
 INSERT INTO osm_states VALUES (316971669, 'Nev.', 287089, 'Nevada', 'Nevada', 'Nevada', 'Nevada', 'Nevada', 'Невада', '内华达州', '0101000020E6100000000000007E375DC06485DD11B4BF4340', 43);
 INSERT INTO osm_states VALUES (316984338, 'Ore.', 251793, 'Oregon', 'Oregon', 'Oregon', 'Oregon', 'Oregón', 'Орегон', '俄勒冈州', '0101000020E61000000000000051185EC02C54002FE8DF4540', 44);
 INSERT INTO osm_states VALUES (316950582, 'Idaho', 216076, 'Idaho', 'Idaho', 'Idaho', 'Idaho', 'Idaho', 'Айдахо', '爱达荷州', '0101000020E610000000000000A3A95CC02002870C40324640', 45);
 INSERT INTO osm_states VALUES (34724864, 'Wash.', 174113, 'Washington', 'Washington', 'Washington', 'Washington', 'Washington', 'Вашингтон', '华盛顿州', '0101000020E61000000000000009065EC0FC4285CD2D034840', 46);
 INSERT INTO osm_states VALUES (2589601, 'B.C.', 71450, 'Baja California', 'Baja California', 'Baja California', 'Basse-Californie', 'Baja California', 'Баха-Калифорния', '下加利福尼亚州', '0101000020E610000000000000BFD85CC0E875B1C293C73E40', 47);
-INSERT INTO osm_states VALUES (539687471, 'undefined', 154033, 'Acre', 'Acre', 'Acre', 'Acre', 'Acre', 'Акри', '阿克里州', '0101000020E61000000000000029A751C0B8D7C877EFC721C0', 48);
+INSERT INTO osm_states VALUES (539687471, NULL, 154033, 'Acre', 'Acre', 'Acre', 'Acre', 'Acre', 'Акри', '阿克里州', '0101000020E61000000000000029A751C0B8D7C877EFC721C0', 48);
 INSERT INTO osm_states VALUES (304951005, 'W.A.', 2527923, 'Western Australia', 'Western Australia', 'Westaustralien', 'Australie occidentale', 'Australia Occidental', 'Западная Австралия', '西澳大利亚州', '0101000020E610000000000000478B5E40342DF42F317739C0', 49);
 INSERT INTO osm_states VALUES (305700701, 'Que.', 1511614, 'Québec', 'Québec', 'Québec', 'Québec', 'Québec', 'Квебек', '魁北克省', '0101000020E6100000000000005CFB51C0007062E456224940', 50);
 INSERT INTO osm_states VALUES (305700702, 'Ont.', 1077704, 'Ontario', 'Ontario', 'Ontario', 'Ontario', 'Ontario', 'Онтарио', '安大略省', '0101000020E610000000000000441055C070E3F301DDB94840', 51);
 INSERT INTO osm_states VALUES (305700706, 'N.L.', 396313, 'Newfoundland and Labrador', 'Newfoundland and Labrador', 'Neufundland und Labrador', 'Terre-Neuve-et-Labrador', 'Terranova y Labrador', 'Ньюфаундленд и Лабрадор', '紐芬蘭-拉布拉多省', '0101000020E61000000000000028054EC06459A9BA855F4A40', 52);
-INSERT INTO osm_states VALUES (1750191683, 'undefined', 1664900, '新疆', 'Xinjiang', 'Xinjiang', 'Sinkiang', 'Xinjiang', 'Синьцзян', '新疆', '0101000020E61000000000000029585540585B7660405D4440', 57);
-INSERT INTO osm_states VALUES (244081488, 'undefined', 720000, '青海省', 'Qinghai', 'Qinghai', 'Qinghai', 'Qinghai', 'Цинхай', '青海省', '0101000020E610000000000000C00958407EB9F4CA09FE4140', 58);
-INSERT INTO osm_states VALUES (244079544, 'undefined', 425800, '甘肃', 'Gansu', 'Gansu', 'Gansu', 'Gansu', 'Ганьсу', '甘肃', '0101000020E610000000000000DD9059401084DF0F0A1F4340', 59);
-INSERT INTO osm_states VALUES (913100, 'undefined', 205800, '陕西', 'Shaanxi', 'Shaanxi', 'Shaanxi', 'Shaanxi', 'Шэньси', '陕西', '0101000020E6100000000000008D665B40F881E4AFD7084240', 60);
-INSERT INTO osm_states VALUES (913105, 'undefined', 156000, '山西', 'Shanxi', 'Shanxi', 'Shanxi', 'Shanxi', 'Шаньси', '山西', '0101000020E6100000000000007F195C4028DC5DC821384340', 61);
-INSERT INTO osm_states VALUES (913101, 'undefined', 66000, '宁夏', 'Ningxia', 'Ningxia', 'Ningxia', 'Ningxia', 'Нинся', '宁夏', '0101000020E610000000000000A47D5A401CA97C54EA8E4240', 62);
-INSERT INTO osm_states VALUES (244081449, 'undefined', 1183000, '内蒙古', 'Inner Mongolia', 'Innere Mongolei', 'Mongolie-intérieure', 'Mongolia Interior', 'Внутренняя Монголия', '内蒙古', '0101000020E61000000000000064425D4058BB067EFBF64540', 63);
-INSERT INTO osm_states VALUES (244080467, 'undefined', 187700, '河北', 'Hebei', 'Hebei', 'Hebei', 'Hebei', 'Хэбэй', '河北', '0101000020E61000000000000043DC5C4060B7C6E423434340', 67);
-INSERT INTO osm_states VALUES (407492, 'undefined', 167000, '河南', 'Henan', 'Henan', 'Henan', 'Henan', 'Хэнань', '河南', '0101000020E610000000000000865D5C40B6708F63B6C44040', 68);
-INSERT INTO osm_states VALUES (244081643, 'undefined', 157100, '山东', 'Shandong', 'Shandong', 'Shandong', 'Shandong', 'Шаньдун', '山东', '0101000020E610000000000000928C5D40340CA7709BFE4140', 69);
-INSERT INTO osm_states VALUES (244081110, 'undefined', 145900, '辽宁', 'Liaoning', 'Liaoning', 'Liaoning', 'Liaoning', 'Ляонін', '辽宁', '0101000020E610000000000000B6765E40449E677D5AD04440', 71);
-INSERT INTO osm_states VALUES (244080735, 'undefined', 102600, '江苏', 'Jiangsu', 'Jiangsu', 'Jiangsu', 'Jiangsu', 'Цзянсу', '江苏', '0101000020E61000000000000065E65D400E528919BBE34040', 72);
-INSERT INTO osm_states VALUES (244082468, 'undefined', 1228400, '西藏自治区', 'Tibet', 'Tibet', 'Tibet', 'Tíbet', 'Тибет', '西藏自治区', '0101000020E610000000000000D80256400C5362DB838D3F40', 75);
+INSERT INTO osm_states VALUES (1750191683, NULL, 1664900, '新疆', 'Xinjiang', 'Xinjiang', 'Sinkiang', 'Xinjiang', 'Синьцзян', '新疆', '0101000020E61000000000000029585540585B7660405D4440', 57);
+INSERT INTO osm_states VALUES (244081488, NULL, 720000, '青海省', 'Qinghai', 'Qinghai', 'Qinghai', 'Qinghai', 'Цинхай', '青海省', '0101000020E610000000000000C00958407EB9F4CA09FE4140', 58);
+INSERT INTO osm_states VALUES (244079544, NULL, 425800, '甘肃', 'Gansu', 'Gansu', 'Gansu', 'Gansu', 'Ганьсу', '甘肃', '0101000020E610000000000000DD9059401084DF0F0A1F4340', 59);
+INSERT INTO osm_states VALUES (913100, NULL, 205800, '陕西', 'Shaanxi', 'Shaanxi', 'Shaanxi', 'Shaanxi', 'Шэньси', '陕西', '0101000020E6100000000000008D665B40F881E4AFD7084240', 60);
+INSERT INTO osm_states VALUES (913105, NULL, 156000, '山西', 'Shanxi', 'Shanxi', 'Shanxi', 'Shanxi', 'Шаньси', '山西', '0101000020E6100000000000007F195C4028DC5DC821384340', 61);
+INSERT INTO osm_states VALUES (913101, NULL, 66000, '宁夏', 'Ningxia', 'Ningxia', 'Ningxia', 'Ningxia', 'Нинся', '宁夏', '0101000020E610000000000000A47D5A401CA97C54EA8E4240', 62);
+INSERT INTO osm_states VALUES (244081449, NULL, 1183000, '内蒙古', 'Inner Mongolia', 'Innere Mongolei', 'Mongolie-intérieure', 'Mongolia Interior', 'Внутренняя Монголия', '内蒙古', '0101000020E61000000000000064425D4058BB067EFBF64540', 63);
+INSERT INTO osm_states VALUES (244080467, NULL, 187700, '河北', 'Hebei', 'Hebei', 'Hebei', 'Hebei', 'Хэбэй', '河北', '0101000020E61000000000000043DC5C4060B7C6E423434340', 67);
+INSERT INTO osm_states VALUES (407492, NULL, 167000, '河南', 'Henan', 'Henan', 'Henan', 'Henan', 'Хэнань', '河南', '0101000020E610000000000000865D5C40B6708F63B6C44040', 68);
+INSERT INTO osm_states VALUES (244081643, NULL, 157100, '山东', 'Shandong', 'Shandong', 'Shandong', 'Shandong', 'Шаньдун', '山东', '0101000020E610000000000000928C5D40340CA7709BFE4140', 69);
+INSERT INTO osm_states VALUES (244081110, NULL, 145900, '辽宁', 'Liaoning', 'Liaoning', 'Liaoning', 'Liaoning', 'Ляонін', '辽宁', '0101000020E610000000000000B6765E40449E677D5AD04440', 71);
+INSERT INTO osm_states VALUES (244080735, NULL, 102600, '江苏', 'Jiangsu', 'Jiangsu', 'Jiangsu', 'Jiangsu', 'Цзянсу', '江苏', '0101000020E61000000000000065E65D400E528919BBE34040', 72);
+INSERT INTO osm_states VALUES (244082468, NULL, 1228400, '西藏自治区', 'Tibet', 'Tibet', 'Tibet', 'Tíbet', 'Тибет', '西藏自治区', '0101000020E610000000000000D80256400C5362DB838D3F40', 75);
 INSERT INTO osm_states VALUES (316417213, 'Har.', 44212, 'Haryana', 'Haryana', 'Haryana', 'Haryana', 'Haryana', 'Харьяна', '哈里亚纳邦', '0101000020E6100000000000002612534020B4A4F135743D40', 77);
 INSERT INTO osm_states VALUES (305700700, 'Nun.', 2078338, 'Nunavut', 'Nunavut', 'Nunavut', 'Nunavut', 'Nunavut', 'Нунавут', '努纳武特', '0101000020E610000000000000F32257C082530D6A64425040', 78);
 INSERT INTO osm_states VALUES (305700696, 'N.W.T.', 1348300, 'Northwest Territories', 'Northwest Territories', 'Nordwest-Territorien', 'Territoires du Nord-Ouest', 'Territorios del Noroeste', 'Северо-Западные территории', '西北地区', '0101000020E6100000000000008BA25DC0FC74DB361DD94F40', 79);
@@ -76,25 +75,25 @@ INSERT INTO osm_states VALUES (305700698, 'Sask.', 650844, 'Saskatchewan', 'Sask
 INSERT INTO osm_states VALUES (1971329414, 'Qld.', 1730008, 'Queensland', 'Queensland', 'Queensland', 'Queensland', 'Queensland', 'Квинсленд', '昆士兰州', '0101000020E61000000000008098116240089DA0D9CC9236C0', 92);
 INSERT INTO osm_states VALUES (304951006, 'N.T.', 1348630, 'Northern Territory', 'Northern Territory', 'Nordterritorium', 'Territoire du Nord', 'Territorio del Norte', 'Северная Территория', '北部地区', '0101000020E610000000000080B4AB6040044454D62F6A33C0', 93);
 INSERT INTO osm_states VALUES (304951007, 'S.A.', 983805, 'South Australia', 'South Australia', 'Südaustralien', 'Australie méridionale', 'Australia Meridional', 'Южная Австралия', '南澳大利亚州', '0101000020E61000000000008074FA6040E0E0ED136C1B3EC0', 94);
-INSERT INTO osm_states VALUES (565543876, 'undefined', 903220, 'Mato Grosso', 'Mato Grosso', 'Mato Grosso', 'Mato Grosso', 'Mato Grosso', 'Мату-Гросу', '马托格罗索州', '0101000020E6100000000000008CFD4BC0607528E83D5F2BC0', 95);
-INSERT INTO osm_states VALUES (539693378, 'undefined', 356081, 'Mato Grosso do Sul', 'Mato Grosso do Sul', 'Mato Grosso do Sul', 'Mato Grosso do Sul', 'Mato Grosso del Sur', 'Мату-Гросу-ду-Сул', '南马托格罗索州', '0101000020E61000000000000018814BC0F493FDC68A9E33C0', 98);
-INSERT INTO osm_states VALUES (415522239, 'undefined', 341247, 'Goiás', 'Goiás', 'Goiás', 'Goiás', 'Goiás', 'Гояс', '戈亚斯州', '0101000020E61000000000000092CD48C0300A4A75520630C0', 99);
-INSERT INTO osm_states VALUES (504800252, 'undefined', 272325, 'Rio Grande do Sul', 'Rio Grande do Sul', 'Rio Grande do Sul', 'Rio Grande do Sul', 'Rio Grande do Sul', 'Риу-Гранди-ду-Сул', '南里奥格兰德州', '0101000020E610000000000000F8DD4AC0143A51BAED033DC0', 100);
-INSERT INTO osm_states VALUES (504798993, 'undefined', 248640, 'São Paulo', 'São Paulo', 'São Paulo', 'São Paulo', 'São Paulo', 'Сан-Паулу', '圣保罗州', '0101000020E610000000000000048948C0707FFF80C91B36C0', 101);
-INSERT INTO osm_states VALUES (539672077, 'undefined', 198592, 'Paraná', 'Paraná', 'Paraná', 'Paraná', 'Paraná', 'Парана', '巴拉那州', '0101000020E61000000000000006D149C0209F872AA16E38C0', 102);
-INSERT INTO osm_states VALUES (539668890, 'undefined', 95107, 'Santa Catarina', 'Santa Catarina', 'Santa Catarina', 'Santa Catarina', 'Santa Catarina', 'Санта-Катарина', '圣卡塔琳娜州', '0101000020E610000000000000F84849C0C256ECDB84133BC0', 103);
-INSERT INTO osm_states VALUES (305626600, 'undefined', 5792, 'Distrito Federal', 'Distrito Federal', 'Distrito Federal', 'Distrito Federal', 'Distrito Federal', 'Федеральный округ', '联邦区', '0101000020E61000000000000030E547C09061A796235E2FC0', 106);
-INSERT INTO osm_states VALUES (244080473, 'undefined', 454800, '黑龙江省', 'Heilongjiang', 'Heilongjiang', 'Heilongjiang', 'Heilongjiang', 'Хэйлунцзян', '黑龙江省', '0101000020E6100000000000003AE25F4010B549C944DC4740', 112);
-INSERT INTO osm_states VALUES (244080890, 'undefined', 187400, '吉林', 'Jilin', 'Jilin', 'Jilin', 'Jilin', 'Цзилинь', '吉林', '0101000020E610000000000000C0C55F40707B8033439A4540', 116);
-INSERT INTO osm_states VALUES (-2574988, 'undefined', 41, 'Norfolk Island', 'Norfolk Island', 'Norfolkinsel', 'Île Norfolk', 'Isla Norfolk', 'Остров Норфолк', '诺福克岛', '0101000020E61000000000008099FE6440E85842E0D8083DC0', 140);
+INSERT INTO osm_states VALUES (565543876, NULL, 903220, 'Mato Grosso', 'Mato Grosso', 'Mato Grosso', 'Mato Grosso', 'Mato Grosso', 'Мату-Гросу', '马托格罗索州', '0101000020E6100000000000008CFD4BC0607528E83D5F2BC0', 95);
+INSERT INTO osm_states VALUES (539693378, NULL, 356081, 'Mato Grosso do Sul', 'Mato Grosso do Sul', 'Mato Grosso do Sul', 'Mato Grosso do Sul', 'Mato Grosso del Sur', 'Мату-Гросу-ду-Сул', '南马托格罗索州', '0101000020E61000000000000018814BC0F493FDC68A9E33C0', 98);
+INSERT INTO osm_states VALUES (415522239, NULL, 341247, 'Goiás', 'Goiás', 'Goiás', 'Goiás', 'Goiás', 'Гояс', '戈亚斯州', '0101000020E61000000000000092CD48C0300A4A75520630C0', 99);
+INSERT INTO osm_states VALUES (504800252, NULL, 272325, 'Rio Grande do Sul', 'Rio Grande do Sul', 'Rio Grande do Sul', 'Rio Grande do Sul', 'Rio Grande do Sul', 'Риу-Гранди-ду-Сул', '南里奥格兰德州', '0101000020E610000000000000F8DD4AC0143A51BAED033DC0', 100);
+INSERT INTO osm_states VALUES (504798993, NULL, 248640, 'São Paulo', 'São Paulo', 'São Paulo', 'São Paulo', 'São Paulo', 'Сан-Паулу', '圣保罗州', '0101000020E610000000000000048948C0707FFF80C91B36C0', 101);
+INSERT INTO osm_states VALUES (539672077, NULL, 198592, 'Paraná', 'Paraná', 'Paraná', 'Paraná', 'Paraná', 'Парана', '巴拉那州', '0101000020E61000000000000006D149C0209F872AA16E38C0', 102);
+INSERT INTO osm_states VALUES (539668890, NULL, 95107, 'Santa Catarina', 'Santa Catarina', 'Santa Catarina', 'Santa Catarina', 'Santa Catarina', 'Санта-Катарина', '圣卡塔琳娜州', '0101000020E610000000000000F84849C0C256ECDB84133BC0', 103);
+INSERT INTO osm_states VALUES (305626600, NULL, 5792, 'Distrito Federal', 'Distrito Federal', 'Distrito Federal', 'Distrito Federal', 'Distrito Federal', 'Федеральный округ', '联邦区', '0101000020E61000000000000030E547C09061A796235E2FC0', 106);
+INSERT INTO osm_states VALUES (244080473, NULL, 454800, '黑龙江省', 'Heilongjiang', 'Heilongjiang', 'Heilongjiang', 'Heilongjiang', 'Хэйлунцзян', '黑龙江省', '0101000020E6100000000000003AE25F4010B549C944DC4740', 112);
+INSERT INTO osm_states VALUES (244080890, NULL, 187400, '吉林', 'Jilin', 'Jilin', 'Jilin', 'Jilin', 'Цзилинь', '吉林', '0101000020E610000000000000C0C55F40707B8033439A4540', 116);
+INSERT INTO osm_states VALUES (-2574988, NULL, 41, 'Norfolk Island', 'Norfolk Island', 'Norfolkinsel', 'Île Norfolk', 'Isla Norfolk', 'Остров Норфолк', '诺福克岛', '0101000020E61000000000008099FE6440E85842E0D8083DC0', 140);
 INSERT INTO osm_states VALUES (316999551, 'Utah', 219762, 'Utah', 'Utah', 'Utah', 'Utah', 'Utah', 'Юта', '犹他州', '0101000020E61000000000000085E65BC030438E2FB9A04340', 143);
-INSERT INTO osm_states VALUES (539684663, 'undefined', 1565465, 'Amazonas', 'Amazonas', 'Amazonas', 'Amazonas', 'Amazonas', 'Амазонас', '亚马孙州', '0101000020E610000000000000EF2D50C02057B3523FBD10C0', 148);
-INSERT INTO osm_states VALUES (539676406, 'undefined', 1229349, 'Pará', 'Pará', 'Pará', 'Pará', 'Pará', 'Пара', '帕拉州', '0101000020E610000000000000AE914AC0B0B43FFE2D2E10C0', 149);
-INSERT INTO osm_states VALUES (541426952, 'undefined', 325614, 'Maranhão', 'Maranhão', 'Maranhão', 'Maranhão', 'Maranhão', 'Мараньян', '马拉尼昂州', '0101000020E61000000000000044A546C0A0F176C8BA6214C0', 155);
-INSERT INTO osm_states VALUES (565545457, 'undefined', 278973, 'Tocantins', 'Tocantins', 'Tocantins', 'Tocantins', 'Tocantins', 'Токантинс', '托坎廷斯州', '0101000020E610000000000000BE2948C0D0651C45AB4824C0', 156);
-INSERT INTO osm_states VALUES (565543192, 'undefined', 237962, 'Rondônia', 'Rondônia', 'Rondônia', 'Rondônia', 'Rondônia', 'Рондония', '朗多尼亚州', '0101000020E61000000000000048B64FC0F89D4BF70E2624C0', 158);
-INSERT INTO osm_states VALUES (539689822, 'undefined', 224752, 'Roraima', 'Roraima', 'Roraima', 'Roraima', 'Roraima', 'Рорайма', '罗赖马州', '0101000020E610000000000000E2B34EC0407EF48A15850040', 159);
-INSERT INTO osm_states VALUES (539680936, 'undefined', 139325, 'Amapá', 'Amapá', 'Amapá', 'Amapá', 'Amapá', 'Амапа', '阿马帕州', '0101000020E61000000000000090FB49C0009323D0DB49F73F', 161);
+INSERT INTO osm_states VALUES (539684663, NULL, 1565465, 'Amazonas', 'Amazonas', 'Amazonas', 'Amazonas', 'Amazonas', 'Амазонас', '亚马孙州', '0101000020E610000000000000EF2D50C02057B3523FBD10C0', 148);
+INSERT INTO osm_states VALUES (539676406, NULL, 1229349, 'Pará', 'Pará', 'Pará', 'Pará', 'Pará', 'Пара', '帕拉州', '0101000020E610000000000000AE914AC0B0B43FFE2D2E10C0', 149);
+INSERT INTO osm_states VALUES (541426952, NULL, 325614, 'Maranhão', 'Maranhão', 'Maranhão', 'Maranhão', 'Maranhão', 'Мараньян', '马拉尼昂州', '0101000020E61000000000000044A546C0A0F176C8BA6214C0', 155);
+INSERT INTO osm_states VALUES (565545457, NULL, 278973, 'Tocantins', 'Tocantins', 'Tocantins', 'Tocantins', 'Tocantins', 'Токантинс', '托坎廷斯州', '0101000020E610000000000000BE2948C0D0651C45AB4824C0', 156);
+INSERT INTO osm_states VALUES (565543192, NULL, 237962, 'Rondônia', 'Rondônia', 'Rondônia', 'Rondônia', 'Rondônia', 'Рондония', '朗多尼亚州', '0101000020E61000000000000048B64FC0F89D4BF70E2624C0', 158);
+INSERT INTO osm_states VALUES (539689822, NULL, 224752, 'Roraima', 'Roraima', 'Roraima', 'Roraima', 'Roraima', 'Рорайма', '罗赖马州', '0101000020E610000000000000E2B34EC0407EF48A15850040', 159);
+INSERT INTO osm_states VALUES (539680936, NULL, 139325, 'Amapá', 'Amapá', 'Amapá', 'Amapá', 'Amapá', 'Амапа', '阿马帕州', '0101000020E61000000000000090FB49C0009323D0DB49F73F', 161);
 INSERT INTO osm_states VALUES (316970920, 'Mont.', 380425, 'Montana', 'Montana', 'Montana', 'Montana', 'Montana', 'Монтана', '蒙大拿州', '0101000020E610000000000000214B5BC0AC31D30C37894740', 185);
 INSERT INTO osm_states VALUES (316973967, 'N.M.', 315065, 'New Mexico', 'New Mexico', 'Neumexiko', 'Nouveau Mexique', 'Nuevo México', 'Нью-Мексико', '新墨西哥州', '0101000020E610000000000000ED7F5AC0BE88702AA3294140', 186);
 INSERT INTO osm_states VALUES (316940520, 'Ariz.', 295063, 'Arizona', 'Arizona', 'Arizona', 'Arizona', 'Arizona', 'Аризона', '亚利桑那州', '0101000020E61000000000000018DB5BC024583D06461C4140', 187);
@@ -110,7 +109,7 @@ INSERT INTO osm_states VALUES (316983705, 'Okla.', 180637, 'Oklahoma', 'Oklahoma
 INSERT INTO osm_states VALUES (316955537, 'Iowa', 144523, 'Iowa', 'Iowa', 'Iowa', 'Iowa', 'Iowa', 'Айова', '艾奥瓦州', '0101000020E610000000000000C55F57C0F4B2CCD5010B4540', 201);
 INSERT INTO osm_states VALUES (316942960, 'Ark.', 137541, 'Arkansas', 'Arkansas', 'Arkansas', 'Arkansas', 'Arkansas', 'Арканзас', '阿肯色州', '0101000020E610000000000000DD1A57C01C465DE8788C4140', 202);
 INSERT INTO osm_states VALUES (304951009, 'Vic.', 227944, 'Victoria', 'Victoria', 'Victoria', 'Victoria', 'Victoria', 'Виктория', '维多利亚州', '0101000020E6100000000000003D2962409A56BCA5E09042C0', 217);
-INSERT INTO osm_states VALUES (-938024, 'undefined', 395, 'Kerguelen', 'Kerguelen', 'Kerguelen', 'Kerguelen', 'Kerguelen', 'Кергелен', '凯尔盖朗群岛', '0101000020E6100000000000006F6052403A3BBED5668B4AC0', 253);
+INSERT INTO osm_states VALUES (-938024, NULL, 395, 'Kerguelen', 'Kerguelen', 'Kerguelen', 'Kerguelen', 'Kerguelen', 'Кергелен', '凯尔盖朗群岛', '0101000020E6100000000000006F6052403A3BBED5668B4AC0', 253);
 INSERT INTO osm_states VALUES (304951004, 'N.S.W.', 802395, 'New South Wales', 'New South Wales', 'Neusüdwales', 'Nouvelle Galles du Sud', 'Nueva Gales del Sur', 'Новый Южный Уэльс', '新南威尔士州', '0101000020E6100000000000006F606240F24975ED951540C0', 255);
 INSERT INTO osm_states VALUES (304951008, 'Tas.', 68115, 'Tasmania', 'Tasmania', 'Tasmanien', 'Tasmanie', 'Tasmania', 'Тасмания', '塔斯马尼亚州', '0101000020E6100000000000800A5462408B97B8A5210245C0', 256);
 INSERT INTO osm_states VALUES (25842885, 'A.C.T.', 2349, 'Australian Capital Territory', 'Australian Capital Territory', 'Australisches Hauptstadtterritorium', 'Territoire de la capitale australienne', 'Territorio de la Capital Australiana', 'Австралийская Столичная Территория', '澳大利亚首都领地', '0101000020E610000000000080EC9E62409ADBC24144C341C0', 257);
@@ -163,11 +162,14 @@ INSERT INTO osm_states VALUES (1376490, 'Hid.', 20813, 'Hidalgo', 'Hidalgo', 'Hi
 INSERT INTO osm_states VALUES (2340903, 'Que.', 11699, 'Querétaro', 'Querétaro', 'Querétaro', 'Querétaro', 'Querétaro', 'Керетаро', '克雷塔罗州', '0101000020E61000000000000082EC58C04CD14423BA0F3540', 571);
 INSERT INTO osm_states VALUES (1376332, 'Mor.', 4879, 'Morelos', 'Morelos', 'Morelos', 'Morelos', 'Morelos', 'Морелос', '莫雷洛斯州', '0101000020E6100000000000008DC358C0082428A213C23240', 573);
 INSERT INTO osm_states VALUES (1375274, 'Tla.', 3997, 'Tlaxcala', 'Tlaxcala', 'Tlaxcala', 'Tlaxcala', 'Tlaxcala', 'Тласкала', '特拉斯卡拉', '0101000020E610000000000000318958C03CE6A99672773340', 574);
-INSERT INTO osm_states VALUES (2128285, 'undefined', 35400, '海南', 'Hainan', 'Hainan', 'Hainan', 'Hainan', 'Хайнань', '海南', '0101000020E6100000000000008A695B40C0BBD117CC2D3340', 667);
+INSERT INTO osm_states VALUES (2128285, NULL, 35400, '海南', 'Hainan', 'Hainan', 'Hainan', 'Hainan', 'Хайнань', '海南', '0101000020E6100000000000008A695B40C0BBD117CC2D3340', 667);
 INSERT INTO osm_states VALUES (316949921, 'Hawaii', 16657, 'Hawaii', 'Hawaii', 'Hawaii', 'Hawaï', 'Hawái', 'Гавайи', '夏威夷州', '0101000020E610000000000000168B63C04CFDF77C76423440', 715);
 INSERT INTO osm_states VALUES (244081852, '', 485000, '四川', 'Sichuan', 'Sichuan', 'Sichuan', 'Sichuan', 'Сычуань', '四川', '0101000020E61000000000000036A1594024C585C0BC673F40', 946);
-INSERT INTO osm_states VALUES (244082773, 'undefined', 394000, '云南', 'Yunnan', 'Yunnan', 'Yunnan', 'Yunnan', 'Юньнань', '云南', '0101000020E6100000000000003B515940B4A592B9C24A3840', 948);
-INSERT INTO osm_states VALUES (244080442, 'undefined', 236700, '广西', 'Guangxi', 'Guangxi', 'Guangxi', 'Guangxi', 'Гуанси', '广西', '0101000020E610000000000000992D5B400CDCC7F137A83740', 949);
-INSERT INTO osm_states VALUES (244080670, 'undefined', 210000, '湖南', 'Hunan', 'Hunan', 'Hunan', 'Hunan', 'Хунань', '湖南', '0101000020E61000000000000049C85B4048D164F349333C40', 950);
-INSERT INTO osm_states VALUES (244080393, 'undefined', 176167, '贵州', 'Guizhou', 'Guizhou', 'Guizhou', 'Guizhou', 'Гуйчжоу', '贵州', '0101000020E610000000000000D6B45A40684D37C3CE373B40', 952);
-INSERT INTO osm_states VALUES (913069, 'undefined', 82403, '重庆', 'Chongqing', 'Chongqing', 'Chongqing', 'Chongqing', 'Чунцин', '重庆', '0101000020E610000000000000E3F25A40A043B3CADA3C3E40', 954);
+INSERT INTO osm_states VALUES (244082773, NULL, 394000, '云南', 'Yunnan', 'Yunnan', 'Yunnan', 'Yunnan', 'Юньнань', '云南', '0101000020E6100000000000003B515940B4A592B9C24A3840', 948);
+INSERT INTO osm_states VALUES (244080442, NULL, 236700, '广西', 'Guangxi', 'Guangxi', 'Guangxi', 'Guangxi', 'Гуанси', '广西', '0101000020E610000000000000992D5B400CDCC7F137A83740', 949);
+INSERT INTO osm_states VALUES (244080670, NULL, 210000, '湖南', 'Hunan', 'Hunan', 'Hunan', 'Hunan', 'Хунань', '湖南', '0101000020E61000000000000049C85B4048D164F349333C40', 950);
+INSERT INTO osm_states VALUES (244080393, NULL, 176167, '贵州', 'Guizhou', 'Guizhou', 'Guizhou', 'Guizhou', 'Гуйчжоу', '贵州', '0101000020E610000000000000D6B45A40684D37C3CE373B40', 952);
+INSERT INTO osm_states VALUES (913069, NULL, 82403, '重庆', 'Chongqing', 'Chongqing', 'Chongqing', 'Chongqing', 'Чунцин', '重庆', '0101000020E610000000000000E3F25A40A043B3CADA3C3E40', 954);
+
+ALTER TABLE osm_states ALTER COLUMN geometry TYPE geometry USING ST_Transform(geometry, 900913);
+SELECT UpdateGeometrySRID('osm_states', 'geometry', 900913);

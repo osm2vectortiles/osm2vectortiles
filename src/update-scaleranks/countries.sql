@@ -2,18 +2,17 @@ DROP TABLE IF EXISTS osm_countries;
 CREATE TABLE osm_countries (
     osm_id INTEGER,
     iso_code varchar(2),
-    name varchar(30),
-    name_en varchar(30),
-    name_de varchar(30),
-    name_fr varchar(30),
-    name_es varchar(30),
-    name_ru varchar(30),
-    name_zh varchar(30),
+    name varchar(100),
+    name_en varchar(100),
+    name_de varchar(100),
+    name_fr varchar(100),
+    name_es varchar(100),
+    name_ru varchar(100),
+    name_zh varchar(100),
     scalerank integer,
     geometry geometry,
     id integer primary key
 );
-SELECT UpdateGeometrySRID('osm_countries', 'geometry', 4326);
 
 INSERT INTO osm_countries VALUES (424312026, 'GL', 'Kalaallit Nunaat', 'Greenland', 'Grönland', 'Groenland', 'Groenlandia', 'Гренландия', '格陵兰', 2, '0101000020E610000000000000DFB144C0BAC9CFC023AE5240', 1);
 INSERT INTO osm_countries VALUES (424311328, 'GY', 'Guyana', 'Guyana', 'Guyana', 'Guyana', 'Guyana', 'Гайана', '圭亚那', 3, '0101000020E610000000000000C07C4DC0205F8E9A2A7F1640', 2);
@@ -218,3 +217,6 @@ INSERT INTO osm_countries VALUES (0, 'MC', 'Monaco', 'Monaco', 'Monaco', 'Monaco
 INSERT INTO osm_countries VALUES (249399300, 'BY', 'Беларусь', 'Belarus', 'Weißrussland', 'Biélorussie', 'Bielorrusia', 'Беларусь', '白俄罗斯', 2, '0101000020E610000000000000F60B3C40E423E8CA28C54A40', 1096);
 INSERT INTO osm_countries VALUES (424297773, 'LT', 'Lietuva', 'Lithuania', 'Litauen', 'Lituanie', 'Lituania', 'Литва', '立陶宛', 3, '0101000020E61000000000000054EE37409417BB8F63BE4B40', 1097);
 INSERT INTO osm_countries VALUES (249399402, 'NP', 'Nepal', 'Nepal', 'Nepal', 'Népal', 'Nepal', 'Непал', '尼泊尔', 2, '0101000020E6100000000000000DFC5440DC2BF607EB403C40', 1196);
+
+ALTER TABLE osm_countries ALTER COLUMN geometry TYPE geometry USING ST_Transform(geometry, 900913);
+SELECT UpdateGeometrySRID('osm_countries', 'geometry', 900913);

@@ -6,8 +6,8 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 154.0723
-  - -24.7269
+  - 60.6445
+  - 55.0532
   - 4
 description: OSM Bright 2
 Layer: 
@@ -48,6 +48,7 @@ Layer:
     fields: 
       class: String
       osm_id: Number
+      type: String
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -501,14 +502,10 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, name,
+          SELECT osm_id, geometry,
           iso_code as code,
-          coalesce(NULLIF(name_en, ''), name) AS name_en,
-          coalesce(NULLIF(name_es, ''), name) AS name_es,
-          coalesce(NULLIF(name_fr, ''), name) AS name_fr,
-          coalesce(NULLIF(name_de, ''), name) AS name_de,
-          coalesce(NULLIF(name_ru, ''), name) AS name_ru,
-          coalesce(NULLIF(name_zh, ''), name) AS name_zh,
+          name, name_en, name_es, name_fr,
+          name_de, name_ru, name_zh,
           scalerank
           FROM osm_countries
           WHERE (
@@ -566,16 +563,12 @@ Layer:
       table: |-
         (
           SELECT geometry, name,
-          coalesce(NULLIF(name_en, ''), name) AS name_en,
-          coalesce(NULLIF(name_es, ''), name) AS name_es,
-          coalesce(NULLIF(name_fr, ''), name) AS name_fr,
-          coalesce(NULLIF(name_de, ''), name) AS name_de,
-          coalesce(NULLIF(name_ru, ''), name) AS name_ru,
-          coalesce(NULLIF(name_zh, ''), name) AS name_zh,
+          name_en, name_es, name_fr,
+          name_de, name_ru, name_zh,
           lower(GeometryType(geometry)) as placement,
           scalerank AS labelrank
           FROM osm_marine
-          WHERE geometry && !bbox! AND scalerank IS NOT NULL AND (
+          WHERE geometry && !bbox! AND (
             (
               scalerank = 1 AND z(!scale_denominator!) >= 1
             )
@@ -626,31 +619,24 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-        (SELECT *, name as name_en, name as name_fr, name as name_de,
-        name as name_zh, name as name_ru, name as name_es FROM (
-          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev as abbr FROM ne_10m_admin_1_states_provinces_shp
-          WHERE geom && !bbox! AND type='State' AND admin='United States of America' 
-          UNION ALL
-          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev as abbr FROM ne_10m_admin_1_states_provinces_shp
-          WHERE geom && !bbox! AND admin='China' AND scalerank=2 UNION ALL
-          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev as abbr FROM ne_10m_admin_1_states_provinces_shp
-          WHERE geom && !bbox! AND admin='India' AND type='State'
-          UNION ALL
-          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev as abbr FROM ne_10m_admin_0_map_subunits
-          WHERE admin = 'United Kingdom'
-          UNION ALL
-          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev as abbr FROM ne_10m_admin_1_states_provinces_shp
-          WHERE admin = 'Australia' AND scalerank=2
-          UNION ALL
-          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev as abbr FROM ne_10m_admin_1_states_provinces_shp
-          WHERE admin = 'Brazil' AND type='Estado'
+        (
+          SELECT osm_id, geometry, abbreviation as abbr, area,
+          name, name_de, name_en, name_es, name_fr, name_ru, name_zh
+          FROM osm_states
+          WHERE geometry && !bbox! AND (
+            (
+              area > 90000 AND z(!scale_denominator!) >= 4
+            )
+            OR (
+              z(!scale_denominator!) >= 5
+            )
+          )
         ) AS states
-        ) AS data
       type: postgis
       user: osm
     description: ''
     fields: 
-      abbrev: String
+      abbr: String
       area: Number
       name: String
       name_de: String
@@ -659,6 +645,7 @@ Layer:
       name_fr: String
       name_ru: String
       name_zh: String
+      osm_id: Number
     properties: 
       "buffer-size": 256
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
