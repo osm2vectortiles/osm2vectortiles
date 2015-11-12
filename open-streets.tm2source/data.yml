@@ -6,9 +6,9 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 60.6445
-  - 55.0532
-  - 4
+  - 99.1406
+  - 12.1253
+  - 3
 description: OSM Bright 2
 Layer: 
   - id: landuse
@@ -456,12 +456,12 @@ Layer:
           UNION ALL
           SELECT 0 as osm_id, geom, 4 as admin_level, 0 as disputed, 0 as maritime
           FROM ne_50m_admin_1_states_provinces_lines
-          WHERE z(!scale_denominator!) = 3
+          WHERE z(!scale_denominator!) = 4
             AND geom && !bbox!
           UNION ALL
           SELECT 0 as osm_id, geom, 4 as admin_level, 0 as disputed, 0 as maritime
           FROM ne_10m_admin_1_states_provinces_lines_shp
-          WHERE z(!scale_denominator!) BETWEEN 4 AND 6
+          WHERE z(!scale_denominator!) BETWEEN 5 AND 6
             AND geom && !bbox!
           UNION ALL
           SELECT osm_id, geometry AS geom, admin_level, 0 as disputed, maritime
