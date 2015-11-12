@@ -638,21 +638,21 @@ Layer:
       table: |-
         (SELECT *, name as name_en, name as name_fr, name as name_de,
         name as name_zh, name as name_ru, name as name_es FROM (
-          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev FROM ne_10m_admin_1_states_provinces_shp
+          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev as abbr FROM ne_10m_admin_1_states_provinces_shp
           WHERE geom && !bbox! AND type='State' AND admin='United States of America' 
           UNION ALL
-          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev FROM ne_10m_admin_1_states_provinces_shp
+          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev as abbr FROM ne_10m_admin_1_states_provinces_shp
           WHERE geom && !bbox! AND admin='China' AND scalerank=2 UNION ALL
-          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev FROM ne_10m_admin_1_states_provinces_shp
+          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev as abbr FROM ne_10m_admin_1_states_provinces_shp
           WHERE geom && !bbox! AND admin='India' AND type='State'
           UNION ALL
-          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev FROM ne_10m_admin_0_map_subunits
+          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev as abbr FROM ne_10m_admin_0_map_subunits
           WHERE admin = 'United Kingdom'
           UNION ALL
-          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev FROM ne_10m_admin_1_states_provinces_shp
+          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev as abbr FROM ne_10m_admin_1_states_provinces_shp
           WHERE admin = 'Australia' AND scalerank=2
           UNION ALL
-          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev FROM ne_10m_admin_1_states_provinces_shp
+          SELECT topoint(geom) as geom, (st_area(geom) / 1000000) as area, name, abbrev as abbr FROM ne_10m_admin_1_states_provinces_shp
           WHERE admin = 'Brazil' AND type='Estado'
         ) AS states
         ) AS data
