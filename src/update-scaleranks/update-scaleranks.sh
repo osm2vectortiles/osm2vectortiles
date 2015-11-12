@@ -18,7 +18,10 @@ function exec_sql_file() {
 function main() {
     echo "Updating scalerank in $OSM_DB"
     exec_sql_file "update.sql"
+    echo "Inserting labels in $OSM_DB"
     exec_sql_file "marine.sql"
+    exec_sql_file "states.sql"
+    exec_sql_file "countries.sql"
 }
 
 main
