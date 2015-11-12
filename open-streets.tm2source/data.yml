@@ -26,20 +26,21 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, classify_landuse(type) as class
-          FROM (
-            SELECT osm_id, geometry, type FROM osm_landusages_gen0
-            WHERE geometry && !bbox!
-            AND z(!scale_denominator!) BETWEEN 7 AND 9
-            UNION ALL
-            SELECT osm_id, geometry, type FROM osm_landusages_gen1
-            WHERE geometry && !bbox!
-            AND z(!scale_denominator!) BETWEEN 10 AND 12
-            UNION ALL
-            SELECT osm_id, geometry, type FROM osm_landusages
-            WHERE geometry && !bbox!
-            AND z(!scale_denominator!) > 12
-          ) AS landusages
+            SELECT osm_id, geometry, classify_landuse(type) as class, type
+            FROM (
+              SELECT osm_id, geometry, type FROM osm_landusages_gen0
+              WHERE geometry && !bbox!
+              AND type IN ('wood', 'nature_reserve', 'national_park')
+              AND z(!scale_denominator!) BETWEEN 5 AND 9
+              UNION ALL
+              SELECT osm_id, geometry, type FROM osm_landusages_gen1
+              WHERE geometry && !bbox!
+              AND z(!scale_denominator!) BETWEEN 10 AND 12
+              UNION ALL
+              SELECT osm_id, geometry, type FROM osm_landusages
+              WHERE geometry && !bbox!
+              AND z(!scale_denominator!) > 12
+            ) AS landusages
         ) AS data
       type: postgis
       user: osm
