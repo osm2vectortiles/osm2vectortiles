@@ -17,7 +17,8 @@ function exec_sql_file() {
 
 function main() {
     echo "Updating scalerank in $OSM_DB"
-    exec_sql_file "$SQL_FILE"
+    exec_sql_file "update.sql"
+    exec_sql_file "marine.sql"
 }
 
 main
