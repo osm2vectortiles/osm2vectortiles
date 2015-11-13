@@ -903,8 +903,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id,
-            name,
+          SELECT geometry, osm_id, name,
             coalesce(NULLIF(name_en, ''), name) AS name_en,
             coalesce(NULLIF(name_es, ''), name) AS name_es,
             coalesce(NULLIF(name_fr, ''), name) AS name_fr,
@@ -915,33 +914,38 @@ Layer:
             nullif(char_length(ref), 0) AS reflen,
             round(MercLength(geometry)) as len,
             classify_road(type) as class,
-            'default' as shield
+            'default' as shield,
+            rank() OVER (PARTITION BY LabelGrid(geometry, 200 * !pixel_width!)
+                         ORDER BY round(MercLength(geometry)) DESC) AS localrank
             FROM osm_roads
             WHERE
             geometry && !bbox! AND
             (
                 (
-                  type IN ('motorway', 'primary', 'primary_link', 'trunk',
-                      'trunk_link', 'secondary', 'secondary_link'
-                    )
+                  type IN ('motorway')
+                  AND ref <> ''
+                  AND z(!scale_denominator!) >= 8
+                )
+                OR
+                (
+                  type IN ('motorway_link', 'primary', 'primary_link', 'trunk',
+                           'trunk_link', 'secondary', 'secondary_link')
                   AND (name <> '' OR ref <> '')
                   AND z(!scale_denominator!) >= 11
                 )
                 OR
-                ( -- 'main'
+                (
                   type IN ('tertiary', 'tertiary_link', 'residential', 'unclassified',
                       'living_street', 'pedestrian', 'construction', 'rail', 'monorail',
-                      'narrow_gauge', 'subway', 'tram'
-                    )
+                      'narrow_gauge', 'subway', 'tram')
                   AND name <> ''
                   AND z(!scale_denominator!) >= 12
                 )
                 OR
-                ( -- 'motorway_link'
-                  type IN ('motorway_link', 'service', 'track', 'driveway', 'path',
-                      'cycleway', 'ski', 'steps', 'bridleway', 'footway', 'funicular',
-                      'light_rail', 'preserved'
-                    )
+                (
+                  type IN ('service', 'track', 'driveway', 'path',
+                           'cycleway', 'ski', 'steps', 'bridleway', 'footway', 'funicular',
+                           'light_rail', 'preserved')
                   AND name <> ''
                   AND z(!scale_denominator!) >= 14
                 )
@@ -953,6 +957,7 @@ Layer:
     fields: 
       class: String
       len: Number
+      localrank: Number
       name: String
       name_de: String
       name_en: String
@@ -965,7 +970,7 @@ Layer:
       reflen: Number
       shield: String
     properties: 
-      "buffer-size": 8
+      "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: waterway_label
     Datasource: 
