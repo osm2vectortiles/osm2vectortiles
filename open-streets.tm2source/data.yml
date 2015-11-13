@@ -26,21 +26,76 @@ Layer:
       srid: ''
       table: |-
         (
-            SELECT osm_id, geometry, classify_landuse(type) as class, type
-            FROM (
-              SELECT osm_id, geometry, type FROM osm_landusages_gen0
-              WHERE geometry && !bbox!
-              AND type IN ('wood', 'nature_reserve', 'national_park')
-              AND z(!scale_denominator!) BETWEEN 5 AND 9
-              UNION ALL
-              SELECT osm_id, geometry, type FROM osm_landusages_gen1
-              WHERE geometry && !bbox!
-              AND z(!scale_denominator!) BETWEEN 10 AND 12
-              UNION ALL
-              SELECT osm_id, geometry, type FROM osm_landusages
-              WHERE geometry && !bbox!
-              AND z(!scale_denominator!) > 12
-            ) AS landusages
+          SELECT osm_id, geometry, classify_landuse(type) as class, type
+          FROM (
+            SELECT osm_id, geometry, type FROM osm_landusages_gen0
+            WHERE geometry && !bbox!
+            AND (
+                type IN ('wood', 'nature_reserve', 'national_park', 'forest')
+                AND st_area(geometry) > 300000000
+            )
+            AND z(!scale_denominator!) = 5
+            UNION ALL
+            SELECT osm_id, geometry, type FROM osm_landusages_gen0
+            WHERE geometry && !bbox!
+            AND (
+                type IN ('wood', 'nature_reserve', 'national_park', 'forest')
+                AND st_area(geometry) > 100000000
+            )
+            AND z(!scale_denominator!) = 6
+            UNION ALL
+            SELECT osm_id, geometry, type FROM osm_landusages_gen0
+            WHERE geometry && !bbox!
+            AND (
+                type IN ('wood', 'nature_reserve', 'national_park', 'forest')
+                AND st_area(geometry) > 25000000
+            )
+            AND z(!scale_denominator!) = 7
+            UNION ALL
+            SELECT osm_id, geometry, type FROM osm_landusages_gen0
+            WHERE geometry && !bbox!
+            AND (
+                type IN ('wood', 'nature_reserve', 'national_park', 'forest')
+                AND st_area(geometry) > 5000000
+            )
+            AND z(!scale_denominator!) = 8
+            UNION ALL
+            SELECT osm_id, geometry, type FROM osm_landusages_gen0
+            WHERE geometry && !bbox!
+            AND (
+                type IN ('wood', 'nature_reserve', 'national_park', 'forest')
+                AND st_area(geometry) > 2000000
+            )
+            AND z(!scale_denominator!) = 9
+            UNION ALL
+            SELECT osm_id, geometry, type FROM osm_landusages_gen0
+            WHERE geometry && !bbox!
+            AND (
+                type IN ('wood', 'nature_reserve', 'national_park', 'forest')
+                AND st_area(geometry) > 500000
+            )
+            AND z(!scale_denominator!) = 10
+            UNION ALL
+            SELECT osm_id, geometry, type FROM osm_landusages_gen1
+            WHERE geometry && !bbox!
+            AND (
+                type IN ('wood', 'nature_reserve', 'national_park', 'forest')
+                AND st_area(geometry) > 100000
+            )
+            AND z(!scale_denominator!) = 11
+            UNION ALL
+            SELECT osm_id, geometry, type FROM osm_landusages
+            WHERE geometry && !bbox!
+            AND (
+                type IN ('wood', 'nature_reserve', 'national_park', 'forest')
+                AND st_area(geometry) > 10000
+            )
+            AND z(!scale_denominator!) = 12
+            UNION ALL
+            SELECT osm_id, geometry, type FROM osm_landusages
+            WHERE geometry && !bbox!
+            AND z(!scale_denominator!) >= 13
+          ) AS landusages
         ) AS data
       type: postgis
       user: osm
