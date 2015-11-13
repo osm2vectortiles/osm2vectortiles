@@ -970,8 +970,10 @@ Layer:
             round(MercLength(geometry)) as len,
             classify_road(type) as class,
             'default' as shield,
-            rank() OVER (PARTITION BY LabelGrid(geometry, 200 * !pixel_width!)
-                         ORDER BY localrank_road(type) ASC) AS localrank
+            rank() OVER (
+                PARTITION BY LabelGrid(geometry, 200 * !pixel_width!)
+                ORDER BY localrank_road(type) ASC, round(MercLength(geometry)) DESC
+            ) AS localrank
             FROM osm_roads
             WHERE
             geometry && !bbox! AND
