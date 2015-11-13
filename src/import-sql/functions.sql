@@ -16,6 +16,20 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+CREATE OR REPLACE FUNCTION localrank_road(type VARCHAR) RETURNS INTEGER
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN type IN ('motorway') THEN 10
+        WHEN type IN ('trunk') THEN 20
+        WHEN type IN ('primary') THEN 30
+        WHEN type IN ('secondary') THEN 40
+        WHEN type IN ('tertiary') THEN 50
+        ELSE 100
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
 CREATE OR REPLACE FUNCTION normalize_scalerank(scalerank INTEGER) RETURNS INTEGER
 AS $$
 BEGIN
