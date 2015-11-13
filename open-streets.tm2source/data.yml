@@ -525,22 +525,22 @@ Layer:
           WHERE (
             (
               scalerank <= 4
-              AND z(!scale_denominator!) >= 2 AND geometry && !bbox!
+              AND z(!scale_denominator!) BETWEEN 2 AND 8 AND geometry && !bbox!
             )
             OR
             (
               scalerank = 5
-              AND z(!scale_denominator!) >= 4 AND geometry && !bbox!
+              AND z(!scale_denominator!) BETWEEN 4 AND 8 AND geometry && !bbox!
             )
             OR
             (
               scalerank = 6
-              AND z(!scale_denominator!) >= 5 AND geometry && !bbox!
+              AND z(!scale_denominator!) BETWEEN 5 AND 8 AND geometry && !bbox!
             )
             OR
             (
               scalerank >= 7
-              AND z(!scale_denominator!) >= 6 AND geometry && !bbox!
+              AND z(!scale_denominator!) BETWEEN 6 AND 8 AND geometry && !bbox!
             )
           )
         ) AS data
