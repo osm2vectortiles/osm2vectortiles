@@ -247,6 +247,7 @@ tables:
       - national_park
       tourism:
       - zoo
+      - camp_site
   places:
     fields:
     - name: osm_id
@@ -630,6 +631,7 @@ tables:
       - fuel
       - waste_basket
       - bicycle_rental
+      - bbq
       leisure:
       - park
       - playground
@@ -969,6 +971,7 @@ tables:
       - fuel
       - waste_basket
       - bicycle_rental
+      - bbq
       leisure:
       - park
       - playground
