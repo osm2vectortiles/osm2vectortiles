@@ -916,7 +916,7 @@ Layer:
             classify_road(type) as class,
             'default' as shield,
             rank() OVER (PARTITION BY LabelGrid(geometry, 200 * !pixel_width!)
-                         ORDER BY round(MercLength(geometry)) DESC) AS localrank
+                         ORDER BY localrank_road(type) ASC) AS localrank
             FROM osm_roads
             WHERE
             geometry && !bbox! AND
