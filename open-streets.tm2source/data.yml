@@ -837,21 +837,20 @@ Layer:
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
-          coalesce(NULLIF(name_zh, ''), name) AS name_zh,
-          scalerank
+          coalesce(NULLIF(name_zh, ''), name) AS name_zh
           FROM osm_water_polygons
           WHERE geometry && !bbox! AND
           (
             (
-              scalerank IS NOT NULl AND area >= 5000000000
+              scalerank IS NOT NULL AND area >= 5000000000
               AND z(!scale_denominator!) >= 5
             )
             OR (
-              scalerank IS NOT NULl AND area >= 1500000000
+              scalerank IS NOT NULL AND area >= 1500000000
               AND z(!scale_denominator!) >= 8
             )
             OR (
-              scalerank IS NOT NULl AND area >= 500000000
+              scalerank IS NOT NULL AND area >= 500000000
               AND z(!scale_denominator!) >= 9
             )
             OR (
@@ -886,7 +885,6 @@ Layer:
       name_ru: String
       name_zh: String
       osm_id: Number
-      scalerank: Number
     properties: 
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
