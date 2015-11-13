@@ -343,11 +343,11 @@ Layer:
           )
           AND (
             (
-              type IN ('motorway', 'primary', 'trunk')
+              type IN ('motorway', 'trunk')
               AND z(!scale_denominator!) >= 5
             )
             OR (
-              type IN ('motorway_link', 'primary_link', 'trunk_link')
+              type IN ('primary', 'motorway_link', 'primary_link', 'trunk_link')
               AND z(!scale_denominator!) >= 7
             )
             OR (
