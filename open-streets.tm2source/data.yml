@@ -741,11 +741,14 @@ Layer:
         coalesce(NULLIF(name_de, ''), name) AS name_de,
         coalesce(NULLIF(name_ru, ''), name) AS name_ru,
         coalesce(NULLIF(name_zh, ''), name) AS name_zh, 
-        type, is_capital AS capital,
-        'SE' AS ldir,
+        type,
+        CASE WHEN is_capital THEN 1 ELSE NULL END AS capital,
+        NULL AS ldir,
         normalize_scalerank(scalerank) AS scalerank,
-        rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
-                     ORDER BY population DESC NULLS LAST) as localrank
+        rank() OVER (PARTITION BY LabelGrid(geometry, 200 * !pixel_width!)
+                     ORDER BY scalerank ASC NULLS LAST,
+                              population DESC NULLS LAST
+        ) as localrank
         FROM osm_places
         WHERE geometry && !bbox! AND name <> ''
         AND (
