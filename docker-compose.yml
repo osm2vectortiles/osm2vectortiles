@@ -30,6 +30,14 @@ import-water:
   build: ./src/import-water
   links:
   - postgis:db
+import-natural-earth:
+  build: ./src/import-natural-earth
+  links:
+  - postgis:db
+update-scaleranks:
+  build: ./src/update-scaleranks
+  links:
+  - postgis:db
 enqueue-jobs:
   build: ./src/enqueue-jobs
   environment:

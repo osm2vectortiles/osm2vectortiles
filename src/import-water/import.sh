@@ -31,7 +31,6 @@ function drop_table() {
 
 function main() {
     local water_polygons="$IMPORT_DATA_DIR/water_polygons.shp"
-    local land_polygons="$IMPORT_DATA_DIR/land_polygons.shp"
 
     local water_table="water_polygons"
     echo "Removing existing table $water_table"
@@ -42,16 +41,6 @@ function main() {
 
     echo "Create index on table $water_table"
     create_index $water_table
-
-    local land_table="land_polygons"
-    echo "Removing existing table $land_polygons"
-    drop_table $land_table
-
-    echo "Importing $land_polygons into table $land_table"
-    import_shp $land_polygons
-
-    echo "Create index on table $land_table"
-    create_index $land_table
 }
 
 main

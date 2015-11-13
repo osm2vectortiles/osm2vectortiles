@@ -7,10 +7,6 @@ generalized_tables:
     source: landusages
     sql_filter: ST_Area(geometry)>50000.000000
     tolerance: 50.0
-  water_polygons_gen0:
-    source: water_polygons_gen1
-    sql_filter: ST_Area(geometry)>500000.000000
-    tolerance: 200.0
   water_polygons_gen1:
     source: water_polygons
     sql_filter: ST_Area(geometry)>50000.000000
@@ -247,46 +243,7 @@ tables:
       - national_park
       tourism:
       - zoo
-  countries:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - key: ISO3166-1:alpha2
-      name: iso_code
-      type: string
-    - key: name
-      name: name
-      type: string
-    - name: name_int
-      key: int_name
-      type: string
-    - name: name_fr
-      key: name:fr
-      type: string
-    - name: name_en
-      key: name:en
-      type: string
-    - name: name_de
-      key: name:de
-      type: string
-    - name: name_es
-      key: name:es
-      type: string
-    - name: name_ru
-      key: name:ru
-      type: string
-    - name: name_zh
-      key: name:zh
-      type: string
-    - key: population
-      name: population
-      type: integer
-    mapping:
-      place:
-      - country
-    type: point
+      - camp_site
   places:
     fields:
     - name: osm_id
@@ -328,10 +285,11 @@ tables:
     - key: admin_level
       name: admin_level
       type: integer
+    - key: scalerank
+      name: scalerank
+      type: integer
     mapping:
       place:
-      - country
-      - state
       - region
       - county
       - city
@@ -345,43 +303,6 @@ tables:
       - locality
       - dwelling
     type: point
-  marine:
-    fields:
-    - name: geometry
-      type: geometry
-    - key: name
-      name: name
-      type: string
-    - name: name_int
-      key: int_name
-      type: string
-    - name: name_fr
-      key: name:fr
-      type: string
-    - name: name_en
-      key: name:en
-      type: string
-    - name: name_de
-      key: name:de
-      type: string
-    - name: name_es
-      key: name:es
-      type: string
-    - name: name_ru
-      key: name:ru
-      type: string
-    - name: name_zh
-      key: name:zh
-      type: string
-    - name: type
-      type: mapping_value
-    mapping:
-      place:
-      - ocean
-      - sea
-      natural:
-      - bay
-    type: geometry
   roads:
     type: linestring
     fields:
@@ -703,6 +624,7 @@ tables:
       - fuel
       - waste_basket
       - bicycle_rental
+      - bbq
       leisure:
       - park
       - playground
@@ -1042,6 +964,7 @@ tables:
       - fuel
       - waste_basket
       - bicycle_rental
+      - bbq
       leisure:
       - park
       - playground

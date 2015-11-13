@@ -6,9 +6,9 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 8.5406
-  - 47.3678
-  - 14
+  - 21.7969
+  - 34.6694
+  - 3
 description: OSM Bright 2
 Layer: 
   - id: landuse
@@ -26,20 +26,66 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, classify_landuse(type) as class
-          FROM (
-            SELECT osm_id, geometry, type FROM osm_landusages_gen0
-            WHERE geometry && !bbox!
-            AND z(!scale_denominator!) BETWEEN 7 AND 9
-            UNION ALL
-            SELECT osm_id, geometry, type FROM osm_landusages_gen1
-            WHERE geometry && !bbox!
-            AND z(!scale_denominator!) BETWEEN 10 AND 12
-            UNION ALL
-            SELECT osm_id, geometry, type FROM osm_landusages
-            WHERE geometry && !bbox!
-            AND z(!scale_denominator!) > 12
-          ) AS landusages
+          SELECT osm_id, geometry, classify_landuse(type) as class, type
+            FROM (
+              SELECT osm_id, geometry, type FROM osm_landusages_gen0
+              WHERE geometry && !bbox!
+              AND type IN ('wood', 'nature_reserve', 'national_park', 'forest')
+              AND (
+                (
+                  st_area(geometry) > 300000000
+                  AND z(!scale_denominator!) = 5
+                )
+                OR
+                (
+                  st_area(geometry) > 100000000
+                  AND z(!scale_denominator!) = 6
+                )
+                OR
+                (
+                  st_area(geometry) > 25000000
+                  AND z(!scale_denominator!) = 7
+                )
+                OR
+                (
+                  st_area(geometry) > 5000000
+                  AND z(!scale_denominator!) = 8
+                )
+                OR
+                (
+                  st_area(geometry) > 2000000
+                  AND z(!scale_denominator!) = 9
+                )
+                OR
+                (
+                  st_area(geometry) > 500000
+                  AND z(!scale_denominator!) = 10
+                )
+              )
+              UNION ALL
+              SELECT osm_id, geometry, type FROM osm_landusages_gen1
+              WHERE geometry && !bbox!
+              AND (
+                  type IN ('wood', 'nature_reserve', 'national_park', 'forest')
+                  AND st_area(geometry) > 100000
+              )
+              AND z(!scale_denominator!) = 11
+              UNION ALL
+              SELECT osm_id, geometry, type FROM osm_landusages
+              WHERE geometry && !bbox!
+              AND (
+                (
+                  type IN ('wood', 'nature_reserve', 'national_park', 'forest')
+                  AND st_area(geometry) > 10000
+                  AND z(!scale_denominator!) = 12
+                )
+                OR
+                (
+                  type NOT IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
+                  AND z(!scale_denominator!) >= 13
+                )
+              )
+            ) AS landusages
         ) AS data
       type: postgis
       user: osm
@@ -47,6 +93,7 @@ Layer:
     fields: 
       class: String
       osm_id: Number
+      type: String
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -108,13 +155,21 @@ Layer:
           SELECT 0 AS osm_id, way AS geometry FROM water_polygons
           WHERE way && !bbox!
           UNION ALL
-          SELECT osm_id, geometry FROM osm_water_polygons_gen0
-          WHERE geometry && !bbox!
-          AND z(!scale_denominator!) between 5 AND 9
+          SELECT 0 AS osm_id, geom AS geometry FROM ne_110m_lakes
+          WHERE geom && !bbox!
+            AND z(!scale_denominator!) between 0 AND 1
+          UNION ALL
+          SELECT 0 AS osm_id, geom AS geometry FROM ne_50m_lakes
+          WHERE geom && !bbox!
+            AND z(!scale_denominator!) BETWEEN 2 AND 3
+          UNION ALL
+          SELECT 0 AS osm_id, geom AS geometry FROM ne_10m_lakes
+          WHERE geom && !bbox!
+            AND z(!scale_denominator!) BETWEEN 4 AND 5
           UNION ALL
           SELECT osm_id, geometry FROM osm_water_polygons_gen1
           WHERE geometry && !bbox!
-          AND z(!scale_denominator!) between 9 AND 12
+          AND z(!scale_denominator!) BETWEEN 6 AND 12
           UNION ALL
           SELECT osm_id, geometry FROM osm_water_polygons
           WHERE geometry && !bbox!
@@ -254,17 +309,37 @@ Layer:
             SELECT osm_id, geometry, type FROM osm_landusages_gen0
             WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
             AND geometry && !bbox!
-            AND z(!scale_denominator!) BETWEEN 7 AND 9
+            AND (
+              (
+                st_area(geometry) > 20000000
+                AND z(!scale_denominator!) = 7
+              )
+              OR
+              (
+                st_area(geometry) > 6000000
+                AND z(!scale_denominator!) = 8
+              )
+              OR
+              (
+                st_area(geometry) > 2000000
+                AND z(!scale_denominator!) = 9
+              )
+              OR
+              (
+                st_area(geometry) > 500000
+                AND z(!scale_denominator!) = 10
+              )
+            )
             UNION ALL
             SELECT osm_id, geometry, type FROM osm_landusages_gen1
             WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
             AND geometry && !bbox!
-            AND z(!scale_denominator!) BETWEEN 10 AND 12
+            AND z(!scale_denominator!) BETWEEN 11 AND 12
             UNION ALL
             SELECT osm_id, geometry, type FROM osm_landusages
             WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
             AND geometry && !bbox!
-            AND z(!scale_denominator!) > 12
+            AND z(!scale_denominator!) >= 13
           ) AS landuse_overlay
         ) AS data
       type: postgis
@@ -325,7 +400,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, type, classify_road_railway(type, service) AS class
+          SELECT osm_id, geometry, type, classify_road_railway(type, service) AS class, oneway
           FROM osm_roads
           WHERE geometry && !bbox! AND (
               -- Do not show bridges and tunnels after z12
@@ -333,16 +408,16 @@ Layer:
           )
           AND (
             (
-              type = 'motorway'
+              type IN ('motorway', 'trunk')
               AND z(!scale_denominator!) >= 5
             )
             OR (
-              type IN ('primary', 'primary_link', 'motorway_link')
+              type IN ('primary', 'motorway_link', 'primary_link', 'trunk_link')
               AND z(!scale_denominator!) >= 7
             )
             OR (
-              type IN ('trunk', 'trunk_link', 'secondary', 'secondary_link')
-              AND z(!scale_denominator!) >= 9
+              type IN ('secondary', 'secondary_link')
+              AND z(!scale_denominator!) >= 8
             )
             OR (
               type IN ('tertiary', 'teriary_link')
@@ -367,6 +442,7 @@ Layer:
     description: ''
     fields: 
       class: String
+      oneway: Number
       osm_id: Number
       type: String
     properties: 
@@ -421,23 +497,68 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, admin_level, 0 as disputed, maritime, area
+          SELECT 0 AS osm_id, geom, 2 AS admin_level, 0 AS disputed, 0 AS maritime
+          FROM ne_110m_admin_0_boundary_lines_land
+          WHERE z(!scale_denominator!) BETWEEN 0 AND 2
+            AND geom && !bbox!
+          UNION ALL
+          SELECT 0 AS osm_id, geom, 2 AS admin_level, 0 AS disputed, 0 AS maritime
+          FROM ne_50m_admin_0_boundary_lines_land
+          WHERE z(!scale_denominator!) = 3
+            AND geom && !bbox!
+          UNION ALL
+          SELECT 0 AS osm_id, geom, 2 AS admin_level, 0 AS disputed, 0 AS maritime
+          FROM ne_10m_admin_0_boundary_lines_land
+          WHERE z(!scale_denominator!) BETWEEN 4 AND 6
+            AND geom && !bbox!
+          UNION ALL
+          SELECT osm_id, geometry AS geom, admin_level, 0 AS disputed, maritime
           FROM osm_admin
-          WHERE admin_level = 2
+          WHERE maritime = 1
+            AND admin_level = 2
             AND z(!scale_denominator!) >= 2
             AND geometry && !bbox!
           UNION ALL
-          SELECT osm_id, geometry, admin_level, 0 as disputed, maritime, area
+          SELECT 0 AS osm_id, geom, 4 AS admin_level, 0 AS disputed, 0 AS maritime
+          FROM ne_50m_admin_1_states_provinces_lines
+          WHERE z(!scale_denominator!) = 1
+            AND scalerank = 2
+            AND geom && !bbox!
+          UNION ALL
+          SELECT 0 AS osm_id, geom, 4 AS admin_level, 0 AS disputed, 0 AS maritime
+          FROM ne_10m_admin_1_states_provinces_lines_shp
+          WHERE z(!scale_denominator!) BETWEEN 2 AND 6
+            AND scalerank = 2
+            AND geom && !bbox!
+          UNION ALL
+          SELECT 0 AS osm_id, geom, 4 AS admin_level, 0 AS disputed, 0 AS maritime
+          FROM ne_10m_admin_1_states_provinces_lines_shp
+          WHERE z(!scale_denominator!) BETWEEN 4 AND 6
+            AND scalerank BETWEEN 3 AND 6
+            AND geom && !bbox!
+          UNION ALL
+          SELECT 0 AS osm_id, geom, 4 AS admin_level, 0 AS disputed, 0 AS maritime
+          FROM ne_10m_admin_1_states_provinces_lines_shp
+          WHERE z(!scale_denominator!) = 6
+            AND scalerank BETWEEN 7 AND 9
+            AND geom && !bbox!
+          UNION ALL
+          SELECT osm_id, geometry AS geom, admin_level, 0 AS disputed, maritime
           FROM osm_admin
-          WHERE admin_level = 4
-            AND z(!scale_denominator!) >= 5
+          WHERE maritime = 0
+            AND ( admin_level = 2 OR admin_level = 4 )
+            AND z(!scale_denominator!) >= 7
             AND geometry && !bbox!
+          UNION ALL
+          SELECT 0 AS osm_id, geom, 2 AS admin_level, 1 AS disputed, 0 AS maritime
+          FROM ne_10m_admin_0_boundary_lines_disputed_areas
+          WHERE z(!scale_denominator!) >= 7
+            AND geom && !bbox!
         ) AS data
       type: postgis
       user: osm
     description: ''
-    fields:
-      area: Number
+    fields: 
       admin_level: Number
       disputed: Number
       maritime: Number
@@ -460,22 +581,39 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, name,
+          SELECT osm_id, geometry,
           iso_code as code,
-          coalesce(NULLIF(name_en, ''), name) AS name_en,
-          coalesce(NULLIF(name_es, ''), name) AS name_es,
-          coalesce(NULLIF(name_fr, ''), name) AS name_fr,
-          coalesce(NULLIF(name_de, ''), name) AS name_de,
-          coalesce(NULLIF(name_ru, ''), name) AS name_ru,
-          coalesce(NULLIF(name_zh, ''), name) AS name_zh,
-          rank_country(population) as scalerank
+          name, name_en, name_es, name_fr,
+          name_de, name_ru, name_zh,
+          scalerank
           FROM osm_countries
-          WHERE z(!scale_denominator!) >= 2 AND geometry && !bbox!
+          WHERE (
+            (
+              scalerank <= 4
+              AND z(!scale_denominator!) BETWEEN 2 AND 8 AND geometry && !bbox!
+            )
+            OR
+            (
+              scalerank = 5
+              AND z(!scale_denominator!) BETWEEN 4 AND 8 AND geometry && !bbox!
+            )
+            OR
+            (
+              scalerank = 6
+              AND z(!scale_denominator!) BETWEEN 5 AND 8 AND geometry && !bbox!
+            )
+            OR
+            (
+              scalerank >= 7
+              AND z(!scale_denominator!) BETWEEN 6 AND 8 AND geometry && !bbox!
+            )
+          )
         ) AS data
       type: postgis
       user: osm
     description: ''
     fields: 
+      code: String
       name: String
       name_de: String
       name_en: String
@@ -483,7 +621,6 @@ Layer:
       name_fr: String
       name_ru: String
       name_zh: String
-      iso_code: Number
       osm_id: Number
       scalerank: Number
     properties: 
@@ -504,18 +641,32 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT geometry, name, 
-          coalesce(NULLIF(name_en, ''), name) AS name_en,
-          coalesce(NULLIF(name_es, ''), name) AS name_es,
-          coalesce(NULLIF(name_fr, ''), name) AS name_fr,
-          coalesce(NULLIF(name_de, ''), name) AS name_de,
-          coalesce(NULLIF(name_ru, ''), name) AS name_ru,
-          coalesce(NULLIF(name_zh, ''), name) AS name_zh,
-          GeometryType(geometry) as placement,
-          rank_marine(type) as labelrank
+          SELECT geometry, name,
+          name_en, name_es, name_fr,
+          name_de, name_ru, name_zh,
+          lower(GeometryType(geometry)) as placement,
+          scalerank AS labelrank
           FROM osm_marine
-          WHERE z(!scale_denominator!) >= 3
-            AND geometry && !bbox!
+          WHERE geometry && !bbox! AND (
+            (
+              scalerank = 1 AND z(!scale_denominator!) >= 1
+            )
+            OR (
+              scalerank = 2 AND z(!scale_denominator!) >= 2
+            )
+            OR (
+              scalerank = 3 AND z(!scale_denominator!) >= 3
+            )
+            OR (
+              scalerank = 4 AND z(!scale_denominator!) >= 4
+            )
+            OR (
+              scalerank = 5 AND z(!scale_denominator!) >= 5
+            )
+            OR (
+              scalerank >= 6 AND z(!scale_denominator!) >= 6
+            )
+          )
         ) AS data
       type: postgis
       user: osm
@@ -530,6 +681,50 @@ Layer:
       name_ru: String
       name_zh: String
       placement: String
+    properties: 
+      "buffer-size": 256
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: state_label
+    Datasource: 
+      dbname: osm
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: ''
+      geometry_table: ''
+      host: db
+      key_field: ''
+      key_field_as_attribute: ''
+      max_size: 512
+      password: osm
+      port: 5432
+      srid: ''
+      table: |-
+        (
+          SELECT osm_id, geometry, abbreviation as abbr, area,
+          name, name_de, name_en, name_es, name_fr, name_ru, name_zh
+          FROM osm_states
+          WHERE geometry && !bbox! AND (
+            (
+              area > 90000 AND z(!scale_denominator!) >= 4
+            )
+            OR (
+              z(!scale_denominator!) >= 5
+            )
+          )
+        ) AS states
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      abbr: String
+      area: Number
+      name: String
+      name_de: String
+      name_en: String
+      name_es: String
+      name_fr: String
+      name_ru: String
+      name_zh: String
+      osm_id: Number
     properties: 
       "buffer-size": 256
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -556,19 +751,32 @@ Layer:
         coalesce(NULLIF(name_de, ''), name) AS name_de,
         coalesce(NULLIF(name_ru, ''), name) AS name_ru,
         coalesce(NULLIF(name_zh, ''), name) AS name_zh, 
-        type, is_capital AS capital,
-        'SE' AS ldir,
-        scalerank_place(type, population) AS scalerank,
-        rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
-                     ORDER BY population DESC NULLS LAST) as localrank
+        type,
+        CASE WHEN is_capital THEN 1 ELSE NULL END AS capital,
+        NULL AS ldir,
+        normalize_scalerank(scalerank) AS scalerank,
+        rank() OVER (PARTITION BY LabelGrid(geometry, 200 * !pixel_width!)
+                     ORDER BY scalerank ASC NULLS LAST,
+                              population DESC NULLS LAST
+        ) as localrank
         FROM osm_places
         WHERE geometry && !bbox! AND name <> ''
         AND (
           (
-            type = 'city'
+            scalerank < 3 AND scalerank IS NOT NULL
             AND z(!scale_denominator!) >= 4
-            -- On zoom 4, display cities with 1M+ population. Decrease by 250k every level
-            AND (population + z(!scale_denominator!) * 250000 - 2000000) > 0
+          )
+          OR (
+            scalerank < 8 AND scalerank IS NOT NULL
+            AND z(!scale_denominator!) >= 6
+          )
+          OR (
+            scalerank IS NOT NULL
+            AND z(!scale_denominator!) >= 7
+          )
+          OR (
+            type IN ('city', 'town')
+            AND z(!scale_denominator!) >= 8
           )
           OR (
             type IN ('town', 'district')
@@ -634,15 +842,15 @@ Layer:
           WHERE geometry && !bbox! AND
           (
             (
-              area >= 5000000000
+              scalerank IS NOT NULL AND area >= 5000000000
               AND z(!scale_denominator!) >= 5
             )
             OR (
-              area >= 1500000000
+              scalerank IS NOT NULL AND area >= 1500000000
               AND z(!scale_denominator!) >= 8
             )
             OR (
-              area >= 500000000
+              scalerank IS NOT NULL AND area >= 500000000
               AND z(!scale_denominator!) >= 9
             )
             OR (
@@ -761,8 +969,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id,
-            name,
+          SELECT geometry, osm_id, name,
             coalesce(NULLIF(name_en, ''), name) AS name_en,
             coalesce(NULLIF(name_es, ''), name) AS name_es,
             coalesce(NULLIF(name_fr, ''), name) AS name_fr,
@@ -773,33 +980,40 @@ Layer:
             nullif(char_length(ref), 0) AS reflen,
             round(MercLength(geometry)) as len,
             classify_road(type) as class,
-            'default' as shield
+            'default' as shield,
+            rank() OVER (
+                PARTITION BY LabelGrid(geometry, 200 * !pixel_width!)
+                ORDER BY localrank_road(type) ASC, round(MercLength(geometry)) DESC
+            ) AS localrank
             FROM osm_roads
             WHERE
             geometry && !bbox! AND
             (
                 (
-                  type IN ('motorway', 'primary', 'primary_link', 'trunk',
-                      'trunk_link', 'secondary', 'secondary_link'
-                    )
+                  type IN ('motorway')
+                  AND ref <> ''
+                  AND z(!scale_denominator!) >= 8
+                )
+                OR
+                (
+                  type IN ('motorway_link', 'primary', 'primary_link', 'trunk',
+                           'trunk_link', 'secondary', 'secondary_link')
                   AND (name <> '' OR ref <> '')
                   AND z(!scale_denominator!) >= 11
                 )
                 OR
-                ( -- 'main'
+                (
                   type IN ('tertiary', 'tertiary_link', 'residential', 'unclassified',
                       'living_street', 'pedestrian', 'construction', 'rail', 'monorail',
-                      'narrow_gauge', 'subway', 'tram'
-                    )
+                      'narrow_gauge', 'subway', 'tram')
                   AND name <> ''
                   AND z(!scale_denominator!) >= 12
                 )
                 OR
-                ( -- 'motorway_link'
-                  type IN ('motorway_link', 'service', 'track', 'driveway', 'path',
-                      'cycleway', 'ski', 'steps', 'bridleway', 'footway', 'funicular',
-                      'light_rail', 'preserved'
-                    )
+                (
+                  type IN ('service', 'track', 'driveway', 'path',
+                           'cycleway', 'ski', 'steps', 'bridleway', 'footway', 'funicular',
+                           'light_rail', 'preserved')
                   AND name <> ''
                   AND z(!scale_denominator!) >= 14
                 )
@@ -811,6 +1025,7 @@ Layer:
     fields: 
       class: String
       len: Number
+      localrank: Number
       name: String
       name_de: String
       name_en: String
@@ -823,7 +1038,7 @@ Layer:
       reflen: Number
       shield: String
     properties: 
-      "buffer-size": 8
+      "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: waterway_label
     Datasource: 

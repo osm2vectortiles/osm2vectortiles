@@ -22,10 +22,8 @@ function create_postgis_extensions() {
         echo "Loading PostGIS into $db"
         PGUSER="$POSTGRES_USER" psql --dbname="$db" <<-'EOSQL'
 			CREATE EXTENSION postgis;
-			CREATE EXTENSION hstore;
 			CREATE EXTENSION postgis_topology;
-			CREATE EXTENSION fuzzystrmatch;
-			CREATE EXTENSION postgis_tiger_geocoder;
+			CREATE EXTENSION hstore;
 		EOSQL
     done
     }

@@ -101,6 +101,8 @@ classifications:
     - national_park
     - village_green
     - zoo
+    - sports_centre
+    - camp_site
     pitch:
     - athletics
     - chess
@@ -394,6 +396,7 @@ classifications:
     park:
     - park
     - viewpoint
+    - bbq
     pharmacy:
     - pharmacy
     pitch:

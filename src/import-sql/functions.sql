@@ -16,22 +16,26 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
-CREATE OR REPLACE FUNCTION scalerank_place(type VARCHAR, population INTEGER) RETURNS INTEGER
+CREATE OR REPLACE FUNCTION localrank_road(type VARCHAR) RETURNS INTEGER
 AS $$
 BEGIN
     RETURN CASE
-        WHEN type <> 'city' THEN NULL
-        WHEN population > 5000 THEN 9
-        WHEN population > 10000 THEN 8
-        WHEN population > 20000 THEN 7
-        WHEN population > 30000 THEN 6
-        WHEN population > 40000 THEN 5
-        WHEN population > 50000 THEN 4
-        WHEN population > 10000 THEN 3
-        WHEN population > 250000 THEN 2
-        WHEN population > 500000 THEN 1
-        WHEN population > 1000000 THEN 0
-        ELSE NULL
+        WHEN type IN ('motorway') THEN 10
+        WHEN type IN ('trunk') THEN 20
+        WHEN type IN ('primary') THEN 30
+        WHEN type IN ('secondary') THEN 40
+        WHEN type IN ('tertiary') THEN 50
+        ELSE 100
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION normalize_scalerank(scalerank INTEGER) RETURNS INTEGER
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN scalerank >= 9 THEN 9
+        ELSE scalerank
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
@@ -72,31 +76,6 @@ BEGIN
     RETURN CASE
         WHEN type IN ('station') THEN 'rail'
         ELSE ''
-    END;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION rank_country(population INTEGER) RETURNS INTEGER
-AS $$
-BEGIN
-    RETURN CASE
-        WHEN population >= 250000000 THEN 1
-        WHEN population >= 100000000 THEN 2
-        WHEN population >= 50000000 THEN 3
-        WHEN population >= 25000000 THEN 4
-        WHEN population >= 10000000 THEN 5
-        WHEN population < 10000000 THEN 6
-    END;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION rank_marine(type VARCHAR) RETURNS INTEGER
-AS $$
-BEGIN
-    RETURN CASE
-        WHEN type IN ('ocean') THEN 1
-        WHEN type IN ('sea') THEN 3
-        WHEN type IN ('bay') THEN 5
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
