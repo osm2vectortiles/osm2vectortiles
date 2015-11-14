@@ -842,18 +842,6 @@ Layer:
           WHERE geometry && !bbox! AND
           (
             (
-              scalerank IS NOT NULL AND area >= 5000000000
-              AND z(!scale_denominator!) >= 5
-            )
-            OR (
-              scalerank IS NOT NULL AND area >= 1500000000
-              AND z(!scale_denominator!) >= 8
-            )
-            OR (
-              scalerank IS NOT NULL AND area >= 500000000
-              AND z(!scale_denominator!) >= 9
-            )
-            OR (
               area >= 100000000
               AND z(!scale_denominator!) >= 10
             )
