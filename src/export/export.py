@@ -114,6 +114,7 @@ def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
         export_logger.info('Elapsed time: {}'.format(int(end - start)),
                            extra=logging_info)
         upload_mbtiles(bucket, mbtiles_file)
+        os.remove(mbtiles_file)
         export_logger.info('Upload mbtiles {}'.format(mbtiles_file),
                            extra=logging_info)
 
