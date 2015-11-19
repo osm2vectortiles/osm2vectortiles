@@ -71,13 +71,9 @@ def export_local(tilelive_command, logging_info):
     regex = re.compile(r'^Mapnik LOG> \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}: ',
                        re.IGNORECASE)
 
-    for line in iter(proc.stderr.readline, ''):
-        sanitized_line = regex.sub('Mapnik: ', line.rstrip())
-        mapnik_logger.warning(sanitized_line, extra=logging_info)
-
     for line in iter(proc.stdout.readline, ''):
         sanitized_line = regex.sub('Mapnik: ', line.rstrip())
-        mapnik_logger.debug(sanitized_line, extra=logging_info)
+        mapnik_logger.warning(sanitized_line, extra=logging_info)
 
     proc.wait()
 
@@ -130,9 +126,8 @@ def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
         start = time.time()
         export_local(tilelive_command, logging_info)
         end = time.time()
-        delta = (end - start).total_seconds()
 
-        export_logger.info('Elapsed time: {}'.format(delta),
+        export_logger.info('Elapsed time: {}'.format(int(end - start)),
                            extra=logging_info)
         upload_mbtiles(bucket, mbtiles_file)
         export_logger.info('Upload mbtiles {}'.format(mbtiles_file),
@@ -181,7 +176,6 @@ def main(args):
         handler = watchtower.CloudWatchLogHandler()
         handler.setFormatter(formatter)
 
-        mapnik_logger.setLevel(logging.WARNING)
         mapnik_logger.addHandler(handler)
         export_logger.addHandler(handler)
 
