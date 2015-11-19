@@ -42,7 +42,7 @@ function drop_table() {
 
 function import_sqlite() {
     echo "Importing Natural Earth to PostGIS..."
-    PGCLIENTENCODING=LATIN1 ogr2ogr \
+    PGCLIENTENCODING=UTF8 ogr2ogr \
     -progress \
     -f Postgresql \
     -s_srs EPSG:4326 \
@@ -61,20 +61,24 @@ function import_water() {
     echo "Removing existing table $water_table"
     drop_table $water_table
 
-    echo "Importing $water_polygons into table $water_table"
+    echo "Importing $WATER_POLYGONS_FILE into table $water_table"
     import_shp "$WATER_POLYGONS_FILE"
 
     echo "Create index on table $water_table"
     create_index $water_table
 }
 
+function hide_inserts() {
+    grep -v "INSERT 0 1"
+}
+
 function update_scaleranks() {
     echo "Updating scalerank in $OSM_DB"
     exec_sql_file "update.sql"
     echo "Inserting labels in $OSM_DB"
-    exec_sql_file "marine.sql"
-    exec_sql_file "states.sql"
-    exec_sql_file "countries.sql"
+    exec_sql_file "marine.sql" | hide_inserts
+    exec_sql_file "states.sql" | hide_inserts
+    exec_sql_file "countries.sql" | hide_inserts
 }
 
 function main() {
@@ -82,3 +86,5 @@ function main() {
     import_water
     import_sqlite
 }
+
+main

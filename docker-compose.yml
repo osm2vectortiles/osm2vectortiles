@@ -26,16 +26,8 @@ import:
    - cache
   links:
    - postgis:db
-import-water:
-  build: ./src/import-water
-  links:
-  - postgis:db
-import-natural-earth:
-  build: ./src/import-natural-earth
-  links:
-  - postgis:db
-update-scaleranks:
-  build: ./src/update-scaleranks
+import-external:
+  build: ./src/import-external
   links:
   - postgis:db
 enqueue-jobs:
@@ -64,24 +56,22 @@ serve:
    - ./export:/data
   ports:
    - "8080:80"
-compare-visual:
-  build: ./src/compare-visual
-  ports:
-   - "4000:3000"
-   - "4001:3001"
+import-sql:
+  build: ./src/import-sql
   links:
-   - serve:tileserver
+   - postgis:db
 mapbox-studio:
-  build: ./src/mapbox-studio
+  build: ./tools/mapbox-studio
   volumes:
    - ./open-streets.tm2source:/projects/open-streets.tm2source
   links:
    - postgis:db
   ports:
    - "3000:3000"
-verify:
-  build: ./src/verify
-import-sql:
-  build: ./src/import-sql
+compare-visual:
+  build: ./tools/compare-visual
+  ports:
+   - "4000:3000"
+   - "4001:3001"
   links:
-   - postgis:db
+   - serve:tileserver
