@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    {% include head.html %}
+    <script src='//api.tiles.mapbox.com/mapbox-gl-js/v0.12.0/mapbox-gl.js'></script>
+    <link href='//api.tiles.mapbox.com/mapbox-gl-js/v0.12.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:50px; bottom:0; width:100%; }
+    </style>
+  </head>
+  <body>
+    {% include header.html %}
+    <div id='map'></div>
+    {% include footer.html %}
+    {% include google_analytics.html %}
+    {{ content }}
+  </body>
+</html>
