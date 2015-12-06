@@ -45,6 +45,10 @@ import-external:
   build: ./src/import-external
   links:
   - postgis:db
+update-scaleranks:
+  build: ./src/update-scaleranks
+  links:
+  - postgis:db
 enqueue-jobs:
   build: ./src/enqueue-jobs
   environment:
