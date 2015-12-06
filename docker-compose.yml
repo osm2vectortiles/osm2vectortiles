@@ -26,6 +26,21 @@ import:
    - cache
   links:
    - postgis:db
+import-labels:
+  build: ./src/import-external
+  command: ./import-labels.sh
+  links:
+  - postgis:db
+import-natural-earth:
+  build: ./src/import-external
+  command: ./import-natural-earth.sh
+  links:
+  - postgis:db
+import-water:
+  build: ./src/import-external
+  command: ./import-water.sh
+  links:
+  - postgis:db
 import-external:
   build: ./src/import-external
   links:

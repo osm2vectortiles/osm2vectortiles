@@ -3,14 +3,13 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
-readonly DB_PORT=$DB_PORT_5432_TCP_PORT
-readonly OSM_DB=${OSM_DB:-osm}
-readonly OSM_USER=${OSM_USER:-osm}
-readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
+source sql.sh
 
-function import_sqlite() {
-    echo "Importing Natural Earth to PostGIS..."
+readonly IMPORT_DATA_DIR=${IMPORT_DATA_DIR:-/data/import}
+readonly NATURAL_EARTH_SQLITE_FILE="$IMPORT_DATA_DIR/natural_earth_vector.sqlite"
+
+function import_natural_earth() {
+    echo "Importing Natural Earth to PostGIS"
     PGCLIENTENCODING=LATIN1 ogr2ogr \
     -progress \
     -f Postgresql \
@@ -25,4 +24,4 @@ function import_sqlite() {
     "$NATURAL_EARTH_SQLITE_FILE"
 }
 
-import_sqlite
+import_natural_earth
