@@ -51,17 +51,26 @@ enqueue-jobs:
     AWS_REGION: "eu-central-1"
     TASK_ZOOM_LEVEL: 8
     QUEUE_NAME: "osm2vectortiles_jobs"
-export:
+export-remote:
   build: ./src/export
+  command: ./export-remote.sh
+  volumes:
+   - ./open-streets.tm2source:/data/tm2source
+  links:
+   - pgbouncer:db
+  environment:
+    AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+    AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+    AWS_REGION: "eu-central-1"
+export-local:
+  build: ./src/export
+  command: ./export-local.sh
   volumes:
    - ./export:/data/export
    - ./open-streets.tm2source:/data/tm2source
   links:
    - pgbouncer:db
   environment:
-    AWS_ACCESS_KEY_ID:
-    AWS_SECRET_ACCESS_KEY:
-    AWS_REGION: "eu-central-1"
     BBOX: "8.4375 46.07323062540838 9.84375 47.040182144806664"
     MIN_ZOOM: "8"
     MAX_ZOOM: "14"

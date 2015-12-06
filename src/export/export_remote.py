@@ -2,17 +2,13 @@
 """Wrapper around tilelive for exporting vector tiles from tm2source.
 
 Usage:
-  export.py local <mbtiles_file> --tm2source=<tm2source> [--bbox=<bbox>] [--min_zoom=<min_zoom>] [--max_zoom=<max_zoom>] [--render_scheme=<scheme>]
-  export.py remote <sqs_queue> --tm2source=<tm2source> [--bucket=<bucket>] [--render_scheme=<scheme>]
-  export.py (-h | --help)
-  export.py --version
+  export_remote.py <sqs_queue> --tm2source=<tm2source> [--bucket=<bucket>] [--render_scheme=<scheme>]
+  export_remote.py (-h | --help)
+  export_remote.py --version
 
 Options:
   -h --help                 Show this screen.
   --version                 Show version.
-  --bbox=<bbox>             WGS84 bounding box [default: -180, -85.0511, 180, 85.0511].
-  --min_zoom=<min_zoom>     Minimum zoom [default: 8].
-  --max_zoom=<max_zoom>     Maximum zoom  [default: 12].
   --render_scheme=<scheme>  Either pyramid or scanline [default: pyramid]
   --tm2source=<tm2source>   Directory of tm2source
   --bucket=<bucket>         S3 Bucket name for storing results [default: osm2vectortiles-jobs]
@@ -59,13 +55,6 @@ def create_tilelive_command(tm2source, mbtiles_file, bbox,
     return cmd
 
 
-def export_local(tilelive_command, logging_info):
-    subprocess.check_output(
-        tilelive_command,
-        stderr=subprocess.STDOUT,
-    )
-
-
 def connect_job_queue(queue_name):
     conn = boto.sqs.connect_to_region(os.getenv('AWS_REGION', 'eu-central-1'))
     queue = conn.get_queue(queue_name)
@@ -108,7 +97,10 @@ def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
         )
 
         start = time.time()
-        export_local(tilelive_command, logging_info)
+        subprocess.check_output(
+            tilelive_command,
+            stderr=subprocess.STDOUT,
+        )
         end = time.time()
 
         export_logger.info('Elapsed time: {}'.format(int(end - start)),
@@ -148,31 +140,19 @@ def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
 
 
 def main(args):
-    if args.get('local'):
-        tilelive_command = create_tilelive_command(
-            args['--tm2source'],
-            args['<mbtiles_file>'],
-            args['--bbox'],
-            args['--min_zoom'],
-            args['--max_zoom'],
-            args['--render_scheme']
-        )
-        export_local(tilelive_command, {})
+    formatter = logging.Formatter('%(ip)s %(task_id)s %(message)s')
+    handler = watchtower.CloudWatchLogHandler()
+    handler.setFormatter(formatter)
 
-    if args.get('remote'):
-        formatter = logging.Formatter('%(ip)s %(task_id)s %(message)s')
-        handler = watchtower.CloudWatchLogHandler()
-        handler.setFormatter(formatter)
+    mapnik_logger.addHandler(handler)
+    export_logger.addHandler(handler)
 
-        mapnik_logger.addHandler(handler)
-        export_logger.addHandler(handler)
-
-        export_remote(
-            args['--tm2source'],
-            args['<sqs_queue>'],
-            args['--render_scheme'],
-            args['--bucket'],
-        )
+    export_remote(
+        args['--tm2source'],
+        args['<sqs_queue>'],
+        args['--render_scheme'],
+        args['--bucket'],
+    )
 
 
 if __name__ == '__main__':

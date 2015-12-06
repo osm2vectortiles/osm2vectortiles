@@ -10,19 +10,14 @@ source sql.sh
 
 function import_shp() {
 	local shp_file=$1
-	shp2pgsql -g way "$shp_file" | exec_psql | hide_inserts
+	local table_name=$2
+	shp2pgsql -I -g way "$shp_file" "$table_name" | exec_psql | hide_inserts
 }
 
 function import_water() {
-    local water_table="water_polygons"
-    echo "Removing existing table $water_table"
-    drop_table $water_table
-
-    echo "Importing $WATER_POLYGONS_FILE into table $water_table"
-    import_shp "$WATER_POLYGONS_FILE"
-
-    echo "Create index on table $water_table"
-    create_index $water_table
+    local table_name="osm_ocean_polygons"
+    drop_table "$table_name"
+    import_shp "$WATER_POLYGONS_FILE" "$table_name"
 }
 
 import_water

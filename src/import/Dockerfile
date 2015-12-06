@@ -17,18 +17,14 @@ RUN apt-get purge -y --auto-remove \
     g++ gcc libc6-dev make git \
     && rm -rf /var/lib/apt/lists/*
 
-ENV IMPOSM_BIN=imposm3
+VOLUME /data/import /data/cache
+ENV IMPORT_DATA_DIR=/data/import \
+    IMPOSM_CACHE_DIR=/data/cache \
+    MAPPING_YAML=/usr/src/app/mapping.yml \
+    IMPOSM_BIN=imposm3
 
 RUN mkdir -p /usr/src/app
-COPY import.sh /usr/src/app/
-COPY mapping.yml /usr/src/app/
-ENV MAPPING_YAML=/usr/src/app/mapping.yml
+COPY . /usr/src/app/
 WORKDIR /usr/src/app
-
-VOLUME /data/import
-ENV IMPORT_DATA_DIR=/data/import
-
-VOLUME /data/cache
-ENV IMPOSM_CACHE_DIR=/data/cache
 
 CMD ["./import.sh"]

@@ -19,13 +19,6 @@ function exec_sql_file() {
     cat "$sql_file" | exec_psql
 }
 
-function create_index() {
-    local table=$1
-    local index_name="$table"_index
-	local index_command="CREATE INDEX $index_name ON $table USING gist (way);"
-	echo $index_command | exec_psql
-}
-
 function drop_table() {
     local table=$1
 	local drop_command="DROP TABLE IF EXISTS $table;"
