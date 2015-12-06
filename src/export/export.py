@@ -60,30 +60,10 @@ def create_tilelive_command(tm2source, mbtiles_file, bbox,
 
 
 def export_local(tilelive_command, logging_info):
-    start = time.time()
-    proc = subprocess.Popen(
+    subprocess.check_output(
         tilelive_command,
-        stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
-        bufsize=0,
-        universal_newlines=True
     )
-
-    regex = re.compile(r'^Mapnik LOG> \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}: ',
-                       re.IGNORECASE)
-
-    for line in iter(proc.stdout.readline, ''):
-        sanitized_line = regex.sub('Mapnik: ', line.rstrip())
-        mapnik_logger.info(sanitized_line, extra=logging_info)
-
-    proc.wait()
-    end = time.time()
-    export_logger.info('Elapsed time: {}'.format(end - start),
-                       extra=logging_info)
-
-    if proc.returncode != 0:
-        raise subprocess.CalledProcessError(returncode=proc.returncode,
-                                            cmd=tilelive_command)
 
 
 def connect_job_queue(queue_name):
@@ -127,9 +107,15 @@ def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
             render_scheme
         )
 
+        start = time.time()
         export_local(tilelive_command, logging_info)
+        end = time.time()
+
+        export_logger.info('Elapsed time: {}'.format(int(end - start)),
+                           extra=logging_info)
         upload_mbtiles(bucket, mbtiles_file)
-        export_logger.info("Upload mbtiles {}".format(mbtiles_file),
+        os.remove(mbtiles_file)
+        export_logger.info('Upload mbtiles {}'.format(mbtiles_file),
                            extra=logging_info)
 
         queue.delete_message(message)
@@ -150,6 +136,9 @@ def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
             }
             try:
                 complete_job(task_id, body, logging_info)
+            except subprocess.CalledProcessError as err:
+                export_logger.exception('Could not complete job: ' + err.output,
+                                        exc_info=True, extra=logging_info)
             except Exception:
                 export_logger.exception('Could not complete job',
                                         exc_info=True, extra=logging_info)
@@ -173,7 +162,7 @@ def main(args):
     if args.get('remote'):
         formatter = logging.Formatter('%(ip)s %(task_id)s %(message)s')
         handler = watchtower.CloudWatchLogHandler()
-        handler .setFormatter(formatter)
+        handler.setFormatter(formatter)
 
         mapnik_logger.addHandler(handler)
         export_logger.addHandler(handler)
