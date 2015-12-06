@@ -15,7 +15,9 @@ script:
   - docker-compose up -d pgbouncer
   - sleep 5
   - docker-compose run import-osm
-  - docker-compose run import-external
+  - docker-compose run import-natural-earth
+  - docker-compose run import-water
+  - docker-compose run import-labels
   - docker-compose run import-sql
   - docker-compose run update-scaleranks
   - docker-compose run export-local
