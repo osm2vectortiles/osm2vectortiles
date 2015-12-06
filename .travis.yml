@@ -12,12 +12,11 @@ before_install:
 script:
   - docker-compose up -d postgis
   - sleep 10
-  - docker-compose run import-water
+  - docker-compose run import-external
   - docker-compose run import-sql
-  - docker-compose run import-natural-earth
   - docker-compose run update-scaleranks
   - docker-compose run import
-  - docker-compose run export
+  - docker-compose run export-local
   - docker-compose up -d serve
   - sleep 5
   - curl "http://localhost:8080/index.json"
