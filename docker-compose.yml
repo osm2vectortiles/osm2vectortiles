@@ -18,8 +18,8 @@ pgbouncer:
    - postgis:pg
   ports:
    - "6432"
-import:
-  build: ./src/import
+import-osm:
+  build: ./src/import-osm
   volumes:
    - ./import:/data/import
   volumes_from:

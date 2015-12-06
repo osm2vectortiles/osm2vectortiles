@@ -6,8 +6,8 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - -14.3701
-  - 45.7675
+  - -11.2061
+  - 46.8452
   - 5
 description: Open Streets
 Layer: 
@@ -575,7 +575,7 @@ Layer:
     Datasource: 
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
-      geometry_field: ''
+      geometry_field: wkb_geometry
       geometry_table: ''
       host: db
       key_field: ''
