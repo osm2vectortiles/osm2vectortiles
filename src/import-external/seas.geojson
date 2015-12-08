@@ -143,8 +143,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -15,
-          -45
+          -13.53515625,
+          -30.902224705171427
         ]
       }
     },
@@ -206,8 +206,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          69.9999999,
-          -9.999999900000013
+          82.6171875,
+          -26.74561038219901
         ]
       }
     },
@@ -227,8 +227,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -10.00000010000001,
-          75
+          -1.9335937499999998,
+          77.5041191797399
         ]
       }
     },
@@ -626,8 +626,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          35.999999899999985,
-          74
+          43.76953125,
+          76.3518964311259
         ]
       }
     },
@@ -712,27 +712,6 @@
         "coordinates": [
           28.2499999,
           40.6666672
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "osm_id": "305640306",
-        "name": "Atlantic Ocean",
-        "name_en": "Atlantic Ocean",
-        "name_de": "Atlantischer Ozean",
-        "name_fr": "Océan Atlantique",
-        "name_es": "Océano Atlántico",
-        "name_zh": "大西洋",
-        "name_ru": "Атлантический океан",
-        "rank": 5
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -38.320312,
-          13.581921
         ]
       }
     },
@@ -1006,27 +985,6 @@
         "coordinates": [
           89.99999989999996,
           -59.9999999
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "osm_id": "305640305",
-        "name": "Море Лаптевых",
-        "name_en": "Laptev Sea",
-        "name_de": "Laptewsee",
-        "name_fr": "Mer de Laptev",
-        "name_es": "Mar de Láptev",
-        "name_zh": null,
-        "name_ru": "Море Лаптевых",
-        "rank": 5
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          125.99999989999996,
-          76
         ]
       }
     },
@@ -3207,6 +3165,546 @@
           [
             -59.501953124999986,
             49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640305",
+        "name": "Море Лаптевых",
+        "name_en": "Laptev Sea",
+        "name_de": "Laptewsee",
+        "name_fr": "Mer de Laptev",
+        "name_es": "Mar de Láptev",
+        "name_zh": null,
+        "name_ru": "Море Лаптевых",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            111.09374999999999,
+            78.54304353589549
+          ],
+          [
+            116.01562499999999,
+            77.61770905279676
+          ],
+          [
+            121.904296875,
+            76.72022329036133
+          ],
+          [
+            124.541015625,
+            76.413973015132
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "osm_id": 305639710,
+        "name": "Arctic Ocean",
+        "name_en": "Arctic Ocean",
+        "name_de": "Arktischer Ozean",
+        "name_fr": "Océan Arctique",
+        "name_es": "Océano Ártico",
+        "name_zh": "北冰洋",
+        "name_ru": "Северный Ледовитый океан",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            49.21875,
+            83.21569268984949
+          ],
+          [
+            99.140625,
+            82.49482361179572
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "osm_id": 0,
+        "name": "Gulf of Mexico"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.7802734375,
+          25.443274612305746
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "osm_id": 0,
+        "name": "Bahia de Campeche"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -95.64697265625,
+            19.91138351415555
+          ],
+          [
+            -94.295654296875,
+            19.435514339097825
+          ],
+          [
+            -93.4716796875,
+            19.290405639497994
+          ],
+          [
+            -92.39501953125,
+            19.518375478601566
+          ],
+          [
+            -91.746826171875,
+            19.993998469485504
+          ],
+          [
+            -91.285400390625,
+            20.33432561683554
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "osm_id": 0,
+        "name": "Hudson Bay",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.95703125,
+          59.17592824927136
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "osm_id": 0,
+        "name": "Hudson Strait"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -75.0146484375,
+            63.48976680530999
+          ],
+          [
+            -72.2021484375,
+            62.59334083012024
+          ],
+          [
+            -70.2685546875,
+            61.98026726504402
+          ],
+          [
+            -67.67578124999999,
+            61.20679804263029
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "osm_id": 0,
+        "name": "Foxe Basin"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -81.123046875,
+            65.62202261510642
+          ],
+          [
+            -79.365234375,
+            66.33750501996518
+          ],
+          [
+            -78.6181640625,
+            66.96447630005638
+          ],
+          [
+            -78.22265625,
+            67.67608458198097
+          ],
+          [
+            -78.1787109375,
+            67.97463396204759
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "osm_id": 0,
+        "name": "Gulf of Boothia"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -90.3076171875,
+            70.4367988185464
+          ],
+          [
+            -88.61572265625,
+            69.97549253616164
+          ],
+          [
+            -87.451171875,
+            69.54219883674266
+          ],
+          [
+            -86.06689453125,
+            68.78414378041504
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "osm_id": 0,
+        "name": "Jones Sound"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -86.7919921875,
+            76.01609366420996
+          ],
+          [
+            -85.078125,
+            76.07438073300233
+          ],
+          [
+            -83.51806640624999,
+            76.10607323707123
+          ],
+          [
+            -82.880859375,
+            76.0902358331725
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "name": "Viscount Melville Sound",
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -112.78564453124999,
+            73.87981844366595
+          ],
+          [
+            -111.37939453125,
+            73.80644709395938
+          ],
+          [
+            -109.9072265625,
+            73.79418697670552
+          ],
+          [
+            -108.65478515625,
+            73.87371654457475
+          ],
+          [
+            -107.57812499999999,
+            74.01349291618119
+          ],
+          [
+            -106.9189453125,
+            74.13407794029423
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "name": "M`Clure Strait",
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.08007812499999,
+            75.23066741281573
+          ],
+          [
+            -120.14648437499999,
+            75.07300992968266
+          ],
+          [
+            -118.828125,
+            74.92514172326577
+          ],
+          [
+            -117.3779296875,
+            74.72382705688685
+          ],
+          [
+            -116.03759765625,
+            74.52575231463916
+          ],
+          [
+            -115.94970703125,
+            74.51402314087824
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "name": "Amundsen Gulf",
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -125.70556640625,
+            70.95252765818387
+          ],
+          [
+            -124.03564453125,
+            70.63448406630856
+          ],
+          [
+            -122.3876953125,
+            70.39997823747066
+          ],
+          [
+            -119.44335937499999,
+            70.25202914452564
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "name": "Baffin Bay",
+        "osm_id": 0,
+        "rank": 2
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -74.970703125,
+            75.73730278940474
+          ],
+          [
+            -70.83984375,
+            74.14008387440462
+          ],
+          [
+            -67.32421875,
+            72.76406472320436
+          ],
+          [
+            -63.6328125,
+            71.60828252210263
+          ],
+          [
+            -61.083984375,
+            70.72897946208789
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "name": "Melville Bay",
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -63.54492187500001,
+            75.79133591604713
+          ],
+          [
+            -61.8310546875,
+            75.6504309974655
+          ],
+          [
+            -59.8974609375,
+            75.33115771680923
+          ],
+          [
+            -59.32617187499999,
+            75.06168594936098
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "name": "Davis Strait",
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -59.0625,
+            67.1016555307692
+          ],
+          [
+            -57.919921875,
+            65.94647177615738
+          ],
+          [
+            -57.1728515625,
+            65.03506043658815
+          ],
+          [
+            -56.865234375,
+            64.47279382008166
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "name": "Black Sea",
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            31.3330078125,
+            43.29320031385282
+          ],
+          [
+            33.4423828125,
+            43.40504748787035
+          ],
+          [
+            35.66162109375,
+            43.34116005412307
+          ],
+          [
+            37.177734375,
+            43.004647127794435
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "name": "Gulf of Maine",
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -69.8291015625,
+            42.5530802889558
+          ],
+          [
+            -69.3017578125,
+            43.08493742707592
+          ],
+          [
+            -68.31298828125,
+            43.5326204268101
+          ],
+          [
+            -67.763671875,
+            43.691707903073805
+          ],
+          [
+            -66.95068359374999,
+            43.8503744993026
           ]
         ]
       }
