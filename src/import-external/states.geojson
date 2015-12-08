@@ -1,111 +1,2486 @@
 {
-"type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-"features": [
-{ "type": "Feature", "properties": { "osm_id": "671022", "area_sqkm": 422102.0, "abbr": "Calif.", "ref": "CA", "name": "California", "name_en": "California", "name_de": "Kalifornien", "name_fr": "Californie", "name_es": "California", "name_zh": null, "name_ru": "Калифорния" }, "geometry": { "type": "Point", "coordinates": [ -118.7559974, 36.7014631 ] } },
-{ "type": "Feature", "properties": { "osm_id": "34724864", "area_sqkm": 225564.0, "abbr": "Wash.", "ref": "WA", "name": "Washington", "name_en": "Washington", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Вашингтон" }, "geometry": { "type": "Point", "coordinates": [ -120.2126139, 47.2868352 ] } },
-{ "type": "Feature", "properties": { "osm_id": "244079544", "area_sqkm": 492743.0, "abbr": null, "ref": "甘", "name": "甘肃省", "name_en": "Gansu Province", "name_de": "Gansu", "name_fr": "Gānsù", "name_es": "Gansu", "name_zh": "甘肃省", "name_ru": "Ганьсу" }, "geometry": { "type": "Point", "coordinates": [ 101.9999999, 38.0000001 ] } },
-{ "type": "Feature", "properties": { "osm_id": "244080393", "area_sqkm": 218220.0, "abbr": null, "ref": "贵", "name": "贵州省", "name_en": "Guizhou Province", "name_de": "Guizhou", "name_fr": "Guìzhoū", "name_es": "Guizhou", "name_zh": "贵州省", "name_ru": "Гуйчжоу" }, "geometry": { "type": "Point", "coordinates": [ 107.0, 27.0 ] } },
-{ "type": "Feature", "properties": { "osm_id": "244080442", "area_sqkm": 330032.0, "abbr": null, "ref": "桂", "name": "广西壮族自治区", "name_en": "Guangxi Zhuang Autonomous Region", "name_de": "Guangxi", "name_fr": "Région autonome zhuang du Guangxi", "name_es": "Guangxi", "name_zh": "广西壮族自治区", "name_ru": "Гуанси-Чжуанский автономный район" }, "geometry": { "type": "Point", "coordinates": [ 109.0, 24.0 ] } },
-{ "type": "Feature", "properties": { "osm_id": "244080467", "area_sqkm": 270756.0, "abbr": null, "ref": "冀", "name": "河北省", "name_en": "Hebei Province", "name_de": "Hebei", "name_fr": "Héběi", "name_es": "Hebei", "name_zh": "河北省", "name_ru": "Хэбэй" }, "geometry": { "type": "Point", "coordinates": [ 116.0, 39.0000001 ] } },
-{ "type": "Feature", "properties": { "osm_id": "244080473", "area_sqkm": 532561.0, "abbr": null, "ref": "黑", "name": "黑龙江省", "name_en": "Heilongjiang Province", "name_de": "Heilongjiang", "name_fr": "Hēilóngjiāng", "name_es": "Heilongjiang", "name_zh": "黑龙江省", "name_ru": "Хэйлунцзян" }, "geometry": { "type": "Point", "coordinates": [ 127.999992, 48.0000047 ] } },
-{ "type": "Feature", "properties": { "osm_id": "244080670", "area_sqkm": 297453.0, "abbr": null, "ref": "湘", "name": "湖南省", "name_en": "Hunan Province", "name_de": "Hunan", "name_fr": "Húnán", "name_es": "Hunan", "name_zh": "湖南省", "name_ru": "Хунань" }, "geometry": { "type": "Point", "coordinates": [ 112.009538, 27.9995878 ] } },
-{ "type": "Feature", "properties": { "osm_id": "244080735", "area_sqkm": 162260.0, "abbr": null, "ref": "苏", "name": "江苏省", "name_en": "Jiangsu Province", "name_de": "Jiāngsū", "name_fr": "Jiāngsū", "name_es": "Jiangsu", "name_zh": "江苏省", "name_ru": "Цзянсу" }, "geometry": { "type": "Point", "coordinates": [ 119.9999999, 33.0000001 ] } },
-{ "type": "Feature", "properties": { "osm_id": "244080890", "area_sqkm": 223210.0, "abbr": null, "ref": "吉", "name": "吉林省", "name_en": "Jilin Province", "name_de": "Jílín", "name_fr": "Jílín", "name_es": "Jilin", "name_zh": "吉林省", "name_ru": "Гирин" }, "geometry": { "type": "Point", "coordinates": [ 125.9816054, 42.9995032 ] } },
-{ "type": "Feature", "properties": { "osm_id": "244081110", "area_sqkm": 245066.0, "abbr": null, "ref": "辽", "name": "辽宁省", "name_en": "Liaoning Province", "name_de": "Liáoníng", "name_fr": "Liáoníng", "name_es": "Liaoning", "name_zh": "辽宁省", "name_ru": "Ляонин" }, "geometry": { "type": "Point", "coordinates": [ 122.9955469, 40.9975197 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316940520", "area_sqkm": 382839.0, "abbr": "Ariz.", "ref": "AZ", "name": "Arizona", "name_en": "Arizona", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Аризона" }, "geometry": { "type": "Point", "coordinates": [ -111.7632755, 34.395342 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316942960", "area_sqkm": 155946.0, "abbr": "Ark.", "ref": "AR", "name": "Arkansas", "name_en": "Arkansas", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Арканзас" }, "geometry": { "type": "Point", "coordinates": [ -92.4479108, 35.2048883 ] } },
-{ "type": "Feature", "properties": { "osm_id": "244081449", "area_sqkm": 1246663.0, "abbr": null, "ref": "蒙", "name": "内蒙古自治区 (ᠦᠪᠦᠷ ᠮᠣᠨᠭᠭᠣᠯ) (Өвөр Монгол)", "name_en": "Inner Mongolia Autonomous Region", "name_de": "Innere Mongolei", "name_fr": "Région autonome de Mongolie-intérieure", "name_es": "Mongolia Interior", "name_zh": "内蒙古自治区", "name_ru": "Внутренняя Монголия" }, "geometry": { "type": "Point", "coordinates": [ 114.3251664, 43.2443242 ] } },
-{ "type": "Feature", "properties": { "osm_id": "244081488", "area_sqkm": 807676.0, "abbr": null, "ref": "青", "name": "青海省 \/ Qinghai", "name_en": "Qinghai Province", "name_de": "Qinghai", "name_fr": "Qīnghǎi", "name_es": "Qinghai", "name_zh": "青海省", "name_ru": "Цинхай" }, "geometry": { "type": "Point", "coordinates": [ 96.0, 36.0 ] } },
-{ "type": "Feature", "properties": { "osm_id": "244081643", "area_sqkm": 192250.0, "abbr": null, "ref": "鲁", "name": "山东省", "name_en": "Shandong Province", "name_de": "Shāndōng", "name_fr": "Shāndōng", "name_es": "Shandong", "name_zh": "山东省", "name_ru": "Шаньдун" }, "geometry": { "type": "Point", "coordinates": [ 118.9999999, 36.0000001 ] } },
-{ "type": "Feature", "properties": { "osm_id": "244081852", "area_sqkm": 555955.0, "abbr": null, "ref": "川", "name": "四川省", "name_en": "Sichuan Province", "name_de": "Sichuan", "name_fr": "Sìchuān", "name_es": "Sichuan", "name_zh": "四川省", "name_ru": "Сычуань" }, "geometry": { "type": "Point", "coordinates": [ 102.4999999, 30.5000001 ] } },
-{ "type": "Feature", "properties": { "osm_id": "244082468", "area_sqkm": 1249048.0, "abbr": null, "ref": "藏", "name": "西藏自治区 (བོད་རང་སྐྱོང་ལྗོངས་)", "name_en": "Tibet Autonomous Region", "name_de": "Autonomes Gebiet Tibet", "name_fr": "Région autonome du Tibet", "name_es": "Región Autónoma del Tíbet", "name_zh": "西藏自治区", "name_ru": "Тибетский автономный район" }, "geometry": { "type": "Point", "coordinates": [ 89.9999998, 32.0000002 ] } },
-{ "type": "Feature", "properties": { "osm_id": "244082773", "area_sqkm": 411435.0, "abbr": null, "ref": "云", "name": "云南省", "name_en": "Yunnan Province", "name_de": "Yunnan", "name_fr": "Yúnnán", "name_es": "Yunnan", "name_zh": "云南省", "name_ru": "Юньнань" }, "geometry": { "type": "Point", "coordinates": [ 102.0, 25.0 ] } },
-{ "type": "Feature", "properties": { "osm_id": "304951004", "area_sqkm": 833251.0, "abbr": null, "ref": "NSW", "name": "New South Wales", "name_en": null, "name_de": "Neusüdwales", "name_fr": "Nouvelle Galles du Sud", "name_es": "Nueva Gales del Sur", "name_zh": null, "name_ru": "Новый Южный Уэльс" }, "geometry": { "type": "Point", "coordinates": [ 147.2869493, -31.8759835 ] } },
-{ "type": "Feature", "properties": { "osm_id": "304951005", "area_sqkm": 2621966.0, "abbr": null, "ref": "WA", "name": "Western Australia", "name_en": null, "name_de": "Westaustralien", "name_fr": "Australie occidentale", "name_es": "Australia Occidental", "name_zh": null, "name_ru": "Западная Австралия" }, "geometry": { "type": "Point", "coordinates": [ 121.0187246, -25.2303005 ] } },
-{ "type": "Feature", "properties": { "osm_id": "304951006", "area_sqkm": 1392809.0, "abbr": null, "ref": "NT", "name": "Northern Territory", "name_en": null, "name_de": "Nordterritorium", "name_fr": "Territoire du Nord", "name_es": "Territorio del Norte", "name_zh": null, "name_ru": "Северная территория" }, "geometry": { "type": "Point", "coordinates": [ 133.2303375, -19.8516101 ] } },
-{ "type": "Feature", "properties": { "osm_id": "304951007", "area_sqkm": 1004301.0, "abbr": null, "ref": "SA", "name": "South Australia", "name_en": null, "name_de": "Südaustralien", "name_fr": "Australie méridionale", "name_es": "Australia Meridional", "name_zh": null, "name_ru": "Южная Австралия" }, "geometry": { "type": "Point", "coordinates": [ 135.6301212, -30.5343665 ] } },
-{ "type": "Feature", "properties": { "osm_id": "304951008", "area_sqkm": 120141.0, "abbr": null, "ref": "TAS", "name": "Tasmania", "name_en": null, "name_de": "Tasmanien", "name_fr": "Tasmanie", "name_es": "Tasmania", "name_zh": null, "name_ru": "Тасмания" }, "geometry": { "type": "Point", "coordinates": [ 146.6366887, -42.035067 ] } },
-{ "type": "Feature", "properties": { "osm_id": "304951009", "area_sqkm": 260231.0, "abbr": null, "ref": "VIC", "name": "Victoria", "name_en": null, "name_de": null, "name_fr": "Victoria", "name_es": "Victoria", "name_zh": null, "name_ru": "Виктория" }, "geometry": { "type": "Point", "coordinates": [ 144.6780052, -36.5986096 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316945104", "area_sqkm": 308081.0, "abbr": "Colo.", "ref": "CO", "name": "Colorado", "name_en": "Colorado", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Колорадо" }, "geometry": { "type": "Point", "coordinates": [ -105.6077167, 38.7251776 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316945353", "area_sqkm": 96329.0, "abbr": "Conn.", "ref": "CT", "name": "Connecticut", "name_en": "Connecticut", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Коннектикут" }, "geometry": { "type": "Point", "coordinates": [ -72.7342163, 41.6500201 ] } },
-{ "type": "Feature", "properties": { "osm_id": "305700696", "area_sqkm": 1420722.0, "abbr": null, "ref": "NT", "name": "Northwest Territories", "name_en": "Northwest Territories", "name_de": "Nordwest-Territorien", "name_fr": "Territoires du Nord-Ouest", "name_es": "Territorios del Noroeste", "name_zh": null, "name_ru": "Северо-Западные территории" }, "geometry": { "type": "Point", "coordinates": [ -118.0, 65.0000004 ] } },
-{ "type": "Feature", "properties": { "osm_id": "305700699", "area_sqkm": 1034237.0, "abbr": null, "ref": "BC", "name": "British Columbia", "name_en": "British Columbia", "name_de": "Britisch-Kolumbien", "name_fr": "Colombie-Britannique", "name_es": "Columbia Británica", "name_zh": "不列颠哥伦比亚", "name_ru": "Британская Колумбия" }, "geometry": { "type": "Point", "coordinates": [ -125.0, 55.0 ] } },
-{ "type": "Feature", "properties": { "osm_id": "305700700", "area_sqkm": 2130542.0, "abbr": null, "ref": "NU", "name": "Nunavut", "name_en": "Nunavut", "name_de": null, "name_fr": "Nunavut", "name_es": null, "name_zh": null, "name_ru": "Нунавут" }, "geometry": { "type": "Point", "coordinates": [ -90.0, 70.0000073 ] } },
-{ "type": "Feature", "properties": { "osm_id": "305700701", "area_sqkm": 1531748.0, "abbr": null, "ref": "QC", "name": "Québec", "name_en": "Québec", "name_de": null, "name_fr": "Québec", "name_es": null, "name_zh": null, "name_ru": "Квебек" }, "geometry": { "type": "Point", "coordinates": [ -72.0, 54.0 ] } },
-{ "type": "Feature", "properties": { "osm_id": "305700702", "area_sqkm": 1169669.0, "abbr": null, "ref": "ON", "name": "Ontario", "name_en": "Ontario", "name_de": null, "name_fr": "Ontario", "name_es": null, "name_zh": null, "name_ru": "Онтарио" }, "geometry": { "type": "Point", "coordinates": [ -86.0000001, 50.0000002 ] } },
-{ "type": "Feature", "properties": { "osm_id": "305700703", "area_sqkm": 757383.0, "abbr": null, "ref": "AB", "name": "Alberta", "name_en": "Alberta", "name_de": null, "name_fr": "Province d’ Alberta", "name_es": null, "name_zh": null, "name_ru": "Альберта" }, "geometry": { "type": "Point", "coordinates": [ -114.9999999, 55.0 ] } },
-{ "type": "Feature", "properties": { "osm_id": "305700704", "area_sqkm": 132167.0, "abbr": null, "ref": "NS", "name": "Nova Scotia", "name_en": "Nova Scotia", "name_de": "Neuschottland", "name_fr": "Nouvelle-Écosse", "name_es": "Nueva Escocia", "name_zh": null, "name_ru": "Новая Шотландия" }, "geometry": { "type": "Point", "coordinates": [ -62.9999999, 45.0000002 ] } },
-{ "type": "Feature", "properties": { "osm_id": "305700705", "area_sqkm": 686615.0, "abbr": null, "ref": "MB", "name": "Manitoba", "name_en": "Manitoba", "name_de": null, "name_fr": "Manitoba", "name_es": null, "name_zh": "马尼托巴", "name_ru": "Манитоба" }, "geometry": { "type": "Point", "coordinates": [ -97.0000001, 55.0000001 ] } },
-{ "type": "Feature", "properties": { "osm_id": "305700706", "area_sqkm": 483301.0, "abbr": null, "ref": "NL", "name": "Newfoundland and Labrador", "name_en": "Newfoundland and Labrador", "name_de": "Neufundland und Labrador", "name_fr": "Terre-Neuve-et-Labrador", "name_es": "Terranova y Labrador", "name_zh": null, "name_ru": "Ньюфаундленд и Лабрадор" }, "geometry": { "type": "Point", "coordinates": [ -56.0000001, 52.0000002 ] } },
-{ "type": "Feature", "properties": { "osm_id": "305700707", "area_sqkm": 544451.0, "abbr": null, "ref": "YT", "name": "Yukon", "name_en": "Yukon Territory", "name_de": null, "name_fr": "Territoire du Yukon", "name_es": null, "name_zh": null, "name_ru": "Юкон" }, "geometry": { "type": "Point", "coordinates": [ -136.0000001, 63.0000001 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316417213", "area_sqkm": 55990.0, "abbr": null, "ref": null, "name": "Haryāna", "name_en": "Haryana", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Харьяна" }, "geometry": { "type": "Point", "coordinates": [ 76.0, 29.0 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316647532", "area_sqkm": 208490.0, "abbr": "Ala.", "ref": "AL", "name": "Alabama", "name_en": "Alabama", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Алабама" }, "geometry": { "type": "Point", "coordinates": [ -86.8295337, 33.2588817 ] } },
-{ "type": "Feature", "properties": { "osm_id": "565543876", "area_sqkm": 923013.0, "abbr": "MT", "ref": "MT", "name": "Mato Grosso", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Мату-Гросу" }, "geometry": { "type": "Point", "coordinates": [ -55.5716547, -12.2115009 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316945699", "area_sqkm": 42910.0, "abbr": "Del.", "ref": "DE", "name": "Delaware", "name_en": "Delaware", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Делавэр" }, "geometry": { "type": "Point", "coordinates": [ -75.4013315, 38.6920451 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316949496", "area_sqkm": 226259.0, "abbr": "Ga.", "ref": "GA", "name": "Georgia", "name_en": "Georgia", "name_de": null, "name_fr": "Géorgie", "name_es": null, "name_zh": null, "name_ru": "Джорджия" }, "geometry": { "type": "Point", "coordinates": [ -83.1137366, 32.3293809 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316949921", "area_sqkm": 114226.0, "abbr": "Hawaii", "ref": "HI", "name": "Hawaii", "name_en": "Hawaii", "name_de": null, "name_fr": "Hawaï", "name_es": "Hawái", "name_zh": null, "name_ru": "Гавайи" }, "geometry": { "type": "Point", "coordinates": [ -157.975203, 21.2160437 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316950582", "area_sqkm": 262069.0, "abbr": "Idaho", "ref": "ID", "name": "Idaho", "name_en": "Idaho", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Айдахо" }, "geometry": { "type": "Point", "coordinates": [ -114.0154071, 43.6447642 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316954434", "area_sqkm": 131633.0, "abbr": "Ind.", "ref": "IN", "name": "Indiana", "name_en": "Indiana", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Индиана" }, "geometry": { "type": "Point", "coordinates": [ -86.1746933, 40.3270127 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316955537", "area_sqkm": 229768.0, "abbr": "Iowa", "ref": "IA", "name": "Iowa", "name_en": "Iowa", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Айова" }, "geometry": { "type": "Point", "coordinates": [ -93.3122705, 41.9216734 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316956038", "area_sqkm": 283188.0, "abbr": "Kans.", "ref": "KS", "name": "Kansas", "name_en": "Kansas", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Канзас" }, "geometry": { "type": "Point", "coordinates": [ -98.5821872, 38.27312 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316959037", "area_sqkm": 202636.0, "abbr": "Ky.", "ref": "KY", "name": "Kentucky", "name_en": "Kentucky", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Кентукки" }, "geometry": { "type": "Point", "coordinates": [ -85.1551411, 37.5726028 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316961033", "area_sqkm": 215307.0, "abbr": "La.", "ref": "LA", "name": "Louisiana", "name_en": "Louisiana", "name_de": null, "name_fr": "Louisiane", "name_es": "Luisiana", "name_zh": null, "name_ru": "Луизиана" }, "geometry": { "type": "Point", "coordinates": [ -92.007126, 30.8703881 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316961875", "area_sqkm": 162164.0, "abbr": "Maine", "ref": "ME", "name": "Maine", "name_en": "Maine", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Мэн" }, "geometry": { "type": "Point", "coordinates": [ -68.8590201, 45.709097 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316964668", "area_sqkm": 54342.0, "abbr": "Md.", "ref": null, "name": "Maryland", "name_en": "Maryland", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Мэриленд" }, "geometry": { "type": "Point", "coordinates": [ -76.9382069, 39.5162234 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316965734", "area_sqkm": 111216.0, "abbr": "Mass.", "ref": "MA", "name": "Massachusetts", "name_en": "Massachusetts", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Массачусетс" }, "geometry": { "type": "Point", "coordinates": [ -72.032366, 42.3788774 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316966612", "area_sqkm": 272805.0, "abbr": "Mich.", "ref": "MI", "name": "Michigan", "name_en": "Michigan", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Мичиган" }, "geometry": { "type": "Point", "coordinates": [ -84.6824346, 43.6211955 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316967611", "area_sqkm": 264374.0, "abbr": "Minn.", "ref": "MN", "name": "Minnesota", "name_en": "Minnesota", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Миннесота" }, "geometry": { "type": "Point", "coordinates": [ -94.6113288, 45.9896587 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316968897", "area_sqkm": 165768.0, "abbr": "Miss.", "ref": "MS", "name": "Mississippi", "name_en": "Mississippi", "name_de": null, "name_fr": null, "name_es": "Misisipi", "name_zh": null, "name_ru": "Миссисипи" }, "geometry": { "type": "Point", "coordinates": [ -89.7348497, 32.9715645 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316970920", "area_sqkm": 425470.0, "abbr": "Mont.", "ref": "MT", "name": "Montana", "name_en": "Montana", "name_de": null, "name_fr": "Montana", "name_es": null, "name_zh": null, "name_ru": "Монтана" }, "geometry": { "type": "Point", "coordinates": [ -109.6387579, 47.3752671 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316971452", "area_sqkm": 267633.0, "abbr": "Nebr.", "ref": "NE", "name": "Nebraska", "name_en": "Nebraska", "name_de": "Nebraska", "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Небраска" }, "geometry": { "type": "Point", "coordinates": [ -99.5873816, 41.7370229 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316971669", "area_sqkm": 312727.0, "abbr": "Nev.", "ref": "NV", "name": "Nevada", "name_en": "Nevada", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Невада" }, "geometry": { "type": "Point", "coordinates": [ -116.8537227, 39.5158825 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316971821", "area_sqkm": 41737.0, "abbr": "N.H.", "ref": "NH", "name": "New Hampshire", "name_en": "New Hampshire", "name_de": null, "name_fr": null, "name_es": "Nuevo Hampshire", "name_zh": null, "name_ru": "Нью-Гэмпшир" }, "geometry": { "type": "Point", "coordinates": [ -71.6553992, 43.4849133 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316973311", "area_sqkm": 76444.0, "abbr": "N.J.", "ref": "NJ", "name": "New Jersey", "name_en": "New Jersey", "name_de": null, "name_fr": null, "name_es": "Nueva Jersey", "name_zh": null, "name_ru": "Нью-Джерси" }, "geometry": { "type": "Point", "coordinates": [ -74.4041622, 40.0757384 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316973967", "area_sqkm": 382908.0, "abbr": "N.M.", "ref": "NM", "name": "New Mexico", "name_en": "New Mexico", "name_de": "Neumexiko", "name_fr": "Nouveau Mexique", "name_es": "Nuevo México", "name_zh": null, "name_ru": "Нью-Мексико" }, "geometry": { "type": "Point", "coordinates": [ -105.993007, 34.5708167 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316976734", "area_sqkm": 164420.0, "abbr": "N.Y.", "ref": "NY", "name": "New York", "name_en": "New York", "name_de": null, "name_fr": null, "name_es": "Nueva York", "name_zh": null, "name_ru": "Нью-Йорк" }, "geometry": { "type": "Point", "coordinates": [ -75.8449946, 43.1561681 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316979074", "area_sqkm": 177565.0, "abbr": "N.C.", "ref": "NC", "name": "North Carolina", "name_en": "North Carolina", "name_de": "Nord-Carolina", "name_fr": "Caroline du Nord", "name_es": "Carolina del Norte", "name_zh": null, "name_ru": "Северная Каролина" }, "geometry": { "type": "Point", "coordinates": [ -79.0392919, 35.6729639 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316979718", "area_sqkm": 243646.0, "abbr": "N.D.", "ref": "ND", "name": "North Dakota", "name_en": "North Dakota", "name_de": "Nord-Dakota", "name_fr": "Dakota du Nord", "name_es": "Dakota del Norte", "name_zh": null, "name_ru": "Северная Дакота" }, "geometry": { "type": "Point", "coordinates": [ -100.540737, 47.6201461 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316982774", "area_sqkm": 210832.0, "abbr": "Ohio", "ref": "OH", "name": "Ohio", "name_en": "Ohio", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Огайо" }, "geometry": { "type": "Point", "coordinates": [ -82.6881395, 40.2253569 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316983705", "area_sqkm": 253345.0, "abbr": "Okla.", "ref": "OK", "name": "Oklahoma", "name_en": "Oklahoma", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Оклахома" }, "geometry": { "type": "Point", "coordinates": [ -97.2684063, 34.9550817 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316984338", "area_sqkm": 300279.0, "abbr": "Ore.", "ref": "OR", "name": "Oregon", "name_en": "Oregon", "name_de": null, "name_fr": null, "name_es": "Oregón", "name_zh": null, "name_ru": "Орегон" }, "geometry": { "type": "Point", "coordinates": [ -120.737257, 43.9792797 ] } },
-{ "type": "Feature", "properties": { "osm_id": "565545457", "area_sqkm": 333784.0, "abbr": "TO", "ref": "TO", "name": "Tocantins", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Токантинс" }, "geometry": { "type": "Point", "coordinates": [ -48.3716912, -10.8855129 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316987717", "area_sqkm": 193810.0, "abbr": "Pa.", "ref": "PA", "name": "Pennsylvania", "name_en": "Pennsylvania", "name_de": "Pennsylvanien", "name_fr": "Pennsylvanie", "name_es": "Pensilvania", "name_zh": null, "name_ru": "Пенсильвания" }, "geometry": { "type": "Point", "coordinates": [ -77.7278831, 40.9699889 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316987977", "area_sqkm": 25583.0, "abbr": "R.I.", "ref": "RI", "name": "Rhode Island", "name_en": "Rhode Island", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Род-Айленд" }, "geometry": { "type": "Point", "coordinates": [ -71.5992372, 41.7962409 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316990225", "area_sqkm": 144797.0, "abbr": "S.C.", "ref": "SC", "name": "South Carolina", "name_en": "South Carolina", "name_de": "Süd-Carolina", "name_fr": "Caroline du Sud", "name_es": "Carolina del Sur", "name_zh": null, "name_ru": "Южная Каролина" }, "geometry": { "type": "Point", "coordinates": [ -80.4363743, 33.6874388 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316990807", "area_sqkm": 210708.0, "abbr": "S.D.", "ref": "SD", "name": "South Dakota", "name_en": "South Dakota", "name_de": "Süd-Dakota", "name_fr": "Dakota du Sud", "name_es": "Dakota del Sur", "name_zh": null, "name_ru": "Южная Дакота" }, "geometry": { "type": "Point", "coordinates": [ -100.348761, 44.6471761 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316994008", "area_sqkm": 195442.0, "abbr": "Tenn.", "ref": "TN", "name": "Tennessee", "name_en": "Tennessee", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Теннесси" }, "geometry": { "type": "Point", "coordinates": [ -86.2820081, 35.7730076 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316998356", "area_sqkm": 747458.0, "abbr": "Tex.", "ref": "TX", "name": "Texas", "name_en": "Texas", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Техас" }, "geometry": { "type": "Point", "coordinates": [ -99.5120986, 31.8160381 ] } },
-{ "type": "Feature", "properties": { "osm_id": "316999551", "area_sqkm": 267829.0, "abbr": "Utah", "ref": "UT", "name": "Utah", "name_en": "Utah", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Юта" }, "geometry": { "type": "Point", "coordinates": [ -111.7143584, 39.4225192 ] } },
-{ "type": "Feature", "properties": { "osm_id": "317000170", "area_sqkm": 48427.0, "abbr": "Vt.", "ref": "VT", "name": "Vermont", "name_en": "Vermont", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Вермонт" }, "geometry": { "type": "Point", "coordinates": [ -72.5002608, 44.5990718 ] } },
-{ "type": "Feature", "properties": { "osm_id": "317004702", "area_sqkm": 150286.0, "abbr": "Va.", "ref": "VA", "name": "Virginia", "name_en": "Virginia", "name_de": null, "name_fr": "Virginie", "name_es": null, "name_zh": null, "name_ru": "Виргиния" }, "geometry": { "type": "Point", "coordinates": [ -78.4927721, 37.1232245 ] } },
-{ "type": "Feature", "properties": { "osm_id": "317006365", "area_sqkm": 81945.0, "abbr": "W.Va.", "ref": "WV", "name": "West Virginia", "name_en": "West Virginia", "name_de": null, "name_fr": "Virginie Occidentale", "name_es": "Virginia Occidental", "name_zh": null, "name_ru": "Западная Виргиния" }, "geometry": { "type": "Point", "coordinates": [ -80.8408415, 38.4758406 ] } },
-{ "type": "Feature", "properties": { "osm_id": "317007239", "area_sqkm": 191379.0, "abbr": "Wis.", "ref": "WI", "name": "Wisconsin", "name_en": "Wisconsin", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Висконсин" }, "geometry": { "type": "Point", "coordinates": [ -89.6884637, 44.4308975 ] } },
-{ "type": "Feature", "properties": { "osm_id": "317007393", "area_sqkm": 297699.0, "abbr": "Wyo.", "ref": "WY", "name": "Wyoming", "name_en": "Wyoming", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Вайоминг" }, "geometry": { "type": "Point", "coordinates": [ -107.5685348, 43.1700264 ] } },
-{ "type": "Feature", "properties": { "osm_id": "470649732", "area_sqkm": 166176.0, "abbr": "SCO", "ref": "SCO", "name": "Scotland", "name_en": null, "name_de": "Schottland", "name_fr": "Écosse", "name_es": "Escocia", "name_zh": null, "name_ru": "Шотландия" }, "geometry": { "type": "Point", "coordinates": [ -4.1140518, 56.7861112 ] } },
-{ "type": "Feature", "properties": { "osm_id": "473849775", "area_sqkm": 222509.0, "abbr": "Mo.", "ref": "MO", "name": "Missouri", "name_en": "Missouri", "name_de": null, "name_fr": null, "name_es": "Misuri", "name_zh": null, "name_ru": "Миссури" }, "geometry": { "type": "Point", "coordinates": [ -92.5617875, 38.7604815 ] } },
-{ "type": "Feature", "properties": { "osm_id": "502334045", "area_sqkm": 619620.0, "abbr": "MG", "ref": "MG", "name": "Minas Gerais", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Минас-Жерайс" }, "geometry": { "type": "Point", "coordinates": [ -44.1588654, -18.5264844 ] } },
-{ "type": "Feature", "properties": { "osm_id": "504798993", "area_sqkm": 259187.0, "abbr": "SP", "ref": "SP", "name": "São Paulo", "name_en": null, "name_de": null, "name_fr": "São Paulo", "name_es": null, "name_zh": null, "name_ru": "Сан-Паулу" }, "geometry": { "type": "Point", "coordinates": [ -49.0232348, -21.9549806 ] } },
-{ "type": "Feature", "properties": { "osm_id": "504799970", "area_sqkm": 114655.0, "abbr": "RJ", "ref": "RJ", "name": "Rio de Janeiro", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Рио-де-Жанейро" }, "geometry": { "type": "Point", "coordinates": [ -42.419415, -22.2752762 ] } },
-{ "type": "Feature", "properties": { "osm_id": "504800252", "area_sqkm": 337534.0, "abbr": "RS", "ref": "RS", "name": "Rio Grande do Sul", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Южный Риу-Гранди" }, "geometry": { "type": "Point", "coordinates": [ -53.767225, -29.8518 ] } },
-{ "type": "Feature", "properties": { "osm_id": "539668890", "area_sqkm": 140699.0, "abbr": "SC", "ref": "SC", "name": "Santa Catarina", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Санта-Катарина" }, "geometry": { "type": "Point", "coordinates": [ -51.114965, -27.0628367 ] } },
-{ "type": "Feature", "properties": { "osm_id": "539672077", "area_sqkm": 236704.0, "abbr": "PR", "ref": "PR", "name": "Paraná", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Парана" }, "geometry": { "type": "Point", "coordinates": [ -51.8148872, -24.4842187 ] } },
-{ "type": "Feature", "properties": { "osm_id": "539676406", "area_sqkm": 1310196.0, "abbr": "PA", "ref": "PA", "name": "Pará", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Пара" }, "geometry": { "type": "Point", "coordinates": [ -52.8973006, -4.7493933 ] } },
-{ "type": "Feature", "properties": { "osm_id": "539680936", "area_sqkm": 192384.0, "abbr": "AP", "ref": "AP", "name": "Amapá", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Амапа" }, "geometry": { "type": "Point", "coordinates": [ -51.9161977, 1.3545442 ] } },
-{ "type": "Feature", "properties": { "osm_id": "539689822", "area_sqkm": 309589.0, "abbr": "RR", "ref": "RR", "name": "Roraima", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Рорайма" }, "geometry": { "type": "Point", "coordinates": [ -61.3631922, 2.135138 ] } },
-{ "type": "Feature", "properties": { "osm_id": "539691270", "area_sqkm": 608596.0, "abbr": "BA", "ref": "BA", "name": "Bahia", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Баия" }, "geometry": { "type": "Point", "coordinates": [ -41.9294776, -12.285251 ] } },
-{ "type": "Feature", "properties": { "osm_id": "539693378", "area_sqkm": 426741.0, "abbr": "MS", "ref": "MS", "name": "Mato Grosso do Sul", "name_en": null, "name_de": null, "name_fr": null, "name_es": "Mato Grosso del Sur", "name_zh": "南马托格罗索州", "name_ru": "Мату-Гросу-ду-Сул" }, "geometry": { "type": "Point", "coordinates": [ -54.4794731, -19.5852564 ] } },
-{ "type": "Feature", "properties": { "osm_id": "539830692", "area_sqkm": 90046.0, "abbr": "PB", "ref": "PB", "name": "Paraíba", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Параиба" }, "geometry": { "type": "Point", "coordinates": [ -36.972191, -7.1168306 ] } },
-{ "type": "Feature", "properties": { "osm_id": "539830860", "area_sqkm": 63004.0, "abbr": "RN", "ref": "RN", "name": "Rio Grande do Norte", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Северный Риу-Гранде" }, "geometry": { "type": "Point", "coordinates": [ -36.4781776, -5.6781175 ] } },
-{ "type": "Feature", "properties": { "osm_id": "539831949", "area_sqkm": 162925.0, "abbr": "PE", "ref": "PE", "name": "Pernambuco", "name_en": null, "name_de": null, "name_fr": "Pernambouc", "name_es": null, "name_zh": null, "name_ru": "Пернамбуку" }, "geometry": { "type": "Point", "coordinates": [ -38.3087923, -8.4127483 ] } },
-{ "type": "Feature", "properties": { "osm_id": "539832191", "area_sqkm": 246469.0, "abbr": "CE", "ref": "CE", "name": "Ceará", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Сеара" }, "geometry": { "type": "Point", "coordinates": [ -39.7156073, -5.3264703 ] } },
-{ "type": "Feature", "properties": { "osm_id": "541425925", "area_sqkm": 300692.0, "abbr": "PI", "ref": "PI", "name": "Piauí", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Пиауи" }, "geometry": { "type": "Point", "coordinates": [ -43.3568099, -7.8739842 ] } },
-{ "type": "Feature", "properties": { "osm_id": "541426952", "area_sqkm": 345762.0, "abbr": "MA", "ref": "MA", "name": "Maranhão", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Мараньян" }, "geometry": { "type": "Point", "coordinates": [ -45.3930262, -5.2085503 ] } },
-{ "type": "Feature", "properties": { "osm_id": "541429445", "area_sqkm": 98344.0, "abbr": "AL", "ref": "AL", "name": "Alagoas", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Алагоас" }, "geometry": { "type": "Point", "coordinates": [ -36.6489727, -9.7081218 ] } },
-{ "type": "Feature", "properties": { "osm_id": "541429632", "area_sqkm": 83209.0, "abbr": "SE", "ref": "SE", "name": "Sergipe", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Сержипи" }, "geometry": { "type": "Point", "coordinates": [ -37.3773519, -10.6743911 ] } },
-{ "type": "Feature", "properties": { "osm_id": "553784069", "area_sqkm": 224822.0, "abbr": "Il.", "ref": "IL", "name": "Illinois", "name_en": "Illinois", "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Иллинойс" }, "geometry": { "type": "Point", "coordinates": [ -89.4339809, 40.0796319 ] } },
-{ "type": "Feature", "properties": { "osm_id": "565543192", "area_sqkm": 310759.0, "abbr": "RO", "ref": "RO", "name": "Rondônia", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": null, "name_ru": "Рондония" }, "geometry": { "type": "Point", "coordinates": [ -62.390871, -10.7375836 ] } },
-{ "type": "Feature", "properties": { "osm_id": "1756225709", "area_sqkm": 53869.0, "abbr": null, "ref": "PE", "name": "Prince Edward Island", "name_en": "Prince Edward Island", "name_de": "Prinz-Edward-Insel", "name_fr": "Île-du-Prince-Édouard", "name_es": "Isla del Príncipe Eduardo", "name_zh": null, "name_ru": "Остров Принца Эдуарда" }, "geometry": { "type": "Point", "coordinates": [ -63.45941, 46.3202067 ] } },
-{ "type": "Feature", "properties": { "osm_id": "1971329414", "area_sqkm": 1766933.0, "abbr": null, "ref": "QLD", "name": "Queensland", "name_en": null, "name_de": null, "name_fr": null, "name_es": null, "name_zh": "昆士兰", "name_ru": "Квинсленд" }, "geometry": { "type": "Point", "coordinates": [ 144.4588889, -21.9182856 ] } }
-]
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "671022",
+        "area_sqkm": 422102,
+        "abbr": "Calif.",
+        "ref": "CA",
+        "name": "California",
+        "name_en": "California",
+        "name_de": "Kalifornien",
+        "name_fr": "Californie",
+        "name_es": "California",
+        "name_zh": null,
+        "name_ru": "Калифорния"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.7559974,
+          36.7014631
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "34724864",
+        "area_sqkm": 225564,
+        "abbr": "Wash.",
+        "ref": "WA",
+        "name": "Washington",
+        "name_en": "Washington",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Вашингтон"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.2126139,
+          47.2868352
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "244079544",
+        "area_sqkm": 492743,
+        "abbr": null,
+        "ref": "甘",
+        "name": "甘肃省",
+        "name_en": "Gansu Province",
+        "name_de": "Gansu",
+        "name_fr": "Gānsù",
+        "name_es": "Gansu",
+        "name_zh": "甘肃省",
+        "name_ru": "Ганьсу"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.9999999,
+          38.0000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "244080393",
+        "area_sqkm": 218220,
+        "abbr": null,
+        "ref": "贵",
+        "name": "贵州省",
+        "name_en": "Guizhou Province",
+        "name_de": "Guizhou",
+        "name_fr": "Guìzhoū",
+        "name_es": "Guizhou",
+        "name_zh": "贵州省",
+        "name_ru": "Гуйчжоу"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107,
+          27
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "244080442",
+        "area_sqkm": 330032,
+        "abbr": null,
+        "ref": "桂",
+        "name": "广西壮族自治区",
+        "name_en": "Guangxi Zhuang Autonomous Region",
+        "name_de": "Guangxi",
+        "name_fr": "Région autonome zhuang du Guangxi",
+        "name_es": "Guangxi",
+        "name_zh": "广西壮族自治区",
+        "name_ru": "Гуанси-Чжуанский автономный район"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          109,
+          24
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "244080467",
+        "area_sqkm": 270756,
+        "abbr": null,
+        "ref": "冀",
+        "name": "河北省",
+        "name_en": "Hebei Province",
+        "name_de": "Hebei",
+        "name_fr": "Héběi",
+        "name_es": "Hebei",
+        "name_zh": "河北省",
+        "name_ru": "Хэбэй"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116,
+          39.0000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "244080473",
+        "area_sqkm": 532561,
+        "abbr": null,
+        "ref": "黑",
+        "name": "黑龙江省",
+        "name_en": "Heilongjiang Province",
+        "name_de": "Heilongjiang",
+        "name_fr": "Hēilóngjiāng",
+        "name_es": "Heilongjiang",
+        "name_zh": "黑龙江省",
+        "name_ru": "Хэйлунцзян"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.999992,
+          48.0000047
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "244080670",
+        "area_sqkm": 297453,
+        "abbr": null,
+        "ref": "湘",
+        "name": "湖南省",
+        "name_en": "Hunan Province",
+        "name_de": "Hunan",
+        "name_fr": "Húnán",
+        "name_es": "Hunan",
+        "name_zh": "湖南省",
+        "name_ru": "Хунань"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.009538,
+          27.9995878
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "244080735",
+        "area_sqkm": 162260,
+        "abbr": null,
+        "ref": "苏",
+        "name": "江苏省",
+        "name_en": "Jiangsu Province",
+        "name_de": "Jiāngsū",
+        "name_fr": "Jiāngsū",
+        "name_es": "Jiangsu",
+        "name_zh": "江苏省",
+        "name_ru": "Цзянсу"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          119.9999999,
+          33.0000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "244080890",
+        "area_sqkm": 223210,
+        "abbr": null,
+        "ref": "吉",
+        "name": "吉林省",
+        "name_en": "Jilin Province",
+        "name_de": "Jílín",
+        "name_fr": "Jílín",
+        "name_es": "Jilin",
+        "name_zh": "吉林省",
+        "name_ru": "Гирин"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          125.9816054,
+          42.9995032
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "244081110",
+        "area_sqkm": 245066,
+        "abbr": null,
+        "ref": "辽",
+        "name": "辽宁省",
+        "name_en": "Liaoning Province",
+        "name_de": "Liáoníng",
+        "name_fr": "Liáoníng",
+        "name_es": "Liaoning",
+        "name_zh": "辽宁省",
+        "name_ru": "Ляонин"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          122.9955469,
+          40.9975197
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316940520",
+        "area_sqkm": 382839,
+        "abbr": "Ariz.",
+        "ref": "AZ",
+        "name": "Arizona",
+        "name_en": "Arizona",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Аризона"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7632755,
+          34.395342
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316942960",
+        "area_sqkm": 155946,
+        "abbr": "Ark.",
+        "ref": "AR",
+        "name": "Arkansas",
+        "name_en": "Arkansas",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Арканзас"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.4479108,
+          35.2048883
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "244081449",
+        "area_sqkm": 1246663,
+        "abbr": null,
+        "ref": "蒙",
+        "name": "内蒙古自治区 (ᠦᠪᠦᠷ ᠮᠣᠨᠭᠭᠣᠯ) (Өвөр Монгол)",
+        "name_en": "Inner Mongolia Autonomous Region",
+        "name_de": "Innere Mongolei",
+        "name_fr": "Région autonome de Mongolie-intérieure",
+        "name_es": "Mongolia Interior",
+        "name_zh": "内蒙古自治区",
+        "name_ru": "Внутренняя Монголия"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.3251664,
+          43.2443242
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "244081488",
+        "area_sqkm": 807676,
+        "abbr": null,
+        "ref": "青",
+        "name": "青海省 / Qinghai",
+        "name_en": "Qinghai Province",
+        "name_de": "Qinghai",
+        "name_fr": "Qīnghǎi",
+        "name_es": "Qinghai",
+        "name_zh": "青海省",
+        "name_ru": "Цинхай"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96,
+          36
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "244081643",
+        "area_sqkm": 192250,
+        "abbr": null,
+        "ref": "鲁",
+        "name": "山东省",
+        "name_en": "Shandong Province",
+        "name_de": "Shāndōng",
+        "name_fr": "Shāndōng",
+        "name_es": "Shandong",
+        "name_zh": "山东省",
+        "name_ru": "Шаньдун"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.9999999,
+          36.0000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "244081852",
+        "area_sqkm": 555955,
+        "abbr": null,
+        "ref": "川",
+        "name": "四川省",
+        "name_en": "Sichuan Province",
+        "name_de": "Sichuan",
+        "name_fr": "Sìchuān",
+        "name_es": "Sichuan",
+        "name_zh": "四川省",
+        "name_ru": "Сычуань"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.4999999,
+          30.5000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "244082468",
+        "area_sqkm": 1249048,
+        "abbr": null,
+        "ref": "藏",
+        "name": "西藏自治区 (བོད་རང་སྐྱོང་ལྗོངས་)",
+        "name_en": "Tibet Autonomous Region",
+        "name_de": "Autonomes Gebiet Tibet",
+        "name_fr": "Région autonome du Tibet",
+        "name_es": "Región Autónoma del Tíbet",
+        "name_zh": "西藏自治区",
+        "name_ru": "Тибетский автономный район"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          89.9999998,
+          32.0000002
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "244082773",
+        "area_sqkm": 411435,
+        "abbr": null,
+        "ref": "云",
+        "name": "云南省",
+        "name_en": "Yunnan Province",
+        "name_de": "Yunnan",
+        "name_fr": "Yúnnán",
+        "name_es": "Yunnan",
+        "name_zh": "云南省",
+        "name_ru": "Юньнань"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102,
+          25
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "304951004",
+        "area_sqkm": 833251,
+        "abbr": null,
+        "ref": "NSW",
+        "name": "New South Wales",
+        "name_en": null,
+        "name_de": "Neusüdwales",
+        "name_fr": "Nouvelle Galles du Sud",
+        "name_es": "Nueva Gales del Sur",
+        "name_zh": null,
+        "name_ru": "Новый Южный Уэльс"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          147.2869493,
+          -31.8759835
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "304951005",
+        "area_sqkm": 2621966,
+        "abbr": null,
+        "ref": "WA",
+        "name": "Western Australia",
+        "name_en": null,
+        "name_de": "Westaustralien",
+        "name_fr": "Australie occidentale",
+        "name_es": "Australia Occidental",
+        "name_zh": null,
+        "name_ru": "Западная Австралия"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0187246,
+          -25.2303005
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "304951006",
+        "area_sqkm": 1392809,
+        "abbr": null,
+        "ref": "NT",
+        "name": "Northern Territory",
+        "name_en": null,
+        "name_de": "Nordterritorium",
+        "name_fr": "Territoire du Nord",
+        "name_es": "Territorio del Norte",
+        "name_zh": null,
+        "name_ru": "Северная территория"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.2303375,
+          -19.8516101
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "304951007",
+        "area_sqkm": 1004301,
+        "abbr": null,
+        "ref": "SA",
+        "name": "South Australia",
+        "name_en": null,
+        "name_de": "Südaustralien",
+        "name_fr": "Australie méridionale",
+        "name_es": "Australia Meridional",
+        "name_zh": null,
+        "name_ru": "Южная Австралия"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.6301212,
+          -30.5343665
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "304951008",
+        "area_sqkm": 120141,
+        "abbr": null,
+        "ref": "TAS",
+        "name": "Tasmania",
+        "name_en": null,
+        "name_de": "Tasmanien",
+        "name_fr": "Tasmanie",
+        "name_es": "Tasmania",
+        "name_zh": null,
+        "name_ru": "Тасмания"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          146.6366887,
+          -42.035067
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "304951009",
+        "area_sqkm": 260231,
+        "abbr": null,
+        "ref": "VIC",
+        "name": "Victoria",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": "Victoria",
+        "name_es": "Victoria",
+        "name_zh": null,
+        "name_ru": "Виктория"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          144.6780052,
+          -36.5986096
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316945104",
+        "area_sqkm": 308081,
+        "abbr": "Colo.",
+        "ref": "CO",
+        "name": "Colorado",
+        "name_en": "Colorado",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Колорадо"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -105.6077167,
+          38.7251776
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316945353",
+        "area_sqkm": 96329,
+        "abbr": "Conn.",
+        "ref": "CT",
+        "name": "Connecticut",
+        "name_en": "Connecticut",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Коннектикут"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.7342163,
+          41.6500201
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305700696",
+        "area_sqkm": 1420722,
+        "abbr": null,
+        "ref": "NT",
+        "name": "Northwest Territories",
+        "name_en": "Northwest Territories",
+        "name_de": "Nordwest-Territorien",
+        "name_fr": "Territoires du Nord-Ouest",
+        "name_es": "Territorios del Noroeste",
+        "name_zh": null,
+        "name_ru": "Северо-Западные территории"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118,
+          65.0000004
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305700699",
+        "area_sqkm": 1034237,
+        "abbr": null,
+        "ref": "BC",
+        "name": "British Columbia",
+        "name_en": "British Columbia",
+        "name_de": "Britisch-Kolumbien",
+        "name_fr": "Colombie-Britannique",
+        "name_es": "Columbia Británica",
+        "name_zh": "不列颠哥伦比亚",
+        "name_ru": "Британская Колумбия"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -125,
+          55
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305700700",
+        "area_sqkm": 2130542,
+        "abbr": null,
+        "ref": "NU",
+        "name": "Nunavut",
+        "name_en": "Nunavut",
+        "name_de": null,
+        "name_fr": "Nunavut",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Нунавут"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90,
+          70.0000073
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305700701",
+        "area_sqkm": 1531748,
+        "abbr": null,
+        "ref": "QC",
+        "name": "Québec",
+        "name_en": "Québec",
+        "name_de": null,
+        "name_fr": "Québec",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Квебек"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72,
+          54
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305700702",
+        "area_sqkm": 1169669,
+        "abbr": null,
+        "ref": "ON",
+        "name": "Ontario",
+        "name_en": "Ontario",
+        "name_de": null,
+        "name_fr": "Ontario",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Онтарио"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.0000001,
+          50.0000002
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305700703",
+        "area_sqkm": 757383,
+        "abbr": null,
+        "ref": "AB",
+        "name": "Alberta",
+        "name_en": "Alberta",
+        "name_de": null,
+        "name_fr": "Province d’ Alberta",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Альберта"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.9999999,
+          55
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305700704",
+        "area_sqkm": 132167,
+        "abbr": null,
+        "ref": "NS",
+        "name": "Nova Scotia",
+        "name_en": "Nova Scotia",
+        "name_de": "Neuschottland",
+        "name_fr": "Nouvelle-Écosse",
+        "name_es": "Nueva Escocia",
+        "name_zh": null,
+        "name_ru": "Новая Шотландия"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -62.9999999,
+          45.0000002
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305700705",
+        "area_sqkm": 686615,
+        "abbr": null,
+        "ref": "MB",
+        "name": "Manitoba",
+        "name_en": "Manitoba",
+        "name_de": null,
+        "name_fr": "Manitoba",
+        "name_es": null,
+        "name_zh": "马尼托巴",
+        "name_ru": "Манитоба"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.0000001,
+          55.0000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305700706",
+        "area_sqkm": 483301,
+        "abbr": null,
+        "ref": "NL",
+        "name": "Newfoundland and Labrador",
+        "name_en": "Newfoundland and Labrador",
+        "name_de": "Neufundland und Labrador",
+        "name_fr": "Terre-Neuve-et-Labrador",
+        "name_es": "Terranova y Labrador",
+        "name_zh": null,
+        "name_ru": "Ньюфаундленд и Лабрадор"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.0000001,
+          52.0000002
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305700707",
+        "area_sqkm": 544451,
+        "abbr": null,
+        "ref": "YT",
+        "name": "Yukon",
+        "name_en": "Yukon Territory",
+        "name_de": null,
+        "name_fr": "Territoire du Yukon",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Юкон"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -136.0000001,
+          63.0000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316417213",
+        "area_sqkm": 55990,
+        "abbr": null,
+        "ref": null,
+        "name": "Haryāna",
+        "name_en": "Haryana",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Харьяна"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76,
+          29
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316647532",
+        "area_sqkm": 208490,
+        "abbr": "Ala.",
+        "ref": "AL",
+        "name": "Alabama",
+        "name_en": "Alabama",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Алабама"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.8295337,
+          33.2588817
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "565543876",
+        "area_sqkm": 923013,
+        "abbr": "MT",
+        "ref": "MT",
+        "name": "Mato Grosso",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Мату-Гросу"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -55.5716547,
+          -12.2115009
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316945699",
+        "area_sqkm": 42910,
+        "abbr": "Del.",
+        "ref": "DE",
+        "name": "Delaware",
+        "name_en": "Delaware",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Делавэр"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.4013315,
+          38.6920451
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316949496",
+        "area_sqkm": 226259,
+        "abbr": "Ga.",
+        "ref": "GA",
+        "name": "Georgia",
+        "name_en": "Georgia",
+        "name_de": null,
+        "name_fr": "Géorgie",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Джорджия"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.1137366,
+          32.3293809
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316949921",
+        "area_sqkm": 114226,
+        "abbr": "Hawaii",
+        "ref": "HI",
+        "name": "Hawaii",
+        "name_en": "Hawaii",
+        "name_de": null,
+        "name_fr": "Hawaï",
+        "name_es": "Hawái",
+        "name_zh": null,
+        "name_ru": "Гавайи"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -157.975203,
+          21.2160437
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316950582",
+        "area_sqkm": 262069,
+        "abbr": "Idaho",
+        "ref": "ID",
+        "name": "Idaho",
+        "name_en": "Idaho",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Айдахо"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0154071,
+          43.6447642
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316954434",
+        "area_sqkm": 131633,
+        "abbr": "Ind.",
+        "ref": "IN",
+        "name": "Indiana",
+        "name_en": "Indiana",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Индиана"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.1746933,
+          40.3270127
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316955537",
+        "area_sqkm": 229768,
+        "abbr": "Iowa",
+        "ref": "IA",
+        "name": "Iowa",
+        "name_en": "Iowa",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Айова"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.3122705,
+          41.9216734
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316956038",
+        "area_sqkm": 283188,
+        "abbr": "Kans.",
+        "ref": "KS",
+        "name": "Kansas",
+        "name_en": "Kansas",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Канзас"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -98.5821872,
+          38.27312
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316959037",
+        "area_sqkm": 202636,
+        "abbr": "Ky.",
+        "ref": "KY",
+        "name": "Kentucky",
+        "name_en": "Kentucky",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Кентукки"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.1551411,
+          37.5726028
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316961033",
+        "area_sqkm": 215307,
+        "abbr": "La.",
+        "ref": "LA",
+        "name": "Louisiana",
+        "name_en": "Louisiana",
+        "name_de": null,
+        "name_fr": "Louisiane",
+        "name_es": "Luisiana",
+        "name_zh": null,
+        "name_ru": "Луизиана"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.007126,
+          30.8703881
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316961875",
+        "area_sqkm": 162164,
+        "abbr": "Maine",
+        "ref": "ME",
+        "name": "Maine",
+        "name_en": "Maine",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Мэн"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -68.8590201,
+          45.709097
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316964668",
+        "area_sqkm": 54342,
+        "abbr": "Md.",
+        "ref": null,
+        "name": "Maryland",
+        "name_en": "Maryland",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Мэриленд"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.9382069,
+          39.5162234
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316965734",
+        "area_sqkm": 111216,
+        "abbr": "Mass.",
+        "ref": "MA",
+        "name": "Massachusetts",
+        "name_en": "Massachusetts",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Массачусетс"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.032366,
+          42.3788774
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316966612",
+        "area_sqkm": 272805,
+        "abbr": "Mich.",
+        "ref": "MI",
+        "name": "Michigan",
+        "name_en": "Michigan",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Мичиган"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.6824346,
+          43.6211955
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316967611",
+        "area_sqkm": 264374,
+        "abbr": "Minn.",
+        "ref": "MN",
+        "name": "Minnesota",
+        "name_en": "Minnesota",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Миннесота"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -94.6113288,
+          45.9896587
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316968897",
+        "area_sqkm": 165768,
+        "abbr": "Miss.",
+        "ref": "MS",
+        "name": "Mississippi",
+        "name_en": "Mississippi",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": "Misisipi",
+        "name_zh": null,
+        "name_ru": "Миссисипи"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.7348497,
+          32.9715645
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316970920",
+        "area_sqkm": 425470,
+        "abbr": "Mont.",
+        "ref": "MT",
+        "name": "Montana",
+        "name_en": "Montana",
+        "name_de": null,
+        "name_fr": "Montana",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Монтана"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -109.6387579,
+          47.3752671
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316971452",
+        "area_sqkm": 267633,
+        "abbr": "Nebr.",
+        "ref": "NE",
+        "name": "Nebraska",
+        "name_en": "Nebraska",
+        "name_de": "Nebraska",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Небраска"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.5873816,
+          41.7370229
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316971669",
+        "area_sqkm": 312727,
+        "abbr": "Nev.",
+        "ref": "NV",
+        "name": "Nevada",
+        "name_en": "Nevada",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Невада"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.8537227,
+          39.5158825
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316971821",
+        "area_sqkm": 41737,
+        "abbr": "N.H.",
+        "ref": "NH",
+        "name": "New Hampshire",
+        "name_en": "New Hampshire",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": "Nuevo Hampshire",
+        "name_zh": null,
+        "name_ru": "Нью-Гэмпшир"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6553992,
+          43.4849133
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316973311",
+        "area_sqkm": 76444,
+        "abbr": "N.J.",
+        "ref": "NJ",
+        "name": "New Jersey",
+        "name_en": "New Jersey",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": "Nueva Jersey",
+        "name_zh": null,
+        "name_ru": "Нью-Джерси"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.4041622,
+          40.0757384
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316973967",
+        "area_sqkm": 382908,
+        "abbr": "N.M.",
+        "ref": "NM",
+        "name": "New Mexico",
+        "name_en": "New Mexico",
+        "name_de": "Neumexiko",
+        "name_fr": "Nouveau Mexique",
+        "name_es": "Nuevo México",
+        "name_zh": null,
+        "name_ru": "Нью-Мексико"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -105.993007,
+          34.5708167
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316976734",
+        "area_sqkm": 164420,
+        "abbr": "N.Y.",
+        "ref": "NY",
+        "name": "New York",
+        "name_en": "New York",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": "Nueva York",
+        "name_zh": null,
+        "name_ru": "Нью-Йорк"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.8449946,
+          43.1561681
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316979074",
+        "area_sqkm": 177565,
+        "abbr": "N.C.",
+        "ref": "NC",
+        "name": "North Carolina",
+        "name_en": "North Carolina",
+        "name_de": "Nord-Carolina",
+        "name_fr": "Caroline du Nord",
+        "name_es": "Carolina del Norte",
+        "name_zh": null,
+        "name_ru": "Северная Каролина"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.0392919,
+          35.6729639
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316979718",
+        "area_sqkm": 243646,
+        "abbr": "N.D.",
+        "ref": "ND",
+        "name": "North Dakota",
+        "name_en": "North Dakota",
+        "name_de": "Nord-Dakota",
+        "name_fr": "Dakota du Nord",
+        "name_es": "Dakota del Norte",
+        "name_zh": null,
+        "name_ru": "Северная Дакота"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -100.540737,
+          47.6201461
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316982774",
+        "area_sqkm": 210832,
+        "abbr": "Ohio",
+        "ref": "OH",
+        "name": "Ohio",
+        "name_en": "Ohio",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Огайо"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.6881395,
+          40.2253569
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316983705",
+        "area_sqkm": 253345,
+        "abbr": "Okla.",
+        "ref": "OK",
+        "name": "Oklahoma",
+        "name_en": "Oklahoma",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Оклахома"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.2684063,
+          34.9550817
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316984338",
+        "area_sqkm": 300279,
+        "abbr": "Ore.",
+        "ref": "OR",
+        "name": "Oregon",
+        "name_en": "Oregon",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": "Oregón",
+        "name_zh": null,
+        "name_ru": "Орегон"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.737257,
+          43.9792797
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "565545457",
+        "area_sqkm": 333784,
+        "abbr": "TO",
+        "ref": "TO",
+        "name": "Tocantins",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Токантинс"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.3716912,
+          -10.8855129
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316987717",
+        "area_sqkm": 193810,
+        "abbr": "Pa.",
+        "ref": "PA",
+        "name": "Pennsylvania",
+        "name_en": "Pennsylvania",
+        "name_de": "Pennsylvanien",
+        "name_fr": "Pennsylvanie",
+        "name_es": "Pensilvania",
+        "name_zh": null,
+        "name_ru": "Пенсильвания"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.7278831,
+          40.9699889
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316987977",
+        "area_sqkm": 25583,
+        "abbr": "R.I.",
+        "ref": "RI",
+        "name": "Rhode Island",
+        "name_en": "Rhode Island",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Род-Айленд"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5992372,
+          41.7962409
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316990225",
+        "area_sqkm": 144797,
+        "abbr": "S.C.",
+        "ref": "SC",
+        "name": "South Carolina",
+        "name_en": "South Carolina",
+        "name_de": "Süd-Carolina",
+        "name_fr": "Caroline du Sud",
+        "name_es": "Carolina del Sur",
+        "name_zh": null,
+        "name_ru": "Южная Каролина"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.4363743,
+          33.6874388
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316990807",
+        "area_sqkm": 210708,
+        "abbr": "S.D.",
+        "ref": "SD",
+        "name": "South Dakota",
+        "name_en": "South Dakota",
+        "name_de": "Süd-Dakota",
+        "name_fr": "Dakota du Sud",
+        "name_es": "Dakota del Sur",
+        "name_zh": null,
+        "name_ru": "Южная Дакота"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -100.348761,
+          44.6471761
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316994008",
+        "area_sqkm": 195442,
+        "abbr": "Tenn.",
+        "ref": "TN",
+        "name": "Tennessee",
+        "name_en": "Tennessee",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Теннесси"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.2820081,
+          35.7730076
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316998356",
+        "area_sqkm": 747458,
+        "abbr": "Tex.",
+        "ref": "TX",
+        "name": "Texas",
+        "name_en": "Texas",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Техас"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.5120986,
+          31.8160381
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316999551",
+        "area_sqkm": 267829,
+        "abbr": "Utah",
+        "ref": "UT",
+        "name": "Utah",
+        "name_en": "Utah",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Юта"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7143584,
+          39.4225192
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "317000170",
+        "area_sqkm": 48427,
+        "abbr": "Vt.",
+        "ref": "VT",
+        "name": "Vermont",
+        "name_en": "Vermont",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Вермонт"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.5002608,
+          44.5990718
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "317004702",
+        "area_sqkm": 150286,
+        "abbr": "Va.",
+        "ref": "VA",
+        "name": "Virginia",
+        "name_en": "Virginia",
+        "name_de": null,
+        "name_fr": "Virginie",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Виргиния"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.4927721,
+          37.1232245
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "317006365",
+        "area_sqkm": 81945,
+        "abbr": "W.Va.",
+        "ref": "WV",
+        "name": "West Virginia",
+        "name_en": "West Virginia",
+        "name_de": null,
+        "name_fr": "Virginie Occidentale",
+        "name_es": "Virginia Occidental",
+        "name_zh": null,
+        "name_ru": "Западная Виргиния"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.8408415,
+          38.4758406
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "317007239",
+        "area_sqkm": 191379,
+        "abbr": "Wis.",
+        "ref": "WI",
+        "name": "Wisconsin",
+        "name_en": "Wisconsin",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Висконсин"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.6884637,
+          44.4308975
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "317007393",
+        "area_sqkm": 297699,
+        "abbr": "Wyo.",
+        "ref": "WY",
+        "name": "Wyoming",
+        "name_en": "Wyoming",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Вайоминг"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -107.5685348,
+          43.1700264
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "470649732",
+        "area_sqkm": 166176,
+        "abbr": "SCO",
+        "ref": "SCO",
+        "name": "Scotland",
+        "name_en": null,
+        "name_de": "Schottland",
+        "name_fr": "Écosse",
+        "name_es": "Escocia",
+        "name_zh": null,
+        "name_ru": "Шотландия"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.1140518,
+          56.7861112
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "473849775",
+        "area_sqkm": 222509,
+        "abbr": "Mo.",
+        "ref": "MO",
+        "name": "Missouri",
+        "name_en": "Missouri",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": "Misuri",
+        "name_zh": null,
+        "name_ru": "Миссури"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.5617875,
+          38.7604815
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "502334045",
+        "area_sqkm": 619620,
+        "abbr": "MG",
+        "ref": "MG",
+        "name": "Minas Gerais",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Минас-Жерайс"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -44.1588654,
+          -18.5264844
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "504798993",
+        "area_sqkm": 259187,
+        "abbr": "SP",
+        "ref": "SP",
+        "name": "São Paulo",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": "São Paulo",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Сан-Паулу"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -49.0232348,
+          -21.9549806
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "504799970",
+        "area_sqkm": 114655,
+        "abbr": "RJ",
+        "ref": "RJ",
+        "name": "Rio de Janeiro",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Рио-де-Жанейро"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -42.419415,
+          -22.2752762
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "504800252",
+        "area_sqkm": 337534,
+        "abbr": "RS",
+        "ref": "RS",
+        "name": "Rio Grande do Sul",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Южный Риу-Гранди"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -53.767225,
+          -29.8518
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "539668890",
+        "area_sqkm": 140699,
+        "abbr": "SC",
+        "ref": "SC",
+        "name": "Santa Catarina",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Санта-Катарина"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -51.114965,
+          -27.0628367
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "539672077",
+        "area_sqkm": 236704,
+        "abbr": "PR",
+        "ref": "PR",
+        "name": "Paraná",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Парана"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -51.8148872,
+          -24.4842187
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "539676406",
+        "area_sqkm": 1310196,
+        "abbr": "PA",
+        "ref": "PA",
+        "name": "Pará",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Пара"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -52.8973006,
+          -4.7493933
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "539680936",
+        "area_sqkm": 192384,
+        "abbr": "AP",
+        "ref": "AP",
+        "name": "Amapá",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Амапа"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -51.9161977,
+          1.3545442
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "539689822",
+        "area_sqkm": 309589,
+        "abbr": "RR",
+        "ref": "RR",
+        "name": "Roraima",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Рорайма"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -61.3631922,
+          2.135138
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "539691270",
+        "area_sqkm": 608596,
+        "abbr": "BA",
+        "ref": "BA",
+        "name": "Bahia",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Баия"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -41.9294776,
+          -12.285251
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "539693378",
+        "area_sqkm": 426741,
+        "abbr": "MS",
+        "ref": "MS",
+        "name": "Mato Grosso do Sul",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": "Mato Grosso del Sur",
+        "name_zh": "南马托格罗索州",
+        "name_ru": "Мату-Гросу-ду-Сул"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -54.4794731,
+          -19.5852564
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "539830692",
+        "area_sqkm": 90046,
+        "abbr": "PB",
+        "ref": "PB",
+        "name": "Paraíba",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Параиба"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -36.972191,
+          -7.1168306
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "539830860",
+        "area_sqkm": 63004,
+        "abbr": "RN",
+        "ref": "RN",
+        "name": "Rio Grande do Norte",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Северный Риу-Гранде"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -36.4781776,
+          -5.6781175
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "539831949",
+        "area_sqkm": 162925,
+        "abbr": "PE",
+        "ref": "PE",
+        "name": "Pernambuco",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": "Pernambouc",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Пернамбуку"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -38.3087923,
+          -8.4127483
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "539832191",
+        "area_sqkm": 246469,
+        "abbr": "CE",
+        "ref": "CE",
+        "name": "Ceará",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Сеара"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -39.7156073,
+          -5.3264703
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "541425925",
+        "area_sqkm": 300692,
+        "abbr": "PI",
+        "ref": "PI",
+        "name": "Piauí",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Пиауи"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.3568099,
+          -7.8739842
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "541426952",
+        "area_sqkm": 345762,
+        "abbr": "MA",
+        "ref": "MA",
+        "name": "Maranhão",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Мараньян"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -45.3930262,
+          -5.2085503
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "541429445",
+        "area_sqkm": 98344,
+        "abbr": "AL",
+        "ref": "AL",
+        "name": "Alagoas",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Алагоас"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -36.6489727,
+          -9.7081218
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "541429632",
+        "area_sqkm": 83209,
+        "abbr": "SE",
+        "ref": "SE",
+        "name": "Sergipe",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Сержипи"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -37.3773519,
+          -10.6743911
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "553784069",
+        "area_sqkm": 224822,
+        "abbr": "Il.",
+        "ref": "IL",
+        "name": "Illinois",
+        "name_en": "Illinois",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Иллинойс"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.4339809,
+          40.0796319
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "565543192",
+        "area_sqkm": 310759,
+        "abbr": "RO",
+        "ref": "RO",
+        "name": "Rondônia",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Рондония"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -62.390871,
+          -10.7375836
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1756225709",
+        "area_sqkm": 53869,
+        "abbr": null,
+        "ref": "PE",
+        "name": "Prince Edward Island",
+        "name_en": "Prince Edward Island",
+        "name_de": "Prinz-Edward-Insel",
+        "name_fr": "Île-du-Prince-Édouard",
+        "name_es": "Isla del Príncipe Eduardo",
+        "name_zh": null,
+        "name_ru": "Остров Принца Эдуарда"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -63.45941,
+          46.3202067
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1971329414",
+        "area_sqkm": 1766933,
+        "abbr": null,
+        "ref": "QLD",
+        "name": "Queensland",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": "昆士兰",
+        "name_ru": "Квинсленд"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          144.4588889,
+          -21.9182856
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "England",
+        "abbr": "Eng.",
+        "area_sqkm": 150215,
+        "name_de": "England",
+        "name_en": "England",
+        "name_es": "Inglaterra",
+        "name_fr": "Angleterre",
+        "name_ru": "Англия",
+        "name_zh": "英格兰",
+        "osm_id": 0,
+        "ref": "EN"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.3515625,
+          52.214338608258196
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Wales",
+        "abbr": "Wales",
+        "area_sqkm": 25219,
+        "name_de": "Wales",
+        "name_en": "Wales",
+        "name_es": "Gales",
+        "name_fr": "Pays de Galles",
+        "name_ru": "Уэльс",
+        "name_zh": "威尔士",
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.955078125,
+          52.16045455774706
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Northern Ireland",
+        "osm_id": 0,
+        "abbr": "N. Ire.",
+        "name_en": "Northern Ireland",
+        "name_es": "Irlanda del Norte",
+        "name_fr": "Irlande du Nord",
+        "name_ru": "Северная Ирландия",
+        "name_zh": "北爱尔",
+        "area_sqkm": 13013
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.03125,
+          54.57206165565852
+        ]
+      }
+    }
+  ]
 }
