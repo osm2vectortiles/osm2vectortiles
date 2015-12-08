@@ -6,9 +6,9 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - -11.2061
-  - 46.8452
-  - 5
+  - -9.063
+  - 36.5273
+  - 4
 description: Open Streets
 Layer: 
   - id: landuse
