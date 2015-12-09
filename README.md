@@ -99,7 +99,7 @@ docker-compose up update-scaleranks
 Export the data as MBTiles file to the `export` directory.
 
 ```
-docker-compose up export
+docker-compose up export-local
 ```
 
 Serve the tiles as raster tiles from `export` directory.
