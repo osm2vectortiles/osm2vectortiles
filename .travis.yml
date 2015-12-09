@@ -11,13 +11,16 @@ before_install:
   - docker-compose build
 script:
   - docker-compose up -d postgis
-  - sleep 10
-  - docker-compose run import-water
-  - docker-compose run import-sql
+  - sleep 5
+  - docker-compose up -d pgbouncer
+  - sleep 5
+  - docker-compose run import-osm
   - docker-compose run import-natural-earth
+  - docker-compose run import-water
+  - docker-compose run import-labels
+  - docker-compose run import-sql
   - docker-compose run update-scaleranks
-  - docker-compose run import
-  - docker-compose run export
+  - docker-compose run export-local
   - docker-compose up -d serve
   - sleep 5
   - curl "http://localhost:8080/index.json"

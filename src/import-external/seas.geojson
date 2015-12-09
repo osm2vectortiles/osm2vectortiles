@@ -1,0 +1,4013 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640027",
+        "name": "North Pacific Ocean",
+        "name_en": "North Pacific Ocean",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Северный Тихий океан",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -152.2265625,
+          33.7243396617476
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 305640134,
+        "name": "Coral Sea",
+        "name_en": "Coral Sea",
+        "name_de": "Korallenmeer",
+        "name_fr": "null",
+        "name_es": "null",
+        "name_zh": "null",
+        "name_ru": "Коралловое море",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          157.12646484375,
+          -18.3336694457713
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640308",
+        "name": "Lincoln Sea",
+        "name_en": "Lincoln Sea",
+        "name_de": "Lincolnsee",
+        "name_fr": "Mer de Lincoln",
+        "name_es": "Mar de Lincoln",
+        "name_zh": null,
+        "name_ru": "Море Линкольна",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58,
+          83
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640040",
+        "name": "Arabian Sea",
+        "name_en": "Arabian Sea",
+        "name_de": "Arabisches Meer",
+        "name_fr": "Mer d'Oman",
+        "name_es": "Mar Arábigo",
+        "name_zh": null,
+        "name_ru": "Аравийское море",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          63.67675781249999,
+          14.987239525774259
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639392",
+        "name": "Scotia Sea",
+        "name_en": "Scotia Sea",
+        "name_de": "Schottische See",
+        "name_fr": "Mer de Scotia",
+        "name_es": "Mar del Scotia",
+        "name_zh": null,
+        "name_ru": "Море Скоша",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -41.57098349999998,
+          -57.6807156
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639493",
+        "name": "North Sea",
+        "name_en": "North Sea",
+        "name_de": "Nordsee",
+        "name_fr": "Mer du Nord",
+        "name_es": "Mar del Norte",
+        "name_zh": null,
+        "name_ru": "Северное море",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.9999964,
+          55.33333729999998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640288",
+        "name": "South Atlantic Ocean",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": "Océan Atlantique Sud",
+        "name_es": "Océano Atlantico Sur",
+        "name_zh": null,
+        "name_ru": "Южный Атлантический океан",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -13.53515625,
+          -30.902224705171427
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640292",
+        "name": "South Pacific Ocean",
+        "name_en": "South Pacific Ocean",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Южный Тихий океан",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -133.2421875,
+          -39.09596293630548
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640064",
+        "name": "Bering Sea",
+        "name_en": "Bering Sea",
+        "name_de": "Beringmeer",
+        "name_fr": "Mer de Béring",
+        "name_es": "Mar de Bering",
+        "name_zh": null,
+        "name_ru": "Берингово море",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -175.00000009999997,
+          60.000000100000015
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640074",
+        "name": "Indian Ocean",
+        "name_en": "Indian Ocean",
+        "name_de": "Indischer Ozean",
+        "name_fr": "Océan Indien",
+        "name_es": "Océano Índico",
+        "name_zh": "印度洋",
+        "name_ru": "Индийский океан",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          82.6171875,
+          -26.74561038219901
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639396",
+        "name": "Greenland Sea",
+        "name_en": "Greenland Sea",
+        "name_de": "Grönlandsee",
+        "name_fr": "Mer du Groenland",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Гренландское море",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.9335937499999998,
+          77.5041191797399
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639751",
+        "name": "Bellingshausen Sea",
+        "name_en": "Bellingshausen Sea",
+        "name_de": "Bellingshausen-See",
+        "name_fr": "Mer de Bellingshausen",
+        "name_es": "Mar de Bellingshausen",
+        "name_zh": null,
+        "name_ru": "Море Беллинсгаузена",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85,
+          -71
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639346",
+        "name": "Ross Sea",
+        "name_en": "Ross Sea",
+        "name_de": "Rossmeer",
+        "name_fr": "Mer de Ross",
+        "name_es": "Mar de Ross",
+        "name_zh": null,
+        "name_ru": "Море Росса",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -175,
+          -75
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639181",
+        "name": "Andaman Sea",
+        "name_en": "Andaman Sea",
+        "name_de": "Andamanensee",
+        "name_fr": "Mer d'Andaman",
+        "name_es": "Mar de Andamán",
+        "name_zh": "安达曼海",
+        "name_ru": "Андаманское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          94.99999989999998,
+          10.000000099999983
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639206",
+        "name": "Bay of Bengal",
+        "name_en": "Bay of Bengal",
+        "name_de": "Golf von Bengalen",
+        "name_fr": "Golfe du Bengale",
+        "name_es": "Bahía de Bengala",
+        "name_zh": null,
+        "name_ru": "Бенгальский залив",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          86.8798828125,
+          13.624633438236152
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639693",
+        "name": "Arafura Sea",
+        "name_en": "Arafura Sea",
+        "name_de": "Arafurasee",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Арафурское море",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.97888579999997,
+          -9.355866100000014
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639726",
+        "name": "North Atlantic Ocean",
+        "name_en": "North Atlantic Ocean",
+        "name_de": null,
+        "name_fr": "Océan Atlantique Nord",
+        "name_es": "Océano Atlántico Norte",
+        "name_zh": null,
+        "name_ru": "Северный Атлантический океан",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -40,
+          40
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639366",
+        "name": "Irish Sea",
+        "name_en": "Irish Sea",
+        "name_de": "Irische See",
+        "name_fr": "Mer d'Irlande",
+        "name_es": "Mar de Irlanda",
+        "name_zh": null,
+        "name_ru": "Ирландское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.9658203125,
+          53.61857936489517
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "osm_id": 305640100,
+        "name": "Timor Sea",
+        "name_en": "Timor Sea",
+        "name_de": "Timorsee",
+        "name_fr": "null",
+        "name_es": "null",
+        "name_zh": "null",
+        "name_ru": "Тиморское море",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.81494140625,
+          -10.984335146101955
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639170",
+        "name": "Philippine Sea",
+        "name_en": "Philippine Sea",
+        "name_de": "Philippinensee",
+        "name_fr": "Mer des Philippines",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Филиппинское море",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135,
+          20
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639165",
+        "name": "Sargasso Sea",
+        "name_en": "Sargasso Sea",
+        "name_de": "Sargassosee",
+        "name_fr": "Mer des Sargasses",
+        "name_es": "Mar de los Sargazos",
+        "name_zh": null,
+        "name_ru": "Саргассово море",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60.000000100000015,
+          30.0000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639182",
+        "name": "Yellow Sea",
+        "name_en": "Yellow Sea",
+        "name_de": "Gelbes Meer",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Жёлтое море",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          123.9999998,
+          36.000000199999974
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639187",
+        "name": "Sea of Okhotsk",
+        "name_en": "Sea of Okhotsk",
+        "name_de": "Ochotskisches Meer",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Охотское море",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          150,
+          55
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639403",
+        "name": "Alboran Sea",
+        "name_en": "Alboran Sea",
+        "name_de": "Alborán-Meer",
+        "name_fr": "Mer d'Alboran",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "море Альборан",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.1729555,
+          36.06049429999999
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640303",
+        "name": null,
+        "name_en": "Flores Sea",
+        "name_de": "Floressee",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Море Флорес",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.99667610000002,
+          -7.999675200000017
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640118",
+        "name": null,
+        "name_en": "Halmahera Sea",
+        "name_de": "Halmaherasee",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Море Хальмахера",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          128.99970339999996,
+          -1.0003346
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640052",
+        "name": null,
+        "name_en": "Tasman Sea",
+        "name_de": "Tasmansee",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Тасманово море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          160,
+          -40
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639424",
+        "name": null,
+        "name_en": "Ceram Sea",
+        "name_de": "Seramsee",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Море Серам",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          130.23193359375,
+          -2.767477951092084
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640098",
+        "name": "瀬戸内海",
+        "name_en": "Seto Inland Sea",
+        "name_de": "Seto-Inlandsee",
+        "name_fr": "Mer intérieure de Seto",
+        "name_es": "Mar Interior de Seto",
+        "name_zh": null,
+        "name_ru": "Внутреннее Японское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.5,
+          34.333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640097",
+        "name": "Баренцево море",
+        "name_en": "Barents Sea",
+        "name_de": "Barentssee",
+        "name_fr": "Mer de Barents",
+        "name_es": "Mar de Barents",
+        "name_zh": null,
+        "name_ru": "Баренцево море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.76953125,
+          76.3518964311259
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640107",
+        "name": "Чукотское море",
+        "name_en": "Chukchi Sea",
+        "name_de": "Tschuktschensee",
+        "name_fr": "Mer des Tchouktches",
+        "name_es": "Mar de Chukotsk",
+        "name_zh": null,
+        "name_ru": "Чукотское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -174.00000009999997,
+          69
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640082",
+        "name": "Bali Sea",
+        "name_en": "Bali Sea",
+        "name_de": "Balisee",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Море Бали",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.498934,
+          -7.749843700000013
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3570303559",
+        "name": "Saaristomeri",
+        "name_en": "Archipelago Sea",
+        "name_de": "Schärenmeer",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Архипелаговое море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.92767190000001,
+          59.90421189999998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640284",
+        "name": "Marmara Denizi",
+        "name_en": "Sea of Marmara",
+        "name_de": "Marmarameer",
+        "name_fr": "Mer de Marmara",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Мраморное море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.2499999,
+          40.6666672
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1245344600",
+        "name": "Golfo di Genova",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Женевский залив",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.9184835,
+          44.1694007
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "313463793",
+        "name": "Golfo de Paria",
+        "name_en": "Gulf of Paria",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": "Golfo de Paria",
+        "name_zh": null,
+        "name_ru": "Парийский залив",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -61.8378662,
+          10.594078899999987
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "936282562",
+        "name": "Lake Michigan",
+        "name_en": "Lake Michigan",
+        "name_de": "Michigansee",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "озеро Мичиган",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.04955449999997,
+          43.95427069999998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3657107035",
+        "name": "Libyan Sea",
+        "name_en": "Libyan Sea",
+        "name_de": "Libysches Meer",
+        "name_fr": "Mer de Libye",
+        "name_es": "Mar de Libia",
+        "name_zh": null,
+        "name_ru": "Ливийское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.1959288,
+          34.2590452
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "936282549",
+        "name": "Lake Huron",
+        "name_en": "Lake Huron",
+        "name_de": "Huronsee",
+        "name_fr": "Lac Huron",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Гурон",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.33112959999998,
+          44.7923065
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640289",
+        "name": "Ålands hav",
+        "name_en": "Sea of Åland",
+        "name_de": "Åländer See",
+        "name_fr": "Mer d'Åland",
+        "name_es": "Mar de Åland",
+        "name_zh": null,
+        "name_ru": "Аландское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.4999999,
+          60
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639335",
+        "name": "Азовское море",
+        "name_en": "Sea of Azov",
+        "name_de": "Asowsches Meer",
+        "name_fr": "Mer d'Azov",
+        "name_es": "Mar de Azov",
+        "name_zh": null,
+        "name_ru": "Азовское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.26816920000001,
+          46.0446219
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3650594065",
+        "name": "安芸灘",
+        "name_en": "Aki-nada",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Море Аки",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          132.32754949999998,
+          34.0646248
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3650265669",
+        "name": "Аральское море",
+        "name_en": "Aral Sea",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Аральское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          59.869499199999986,
+          45.98076459999998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2831053013",
+        "name": "Печорское море",
+        "name_en": "Pechora Sea",
+        "name_de": "Petschorasee",
+        "name_fr": null,
+        "name_es": "Mar de Pechora",
+        "name_zh": null,
+        "name_ru": "Печорское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          53.709409099999974,
+          69.79967279999997
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639355",
+        "name": "Davis Sea",
+        "name_en": "Davis Sea",
+        "name_de": "Davissee",
+        "name_fr": "Mer de Davis",
+        "name_es": "Mar de Davis",
+        "name_zh": null,
+        "name_ru": "Море Дейвиса",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          93.49999990000002,
+          -65.9999999
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639157",
+        "name": "Southern Ocean",
+        "name_en": "Southern Ocean",
+        "name_de": "Südlicher Ozean",
+        "name_fr": "Océan Austral",
+        "name_es": "Océano Antártico",
+        "name_zh": "南冰洋",
+        "name_ru": "Южный океан",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          89.99999989999996,
+          -59.9999999
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3650204850",
+        "name": "Каспийское Море",
+        "name_en": "Caspian Sea",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Каспийское Море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.5375798,
+          42.0137726
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640298",
+        "name": "Amundsen Sea",
+        "name_en": "Amundsen Sea",
+        "name_de": "Amundsen-See",
+        "name_fr": "Mer d'Amundsen",
+        "name_es": "Mar de Amundsen",
+        "name_zh": null,
+        "name_ru": "Море Амундсена",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.916667,
+          -72.5
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2483364661",
+        "name": "Sea of Japan & East Sea",
+        "name_en": "Sea of Japan & East Sea",
+        "name_de": "Japanisches Meer",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Японское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.85079370000003,
+          40.2748697
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316793545",
+        "name": "Gulf of Tadjoura",
+        "name_en": "Gulf of Tadjoura",
+        "name_de": "Golf von Tadjoura",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Залив Таджура",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          42.9731427,
+          11.670741199999982
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639192",
+        "name": "Savu Sea",
+        "name_en": "Savu Sea",
+        "name_de": "Sawusee",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Море Саву",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          122,
+          -9.666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640000",
+        "name": "Ligurian Sea",
+        "name_en": "Ligurian Sea",
+        "name_de": "Ligurisches Meer",
+        "name_fr": "Mer Ligure",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Лигурийское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.9999997,
+          43.50000019999998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639697",
+        "name": "Celtic Sea",
+        "name_en": "Celtic Sea",
+        "name_de": "Keltische See",
+        "name_fr": "Mer Celtique",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Кельтское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -9,
+          50
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1646703917",
+        "name": "Waddenzee",
+        "name_en": "Wadden Sea",
+        "name_de": "Wattenmeer",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Ваттовое море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.1340891,
+          53.12086919999997
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640128",
+        "name": "Laut Banda",
+        "name_en": "Banda Sea",
+        "name_de": "Bandasee",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Море Банда",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.32080078124999,
+          -5.200364681183476
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2515637409",
+        "name": "Ικάριο πέλαγος",
+        "name_en": "Icarian Sea",
+        "name_de": "Ikarisches Meer",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Икарийское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.568647099999986,
+          37.2009168
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": null,
+        "name": null,
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -26.806640624999986,
+            66.86108230224606
+          ],
+          [
+            -24.169921875,
+            67.64267630796037
+          ],
+          [
+            -20.56640625,
+            68.07330474079023
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639710",
+        "name": "Arctic Ocean",
+        "name_en": "Arctic Ocean",
+        "name_de": "Arktischer Ozean",
+        "name_fr": "Océan Arctique",
+        "name_es": "Océano Ártico",
+        "name_zh": "北冰洋",
+        "name_ru": "Северный Ледовитый океан",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -157.5,
+            75.8021184587649
+          ],
+          [
+            -143.26171875,
+            76.84081641443095
+          ],
+          [
+            -133.41796874999997,
+            77.80477074199557
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639714",
+        "name": "Weddell Sea",
+        "name_en": "Weddell Sea",
+        "name_de": "Weddell-Meer",
+        "name_fr": "Mer de Weddell",
+        "name_es": "Mar de Weddell",
+        "name_zh": null,
+        "name_ru": "Море Уэдделла",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -42.1875,
+            -73.02259157147299
+          ],
+          [
+            -38.232421875,
+            -71.66366293141732
+          ],
+          [
+            -34.716796875,
+            -70.52489722821653
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640096",
+        "name": "Bismarck Sea",
+        "name_en": "Bismarck Sea",
+        "name_de": "Bismarcksee",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Море Бисмарка",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            145.94238281249997,
+            -3.162455530237859
+          ],
+          [
+            146.53564453125003,
+            -3.381823735328289
+          ],
+          [
+            147.15087890625003,
+            -3.480523430587786
+          ],
+          [
+            147.67822265624997,
+            -3.491489430459777
+          ],
+          [
+            147.76611328125,
+            -3.491489430459777
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "316793178",
+        "name": "Gulf of Aden",
+        "name_en": "Gulf of Aden",
+        "name_de": "Golf von Aden",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Аденский залив",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            47.362060546875,
+            12.211180191503994
+          ],
+          [
+            47.80151367187499,
+            12.286333810713796
+          ],
+          [
+            48.131103515624986,
+            12.393658862377404
+          ],
+          [
+            48.48266601562501,
+            12.479487125908546
+          ],
+          [
+            48.603515625,
+            12.554563528593654
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639729",
+        "name": "Laccadive Sea",
+        "name_en": "Laccadive Sea",
+        "name_de": "Lakkadivensee",
+        "name_fr": "Mer des Laquedives",
+        "name_es": "Mar de Laquedivas",
+        "name_zh": null,
+        "name_ru": "Лаккадивское море",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            73.21289062499999,
+            12.726084296948168
+          ],
+          [
+            74.53125,
+            7.362466865535736
+          ],
+          [
+            76.37695312499997,
+            3.601142320158721
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640030",
+        "name": "Norwegian Sea",
+        "name_en": "Norwegian Sea",
+        "name_de": "Europäisches Nordmeer",
+        "name_fr": "Mer de Norvège",
+        "name_es": "Mar de Noruega",
+        "name_zh": null,
+        "name_ru": "Норвежское море",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -0.3515625,
+            64.24459476798192
+          ],
+          [
+            5.80078125,
+            68.52823492039876
+          ],
+          [
+            13.0078125,
+            71.13098770917023
+          ],
+          [
+            20.91796875,
+            72.81607371878991
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639417",
+        "name": "Labrador Sea",
+        "name_en": "Labrador Sea",
+        "name_de": "Labradorsee",
+        "name_fr": "Mer du Labrador",
+        "name_es": "Mar de Labrador",
+        "name_zh": null,
+        "name_ru": "Море Лабрадор",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -55.986328125,
+            57.914847767009185
+          ],
+          [
+            -54.558105468750014,
+            57.219608462466454
+          ],
+          [
+            -53.6572265625,
+            56.656226493502196
+          ],
+          [
+            -52.778320312499986,
+            55.838313522108194
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640085",
+        "name": "Molucca Sea",
+        "name_en": "Molucca Sea",
+        "name_de": "Molukkensee",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Молуккское море",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            125.31005859374996,
+            -0.373532510228805
+          ],
+          [
+            125.99121093749996,
+            0.329588026053569
+          ],
+          [
+            126.27685546875,
+            0.96675099976663
+          ],
+          [
+            126.62841796874999,
+            1.603794430058972
+          ],
+          [
+            126.73828124999996,
+            1.845383988573187
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640105",
+        "name": "Solomon Sea",
+        "name_en": "Solomon Sea",
+        "name_de": "Salomonensee",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Соломоново море",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            154.10522460937497,
+            -7.928674801364046
+          ],
+          [
+            154.6875,
+            -8.233237111274551
+          ],
+          [
+            155.137939453125,
+            -8.548429781881925
+          ],
+          [
+            155.401611328125,
+            -8.841651120809155
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639712",
+        "name": "Beaufort Sea",
+        "name_en": "Beaufort Sea",
+        "name_de": "Beaufortsee",
+        "name_fr": "Mer de Beaufort",
+        "name_es": "Mar de Beaufort",
+        "name_zh": null,
+        "name_ru": "Море Бофорта",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -147.65625,
+            71.27259471233448
+          ],
+          [
+            -141.767578125,
+            71.52490903732816
+          ],
+          [
+            -138.603515625,
+            71.82198599692957
+          ],
+          [
+            -135.87890625,
+            72.14815494622198
+          ],
+          [
+            -133.505859375,
+            72.65303835920172
+          ],
+          [
+            -129.19921875,
+            73.72659470212253
+          ],
+          [
+            -126.12304687500001,
+            75.25305660483545
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640071",
+        "name": "Celebes Sea",
+        "name_en": "Celebes Sea",
+        "name_de": "Celebessee",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Море Сулавеси",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            120.322265625,
+            2.767477951092071
+          ],
+          [
+            121.26708984374999,
+            3.030812122664369
+          ],
+          [
+            122.12402343749996,
+            3.425691524418061
+          ],
+          [
+            122.82714843749999,
+            3.886177033699347
+          ],
+          [
+            123.31054687499993,
+            4.609278084409822
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639414",
+        "name": "East China Sea",
+        "name_en": "East China Sea",
+        "name_de": "Ostchinesisches Meer",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Восточно-Китайское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            124.85961914062496,
+            27.732160709580885
+          ],
+          [
+            125.26611328125,
+            28.323724553545993
+          ],
+          [
+            125.51879882812501,
+            28.76765910569121
+          ],
+          [
+            125.66162109374999,
+            29.200123477644976
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639363",
+        "name": "Java Sea",
+        "name_en": "Java Sea",
+        "name_de": "Javasee",
+        "name_fr": "Mer de Java",
+        "name_es": "Mar de Java",
+        "name_zh": null,
+        "name_ru": "Яванское море",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.58837890625001,
+            -4.872047700241914
+          ],
+          [
+            111.29150390624997,
+            -5.025282908609297
+          ],
+          [
+            113.26904296874996,
+            -5.287887414011318
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639193",
+        "name": "Persian Gulf",
+        "name_en": "Persian Gulf",
+        "name_de": "Persischer Golf",
+        "name_fr": "Golfe Persique",
+        "name_es": "Golfo Pérsico",
+        "name_zh": null,
+        "name_ru": "Персидский залив",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            50.251464843750014,
+            27.664068965384494
+          ],
+          [
+            51.064453125000014,
+            26.941659545381498
+          ],
+          [
+            51.78955078124999,
+            26.391869671769015
+          ],
+          [
+            52.25097656250001,
+            26.175158990178115
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640275",
+        "name": "Mediterranean Sea",
+        "name_en": "Mediterranean Sea",
+        "name_de": "Mittelmeer",
+        "name_fr": "Mer Méditerranée",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Средиземное море",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0.68115234375,
+            37.26530995561875
+          ],
+          [
+            2.92236328125,
+            37.50972584293751
+          ],
+          [
+            4.350585937499999,
+            38.013476231041935
+          ],
+          [
+            5.55908203125001,
+            38.77121637244271
+          ],
+          [
+            6.17431640625,
+            39.80853604144591
+          ],
+          [
+            6.921386718749999,
+            41.590796851056005
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640273",
+        "name": "Tyrrhenian Sea",
+        "name_en": "Tyrrhenian Sea",
+        "name_de": "Tyrrhenisches Meer",
+        "name_fr": "Mer Tyrrhénienne",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Тирренское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            11.206054687500005,
+            40.438585867043294
+          ],
+          [
+            11.53564453125,
+            40.04969396696314
+          ],
+          [
+            11.876220703125005,
+            39.83385008019445
+          ],
+          [
+            12.26074218749999,
+            39.61415207700262
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639344",
+        "name": "Red Sea",
+        "name_en": "Red Sea",
+        "name_de": "Rotes Meer",
+        "name_fr": "Mer Rouge",
+        "name_es": "Mar Rojo",
+        "name_zh": null,
+        "name_ru": "Красное море",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            37.79296875,
+            21.881889807629253
+          ],
+          [
+            38.78173828125001,
+            20.25189031395292
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639702",
+        "name": "English Channel",
+        "name_en": "English Channel",
+        "name_de": "Ärmelkanal",
+        "name_fr": "La Manche",
+        "name_es": "Canal de la Mancha",
+        "name_zh": null,
+        "name_ru": "Ла-Манш",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -4.04296875,
+            49.58222604462171
+          ],
+          [
+            -3.1640625,
+            49.80963156356307
+          ],
+          [
+            -1.86767578125,
+            50.127621728300475
+          ],
+          [
+            0.714111328125,
+            50.5692828655824
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639183",
+        "name": "Sulu Sea",
+        "name_en": "Sulu Sea",
+        "name_de": "Sulusee",
+        "name_fr": "Mer de Sulu",
+        "name_es": "Mar de Joló",
+        "name_zh": null,
+        "name_ru": "Море Сулу",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            118.93798828124997,
+            7.079088026071717
+          ],
+          [
+            120.16845703125,
+            7.950436835029372
+          ],
+          [
+            121.15722656250001,
+            8.863362033551676
+          ],
+          [
+            121.35498046874997,
+            9.362352822055604
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640123",
+        "name": "Caribbean Sea",
+        "name_en": "Caribbean Sea",
+        "name_de": "Karibisches Meer",
+        "name_fr": "Mer des Caraïbes",
+        "name_es": "Mar Caribe",
+        "name_zh": null,
+        "name_ru": "Карибское море",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -84.375,
+            18.22935133838667
+          ],
+          [
+            -79.5849609375,
+            16.25686733062344
+          ],
+          [
+            -75.41015624999999,
+            14.859850400601037
+          ],
+          [
+            -71.71875,
+            14.093957177836224
+          ],
+          [
+            -67.587890625,
+            14.306969497825788
+          ],
+          [
+            -63.58886718749999,
+            15.368949896534705
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640277",
+        "name": "Baltic Sea",
+        "name_en": "Baltic Sea",
+        "name_de": "Ostsee",
+        "name_fr": null,
+        "name_es": "Mar Báltico",
+        "name_zh": null,
+        "name_ru": "Балтийское море",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            18.303222656249996,
+            55.86298231197633
+          ],
+          [
+            19.05029296875,
+            56.29215668507643
+          ],
+          [
+            19.467773437500007,
+            56.692441635399774
+          ],
+          [
+            19.885253906250014,
+            57.05268197871747
+          ],
+          [
+            19.995117187499982,
+            57.17199198214383
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639734",
+        "name": "Gulf of California",
+        "name_en": "Gulf of California",
+        "name_de": "Golf von Kalifornien",
+        "name_fr": "Golfe de Californie",
+        "name_es": "Golfo de California",
+        "name_zh": null,
+        "name_ru": "Калифорнийский залив",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -111.22558593749997,
+            27.22532583690335
+          ],
+          [
+            -110.7861328125,
+            26.745610382199004
+          ],
+          [
+            -110.40161132812499,
+            26.303264239389517
+          ],
+          [
+            -110.18188476562496,
+            25.928407032694114
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639382",
+        "name": "Mar Balear",
+        "name_en": "Balearic Sea",
+        "name_de": "Balearen-Meer",
+        "name_fr": "Mer des Baléares",
+        "name_es": "Mar Balear",
+        "name_zh": null,
+        "name_ru": "Балеарское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0.6591796875,
+            39.198205348894795
+          ],
+          [
+            1.42822265625,
+            39.977120098439634
+          ],
+          [
+            2.30712890625,
+            40.54720023441049
+          ],
+          [
+            3.93310546875,
+            41.22824901518529
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640059",
+        "name": "Αιγαίο Πέλαγος",
+        "name_en": "Aegean Sea",
+        "name_de": "Ägäisches Meer",
+        "name_fr": "Mer Égée",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Эгейское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            24.708251953125,
+            39.13006024213509
+          ],
+          [
+            25.11474609375,
+            38.848264388699114
+          ],
+          [
+            25.235595703124982,
+            38.6769334446379
+          ],
+          [
+            25.356445312499986,
+            38.47079371120377
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639216",
+        "name": "Белое море",
+        "name_en": "White Sea",
+        "name_de": "Weißes Meer",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Белое море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            40.341796875,
+            66.08936427047087
+          ],
+          [
+            41.1328125,
+            66.32868478255794
+          ],
+          [
+            41.59423828125,
+            66.54826346217438
+          ],
+          [
+            41.77001953124999,
+            66.65297740055279
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "303209363",
+        "name": "South Sea",
+        "name_en": "South Sea",
+        "name_de": "Südchinesisches Meer",
+        "name_fr": "Mer de méridionale",
+        "name_es": "Mar de la Meridional",
+        "name_zh": "南海",
+        "name_ru": "Южно-Китайское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.25878906249999,
+            6.577303118123873
+          ],
+          [
+            112.93945312499999,
+            9.925565912405503
+          ],
+          [
+            114.12597656249997,
+            12.254127737657365
+          ],
+          [
+            114.69726562499997,
+            14.264383087562633
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639191",
+        "name": "Карское море",
+        "name_en": "Kara Sea",
+        "name_de": "Karasee",
+        "name_fr": "Mer de Kara",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Карское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            76.46484374999999,
+            76.18499546094715
+          ],
+          [
+            78.83789062499996,
+            76.67978490310689
+          ],
+          [
+            80.947265625,
+            77.35106958476408
+          ],
+          [
+            82.08984375000001,
+            77.71159036383128
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639695",
+        "name": "Восточно-Сибирское море",
+        "name_en": "East Siberian Sea",
+        "name_de": "Ostsibirische See",
+        "name_fr": "Mer de Sibérie orientale",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Восточно-Сибирское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            154.51171875000003,
+            74.6832503005186
+          ],
+          [
+            158.02734375,
+            73.2773532019247
+          ],
+          [
+            164.70703124999997,
+            71.52490903732817
+          ],
+          [
+            166.64062,
+            71.24435551310675
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305639198",
+        "name": "Κρητικό πέλαγος",
+        "name_en": "Sea of Crete",
+        "name_de": "Kretisches Meer",
+        "name_fr": "Mer de Crète",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Критское море",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            24.807128906249993,
+            36.062421715108904
+          ],
+          [
+            24.993896484374993,
+            35.98689628443789
+          ],
+          [
+            25.14221191406248,
+            35.96466914770407
+          ],
+          [
+            25.345458984375004,
+            35.93798832265391
+          ],
+          [
+            25.4718017578125,
+            35.929092712084554
+          ],
+          [
+            25.686035156249982,
+            35.93798832265391
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Bahia de Campeche",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Adriatic Sea",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Black Sea",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Skagerrak",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Kattegat",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Gulf of Bothnia",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Gulf of Finland",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "-644762446",
+        "name": "",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            49.85595703124999,
+            43.036775857610564
+          ],
+          [
+            50.64697265624998,
+            42.01665183556823
+          ],
+          [
+            50.998535156250014,
+            41.21172151054785
+          ],
+          [
+            51.13037109375,
+            40.780541431860314
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Gulf of Oman",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Gulf of Tonkin",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Hudson Strait",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Cumberland Sd.",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Foxe Basin",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Davis Strait",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Baffin Bay",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Melville Bay",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Taiwan Strait",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Selat Makassar",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Laut Seram",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Laptev Sea",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Gulf of Maine",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "0",
+        "name": "Gulf of St. Lawrence",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": null
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -61.91894531250001,
+            48.151428143221224
+          ],
+          [
+            -61.083984374999986,
+            48.458351882808635
+          ],
+          [
+            -60.402832031249986,
+            48.76343113791797
+          ],
+          [
+            -59.875488281249986,
+            49.13859653703877
+          ],
+          [
+            -59.501953124999986,
+            49.46812406733165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "305640305",
+        "name": "Море Лаптевых",
+        "name_en": "Laptev Sea",
+        "name_de": "Laptewsee",
+        "name_fr": "Mer de Laptev",
+        "name_es": "Mar de Láptev",
+        "name_zh": null,
+        "name_ru": "Море Лаптевых",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            111.09374999999999,
+            78.54304353589549
+          ],
+          [
+            116.01562499999999,
+            77.61770905279676
+          ],
+          [
+            121.904296875,
+            76.72022329036133
+          ],
+          [
+            124.541015625,
+            76.413973015132
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "osm_id": 305639710,
+        "name": "Arctic Ocean",
+        "name_en": "Arctic Ocean",
+        "name_de": "Arktischer Ozean",
+        "name_fr": "Océan Arctique",
+        "name_es": "Océano Ártico",
+        "name_zh": "北冰洋",
+        "name_ru": "Северный Ледовитый океан",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            49.21875,
+            83.21569268984949
+          ],
+          [
+            99.140625,
+            82.49482361179572
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 0,
+        "name": "Gulf of Mexico"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.7802734375,
+          25.443274612305746
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 0,
+        "name": "Bahia de Campeche"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -95.64697265625,
+            19.91138351415555
+          ],
+          [
+            -94.295654296875,
+            19.435514339097825
+          ],
+          [
+            -93.4716796875,
+            19.290405639497994
+          ],
+          [
+            -92.39501953125,
+            19.518375478601566
+          ],
+          [
+            -91.746826171875,
+            19.993998469485504
+          ],
+          [
+            -91.285400390625,
+            20.33432561683554
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 0,
+        "name": "Hudson Bay",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.95703125,
+          59.17592824927136
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 0,
+        "name": "Hudson Strait"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -75.0146484375,
+            63.48976680530999
+          ],
+          [
+            -72.2021484375,
+            62.59334083012024
+          ],
+          [
+            -70.2685546875,
+            61.98026726504402
+          ],
+          [
+            -67.67578124999999,
+            61.20679804263029
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 0,
+        "name": "Foxe Basin"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -81.123046875,
+            65.62202261510642
+          ],
+          [
+            -79.365234375,
+            66.33750501996518
+          ],
+          [
+            -78.6181640625,
+            66.96447630005638
+          ],
+          [
+            -78.22265625,
+            67.67608458198097
+          ],
+          [
+            -78.1787109375,
+            67.97463396204759
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 0,
+        "name": "Gulf of Boothia"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -90.3076171875,
+            70.4367988185464
+          ],
+          [
+            -88.61572265625,
+            69.97549253616164
+          ],
+          [
+            -87.451171875,
+            69.54219883674266
+          ],
+          [
+            -86.06689453125,
+            68.78414378041504
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 0,
+        "name": "Jones Sound"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -86.7919921875,
+            76.01609366420996
+          ],
+          [
+            -85.078125,
+            76.07438073300233
+          ],
+          [
+            -83.51806640624999,
+            76.10607323707123
+          ],
+          [
+            -82.880859375,
+            76.0902358331725
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Viscount Melville Sound",
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -112.78564453124999,
+            73.87981844366595
+          ],
+          [
+            -111.37939453125,
+            73.80644709395938
+          ],
+          [
+            -109.9072265625,
+            73.79418697670552
+          ],
+          [
+            -108.65478515625,
+            73.87371654457475
+          ],
+          [
+            -107.57812499999999,
+            74.01349291618119
+          ],
+          [
+            -106.9189453125,
+            74.13407794029423
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "M`Clure Strait",
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.08007812499999,
+            75.23066741281573
+          ],
+          [
+            -120.14648437499999,
+            75.07300992968266
+          ],
+          [
+            -118.828125,
+            74.92514172326577
+          ],
+          [
+            -117.3779296875,
+            74.72382705688685
+          ],
+          [
+            -116.03759765625,
+            74.52575231463916
+          ],
+          [
+            -115.94970703125,
+            74.51402314087824
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Amundsen Gulf",
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -125.70556640625,
+            70.95252765818387
+          ],
+          [
+            -124.03564453125,
+            70.63448406630856
+          ],
+          [
+            -122.3876953125,
+            70.39997823747066
+          ],
+          [
+            -119.44335937499999,
+            70.25202914452564
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Baffin Bay",
+        "osm_id": 0,
+        "rank": 2
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -74.970703125,
+            75.73730278940474
+          ],
+          [
+            -70.83984375,
+            74.14008387440462
+          ],
+          [
+            -67.32421875,
+            72.76406472320436
+          ],
+          [
+            -63.6328125,
+            71.60828252210263
+          ],
+          [
+            -61.083984375,
+            70.72897946208789
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Melville Bay",
+        "osm_id": 0,
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -63.54492187500001,
+            75.79133591604713
+          ],
+          [
+            -61.8310546875,
+            75.6504309974655
+          ],
+          [
+            -59.8974609375,
+            75.33115771680923
+          ],
+          [
+            -59.32617187499999,
+            75.06168594936098
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Davis Strait",
+        "osm_id": 0,
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -59.0625,
+            67.1016555307692
+          ],
+          [
+            -57.919921875,
+            65.94647177615738
+          ],
+          [
+            -57.1728515625,
+            65.03506043658815
+          ],
+          [
+            -56.865234375,
+            64.47279382008166
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Black Sea",
+        "osm_id": 0,
+        "rank": 3
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            31.3330078125,
+            43.29320031385282
+          ],
+          [
+            33.4423828125,
+            43.40504748787035
+          ],
+          [
+            35.66162109375,
+            43.34116005412307
+          ],
+          [
+            37.177734375,
+            43.004647127794435
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gulf of Maine",
+        "osm_id": 0,
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -69.8291015625,
+            42.5530802889558
+          ],
+          [
+            -69.3017578125,
+            43.08493742707592
+          ],
+          [
+            -68.31298828125,
+            43.5326204268101
+          ],
+          [
+            -67.763671875,
+            43.691707903073805
+          ],
+          [
+            -66.95068359374999,
+            43.8503744993026
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": 0,
+        "name": "Bay of Biscay",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.46044921875,
+          45.706179285330855
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Skagerrak",
+        "osm_id": 0,
+        "rank": 4
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.558349609375,
+            57.65127960812027
+          ],
+          [
+            9.283447265625,
+            57.92068300017787
+          ],
+          [
+            10.0634765625,
+            58.297944045474146
+          ],
+          [
+            10.5029296875,
+            58.69977573144006
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kattegat",
+        "osm_id": 0,
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            11.348876953125,
+            57.48040333923341
+          ],
+          [
+            11.524658203125,
+            57.1958078966064
+          ],
+          [
+            11.689453125,
+            56.93298739609704
+          ],
+          [
+            11.77734375,
+            56.806893398067466
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gulf of Finland",
+        "rank": 4,
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            24.554443359375,
+            59.7397902233294
+          ],
+          [
+            25.48828125,
+            59.84481485969105
+          ],
+          [
+            26.54296875,
+            59.91097597079679
+          ],
+          [
+            26.927490234374996,
+            59.9054675732672
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Adriatic Sea",
+        "osm_id": 0,
+        "rank": 4
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.414062499999998,
+            43.8028187190472
+          ],
+          [
+            15.4248046875,
+            42.73087427928485
+          ],
+          [
+            16.23779296875,
+            42.24478535602799
+          ],
+          [
+            17.24853515625,
+            41.88592102814744
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ionian Sea",
+        "osm_id": 0,
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.7646484375,
+          37.87485339352928
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "rank": 4,
+        "name": "Gulf of Guinea",
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -2.109375,
+            3.7765593098768635
+          ],
+          [
+            1.6259765625,
+            3.2502085616531686
+          ],
+          [
+            3.8891601562499996,
+            2.591888984149953
+          ],
+          [
+            5.756835937499999,
+            1.867345112921926
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mozambique Channel",
+        "osm_id": 0,
+        "rank": 4
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            39.7265625,
+            -22.309425841200177
+          ],
+          [
+            39.92431640625,
+            -20.447602397594153
+          ],
+          [
+            40.45166015625,
+            -18.562947442888312
+          ],
+          [
+            40.97900390625,
+            -17.266727823520508
+          ],
+          [
+            41.81396484375,
+            -16.066928957450106
+          ],
+          [
+            42.2314453125,
+            -15.686509572551422
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gulf of Oman",
+        "osm_id": 0,
+        "rank": 5
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            57.2607421875,
+            25.105497373014686
+          ],
+          [
+            57.94189453125,
+            24.666986385216273
+          ],
+          [
+            58.60107421874999,
+            24.407137917727667
+          ],
+          [
+            60.07324218749999,
+            24.086589258228027
+          ],
+          [
+            61.06201171875,
+            23.96617587126503
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gulf of Thailand",
+        "osm_id": 0,
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.865234375,
+          9.015302333420598
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gulf of Tonkin",
+        "rank": 5,
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            107.02880859375,
+            18.47960905583197
+          ],
+          [
+            107.138671875,
+            19.103648251663646
+          ],
+          [
+            107.314453125,
+            19.746024239625427
+          ],
+          [
+            107.77587890625,
+            20.324023603422518
+          ],
+          [
+            108.3251953125,
+            20.673905264672843
+          ],
+          [
+            108.9404296875,
+            20.92039691397189
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Great Australian Bight",
+        "rank": 4,
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            126.5625,
+            -35.81781315869662
+          ],
+          [
+            129.90234375,
+            -36.244273184939075
+          ],
+          [
+            133.330078125,
+            -37.090239803072066
+          ],
+          [
+            136.845703125,
+            -38.54816542304657
+          ],
+          [
+            138.603515625,
+            -39.43619299931407
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gulf of Alaska",
+        "rank": 4,
+        "osm_id": 0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -149.150390625,
+            57.9148477670092
+          ],
+          [
+            -146.9091796875,
+            58.424729753759124
+          ],
+          [
+            -144.31640625,
+            58.81374171570782
+          ],
+          [
+            -141.5478515625,
+            58.768200159239576
+          ]
+        ]
+      }
+    }
+  ]
+}

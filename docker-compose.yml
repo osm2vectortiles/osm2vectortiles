@@ -18,20 +18,31 @@ pgbouncer:
    - postgis:pg
   ports:
    - "6432"
-import:
-  build: ./src/import
+import-osm:
+  build: ./src/import-osm
   volumes:
    - ./import:/data/import
   volumes_from:
    - cache
   links:
    - postgis:db
-import-water:
-  build: ./src/import-water
+import-labels:
+  build: ./src/import-external
+  command: ./import-labels.sh
   links:
   - postgis:db
 import-natural-earth:
-  build: ./src/import-natural-earth
+  build: ./src/import-external
+  command: ./import-natural-earth.sh
+  links:
+  - postgis:db
+import-water:
+  build: ./src/import-external
+  command: ./import-water.sh
+  links:
+  - postgis:db
+import-external:
+  build: ./src/import-external
   links:
   - postgis:db
 update-scaleranks:
@@ -39,22 +50,31 @@ update-scaleranks:
   links:
   - postgis:db
 enqueue-jobs:
-  build: ./src/enqueue-jobs
+  build: ./tools/enqueue-jobs
   environment:
     AWS_REGION: "eu-central-1"
     TASK_ZOOM_LEVEL: 8
     QUEUE_NAME: "osm2vectortiles_jobs"
-export:
+export-remote:
   build: ./src/export
+  command: ./export-remote.sh
+  volumes:
+   - ./open-streets.tm2source:/data/tm2source
+  links:
+   - pgbouncer:db
+  environment:
+    AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+    AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+    AWS_REGION: "eu-central-1"
+export-local:
+  build: ./src/export
+  command: ./export-local.sh
   volumes:
    - ./export:/data/export
    - ./open-streets.tm2source:/data/tm2source
   links:
    - pgbouncer:db
   environment:
-    AWS_ACCESS_KEY_ID:
-    AWS_SECRET_ACCESS_KEY:
-    AWS_REGION: "eu-central-1"
     BBOX: "8.4375 46.07323062540838 9.84375 47.040182144806664"
     MIN_ZOOM: "8"
     MAX_ZOOM: "14"
@@ -64,24 +84,22 @@ serve:
    - ./export:/data
   ports:
    - "8080:80"
-compare-visual:
-  build: ./src/compare-visual
-  ports:
-   - "4000:3000"
-   - "4001:3001"
+import-sql:
+  build: ./src/import-sql
   links:
-   - serve:tileserver
+   - postgis:db
 mapbox-studio:
-  build: ./src/mapbox-studio
+  build: ./tools/mapbox-studio
   volumes:
    - ./open-streets.tm2source:/projects/open-streets.tm2source
   links:
    - postgis:db
   ports:
    - "3000:3000"
-verify:
-  build: ./src/verify
-import-sql:
-  build: ./src/import-sql
+compare-visual:
+  build: ./tools/compare-visual
+  ports:
+   - "4000:3000"
+   - "4001:3001"
   links:
-   - postgis:db
+   - serve:tileserver

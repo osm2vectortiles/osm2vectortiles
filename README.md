@@ -51,14 +51,6 @@ Start up your PostGIS container with the data container attached.
 docker-compose up -d postgis
 ```
 
-In order to render the oceans you need to import the water polygons
-from [OpenStreetMapData.com](http://openstreetmapdata.com/data/water-polygons).
-Run the `import-water` container.
-
-```
-docker-compose up import-water
-```
-
 Download a PBF and put it into the local `import` directory.
 
 ```
@@ -68,13 +60,46 @@ wget https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.p
 Now you need to import the PBF files into PostGIS.
 
 ```
-docker-compose up import
+docker-compose up import-osm
+```
+
+Now you need to import several external data sources.
+
+Import water polygons from [OpenStreetMapData.com](http://openstreetmapdata.com/data/water-polygons).
+
+
+```
+docker-compose up import-water
+```
+
+Import Natural Earth data for lower zoom levels.
+
+```
+docker-compose up import-natural-earth
+```
+
+Import custom country, sea and state labels.
+
+```
+docker-compose up import-labels
+```
+
+Now import custom SQL functions.
+
+```
+docker-compose up import-sql
+```
+
+Update the scaleranks of OSM places.
+
+```
+docker-compose up update-scaleranks
 ```
 
 Export the data as MBTiles file to the `export` directory.
 
 ```
-docker-compose up export
+docker-compose up export-local
 ```
 
 Serve the tiles as raster tiles from `export` directory.

@@ -1,2 +1,0 @@
-mercantile==0.8.3
-boto==2.38.0

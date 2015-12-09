@@ -6,9 +6,9 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 21.7969
-  - 34.6694
-  - 3
+  - -9.063
+  - 36.5273
+  - 4
 description: Open Streets
 Layer: 
   - id: landuse
@@ -152,11 +152,11 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT 0 AS osm_id, ST_SimplifyPreserveTopology(way, 200) AS geometry FROM water_polygons
+          SELECT 0 AS osm_id, ST_SimplifyPreserveTopology(way, 200) AS geometry FROM osm_ocean_polygons
           WHERE way && !bbox!
             AND z(!scale_denominator!) = 0
           UNION ALL
-          SELECT 0 AS osm_id, way AS geometry FROM water_polygons
+          SELECT 0 AS osm_id, way AS geometry FROM osm_ocean_polygons
           WHERE way && !bbox!
             AND z(!scale_denominator!) >= 1
           UNION ALL
@@ -575,7 +575,7 @@ Layer:
     Datasource: 
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
-      geometry_field: geometry
+      geometry_field: wkb_geometry
       geometry_table: ''
       host: db
       key_field: ''
@@ -586,41 +586,46 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry,
-          iso_code as code,
-          name, name_en, name_es, name_fr,
-          name_de, name_ru, name_zh,
-          scalerank
-          FROM osm_countries
+          SELECT osm_id, wkb_geometry,
+          iso3166_1_alpha_2 as code,
+          name,
+          coalesce(NULLIF(name_en, ''), name) AS name_en,
+          coalesce(NULLIF(name_es, ''), name) AS name_es,
+          coalesce(NULLIF(name_fr, ''), name) AS name_fr,
+          coalesce(NULLIF(name_de, ''), name) AS name_de,
+          coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+          coalesce(NULLIF(name_zh, ''), name) AS name_zh, 
+          rank as scalerank
+          FROM custom_countries
           WHERE (
             (
-              scalerank <= 1
-              AND z(!scale_denominator!) = 1 AND geometry && !bbox!
+              rank <= 1
+              AND z(!scale_denominator!) = 1 AND wkb_geometry && !bbox!
             )
             OR
             (
-              scalerank <= 2
-              AND z(!scale_denominator!) >= 2 AND geometry && !bbox!
+              rank <= 2
+              AND z(!scale_denominator!) >= 2 AND wkb_geometry && !bbox!
             )
             OR
             (
-              scalerank <= 4
-              AND z(!scale_denominator!) >= 3 AND geometry && !bbox!
+              rank <= 4
+              AND z(!scale_denominator!) >= 3 AND wkb_geometry && !bbox!
             )
             OR
             (
-              scalerank <= 5
-              AND z(!scale_denominator!) >= 4 AND geometry && !bbox!
+              rank <= 5
+              AND z(!scale_denominator!) >= 4 AND wkb_geometry && !bbox!
             )
             OR
             (
-              scalerank <= 6
-              AND z(!scale_denominator!) >= 5 AND geometry && !bbox!
+              rank <= 6
+              AND z(!scale_denominator!) >= 5 AND wkb_geometry && !bbox!
             )
             OR
             (
-              scalerank >= 7
-              AND z(!scale_denominator!) >= 6 AND geometry && !bbox!
+              rank >= 7
+              AND z(!scale_denominator!) >= 6 AND wkb_geometry && !bbox!
             )
           )
         ) AS data
@@ -656,30 +661,36 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT geometry, name,
-          name_en, name_es, name_fr,
-          name_de, name_ru, name_zh,
-          lower(GeometryType(geometry)) as placement,
-          scalerank AS labelrank
-          FROM osm_marine
-          WHERE geometry && !bbox! AND (
+          SELECT osm_id, wkb_geometry,
+          name,
+          coalesce(NULLIF(name_en, ''), name) AS name_en,
+          coalesce(NULLIF(name_es, ''), name) AS name_es,
+          coalesce(NULLIF(name_fr, ''), name) AS name_fr,
+          coalesce(NULLIF(name_de, ''), name) AS name_de,
+          coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+          coalesce(NULLIF(name_zh, ''), name) AS name_zh, 
+          case when GeometryType(wkb_geometry) = 'LINESTRING' then 'line'
+               else 'POINT' end as placement,
+          rank AS labelrank
+          FROM custom_seas
+          WHERE wkb_geometry && !bbox! AND (
             (
-              scalerank = 1 AND z(!scale_denominator!) >= 1
+              rank = 1 AND z(!scale_denominator!) >= 1
             )
             OR (
-              scalerank = 2 AND z(!scale_denominator!) >= 2
+              rank = 2 AND z(!scale_denominator!) >= 2
             )
             OR (
-              scalerank = 3 AND z(!scale_denominator!) >= 3
+              rank = 3 AND z(!scale_denominator!) >= 3
             )
             OR (
-              scalerank = 4 AND z(!scale_denominator!) >= 4
+              rank = 4 AND z(!scale_denominator!) >= 4
             )
             OR (
-              scalerank = 5 AND z(!scale_denominator!) >= 5
+              rank = 5 AND z(!scale_denominator!) >= 5
             )
             OR (
-              scalerank >= 6 AND z(!scale_denominator!) >= 6
+              rank = 6 AND z(!scale_denominator!) >= 6
             )
           )
         ) AS data
@@ -695,6 +706,7 @@ Layer:
       name_fr: String
       name_ru: String
       name_zh: String
+      osm_id: String
       placement: String
     properties: 
       "buffer-size": 256
@@ -714,12 +726,19 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, abbreviation as abbr, area,
-          name, name_de, name_en, name_es, name_fr, name_ru, name_zh
-          FROM osm_states
-          WHERE geometry && !bbox! AND (
+          SELECT osm_id, wkb_geometry, abbr,
+          area_sqkm as area,
+          name,
+          coalesce(NULLIF(name_en, ''), name) AS name_en,
+          coalesce(NULLIF(name_es, ''), name) AS name_es,
+          coalesce(NULLIF(name_fr, ''), name) AS name_fr,
+          coalesce(NULLIF(name_de, ''), name) AS name_de,
+          coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+          coalesce(NULLIF(name_zh, ''), name) AS name_zh
+          FROM custom_states
+          WHERE wkb_geometry && !bbox! AND (
             (
-              area > 90000 AND z(!scale_denominator!) >= 4
+              area_sqkm > 90000 AND z(!scale_denominator!) >= 4
             )
             OR (
               z(!scale_denominator!) >= 5

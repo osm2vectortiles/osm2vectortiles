@@ -1,0 +1,4892 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "26036352",
+        "iso3166_1_alpha_2": "PH",
+        "name": "Philippines",
+        "name_en": "Philippines",
+        "name_de": "Philippinen",
+        "name_fr": "Philippines",
+        "name_es": "Filipinas",
+        "name_zh": "菲律宾",
+        "name_ru": "Филиппины",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          122.7312101,
+          12.7503486
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "26347360",
+        "iso3166_1_alpha_2": "IT",
+        "name": "Italia",
+        "name_en": "Italy",
+        "name_de": "Italien",
+        "name_fr": "Italie",
+        "name_es": "Italia",
+        "name_zh": "意大利",
+        "name_ru": "Италия",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.674297,
+          42.6384261
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "26847706",
+        "iso3166_1_alpha_2": "AF",
+        "name": "افغانستان",
+        "name_en": "Afghanistan",
+        "name_de": "Afghanistan",
+        "name_fr": "Afghanistan",
+        "name_es": "Afganistán",
+        "name_zh": "阿富汗",
+        "name_ru": "Афганистан",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          64.9998468,
+          33.0000866
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "26847709",
+        "iso3166_1_alpha_2": "AT",
+        "name": "Österreich",
+        "name_en": "Austria",
+        "name_de": "Österreich",
+        "name_fr": "Autriche",
+        "name_es": "Austria",
+        "name_zh": "奥地利",
+        "name_ru": "Австрия",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.199959,
+          47.2000338
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "148332300",
+        "iso3166_1_alpha_2": "ES",
+        "name": "España",
+        "name_en": "Spain",
+        "name_de": "Spanien",
+        "name_fr": "Espagne",
+        "name_es": "España",
+        "name_zh": "西班牙",
+        "name_ru": "Испания",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.003104,
+          40.0028028
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "148874198",
+        "iso3166_1_alpha_2": "AD",
+        "name": "Andorra",
+        "name_en": "Andorra",
+        "name_de": "Andorra",
+        "name_fr": "Andorre",
+        "name_es": "Andorra",
+        "name_zh": "安道尔",
+        "name_ru": "Андорра",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.5732033,
+          42.5407167
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "208592566",
+        "iso3166_1_alpha_2": "SI",
+        "name": "Slovenija",
+        "name_en": "Slovenia",
+        "name_de": "Slowenien",
+        "name_fr": "Slovénie",
+        "name_es": "Eslovenia",
+        "name_zh": "斯洛文尼亚",
+        "name_ru": "Словения",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.4808369,
+          45.8133113
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399339",
+        "iso3166_1_alpha_2": "GS",
+        "name": "South Georgia and South Sandwich Islands",
+        "name_en": "South Georgia and South Sandwich Islands",
+        "name_de": "Südgeorgien und die Südlichen Sandwichinseln",
+        "name_fr": "Géorgie du Sud-et-les Îles Sandwich du Sud",
+        "name_es": "Islas Georgias del Sur y Sandwich del Sur",
+        "name_zh": "南喬治亞島與南桑威奇群島",
+        "name_ru": "Южная Георгия и Южные Сандвичевы Острова",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -35.8090698,
+          -54.8432857
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "246422158",
+        "iso3166_1_alpha_2": "DO",
+        "name": "República Dominicana",
+        "name_en": "Dominican Republic",
+        "name_de": "Dominikanische Republik",
+        "name_fr": "République Dominicaine",
+        "name_es": "República Dominicana",
+        "name_zh": "多明尼加共和國",
+        "name_ru": "Доминиканская Республика",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.3028026,
+          19.0974031
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "248120384",
+        "iso3166_1_alpha_2": "NZ",
+        "name": "New Zealand",
+        "name_en": "New Zealand",
+        "name_de": "Neuseeland",
+        "name_fr": "Nouvelle-Zélande",
+        "name_es": "Nueva Zelanda",
+        "name_zh": "新西兰",
+        "name_ru": "Новая Зеландия",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          172.8344077,
+          -41.5000831
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399277",
+        "iso3166_1_alpha_2": "AM",
+        "name": "Հայաստան",
+        "name_en": "Armenia",
+        "name_de": "Armenien",
+        "name_fr": "Arménie",
+        "name_es": "Armenia",
+        "name_zh": "亚美尼亚",
+        "name_ru": "Армения",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.6736646,
+          40.7696272
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399280",
+        "iso3166_1_alpha_2": "AR",
+        "name": "Argentina",
+        "name_en": "Argentina",
+        "name_de": "Argentinien",
+        "name_fr": "Argentine",
+        "name_es": "Argentina",
+        "name_zh": "阿根廷",
+        "name_ru": "Аргентина",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.9672817,
+          -34.9964963
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399285",
+        "iso3166_1_alpha_2": "BB",
+        "name": "Barbados",
+        "name_en": "Barbados",
+        "name_de": "Barbados",
+        "name_fr": "Barbade",
+        "name_es": "Barbados",
+        "name_zh": "巴巴多斯",
+        "name_ru": "Барбадос",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -59.5250305,
+          13.1500331
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399288",
+        "iso3166_1_alpha_2": "BF",
+        "name": "Burkina Faso",
+        "name_en": "Burkina Faso",
+        "name_de": "Burkina Faso",
+        "name_fr": "Burkina Faso",
+        "name_es": "Burkina Faso",
+        "name_zh": "布基纳法索",
+        "name_ru": "Буркина-Фасо",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.6880314,
+          12.0753083
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399296",
+        "iso3166_1_alpha_2": "BS",
+        "name": "Bahamas",
+        "name_en": "Bahamas",
+        "name_de": "Bahamas",
+        "name_fr": "Bahamas",
+        "name_es": "Bahamas",
+        "name_zh": "巴哈马",
+        "name_ru": "Багамы",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.0000547,
+          24.7736546
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399394",
+        "iso3166_1_alpha_2": "MY",
+        "name": "Malaysia",
+        "name_en": "Malaysia",
+        "name_de": "Malaysia",
+        "name_fr": "Malaisie",
+        "name_es": "Malasia",
+        "name_zh": "马来西亚",
+        "name_ru": "Малайзия",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.2656823,
+          4.5693754
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399300",
+        "iso3166_1_alpha_2": "BY",
+        "name": "Беларусь",
+        "name_en": "Belarus",
+        "name_de": "Weißrussland",
+        "name_fr": "Biélorussie",
+        "name_es": "Bielorrusia",
+        "name_zh": "白俄罗斯",
+        "name_ru": "Беларусь",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.6971358,
+          53.4250605
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399308",
+        "iso3166_1_alpha_2": "CK",
+        "name": "Cook Islands",
+        "name_en": "Cook Islands",
+        "name_de": "Cookinseln",
+        "name_fr": "Îles Cook",
+        "name_es": "Islas Cook",
+        "name_zh": "库克群岛",
+        "name_ru": "Острова Кука",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -160.3554851,
+          -16.0492781
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399313",
+        "iso3166_1_alpha_2": "CU",
+        "name": "Cuba",
+        "name_en": "Cuba",
+        "name_de": "Kuba",
+        "name_fr": "Cuba",
+        "name_es": "Cuba",
+        "name_zh": "古巴",
+        "name_ru": "Куба",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.8328748,
+          23.0131338
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1696853468",
+        "iso3166_1_alpha_2": null,
+        "name": "Լեռնային Ղարաբաղի Հանրապետությու (Nagorno-Karabakh Republic)",
+        "name_en": "Nagorno-Karabakh Republic",
+        "name_de": "Republik Bergkarabach",
+        "name_fr": "Haut-Karabagh",
+        "name_es": "República de Nagorno Karabaj",
+        "name_zh": "纳戈尔诺-卡拉巴赫共和国",
+        "name_ru": "Нагорно-Карабахская Республика",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          46.6977209,
+          39.8079192
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399347",
+        "iso3166_1_alpha_2": "HU",
+        "name": "Magyarország",
+        "name_en": "Hungary",
+        "name_de": "Ungarn",
+        "name_fr": "Hongrie",
+        "name_es": "Hungría",
+        "name_zh": "匈牙利",
+        "name_ru": "Венгрия",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.5060937,
+          47.1817585
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399360",
+        "iso3166_1_alpha_2": "KM",
+        "name": "Comores",
+        "name_en": "Comoros",
+        "name_de": "Komoren",
+        "name_fr": "Comores",
+        "name_es": "Comoras",
+        "name_zh": "科摩洛",
+        "name_ru": "Коморы",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.2832964,
+          -12.2045176
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399402",
+        "iso3166_1_alpha_2": "NP",
+        "name": "Nepal",
+        "name_en": "Nepal",
+        "name_de": "Nepal",
+        "name_fr": "Népal",
+        "name_es": "Nepal",
+        "name_zh": "尼泊尔",
+        "name_ru": "Непал",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.0917515,
+          28.1082107
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399361",
+        "iso3166_1_alpha_2": "KP",
+        "name": "조선민주주의인민공화국",
+        "name_en": "North Korea",
+        "name_de": "Nordkorea",
+        "name_fr": "Corée du Nord",
+        "name_es": "Corea del Norte",
+        "name_zh": "朝鲜",
+        "name_ru": "Корейская Народно-Демократическая Республика",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.399971,
+          40.3123959
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399406",
+        "iso3166_1_alpha_2": "PE",
+        "name": "Perú",
+        "name_en": "Peru",
+        "name_de": "Peru",
+        "name_fr": "Pérou",
+        "name_es": "Perú",
+        "name_zh": "秘鲁",
+        "name_ru": "Перу",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.0458515,
+          -6.8699697
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425015",
+        "iso3166_1_alpha_2": "KI",
+        "name": "Kiribati",
+        "name_en": "Kiribati",
+        "name_de": "Kiribati",
+        "name_fr": "Kiribati",
+        "name_es": "Kiribati",
+        "name_zh": "基里巴斯",
+        "name_ru": "Кирибати",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -171.6645388,
+          0.4483283
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399362",
+        "iso3166_1_alpha_2": "KR",
+        "name": "대한민국",
+        "name_en": "South Korea",
+        "name_de": "Südkorea",
+        "name_fr": "Corée du Sud",
+        "name_es": "Corea del Sur",
+        "name_zh": null,
+        "name_ru": "Республика Корея",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.937111,
+          35.3985008
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399364",
+        "iso3166_1_alpha_2": "KY",
+        "name": "Cayman Islands",
+        "name_en": "Cayman Islands",
+        "name_de": "Kaimaninseln",
+        "name_fr": "Îles Caïmans",
+        "name_es": "Islas Caimán",
+        "name_zh": "开曼群岛",
+        "name_ru": "Острова Кайман",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.5667132,
+          19.5417212
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297198",
+        "iso3166_1_alpha_2": "NO",
+        "name": "Norge",
+        "name_en": "Norway",
+        "name_de": "Norwegen",
+        "name_fr": "Norvège",
+        "name_es": "Noruega",
+        "name_zh": "挪威",
+        "name_ru": "Норвегия",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.0999715,
+          60.5000209
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399419",
+        "iso3166_1_alpha_2": "SA",
+        "name": "السعودية",
+        "name_en": "Saudi Arabia",
+        "name_de": "Saudi-Arabien",
+        "name_fr": "Arabie saoudite",
+        "name_es": "Arabia Saudita",
+        "name_zh": "沙特阿拉伯",
+        "name_ru": "Саудовская Аравия",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          42.3528328,
+          25.6242618
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399429",
+        "iso3166_1_alpha_2": "ST",
+        "name": "São Tomé e Príncipe",
+        "name_en": "São Tomé and Príncipe",
+        "name_de": "São Tomé und Príncipe",
+        "name_fr": "Sao Tomé-et-Principe",
+        "name_es": "Santo Tomé y Príncipe",
+        "name_zh": "圣多美和普林西比",
+        "name_ru": "Сан-Томе и Принсипи",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.9648718,
+          0.8875498
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "433483519",
+        "iso3166_1_alpha_2": "BM",
+        "name": "Bermuda",
+        "name_en": "Bermuda",
+        "name_de": "Bermuda",
+        "name_fr": "Bermudes",
+        "name_es": "Bermudas",
+        "name_zh": "百慕大",
+        "name_ru": "Бермуды",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.7603583,
+          32.3018217
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399440",
+        "iso3166_1_alpha_2": "TM",
+        "name": "Türkmenistan",
+        "name_en": "Turkmenistan",
+        "name_de": "Turkmenistan",
+        "name_fr": "Turkménistan",
+        "name_es": "Turkmenistán",
+        "name_zh": "土库曼斯坦",
+        "name_ru": "Туркмения",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          59.3924609,
+          39.3763807
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399444",
+        "iso3166_1_alpha_2": "TT",
+        "name": "Trinidad and Tobago",
+        "name_en": "Trinidad and Tobago",
+        "name_de": "Trinidad und Tobago",
+        "name_fr": "Trinité-et-Tobago",
+        "name_es": "Trinidad y Tobago",
+        "name_zh": "特立尼达和多巴哥",
+        "name_ru": "Тринидад и Тобаго",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60.9821067,
+          10.8677845
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297207",
+        "iso3166_1_alpha_2": "BH",
+        "name": "البحرين",
+        "name_en": "Bahrain",
+        "name_de": "Bahrain",
+        "name_fr": "Bahreïn",
+        "name_es": "Bahréin",
+        "name_zh": "巴林",
+        "name_ru": "Бахрейн",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.5344606,
+          26.1551249
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "249399459",
+        "iso3166_1_alpha_2": "YE",
+        "name": "اليَمَن",
+        "name_en": "Yemen",
+        "name_de": "Jemen",
+        "name_fr": "Yémen",
+        "name_es": "Yemen",
+        "name_zh": "也门",
+        "name_ru": "Йемен",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          47.8915271,
+          16.3471243
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "271048940",
+        "iso3166_1_alpha_2": null,
+        "name": "Sint Maarten",
+        "name_en": "Sint Maarten",
+        "name_de": "Sint Maarten",
+        "name_fr": "Saint-Martin",
+        "name_es": null,
+        "name_zh": "圣马丁岛",
+        "name_ru": "Синт-Мартен",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -63.0549948,
+          18.0423736
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "332779764",
+        "iso3166_1_alpha_2": "BZ",
+        "name": "Belize",
+        "name_en": "Belize",
+        "name_de": "Belize",
+        "name_fr": "Bélize",
+        "name_es": "Belice",
+        "name_zh": "伯利兹",
+        "name_ru": "Белиз",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.7600927,
+          16.8259793
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "369137525",
+        "iso3166_1_alpha_2": "RS",
+        "name": "Србија",
+        "name_en": "Serbia",
+        "name_de": "Serbien",
+        "name_fr": "Serbie",
+        "name_es": "Serbia",
+        "name_zh": "塞尔维亚",
+        "name_ru": "Сербия",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.55144,
+          44.1534121
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "433483540",
+        "iso3166_1_alpha_2": "JE",
+        "name": "Jersey",
+        "name_en": "Jersey",
+        "name_de": "Jersey",
+        "name_fr": "Jersey",
+        "name_es": "Jersey",
+        "name_zh": "泽西岛",
+        "name_ru": "Джерси",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.1358386,
+          49.2214561
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297217",
+        "iso3166_1_alpha_2": "NL",
+        "name": "Nederland",
+        "name_en": "The Netherlands",
+        "name_de": "Niederlande",
+        "name_fr": "Pays-Bas",
+        "name_es": "Países Bajos",
+        "name_zh": "荷兰",
+        "name_ru": "Нидерланды",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.7480821,
+          52.5001698
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297281",
+        "iso3166_1_alpha_2": "HT",
+        "name": "Haiti",
+        "name_en": "Haiti",
+        "name_de": "Haiti",
+        "name_fr": "Haïti",
+        "name_es": "Haití",
+        "name_zh": "海地",
+        "name_ru": "Гаити",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.3570972,
+          19.1399952
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297384",
+        "iso3166_1_alpha_2": "BJ",
+        "name": "Bénin",
+        "name_en": "Benin",
+        "name_de": "Benin",
+        "name_fr": "Bénin",
+        "name_es": "Benín",
+        "name_zh": "贝宁",
+        "name_ru": "Бенин",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2584408,
+          9.5293472
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "433483552",
+        "iso3166_1_alpha_2": "NU",
+        "name": "Niue",
+        "name_en": "Niue",
+        "name_de": "Niue",
+        "name_fr": "Niue",
+        "name_es": "Niue",
+        "name_zh": "紐埃",
+        "name_ru": "Ниуэ",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -169.8613411,
+          -19.0536414
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297465",
+        "iso3166_1_alpha_2": "CR",
+        "name": "Costa Rica",
+        "name_en": "Costa Rica",
+        "name_de": "Costa Rica",
+        "name_fr": "Costa Rica",
+        "name_es": "Costa Rica",
+        "name_zh": "哥斯大黎加",
+        "name_ru": "Коста-Рика",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.0739102,
+          10.2735633
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297496",
+        "iso3166_1_alpha_2": "DM",
+        "name": "Dominica",
+        "name_en": "Dominica",
+        "name_de": "Dominica",
+        "name_fr": "Dominique",
+        "name_es": "Dominica",
+        "name_zh": "多明尼加",
+        "name_ru": "Доминика",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -61.3653618,
+          15.4113138
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297579",
+        "iso3166_1_alpha_2": "GM",
+        "name": "The Gambia",
+        "name_en": "Gambia",
+        "name_de": "Gambia",
+        "name_fr": "Gambie",
+        "name_es": "Gambia",
+        "name_zh": "冈比亚",
+        "name_ru": "Гамбия",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -15.4900464,
+          13.470062
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297586",
+        "iso3166_1_alpha_2": "GN",
+        "name": "Guinée",
+        "name_en": "Guinea",
+        "name_de": "Guinea",
+        "name_fr": "Guinée",
+        "name_es": "Guinea",
+        "name_zh": "几内亚",
+        "name_ru": "Гвинея",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -10.7083587,
+          10.7226226
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297609",
+        "iso3166_1_alpha_2": "GW",
+        "name": "Guiné-Bissau",
+        "name_en": "Guinea-Bissau",
+        "name_de": "Guinea-Bissau",
+        "name_fr": "Guinée-Bissau",
+        "name_es": "Guinea-Bissau",
+        "name_zh": "几内亚比绍",
+        "name_ru": "Гвинея-Бисау",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -14.9000214,
+          12.100035
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424298076",
+        "iso3166_1_alpha_2": "TD",
+        "name": "Chad تشاد",
+        "name_en": "Chad",
+        "name_de": "Tschad",
+        "name_fr": "Tchad",
+        "name_es": "Chad",
+        "name_zh": "乍得",
+        "name_ru": "Чад",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.0156172,
+          15.6134137
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297629",
+        "iso3166_1_alpha_2": "HN",
+        "name": "Honduras",
+        "name_en": "Honduras",
+        "name_de": "Honduras",
+        "name_fr": "Honduras",
+        "name_es": "Honduras",
+        "name_zh": "洪都拉斯",
+        "name_ru": "Гондурас",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.5978534,
+          15.0610686
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297647",
+        "iso3166_1_alpha_2": "IL",
+        "name": "ישראל",
+        "name_en": "Israel",
+        "name_de": "Israel",
+        "name_fr": "Israël",
+        "name_es": "Israel",
+        "name_zh": "以色列",
+        "name_ru": "Израиль",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.0015196,
+          30.8760272
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424298277",
+        "iso3166_1_alpha_2": "SC",
+        "name": "Seychelles",
+        "name_en": "Seychelles",
+        "name_de": "Seychellen",
+        "name_fr": "Seychelles",
+        "name_es": "Seychelles",
+        "name_zh": "塞舌尔群岛",
+        "name_ru": "Сейшелы",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          55.4540146,
+          -4.6574977
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297742",
+        "iso3166_1_alpha_2": "LB",
+        "name": "لبنان",
+        "name_en": "Lebanon",
+        "name_de": "Libanon",
+        "name_fr": "Liban",
+        "name_es": "Líbano",
+        "name_zh": "黎巴嫩",
+        "name_ru": "Ливан",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.843409,
+          33.8750629
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297773",
+        "iso3166_1_alpha_2": null,
+        "name": "Lietuva",
+        "name_en": "Lithuania",
+        "name_de": "Litauen",
+        "name_fr": "Lituanie",
+        "name_es": "Lituania",
+        "name_zh": "立陶宛",
+        "name_ru": "Литва",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.7499998,
+          55.3500003
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425019",
+        "iso3166_1_alpha_2": "LV",
+        "name": "Latvija",
+        "name_en": "Latvia",
+        "name_de": "Lettland",
+        "name_fr": "Lettonie",
+        "name_es": "Letonia",
+        "name_zh": "拉脱维亚",
+        "name_ru": "Латвия",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.5999717,
+          56.8666904
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297810",
+        "iso3166_1_alpha_2": "MK",
+        "name": "Македонија",
+        "name_en": "Macedonia",
+        "name_de": "Mazedonien",
+        "name_fr": "Macédoine",
+        "name_es": "Macedonia",
+        "name_zh": "马其顿",
+        "name_ru": "Македония",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.7168387,
+          41.6171214
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297816",
+        "iso3166_1_alpha_2": "ML",
+        "name": "Mali",
+        "name_en": "Mali",
+        "name_de": "Mali",
+        "name_fr": "Mali",
+        "name_es": "Malí",
+        "name_zh": "马里",
+        "name_ru": "Мали",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.2900239,
+          16.3700359
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297917",
+        "iso3166_1_alpha_2": "NR",
+        "name": "Nauru",
+        "name_en": "Nauru",
+        "name_de": "Nauru",
+        "name_fr": "Nauru",
+        "name_es": "Nauru",
+        "name_zh": "瑙魯",
+        "name_ru": "Науру",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          166.9333009,
+          -0.5249624
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297931",
+        "iso3166_1_alpha_2": "PG",
+        "name": "Papua New Guinea",
+        "name_en": "Papua New Guinea",
+        "name_de": "Papua-Neuguinea",
+        "name_fr": "Papouasie-Nouvelle-Guinée",
+        "name_es": "Papúa Nueva Guinea",
+        "name_zh": "巴布亚新几内亚",
+        "name_ru": "Папуа — Новая Гвинея",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          144.2489081,
+          -5.6816069
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424297973",
+        "iso3166_1_alpha_2": "SD",
+        "name": "السودان",
+        "name_en": "Sudan",
+        "name_de": "Sudan",
+        "name_fr": "Soudan",
+        "name_es": "Sudán",
+        "name_zh": "苏丹",
+        "name_ru": "Судан",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.4917691,
+          14.5844444
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424298019",
+        "iso3166_1_alpha_2": "LU",
+        "name": "Luxembourg",
+        "name_en": "Luxembourg",
+        "name_de": "Luxemburg",
+        "name_fr": "Luxembourg",
+        "name_es": "Luxemburgo",
+        "name_zh": "卢森堡",
+        "name_ru": "Люксембург",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.1296751,
+          49.8158683
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424298150",
+        "iso3166_1_alpha_2": "VN",
+        "name": "Việt Nam",
+        "name_en": "Vietnam",
+        "name_de": "Vietnam",
+        "name_fr": "Viêt Nam",
+        "name_es": "Vietnam",
+        "name_zh": "越南",
+        "name_ru": "Вьетнам",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          108.4265113,
+          13.2904027
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424298227",
+        "iso3166_1_alpha_2": "EC",
+        "name": "Ecuador",
+        "name_en": "Ecuador",
+        "name_de": "Ecuador",
+        "name_fr": "Équateur",
+        "name_es": "Ecuador",
+        "name_zh": "厄瓜多尔",
+        "name_ru": "Эквадор",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3666965,
+          -1.3397668
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311679",
+        "iso3166_1_alpha_2": "NF",
+        "name": "Norfolk Island",
+        "name_en": "Norfolk Island",
+        "name_de": "Norfolkinsel",
+        "name_fr": "Île Norfolk",
+        "name_es": "Isla Norfolk",
+        "name_zh": "诺福克岛",
+        "name_ru": "Остров Норфолк",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          167.9483137,
+          -29.0328038
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424298167",
+        "iso3166_1_alpha_2": "ZA",
+        "name": "South Africa",
+        "name_en": "South Africa",
+        "name_de": "Südafrika",
+        "name_fr": "Afrique du Sud",
+        "name_es": "Sudáfrica",
+        "name_zh": "南非",
+        "name_ru": "Южно-Африканская Республика",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.991639,
+          -28.8166236
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424298311",
+        "iso3166_1_alpha_2": "IR",
+        "name": "ایران",
+        "name_en": "Iran",
+        "name_de": "Iran",
+        "name_fr": "Iran",
+        "name_es": "Irán",
+        "name_zh": "伊朗",
+        "name_ru": "Иран",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          52.9471344,
+          32.9407496
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424298326",
+        "iso3166_1_alpha_2": "TR",
+        "name": "Türkiye",
+        "name_en": "Turkey",
+        "name_de": "Türkei",
+        "name_fr": "Turquie",
+        "name_es": "Turquía",
+        "name_zh": "土耳其",
+        "name_ru": "Турция",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          34.9249653,
+          38.9597594
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424310601",
+        "iso3166_1_alpha_2": "AL",
+        "name": "Shqipëria",
+        "name_en": "Albania",
+        "name_de": "Albanien",
+        "name_fr": "Albanie",
+        "name_es": "Albania",
+        "name_zh": "阿尔巴尼亚",
+        "name_ru": "Албания",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.9999619,
+          41.000028
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424310680",
+        "iso3166_1_alpha_2": "SZ",
+        "name": "Swaziland",
+        "name_en": "Swaziland",
+        "name_de": "Swasiland",
+        "name_fr": "Swaziland",
+        "name_es": "Suazilandia",
+        "name_zh": "斯威士兰",
+        "name_ru": "Свазиленд",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3991317,
+          -26.5624806
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424310703",
+        "iso3166_1_alpha_2": "AE",
+        "name": "الإمارات العربية المتحدة",
+        "name_en": "United Arab Emirates",
+        "name_de": "Vereinigte Arabische Emirate",
+        "name_fr": "Émirats arabes unis",
+        "name_es": "Emiratos Árabes Unidos",
+        "name_zh": "阿拉伯联合酋长国",
+        "name_ru": "Объединённые Арабские Эмираты",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          53.9994829,
+          24.0002488
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424310758",
+        "iso3166_1_alpha_2": "KN",
+        "name": "Saint Kitts and Nevis",
+        "name_en": "Saint Kitts and Nevis",
+        "name_de": "St. Kitts und Nevis",
+        "name_fr": "Saint-Christophe-et-Niévès",
+        "name_es": "San Cristóbal y Nieves",
+        "name_zh": "圣基茨和尼维斯",
+        "name_ru": "Сент-Китс и Невис",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -62.7687277,
+          17.3462278
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424310875",
+        "iso3166_1_alpha_2": null,
+        "name": "Angola",
+        "name_en": "Angola",
+        "name_de": "Angola",
+        "name_fr": "Angola",
+        "name_es": "Angola",
+        "name_zh": "安哥拉",
+        "name_ru": "Ангола",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.5691241,
+          -11.8775768
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424310982",
+        "iso3166_1_alpha_2": "BI",
+        "name": "Burundi",
+        "name_en": "Burundi",
+        "name_de": "Burundi",
+        "name_fr": "Burundi",
+        "name_es": "Burundi",
+        "name_zh": "布隆迪",
+        "name_ru": "Бурунди",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.8870575,
+          -3.3634357
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311827",
+        "iso3166_1_alpha_2": "TG",
+        "name": "Togo",
+        "name_en": "Togo",
+        "name_de": "Togo",
+        "name_fr": "Togo",
+        "name_es": "Togo",
+        "name_zh": "多哥",
+        "name_ru": "Того",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.0199765,
+          8.7800265
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311028",
+        "iso3166_1_alpha_2": "BT",
+        "name": "འབྲུགཡུལ་",
+        "name_en": "Bhutan",
+        "name_de": "Bhutan",
+        "name_fr": "Bhoutan",
+        "name_es": "Bután",
+        "name_zh": "不丹",
+        "name_ru": "Бутан",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          90.5119273,
+          27.549511
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311104",
+        "iso3166_1_alpha_2": "CL",
+        "name": "Chile",
+        "name_en": "Chile",
+        "name_de": "Chile",
+        "name_fr": "Chili",
+        "name_es": "Chile",
+        "name_zh": "智利",
+        "name_ru": "Чили",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.3187697,
+          -31.7613365
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311151",
+        "iso3166_1_alpha_2": "CV",
+        "name": "Cabo Verde",
+        "name_en": "Cabo Verde",
+        "name_de": "Kap Verde",
+        "name_fr": "Cap-Vert",
+        "name_es": "Cabo Verde",
+        "name_zh": "佛得角",
+        "name_ru": "Кабо-Верде",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -24.0083947,
+          16.0000552
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "433483572",
+        "iso3166_1_alpha_2": "TK",
+        "name": "Tokelau",
+        "name_en": "Tokelau",
+        "name_de": "Tokelau",
+        "name_fr": "Tokelau",
+        "name_es": "Tokelau",
+        "name_zh": "托克劳",
+        "name_ru": "Токелау",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -171.8196878,
+          -9.1676396
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311237",
+        "iso3166_1_alpha_2": null,
+        "name": "Falkland Islands (Malvinas)",
+        "name_en": "Falkland Islands",
+        "name_de": "Falklandinseln",
+        "name_fr": "Îles Malouines (Îles Falkland)",
+        "name_es": "Islas Malvinas",
+        "name_zh": "福克兰群岛",
+        "name_ru": "Фолклендские Oстрова",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -59.5500387,
+          -51.9666424
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311244",
+        "iso3166_1_alpha_2": "FM",
+        "name": "Federated States of Micronesia",
+        "name_en": "Federated States of Micronesia",
+        "name_de": "Mikronesien",
+        "name_fr": "Micronésie",
+        "name_es": "Estados Federados de Micronesia",
+        "name_zh": "密克罗尼西亚",
+        "name_ru": "Федеративные Штаты Микронезии",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          150.1982846,
+          5.5600565
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311252",
+        "iso3166_1_alpha_2": "GA",
+        "name": "Gabon",
+        "name_en": "Gabon",
+        "name_de": "Gabun",
+        "name_fr": "Gabon",
+        "name_es": "Gabón",
+        "name_zh": "加蓬",
+        "name_ru": "Габон",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.6899699,
+          -0.8999695
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311328",
+        "iso3166_1_alpha_2": "GY",
+        "name": "Guyana",
+        "name_en": "Guyana",
+        "name_de": "Guyana",
+        "name_fr": "Guyana",
+        "name_es": "Guyana",
+        "name_zh": "圭亚那",
+        "name_ru": "Гайана",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.6416891,
+          4.8417097
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311353",
+        "iso3166_1_alpha_2": "HR",
+        "name": "Hrvatska",
+        "name_en": "Croatia",
+        "name_de": "Kroatien",
+        "name_fr": "Croatie",
+        "name_es": "Croacia",
+        "name_zh": "克罗地亚",
+        "name_ru": "Хорватия",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.0118954,
+          45.5643442
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311521",
+        "iso3166_1_alpha_2": "KZ",
+        "name": "Казахстан",
+        "name_en": "Kazakhstan",
+        "name_de": "Kasachstan",
+        "name_fr": "Kazakhstan",
+        "name_es": "Kazajistán",
+        "name_zh": "哈萨克斯坦",
+        "name_ru": "Казахстан",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          65.2093197,
+          47.2286086
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311573",
+        "iso3166_1_alpha_2": "LR",
+        "name": "Liberia",
+        "name_en": "Liberia",
+        "name_de": "Liberia",
+        "name_fr": "Libéria",
+        "name_es": "Liberia",
+        "name_zh": "利比里亚",
+        "name_ru": "Либерия",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -9.3658524,
+          5.7499721
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311641",
+        "iso3166_1_alpha_2": "MV",
+        "name": "Maldives",
+        "name_en": "Maldives",
+        "name_de": "Malediven",
+        "name_fr": "Maldives",
+        "name_es": "Maldivas",
+        "name_zh": "马尔代夫",
+        "name_ru": "Мальдивы",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.4867968,
+          4.2218417
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311645",
+        "iso3166_1_alpha_2": "MW",
+        "name": "Malawi",
+        "name_en": "Malawi",
+        "name_de": "Malawi",
+        "name_fr": "Malawi",
+        "name_es": "Malaui",
+        "name_zh": "马拉维",
+        "name_ru": "Малави",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.9301963,
+          -13.2687204
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311658",
+        "iso3166_1_alpha_2": "MZ",
+        "name": "Mozambique",
+        "name_en": "Mozambique",
+        "name_de": "Mosambik",
+        "name_fr": "Mozambique",
+        "name_es": "Mozambique",
+        "name_zh": "莫桑比克",
+        "name_ru": "Мозамбик",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          34.9144977,
+          -19.302233
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311662",
+        "iso3166_1_alpha_2": "NA",
+        "name": "Namibia",
+        "name_en": "Namibia",
+        "name_de": "Namibia",
+        "name_fr": "Namibie",
+        "name_es": "Namibia",
+        "name_zh": "纳米比亚",
+        "name_ru": "Намибия",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.3231107,
+          -23.2335499
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311675",
+        "iso3166_1_alpha_2": "NE",
+        "name": "Niger",
+        "name_en": "Niger",
+        "name_de": "Niger",
+        "name_fr": "Niger",
+        "name_es": "Níger",
+        "name_zh": "尼日尔",
+        "name_ru": "Нигер",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.3238432,
+          17.7356214
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311738",
+        "iso3166_1_alpha_2": "RW",
+        "name": "Rwanda",
+        "name_en": "Rwanda",
+        "name_de": "Ruanda",
+        "name_fr": "Rwanda",
+        "name_es": "Ruanda",
+        "name_zh": "卢旺达",
+        "name_ru": "Руанда",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.0644358,
+          -1.9646631
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311802",
+        "iso3166_1_alpha_2": "SV",
+        "name": "El Salvador",
+        "name_en": "El Salvador",
+        "name_de": "El Salvador",
+        "name_fr": "Salvador",
+        "name_es": "El Salvador",
+        "name_zh": "萨尔瓦多",
+        "name_ru": "Сальвадор",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.9140683,
+          13.8000382
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311814",
+        "iso3166_1_alpha_2": "TC",
+        "name": "Turks and Caicos Islands",
+        "name_en": "Turks and Caicos Islands",
+        "name_de": "Turks- und Caicosinseln",
+        "name_fr": "Îles Turques-et-Caïques",
+        "name_es": "Islas Turcas y Caicos",
+        "name_zh": "特克斯和凱科斯群島",
+        "name_ru": "Острова Тёркс и Кайкос",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6201783,
+          21.7214683
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311848",
+        "iso3166_1_alpha_2": "TO",
+        "name": "Tonga",
+        "name_en": "Tonga",
+        "name_de": "Tonga",
+        "name_fr": "Tonga",
+        "name_es": "Tonga",
+        "name_zh": "汤加群岛",
+        "name_ru": "Тонга",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -175.2026424,
+          -19.9160819
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311883",
+        "iso3166_1_alpha_2": "VA",
+        "name": "Civitatis Vaticanæ",
+        "name_en": "Vatican City",
+        "name_de": "Vatikanstadt",
+        "name_fr": "Cité du Vatican",
+        "name_es": "Ciudad del Vaticano",
+        "name_zh": "梵蒂冈",
+        "name_ru": "Ватикан",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.4528349,
+          41.9034912
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311890",
+        "iso3166_1_alpha_2": "VE",
+        "name": "Venezuela",
+        "name_en": "Venezuela",
+        "name_de": "Venezuela",
+        "name_fr": "Venezuela",
+        "name_es": "Venezuela",
+        "name_zh": "委内瑞拉",
+        "name_ru": "Венесуэла",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.1109318,
+          8.0018709
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311891",
+        "iso3166_1_alpha_2": "VG",
+        "name": "British Virgin Islands",
+        "name_en": "British Virgin Islands",
+        "name_de": "Britische Jungferninseln",
+        "name_fr": "Îles Vierges britanniques",
+        "name_es": "Islas Vírgenes Británicas",
+        "name_zh": "英属维尔京群岛",
+        "name_ru": "Виргинские Острова (Брит.)",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.5661642,
+          18.4024395
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311942",
+        "iso3166_1_alpha_2": "ID",
+        "name": "Indonesia",
+        "name_en": "Indonesia",
+        "name_de": "Indonesien",
+        "name_fr": "Indonésie",
+        "name_es": "Indonesia",
+        "name_zh": "印度尼西亚",
+        "name_ru": "Индонезия",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.5632032,
+          -4.7993356
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313277",
+        "iso3166_1_alpha_2": "SE",
+        "name": "Sverige",
+        "name_en": "Sweden",
+        "name_de": "Schweden",
+        "name_fr": "Suède",
+        "name_es": "Suecia",
+        "name_zh": "瑞典",
+        "name_ru": "Швеция",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.5208584,
+          59.6749712
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424311955",
+        "iso3166_1_alpha_2": "MH",
+        "name": "Marshall Islands",
+        "name_en": "Marshall Islands",
+        "name_de": "Marshallinseln",
+        "name_fr": "Îles Marshall",
+        "name_es": "Islas Marshall",
+        "name_zh": "马绍尔群岛",
+        "name_ru": "Маршалловы Острова",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          170.9985095,
+          6.9518742
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424312026",
+        "iso3166_1_alpha_2": "GL",
+        "name": "Kalaallit Nunaat",
+        "name_en": "Greenland",
+        "name_de": "Grönland",
+        "name_fr": "Groenland",
+        "name_es": "Groenlandia",
+        "name_zh": "格陵兰岛",
+        "name_ru": "Гренландия",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -42.8125967,
+          77.6192349
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424312044",
+        "iso3166_1_alpha_2": "FO",
+        "name": "Føroyar",
+        "name_en": "Faroe Islands",
+        "name_de": "Färöer",
+        "name_fr": "Îles Féroé",
+        "name_es": "Islas Feroe",
+        "name_zh": "法罗群岛",
+        "name_ru": "Фарерские Острова",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.0322972,
+          62.0448724
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313406",
+        "iso3166_1_alpha_2": null,
+        "name": "Κύπρος",
+        "name_en": "Cyprus",
+        "name_de": "Republik Zypern",
+        "name_fr": "Chypre",
+        "name_es": "Chipre",
+        "name_zh": "賽普勒斯",
+        "name_ru": "Республика Кипр",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.1451285,
+          34.9823018
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313428",
+        "iso3166_1_alpha_2": "SG",
+        "name": "Singapore",
+        "name_en": "Singapore",
+        "name_de": "Singapur",
+        "name_fr": "Singapour",
+        "name_es": "Singapur",
+        "name_zh": "新加坡",
+        "name_ru": "Сингапур",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.8194992,
+          1.357107
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424315584",
+        "iso3166_1_alpha_2": "AU",
+        "name": "Australia",
+        "name_en": "Australia",
+        "name_de": "Australien",
+        "name_fr": "Australie",
+        "name_es": "Australia",
+        "name_zh": "澳大利亚",
+        "name_ru": "Австралия",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.755,
+          -24.7761086
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313451",
+        "iso3166_1_alpha_2": "JP",
+        "name": "日本",
+        "name_en": "Japan",
+        "name_de": "Japan",
+        "name_fr": "Japon",
+        "name_es": "Japón",
+        "name_zh": "日本",
+        "name_ru": "Япония",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.2394179,
+          36.5748441
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313466",
+        "iso3166_1_alpha_2": "VU",
+        "name": "Vanuatu",
+        "name_en": "Vanuatu",
+        "name_de": "Vanuatu",
+        "name_fr": "Vanuatu",
+        "name_es": "Vanuatu",
+        "name_zh": "瓦努阿图",
+        "name_ru": "Вануату",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          168.1069154,
+          -16.5255069
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313734",
+        "iso3166_1_alpha_2": "BR",
+        "name": "Brasil",
+        "name_en": "Brazil",
+        "name_de": "Brasilien",
+        "name_fr": "Brésil",
+        "name_es": "Brasil",
+        "name_zh": "巴西",
+        "name_ru": "Бразилия",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -53.2,
+          -10.3333333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313582",
+        "iso3166_1_alpha_2": "CN",
+        "name": "中华人民共和国",
+        "name_en": "People's Republic of China",
+        "name_de": "China",
+        "name_fr": "Chine",
+        "name_es": "China",
+        "name_zh": "中国",
+        "name_ru": "Китайская Народная Республика",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.999927,
+          35.000074
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313591",
+        "iso3166_1_alpha_2": "JM",
+        "name": "Jamaica",
+        "name_en": "Jamaica",
+        "name_de": "Jamaika",
+        "name_fr": "Jamaïque",
+        "name_es": "Jamaica",
+        "name_zh": "牙买加",
+        "name_ru": "Ямайка",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.3947693,
+          18.1850507
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313836",
+        "iso3166_1_alpha_2": "GH",
+        "name": "Ghana",
+        "name_en": "Ghana",
+        "name_de": "Ghana",
+        "name_fr": "Ghana",
+        "name_es": "Ghana",
+        "name_zh": "加纳",
+        "name_ru": "Гана",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.0800271,
+          8.0300284
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313675",
+        "iso3166_1_alpha_2": "AZ",
+        "name": "Azərbaycan",
+        "name_en": "Azerbaijan",
+        "name_de": "Aserbaidschan",
+        "name_fr": "Azerbaïdjan",
+        "name_es": "Azerbaiyán",
+        "name_zh": "阿塞拜疆",
+        "name_ru": "Азербайджан",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          47.7872508,
+          40.3936294
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313730",
+        "iso3166_1_alpha_2": "BO",
+        "name": "Bolivia",
+        "name_en": "Bolivia",
+        "name_de": "Bolivien",
+        "name_fr": "Bolivie",
+        "name_es": "Bolivia",
+        "name_zh": "玻利维亚",
+        "name_ru": "Боливия",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.9912286,
+          -17.0568696
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313751",
+        "iso3166_1_alpha_2": "BW",
+        "name": "Botswana",
+        "name_en": "Botswana",
+        "name_de": "Botsuana",
+        "name_fr": "Botswana",
+        "name_es": "Botsuana",
+        "name_zh": "博茨瓦纳",
+        "name_ru": "Ботсвана",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.5928742,
+          -23.1681782
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313760",
+        "iso3166_1_alpha_2": null,
+        "name": "Canada",
+        "name_en": "Canada",
+        "name_de": "Kanada",
+        "name_fr": "Canada",
+        "name_es": "Canadá",
+        "name_zh": "加拿大",
+        "name_ru": "Канада",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -107.9917071,
+          61.0666922
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313903",
+        "iso3166_1_alpha_2": "KE",
+        "name": "Kenya",
+        "name_en": "Kenya",
+        "name_de": "Kenia",
+        "name_fr": "Kenya",
+        "name_es": "Kenia",
+        "name_zh": "肯尼亚",
+        "name_ru": "Кения",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.4313975,
+          1.4419683
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313803",
+        "iso3166_1_alpha_2": "CZ",
+        "name": "Česko",
+        "name_en": "Czech Republic",
+        "name_de": "Tschechien",
+        "name_fr": "République tchèque",
+        "name_es": "Chequia",
+        "name_zh": "捷克",
+        "name_ru": "Чехия",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.4749544,
+          49.8167003
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313823",
+        "iso3166_1_alpha_2": "FJ",
+        "name": "Fiji",
+        "name_en": "Fiji",
+        "name_de": "Fidschi",
+        "name_fr": "Fidji",
+        "name_es": "Fiyi",
+        "name_zh": "斐济岛",
+        "name_ru": "Фиджи",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          179.0122737,
+          -18.1239696
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313832",
+        "iso3166_1_alpha_2": "EE",
+        "name": "Eesti",
+        "name_en": "Estonia",
+        "name_de": "Estland",
+        "name_fr": "Estonie",
+        "name_es": "Estonia",
+        "name_zh": "爱沙尼亚",
+        "name_ru": "Эстония",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.3319078,
+          58.7523778
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313853",
+        "iso3166_1_alpha_2": "GQ",
+        "name": "Guinea Ecuatorial",
+        "name_en": "Equatorial Guinea",
+        "name_de": "Äquatorialguinea",
+        "name_fr": "Guinée équatoriale",
+        "name_es": "Guinea Ecuatorial",
+        "name_zh": "赤道几内亚",
+        "name_ru": "Экваториальная Гвинея",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.5170357,
+          1.613172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313891",
+        "iso3166_1_alpha_2": "IO",
+        "name": "British Indian Ocean Territory",
+        "name_en": "British Indian Ocean Territory",
+        "name_de": "Britisches Territorium im Indischen Ozean",
+        "name_fr": "Territoire britannique de l'Océan Indien",
+        "name_es": "Territorio Británico del Océano Índico",
+        "name_zh": "英属印度洋领地",
+        "name_ru": "Британская Территория в Индийском Океане",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          72.1173961,
+          -6.4157192
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425060",
+        "iso3166_1_alpha_2": "PL",
+        "name": "Polska",
+        "name_en": "Poland",
+        "name_de": "Polen",
+        "name_fr": "Pologne",
+        "name_es": "Polonia",
+        "name_zh": "波兰",
+        "name_ru": "Польша",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.0258159,
+          52.0977181
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424313936",
+        "iso3166_1_alpha_2": "KW",
+        "name": "الكويت",
+        "name_en": "Kuwait",
+        "name_de": "Kuwait",
+        "name_fr": "Koweït",
+        "name_es": "Kuwait",
+        "name_zh": "科威特",
+        "name_ru": "Кувейт",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          47.4979476,
+          29.2733964
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424314005",
+        "iso3166_1_alpha_2": "MS",
+        "name": "Montserrat",
+        "name_en": "Montserrat",
+        "name_de": "Montserrat",
+        "name_fr": "Montserrat",
+        "name_es": "Montserrat",
+        "name_zh": "蒙特塞拉特",
+        "name_ru": "Монтсеррат",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -62.1916844,
+          16.7417041
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424314088",
+        "iso3166_1_alpha_2": "PK",
+        "name": "‪‫پاکستان‬ Pakistan‬",
+        "name_en": "Pakistan",
+        "name_de": "Pakistan",
+        "name_fr": "Pakistan",
+        "name_es": "Pakistán",
+        "name_zh": "巴基斯坦",
+        "name_ru": "Пакистан",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          71.247499,
+          30.3308401
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424314123",
+        "iso3166_1_alpha_2": "SL",
+        "name": "Sierra Leone",
+        "name_en": "Sierra Leone",
+        "name_de": "Sierra Leone",
+        "name_fr": "Sierra Leone",
+        "name_es": "Sierra Leona",
+        "name_zh": "塞拉利昂",
+        "name_ru": "Сьерра-Леоне",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -11.8400269,
+          8.6400349
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424314145",
+        "iso3166_1_alpha_2": "IN",
+        "name": "India",
+        "name_en": "India",
+        "name_de": "Indien",
+        "name_fr": "Inde",
+        "name_es": "India",
+        "name_zh": "印度",
+        "name_ru": "Индия",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.6677428,
+          22.3511148
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425062",
+        "iso3166_1_alpha_2": "QA",
+        "name": "قطر",
+        "name_en": "Qatar",
+        "name_de": "Katar",
+        "name_fr": "Qatar",
+        "name_es": "Catar",
+        "name_zh": "卡塔尔",
+        "name_ru": "Катар",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.2295295,
+          25.3336984
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424314276",
+        "iso3166_1_alpha_2": "TJ",
+        "name": "Тоҷикистон",
+        "name_en": "Tajikistan",
+        "name_de": "Tadschikistan",
+        "name_fr": "Tadjikistan",
+        "name_es": "Tayikistán",
+        "name_zh": "塔吉克斯坦",
+        "name_ru": "Таджикистан",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          70.8156541,
+          38.6281733
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424314335",
+        "iso3166_1_alpha_2": "TZ",
+        "name": "Tanzania",
+        "name_en": "Tanzania",
+        "name_de": "Tansania",
+        "name_fr": "Tanzanie",
+        "name_es": "Tanzania",
+        "name_zh": "坦桑尼亚",
+        "name_ru": "Танзания",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.7878438,
+          -6.5247123
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1696874354",
+        "iso3166_1_alpha_2": null,
+        "name": "Kuzey Kıbrıs Türk Cumhuriyeti",
+        "name_en": "Turkish Republic Of Northern Cyprus",
+        "name_de": "Nordzypern",
+        "name_fr": "Chypre du Nord",
+        "name_es": "República Turca del Norte de Chipre",
+        "name_zh": "北賽普勒斯土耳其共和國",
+        "name_ru": "Турецкая Республика Северного Кипра",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.6252379,
+          35.2245313
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424314631",
+        "iso3166_1_alpha_2": null,
+        "name": "Colombia",
+        "name_en": "Colombia",
+        "name_de": "Kolumbien",
+        "name_fr": "Colombie",
+        "name_es": "Colombia",
+        "name_zh": "哥伦比亚",
+        "name_ru": "Колумбия",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.7845143,
+          2.893108
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424314691",
+        "iso3166_1_alpha_2": "CI",
+        "name": "Côte d'Ivoire",
+        "name_en": "Ivory Coast",
+        "name_de": "Elfenbeinküste",
+        "name_fr": "Côte d'Ivoire",
+        "name_es": "Costa de Marfil",
+        "name_zh": "科特迪瓦",
+        "name_ru": "Кот-д’Ивуар",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.5679458,
+          7.9897371
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424315291",
+        "iso3166_1_alpha_2": "OM",
+        "name": "عُمان",
+        "name_en": "Oman",
+        "name_de": "Oman",
+        "name_fr": "Oman",
+        "name_es": "Omán",
+        "name_zh": "阿曼",
+        "name_ru": "Оман",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          57.0036901,
+          21.0000287
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424314784",
+        "iso3166_1_alpha_2": "IS",
+        "name": "Ísland",
+        "name_en": "Iceland",
+        "name_de": "Island",
+        "name_fr": "Islande",
+        "name_es": "Islandia",
+        "name_zh": "冰岛",
+        "name_ru": "Исландия",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -18.1059013,
+          64.9841821
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424314830",
+        "iso3166_1_alpha_2": "RU",
+        "name": "Россия",
+        "name_en": "Russia",
+        "name_de": "Russland",
+        "name_fr": "Russie",
+        "name_es": "Rusia",
+        "name_zh": "俄罗斯",
+        "name_ru": "Россия",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.7453061,
+          64.6863136
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424315709",
+        "iso3166_1_alpha_2": "BG",
+        "name": "България",
+        "name_en": "Bulgaria",
+        "name_de": "Bulgarien",
+        "name_fr": "Bulgarie",
+        "name_es": "Bulgaria",
+        "name_zh": "保加利亚",
+        "name_ru": "Болгария",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.4856617,
+          42.6073975
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424315932",
+        "iso3166_1_alpha_2": "CM",
+        "name": "Cameroun - Cameroon",
+        "name_en": "Cameroon",
+        "name_de": "Kamerun",
+        "name_fr": "Cameroun",
+        "name_es": "Camerún",
+        "name_zh": "喀麦隆",
+        "name_ru": "Камерун",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.1535811,
+          4.6125522
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424316018",
+        "iso3166_1_alpha_2": null,
+        "name": "مصر",
+        "name_en": "Egypt",
+        "name_de": "Ägypten",
+        "name_fr": "Égypte",
+        "name_es": "Egipto",
+        "name_zh": "埃及",
+        "name_ru": "Египет",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.2675469,
+          26.2540493
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424316022",
+        "iso3166_1_alpha_2": "ER",
+        "name": "ኤርትራ",
+        "name_en": "Eritrea",
+        "name_de": "Eritrea",
+        "name_fr": "Érythrée",
+        "name_es": "Eritrea",
+        "name_zh": "厄立特里亚",
+        "name_ru": "Эритрея",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.9999668,
+          15.9500319
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424316074",
+        "iso3166_1_alpha_2": "GD",
+        "name": "Grenada",
+        "name_en": "Grenada",
+        "name_de": "Grenada",
+        "name_fr": "Grenade",
+        "name_es": "Granada",
+        "name_zh": "格林纳达",
+        "name_ru": "Гренада",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -61.6904045,
+          12.1360374
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424316205",
+        "iso3166_1_alpha_2": "IQ",
+        "name": "العراق",
+        "name_en": "Iraq",
+        "name_de": "Irak",
+        "name_fr": "Irak",
+        "name_es": "Iraq",
+        "name_zh": "伊拉克",
+        "name_ru": "Ирак",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.1749775,
+          33.0955793
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424316216",
+        "iso3166_1_alpha_2": "JO",
+        "name": "الزرقاء",
+        "name_en": "Jordan",
+        "name_de": "Jordanien",
+        "name_fr": "Jordanie",
+        "name_es": "Jordania",
+        "name_zh": "约旦",
+        "name_ru": "Иордания",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.941628,
+          31.1667049
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424316307",
+        "iso3166_1_alpha_2": "LA",
+        "name": "ປະເທດລາວ",
+        "name_en": "Laos",
+        "name_de": "Laos",
+        "name_fr": "Laos",
+        "name_es": "Laos",
+        "name_zh": "老挝",
+        "name_ru": "Лаос",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.378253,
+          20.0171109
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424316319",
+        "iso3166_1_alpha_2": "LC",
+        "name": "Saint Lucia",
+        "name_en": "Saint Lucia",
+        "name_de": "St. Lucia",
+        "name_fr": "Sainte-Lucie",
+        "name_es": "Santa Lucía",
+        "name_zh": "圣卢西亚岛",
+        "name_ru": "Сент-Люсия",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60.975036,
+          13.8250489
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424316417",
+        "iso3166_1_alpha_2": "MD",
+        "name": "Moldova",
+        "name_en": "Moldova",
+        "name_de": "Moldawien",
+        "name_fr": "Moldavie",
+        "name_es": "Moldavia",
+        "name_zh": "摩尔多瓦",
+        "name_ru": "Молдова",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.5110236,
+          47.286747
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424316478",
+        "iso3166_1_alpha_2": "MM",
+        "name": "မြန်မာ",
+        "name_en": "Myanmar",
+        "name_de": "Myanmar",
+        "name_fr": "Birmanie",
+        "name_es": "Birmania",
+        "name_zh": "缅甸",
+        "name_ru": "Мьянма",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          95.9999652,
+          17.1750495
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1388794217",
+        "iso3166_1_alpha_2": "PN",
+        "name": "Pitcairn Islands",
+        "name_en": "Pitcairn",
+        "name_de": "Pitcairninseln",
+        "name_fr": "Îles Pitcairn",
+        "name_es": "Islas Pitcairn",
+        "name_zh": "皮特凯恩群岛",
+        "name_ru": "Питкэрн",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -130.1017823,
+          -25.0657719
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424316493",
+        "iso3166_1_alpha_2": "MR",
+        "name": "موريتانيا",
+        "name_en": "Mauritania",
+        "name_de": "Mauretanien",
+        "name_fr": "Mauritanie",
+        "name_es": "Mauritania",
+        "name_zh": "毛里塔尼亚",
+        "name_ru": "Мавритания",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -9.2399263,
+          20.2540382
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424316663",
+        "iso3166_1_alpha_2": "NG",
+        "name": "Nigeria",
+        "name_en": "Nigeria",
+        "name_de": "Nigeria",
+        "name_fr": "Nigéria",
+        "name_es": "Nigeria",
+        "name_zh": "尼日利亚",
+        "name_ru": "Нигерия",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.9999721,
+          9.6000359
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424317039",
+        "iso3166_1_alpha_2": "SO",
+        "name": "الصومال",
+        "name_en": "Somalia",
+        "name_de": "Somalia",
+        "name_fr": "Somalie",
+        "name_es": "Somalia",
+        "name_zh": "索马里",
+        "name_ru": "Сомали",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          49.083416,
+          8.3676771
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424316671",
+        "iso3166_1_alpha_2": "NI",
+        "name": "Nicaragua",
+        "name_en": "Nicaragua",
+        "name_de": "Nicaragua",
+        "name_fr": "Nicaragua",
+        "name_es": "Nicaragua",
+        "name_zh": "尼加拉瓜",
+        "name_ru": "Никарагуа",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.8700308,
+          12.3724928
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424316758",
+        "iso3166_1_alpha_2": "PA",
+        "name": "Panama",
+        "name_en": "Panama",
+        "name_de": "Panama",
+        "name_fr": "Panama",
+        "name_es": "Panamá",
+        "name_zh": "巴拿马",
+        "name_ru": "Панама",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.3066246,
+          8.3096067
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424317025",
+        "iso3166_1_alpha_2": "SM",
+        "name": "San Marino",
+        "name_en": "San Marino",
+        "name_de": "San Marino",
+        "name_fr": "Saint-Marin",
+        "name_es": "San Marino",
+        "name_zh": "圣马力诺",
+        "name_ru": "Сан-Марино",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.458306,
+          43.9458623
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1602889766",
+        "iso3166_1_alpha_2": null,
+        "name": "Isle of Man",
+        "name_en": "Isle of Man",
+        "name_de": "Insel Man",
+        "name_fr": "Île de Man",
+        "name_es": "Isla de Man",
+        "name_zh": "马恩岛",
+        "name_ru": "Остров Мэн",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.5591148,
+          54.1936805
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424317315",
+        "iso3166_1_alpha_2": "TN",
+        "name": "Tunisie تونس",
+        "name_en": "Tunisia",
+        "name_de": "Tunesien",
+        "name_fr": "Tunisie",
+        "name_es": "Túnez",
+        "name_zh": "突尼西亚",
+        "name_ru": "Тунис",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.400138,
+          33.8439408
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424317372",
+        "iso3166_1_alpha_2": "TV",
+        "name": "Tuvalu",
+        "name_en": "Tuvalu",
+        "name_de": "Tuvalu",
+        "name_fr": "Tuvalu",
+        "name_es": "Tuvalu",
+        "name_zh": "吐瓦鲁",
+        "name_ru": "Тувалу",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          178.1167698,
+          -7.768959
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424317406",
+        "iso3166_1_alpha_2": "UG",
+        "name": "Uganda",
+        "name_en": "Uganda",
+        "name_de": "Uganda",
+        "name_fr": "Ouganda",
+        "name_es": "Uganda",
+        "name_zh": "乌干达",
+        "name_ru": "Уганда",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.2166578,
+          1.5333554
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1607605918",
+        "iso3166_1_alpha_2": null,
+        "name": "Guernsey",
+        "name_en": "Guernsey",
+        "name_de": "Guernsey",
+        "name_fr": "Guernesey",
+        "name_es": "Guernsey",
+        "name_zh": null,
+        "name_ru": "Гернси",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.484854,
+          49.580437
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424317428",
+        "iso3166_1_alpha_2": null,
+        "name": "O'zbekiston",
+        "name_en": "Uzbekistan",
+        "name_de": "Usbekistan",
+        "name_fr": "Ouzbékistan",
+        "name_es": "Uzbekistán",
+        "name_zh": "乌兹别克斯坦",
+        "name_ru": "Узбекистан",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          63.9528098,
+          41.32373
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432424929",
+        "iso3166_1_alpha_2": "AG",
+        "name": "Antigua and Barbuda",
+        "name_en": "Antigua and Barbuda",
+        "name_de": "Antigua und Barbuda",
+        "name_fr": "Antigua-et-Barbuda",
+        "name_es": "Antigua y Barbuda",
+        "name_zh": "安提瓜和巴布达",
+        "name_ru": "Антигуа и Барбуда",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -61.8222516,
+          17.079128
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "424317935",
+        "iso3166_1_alpha_2": "US",
+        "name": "United States",
+        "name_en": "United States of America",
+        "name_de": "Vereinigte Staaten",
+        "name_fr": "États-Unis d'Amérique",
+        "name_es": "Estados Unidos de América",
+        "name_zh": "美国",
+        "name_ru": "Соединённые Штаты Америки",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -100.4458825,
+          39.7837304
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "osm_id": 432424926,
+        "iso3166_1_alpha_2": "DZ",
+        "name": "الجزائر Algérie",
+        "name_en": "Algeria",
+        "name_de": "Algerien",
+        "name_fr": "Algérie",
+        "name_es": "Argelia",
+        "name_zh": "阿尔及利亚",
+        "name_ru": "Алжир",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.9999825,
+          28.0000272
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432424937",
+        "iso3166_1_alpha_2": "BD",
+        "name": "Bangladesh",
+        "name_en": "Bangladesh",
+        "name_de": "Bangladesch",
+        "name_fr": "Bangladesh",
+        "name_es": "Bangladés",
+        "name_zh": "孟加拉国",
+        "name_ru": "Бангладеш",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          90.2932426,
+          24.4768783
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432424952",
+        "iso3166_1_alpha_2": "KH",
+        "name": "កម្ពុជា",
+        "name_en": "Cambodia",
+        "name_de": "Kambodscha",
+        "name_fr": "Cambodge",
+        "name_es": "Camboya",
+        "name_zh": "高棉",
+        "name_ru": "Камбоджа",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.869423,
+          13.5066394
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432424956",
+        "iso3166_1_alpha_2": "CF",
+        "name": "Centrafrique",
+        "name_en": "Central African Republic",
+        "name_de": "Zentralafrikanische Republik",
+        "name_fr": "Centrafrique",
+        "name_es": "República Centroafricana",
+        "name_zh": "中非",
+        "name_ru": "Центральноафриканская Республика",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.9981227,
+          7.0323598
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432424968",
+        "iso3166_1_alpha_2": "DK",
+        "name": "Danmark",
+        "name_en": "Denmark",
+        "name_de": "Dänemark",
+        "name_fr": "Danemark",
+        "name_es": "Dinamarca",
+        "name_zh": "丹麦",
+        "name_ru": "Дания",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.3333283,
+          55.670249
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432424972",
+        "iso3166_1_alpha_2": null,
+        "name": "Timor-Leste",
+        "name_en": "East Timor",
+        "name_de": "Osttimor",
+        "name_fr": "Timor Oriental",
+        "name_es": "Timor Oriental",
+        "name_zh": "东帝汶",
+        "name_ru": "Восточный Тимор",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          125.8375756,
+          -8.5151979
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432424981",
+        "iso3166_1_alpha_2": "FI",
+        "name": "Suomi",
+        "name_en": "Finland",
+        "name_de": "Finnland",
+        "name_fr": "Finlande",
+        "name_es": "Finlandia",
+        "name_zh": "芬兰",
+        "name_ru": "Финляндия",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.9209164,
+          63.2467777
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432424985",
+        "iso3166_1_alpha_2": "GE",
+        "name": "საქართველო",
+        "name_en": "Georgia",
+        "name_de": "Georgien",
+        "name_fr": "Géorgie",
+        "name_es": "Georgia",
+        "name_zh": "乔治亚",
+        "name_ru": "Грузия",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.0287382,
+          41.6809707
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432424989",
+        "iso3166_1_alpha_2": "GR",
+        "name": "Ελλάδα",
+        "name_en": "Greece",
+        "name_de": "Griechenland",
+        "name_fr": "Grèce",
+        "name_es": "Grecia",
+        "name_zh": "希腊",
+        "name_ru": "Греция",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.9999569,
+          39.000041
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425023",
+        "iso3166_1_alpha_2": "LY",
+        "name": "ليبيا",
+        "name_en": "Libya",
+        "name_de": "Libyen",
+        "name_fr": "Libye",
+        "name_es": "Libia",
+        "name_zh": "利比亚",
+        "name_ru": "Ливия",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.1236723,
+          26.8234472
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425028",
+        "iso3166_1_alpha_2": "MG",
+        "name": "Madagascar",
+        "name_en": "Madagascar",
+        "name_de": "Madagaskar",
+        "name_fr": "Madagascar",
+        "name_es": "Madagascar",
+        "name_zh": "马达加斯加",
+        "name_ru": "Мадагаскар",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          46.4416422,
+          -18.9249604
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425123",
+        "iso3166_1_alpha_2": "ZM",
+        "name": "Zambia",
+        "name_en": "Zambia",
+        "name_de": "Sambia",
+        "name_fr": "Zambie",
+        "name_es": "Zambia",
+        "name_zh": "赞比亚",
+        "name_ru": "Замбия",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.5599164,
+          -14.5186239
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425036",
+        "iso3166_1_alpha_2": "MX",
+        "name": "México",
+        "name_en": "Mexico",
+        "name_de": "Mexiko",
+        "name_fr": "Mexique",
+        "name_es": "México",
+        "name_zh": "墨西哥",
+        "name_ru": "Мексика",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -100.0000375,
+          22.5000485
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425040",
+        "iso3166_1_alpha_2": "MN",
+        "name": "Монгол Улс",
+        "name_en": "Mongolia",
+        "name_de": "Mongolei",
+        "name_fr": "Mongolie",
+        "name_es": "Mongolia",
+        "name_zh": "蒙古国",
+        "name_ru": "Монголия",
+        "rank": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.8499736,
+          46.8250388
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425041",
+        "iso3166_1_alpha_2": "MA",
+        "name": "Maroc  المغرب ⵍⵎⴰⵖⵔⵉⴱ",
+        "name_en": "Morocco",
+        "name_de": "Marokko",
+        "name_fr": "Maroc",
+        "name_es": "Marruecos",
+        "name_zh": "摩洛哥",
+        "name_ru": "Марокко",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.3366043,
+          31.1728192
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425063",
+        "iso3166_1_alpha_2": "CG",
+        "name": "République du Congo",
+        "name_en": "Republic of the Congo",
+        "name_de": "Republik Kongo",
+        "name_fr": "République du Congo",
+        "name_es": "República del Congo",
+        "name_zh": "刚果共和国",
+        "name_ru": "Конго",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.6419155,
+          -0.7264327
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425064",
+        "iso3166_1_alpha_2": "RO",
+        "name": "România",
+        "name_en": "Romania",
+        "name_de": "Rumänien",
+        "name_fr": "Roumanie",
+        "name_es": "Rumania",
+        "name_zh": "罗马尼亚",
+        "name_ru": "Румыния",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.6859225,
+          45.9852129
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425070",
+        "iso3166_1_alpha_2": "VC",
+        "name": "Saint Vincent and the Grenadines",
+        "name_en": "Saint Vincent and the Grenadines",
+        "name_de": "Saint Vincent und die Grenadinen",
+        "name_fr": "Saint-Vincent-et-les-Grenadines",
+        "name_es": "San Vicente y las Granadinas",
+        "name_zh": "圣文森特和格林纳丁斯",
+        "name_ru": "Сент-Винсент и Гренадины",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -61.2765569,
+          12.90447
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425075",
+        "iso3166_1_alpha_2": "SN",
+        "name": "Sénégal",
+        "name_en": "Senegal",
+        "name_de": "Senegal",
+        "name_fr": "Sénégal",
+        "name_es": "Senegal",
+        "name_zh": "塞内加尔",
+        "name_ru": "Сенегал",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -14.4529612,
+          14.4750607
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425079",
+        "iso3166_1_alpha_2": "SK",
+        "name": "Slovensko",
+        "name_en": "Slovakia",
+        "name_de": "Slowakei",
+        "name_fr": "Slovaquie",
+        "name_es": "Eslovaquia",
+        "name_zh": "斯洛伐克",
+        "name_ru": "Словакия",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.4528646,
+          48.7411522
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425087",
+        "iso3166_1_alpha_2": "SR",
+        "name": "Suriname",
+        "name_en": "Suriname",
+        "name_de": "Surinam",
+        "name_fr": "Suriname",
+        "name_es": "Surinam",
+        "name_zh": "苏里南",
+        "name_ru": "Суринам",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.0771187,
+          4.1413025
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425099",
+        "iso3166_1_alpha_2": "TW",
+        "name": "中華民國",
+        "name_en": "Republic of China",
+        "name_de": "Republik China",
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": "中華民國",
+        "name_ru": "Китайская Республика",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9820179,
+          23.9739374
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "432425116",
+        "iso3166_1_alpha_2": "UY",
+        "name": "Uruguay",
+        "name_en": "Uruguay",
+        "name_de": "Uruguay",
+        "name_fr": "Uruguay",
+        "name_es": "Uruguay",
+        "name_zh": "乌拉圭",
+        "name_ru": "Уругвай",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.0201525,
+          -32.8755548
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "433483517",
+        "iso3166_1_alpha_2": null,
+        "name": "Anguilla",
+        "name_en": "Anguilla",
+        "name_de": "Anguilla",
+        "name_fr": "Anguilla",
+        "name_es": "Anguila",
+        "name_zh": "安圭拉",
+        "name_ru": "Ангилья",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -63.0750234,
+          18.1954947
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "435981993",
+        "iso3166_1_alpha_2": "CD",
+        "name": "République Démocratique du Congo",
+        "name_en": "Democratic Republic of the Congo",
+        "name_de": "Demokratische Republik Kongo",
+        "name_fr": "République démocratique du Congo",
+        "name_es": "República Democrática del Congo",
+        "name_zh": "刚果民主共和国",
+        "name_ru": "Демократическая Республика Конго",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.8222636,
+          -2.9814344
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "437146363",
+        "iso3166_1_alpha_2": "TH",
+        "name": "ประเทศไทย",
+        "name_en": "Thailand",
+        "name_de": "Thailand",
+        "name_fr": "Thaïlande",
+        "name_es": "Tailandia",
+        "name_zh": "泰国",
+        "name_ru": "Таиланд",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.83273,
+          14.8971921
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "445970763",
+        "iso3166_1_alpha_2": "ME",
+        "name": "Crna Gora",
+        "name_en": "Montenegro",
+        "name_de": "Montenegro",
+        "name_fr": "Monténégro",
+        "name_es": "Montenegro",
+        "name_zh": "黑山",
+        "name_ru": "Черногория",
+        "rank": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.291739,
+          43.0285558
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "466507355",
+        "iso3166_1_alpha_2": null,
+        "name": "Аҧсны - Абхазия",
+        "name_en": "Abkhazia",
+        "name_de": "Abchasien",
+        "name_fr": "Abkhazie",
+        "name_es": "Abjasia",
+        "name_zh": "阿布哈茲",
+        "name_ru": "Абхазия",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          41.2299786,
+          43.1500226
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "506532878",
+        "iso3166_1_alpha_2": null,
+        "name": "Antarctica",
+        "name_en": "Antarctica",
+        "name_de": "Antarktis",
+        "name_fr": "Antarctique",
+        "name_es": "Antártida",
+        "name_zh": "南极洲",
+        "name_ru": "Антарктида",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          34.378236,
+          -82.108182
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "506535828",
+        "iso3166_1_alpha_2": null,
+        "name": "American Samoa",
+        "name_en": "American Samoa",
+        "name_de": "Amerikanisch-Samoa",
+        "name_fr": "Samoa Américaines",
+        "name_es": "Samoa Americana",
+        "name_zh": "美属萨摩亚",
+        "name_ru": "Американское Самоа",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -170.692511,
+          -14.289304
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "607976629",
+        "iso3166_1_alpha_2": null,
+        "name": "Guam",
+        "name_en": "Guam",
+        "name_de": "Guam",
+        "name_fr": "Guam",
+        "name_es": "Guam",
+        "name_zh": "关岛",
+        "name_ru": "Гуам",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          144.8970036,
+          13.5394645
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "823750101",
+        "iso3166_1_alpha_2": "SB",
+        "name": "Solomon Islands",
+        "name_en": "Solomon Islands",
+        "name_de": "Salomonen",
+        "name_fr": "Salomon",
+        "name_es": "Islas Salomón",
+        "name_zh": "所罗门群岛",
+        "name_ru": "Соломоновы Острова",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          162.8288542,
+          -9.7354344
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "838090640",
+        "iso3166_1_alpha_2": "GB",
+        "name": "United Kingdom",
+        "name_en": "United Kingdom",
+        "name_de": "Vereinigtes Königreich",
+        "name_fr": "Royaume-Uni",
+        "name_es": "Reino Unido",
+        "name_zh": "英国",
+        "name_ru": "Великобритания",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.2765753,
+          54.7023545
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1648342273",
+        "iso3166_1_alpha_2": "UA",
+        "name": "Україна",
+        "name_en": "Ukraine",
+        "name_de": "Ukraine",
+        "name_fr": "Ukraine",
+        "name_es": "Ucrania",
+        "name_zh": "乌克兰",
+        "name_ru": "Украина",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2718321,
+          49.4871968
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1356260631",
+        "iso3166_1_alpha_2": "SS",
+        "name": "South Sudan",
+        "name_en": "South Sudan",
+        "name_de": "Südsudan",
+        "name_fr": "Sud-Soudan",
+        "name_es": "Sudán del Sur",
+        "name_zh": "南蘇丹",
+        "name_ru": "Южный Судан",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.6667897,
+          7.8699431
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1363947712",
+        "iso3166_1_alpha_2": null,
+        "name": "France",
+        "name_en": "France",
+        "name_de": "Frankreich",
+        "name_fr": "France",
+        "name_es": "Francia",
+        "name_zh": "法国",
+        "name_ru": "Франция",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.8883335,
+          46.603354
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1696850886",
+        "iso3166_1_alpha_2": null,
+        "name": "Хуссар Ирыстон",
+        "name_en": "South Ossetia",
+        "name_de": "Südossetien",
+        "name_fr": "Ossétie du Sud",
+        "name_es": null,
+        "name_zh": "南奥塞梯",
+        "name_ru": "Южная Осетия",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.0979465,
+          42.3476344
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1420871007",
+        "iso3166_1_alpha_2": null,
+        "name": "Ireland",
+        "name_en": "Ireland",
+        "name_de": "Irland",
+        "name_fr": "Irlande",
+        "name_es": "Irlanda",
+        "name_zh": "爱尔兰",
+        "name_ru": "Ирландия",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.9794599,
+          52.865196
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1504546320",
+        "iso3166_1_alpha_2": null,
+        "name": "Schweiz, Suisse, Svizzera, Svizra",
+        "name_en": "Switzerland",
+        "name_de": "Schweiz",
+        "name_fr": "Suisse",
+        "name_es": "Suiza",
+        "name_zh": "瑞士",
+        "name_ru": "Швейцария",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.2319736,
+          46.7985624
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1511934680",
+        "iso3166_1_alpha_2": null,
+        "name": "Belau",
+        "name_en": "Palau",
+        "name_de": "Palau",
+        "name_fr": "Palaos",
+        "name_es": "Palaos",
+        "name_zh": "帕劳",
+        "name_ru": "Палау",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          133.31363,
+          6.097367
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1529444079",
+        "iso3166_1_alpha_2": "WS",
+        "name": "Sāmoa",
+        "name_en": "Sāmoa",
+        "name_de": "Samoa",
+        "name_fr": "Samoa",
+        "name_es": "Samoa",
+        "name_zh": "萨摩亚",
+        "name_ru": "Самоа",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -172.1200508,
+          -13.7693895
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1640880787",
+        "iso3166_1_alpha_2": "ZW",
+        "name": "Zimbabwe",
+        "name_en": "Zimbabwe",
+        "name_de": "Simbabwe",
+        "name_fr": "Zimbabwe",
+        "name_es": "Zimbabue",
+        "name_zh": "津巴布韦",
+        "name_ru": "Зимбабве",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.7468414,
+          -18.4554963
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1644732479",
+        "iso3166_1_alpha_2": "GT",
+        "name": "Guatemala",
+        "name_en": "Guatemala",
+        "name_de": "Guatemala",
+        "name_fr": "Guatémala",
+        "name_es": "Guatemala",
+        "name_zh": "危地马拉",
+        "name_ru": "Гватемала",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.8988087,
+          15.6356088
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1644764586",
+        "iso3166_1_alpha_2": null,
+        "name": "Paraguay",
+        "name_en": "Paraguay",
+        "name_de": "Paraguay",
+        "name_fr": "Paraguay",
+        "name_es": "Paraguay",
+        "name_zh": "巴拉圭",
+        "name_ru": "Парагвай",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.1693445,
+          -23.3165935
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1683325355",
+        "iso3166_1_alpha_2": "DE",
+        "name": "Deutschland",
+        "name_en": "Germany",
+        "name_de": "Deutschland",
+        "name_fr": "Allemagne",
+        "name_es": "Alemania",
+        "name_zh": "德国",
+        "name_ru": "Германия",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.4234469,
+          51.0834196
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1684793666",
+        "iso3166_1_alpha_2": "BE",
+        "name": "België - Belgique - Belgien",
+        "name_en": "Belgium",
+        "name_de": "Belgien",
+        "name_fr": "Belgique",
+        "name_es": "Bélgica",
+        "name_zh": "比利时",
+        "name_ru": "Бельгия",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.66696,
+          50.6407351
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1694010854",
+        "iso3166_1_alpha_2": "BN",
+        "name": "Brunei Darussalam",
+        "name_en": "Brunei",
+        "name_de": "Brunei",
+        "name_fr": "Brunei",
+        "name_es": "Brunéi",
+        "name_zh": "文莱",
+        "name_ru": "Бруней",
+        "rank": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.5653908,
+          4.4137155
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1700777271",
+        "iso3166_1_alpha_2": "KG",
+        "name": "Кыргызстан",
+        "name_en": "Kyrgyzstan",
+        "name_de": "Kirgisistan",
+        "name_fr": "Kirghizstan",
+        "name_es": "Kirguistán",
+        "name_zh": "吉尔吉斯斯坦",
+        "name_ru": "Киргизия",
+        "rank": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.724091,
+          41.5089324
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1708980402",
+        "iso3166_1_alpha_2": "MU",
+        "name": "Mauritius",
+        "name_en": "Mauritius",
+        "name_de": "Mauritius",
+        "name_fr": "Maurice",
+        "name_es": "Mauricio",
+        "name_zh": "毛里求斯",
+        "name_ru": "Маврикий",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          57.5703566,
+          -20.2759451
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1770467684",
+        "iso3166_1_alpha_2": null,
+        "name": "Aruba",
+        "name_en": "Aruba",
+        "name_de": "Aruba",
+        "name_fr": "Aruba",
+        "name_es": "Aruba",
+        "name_zh": "阿鲁巴",
+        "name_ru": "Аруба",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -69.9618475,
+          12.5013629
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2134362766",
+        "iso3166_1_alpha_2": "MY",
+        "name": "Malaysia",
+        "name_en": "Malaysia",
+        "name_de": "Malaysia",
+        "name_fr": "Malaisie",
+        "name_es": "Malasia",
+        "name_zh": "马来西亚",
+        "name_ru": "Малайзия",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.8471939,
+          2.3923759
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1983711862",
+        "iso3166_1_alpha_2": "BA",
+        "name": "Bosna i Hercegovina",
+        "name_en": "Bosnia and Herzegovina",
+        "name_de": "Bosnien und Herzegowina",
+        "name_fr": "Bosnie-Herzégovine",
+        "name_es": "Bosnia y Herzegovina",
+        "name_zh": "波斯尼亚和黑塞哥维纳",
+        "name_ru": "Босния и Герцеговина",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.5961467,
+          44.3053476
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2043451343",
+        "iso3166_1_alpha_2": null,
+        "name": "Приднестровье",
+        "name_en": "Transnistria",
+        "name_de": "Transnistrien",
+        "name_fr": "Transnistrie",
+        "name_es": "Transnistria",
+        "name_zh": null,
+        "name_ru": "Приднестровье",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.397413,
+          47.192292
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2110225115",
+        "iso3166_1_alpha_2": null,
+        "name": "فلسطين",
+        "name_en": "Palestine",
+        "name_de": "Palästina",
+        "name_fr": "Palestine",
+        "name_es": "Palestina",
+        "name_zh": "巴勒斯坦",
+        "name_ru": "Палестина",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.162072,
+          31.649741
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2163914205",
+        "iso3166_1_alpha_2": "ET",
+        "name": "ኢትዮጵያ Ethiopia",
+        "name_en": "Ethiopia",
+        "name_de": "Äthiopien",
+        "name_fr": "Éthiopie",
+        "name_es": "Etiopía",
+        "name_zh": "埃塞俄比亚",
+        "name_ru": "Эфиопия",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.6521203,
+          10.2116702
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2377028247",
+        "iso3166_1_alpha_2": "PT",
+        "name": "Portugal",
+        "name_en": "Portugal",
+        "name_de": "Portugal",
+        "name_fr": "Portugal",
+        "name_es": null,
+        "name_zh": "葡萄牙",
+        "name_ru": "Португалия",
+        "rank": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.8896263,
+          40.033265
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2621901768",
+        "iso3166_1_alpha_2": null,
+        "name": "الجمهورية العربية الصحراوية الديمقراطية‎",
+        "name_en": "Sahrawi Arab Democratic Republic",
+        "name_de": "Demokratische Arabische Republik Sahara",
+        "name_fr": "République sahraouie",
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": null,
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -12.7385445,
+          23.8567121
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3491215388",
+        "iso3166_1_alpha_2": null,
+        "name": "Lesotho",
+        "name_en": "Lesotho",
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Лесото",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.3350193,
+          -29.6039267
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3696525426",
+        "iso3166_1_alpha_2": "LI",
+        "name": "Liechtenstein",
+        "name_en": null,
+        "name_de": null,
+        "name_fr": null,
+        "name_es": null,
+        "name_zh": null,
+        "name_ru": "Лихтенштейн",
+        "rank": 6
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.5531527,
+          47.1416307
+        ]
+      }
+    }
+  ]
+}
