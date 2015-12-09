@@ -62,3 +62,5 @@ Options:
 -z, --z <z>                Z value
 -p, --provider <provider>  Vector tile provider
 ```
+
+The compare.sh script generates the tileInfo output for a given array of tiles.
