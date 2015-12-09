@@ -1,16 +1,19 @@
 {
-  "name": "compare",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "name": "tileInfo",
+  "version": "0.0.1",
+  "description": "A command line tool to output interesting information of a specified vector tile",
+  "author": "Manuel Roth <manuelroth@hotmail.ch>",
+  "bin": "./tileInfo.js",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/osm2vectortiles/osm2vectortiles.git"
+  },
   "dependencies": {
+    "mbtiles": "^0.8.2",
     "mkdirp": "^0.5.1",
     "pbf": "^1.3.5",
+    "tilelive": "^5.11.0",
     "vector-tile": "^1.1.3"
   }
 }

@@ -184,7 +184,5 @@ var output = "";
 exports.printOutput = function(layers, name, tileNumber) {
 	printProlog(layers, name, tileNumber);
 	printResult(layers);
-	var result = output;
-	output = "";
-	return result;
+	return output;
 }
