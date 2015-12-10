@@ -23,6 +23,7 @@ RUN mkdir -p /usr/src/app && mkdir -p /project
 WORKDIR /usr/src/app
 
 RUN npm install -g \
+   git+https://github.com/klokantech/tileserver-tessera.git \
    tessera@0.5.3  \
    mbtiles@0.8.2  \
    tilelive-tmstyle@0.4.2 \
