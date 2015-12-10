@@ -387,3 +387,8 @@ h3.action__header {
     margin-top: 1rem;
     text-align: center;
 }
+
+.map-preview {
+    height: 30rem;
+    width: 100%;
+}
