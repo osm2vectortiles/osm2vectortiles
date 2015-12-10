@@ -53,7 +53,6 @@ enqueue-jobs:
     QUEUE_NAME: "osm2vectortiles_jobs"
 export-remote:
   image: "osm2vectortiles/export-remote"
-  build: ./src/export
   command: ./export-remote.sh
   volumes:
    - ./open-streets.tm2source:/data/tm2source
@@ -77,7 +76,6 @@ export-local:
     MAX_ZOOM: "14"
 serve:
   image: "osm2vectortiles/serve"
-  build: ./src/serve
   volumes:
    - ./export:/data
   ports:
