@@ -78,6 +78,6 @@ var streetsBasicMap= L.mapbox.map('streets-basic-map', 'http://rastertiles.osm2v
 var woodcutMap = L.mapbox.map('woodcut-map', 'http://rastertiles.osm2vectortiles.org/woodcut/index.json').setView([42.956, 11.667], 5);
 var piratesMap = L.mapbox.map('pirates-map', 'http://rastertiles.osm2vectortiles.org/pirates/index.json').setView([15.401, -76.498], 6);
 var fourteenStreetMap= L.mapbox.map('14th-street-map', 'http://rastertiles.osm2vectortiles.org/14th-street/index.json').setView([46.9493, 7.4492], 15);
-var wheatpasteMap = L.mapbox.map('wheatpaste-map', 'http://rastertiles.osm2vectortiles.org/wheatpaste/index.json').setView([41.8875/12.4753], 11);
+var wheatpasteMap = L.mapbox.map('wheatpaste-map', 'http://rastertiles.osm2vectortiles.org/wheatpaste/index.json').setView([41.8875, 12.4753], 11);
 </script>
 
