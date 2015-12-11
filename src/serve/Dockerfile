@@ -17,29 +17,26 @@ RUN wget --quiet -P /fonts https://github.com/aaronlidman/Toner-for-Tilemill/raw
     wget --quiet -P /fonts https://github.com/aaronlidman/Toner-for-Tilemill/raw/master/toner4tilemill/fonts/Arial-Unicode-Italic.ttf && \
     wget --quiet -P /fonts https://github.com/aaronlidman/Toner-for-Tilemill/raw/master/toner4tilemill/fonts/Arial-Unicode-Regular.ttf
 
-ENV MAPNIK_FONT_PATH=/fonts
-
 # only install minimal amount of tessera packages
 # be careful as some tessera packages collide with itself
-RUN npm install -g tessera
-RUN npm install -g mbtiles \
-           tilelive-tmstyle \
-           tilelive-xray \
-           tilelive-http \
-           git+https://git@github.com/mojodna/node-tilejson.git\#always-xyz
+RUN mkdir -p /usr/src/app && mkdir -p /project
+WORKDIR /usr/src/app
 
-RUN mkdir -p /usr/src/app
-COPY run.sh /usr/src/app/
+RUN npm install -g \
+   git+https://github.com/klokantech/tileserver-tessera.git \
+   tessera@0.5.3  \
+   mbtiles@0.8.2  \
+   tilelive-tmstyle@0.4.2 \
+   tilelive-xray@0.2.0  \
+   tilelive-http@0.8.0
 
 # mountpoint of custom mbtiles files and tm2 projects
 VOLUME /data
-ENV SOURCE_DATA_DIR=/data
+ENV SOURCE_DATA_DIR=/data \
+    DEST_DATA_DIR=/project \
+    PORT=80 \
+    MAPNIK_FONT_PATH=/fonts
 
-# destination of modified tm2 projects
-RUN mkdir -p /project
-ENV DEST_DATA_DIR=/project
-
+COPY run.sh /usr/src/app/
 EXPOSE 80
-ENV PORT=80
-
 CMD ["/usr/src/app/run.sh"]

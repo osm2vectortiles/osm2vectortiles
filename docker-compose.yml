@@ -7,19 +7,19 @@ cache:
   volumes:
   - /data/cache
 postgis:
-  build: ./src/postgis
+  image: "osm2vectortiles/postgis"
   volumes_from:
    - pgdata
   ports:
    - "5432"
 pgbouncer:
-  build: ./src/pgbouncer
+  image: "osm2vectortiles/pgbouncer"
   links:
    - postgis:pg
   ports:
    - "6432"
 import-osm:
-  build: ./src/import-osm
+  image: "osm2vectortiles/import-osm"
   volumes:
    - ./import:/data/import
   volumes_from:
@@ -27,26 +27,22 @@ import-osm:
   links:
    - postgis:db
 import-labels:
-  build: ./src/import-external
+  image: "osm2vectortiles/import-external"
   command: ./import-labels.sh
   links:
   - postgis:db
 import-natural-earth:
-  build: ./src/import-external
+  image: "osm2vectortiles/import-external"
   command: ./import-natural-earth.sh
   links:
   - postgis:db
 import-water:
-  build: ./src/import-external
+  image: "osm2vectortiles/import-external"
   command: ./import-water.sh
   links:
   - postgis:db
-import-external:
-  build: ./src/import-external
-  links:
-  - postgis:db
 update-scaleranks:
-  build: ./src/update-scaleranks
+  image: "osm2vectortiles/update-scaleranks"
   links:
   - postgis:db
 enqueue-jobs:
@@ -56,7 +52,7 @@ enqueue-jobs:
     TASK_ZOOM_LEVEL: 8
     QUEUE_NAME: "osm2vectortiles_jobs"
 export-remote:
-  build: ./src/export
+  image: "osm2vectortiles/export-remote"
   command: ./export-remote.sh
   volumes:
    - ./open-streets.tm2source:/data/tm2source
@@ -67,7 +63,7 @@ export-remote:
     AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
     AWS_REGION: "eu-central-1"
 export-local:
-  build: ./src/export
+  image: "osm2vectortiles/export"
   command: ./export-local.sh
   volumes:
    - ./export:/data/export
@@ -79,17 +75,17 @@ export-local:
     MIN_ZOOM: "8"
     MAX_ZOOM: "14"
 serve:
-  build: ./src/serve
+  image: "osm2vectortiles/serve"
   volumes:
    - ./export:/data
   ports:
    - "8080:80"
 import-sql:
-  build: ./src/import-sql
+  image: "osm2vectortiles/import-sql"
   links:
    - postgis:db
 mapbox-studio:
-  build: ./tools/mapbox-studio
+  image: "osm2vectortiles/mapbox-studio"
   volumes:
    - ./open-streets.tm2source:/projects/open-streets.tm2source
   links:
@@ -97,7 +93,7 @@ mapbox-studio:
   ports:
    - "3000:3000"
 compare-visual:
-  build: ./tools/compare-visual
+  image: "osm2vectortiles/compare-visual"
   ports:
    - "4000:3000"
    - "4001:3001"

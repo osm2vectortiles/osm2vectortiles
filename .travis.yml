@@ -9,6 +9,13 @@ before_install:
   - wget -nc -P "$HOME/cache" "https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf"
   - mkdir -p "$TRAVIS_BUILD_DIR/import" && cp "$HOME/cache/zurich_switzerland.osm.pbf" "$TRAVIS_BUILD_DIR/import"
   - docker-compose build
+  - docker build -t osm2vectortiles/postgis src/postgis
+  - docker build -t osm2vectortiles/export src/export
+  - docker build -t osm2vectortiles/import-osm src/import-osm
+  - docker build -t osm2vectortiles/import-external src/import-external
+  - docker build -t osm2vectortiles/import-sql src/import-sql
+  - docker build -t osm2vectortiles/update-scaleranks src/update-scaleranks
+  - docker build -t osm2vectortiles/serve src/serve
 script:
   - docker-compose up -d postgis
   - sleep 5
