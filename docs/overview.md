@@ -8,6 +8,7 @@ published: true
 
 Get started styling and using vector tiles.
 
+- [Create Map with Mapbox Studio Classic](/docs/create-map.html)
 - [Layer Reference](/docs/layer-reference.html)
 - [Serve tiles with Docker](/docs/tileserver-kitematic.html)
 
