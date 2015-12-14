@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
-    {% include head.html %}
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+
+    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }}</title>
+
+    <meta name="author" content="{{ site.name }}" />
+    <meta name="description" content="{{ site.description }}" />
+    <meta name="theme-color" content="#115e94">
+
+    <link href="{{ site.baseurl }}base.css" rel="stylesheet" />
+    <!--<script type="text/javascript" src="{{ site.baseurl }}js/index.js"></script>-->
+
   </head>
-  <body>
+  <body {% if page.id == 'home' %}class="home"{% endif %}>
+    <div id="navbar-top">
+      <div class="container">
+        <a class="title" href="{{ site.baseurl }}">
+          <img src="/img/osm2vectortiles-logo-small-white.png" alt="OSM2VectorTiles logo">
+               OSM2VectorTiles</a>
+        <ul class="nav">
+          <li><a href="{{ site.baseurl }}">MAPS</a></li>
+          <li><a href="{{ site.baseurl }}docs/">DOCS</a></li>
+          <li><a href="{{ site.baseurl }}data/download">DOWNLOADS</a></li>
+          <li><a href="{{ site.baseurl }}faq">FAQ</a></li>
+          <li><a href="https://github.com/osm2vectortiles/osm2vectortiles">
+              <img class="octocat" src="{{ site.baseurl }}img/GitHub-Mark-Light-32px.png" alt="Github">
+            </a></li>
+        </ul>
+        <div class="nav-mobile">
+          <div id="nav-mobile-btn">H</div>
+          <ul id="nav-mobile-nav">
+            <li><a href="{{ site.baseurl }}">Maps</a></li>
+            <li><a href="{{ site.baseurl }}html5">Docs</a></li>
+            <li><a href="{{ site.baseurl }}fonts">Downloads</a></li>
+            <li><a href="{{ site.baseurl }}components">FAQ</a></li>
+            <li><a href="https://github.com/osm2vectortiles/osm2vectortiles">
+                <img class="octocat" src="{{ site.baseurl }}img/GitHub-Mark-32px.png" alt="Github">
+                GitHub
+              </a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- content -->
     {{ content }}
-    {% include google_analytics.html %}
+    <!-- end content -->
+
+    <div class="footer">
+      <div class="container">
+        <a class="icon klokan" href="http://klokantech.com">K</a>
+        <a class="icon" href="https://twitter.com/klokantech">T</a>
+        <a class="icon" href="https://plus.google.com/+Klokantech/">G</a>
+        <a class="icon" href="https://www.facebook.com/klokantech">F</a>
+      </div>
+    </div>
   </body>
 </html>

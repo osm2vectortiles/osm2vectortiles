@@ -1,0 +1,92 @@
+/* Progressbar */
+
+.progress{
+  width: $progress-width;
+  padding: 20px 0 20px 20px;
+  height: 50px;
+  font-size: 12px;
+  line-height: 12px;
+  margin: 10px 0 20px 0;
+
+  .bar{
+    width: 80%;
+    height: 42px;
+    float: left;
+
+    .segment{
+      float: left;
+      height: 15px;
+      display: block;
+
+      &:first-child{background-color: $progress-segments-colors(0);}
+      @each $color in $progress-segments-colors {
+        $i: index($progress-segments-colors, $color);
+        &:nth-child(#{$i}){ 
+          background-color: $color;
+        }
+      }
+
+
+      &:first-child:before, &:nth-child(2):before{
+        position: absolute;
+        margin-top: -15px;
+        padding-right: 10px;
+      }
+      &.reviewed:first-child:before{content: 'Reviewed';}
+      &.edited:nth-child(2):before{content: 'Edited';}
+
+    }
+    .segment-label{
+      position: absolute;
+      font-size: 14px;
+      margin-top: 15px;
+      padding-top: 4px;
+    }
+
+    .maps:after, .sheets:after, .bar:before, .bar-count, 
+      .bar-segment:first-child:before, .bar-segment:nth-child(2):before{
+      background-color: $progress-bg;
+    }
+
+    .segment-label:after{
+      position: absolute;
+      margin-top: 12px; 
+      font-size: 10px;
+      left: 0;
+    }
+  }
+
+  .sheets:after {
+    content: " sheets";
+  }
+
+  .maps:after {
+    content: " maps";
+  }
+
+  .percent:after {
+    content: " %";
+  }
+
+  .bar-count{
+    position: relative;
+    width: 16%;
+    float: right;
+    font-size: 28px;
+    padding: 15px 2%;
+    margin-top: -15px;
+    z-index: 10;
+
+
+    &:after{
+      padding-left: 10px; 
+      padding-bottom: 16px;
+      font-size: 16px;
+      position: absolute;
+      margin-top: 10px;
+      left: 0;
+    }
+
+  }
+
+}

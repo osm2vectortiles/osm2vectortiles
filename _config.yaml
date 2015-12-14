@@ -1,0 +1,6 @@
+# Name of your site (displayed in the header)
+name: OSM2VectorTiles
+
+permalink: pretty
+
+baseurl: "http://klokantech.github.io/osm2vectortiles/"

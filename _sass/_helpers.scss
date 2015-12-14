@@ -1,0 +1,219 @@
+/* Helpers */	
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+
+.clearfix:after{clear: both;}
+.hidden{display: none;}
+.clip{overflow: hidden;}
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.contain{position: relative;}
+.absolute{position: absolute;}
+.circle{border-radius: 50%;}
+
+.round{
+  border-radius: $radius-all;
+}
+
+.round-top-left{
+  border-top-left-radius: $radius-top-left;
+}
+
+.round-top-right{
+  border-top-right-radius: $radius-top-right;
+}
+
+.round-bottom-right{
+  border-bottom-right-radius: $radius-bottom-right;
+}
+
+.round-bottom-left{
+  border-top-bottom-radius: $radius-bottom-left;
+}
+
+.float-left{float: left;}
+.float-right{float: right;}
+.text-left{text-align: left;}
+.text-right{text-align: right;}
+center, .center, .text-center{text-align: center;}
+
+.inline{
+  display: inline-block;
+}
+
+.width-100{width: 100%;}
+.width-50{width: 50%;}
+
+/* Borders */
+@each $name, $size, $type, $color in ($borders){
+  .border-#{$name} {border: #{$size} #{$type} #{$color};}
+  .bordertop-#{$name} {border-top: #{$size} #{$type} #{$color};}
+  .borderright-#{$name} {border-right: #{$size} #{$type} #{$color};}
+  .borderbottom-#{$name} {border-bottom: #{$size} #{$type} #{$color};}
+  .borderleft-#{$name} {border-left: #{$size} #{$type} #{$color};}
+}
+
+/* Margins */
+.mar-no, .mar-0{margin: 0 !important;}
+.mary-no, .mary-0{margin-top: 0 !important; margin-bottom: 0 !important;}
+.marx-no, .marx-0{margin-left: 0 !important; margin-right: 0 !important;}
+.martop-no, .mart-0{margin-top: 0 !important;}
+.marright-no, .marr-0{margin-right: 0 !important;}
+.marbottom-no, .marb-0{margin-bottom: 0 !important;}
+.marleft-no, .marl-0{margin-left: 0 !important;}
+
+.pad-no, .pad-0{padding: 0 !important;}
+.pady-no, .pady-0{padding-top: 0 !important; padding-bottom: 0 !important;}
+.padx-no, .padx-0{padding-left: 0 !important; padding-right: 0 !important;}
+.padtop-no, .padt-0{padding-top: 0 !important;}
+.padright-no, .padr-0{padding-right: 0 !important;}
+.padbottom-no, .padb-0{padding-bottom: 0 !important;}
+.padleft-no, .padl-0{padding-left: 0 !important;}
+
+.pad-1{padding: 10px;}
+.pad-2{padding: 20px;}
+.pad-3{padding: 30px;}
+.pad-4{padding: 40px;}
+.pad-5{padding: 50px;}
+.pad-6{padding: 60px;}
+.pad-7{padding: 70px;}
+.pad-8{padding: 80px;}
+.pad-9{padding: 90px;}
+
+.padx-1{padding-left: 10px; padding-right: 10px;}
+.padx-2{padding-left: 20px; padding-right: 20px;}
+.padx-3{padding-left: 30px; padding-right: 30px;}
+.padx-4{padding-left: 40px; padding-right: 40px;}
+.padx-5{padding-left: 50px; padding-right: 50px;}
+.padx-6{padding-left: 60px; padding-right: 60px;}
+.padx-7{padding-left: 70px; padding-right: 70px;}
+.padx-8{padding-left: 80px; padding-right: 80px;}
+.padx-9{padding-left: 90px; padding-right: 90px;}
+.padx-10{padding-left: 100px; padding-right: 100px;}
+
+.padt-1, .pady-1{padding-top: 10px;}
+.padt-2, .pady-2{padding-top: 20px;}
+.padt-3, .pady-3{padding-top: 30px;}
+.padt-4, .pady-4{padding-top: 40px;}
+.padt-5, .pady-5{padding-top: 50px;}
+.padt-6, .pady-6{padding-top: 60px;}
+.padt-7, .pady-7{padding-top: 70px;}
+.padt-8, .pady-8{padding-top: 80px;}
+.padt-9, .pady-9{padding-top: 90px;}
+.padt-10, .pady-10{padding-top: 100px;}
+
+.padb-1, .pady-1{padding-bottom: 10px;}
+.padb-2, .pady-2{padding-bottom: 20px;}
+.padb-3, .pady-3{padding-bottom: 30px;}
+.padb-4, .pady-4{padding-bottom: 40px;}
+.padb-5, .pady-5{padding-bottom: 50px;}
+.padb-6, .pady-6{padding-bottom: 60px;}
+.padb-7, .pady-7{padding-bottom: 70px;}
+.padb-8, .pady-8{padding-bottom: 80px;}
+.padb-9, .pady-9{padding-bottom: 90px;}
+.padb-10, .pady-10{padding-bottom: 100px;}
+
+.mar-1{margin: 10px;}
+.mar-2{margin: 20px;}
+.mar-3{margin: 30px;}
+.mar-4{margin: 40px;}
+.mar-5{margin: 50px;}
+.mar-6{margin: 60px;}
+.mar-7{margin: 70px;}
+.mar-8{margin: 80px;}
+.mar-9{margin: 90px;}
+.mar-10{margin: 100px;}
+
+.marx-1{margin-left: 10px; margin-right: 10px;}
+.marx-2{margin-left: 20px; margin-right: 20px;}
+.marx-3{margin-left: 30px; margin-right: 30px;}
+.marx-4{margin-left: 40px; margin-right: 40px;}
+.marx-5{margin-left: 50px; margin-right: 50px;}
+.marx-6{margin-left: 60px; margin-right: 60px;}
+.marx-7{margin-left: 70px; margin-right: 70px;}
+.marx-8{margin-left: 80px; margin-right: 80px;}
+.marx-9{margin-left: 90px; margin-right: 90px;}
+.marx-10{margin-left: 100px; margin-right: 100px;}
+
+.mary-1{margin-top: 10px; margin-bottom: 10px;}
+.mary-2{margin-top: 20px; margin-bottom: 20px;}
+.mary-3{margin-top: 30px; margin-bottom: 30px;}
+.mary-4{margin-top: 40px; margin-bottom: 40px;}
+.mary-5{margin-top: 50px; margin-bottom: 50px;}
+.mary-6{margin-top: 60px; margin-bottom: 60px;}
+.mary-7{margin-top: 70px; margin-bottom: 70px;}
+.mary-8{margin-top: 80px; margin-bottom: 80px;}
+.mary-9{margin-top: 90px; margin-bottom: 90px;}
+.mary-10{margin-top: 100px; margin-bottom: 100px;}
+
+/* colors */
+.primary{color: $color-primary;}
+.secondary{color: $color-secondary;}
+.gray-light{color: $color-gray-light;}
+.gray{color: $color-gray;}
+.gray-dark{color: $color-gray-dark;}
+.success{color: $color-success;}
+.warning{color: $color-warning;}
+.danger{color: $color-danger;}
+.white{color: #ffffff;}
+.black{color: #000000;}
+
+.bg-primary{background-color: $color-primary;}
+.bg-secondary{background-color: $color-secondary;}
+.bg-gray-light{background-color: $color-gray-light;}
+.bg-gray{background-color: $color-gray;}
+.bg-gray-dark{background-color: $color-gray-dark;}
+.bg-success{background-color: $color-success;}
+.bg-warning{background-color: $color-warning;}
+.bg-danger{background-color: $color-danger;}
+.bg-white{background-color: #ffffff;}
+.bg-black{background-color: #000000;}
+
+/* Messages */
+
+.message{
+  color: #ffffff;
+  background-color: $color-primary;
+  padding: $padding-x $padding-y;
+  font-weight: bold;
+  &.success{
+    background-color: $color-success;
+  }
+  &.warning{
+    background-color: $color-warning;
+  }
+  &.error{
+    background-color: $color-danger;
+  }
+
+}
+
+/* Syntax */
+.highlight{
+  margin: 20px 0; 
+}
+
+.language-html{
+  .nt{
+    color: $color-warning;
+  }
+  .na{
+    color: $color-success;
+  }
+  .s{
+    color: $color-danger;
+  }
+  .c{
+    color: $color-gray-dark;
+    font-style: italic;
+  }
+}

@@ -1,0 +1,90 @@
+/* Grid */
+
+$grid-screens: ( 
+// screen, include offsets (boolean)
+($sc-small, false),
+($sc-medium, false),
+($sc-medium, true)
+);
+
+%grid-base {
+  float: left;
+  width: 100%;
+  padding: $grid-padding-y $grid-paddnig-x;
+  margin: $grid-margin-y $grid-margin-x;
+}
+
+@each $grid, $width in ($grid-sizes) {
+  .#{$grid} {
+    @extend %grid-base;
+  }
+}
+
+/* Reverses order of blocks in grid */
+.flip {float: right;}
+
+@each $screen, $offset in ($grid-screens){
+  @media (min-width: $screen) {
+    @each $grid, $width in ($grid-sizes) {
+      @if $screen < $sc-medium {
+        .#{$grid} {
+          @if $width >= 50 {
+            width: 100%;
+          } @else {
+            width: 50%;
+          }
+        }
+      } @else {
+        .#{$grid} {width: $width + 0%;}
+      }
+    }
+    @if $offset {
+      @each $grid, $width in ($grid-sizes) {
+        .offset#{str-slice($grid, 4)} {margin-left: $width + 0%;}
+      }
+    }
+  }
+}
+
+/* Add clearfix */
+.container, .row, .row1, .row2, .row3, .row4, .row5, .row6 {
+  @extend .clearfix;
+}
+
+.row{
+  &active{
+    display: block;
+  }
+}
+
+/* Vertical grid */
+.row1{height: 40px;}
+.row2{height: 80px;}
+.row3{height: 120px;}
+.row4{height: 160px;}
+.row5{height: 200px;}
+.row6{height: 240px;}
+.row7{height: 280px;}
+.row8{height: 320px;}
+.row9{height: 360px;}
+.row10{height: 400px;}
+.row11{height: 440px;}
+.row12{height: 480px;}
+.row13{height: 520px;}
+.row14{height: 560px;}
+.row15{height: 600px;}
+.row16{height: 640px;}
+
+.no-padding{padding: 0;}
+.no-margin{margin: 0;}
+
+/* Image grid */ 
+.col-img {
+  border: none;
+  float: left;
+  @media (min-width: $sc-medium)  {width: 50%;}
+  @media (min-width: $sc-large)  {width: 25%;}
+}
+.col-img img{
+  width: 90%;
+}

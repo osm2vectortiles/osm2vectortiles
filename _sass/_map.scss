@@ -1,0 +1,109 @@
+/* Map styling */
+
+.map-fullscreen{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.map-controls {
+  &.horizontal{
+    a{
+      display: inline-block;
+    }
+  }
+
+  &.top-left{
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  &.top-right{
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  &.left{
+    position: absolute;
+    top: 50%;
+    left: 0;
+  }
+  &.right{
+    position: absolute;
+    top: 50%;
+    right: 0;
+  }
+
+  a{
+    font-family: 'icons';
+    display: block;
+    position:relative;
+    color: $map-control-color;
+    background: $map-control-bg;
+    text-decoration:none;
+    width: $map-control-size;
+    height: $map-control-size;
+    font-size: $map-control-size * 0.6;
+    line-height: $map-control-size;
+    text-align: center;
+    font-weight: bold;
+    margin: $map-control-margin;
+    z-index:2;
+    font-weight: bold;
+    cursor:pointer;
+    z-index:10;
+
+    .isEnabled{display: none;}
+    .isDisabled{display: none;}
+
+    .disabled, &.disabled{
+      background-color: darken($map-control-bg, 10%);
+
+      .isDisabled{display: block;}
+    }
+
+    .enabled, &.enabled{
+      background-color: lighten($map-control-bg, 10%);
+
+      .isEnabled{display: block;}
+    }
+  }
+  .hidden, &.hidden{
+    display: none;
+  }
+  .visible, &.visible{
+    display: inline !important;
+  }
+
+  .tooltip{
+    position: absolute;
+    left: $map-control-size + 1px;
+    margin-top: -($map-control-size + 1px);
+    height: $map-control-size;
+    width: 300px;
+    display: block;
+    vertical-align: middle;
+    line-height: $map-control-size;
+    padding: 0 10px;
+    background-color: rgba(255, 255, 255, 0.6);
+    z-index: 10;
+  }
+
+  /* Special controls */
+  #geocoderForm{
+    position: absolute;
+    right: $map-control-size;
+    width: 200px;
+    z-index: 50;
+    display: none;
+
+    input{
+      height: $map-control-size;
+      right: 1px;
+      position: absolute;
+    }
+    &.visible {display: block;}
+  }
+}

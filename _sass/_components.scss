@@ -1,0 +1,203 @@
+/* components */
+
+.tabs{
+  ul{
+    list-style-type: none;
+    margin: 0;
+
+    li{
+      font-size: $font-size-h5;
+      display: inline-block;
+      cursor: pointer;
+      padding: 10px 20px 6px 20px;
+      margin: 10px 5px 0 5px;
+      font-weight: bold;
+      border-top: 1px solid $color-gray-dark;
+      border-right: 1px solid $color-gray-dark;
+      border-bottom: 1px solid $color-primary;
+      border-left: 1px solid $color-gray-dark;
+      -webkit-border-top-left-radius: $radius-all;
+      -webkit-border-top-right-radius: $radius-all;
+      -moz-border-radius-topleft: $radius-all;
+      -moz-border-radius-topright: $radius-all;
+      border-top-left-radius: $radius-all;
+      border-top-right-radius: $radius-all;
+      &:first-child{
+        margin-left: 0;
+      }
+      &:hover, &.active{
+        color: $color-primary;
+        border-top: 1px solid $color-primary;
+        border-right: 1px solid $color-primary;
+        border-left: 1px solid $color-primary;
+      }
+      &.active{
+        border-bottom: 1px solid #fff;
+      }
+    }
+  }
+
+  .tabs-content{
+    padding: $padding-y $padding-x;
+    border: 1px solid $color-primary; 
+    margin-top: -1px;
+    -webkit-border-top-right-radius: $radius-all;
+    -moz-border-radius-topright: $radius-all;
+    border-top-right-radius: $radius-all;
+
+    .tabs-tab{
+      display: none;
+      p{
+        margin: 0;
+      }
+      &.active{
+        display: block;
+      }
+    }
+
+  }
+
+}
+
+/* KlokanTech JavaScript components */
+.popup-bg{ 
+  position: fixed;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  background-color: $popupbg-bg-color;
+  z-index: 101;
+}
+
+.popup{
+  z-index: 111;
+  position: absolute;
+  width: $popup-width;
+  min-height: 100px;
+  top: $popup-top;
+  left: 50%;
+  margin-left: ($popup-width / 2) * -1;
+  padding: $popup-padding;
+  background: $popup-bg-color;
+
+  .popup-title{
+    display: block;
+    font-weight: bold;
+    padding: 0 0 10px 0;
+    font-size: 120%;
+  }
+  .popup-close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: 'icons';
+    cursor: pointer;
+    color: $text-color;
+    &:hover{
+      text-decoration: none;
+      color: darken($text-color, 20%);
+    }
+  }
+  .popup-content{
+    display: block;
+  }
+  .popup-actions{
+    display: block;
+    margin-top: 10px;
+    div{
+      margin-right: 10px;
+    }
+  }
+}
+
+.ac-renderer{
+  position: absolute; 
+  border: 1px solid $color-gray; 
+  margin-top: -1px;
+  max-width: 400px;
+}
+.ac-row {
+  white-space: nowrap;
+  position: relative; 
+  cursor: pointer;
+  padding: 5px;
+  background-color: #fff;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
+.ac-highlighted {font-weight: bold;}
+.ac-active {color: $color-gray-dark; background-color: $color-gray-light;}
+.ac-type {
+  background-color: #990033;
+  color: #FFFFFF;
+  display: block;
+  margin: 2px;
+  padding: 2px;
+  font-style: italic;
+  float: right;
+}
+
+/* MULTICOMPLETE */
+.multicomplete {
+  background-color:#fff;
+  border: 1px solid $color-gray;
+  cursor:text;
+  display: block;
+  padding: 2px;
+  width: 300px;
+  height: 100px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 0;
+  input {
+    border:0 !important;
+    outline:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    height:23px;
+  }
+  div {
+    display:inline-block;
+    position:relative;
+    font-size:11px;
+    padding: 3px 18px 3px 5px;
+    margin: 0 4px 2px 0;
+    cursor:default;
+    border-radius: $border-radius / 2;
+    background-color: $multicomplete-tag-bg-color;
+    color: #fff;
+    a {
+      display:block;
+      width:10px;
+      height:10px;
+      position:absolute;
+      top:3px;right:2px;
+      text-decoration:none;
+      color: #fff;
+      font-size:10px;
+      &:hover {
+        color: $color-gray-dark;
+      }
+    }
+    .mc-tag-remove{
+      font-family: 'icons';
+    }
+  }
+}
+
+.notice{
+  text-align: center;
+  position: fixed;
+  left: 0; right: 0;
+  bottom:0;
+  height: 50px;
+  background-color: $color-gray-light;
+  p{
+    display: inline-block;
+    margin: 15px 30px
+  }
+  button{
+    display: inline-block;
+    height: 30px;
+    padding: 4px 10px;;
+  }
+}
