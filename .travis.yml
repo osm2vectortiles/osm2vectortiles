@@ -27,7 +27,7 @@ script:
   - docker-compose run import-labels
   - docker-compose run import-sql
   - docker-compose run update-scaleranks
-  - docker-compose run export-local
+  - docker-compose run export
   - docker-compose up -d serve
   - sleep 5
   - curl "http://localhost:8080/index.json"
