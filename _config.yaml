@@ -3,4 +3,4 @@ name: OSM2VectorTiles
 
 permalink: pretty
 
-baseurl: "/"
+baseurl: "http://klokantech.github.io/osm2vectortiles/"
