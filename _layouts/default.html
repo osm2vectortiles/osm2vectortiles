@@ -13,16 +13,16 @@
 
     <link href="{{ site.baseurl }}base.css" rel="stylesheet" />
     <!--<script type="text/javascript" src="{{ site.baseurl }}js/index.js"></script>-->
-
+    <link rel="shortcut icon" href="{{ site.baseurl }}favicon.ico" type="image/x-icon">
   </head>
   <body {% if page.id == 'home' %}class="home"{% endif %}>
     <div id="navbar-top">
       <div class="container">
         <a class="title" href="{{ site.baseurl }}">
           <img src="{{ site.baseurl }}img/osm2vectortiles-logo-small-white.png" alt="OSM2VectorTiles logo">
-               OSM2VectorTiles</a>
+          OSM2VectorTiles</a>
         <ul class="nav">
-          <li><a href="{{ site.baseurl }}">MAPS</a></li>
+          <li><a href="{{ site.baseurl }}maps/">MAPS</a></li>
           <li><a href="{{ site.baseurl }}docs/">DOCS</a></li>
           <li><a href="{{ site.baseurl }}data/download">DOWNLOADS</a></li>
           <li><a href="{{ site.baseurl }}faq">FAQ</a></li>
@@ -51,11 +51,11 @@
     <!-- end content -->
 
     <div class="footer">
-      <div class="container">
-        <a class="icon klokan" href="http://klokantech.com">K</a>
-        <a class="icon" href="https://twitter.com/klokantech">T</a>
-        <a class="icon" href="https://plus.google.com/+Klokantech/">G</a>
-        <a class="icon" href="https://www.facebook.com/klokantech">F</a>
+      <div class="container bordertop-block center">
+        <p class="padt-3">OSM2VectorTiles is maintained by 
+          <a href="http://www.klokantech.com">KlokanTechnologies GmbH</a> and 
+          <a href="https://github.com/geometalab">geometalab</a></p>
+
       </div>
     </div>
   </body>

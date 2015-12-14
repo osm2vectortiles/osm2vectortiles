@@ -12,7 +12,7 @@ $color-danger: #EF3200;
 $color-code: #dd1144;
 
 /* Background color */
-$body-bg:  #fff !default;
+$body-bg:  #fbfbfb !default;
 
 /* Global text color */
 $text-color: #606c71 !default;
@@ -212,14 +212,14 @@ $navside-item-padding: 20px;
 
 /* Sticky footer */
 $footer-color: #868d97;
-$footer-color-bg: #374045;
-$footer-link-color: #868d97;
-$footer-link-hover-color: darken(#fff, 10%);
+$footer-color-bg: transparent;
+$footer-link-color: $link-color;
+$footer-link-hover-color: darken($link-color, 10%);
 $footer-link-hover-decoration: none;
-$footer-height: 80px;
-$footer-fontsize: 32px;
+$footer-height: 120px;
+$footer-fontsize: 16px;
 $footer-padding: 24px 20px 16px 20px;
-$footer-fontweight: bold;
+$footer-fontweight: normal;
 $footer-border-color: transparent;
 $footer-bordertop-size: 0;
 

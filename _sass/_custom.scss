@@ -25,10 +25,10 @@ body{
 
   &.home{
     background: url('img/home-bg.jpg');
-    
+
     h1, h2, h3, h4, h5, h6{
       color: #363636;
-      
+
       span.font-primary{
         font-family: $font-primary;
       }
@@ -36,7 +36,7 @@ body{
         color: #fff;
       }
     }
-    
+
   }
 }
 
@@ -50,6 +50,33 @@ body{
   }
 
   &.home{
-    height: 486px;
+    height: 548px;
+    img{
+      position: absolute;
+      left: 50%;
+      margin-left: -410px;
+      top: 230px;
+    }
   }
+}
+
+.home-btn{
+  text-align: center;
+  margin-bottom: 40px;
+
+  h3{
+    margin-top: -80px;
+    &:hover{
+      color: #868d97;
+    }
+  }
+
+  &:hover{
+    text-decoration: none;
+    color: #868d97;
+  }
+}
+
+.btn, .btn-gray-dark{
+  line-height: 1.4;
 }
