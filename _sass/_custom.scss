@@ -19,12 +19,12 @@
 }
 
 body{
-  background: url('/img/page-bg.jpg');
+  background: url('img/page-bg.jpg');
   background-position: top center;
   background-repeat: no-repeat;
 
   &.home{
-    background: url('/img/home-bg.jpg');
+    background: url('img/home-bg.jpg');
     
     h1, h2, h3, h4, h5, h6{
       color: #363636;
