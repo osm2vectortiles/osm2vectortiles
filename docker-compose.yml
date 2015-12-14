@@ -51,9 +51,9 @@ enqueue-jobs:
     AWS_REGION: "eu-central-1"
     TASK_ZOOM_LEVEL: 8
     QUEUE_NAME: "osm2vectortiles_jobs"
-export-remote:
-  image: "osm2vectortiles/export-remote"
-  command: ./export-remote.sh
+export-worker:
+  image: "osm2vectortiles/export"
+  command: ./export-worker.sh
   volumes:
    - ./open-streets.tm2source:/data/tm2source
   links:
@@ -62,7 +62,7 @@ export-remote:
     AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
     AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
     AWS_REGION: "eu-central-1"
-export-local:
+export:
   image: "osm2vectortiles/export"
   command: ./export-local.sh
   volumes:
