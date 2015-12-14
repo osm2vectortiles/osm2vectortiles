@@ -2,7 +2,6 @@
 """Remove descendant tiles below a parent tile with specified mask level.
 Usage:
   optimize.py check <mbtiles_file> -z=<mask_level> [--scheme=<scheme>]
-  optimize.py remove <mbtiles_file> -z=<mask_level> [--scheme=<scheme>]
   optimize.py (-h | --help)
   optimize.py --version
 
@@ -15,6 +14,7 @@ Options:
 from collections import defaultdict, namedtuple, Counter
 from docopt import docopt
 
+import sys
 import hashlib
 import mbutil
 import mercantile
@@ -85,14 +85,16 @@ def find_optimizable_tiles(mbtiles_file, maskLevel, scheme):
 
 
 def check_masked_tiles(mbtiles_file, maskLevel, scheme):
-    for tile in find_optimizable_tiles(mbtiles_file, maskLevel, scheme):
+    tiles = list(find_optimizable_tiles(mbtiles_file, maskLevel, scheme))
+    for tile in tiles:
         print('{}/{}/{}\t{}'.format(tile.z, tile.x, tile.y, 'OPTIMIZABLE'))
+    return len(tiles)
 
 if __name__ == '__main__':
     args = docopt(__doc__, version='0.1')
     if args.get('check'):
-        check_masked_tiles(
+        sys.exit(check_masked_tiles(
             args['<mbtiles_file>'],
             int(args['-z']),
             args['--scheme']
-        )
+        ))
