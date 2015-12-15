@@ -26,13 +26,14 @@ In `Styles` create a new style, choose `Bright` and save your project.
 In the new Mapbox Studio you can no longer specify a
 [TileJSON](https://github.com/mapbox/tilejson-spec) url of a custom vectortiles server.
 Therefore it is best to work with the original Mapbox Streets v6 data in the editor
-and make the switch at the deployment step.
+and make the switch to osm2vectortiles at the deployment step. This works because our vector tiles are
+to a large part Mapbox Streets v6 compatible.
 
 Because users have an upload limit for their own data sources you cannot upload the osm2vectortiles
-world file to Mapbox Studio. However if you want to work with the real data you can choose
-an extract which is quite small (below 100MB) and upload it to Mapbox Studio.
-
-TODO: Explain how to do that
+world file to Mapbox Studio and style it directly.
+However if you want to work with the real data you can choose
+an extract which is quite small (below 100MB) and upload it to Mapbox Studio and work on this sample
+extract to create your map.
 
 ## Deploy your Map
 
