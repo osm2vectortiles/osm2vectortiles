@@ -17,7 +17,7 @@ Get started styling and using vector tiles.
 - Hosting
   - [Serve raster tiles with Docker](/docs/serve-raster-tiles-docker.html)
   - [Serve vector tiles](/docs/serve-vector-tiles.html)
-  - Use public and free Klokantech CDN
+  - [Use public CDN](/docs/use-public-cdn.html)
 
 ## Developer Documentation
 
