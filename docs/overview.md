@@ -8,12 +8,12 @@ published: true
 
 Get started styling and using vector tiles.
 
-- [Getting started](/docs/get-started.html): Create your own raster map
-- Getting started with MapboxGL
-
-
-- How to create your own style?
-  - Mapbox Studio Classic and Mapbox Studio?
+- Getting started
+  - [Display map with Mapnik and Tessera](/docs/get-started.html)
+  - [Display map with Mapbox GL](/docs/display-map-with-mapbox-gl.html)
+- How to create your own style
+  - [Create a new style with Mapbox Studio Classic](/docs/create-map-with-mapbox-studio-classic.html)
+  - Create a new style with Mapbox Studio
   - Reference to Tessera Tutorial
 - How to host OSM Vector Tiles myself?
   - Tessera Container

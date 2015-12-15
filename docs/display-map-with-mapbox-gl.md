@@ -6,20 +6,19 @@ published: true
 
 ## Display Map
 
-To display a custom MapboxGL based map you can simply create a html file and
-reference the public vector tile server of osm2vectortiles.
+To display a custom MapboxGL based map you need to create a HTML file and
+reference the public vector tile server of osm2vectortiles. You are free to download and
+host the vector tiles yourself but we provide a fast and distributed CDN service for serving
+the PBFs for you.
 
-If you don't want to host the generated vector tiles from osm2vectortiles yourself you can use
-our fast CDN serving PBF for free.
-
-The easiest way to get started is using the example repository we created.
+The easiest way to get started is using the `mapbox-gl-js-exmaple` repository.
 Clone the repository and change into the directory.
 
 ```
 git clone https://github.com/osm2vectortiles/mapbox-gl-js-example.git
 ```
 
-## Files
+## Configure Source, Fonts and Sprites
 
 In order for Mapbox GL JS to work you also need to provide the
 [fonts](https://www.mapbox.com/mapbox-gl-style-spec/#glyphs) and
@@ -30,6 +29,7 @@ The [Mapbox GL Style JSON](https://www.mapbox.com/mapbox-gl-style-spec/) of OSM 
 You can create your own styles with Mapbox Studio.
 
 If you want to serve the Mapbox GL Style JSON without Mapbox you need to configure three URLs.
+
 1. Change the `sources` URL to the free osm2vectortile serve or use your own server
 2. Change the `sprite` URL to the location of your sprites
 3. Change the `glyphs` URL to the location of your fonts
@@ -45,14 +45,13 @@ If you want to serve the Mapbox GL Style JSON without Mapbox you need to configu
 "glyphs": "/assets/font/{fontstack}/{range}.pbf"
 ```
 
+## Initialize the Map
 
-All you need to serve a MapboxGL based map is the [Mapbox GL style JSON](https://www.mapbox.com/mapbox-gl-style-spec/) created
-with [Mapbox Studio](https://www.mapbox.com/mapbox-studio/).
+In order to serve a MapboxGL based map you need a [Mapbox GL style JSON](https://www.mapbox.com/mapbox-gl-style-spec/) created with [Mapbox Studio](https://www.mapbox.com/mapbox-studio/).
 In this example we will serve the free OSM Bright style [provided by Mapbox](https://github.com/mapbox/mapbox-gl-styles).
 
-The HTML file defines a fullscreen map and the CSS and JavaScript files required by Mapbox GL JS.
-You can use your own JSON style but for the ease of getting started we will reference a JSON style that
-we already uploaded at http://osm2vectortiles.org/styles/bright-v8.json.
+The HTML file defines a full screen map and the CSS and JavaScript files required by Mapbox GL JS.
+The `bright-v8.json` style is loaded from the local directory.
 
 Because we use the local sprites and fonts we don't need a Mapbox API key.
 
@@ -88,3 +87,18 @@ map.addControl(new mapboxgl.Navigation());
 </body>
 </html>
 ```
+
+## Serve the Map
+
+You need a simple HTTP server for serving the HTML and assets.
+
+If you have Python installed you can run `python -m SimpleHTTPServer` 
+in the working directory and visit the map at `localhost:8000`.
+
+If you have NodeJS installed you can install a simple http server with `npm install http-server -g`
+and run it in the working directory with `http-server` and visit the map at `localhost:8080`.
+
+Or if you are using Docker you can run a container serving the static files at `localhost:8000`
+with `docker run --rm -v $(pwd):/usr/share/nginx/html:ro -p 8000:80 nginx`.
+
+It is even possible to host the map on GitHub Pages.
