@@ -20,7 +20,9 @@ You get a basic raster tile map similar to the map below.
 1. [Download](http://osm2vectortiles.org/data/download.html) an extract you want to serve.
 2. [Download](https://github.com/mapbox/mapbox-studio-osm-bright.tm2.git) the visual style.
 3. Add both to the same directory and make sure that the have the same name
+
 ```bash
+
 tileserver
 	tiles.mbtiles (Extract)
 	tiles.tm2 (Style Project)
@@ -29,7 +31,9 @@ tileserver
 ## Install Kitematic
 
 1. [Download](https://www.docker.com/docker-toolbox) and install Kitematic. 
-2. Start a new container by searching for `osm2vectortiles` and click create on the container called `serve`. ![Search Container](/media/search_container.png)
+2. Start a new container by searching for `osm2vectortiles` and click create on the container called `serve`. 
+
+![Search Container](/media/search_container.png)
 
 ## Kitematic Usage
 

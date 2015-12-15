@@ -8,7 +8,7 @@ published: true
 
 Get started styling and using vector tiles.
 
-- Getting started with Mapnik 
+- [Getting started](/docs/get-started.html): Create your own raster map
 - Getting started with MapboxGL
 
 
