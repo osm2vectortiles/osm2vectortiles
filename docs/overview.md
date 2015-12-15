@@ -30,7 +30,8 @@ who want to reuse part of our process or want to contribute.
 
 - How to create my own vector tiles (based on OSM Vector Tiles)?
 - What data sources are the OSM Vector Tiles based on?
-- How to create my own extract? (Download world extract and tl copy)
+- [How to create my own extract?](/docs/extracts.html)
+
 - How to add my own data to the vector tiles? (Overlay, its just a base map / Import to PostGIS)
 
 - [Import and Export Process](/docs/docker-based-process.html)
