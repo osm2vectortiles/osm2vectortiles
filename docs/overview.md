@@ -8,13 +8,16 @@ published: true
 
 Get started styling and using vector tiles.
 
-- Getting Started (Demo different map style and kitematic setup with extract)
-- How to host OSM Vector Tiles myself?
-  - Tessera Container
-  - Mapbox GL with klokantech tileserver
+- Getting started with Mapnik 
+- Getting started with MapboxGL
+
+
 - How to create your own style?
   - Mapbox Studio Classic and Mapbox Studio?
   - Reference to Tessera Tutorial
+- How to host OSM Vector Tiles myself?
+  - Tessera Container
+  - Mapbox GL with klokantech tileserver
 
 - [Create Map with Mapbox Studio Classic](/docs/create-map.html)
 - [Layer Reference](/docs/layer-reference.html)
