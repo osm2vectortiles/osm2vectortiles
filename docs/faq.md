@@ -6,16 +6,13 @@ published: true
 
 # FAQ
 
-## Can I use Mapbox GL
-
-Yes it is possible veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.
- 
-## How can I host a tileserver?
-
-Flank shank beef ribs, landjaeger jerky tongue chuck fatback meatloaf bacon ground round venison filet mignon short ribs. Ham doner pork loin prosciutto t-bone, pork chop rump jerky filet mignon pastrami meatball fatback turkey salami capicola. Shoulder tongue meatball ground round strip steak cupim beef. Kevin kielbasa pancetta picanha. Jowl kevin ham hock brisket frankfurter strip steak corned beef meatloaf jerky flank tri-tip tongue doner.
-
-
 ## Can I use the OSM Vector Tiles for commercial purposes?
+
+We want to push vector tiles and enable every developer to create great looking map applications.
+The workflow to produce MBTiles is MIT licensed which allows you to create your own vector tiles
+and use and sell them commercially. The vector tile data provided on the download page is licensed CC BY-SA.
+Because the data is from OpenStreetMap [you also need to credit OpenStreetMap](http://www.openstreetmap.org/copyright)
+and add the attribution "© OpenStreetMap contributors".
 
 ## Will the extracts and planet file be updated with new OSM data?
 
