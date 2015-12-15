@@ -4,6 +4,8 @@ title: Create Extracts
 published: true
 ---
 
+# Create own extract
+
 If you need an extract which is not included on the [downloads page](http://osm2vectortiles.org/data/download.html), you can simply download the planet file and make your own extract. 
 
 ## Preparation
