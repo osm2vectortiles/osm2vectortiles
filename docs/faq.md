@@ -16,8 +16,23 @@ and add the attribution "© OpenStreetMap contributors".
 
 ## Will the extracts and planet file be updated with new OSM data?
 
-## Where should I report visual errors in the map?
+We plan to provide at least quarterly updates of the open vector tile data.
+
+## Where should I report bugs in the map?
+
+Please report any bugs you experience on the [GitHub issue tracker](https://github.com/osm2vectortiles/osm2vectortiles/issues).
 
 ## How can I contribute to the project?
 
+Please report any bugs you experience on the [GitHub issue tracker](https://github.com/osm2vectortiles/).
+
 ## Can I use my custom base map in other GIS tools? (QGIS, Esri, ...)
+
+The Mapbox Vector Tile Specification is [planned to be implemented by Esri into ArgGIS](http://blogs.esri.com/esri/arcgis/2015/07/20/vector-tiles-preview/).
+The Geometa Lab is working on a QGIS plugin to support vector tiles.
+
+## What is the future Roadmap of this Project?
+
+We are willing to support this project in the future and provide it with
+regular updates. The roadmap is public and we welcome you to contribute
+on the [GitHub issue tracker](https://github.com/osm2vectortiles/osm2vectortiles/issues).
