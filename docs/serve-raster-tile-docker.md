@@ -1,4 +1,8 @@
-
+---
+layout: page
+title: Serve Raster Tiles with Docker
+published: true
+---
 
 You can render raster tiles from a Mapbox Studio Classic **.tm2** style project and a vector tiles file
 with the help of Docker and [tessera](https://github.com/mojodna/tessera).

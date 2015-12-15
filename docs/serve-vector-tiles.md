@@ -1,3 +1,9 @@
+---
+layout: page
+title: Serve Vector Tiles
+published: true
+---
+
 # Serve Vector Tiles
 
 We provide a free and fast CDN for accessing the vector tiles.
