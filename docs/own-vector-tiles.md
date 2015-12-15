@@ -12,7 +12,6 @@ Clone the osm2vectortiles project.
 
 ```
 git clone https://github.com/osm2vectortiles/osm2vectortiles.git
-cd osm2vectortiles
 ```
 
 Start up your PostGIS container with the data container attached.

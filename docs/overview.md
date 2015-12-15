@@ -33,8 +33,7 @@ who want to reuse part of our process or want to contribute.
 - [How to create your own extract?](/docs/extracts.html)
 - How to add my own data to the vector tiles? (Overlay, its just a base map / Import to PostGIS)
 
-- [Import and Export Process](/docs/docker-based-process.html)
-- [Import OSM data into PostGIS](/docs/import.html)
+- [Import and Export Process](/docs/import-export-process.html)
 - [Imposm Mapping Schema](/docs/imposm-schema.html)
 - [Develop with Mapbox Studio in Docker](/docs/mapbox-studio-in-docker.html)
 - [Compare visual with Mapbox Streets](/docs/compare-visual.html)
