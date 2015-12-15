@@ -19,7 +19,7 @@ A Mapbox Terrain equivalent is not available by osm2vectortiles.
 
 In `Styles` create a new style, choose `Bright` and save your project.
 
-![Create new project with Mapbox Studio Classic](/media/mapbox_classic_create_project.gif)
+![Create new project with new Mapbox Studio](/media/apbox_studio_create_style.gif.gif)
 
 ## Switch to osm2vectortiles
 
