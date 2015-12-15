@@ -22,5 +22,5 @@ To create an extract the tilelive-copy utility is used. It takes a bounding box 
 Replace the bounding box in the following command with your bounding box.
 
 ```bash
-tilelive-copy --minzoom=0 --maxzoom=14 --bounds="60.403889,29.288333,74.989862,38.5899217" world.mbtiles afghanistan.mbtiles
+tilelive-copy --minzoom=0 --maxzoom=14 --bounds="60.403889,29.288333,74.989862,38.5899217" world.mbtiles switzerland.mbtiles
 ```
