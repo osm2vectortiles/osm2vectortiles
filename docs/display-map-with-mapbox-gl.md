@@ -29,6 +29,7 @@ The [Mapbox GL Style JSON](https://www.mapbox.com/mapbox-gl-style-spec/) of OSM 
 You can create your own styles with Mapbox Studio.
 
 If you want to serve the Mapbox GL Style JSON without Mapbox you need to configure three URLs.
+
 1. Change the `sources` URL to the free osm2vectortile serve or use your own server
 2. Change the `sprite` URL to the location of your sprites
 3. Change the `glyphs` URL to the location of your fonts
