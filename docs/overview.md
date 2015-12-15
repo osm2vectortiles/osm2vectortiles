@@ -15,8 +15,8 @@ Get started styling and using vector tiles.
   - [Create a style with Mapbox Studio Classic](/docs/create-map-with-mapbox-studio-classic.html)
   - [Create a style with new Mapbox Studio](/docs/create-map-with-mapbox-studio.html)
 - Hosting
-  - Serve raster tiles with Docker
-  - Serve vector tiles hosting
+  - [Serve raster tiles with Docker](/docs/server-raster-tiles-docker.html)
+  - [Serve vector tiles](/docs/server-vector-tiles.html)
   - Use public and free Klokantech CDN
 
 ## Developer Documentation
