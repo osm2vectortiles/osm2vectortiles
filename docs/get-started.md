@@ -21,12 +21,9 @@ You get a basic raster tile map similar to the map below.
 2. [Download](https://github.com/mapbox/mapbox-studio-osm-bright.tm2.git) the visual style.
 3. Add both to the same directory and make sure that the have the same name
 
-```bash
+├── contry.tm2 (Style Project)
+└── country.mbtiles (Extract)
 
-tileserver
-	tiles.mbtiles (Extract)
-	tiles.tm2 (Style Project)
-```
 
 ## Install Kitematic
 
