@@ -24,7 +24,8 @@ Please report any bugs you experience on the [GitHub issue tracker](https://gith
 
 ## How can I contribute to the project?
 
-Please report any bugs you experience on the [GitHub issue tracker](https://github.com/osm2vectortiles/).
+The purpose of this project is to make OSM data more accessible to anybody. Any feedback or improvement is greatly appreciated. So feel free to submit a pull request or file a bug on [GitHub](https://github.com/osm2vectortiles/).
+
 
 ## Can I use my custom base map in other GIS tools? (QGIS, Esri, ...)
 
