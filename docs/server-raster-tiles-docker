@@ -46,12 +46,12 @@ docker run -v $(pwd):/data -p 80:80 osm2vectortiles/serve
 
 ## Use the Map from Leaflet
 
-The server will now provide a TileJSON URL at the service url of the map.
-For the example this would be http://localhost/mapbox-studio-osm-bright/index.json.
-You can reference this TileJSON URL in the leaflet configuration.
+The server will now provide a TileJSON endpoint at the service url of the map.
+For this example the TileJSON endpoint is http://localhost/mapbox-studio-osm-bright/index.json.
+You can reference this TileJSON endpoint in the leaflet configuration.
 
-Create a HTML file.
-
+The HTML file will display a fullscreen Leaflet map using the raster tiles from our 
+raster tile server as a base layer. You can now add additional layer on top of it or add interactivity.
 ```html
 <!DOCTYPE html>
 <html>
