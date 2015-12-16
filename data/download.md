@@ -13,6 +13,12 @@ Download entire planet as MBTiles:
 
 - [Latest planet (62GB)](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/world.mbtiles)
 
+## City Extracts
+
+City extracts are limited to the boundaries of a city and do not allow zooming out to the entire world.
+
+- [Zurich](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/zurich.mbtiles)
+
 ## Country Extracts
 
 All country extracts consist of a bounding box of the country containing all details down to zoom level 14.
