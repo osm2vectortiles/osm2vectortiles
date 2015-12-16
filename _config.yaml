@@ -1,6 +1,4 @@
-# Name of your site (displayed in the header)
 name: OSM2VectorTiles
-
 permalink: pretty
-
+pygments: true
 baseurl: "http://osm2vectortiles.org/"
