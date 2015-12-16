@@ -6,7 +6,7 @@ published: true
 
 # Layer Reference
 
-Guide about the data inside the vector tiles to help you with styling.
+This is a guide to the data inside the OSM Vector Tiles to help you with styling.
 
 Available layers:
 
@@ -29,6 +29,32 @@ Available layers:
 - [#road_label](#road_label)
 - [#waterway_label](#waterway_label)
 - [#housenum_label](#housenum_label)
+
+## Zoom Level Reference
+The zoom level reference helps to see which layer is included on which zoom level. The zoom levels are ordered by how they get drawn. The layer landuse is at the bottom and housenum_label is at top of all the others.
+
+|                 | z0 | z1 | z2 | z3 | z4 | z5 | z6 | z7 | z8 | z9 | z10 | z11 | z12 | z13 | z14 |
+|-----------------|----|----|----|----|----|----|----|----|----|----|-----|-----|-----|-----|-----|
+| landuse         |    |    |    |    |    |  x |  x |  x |  x |  x |  x  |  x  |  x  |  x  |  x  |
+| waterway        |    |    |    |    |    |    |    |    |  x |  x |  x  |  x  |  x  |  x  |  x  |
+| water           |  x |  x |  x |  x |  x |  x |  x |  x |  x |  x |  x  |  x  |  x  |  x  |  x  |
+| aeroway         |    |    |    |    |    |    |    |    |    |    |     |     |  x  |  x  |  x  |
+| barrier_line    |    |    |    |    |    |    |    |    |    |    |     |     |     |     |  x  |
+| building        |    |    |    |    |    |    |    |    |    |    |     |     |     |  x  |  x  |
+| landuse_overlay |    |    |    |    |    |    |    |  x |  x |  x |  x  |  x  |  x  |  x  |  x  |
+| tunnel          |    |    |    |    |    |    |    |    |    |    |     |  x  |  x  |  x  |  x  |
+| road            |    |    |    |    |    |  x |  x |  x |  x |  x |  x  |  x  |  x  |  x  |  x  |
+| bridge          |    |    |    |    |    |    |    |    |    |    |     |     |  x  |  x  |  x  |
+| admin           |  x |  x |  x |  x |  x |  x |  x |  x |  x |  x |  x  |  x  |  x  |  x  |  x  |
+| country_label   |    |  x |  x |  x |  x |  x |  x |  x |  x |  x |  x  |  x  |  x  |  x  |  x  |
+| marine_label    |    |  x |  x |  x |  x |  x |  x |  x |  x |  x |  x  |  x  |  x  |  x  |  x  |
+| state_label     |    |    |    |    |  x |  x |  x |  x |  x |  x |  x  |  x  |  x  |  x  |  x  |
+| place_label     |    |    |    |    |  x |  x |  x |  x |  x |  x |  x  |  x  |  x  |  x  |  x  |
+| water_label     |    |    |    |    |    |    |    |    |    |    |  x  |  x  |  x  |  x  |  x  |
+| poi_label       |    |    |    |    |    |    |    |    |    |    |     |     |     |     |  x  |
+| road_label      |    |    |    |    |    |    |    |    |  x |  x |  x  |  x  |  x  |  x  |  x  |
+| waterway_label  |    |    |    |    |    |    |    |    |  x |  x |  x  |  x  |  x  |  x  |  x  |
+| housenum_label  |    |    |    |    |    |    |    |    |    |    |     |     |     |     |  x  |
 
 ## #landuse
 
@@ -60,22 +86,19 @@ Class is a generalization of the various OSM values described as `types`.
 
 ## #water
 
-This is a simple polygon layer with no differentiating types or classes.Water bodies are filtered
-and simplified according to scale - only oceans and very large lakes are shown at the lowest zoom
-levels, while smaller and smaller lakes and ponds appear as you zoom in.
+This is a simple polygon layer with no differentiating types or classes. Water bodies are filtered and simplified according to scale - only oceans and very large lakes are shown at the lowest zoom levels, while smaller and smaller lakes and ponds appear as you zoom in.
 
 ![](/media/layer_diagrams/water.png)
 
-
 ## #waterway
 
+The waterway layer contains rivers, streams, canals, etc represented as lines.
 
-![](/media/layer_diagrams/landuse.png)
-
+![](/media/layer_diagrams/waterway.png)
 
 ### Types
 
-The `type` column can can contain one of the following types:
+The `type` column can contain one of the following types:
 
 - `ditch`
 - `stream`
@@ -87,9 +110,13 @@ The `type` column can can contain one of the following types:
 
 ## #aeroway
 
+The aeroway layer contains the types runway, taxiway, apron and helipad.
+
 ![](/media/layer_diagrams/aeroway.png)
 
 ## #barrier_line
+
+The barrier_line layer contains the classes fence, cliff, gate.
 
 ![](/media/layer_diagrams/barrier_line.png)
 
@@ -103,41 +130,110 @@ The `type` column can can contain one of the following types:
 
 ## #building
 
+This layer contains buildings. Buildings are shown starting zoom level 13.
+
 ![](/media/layer_diagrams/building.png)
 
 ## #landuse_overlay
 
+This layer is for landuse polygons that should be drawn above the #water layer.
+
 ![](/media/layer_diagrams/landuse_overlay.png)
 
-## #tunnel
+### Classes
 
-![](/media/layer_diagrams/tunnel.png)
+| Class             | Aggregated Types
+|-------------------|-----------------------------------------------------------------
+| wetland           | `wetland`, `marsh`, `swamp`, `bog
 
-## #road
 
-![](/media/layer_diagrams/road.png)
+## #tunnel #road #bridge
 
-## #bridge
+The layers tunnel and bridge are based of the layer road. 
 
-![](/media/layer_diagrams/bridge.png)
+![](/media/layer_diagrams/tunnel.png) ![](/media/layer_diagrams/road.png) ![](/media/layer_diagrams/bridge.png)
+
+### Classes
+
+The main field used for styling the tunnel, road, and bridge layers is class.
+
+| Class             | Aggregated Types
+|-------------------|-----------------------------------------------------------------
+| `motorway`        | `motorway`
+| `motorway_link`   | `motorway_link`
+| `driveway`        | `driveway`
+| `main`            | `primary`, `primary_link`, `trunk`, `trunk_link`, `secondary`, `secondary_link`, `tertiary`, `tertiary_link`
+| `street`          | `residential`, `unclassified`, `living_street`, `road`, `raceway`
+| `street_limited`  | `pedestrian`, `construction`, `private`
+| `service`         | `service`, `track`, `alley`, `spur`, `siding`, `crossover`
+| `path`            | `path`, `cycleway`, `ski`, `steps`, `bridleway`, `footway`
+| `major_rail`      | `rail`, `monorail`, `narrow_gauge`, `subway`
+| `minor_rail`      | `funicular`, `light_rail`, `preserved`, `tram`, `disused`, `yard`
+| `aerialway`       | `chair_lift`, `mixed_lift`, `drag_lift`, `platter`, `t-bar` `magic_carpet`, `gondola`, `cable_car`, `rope_tow`, `zip_line`, `j-bar`, `canopy`
+| `golf`            | `hole`
 
 ## #admin
 
+This layer contains the administrative boundary lines. These are based on Natural Earth data on lower zoom levels (0-6) and OSM data (7-14) on upper zoom levels.
+
 ![](/media/layer_diagrams/admin.png)
+
+### Administrative Level
+
+| Value             | Aggregated Types
+|-------------------|-----------------------------------------------------------------
+| `2`        		| counties
+| `4`        		| states, provinces
+
+### Disputes
+
+The disputed field should be used to apply a dashed or otherwise distinct style to disputed boundaries. No single map of the world will ever keep everybody happy, but acknowledging disputes where they exist is an important aspect of good cartography.
+
+### Maritime boundaries
+
+The maritime field can be used as a filter to downplay or hide maritime boundaries, which are often not shown on maps.  
 
 ## #country_label
 
+The country_label layer contains the labels of all countries with translated names.
+
 ![](/media/layer_diagrams/country_label.png)
+
+### Scalerank
+
+The scalerank field is used to hide or show the label based on the importance, size and available room.
 
 ## #marine_label
 
+The marine_label layer contains labels for marine features such as oceans, seas, large lakes and bays.
+
 ![](/media/layer_diagrams/marine_label.png)
+
+### Labelrank
+
+The labelrank is used to hide or show the label based on the importance, size and available room.
+
+## #state_label
+
+The layer state_label contains labels for large provinces in large countries such as China, USA, Russia, Australia and UK. 
 
 ## #place_label
 
+The layer place_label contains labels for cities. 
+
 ![](/media/layer_diagrams/place_label.png)
 
+### Scalerank
+
+The scalerank is used to hide or show the label based on the importance, size and available room.
+
+### Localrank
+
+The localrank field can be used to adjust the label density by showing fewer labels. 
+
 ## #water_label
+
+The layer water_label contains labels for bodies of water such as lakes.
 
 ![](/media/layer_diagrams/water_label.png)
 
@@ -160,9 +256,11 @@ The `type` column can can contain one of the following types:
 | `major_rail`      | `rail`, `monorail`, `narrow_gauge`, `subway`
 | `minor_rail`      | `funicular`, `light_rail`, `preserved`, `tram`, `disused`, `yard`
 | `aerialway`       | `chair_lift`, `mixed_lift`, `drag_lift`, `platter`, `t-bar` `magic_carpet`, `gondola`, `cable_car`, `rope_tow`, `zip_line`, `j-bar`, `canopy`
-| `golf`            | `hole`,
+| `golf`            | `hole`
 
 ## #waterway_label
+
+The layer waterway_label contains labels for rivers.
 
 ![](/media/layer_diagrams/waterway_label.png)
 
@@ -176,6 +274,8 @@ Both housenumber polygons and points were mapped to a single layer.
 The `house_num` field countains house and building numbers.
 
 ## #poi_label
+
+The poi_label layer is used to place icons and labels for various point of interests.
 
 ![](/media/layer_diagrams/poi_label.png)
 
