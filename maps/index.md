@@ -6,78 +6,93 @@ published: true
 
 ## Vector Maps
 
+<div id="vector-map" class="map-preview"></div>
 
-### OSM Bright
+<button id="vector-osm-bright">OSM Bright</button>
+<button id="vector-osm-basic">Basic Map</button>
 
-<div class="map-preview" id="vector-osm-bright-map"></div>
-
-### Basic
-
-<div class="map-preview" id="vector-basic-map"></div>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.1/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.1/mapbox-gl.css' rel='stylesheet' />
 
 <script>
-mapboxgl.accessToken = 'pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w';
-var brightMap = new mapboxgl.Map({
-    container: 'vector-osm-bright-map',
-    style: '/styles/bright-v8.json',
-    center: [8.54124, 47.36686],
-    zoom: 6
-});
-var basicMap = new mapboxgl.Map({
-    container: 'vector-basic-map',
-    style: '/styles/basic-v8.json',
-    center: [8.54124, 47.36686],
-    zoom: 6
-});
+	mapboxgl.accessToken = 'pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w';
+	var brightMap = new mapboxgl.Map({
+		    container: 'vector-map',
+		    style: '/styles/bright-v8.json',
+		    center: [8.54124, 47.36686],
+		    zoom: 6
+	});
+
+	var bright = document.getElementById("vector-osm-bright");
+	bright.onclick = function(e) {
+		e.preventDefault();
+        e.stopPropagation();
+        var brightMap = new mapboxgl.Map({
+		    container: 'vector-map',
+		    style: '/styles/bright-v8.json',
+		    center: [8.54124, 47.36686],
+		    zoom: 6
+		});
+	}
+	var basic = document.getElementById("vector-osm-basic");
+	basic.onclick = function(e) {
+		e.preventDefault();
+        e.stopPropagation();
+        var basicMap = new mapboxgl.Map({
+		    container: 'vector-map',
+		    style: '/styles/basic-v8.json',
+		    center: [8.54124, 47.36686],
+		    zoom: 6
+		});
+	}
 </script>
 
 ## Raster Maps
 
-### OSM Bright
+<div id="raster-map" class="map-preview"></div>
 
-<div class="map-preview" id="osm-bright-map"></div>
+<button id="raster-osm-bright">OSM Bright</button>
+<button id="comic-map">Comic Map</button>
+<button id="light-map">Light Map</button>
+<button id="dark-map">Dark Map</button>
+<button id="streets-basic">Streets Basic</button>
+<button id="woodcut">Woodcut</button>
+<button id="pirates">Pirates</button>
+<button id="fourteen-street">14th Street</button>
+<button id="wheatpaste">Wheatpaste</button>
 
-### Streets Basic
-
-<div class="map-preview" id="streets-basic-map"></div>
-
-### Woodcut
-
-<div class="map-preview" id="woodcut-map"></div>
-
-### Comic
-
-<div class="map-preview" id="comic-map"></div>
-
-### Pirates
-
-<div class="map-preview" id="pirates-map"></div>
-
-### Light
-
-<div class="map-preview" id="light-map"></div>
-
-### Dark
-
-<div class="map-preview" id="dark-map"></div>
-
-### Wheatpaste
-
-<div class="map-preview" id="wheatpaste-map"></div>
-
-### 14th Street
-
-<div class="map-preview" id="14th-street-map"></div>
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
 
 <script>
-var comicMap = L.mapbox.map('comic-map', 'http://rastertiles.osm2vectortiles.org/comic/index.json').setView([47.3739, 8.5456], 13);
-var brightMap = L.mapbox.map('osm-bright-map', 'http://rastertiles.osm2vectortiles.org/osm-bright/index.json').setView([53.390, 1.351], 6);
-var lightMap= L.mapbox.map('light-map', 'http://rastertiles.osm2vectortiles.org/light/index.json').setView([48.8403, 2.4651], 10);
-var darkMap= L.mapbox.map('dark-map', 'http://rastertiles.osm2vectortiles.org/dark/index.json').setView([37.6575, -122.2754], 11);
-var streetsBasicMap= L.mapbox.map('streets-basic-map', 'http://rastertiles.osm2vectortiles.org/streets-basic/index.json').setView([42.59, -93.65], 4);
-var woodcutMap = L.mapbox.map('woodcut-map', 'http://rastertiles.osm2vectortiles.org/woodcut/index.json').setView([42.956, 11.667], 5);
-var piratesMap = L.mapbox.map('pirates-map', 'http://rastertiles.osm2vectortiles.org/pirates/index.json').setView([15.401, -76.498], 6);
-var fourteenStreetMap= L.mapbox.map('14th-street-map', 'http://rastertiles.osm2vectortiles.org/14th-street/index.json').setView([46.9493, 7.4492], 15);
-var wheatpasteMap = L.mapbox.map('wheatpaste-map', 'http://rastertiles.osm2vectortiles.org/wheatpaste/index.json').setView([41.8875, 12.4753], 11);
-</script>
+var map = L.map('raster-map').setView([51.505, -0.09], 13);
+var layer = L.tileLayer('http://rastertiles.osm2vectortiles.org/osm-bright/{z}/{x}/{y}.png').addTo(map);
 
+var osm_bright = document.getElementById("raster-osm-bright");
+var comic_map = document.getElementById("comic-map");
+var light_map = document.getElementById("light-map");
+var dark_map = document.getElementById("dark-map");
+var streets_basic = document.getElementById("streets-basic");
+var woodcut = document.getElementById("woodcut");
+var pirates = document.getElementById("pirates");
+var fourteen_street = document.getElementById("fourteen-street");
+var wheatpaste = document.getElementById("wheatpaste");
+
+addClickListener(osm_bright, 'http://rastertiles.osm2vectortiles.org/osm-bright/{z}/{x}/{y}.png');
+addClickListener(comic_map, 'http://rastertiles.osm2vectortiles.org/comic/{z}/{x}/{y}.png');
+addClickListener(light_map, 'http://rastertiles.osm2vectortiles.org/light/{z}/{x}/{y}.png');
+addClickListener(dark_map, 'http://rastertiles.osm2vectortiles.org/dark/{z}/{x}/{y}.png');
+addClickListener(streets_basic, 'http://rastertiles.osm2vectortiles.org/streets-basic/{z}/{x}/{y}.png');
+addClickListener(woodcut, 'http://rastertiles.osm2vectortiles.org/woodcut/{z}/{x}/{y}.png');
+addClickListener(pirates, 'http://rastertiles.osm2vectortiles.org/pirates/{z}/{x}/{y}.png');
+addClickListener(fourteen_street, 'http://rastertiles.osm2vectortiles.org/14th-street/{z}/{x}/{y}.png');
+addClickListener(wheatpaste, 'http://rastertiles.osm2vectortiles.org/wheatpaste/{z}/{x}/{y}.png');
+
+function addClickListener(mapButton, url) {
+	mapButton.onclick = function(e) {
+		e.preventDefault();
+	    e.stopPropagation();
+	    layer.setUrl(url);
+	}
+}
+</script>
