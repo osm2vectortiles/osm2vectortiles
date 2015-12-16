@@ -1,0 +1,67 @@
+/* Mixins */
+@mixin btn(){
+  display:inline-block;
+  text-align: center;
+  margin: 0;
+  position: relative;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 600;
+  text-decoration: none;
+  vertical-align: middle;
+  background-image: none;
+}
+
+@mixin btn-color($color, $background, $hover, $hover-background) {
+  color: $color;
+  $gradient: darken($background, 5%);
+  background: linear-gradient($background, $gradient);
+  border: none;
+
+  &:hover,
+    &:focus,
+    &:active,
+    &.active{
+    color: $hover;
+    $hover-gradient: darken($hover-background, 5%);
+    background: linear-gradient($hover-background, $hover-gradient);
+  }
+}
+
+@mixin btn-color-stroke($color, $background, $border, $hover, $hover-background, $hover-border) {
+  color: $color;
+  background: $background;
+  border: $border;
+  border-color: $border;
+
+  &:hover,
+    &:focus,
+    &:active,
+    &.active{
+    color: $hover;
+    background-color: transparent;
+    border-color: $hover-border;
+  }
+}
+
+@mixin btn-size($height, $padding, $font-size, $border, $radius, $scale) {
+  @if $height != null {
+    height: $height * $scale;
+  }
+  font-size: $font-size * $scale;
+  padding: $padding * $scale $padding * $scale + 6;
+  border-width: $border * $scale;
+  border-style: solid;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+  text-decoration: none;
+  &:hover,
+    &:focus,
+    &:active,
+    &.active{
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,53 @@
+/* Fonts  */
+
+/* latin-ext */
+@font-face {
+  font-family: 'OpenSans';
+  src: url('fonts/OpenSans-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'OpenSans';
+  src: url('fonts/OpenSans-Italic.ttf');
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'OpenSans';
+  src: url('fonts/OpenSans-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MuseoSans';
+  src: url('fonts/MuseoSans_700Web.eot');
+}
+
+@font-face {
+  font-family: 'MuseoSans';
+  src: url('fonts/MuseoSans_700Web.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'icons';
+  src: url('fonts/icons.eot');
+}
+
+@font-face {
+  font-family: 'icons';
+  src: url('fonts/icons.woff') format('woff');
+}
+
+.icon, [class^='icon-'], [class*=' icon-']{
+  font-family: 'icons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 20px;
+}

@@ -1,0 +1,157 @@
+/* Forms */
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  min-width: 0;
+}
+
+legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: $line-height-computed;
+  font-size: ($font-size * 1.5);
+  line-height: inherit;
+  color: $legend-color;
+  border: 0;
+}
+
+label {
+  display: block;
+  max-width: 100%;
+  margin: 6px 0 4px 1px;
+  font-weight: bold;
+  font-size: $font-size * 0.9;
+  color: $headings-color;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &.inline{
+    display: inline-block;
+    font-weight: normal;
+  }
+
+}
+
+input, select, button {
+  vertical-align: top;
+}
+
+input, textarea{
+  display: block;
+  padding: $input-padding-y $input-padding-x;
+  line-height: $input-line-height;
+  color: $input-color;
+  background-color: $input-bg;
+  background-image: none;
+  border: 1px solid $input-border-color;
+  border-radius: $input-border-radius;
+  font-family: $font-primary;
+
+  &.stretch{
+    width: 100%;
+  }
+
+  &:active, &:focus{
+    color: darken($input-color, 30%);
+    border-color: darken($input-color, 30%);
+  }
+
+}
+
+input[type='text'], input[type='password'], input[type='date'],
+input[type='email'], input[type='button']{
+  height: $input-height;
+
+  &.search{
+    display: inline-block;
+  }
+
+}
+input[type='submit'], input[type='button']{
+  margin-top: 5px;
+  &.search{
+    position: relative;
+    display: inline-block;
+    height: $input-height;
+    margin-top: 0;
+    padding: 0 5px;
+    left: -9px;
+    cursor: pointer;
+
+    &:hover{
+      color: darken($input-color, 30%);
+      border-color: darken($input-color, 30%);
+    }
+
+  }
+}
+
+input[type="radio"], 
+input[type="checkbox"] {
+  margin: 9px 0 0 1px;
+  line-height: normal;
+  display: inline-block;
+}
+
+input[type="file"] {
+  display: block;
+}
+
+input[type="range"] {
+  display: block;
+  width: 100%;
+}
+
+select[multiple], select[size] {
+  height: auto;
+}
+
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  outline: none;
+}
+
+output {
+  display: block;
+  padding-top: ($padding-y + 1);
+  font-size: $font-size;
+  line-height: $line-height;
+  color: $input-color;
+}
+
+
+input[type="search"] {
+  -webkit-appearance: none;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"] {
+  line-height: $input-height;
+  line-height: $line-height #{\0};
+
+  &.input-sm {
+    line-height: $input-height-small;
+  }
+}
+
+form{
+  ul, li{
+    margin: 0;
+    list-style-type: none;
+  }
+
+  ul li label{
+    display: inline-block;
+    font-weight: normal;
+  }
+}

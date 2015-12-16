@@ -1,0 +1,128 @@
+/* For custom styles in project */
+
+.octocat{
+  margin-top: -20px;
+  margin-bottom: -10px;
+}
+
+#navbar-top{
+  background-color: transparent;
+  position: absolute;
+
+  .title{
+    font-family: 'OpenSans';
+    font-size: 22px;
+    img{
+      vertical-align: bottom;
+    }
+  }
+}
+
+body{
+  background: url('img/page-bg.jpg');
+  background-position: top center;
+  background-repeat: no-repeat;
+
+  &.home{
+    background: url('img/home-bg.jpg');
+    background-repeat: no-repeat;
+    background-position: top center;
+
+    h1, h2, h3, h4, h5, h6{
+      color: #363636;
+
+      span.font-primary{
+        font-family: $font-primary;
+      }
+      &.white{
+        color: #fff;
+      }
+    }
+
+  }
+}
+
+.banner{
+  height: 270px;
+  border-top: 4px solid #2571a2;
+  border-bottom: 1px solid #439595;
+  h1{
+    margin: 100px 0 0 0;
+    font-size: 45px;
+  }
+
+  &.home{
+    height: 548px;
+    img{
+      position: absolute;
+      left: 50%;
+      margin-left: -410px;
+      top: 230px;
+    }
+  }
+}
+
+.home-btn{
+  text-align: center;
+  margin-bottom: 40px;
+
+  h3{
+    margin-top: -80px;
+    &:hover{
+      color: #868d97;
+    }
+  }
+
+  &:hover{
+    text-decoration: none;
+    color: #868d97;
+  }
+}
+
+.btn, .btn-gray-dark{
+  line-height: 1.4;
+}
+
+@media(max-width: 841px){
+  .banner{
+
+    h1{font-size: 30px;}
+
+    &.home{
+      height: 460px;
+
+      img{
+        margin-left: -205px;
+        top: 302px;
+        width: 410px;
+        height: 196px;
+      }
+    }
+  }
+
+  .logos{
+    img{
+      width: 100%;
+    }
+  }
+}
+
+@media(max-width: 451px){
+
+  body.home{ 
+    h1{
+      font-size: 24px;
+    }
+  }
+  .banner{
+    &.home{
+
+      img{
+        margin-left: -151px;
+        top: 337px;
+        width: 320px;
+        height: 153px;
+      }
+    }
+  }
+}

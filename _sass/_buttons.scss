@@ -1,0 +1,67 @@
+/* Buttons */
+
+@each $name, $color, $bg-color, $hover, $bg-hover in ($btns){
+  .btn#{$name}{
+    @include btn();
+    @include btn-color($color, $bg-color, $hover, $bg-hover);
+    @include btn-size($btn-height, $btn-padding, $btn-font-size, 0, $btn-radius, 1);
+  }
+  .btn-small#{$name}{
+    @include btn();
+    @include btn-color($color, $bg-color, $hover,  $bg-hover);
+    @include btn-size($btn-height, $btn-padding, $btn-font-size, 0, $btn-radius, $btn-small-scale);
+  }
+  .btn-stroke#{$name} {
+    @include btn();
+    @include btn-color-stroke($bg-color, transparent, $bg-color, lighten($bg-color, 10%),  transparent, lighten($bg-color, 10%));
+    @include btn-size($btn-height, $btn-padding - $btn-border, $btn-font-size, $btn-border, $btn-radius, 1);
+  }
+  .btn-large#{$name}{
+    @include btn();
+    font-weight: normal;
+    @include btn-color($color, $bg-color, $color,  $bg-hover);
+    @include btn-size(null, $btn-padding * 2, $btn-font-size * 1.4, 0, $btn-radius, 1);
+  }
+  .btn-large-stroke#{$name}{
+    @include btn();
+    font-weight: normal;
+    @include btn-color-stroke($bg-color, transparent, $bg-color, lighten($bg-color, 10%),  transparent, lighten($bg-color, 10%));
+    @include btn-size(null, $btn-padding * 2, $btn-font-size * 1.4, $btn-border, $btn-radius, 1);
+  }
+
+}
+
+.btns{
+  display: inline-block;
+
+  a, li{
+    $gradient: darken($btns-bg-color, 5%);
+    background: linear-gradient($btns-bg-color, $gradient);
+    padding: $btns-pads;
+    display: table-cell;
+    border-top: $btns-border;
+    border-bottom: $btns-border;
+    border-left: $btns-border;
+    color: $btns-color;
+
+    &:first-child{
+      border-bottom-left-radius: $btns-radius;
+      border-top-left-radius: $btns-radius;
+
+    }
+    &:last-child{
+      border-right: $btns-border;
+      border-top-right-radius: $btns-radius;
+      border-bottom-right-radius: $btns-radius;
+    }
+
+    &:hover, &.open, &:focus, &.active{
+      $hgradient: darken($btns-hover-bg, 5%);
+      background: linear-gradient($btns-hover-bg, $hgradient);
+      color: $btns-hover-color;
+      text-decoration: none;
+    }
+
+  }
+}
+

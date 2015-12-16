@@ -1,0 +1,96 @@
+/* Headings */
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+  line-height: $headings-line-height;
+  color: $headings-color;
+
+  small,
+  .small {
+    font-weight: normal;
+    line-height: 1;
+  }
+
+  &.prim{
+    font-family: $font-primary;
+  }
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3 {
+  margin-top: $line-height-computed;
+  margin-bottom: ($line-height-computed / 2);
+}
+
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  margin-top: ($line-height-computed / 2);
+  margin-bottom: ($line-height-computed / 2);
+}
+
+h1, .h1 { font-size: $font-size-h1; }
+h2, .h2 { font-size: $font-size-h2; }
+h3, .h3 { font-size: $font-size-h3; }
+h4, .h4 { font-size: $font-size-h4; }
+h5, .h5 { font-size: $font-size-h5; }
+h6, .h6 { font-size: $font-size-h6; }
+
+p {
+  margin: 0 0 ($line-height-computed / 2);
+  font-size: $font-size;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover, &:focus {
+    color: $link-hover-color;
+    text-decoration: underline;
+  }
+}
+
+strong, b, .strong, .b{
+  font-weight: bold;
+}
+
+em, i, cite{
+  font-style: italic;
+}
+
+abbr, dfn{
+  cursor: help;
+  border-bottom: 1px dotted;
+}
+
+ul{
+  list-style-type: square;
+  margin: 0 20px;
+}
+
+ol{
+  list-style-type:lower-latin;
+  margin: 0 20px;
+}
+mark{
+  color: $headings-color;
+  background-color: $color-gray-light;
+}
+
+code, .code, pre{
+  background-color: $code-color-bg;
+  color: $code-color;
+  padding: $code-padding;
+  font-family: $font-monospace;
+  overflow: auto;
+}
+
+small, .small {font-size: 85%;}
+.smaller {font-size: 65%;}
+.normal{font-size: $font-size;}
+big, .big {font-size: 115%;}
+.bigger {font-size: 135%;}
