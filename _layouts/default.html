@@ -16,74 +16,10 @@
     <link rel="shortcut icon" href="{{ site.baseurl }}favicon.ico" type="image/x-icon">
   </head>
   <body {% if page.id == 'home' %}class="home"{% endif %}>
-    <div id="navbar-top">
-      <div class="container">
-        <a class="title" href="{{ site.baseurl }}">
-          <img src="{{ site.baseurl }}img/osm2vectortiles-logo-small-white.png" alt="OSM2VectorTiles logo">
-          OSM2VectorTiles</a>
-        <ul class="nav">
-          <li><a href="{{ site.baseurl }}maps/">MAPS</a></li>
-          <li><a href="{{ site.baseurl }}docs/">DOCS</a></li>
-          <li><a href="{{ site.baseurl }}data/download">DOWNLOADS</a></li>
-          <li><a href="{{ site.baseurl }}faq">FAQ</a></li>
-          <li><a href="https://github.com/osm2vectortiles/osm2vectortiles">
-              <img class="octocat" src="{{ site.baseurl }}img/GitHub-Mark-Light-32px.png" alt="Github">
-            </a></li>
-        </ul>
-        <div class="nav-mobile">
-          <div id="nav-mobile-btn">H</div>
-          <ul id="nav-mobile-nav">
-            <li><a href="{{ site.baseurl }}maps/">Maps</a></li>
-            <li><a href="{{ site.baseurl }}docs/">Docs</a></li>
-            <li><a href="{{ site.baseurl }}data/download">Downloads</a></li>
-            <li><a href="{{ site.baseurl }}faq">FAQ</a></li>
-            <li><a href="https://github.com/osm2vectortiles/osm2vectortiles">
-                <img class="octocat" src="{{ site.baseurl }}img/GitHub-Mark-32px.png" alt="Github">
-                &nbsp;GitHub
-              </a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- content -->
+    {% include navbar.html %}
     {{ content }}
-    <!-- end content -->
-
-    <div class="container">
-      <div class="row center pady-4 bordertop-block borderbottom-block logos">
-        <div class="col6">
-          <a href="http://www.klokantech.com/contact/">
-            <img src="{{ site.baseurl }}img/klokantech-logo.png" alt="Klokan Technologies"/>
-          </a>
-        </div>
-        <div class="col6">
-          <a href="http://www.ifs.hsr.ch/Geometa-Lab.12520.0.html">
-            <img src="{{ site.baseurl }}img/hsr-logo.png" alt="Geometalab HSR"/>
-          </a>
-        </div>
-      </div>
-
-
-      <div class="row center pady-4">
-        <div class="col9 offset1">
-          <p>Do you need <a href="http://www.klokantech.com/contact">
-              commercial support</a>, help with rendering of your own vector 
-              tiles, parallelisation in a cluster or Amazon Cloud, 
-              <a href="http://www.tilehosting.com/">tile hosting</a>, or 
-              efficient rendering of <a href="http://www.maptiler.com/">
-                imagery and raster geodata</a>? 
-                <a href="http://www.klokantech.com/contact">Contact us</a>.</p> 
-        </div>
-      </div>
-    </div>
-
-    <div class="footer">
-      <div class="container bordertop-block center">
-        <p class="padt-3">OSM2VectorTiles is maintained cooperatively by 
-          <a href="https://github.com/geometalab">Geometa Lab HSR</a> and 
-          <a href="http://www.klokantech.com/">Klokan Technologies GmbH</a></p>
-      </div>
-    </div>
+    {% include commercial_support.html %}
+    {% include footer.html %}
+    {% include google_analytics.html %}
   </body>
 </html>
