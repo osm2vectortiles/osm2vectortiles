@@ -18,6 +18,11 @@ Download entire planet as MBTiles:
 City extracts are limited to the boundaries of a city and do not allow zooming out to the entire world.
 
 - [Zurich](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/zurich.mbtiles)
+- [San Francisco](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/san_francisco.mbtiles)
+- [London](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/london.mbtiles)
+- [Paris](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/paris.mbtiles)
+- [Rio de Janeiro](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/rio_de_janeiro.mbtiles)
+- [New York](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/new_york.mbtiles)
 
 ## Country Extracts
 
