@@ -68,27 +68,18 @@ published: true
 var map = L.map('raster-map').setView([51.505, -0.09], 13);
 var layer = L.tileLayer('http://rastertiles.osm2vectortiles.org/osm-bright/{z}/{x}/{y}.png').addTo(map);
 
-var osm_bright = document.getElementById("raster-osm-bright");
-var comic_map = document.getElementById("comic-map");
-var light_map = document.getElementById("light-map");
-var dark_map = document.getElementById("dark-map");
-var streets_basic = document.getElementById("streets-basic");
-var woodcut = document.getElementById("woodcut");
-var pirates = document.getElementById("pirates");
-var fourteen_street = document.getElementById("fourteen-street");
-var wheatpaste = document.getElementById("wheatpaste");
+addClickListener('raster-osm-bright', 'http://rastertiles.osm2vectortiles.org/osm-bright/{z}/{x}/{y}.png');
+addClickListener('comic-map', 'http://rastertiles.osm2vectortiles.org/comic/{z}/{x}/{y}.png');
+addClickListener('light-map', 'http://rastertiles.osm2vectortiles.org/light/{z}/{x}/{y}.png');
+addClickListener('dark-map', 'http://rastertiles.osm2vectortiles.org/dark/{z}/{x}/{y}.png');
+addClickListener('streets-basic', 'http://rastertiles.osm2vectortiles.org/streets-basic/{z}/{x}/{y}.png');
+addClickListener('woodcut', 'http://rastertiles.osm2vectortiles.org/woodcut/{z}/{x}/{y}.png');
+addClickListener('pirates', 'http://rastertiles.osm2vectortiles.org/pirates/{z}/{x}/{y}.png');
+addClickListener('fourteen-street', 'http://rastertiles.osm2vectortiles.org/14th-street/{z}/{x}/{y}.png');
+addClickListener('wheatpaste', 'http://rastertiles.osm2vectortiles.org/wheatpaste/{z}/{x}/{y}.png');
 
-addClickListener(osm_bright, 'http://rastertiles.osm2vectortiles.org/osm-bright/{z}/{x}/{y}.png');
-addClickListener(comic_map, 'http://rastertiles.osm2vectortiles.org/comic/{z}/{x}/{y}.png');
-addClickListener(light_map, 'http://rastertiles.osm2vectortiles.org/light/{z}/{x}/{y}.png');
-addClickListener(dark_map, 'http://rastertiles.osm2vectortiles.org/dark/{z}/{x}/{y}.png');
-addClickListener(streets_basic, 'http://rastertiles.osm2vectortiles.org/streets-basic/{z}/{x}/{y}.png');
-addClickListener(woodcut, 'http://rastertiles.osm2vectortiles.org/woodcut/{z}/{x}/{y}.png');
-addClickListener(pirates, 'http://rastertiles.osm2vectortiles.org/pirates/{z}/{x}/{y}.png');
-addClickListener(fourteen_street, 'http://rastertiles.osm2vectortiles.org/14th-street/{z}/{x}/{y}.png');
-addClickListener(wheatpaste, 'http://rastertiles.osm2vectortiles.org/wheatpaste/{z}/{x}/{y}.png');
-
-function addClickListener(mapButton, url) {
+function addClickListener(name, url) {
+	var mapButton = document.getElementById(name);
 	mapButton.onclick = function(e) {
 		e.preventDefault();
 	    e.stopPropagation();
