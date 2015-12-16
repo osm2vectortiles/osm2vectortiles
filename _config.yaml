@@ -1,4 +1,7 @@
 name: OSM2VectorTiles
 permalink: pretty
-pygments: true
+markdown: redcarpet
+redcarpet:
+  extensions: ["fenced_code_blocks", "tables"]
+highlighter: pygments
 baseurl: "http://osm2vectortiles.org/"
