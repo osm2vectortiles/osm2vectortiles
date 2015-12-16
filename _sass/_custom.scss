@@ -25,6 +25,8 @@ body{
 
   &.home{
     background: url('img/home-bg.jpg');
+    background-repeat: no-repeat;
+    background-position: top center;
 
     h1, h2, h3, h4, h5, h6{
       color: #363636;
@@ -79,4 +81,47 @@ body{
 
 .btn, .btn-gray-dark{
   line-height: 1.4;
+}
+
+@media(max-width: 841px){
+  .banner{
+    &.home{
+      height: 460px;
+
+      h1{font-size: 30px;}
+
+      img{
+        margin-left: -205px;
+        top: 302px;
+        width: 410px;
+        height: 196px;
+      }
+    }
+  }
+  
+  .logos{
+    img{
+      width: 100%;
+    }
+  }
+}
+
+@media(max-width: 451px){
+
+  body.home{ 
+    h1{
+      font-size: 24px;
+    }
+  }
+  .banner{
+    &.home{
+
+      img{
+        margin-left: -151px;
+        top: 302px;
+        width: 320px;
+        height: 153px;
+      }
+    }
+  }
 }
