@@ -85,10 +85,11 @@ body{
 
 @media(max-width: 841px){
   .banner{
+
+    h1{font-size: 30px;}
+
     &.home{
       height: 460px;
-
-      h1{font-size: 30px;}
 
       img{
         margin-left: -205px;
@@ -98,7 +99,7 @@ body{
       }
     }
   }
-  
+
   .logos{
     img{
       width: 100%;
@@ -118,7 +119,7 @@ body{
 
       img{
         margin-left: -151px;
-        top: 302px;
+        top: 337px;
         width: 320px;
         height: 153px;
       }
