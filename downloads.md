@@ -12,9 +12,10 @@ The download servers are kindly provided by [Switch Engines](https://www.switch.
 
 ## Planet
 
-Download entire planet as MBTiles:
+- **[Full planet (62GB)](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/world.mbtiles)**
+- [Planet from z0 to z5 (20MB)](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/world_z0-z5.mbtiles)
+- [Planet from z0 to z8 (411MB)](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/world_z0-z8.mbtiles)
 
-- [Latest planet (62GB)](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/world.mbtiles)
 
 ## City Extracts
 
