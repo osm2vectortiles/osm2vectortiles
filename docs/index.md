@@ -33,4 +33,4 @@ Targeted at people who want to reuse our process or want to contribute.
 - Import and Export
   - [Import and Export Process](/docs/import-export-process)
   - [Database Schema](/docs/database-schema)
-  - [Imposm Mapping Schema](/docs/imposm-schema)
+  - [Imposm Mapping](/docs/imposm-schema)
