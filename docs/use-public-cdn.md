@@ -14,4 +14,4 @@ Anybody can with a few simple steps easily <a href="/docs/start/">host his own m
 
 ## Using the Service
 
-The demo tile server address is: (http://osm2vectortiles.tileserver.com/v1.json)[http://osm2vectortiles.tileserver.com/v1.json]
+The demo tile server address is: [http://osm2vectortiles.tileserver.com/v1.json](http://osm2vectortiles.tileserver.com/v1.json)
