@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Layer Reference
+title: OSM VectorTiles Documentation
 published: true
 ---
 
