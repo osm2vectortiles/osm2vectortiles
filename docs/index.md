@@ -34,3 +34,12 @@ Targeted at people who want to reuse our process or want to contribute.
   - [Import and Export Process](/docs/import-export-process)
   - [Database Schema](/docs/database-schema)
   - [Imposm Mapping](/docs/imposm-schema)
+
+## Additional Documentation
+
+OSM2VectorTiles arose from a study project. The original thesis
+is available publicly and if you wan't to dig deeper you are welcome
+to read the thesis.
+
+- Study Project Thesis
+  - [Vector Tiles from OpenStreetMap](https://www.sharelatex.com/github/repos/osm2vectortiles/osm2vectortiles-thesis/builds/latest/output.pdf)

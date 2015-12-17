@@ -1,6 +1,6 @@
 ---
 layout: page
-title: FAQ
+title: Frequently Asked Questions
 published: true
 ---
 
