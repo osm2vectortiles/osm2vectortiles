@@ -61,13 +61,13 @@ published: true
 <div id="raster-map" class="map-preview"></div>
 <div id="map-container">
 	<button id="raster-osm-bright" class="map-button">OSM Bright</button
-	><button id="comic-map" class="map-button">Comic Map</button
+	><button id="retro" class="map-button">Retro</button
+    ><button id="comic-map" class="map-button">Comic Map</button
 	><button id="light-map" class="map-button">Light Map</button
 	><button id="dark-map" class="map-button">Dark Map</button
 	><button id="streets-basic" class="map-button">Streets Basic</button
 	><button id="woodcut" class="map-button">Woodcut</butto><button id="pirates" class="map-button">Pirates</button
-	><button id="wheatpaste" class="map-button">Wheatpaste</button
-	><button id="retro" class="map-button">Retro</button>
+	><button id="wheatpaste" class="map-button">Wheatpaste</button>
 </div>
 </br>
 <div id="raster-style-reference"></div>

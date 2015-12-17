@@ -4,7 +4,7 @@ title: Create a new Style with Mapbox Studio Classic
 published: true
 ---
 
-# Create a new Style with Mapbox Studio Classic 
+# Create a new Style with Mapbox Studio Classic
 
 You can use [the same resources from Mapbox](https://www.mapbox.com/help/getting-started-studio/)
 for learning how to design maps with Mapbox Studio Classic. This tutorial will show you how to customize
@@ -26,7 +26,7 @@ In `Styles and Resources` create a new style and choose `OSM Bright 2`. Then sav
 Now you are based of the vector tiles from Mapbox Streets. To use our free and Open Source vector tiles
 you need to `Change Source` in `Layers`.
 
-Enter the [TileJSON](https://github.com/mapbox/tilejson-spec) url of our vectortiles server `vectortiles.osm2vectortiles.org/world.json`.
+Enter the [TileJSON](https://github.com/mapbox/tilejson-spec) URL of our vectortiles server `https://osm2vectortiles.tileserver.com/v1.json`.
 You can later replace this with your own vector tiles server if you want to serve everything by yourself.
 
 Because our vector tiles are to a large part Mapbox Streets compatible you won't see any drastic changes.
@@ -34,6 +34,17 @@ In fact you could even continue styling your project with Mapbox Streets and mak
 
 ![Switch to osm2vectortiles in Mapbox Studio Classic](/media/mapbox_classic_switch_osm2vectortiles.gif)
 
+## Design your Map
+
+Create a awesome map with a great design. We recommend the
+[Mapbox Studio Classic Quickstart tutorial](https://www.mapbox.com/help/style-quickstart/)
+to get a overview of all the options you can use to create good looking maps.
+To get some inspiration you can
+look at the [example maps](/maps) that work together with osm2vectortiles.
+
+[![Map Gallery of maps made with osm2vectortiles](/media/sample_map_gallery.gif)](/maps)
+
 ## Deploy your Map
 
-Because you are no longer bound to Mapbox for hosting you can now host the maps yourself and save money.
+Learn [how to deploy a raster tile server with Docker](/docs/serve-raster-tiles-docker/)
+or get started by [displaying your first raster based map locally](/docs/start/).

@@ -4,12 +4,15 @@ title: Display Map with Mapbox GL
 published: true
 ---
 
-## Display Map
+# Display Map with Mapbox GL
 
-To display a custom MapboxGL based map you need to create a HTML file and
-reference the public vector tile server of osm2vectortiles. You are free to download and
+To display a custom Mapbox GL based map you need to create a HTML file and
+reference [the public vector tile CDN](/docs/use-public-cdn/).
+You are free to download and
 host the vector tiles yourself but we provide a fast and distributed CDN service for serving
 the PBFs for you.
+
+## Clone example Repository
 
 The easiest way to get started is using the `mapbox-gl-js-exmaple` repository.
 Clone the repository and change into the directory.
@@ -30,14 +33,14 @@ You can create your own styles with Mapbox Studio.
 
 If you want to serve the Mapbox GL Style JSON without Mapbox you need to configure three URLs.
 
-1. Change the `sources` URL to the free osm2vectortile serve or use your own server
+1. Change the `sources` URL to the free CDN server or use your own server
 2. Change the `sprite` URL to the location of your sprites
 3. Change the `glyphs` URL to the location of your fonts
 
 ```javascript
 "sources": {
     "mapbox": {
-        "url": "http://vectortiles.osm2vectortiles.org/world.json",
+        "url": "http://osm2vectortiles.tileserver.com/v1.json",
         "type": "vector"
     }
 },
