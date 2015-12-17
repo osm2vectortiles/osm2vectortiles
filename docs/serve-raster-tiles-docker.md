@@ -70,11 +70,12 @@ You can get the configuration for the most common mapping libraries.
 ## Use the Map from Leaflet
 
 The server will now provide a TileJSON endpoint at the service URL of the map.
-For this example the TileJSON endpoint is `http://localhost:8080/mapbox-studio-osm-bright/index.json`.
+For this example the TileJSON endpoint is `http://192.168.99.101:8080/mapbox-studio-osm-bright/index.json`.
 You can reference this TileJSON endpoint in the leaflet configuration.
 
 The HTML file will display a full screen Leaflet map using the raster tiles from our
-raster tile server as a base layer. You can now add additional layer on top of it or add interactivity.
+raster tile server as a base layer.
+You can now add additional layers on top of it or add interactivity.
 
 ```html
 <!DOCTYPE html>
@@ -96,7 +97,7 @@ raster tile server as a base layer. You can now add additional layer on top of i
   var map = L.mapbox.map('map', 'mapbox.light', {
     minZoom: 8,
   }).setView([46.806, 8.091], 8);
-  var overlay = L.mapbox.tileLayer('http://localhost:8080/mapbox-studio-osm-bright/index.json').addTo(map);
+  var overlay = L.mapbox.tileLayer('http://192.168.99.101:8080/mapbox-studio-osm-bright/index.json').addTo(map);
 </script>
 </body>
 </html>
