@@ -21,15 +21,15 @@ Get started styling and using vector tiles.
 
 ## Developer Documentation
 
-Documentation about the internals of the project targeted at people
-who want to reuse part of our process or want to contribute.
+Documentation about how to create vector tiles yourself.
+Targeted at people who want to reuse our process or want to contribute.
 
+- Vector Tiles
+  - [Create your own Vector Tiles](/docs/own-vector-tiles)
+  - [Layer Reference](/docs/layer-reference)
+  - [Create your own Extract](/docs/extracts)
 - Data Source
   - [Data Sources of OSM Vector Tiles](/docs/data-sources)
-- Vector Tiles
-  - [Create your own vector tiles](/docs/own-vector-tiles)
-  - [Layer Reference](/docs/layer-reference)
-  - [Create your own extract](/docs/extracts)
 - Import and Export
   - [Import and Export Process](/docs/import-export-process)
   - [Imposm Mapping Schema](/docs/imposm-schema)
