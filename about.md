@@ -26,9 +26,5 @@ published: true
       <a href="/media/press/icons_with_map_background.png">
         <img src="/media/press/icons_with_map_background.png" alt="Icons with Map Background">
       </a>
-
-      <a href="/media/press/icons.png">
-        <img src="/media/press/icons.png" alt="Icons">
-      </a>
     </div>
 </div>
