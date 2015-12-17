@@ -4,6 +4,8 @@ title: Serve Raster Tiles with Docker
 published: true
 ---
 
+# Serve Raster Tiles with Docker
+
 You can render raster tiles from a Mapbox Studio Classic **.tm2** style project and a vector tiles file
 with the help of Docker and [tessera](https://github.com/mojodna/tessera).
 For a single map you can serve up to 50 users concurrently with a standard 4GB VPS server with Docker installed.
