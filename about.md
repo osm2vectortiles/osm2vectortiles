@@ -17,12 +17,16 @@ published: true
     </div>
     <div class="col4">
       <h3>Pictures for Press Usage</h3>
-      <a href="/media/press/icons_with_map_background.png">
-        <img src="/media/press/icons_with_map_background.png" alt="Icons with Map Background">
+      <a href="/media/press/logo.png">
+        <img src="/media/press/logo.png" alt="Project Logo">
       </a>
       <a href="/media/press/website_screenshot.png">
         <img src="/media/press/website_screenshot.png" alt="Website Screenshot">
       </a>
+      <a href="/media/press/icons_with_map_background.png">
+        <img src="/media/press/icons_with_map_background.png" alt="Icons with Map Background">
+      </a>
+
       <a href="/media/press/icons.png">
         <img src="/media/press/icons.png" alt="Icons">
       </a>
