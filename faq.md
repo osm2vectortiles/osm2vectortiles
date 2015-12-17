@@ -51,7 +51,7 @@ on the [GitHub issue tracker](https://github.com/osm2vectortiles/osm2vectortiles
 
 ## What are the restrictions on using the CDN?
 
-A [public and fast vector tile server](osm2vectortiles.tileserver.com/v1.json)
+A [public and fast vector tile server](http://osm2vectortiles.tileserver.com/v1.json)
 is publicly available for everyone to use for free without any restrictions.
 
 However if you create real application we ask you

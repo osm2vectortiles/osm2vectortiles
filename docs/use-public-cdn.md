@@ -12,9 +12,9 @@ This service is freely available for all developers to use.
 
 ## Using the Service
 
-For Mapbox GL JS applications you need to change the source URL
-to the TileJSON endpoint of the CDN.
+A [public and fast vector tile server](http://osm2vectortiles.tileserver.com/v1.json)
+is publicly available for everyone to use for free without any restrictions.
 
-```
-http://cdn.klokantech.com/v1/world.json
-```
+However if you create real application we ask you
+kindly to [create a free access key](http://maps.klokantech.com/)
+and use the vector tiles together with the access keys so we can guarantee the performance of the service.
