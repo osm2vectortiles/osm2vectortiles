@@ -239,7 +239,7 @@ At lower zoom levels there is still some world data to make maps look good.
 - [Ukraine](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/ukraine.mbtiles)
 - [United Arab Emirates](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/united_arab_emirates.mbtiles)
 - [United Kingdom](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/united_kingdom.mbtiles)
-- [United States of America](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/united_states_of_america.mbtiles)
+- ~~[United States of America](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/united_states_of_america.mbtiles)~~
 - [Uruguay](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/uruguay.mbtiles)
 - [Uzbekistan](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/uzbekistan.mbtiles)
 - [Vanuatu](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/vanuatu.mbtiles)

@@ -17,10 +17,16 @@ For a single map you can serve up to 50 users concurrently with a standard 4GB V
 ### Download MBTiles
 
 On the server download your desired extract of a country or the
-entire world MBTiles from http://osm2vectortiles.org/data/download.html.
+entire world MBTiles of the [Downloads page](/downloads).
 
 ```bash
 wget -c https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/world.mbtiles
+```
+
+You can also download a smaller extract like Zurich.
+
+```bash
+wget -c https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/zurich.mbtiles
 ```
 
 ### Clone the Style Project
@@ -47,13 +53,27 @@ The raster tiles will be exposed at port 8080 of your Docker host.
 docker run -v $(pwd):/data -p 8080:80 klokantech/tileserver-mapnik
 ```
 
+## Configuration
+
+If you visit your docker host on port 8080 you should see your map appearing
+in the interface. If you click on the map thumbnail you will get the configuration
+of different GIS clients and mapping libraries.
+
+![Mapping libraries configuration](/media/tileserver_docker_cmd.png)
+
+You can choose `Source code` in `Leaflet` to get the source code for a Leaflet layer.
+
+![Leaflet configuration](/media/leaflet_configuration_tileserver.png)
+
+You can get the configuration for the most common mapping libraries.
+
 ## Use the Map from Leaflet
 
 The server will now provide a TileJSON endpoint at the service URL of the map.
-For this example the TileJSON endpoint is http://localhost/mapbox-studio-osm-bright/index.json.
+For this example the TileJSON endpoint is `http://localhost:8080/mapbox-studio-osm-bright/index.json`.
 You can reference this TileJSON endpoint in the leaflet configuration.
 
-The HTML file will display a fullscreen Leaflet map using the raster tiles from our 
+The HTML file will display a full screen Leaflet map using the raster tiles from our
 raster tile server as a base layer. You can now add additional layer on top of it or add interactivity.
 
 ```html
@@ -76,7 +96,7 @@ raster tile server as a base layer. You can now add additional layer on top of i
   var map = L.mapbox.map('map', 'mapbox.light', {
     minZoom: 8,
   }).setView([46.806, 8.091], 8);
-  var overlay = L.mapbox.tileLayer('http://localhost/mapbox-studio-osm-bright/index.json').addTo(map);
+  var overlay = L.mapbox.tileLayer('http://localhost:8080/mapbox-studio-osm-bright/index.json').addTo(map);
 </script>
 </body>
 </html>

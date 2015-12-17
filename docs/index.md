@@ -9,14 +9,14 @@ published: true
 Get started styling and using vector tiles.
 
 - Getting started
-  - [Display map with tileserver-mapnik](/docs/start)
-  - [Display map with Mapbox GL](/docs/display-map-with-mapbox-gl)
+  - [Display Map with tileserver-mapnik](/docs/start)
+  - [Display Map with Mapbox GL](/docs/display-map-with-mapbox-gl)
 - Create your own custom basemap
-  - [Create a style with Mapbox Studio Classic](/docs/create-map-with-mapbox-studio-classic)
-  - [Create a style with new Mapbox Studio](/docs/create-map-with-mapbox-studio)
+  - [Create a Style with Mapbox Studio Classic](/docs/create-map-with-mapbox-studio-classic)
+  - [Create a Style with new Mapbox Studio](/docs/create-map-with-mapbox-studio)
 - Hosting
-  - [Serve raster tiles with Docker](/docs/serve-raster-tiles-docker)
-  - [Serve vector tiles](/docs/serve-vector-tiles)
+  - [Serve Raster Tiles with Docker](/docs/serve-raster-tiles-docker)
+  - [Serve Vector Tiles](/docs/serve-vector-tiles)
   - [Use public CDN](/docs/use-public-cdn)
 
 ## Developer Documentation
