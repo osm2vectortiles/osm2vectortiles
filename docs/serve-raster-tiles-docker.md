@@ -6,14 +6,15 @@ published: true
 
 # Serve Raster Tiles with Docker
 
-You can render raster tiles from a Mapbox Studio Classic **.tm2** style project and a vector tiles file
-with the help of Docker and [tessera](https://github.com/mojodna/tessera).
+You can render raster tiles from a Mapbox Studio Classic **.tm2** style project and a vector tile MBTiles file
+with the help of Docker and [tileserver-mapnik](https://github.com/klokantech/tileserver-mapnik).
+
 For a single map you can serve up to 50 users concurrently with a standard 4GB VPS server with Docker installed.
 
 ## Preparation
 
 1. Download MBTiles
-2. Clone a visual style project
+2. Clone a **tm2** project (visual style)
 3. Add both to the same directory
 
 ### Download MBTiles
@@ -55,52 +56,18 @@ The raster tiles will be exposed at port 8080 of your Docker host.
 docker run -v $(pwd):/data -p 8080:80 klokantech/tileserver-mapnik
 ```
 
-## Configuration
+## Use the Raster Tiles
 
-If you visit your docker host on port 8080 you should see your map appearing
+If you visit your Docker host on port 8080 you should see your map appearing
 in the interface. If you click on the map thumbnail you will get the configuration
-of different GIS clients and mapping libraries.
+of the most common GIS clients and mapping libraries.
 
 ![Mapping libraries configuration](/media/tileserver_docker_cmd.png)
 
-You can choose `Source code` in `Leaflet` to get the source code for a Leaflet layer.
+Choose `Source code` in `Leaflet` to get the source code for e.g. Leaflet.
 
 ![Leaflet configuration](/media/leaflet_configuration_tileserver.png)
 
-You can get the configuration for the most common mapping libraries.
-
-## Use the Map from Leaflet
-
 The server will now provide a TileJSON endpoint at the service URL of the map.
 For this example the TileJSON endpoint is `http://192.168.99.101:8080/mapbox-studio-osm-bright/index.json`.
-You can reference this TileJSON endpoint in the leaflet configuration.
-
-The HTML file will display a full screen Leaflet map using the raster tiles from our
-raster tile server as a base layer.
-You can now add additional layers on top of it or add interactivity.
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset=utf-8 />
-    <title>A simple map</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
-    <link href='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet' />
-    <style>
-      body { margin:0; padding:0; }
-      #map { position:absolute; top:0; bottom:0; width:100%; }
-    </style>
-  </head>
-<body>
-<div id='map'></div>
-<script>
-  var map = L.mapbox.map('map', 'mapbox.light', {
-    minZoom: 8,
-  }).setView([46.806, 8.091], 8);
-  var overlay = L.mapbox.tileLayer('http://192.168.99.101:8080/mapbox-studio-osm-bright/index.json').addTo(map);
-</script>
-</body>
-</html>
-```
+You need to reference this TileJSON endpoint in the Leaflet configuration.

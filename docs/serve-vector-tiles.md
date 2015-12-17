@@ -17,9 +17,8 @@ which supports serving MBTiles containing vector tile PBFs out of the box.
 
 ### Installation
 
-If you have an Apache webhosting this is the easiest option to get started.
-Follow the [installation instructions](https://github.com/klokantech/tileserver-php#installation) to set
-up tileserver-php on your server.
+If you have an Apache webhosting follow the
+[installation instructions](https://github.com/klokantech/tileserver-php#installation) to set up tileserver-php on your server.
 
 ### Download MBTiles
 
@@ -29,7 +28,7 @@ entire world MBTiles](/downloads).
 
 ## Docker
 
-You can also run tileserver-php with Docker
+You can also run tileserver-php with Docker.
 
 Pull down the latest image.
 
