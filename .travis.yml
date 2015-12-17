@@ -29,7 +29,6 @@ script:
   - docker-compose run export
   - docker-compose up -d serve
   - sleep 5
-  - curl "http://localhost:8080/"
 cache:
   directories:
     - $HOME/cache
