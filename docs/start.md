@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Display map with tileserver-mapnik
+title: Maps rendered from Vector Tiles
 published: true
 ---
 
@@ -22,7 +22,7 @@ This tutorial describes how to get a raster tile map with OSM Vector Tiles as da
 
 ![Search Container](/media/search_container.png)
 
-### Add mbtiles file and style
+### Add MBTiles File and Style
 
 Click on the volume `/data` and add the downloaded mbtiles file and style project.
 
