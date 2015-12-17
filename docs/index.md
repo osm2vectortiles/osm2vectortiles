@@ -32,4 +32,5 @@ Targeted at people who want to reuse our process or want to contribute.
   - [Data Sources of OSM Vector Tiles](/docs/data-sources)
 - Import and Export
   - [Import and Export Process](/docs/import-export-process)
+  - [Database Schema](/docs/database-schema)
   - [Imposm Mapping Schema](/docs/imposm-schema)
