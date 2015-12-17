@@ -15,7 +15,6 @@ before_install:
   - docker build -t osm2vectortiles/import-external src/import-external
   - docker build -t osm2vectortiles/import-sql src/import-sql
   - docker build -t osm2vectortiles/update-scaleranks src/update-scaleranks
-  - docker build -t osm2vectortiles/serve src/serve
 script:
   - docker-compose up -d postgis
   - sleep 5
