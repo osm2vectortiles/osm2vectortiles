@@ -16,8 +16,15 @@ published: true
         </p>
     </div>
     <div class="col4">
-      <a href="/img/home-banner-icons.png">
-        <img src="/img/home-banner-icons.png" alt="OSM 2 Vector Tile Process">
+      <h3>Pictures for Press Usage</h3>
+      <a href="/media/press/icons_with_map_background.png">
+        <img src="/media/press/icons_with_map_background.png" alt="Icons with Map Background">
+      </a>
+      <a href="/media/press/website_screenshot.png">
+        <img src="/media/press/website_screenshot.png" alt="Website Screenshot">
+      </a>
+      <a href="/media/press/icons.png">
+        <img src="/media/press/icons.png" alt="Icons">
       </a>
     </div>
 </div>
