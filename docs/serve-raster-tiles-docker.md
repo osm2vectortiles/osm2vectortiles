@@ -45,7 +45,7 @@ This will serve the current directory at port 80.
 If your machine is accessible at port 80 you can already see your map.
 
 ```bash
-docker run -v $(pwd):/data -p 80:80 osm2vectortiles/serve
+docker run -v $(pwd):/data -p 8080:80 klokantech/tileserver-mapnik
 ```
 
 ## Use the Map from Leaflet
