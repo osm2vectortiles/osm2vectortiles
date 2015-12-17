@@ -34,7 +34,7 @@ published: true
 		    style: '/styles/bright-v8.json',
 		    center: [8.5456, 47.3739],
 		    zoom: 11
-		});
+		}).addControl(new mapboxgl.Navigation({position: 'top-left'}));
 	}
 	var basic = document.getElementById("vector-osm-basic");
 	basic.onclick = function(e) {
@@ -45,7 +45,7 @@ published: true
 		    style: '/styles/basic-v8.json',
 		    center: [8.5456, 47.3739],
 		    zoom: 11
-		});
+		}).addControl(new mapboxgl.Navigation({position: 'top-left'}));
 	}
 </script>
 
