@@ -75,7 +75,7 @@ export:
     MIN_ZOOM: "8"
     MAX_ZOOM: "14"
 serve:
-  image: "osm2vectortiles/serve"
+  image: "klokantech/tileserver-mapnik"
   volumes:
    - ./export:/data
   ports:
