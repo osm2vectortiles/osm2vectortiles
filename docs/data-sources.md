@@ -6,12 +6,11 @@ published: true
 
 # Data Sources
 
-The OSM Vector Tiles contain data from the following data sources.
+The OSM Vector Tiles contain data from the different data sources
+which are described below.
 
 ## OSM Planet File
 The cornerstone of the entire map is OpenStreetMap data from published snapshots from [OSM Planet](http://wiki.openstreetmap.org/wiki/Planet.osm). The vector tiles contain a subset of the OSM Planet file. [Imposm3](http://imposm.org/docs/imposm3/latest/) is used with a [custom mapping file](https://github.com/osm2vectortiles/osm2vectortiles/blob/master/src/import-osm/mapping.yml) to import the OSM data into the PostGIS database.
-
-More information about the [layer reference](/docs/imposm-schema.html)
 
 Imposm3 creates the following tables in the PostGIS database.
 
@@ -50,15 +49,15 @@ The following Natural Earth tables are used:
 
 | Table Name                                                                                                                | Geometry Type |
 | ------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| ne_110m_admin_0_boundary_lines_land                                                                                 | linestring    |
-| ne_50m_admin_0_boundary_lines_land                                                                                  | linestring    |
-| ne_10m_admin_0_boundary_lines_land                                                                                  | linestring    |
-| ne_50m_admin_1_states_provinces_lines                                                                               | linestring    |
-| ne_10m_admin_1_states_provinces_lines_shp                                                                          | linestring    |
-| ne_10m_admin_0_boundary_lines_disputed_areas                                                                       | linestring    |
-| ne_110m_lakes                                                                                                           | polygon       |
-| ne_50m_lakes                                                                                                            | polygon       |
-| ne_10m_lakes                                                                                                            | polygon       |
+| ne\_110m\_admin\_0\_boundary\_lines\_land                                                                                       | linestring    |
+| ne\_50m\_admin\_0\_boundary\_lines\_land                                                                                        | linestring    |
+| ne\_10m\_admin\_0\_boundary\_lines\_land                                                                                        | linestring    |
+| ne\_50m\_admin\_1\_states_provinces\_lines                                                                                     | linestring    |
+| ne\_10m\_admin\_1\_states_provinces\_lines\_shp                                                                                 | linestring    |
+| ne\_10m\_admin\_0\_boundary\_lines\_disputed\_areas                                                                              | linestring    |
+| ne\_110m\_lakes                                                                                                             | polygon       |
+| ne\_50m\_lakes                                                                                                              | polygon       |
+| ne\_10m\_lakes                                                                                                              | polygon       |
 
 
 ## Custom Curated Labels

@@ -106,9 +106,13 @@ article, .article{
     margin-left: auto;
     margin-right: auto;
   }
-}
 
-/* responsive images */
-img {
+  /* responsive images */
+  img {
     max-width: 100%;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
 }
