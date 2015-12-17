@@ -10,10 +10,11 @@
     <meta name="author" content="{{ site.name }}" />
     <meta name="description" content="{{ site.description }}" />
     <meta name="theme-color" content="#3f9a6c">
+    {% include facebook_tags.html %}
 
-    <link href="{{ site.baseurl }}base.css" rel="stylesheet" />
-    <script type="text/javascript" src="{{ site.baseurl }}js/index.js"></script>
-    <link rel="shortcut icon" href="{{ site.baseurl }}favicon.ico" type="image/x-icon">
+    <link href="/base.css" rel="stylesheet" />
+    <script type="text/javascript" src="/js/index.js"></script>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   </head>
   <body {% if page.id == 'home' %}class="home"{% endif %}>
     {% include navbar.html %}
