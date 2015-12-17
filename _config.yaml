@@ -5,3 +5,4 @@ redcarpet:
   extensions: ["fenced_code_blocks", "tables"]
 highlighter: pygments
 full_url: 'http://osm2vectortiles.org'
+tweet: "Create a custom base map in minutes with free vector tiles from OpenStreetMap data."
