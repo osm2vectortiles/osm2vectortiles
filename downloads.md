@@ -6,6 +6,8 @@ published: true
 
 # Downloads
 
+The rendered vector tiles provided as download are under
+the [Open Database License](https://tldrlegal.com/license/odc-open-database-license-(odbl)) the same license [OpenStreetMap is using](https://www.openstreetmap.org/copyright).
 
 ## Planet
 
