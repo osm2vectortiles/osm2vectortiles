@@ -56,6 +56,7 @@ You can reference this TileJSON endpoint in the leaflet configuration.
 
 The HTML file will display a fullscreen Leaflet map using the raster tiles from our 
 raster tile server as a base layer. You can now add additional layer on top of it or add interactivity.
+
 ```html
 <!DOCTYPE html>
 <html>
