@@ -41,6 +41,6 @@ wget https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/zur
 git clone https://github.com/mapbox/mapbox-studio-osm-bright.tm2.git
 docker run -v $(pwd):/data -p 8080:80 klokantech/tileserver-mapnik
 ```
-Note: The webserver is started on port 80 of the container. To access it you need to figure out the ip address of the container. (`docker-machine env default`)
+Note: The webserver is is now accessible on port 8080. To access it you need to figure out the ip address of the container. (`docker-machine env default`)
 
 ![Container running and serving tiles](/media/tileserver_docker_cmd.png)

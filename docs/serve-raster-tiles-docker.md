@@ -10,7 +10,7 @@ For a single map you can serve up to 50 users concurrently with a standard 4GB V
 
 ## Preparation
 
-1. Download MBTiles 
+1. Download MBTiles
 2. Clone a visual style project
 3. Add both to the same directory
 
@@ -41,8 +41,7 @@ Make sure you have the style project and the MBTiles file in the same directory.
 ```
 
 Now run Docker via the command line to serve raster tiles.
-This will serve the current directory at port 80.
-If your machine is accessible at port 80 you can already see your map.
+The raster tiles will be exposed at port 8080 of your Docker host.
 
 ```bash
 docker run -v $(pwd):/data -p 8080:80 klokantech/tileserver-mapnik
@@ -50,7 +49,7 @@ docker run -v $(pwd):/data -p 8080:80 klokantech/tileserver-mapnik
 
 ## Use the Map from Leaflet
 
-The server will now provide a TileJSON endpoint at the service url of the map.
+The server will now provide a TileJSON endpoint at the service URL of the map.
 For this example the TileJSON endpoint is http://localhost/mapbox-studio-osm-bright/index.json.
 You can reference this TileJSON endpoint in the leaflet configuration.
 
