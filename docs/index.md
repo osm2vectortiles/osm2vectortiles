@@ -9,7 +9,7 @@ published: true
 Get started styling and using vector tiles.
 
 - Getting started
-  - [Display map with Mapnik and Tessera](/docs/get-started)
+  - [Display map with tileserver-mapnik](/docs/display-map-with-tileserver-mapnik)
   - [Display map with Mapbox GL](/docs/display-map-with-mapbox-gl)
 - Create your own custom basemap
   - [Create a style with Mapbox Studio Classic](/docs/create-map-with-mapbox-studio-classic)
