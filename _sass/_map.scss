@@ -1,8 +1,39 @@
 /* Map styling */
 
+.map-container {
+  height: 125px;
+}
+
+.map-button {
+  width: 12.5%;
+  height: 50px;
+  background-color: #44A886;
+  color: white;
+  font-size: 0.9em;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  border: 1px solid #58B89C;
+}
+
+.map-button:hover {
+  cursor: pointer;
+  background-color: white;
+  color: #44A886;
+}
+
 .map-preview {
   height: 400px;
   width: 100%;
+}
+
+@media only screen and (max-width: 700px) {
+  .map-button {
+    min-width: 20%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .map-button {
+    min-width: 50%;
+  }
 }
 
 .map-fullscreen{

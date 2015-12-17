@@ -8,8 +8,10 @@ published: true
 
 <div id="vector-map" class="map-preview"></div>
 
-<button id="vector-osm-bright">OSM Bright</button>
-<button id="vector-osm-basic">Basic Map</button>
+<div id="map-container">
+	<button id="vector-osm-bright" class="map-button">OSM Bright</button
+	><button id="vector-osm-basic" class="map-button">Basic Map</button>
+</div>
 
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.1/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.1/mapbox-gl.css' rel='stylesheet' />
@@ -50,16 +52,16 @@ published: true
 ## Raster Maps
 
 <div id="raster-map" class="map-preview"></div>
+<div id="map-container">
+	<button id="raster-osm-bright" class="map-button">OSM Bright</button
+	><button id="comic-map" class="map-button">Comic Map</button
+	><button id="light-map" class="map-button">Light Map</button
+	><button id="dark-map" class="map-button">Dark Map</button
+	><button id="streets-basic" class="map-button">Streets Basic</button
+	><button id="woodcut" class="map-button">Woodcut</butto><button id="pirates" class="map-button">Pirates</button
+	><button id="wheatpaste" class="map-button">Wheatpaste</button>
+</div>
 
-<button id="raster-osm-bright">OSM Bright</button>
-<button id="comic-map">Comic Map</button>
-<button id="light-map">Light Map</button>
-<button id="dark-map">Dark Map</button>
-<button id="streets-basic">Streets Basic</button>
-<button id="woodcut">Woodcut</button>
-<button id="pirates">Pirates</button>
-<button id="fourteen-street">14th Street</button>
-<button id="wheatpaste">Wheatpaste</button>
 
 <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
@@ -75,7 +77,6 @@ addClickListener('dark-map', 'http://rastertiles.osm2vectortiles.org/dark/{z}/{x
 addClickListener('streets-basic', 'http://rastertiles.osm2vectortiles.org/streets-basic/{z}/{x}/{y}.png');
 addClickListener('woodcut', 'http://rastertiles.osm2vectortiles.org/woodcut/{z}/{x}/{y}.png');
 addClickListener('pirates', 'http://rastertiles.osm2vectortiles.org/pirates/{z}/{x}/{y}.png');
-addClickListener('fourteen-street', 'http://rastertiles.osm2vectortiles.org/14th-street/{z}/{x}/{y}.png');
 addClickListener('wheatpaste', 'http://rastertiles.osm2vectortiles.org/wheatpaste/{z}/{x}/{y}.png');
 
 function addClickListener(name, url) {
