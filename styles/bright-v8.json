@@ -63,7 +63,7 @@
     },
     "sources": {
         "mapbox": {
-            "url": "http://vectortiles.osm2vectortiles.org/world.json",
+            "url": "http://klokantech.tileserver.com/v1/index.json?key=WQ5sRntXphOrWgesmtmU",
             "type": "vector"
         }
     },
