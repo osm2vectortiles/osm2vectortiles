@@ -10,7 +10,7 @@ We provide a free and fast CDN for accessing the vector tiles.
 But you have the choice to self host the vector tiles if you want to.
 
 For serving vector tiles we recommend using
-[https://github.com/klokantech/tileserver-php](tileserver-php from Klokan Technologies)
+[tileserver-php from Klokan Technologies](https://github.com/klokantech/tileserver-php)
 which supports serving MBTiles containing vector tile PBFs out of the box.
 
 ## Apache
