@@ -53,22 +53,22 @@ on the [GitHub issue tracker](https://github.com/osm2vectortiles/osm2vectortiles
 ## What are the restrictions on using the CDN?
 
 A [public and fast vector tile server](http://osm2vectortiles.tileserver.com/v1.json)
-is publicly available for everyone to use for free without any restrictions.
+is available for everyone for testing, evaluation, development and non-commercial use.
 
-However if you create real application we ask you
-kindly to [create a free access key](http://maps.klokantech.com/)
+If you work on a real application we ask you kindly to [create a free access key](http://maps.klokantech.com/)
 and use the vector tiles together with the access keys so we can guarantee the performance of the service.
+
+For extensive use it is recommended to install your own tileserver or use a paid tile service.
 
 ## What is the difference from other Projects like Kartotherian or Mapzen Vector Tiles?
 
-We are big fans of Kartotherian and Mapzen but believe not only the process to produce vector tiles
-should be open, but also the rendered data to make it really easy for everyone to create
+We are big fans of Kartotherian and Mapzen, but believe not only the process to produce vector tiles
+should be open, but also the rendered data to make it really easy for everyone to create and host
 their own maps.
-These projects provide public vector tile servers as well but do not provide vector tiles downloads.
+These projects provide public vector tile servers as well, but do not provide the vector tiles downloads.
 Additionally our projects has close compatibility to Mapbox Streets v5 and v6, which allows
 using the superior tooling from Mapbox for creating maps (such as open-source [MapBox Studio Classic](https://www.mapbox.com/mapbox-studio-classic/)).
-We are looking forward to contribute back to projects like Kartotherian with our improved
-source project and mapping files.
+We are looking forward to contribute back to used open-source projects, and would love to see our tiles and styles (.tm2source) adopted in other projects like Kartotherian, and improved by the community.
 
 ## Who is behind this project?
 
