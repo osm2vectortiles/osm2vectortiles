@@ -66,7 +66,7 @@ published: true
 	><button id="light-map" class="map-button">Light Map</button
 	><button id="dark-map" class="map-button">Dark Map</button
 	><button id="streets-basic" class="map-button">Streets Basic</button
-	><button id="woodcut" class="map-button">Woodcut</butto><button id="pirates" class="map-button">Pirates</button
+	><button id="woodcut" class="map-button">Woodcut</button><button id="pirates" class="map-button">Pirates</button
 	><button id="wheatpaste" class="map-button">Wheatpaste</button>
 </div>
 </br>
