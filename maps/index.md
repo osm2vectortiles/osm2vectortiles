@@ -22,7 +22,7 @@ published: true
 	var vectorStyleReference = document.getElementById("vector-style-reference");
 	vectorStyleReference.innerHTML = 'The map above uses the following style project: <a href="https://github.com/mapbox/mapbox-gl-styles/blob/master/styles/bright-v8.json">OSM Bright</a>';
 	mapboxgl.accessToken = 'pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w';
-	var brightMap = new mapboxgl.Map({
+	var vectorMap = new mapboxgl.Map({
 		    container: 'vector-map',
 		    style: '/styles/bright-v8.json',
 		    center: [8.5456, 47.3739],
@@ -33,12 +33,7 @@ published: true
 	bright.onclick = function(e) {
 		e.preventDefault();
         e.stopPropagation();
-        var brightMap = new mapboxgl.Map({
-		    container: 'vector-map',
-		    style: '/styles/bright-v8.json',
-		    center: [8.5456, 47.3739],
-		    zoom: 11
-		}).addControl(new mapboxgl.Navigation({position: 'top-left'}));
+        vectorMap.setStyle('/styles/bright-v8.json');
 		vectorStyleReference.innerHTML = 'The map above uses the following style project: <a href="https://github.com/mapbox/mapbox-gl-styles/blob/master/styles/bright-v8.json">OSM Bright</a>';
 
 	}
@@ -46,12 +41,7 @@ published: true
 	basic.onclick = function(e) {
 		e.preventDefault();
         e.stopPropagation();
-        var basicMap = new mapboxgl.Map({
-		    container: 'vector-map',
-		    style: '/styles/basic-v8.json',
-		    center: [8.5456, 47.3739],
-		    zoom: 11
-		}).addControl(new mapboxgl.Navigation({position: 'top-left'}));
+        vectorMap.setStyle('/styles/basic-v8.json');
 		vectorStyleReference.innerHTML = 'The map above uses the following style project: <a href="https://github.com/mapbox/mapbox-gl-styles/blob/master/styles/basic-v8.json">Basic Map</a>';
 	}
 </script>
