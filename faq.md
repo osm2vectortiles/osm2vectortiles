@@ -32,16 +32,17 @@ on [GitHub](https://github.com/osm2vectortiles/).
 
 ## Can I use my custom Base Map in other GIS tools like QGIS or ArcGIS?
 
-The [recommended raster tile server](/docs/display-map-with-tileserver-mapnik/) supports other
+The [recommended raster tile server](/docs/start/) supports other
 GIS clients and also supports WMTS. You can therefore use the rendered raster tiles
 from our vector tiles in QGIS, ArcGIS, uDig and also different web mapping libraries
-like Google Maps, Leaflet, Open Layers, MapBox JS and ArcGIS JavaScript API.
+like Google Maps, Leaflet, OpenLayers, MapBox JS and ArcGIS JavaScript API.
 
 Support for styling vector tiles in the Mapbox Vector Tile Specification is built
 into Mapbox Studio and Mapbox Studio Classic.
-Esri plans [to support vector tiles in ArcGIS](http://blogs.esri.com/esri/arcgis/2015/07/20/vector-tiles-preview/) and the Geometa Lab is working on a QGIS plugin for supporting
-vector tiles. Map libraries like Mapbox GL JS and Open Layers also support
-rendering vector tiles on the client side.
+Esri plans [to support vector tiles in ArcGIS](http://blogs.esri.com/esri/arcgis/2015/07/20/vector-tiles-preview/) and the Geometa Lab is working on a QGIS plugin for loading vector tiles directly. Map libraries like Mapbox GL JS and OpenLayers also support
+direct rendering of vector tiles on the client side.
+
+Our Open Streets tiles should be usable also in native applications on Android and iOS which uses MapBox Vector Tile specification.
 
 ## What is the future Roadmap of this Project?
 
@@ -61,16 +62,16 @@ and use the vector tiles together with the access keys so we can guarantee the p
 ## What is the difference from other Projects like Kartotherian or Mapzen Vector Tiles?
 
 We are big fans of Kartotherian and Mapzen but believe not only the process to produce vector tiles
-should be open, but also the rendered data to make it really accessible for everyone to create
+should be open, but also the rendered data to make it really easy for everyone to create
 their own maps.
-These projects provide public vector tile servers as well but do not provide any downloads.
-Additionally our projects has close compatibility to Mapbox Streets v5 and v6 which allows
-using the superior tooling from Mapbox for creating maps.
+These projects provide public vector tile servers as well but do not provide vector tiles downloads.
+Additionally our projects has close compatibility to Mapbox Streets v5 and v6, which allows
+using the superior tooling from Mapbox for creating maps (such as open-source [MapBox Studio Classic](https://www.mapbox.com/mapbox-studio-classic/)).
 We are looking forward to contribute back to projects like Kartotherian with our improved
 source project and mapping files.
 
 ## Who is behind this project?
 
-The OSM2VectorTiles project started as a study project of Geometa Lab supported and made
-possible by Klokan Technologies. We are map enthusiasts who want to make OpenStreetMap
+The OSM2VectorTiles project started as a student project at Geometa Lab HSR supported and made
+possible by Klokan Technologies GmbH. We are map enthusiasts who want to make OpenStreetMap
 accessible for everyone again.
