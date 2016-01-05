@@ -15,19 +15,25 @@ published: true
 </br>
 <div id="vector-style-reference"></div>
 
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.1/mapbox-gl.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.1/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.2/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.2/mapbox-gl.css' rel='stylesheet' />
 
 <script>
 	var vectorStyleReference = document.getElementById("vector-style-reference");
 	vectorStyleReference.innerHTML = 'The map above uses the following style project: <a href="https://github.com/mapbox/mapbox-gl-styles/blob/master/styles/bright-v8.json">OSM Bright</a>';
 	mapboxgl.accessToken = 'pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w';
-	var vectorMap = new mapboxgl.Map({
+
+	if (!mapboxgl.supported()) {
+		var vectorMapContainer = document.getElementById("vector-map");
+		vectorMapContainer.innerHTML = 'Your browser does not support Mapbox GL. Either your browser does not support WebGL or it is disabled, please check <a href="https://get.webgl.org/">http://get.webgl.org</a> for more information.'
+	} else {
+		var vectorMap = new mapboxgl.Map({
 		    container: 'vector-map',
 		    style: '/styles/bright-v8.json',
 		    center: [8.5456, 47.3739],
 		    zoom: 11
-	}).addControl(new mapboxgl.Navigation({position: 'top-left'}));
+		}).addControl(new mapboxgl.Navigation({position: 'top-left'}));
+	}
 
 	var bright = document.getElementById("vector-osm-bright");
 	bright.onclick = function(e) {
