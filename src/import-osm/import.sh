@@ -8,7 +8,6 @@ readonly IMPOSM_CACHE_DIR=${IMPOSM_CACHE_DIR:-/data/cache}
 
 readonly IMPOSM_BIN=${IMPOSM_BIN:-/imposm3}
 readonly MAPPING_JSON=${MAPPING_JSON:-/usr/src/app/mapping.json}
-readonly PBF_DOWNLOAD_URL=${PBF_DOWNLOAD_URL:-false}
 
 readonly OSM_DB=${OSM_DB:-osm}
 readonly OSM_USER=${OSM_USER:-osm}
@@ -24,11 +23,22 @@ function download_pbf() {
 }
 
 function import_pbf() {
-    local pbf_file=$1
-    exec $IMPOSM_BIN import -connection $PG_CONNECT -mapping $MAPPING_YAML \
+    local pbf_file="$1"
+    exec $IMPOSM_BIN import \
+        -connection $PG_CONNECT \
+        -mapping $MAPPING_YAML \
         -overwritecache -cachedir=$IMPOSM_CACHE_DIR \
         -read $pbf_file \
-        -write -dbschema-import=${DB_SCHEMA} -optimize
+        -write -dbschema-import=${DB_SCHEMA} -optimize -diff
+}
+
+function import_diff_changes() {
+    local changes_dir="$1"
+    exec $IMPOSM_BIN diff \
+        -connection $PG_CONNECT \
+        -mapping $MAPPING_YAML \
+        -cachedir=$IMPOSM_CACHE_DIR \
+        -dbschema-import=${DB_SCHEMA} $changes_dir/*.osc.gz
 }
 
 function import_single_pbf() {
@@ -45,13 +55,3 @@ function import_single_pbf() {
         exit 404
     fi
 }
-
-function main() {
-    if ! [ $PBF_DOWNLOAD_URL = false ]; then
-        download_pbf $PBF_DOWNLOAD_URL
-    fi
-
-    import_single_pbf
-}
-
-main
