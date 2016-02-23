@@ -1,0 +1,15 @@
+{
+  "name": "detect-dirty-tiles",
+  "version": "1.0.0",
+  "description": "Returns tiles which are affected by updated OSM data",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "manuelroth",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^4.4.6",
+    "tile-cover": "^3.0.1"
+  }
+}
