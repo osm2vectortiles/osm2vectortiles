@@ -17,6 +17,10 @@ RUN apt-get purge -y --auto-remove \
     g++ gcc libc6-dev make git \
     && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
+
 VOLUME /data/import /data/cache
 ENV IMPORT_DATA_DIR=/data/import \
     IMPOSM_CACHE_DIR=/data/cache \
