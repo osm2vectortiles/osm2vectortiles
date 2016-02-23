@@ -1,8 +1,10 @@
-var fs = require('fs');
-var poly = JSON.parse(fs.readFileSync('./line.geojson'));
+var updatedGeometries = require('./updated-geometries.js');
 var tileCover = require('./tile-cover.js');
 
-var geometry = poly.features[0].geometry;
-var dirtyTileArray = tileCover.getCoveredTiles(geometry, 4);
-
-console.log(dirtyTileArray);
+updatedGeometries.getUpdatedGeometries('osm_poi_points', 14, function(geometries) {
+	geometries.forEach(function(geometry) {
+		var geometryJSON = JSON.parse(geometry.geometry);
+		var dirtyTileArray = tileCover.getCoveredTiles(geometryJSON, 14);
+		console.log(dirtyTileArray);
+	})
+});

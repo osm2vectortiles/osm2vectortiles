@@ -1,16 +1,15 @@
-var pg = require('promise-pg');
+var pgp = require('pg-promise')();
 var db = pgp({
-    host: process.env.DB_HOST || 'postgis',
+    host: process.env.DB_PORT_5432_TCP_ADDR,
     port: 5432,
-    database: process.env.DB_NAME || 'osm',
-    user: process.env.DB_USER ||  'osm',
-    password: process.env.DB_PASSWORD ||  'osm'
+    database: 'osm',
+    user: 'osm',
+    password: 'osm'
 });
 
 exports.getUpdatedGeometries = function(tableName, zoomLevel, callback){
 	var dbQuery = db.query(
-        "SELECT id, name FROM public.communities_search WHERE name ILIKE '$1^%' OR zip::text = $1",
-        searchQuery
+        "SELECT ST_AsGeoJSON(geometry) AS geometry FROM osm_poi_points WHERE timestamp IS NULL"
     );
 
     dbQuery.then(function(data) {
