@@ -55,6 +55,10 @@ update-scaleranks:
   image: "osm2vectortiles/update-scaleranks"
   links:
   - postgis:db
+detect-dirty-tiles:
+  image: "osm2vectortiles/detect-dirty-tiles"
+  links:
+  - postgis:db
 enqueue-jobs:
   build: ./tools/enqueue-jobs
   environment:
