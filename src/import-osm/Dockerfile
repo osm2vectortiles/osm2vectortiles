@@ -18,7 +18,9 @@ RUN apt-get purge -y --auto-remove \
     && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update \
- && apt-get install -y --no-install-recommends postgresql-client \
+ && apt-get install -y --no-install-recommends \
+        postgresql-client \
+        osmctools \
     && rm -rf /var/lib/apt/lists/*
 
 VOLUME /data/import /data/cache

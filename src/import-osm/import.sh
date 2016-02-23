@@ -11,6 +11,8 @@ readonly OSM_DB=${OSM_DB:-osm}
 readonly OSM_USER=${OSM_USER:-osm}
 readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
 
+readonly OSM_UPDATE_BASEURL=${OSM_UPDATE_BASEURL:-false}
+
 readonly DB_SCHEMA=${OSM_SCHEMA:-public}
 readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
 readonly PG_CONNECT="postgis://$OSM_USER:$OSM_PASSWORD@$DB_HOST/$OSM_DB"
@@ -28,6 +30,10 @@ function import_pbf() {
         -overwritecache -cachedir=$IMPOSM_CACHE_DIR \
         -read $pbf_file \
         -write -dbschema-import=${DB_SCHEMA} -optimize -diff
+
+	add_timestamp_column
+    local timestamp=$(osmconvert "$pbf_file" --out-timestamp)
+    update_timestamp "$timestamp"
 }
 
 function update_timestamp() {
@@ -85,26 +91,30 @@ function exec_sql() {
         -c "$sql_cmd" || true
 }
 
-function import_diff_changes() {
-    local changes_dir="$1"
-    local diff_file
-    for diff_file in $changes_dir/*.osc.gz; do
-        imposm3 diff \
-            -connection $PG_CONNECT \
-            -mapping $MAPPING_YAML \
-            -cachedir=$IMPOSM_CACHE_DIR \
-            -diffdir=$IMPORT_DATA_DIR \
-            -dbschema-import=${DB_SCHEMA} $diff_file
+function import_pbf_diffs() {
+    local pbf_file="$1"
+    local latest_diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
 
-        local osc_filename="${diff_file%.*}"
-        local raw_filename="${osc_filename%.*}"
-        local state_file="$raw_filename.state.txt"
-        if [ -f $state_file ]; then
-            local timestamp=$(read_pbf_timestamp $state_file)
-            echo "Set timestamp $timestamp for diff $diff_file"
-            update_timestamp "$timestamp"
-        fi
-    done
+    cd "$IMPORT_DATA_DIR"
+    if [ $OSM_UPDATE_BASEURL = false ]; then
+        osmupdate "$pbf_file" "$latest_diffs_file"
+    else
+        echo "Downloading diffs from $OSM_UPDATE_BASEURL"
+        osmupdate -v \
+            "$pbf_file" "$latest_diffs_file" \
+            --base-url="$OSM_UPDATE_BASEURL"
+    fi
+
+    imposm3 diff \
+        -connection $PG_CONNECT \
+        -mapping $MAPPING_YAML \
+        -cachedir=$IMPOSM_CACHE_DIR \
+        -diffdir=$IMPORT_DATA_DIR \
+        -dbschema-import=${DB_SCHEMA} $latest_diffs_file
+
+    local timestamp=$(osmconvert "$latest_diffs_file" --out-timestamp)
+    echo "Set $timestamp for latest updates from $latest_diffs_file"
+    update_timestamp "$timestamp"
 }
 
 function read_pbf_timestamp() {
