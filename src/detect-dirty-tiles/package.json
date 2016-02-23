@@ -9,7 +9,7 @@
   "author": "manuelroth",
   "license": "ISC",
   "dependencies": {
-    "pg": "^4.4.6",
+    "pg-promise": "^3.2.2",
     "tile-cover": "^3.0.1"
   }
 }
