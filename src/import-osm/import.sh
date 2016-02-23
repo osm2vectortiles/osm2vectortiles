@@ -39,25 +39,18 @@ function update_timestamp() {
 	exec_sql "UPDATE osm_barrier_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_buildings SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_buildings_gen0 SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_countries SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_housenumbers_points SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_housenumbers_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_landusages SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_landusages_gen0 SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_landusages_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_marine SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_ocean_polygons SET timestamp='$timestamp'"
 	exec_sql "UPDATE osm_places SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_poi_points SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_poi_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_roads SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_states SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_water_lines SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_water_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_water_polygons_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE seas SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE states SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE water_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
 }
 
 function add_timestamp_column() {
@@ -68,25 +61,18 @@ function add_timestamp_column() {
 	exec_sql "ALTER TABLE osm_barrier_polygons ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_buildings ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_buildings_gen0 ADD COLUMN timestamp timestamp"
-	exec_sql "ALTER TABLE osm_countries ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_housenumbers_points ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_housenumbers_polygons ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_landusages ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_landusages_gen0 ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_landusages_gen1 ADD COLUMN timestamp timestamp"
-	exec_sql "ALTER TABLE osm_marine ADD COLUMN timestamp timestamp"
-	exec_sql "ALTER TABLE osm_ocean_polygons ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_places ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_poi_points ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_poi_polygons ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_roads ADD COLUMN timestamp timestamp"
-	exec_sql "ALTER TABLE osm_states ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_water_lines ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_water_polygons ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_water_polygons_gen1 ADD COLUMN timestamp timestamp"
-	exec_sql "ALTER TABLE seas ADD COLUMN timestamp timestamp"
-	exec_sql "ALTER TABLE states ADD COLUMN timestamp timestamp"
-	exec_sql "ALTER TABLE water_polygons ADD COLUMN timestamp timestamp"
 }
 
 function exec_sql() {
@@ -101,11 +87,32 @@ function exec_sql() {
 
 function import_diff_changes() {
     local changes_dir="$1"
-    imposm3 diff \
-        -connection $PG_CONNECT \
-        -mapping $MAPPING_YAML \
-        -cachedir=$IMPOSM_CACHE_DIR \
-        -dbschema-import=${DB_SCHEMA} $changes_dir/*.osc.gz
+    local diff_file
+    for diff_file in $changes_dir/*.osc.gz; do
+        imposm3 diff \
+            -connection $PG_CONNECT \
+            -mapping $MAPPING_YAML \
+            -cachedir=$IMPOSM_CACHE_DIR \
+            -diffdir=$IMPORT_DATA_DIR \
+            -dbschema-import=${DB_SCHEMA} $diff_file
+
+        local osc_filename="${diff_file%.*}"
+        local raw_filename="${osc_filename%.*}"
+        local state_file="$raw_filename.state.txt"
+        if [ -f $state_file ]; then
+            local timestamp=$(read_pbf_timestamp $state_file)
+            echo "Set timestamp $timestamp for diff $diff_file"
+            update_timestamp "$timestamp"
+        fi
+    done
+}
+
+function read_pbf_timestamp() {
+    local state_file="$1"
+    local timestamp=$(cat "$state_file" | grep 'timestamp=')
+    local nothing=''
+    local pruned_timestamp="${timestamp/timestamp=/$nothing}"
+    echo $pruned_timestamp | sed -r 's/\\+//g'
 }
 
 function import_single_pbf() {
