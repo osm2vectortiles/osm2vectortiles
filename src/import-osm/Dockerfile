@@ -24,8 +24,7 @@ RUN apt-get update \
 VOLUME /data/import /data/cache
 ENV IMPORT_DATA_DIR=/data/import \
     IMPOSM_CACHE_DIR=/data/cache \
-    MAPPING_YAML=/usr/src/app/mapping.yml \
-    IMPOSM_BIN=imposm3
+    MAPPING_YAML=/usr/src/app/mapping.yml
 
 RUN mkdir -p /usr/src/app
 COPY . /usr/src/app/

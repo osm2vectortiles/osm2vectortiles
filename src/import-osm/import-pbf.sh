@@ -24,7 +24,6 @@ function main() {
 
     if [ -f $IMPORT_DATA_DIR/state.txt ]; then
         local timestamp=$(read_pbf_timestamp)
-        echo "Heyho $timestamp"
         update_timestamp "$timestamp"
     fi
 }

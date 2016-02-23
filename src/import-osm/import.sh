@@ -5,8 +5,6 @@ set -o nounset
 
 readonly IMPORT_DATA_DIR=${IMPORT_DATA_DIR:-/data/import}
 readonly IMPOSM_CACHE_DIR=${IMPOSM_CACHE_DIR:-/data/cache}
-
-readonly IMPOSM_BIN=${IMPOSM_BIN:-/imposm3}
 readonly MAPPING_JSON=${MAPPING_JSON:-/usr/src/app/mapping.json}
 
 readonly OSM_DB=${OSM_DB:-osm}
@@ -24,7 +22,7 @@ function download_pbf() {
 
 function import_pbf() {
     local pbf_file="$1"
-    $IMPOSM_BIN import \
+    imposm3 import \
         -connection $PG_CONNECT \
         -mapping $MAPPING_YAML \
         -overwritecache -cachedir=$IMPOSM_CACHE_DIR \
@@ -103,7 +101,7 @@ function exec_sql() {
 
 function import_diff_changes() {
     local changes_dir="$1"
-    $IMPOSM_BIN diff \
+    imposm3 diff \
         -connection $PG_CONNECT \
         -mapping $MAPPING_YAML \
         -cachedir=$IMPOSM_CACHE_DIR \
@@ -117,7 +115,6 @@ function import_single_pbf() {
             import_pbf $pbf_file
             break
         done
-        exit 0
     else
         echo "No PBF files for import found."
         echo "Please mount the $IMPORT_DATA_DIR volume to a folder containing OSM PBF files."
