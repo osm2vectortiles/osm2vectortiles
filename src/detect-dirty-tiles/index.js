@@ -1,7 +1,11 @@
+var _ = require('underscore');
 var updatedGeometries = require('./updated-geometries.js');
 
 updatedGeometries.getUpdatedGeometries().then(function(geometries) {
-    console.log(JSON.stringify(geometries, null, 2));
+    var statistics = _.countBy(geometries, function(geom) {
+        return geom.table;
+    });
+    console.log(statistics);
 }).catch(function(err) {
     console.error(err);
 });
