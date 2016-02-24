@@ -9,6 +9,8 @@
   "author": "manuelroth",
   "license": "ISC",
   "dependencies": {
+    "q": "^1.4.1",
+    "underscore": "^1.8.3",
     "pg-promise": "^3.2.2",
     "tile-cover": "^3.0.1"
   },
@@ -34,7 +36,7 @@
             "unix"
         ],
         "quotes": [
-            2,
+            1,
             "single"
         ],
         "semi": [
