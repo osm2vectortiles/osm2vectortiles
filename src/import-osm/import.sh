@@ -25,15 +25,22 @@ function download_pbf() {
 function import_pbf() {
     local pbf_file="$1"
     imposm3 import \
-        -connection $PG_CONNECT \
-        -mapping $MAPPING_YAML \
-        -overwritecache -cachedir=$IMPOSM_CACHE_DIR \
-        -read $pbf_file \
-        -write -dbschema-import=${DB_SCHEMA} -optimize -diff
+        -connection "$PG_CONNECT" \
+        -mapping "$MAPPING_YAML" \
+        -overwritecache \
+        -cachedir "$IMPOSM_CACHE_DIR" \
+        -read "$pbf_file" \
+        -dbschema-import="${DB_SCHEMA}" \
+        -write -optimize -diff
 
 	add_timestamp_column
-    local timestamp=$(osmconvert "$pbf_file" --out-timestamp)
+    local timestamp=$(extract_timestamp "$pbf_file")
     update_timestamp "$timestamp"
+}
+
+function extract_timestamp() {
+    local file="$1"
+    osmconvert "$file" --out-timestamp
 }
 
 function update_timestamp() {
@@ -96,7 +103,7 @@ function import_pbf_diffs() {
     local latest_diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
 
     cd "$IMPORT_DATA_DIR"
-    if [ $OSM_UPDATE_BASEURL = false ]; then
+    if [ "$OSM_UPDATE_BASEURL" = false ]; then
         osmupdate "$pbf_file" "$latest_diffs_file"
     else
         echo "Downloading diffs from $OSM_UPDATE_BASEURL"
@@ -106,35 +113,13 @@ function import_pbf_diffs() {
     fi
 
     imposm3 diff \
-        -connection $PG_CONNECT \
-        -mapping $MAPPING_YAML \
-        -cachedir=$IMPOSM_CACHE_DIR \
-        -diffdir=$IMPORT_DATA_DIR \
-        -dbschema-import=${DB_SCHEMA} $latest_diffs_file
+        -connection "$PG_CONNECT" \
+        -mapping "$MAPPING_YAML" \
+        -cachedir "$IMPOSM_CACHE_DIR" \
+        -diffdir "$IMPORT_DATA_DIR" \
+        -dbschema-import "${DB_SCHEMA} $latest_diffs_file"
 
-    local timestamp=$(osmconvert "$latest_diffs_file" --out-timestamp)
+    local timestamp=$(extract_timestamp "$latest_diffs_file")
     echo "Set $timestamp for latest updates from $latest_diffs_file"
     update_timestamp "$timestamp"
-}
-
-function read_pbf_timestamp() {
-    local state_file="$1"
-    local timestamp=$(cat "$state_file" | grep 'timestamp=')
-    local nothing=''
-    local pruned_timestamp="${timestamp/timestamp=/$nothing}"
-    echo $pruned_timestamp | sed -r 's/\\+//g'
-}
-
-function import_single_pbf() {
-    if [ "$(ls -A $IMPORT_DATA_DIR/*.pbf 2> /dev/null)" ]; then
-        local pbf_file
-        for pbf_file in "$IMPORT_DATA_DIR"/*.pbf; do
-            import_pbf $pbf_file
-            break
-        done
-    else
-        echo "No PBF files for import found."
-        echo "Please mount the $IMPORT_DATA_DIR volume to a folder containing OSM PBF files."
-        exit 404
-    fi
 }

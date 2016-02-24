@@ -9,7 +9,7 @@ function main() {
     if [ "$(ls -A $IMPORT_DATA_DIR/*.pbf 2> /dev/null)" ]; then
         local pbf_file
         for pbf_file in "$IMPORT_DATA_DIR"/*.pbf; do
-            import_pbf_diffs $pbf_file
+            import_pbf_diffs "$pbf_file"
             break
         done
     else
