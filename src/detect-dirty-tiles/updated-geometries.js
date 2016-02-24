@@ -8,14 +8,9 @@ var db = pgp({
 });
 
 exports.getUpdatedGeometries = function(tableName, zoomLevel, callback){
-	var dbQuery = db.query(
-        "SELECT ST_AsGeoJSON(geometry) AS geometry FROM osm_poi_points WHERE timestamp IS NULL"
-    );
+    var dbQuery = db.query('SELECT ST_AsGeoJSON(geometry) AS geometry FROM osm_poi_points WHERE timestamp IS NULL');
 
-    dbQuery.then(function(data) {
-    	callback(data);
-    })
-    .catch(function(error) {
-    	console.error(error);
-    })
-}
+    dbQuery.then(callback).catch(function(error) {
+        console.error(error);
+    });
+};
