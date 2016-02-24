@@ -1,0 +1,69 @@
+system:
+  name: road
+  classes:
+    motorway:
+    - motorway
+    motorway_link:
+    - motorway_link
+    driveway:
+    - driveway
+    main:
+    - primary
+    - primary_link
+    - trunk
+    - trunk_link
+    - secondary
+    - secondary_link
+    - tertiary
+    - tertiary_link
+    street:
+    - residential
+    - unclassified
+    - living_street
+    - road
+    - raceway
+    street_limited:
+    - pedestrian
+    - construction
+    - private
+    service:
+    - service
+    - track
+    - alley
+    - spur
+    - siding
+    - crossover
+    path:
+    - path
+    - cycleway
+    - ski
+    - steps
+    - bridleway
+    - footway
+    major_rail:
+    - rail
+    - monorail
+    - narrow_gauge
+    - subway
+    minor_rail:
+    - funicular
+    - light_rail
+    - preserved
+    - tram
+    - disused
+    - yard
+    aerialway:
+    - chair_lift
+    - mixed_lift
+    - drag_lift
+    - platter
+    - t-bar
+    - magic_carpet
+    - gondola
+    - cable_car
+    - rope_tow
+    - zip_line
+    - j-bar
+    - canopy
+    golf:
+    - hole
