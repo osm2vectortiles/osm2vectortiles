@@ -36,6 +36,8 @@ import-osm-diff:
    - cache
   links:
    - postgis:db
+  environment:
+     OSM_UPDATE_BASEURL: "http://download.geofabrik.de/europe/liechtenstein-updates/"
 import-labels:
   image: "osm2vectortiles/import-external"
   command: ./import-labels.sh

@@ -11,6 +11,8 @@ readonly OSM_DB=${OSM_DB:-osm}
 readonly OSM_USER=${OSM_USER:-osm}
 readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
 
+readonly OSM_UPDATE_BASEURL=${OSM_UPDATE_BASEURL:-false}
+
 readonly DB_SCHEMA=${OSM_SCHEMA:-public}
 readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
 readonly PG_CONNECT="postgis://$OSM_USER:$OSM_PASSWORD@$DB_HOST/$OSM_DB"
@@ -23,11 +25,22 @@ function download_pbf() {
 function import_pbf() {
     local pbf_file="$1"
     imposm3 import \
-        -connection $PG_CONNECT \
-        -mapping $MAPPING_YAML \
-        -overwritecache -cachedir=$IMPOSM_CACHE_DIR \
-        -read $pbf_file \
-        -write -dbschema-import=${DB_SCHEMA} -optimize -diff
+        -connection "$PG_CONNECT" \
+        -mapping "$MAPPING_YAML" \
+        -overwritecache \
+        -cachedir "$IMPOSM_CACHE_DIR" \
+        -read "$pbf_file" \
+        -dbschema-import="${DB_SCHEMA}" \
+        -write -optimize -diff
+
+	add_timestamp_column
+    local timestamp=$(extract_timestamp "$pbf_file")
+    update_timestamp "$timestamp"
+}
+
+function extract_timestamp() {
+    local file="$1"
+    osmconvert "$file" --out-timestamp
 }
 
 function update_timestamp() {
@@ -39,25 +52,18 @@ function update_timestamp() {
 	exec_sql "UPDATE osm_barrier_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_buildings SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_buildings_gen0 SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_countries SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_housenumbers_points SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_housenumbers_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_landusages SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_landusages_gen0 SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_landusages_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_marine SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_ocean_polygons SET timestamp='$timestamp'"
 	exec_sql "UPDATE osm_places SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_poi_points SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_poi_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_roads SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_states SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_water_lines SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_water_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_water_polygons_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE seas SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE states SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE water_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
 }
 
 function add_timestamp_column() {
@@ -68,25 +74,18 @@ function add_timestamp_column() {
 	exec_sql "ALTER TABLE osm_barrier_polygons ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_buildings ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_buildings_gen0 ADD COLUMN timestamp timestamp"
-	exec_sql "ALTER TABLE osm_countries ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_housenumbers_points ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_housenumbers_polygons ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_landusages ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_landusages_gen0 ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_landusages_gen1 ADD COLUMN timestamp timestamp"
-	exec_sql "ALTER TABLE osm_marine ADD COLUMN timestamp timestamp"
-	exec_sql "ALTER TABLE osm_ocean_polygons ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_places ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_poi_points ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_poi_polygons ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_roads ADD COLUMN timestamp timestamp"
-	exec_sql "ALTER TABLE osm_states ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_water_lines ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_water_polygons ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_water_polygons_gen1 ADD COLUMN timestamp timestamp"
-	exec_sql "ALTER TABLE seas ADD COLUMN timestamp timestamp"
-	exec_sql "ALTER TABLE states ADD COLUMN timestamp timestamp"
-	exec_sql "ALTER TABLE water_polygons ADD COLUMN timestamp timestamp"
 }
 
 function exec_sql() {
@@ -99,25 +98,28 @@ function exec_sql() {
         -c "$sql_cmd" || true
 }
 
-function import_diff_changes() {
-    local changes_dir="$1"
-    imposm3 diff \
-        -connection $PG_CONNECT \
-        -mapping $MAPPING_YAML \
-        -cachedir=$IMPOSM_CACHE_DIR \
-        -dbschema-import=${DB_SCHEMA} $changes_dir/*.osc.gz
-}
+function import_pbf_diffs() {
+    local pbf_file="$1"
+    local latest_diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
 
-function import_single_pbf() {
-    if [ "$(ls -A $IMPORT_DATA_DIR/*.pbf 2> /dev/null)" ]; then
-        local pbf_file
-        for pbf_file in "$IMPORT_DATA_DIR"/*.pbf; do
-            import_pbf $pbf_file
-            break
-        done
+    cd "$IMPORT_DATA_DIR"
+    if [ "$OSM_UPDATE_BASEURL" = false ]; then
+        osmupdate "$pbf_file" "$latest_diffs_file"
     else
-        echo "No PBF files for import found."
-        echo "Please mount the $IMPORT_DATA_DIR volume to a folder containing OSM PBF files."
-        exit 404
+        echo "Downloading diffs from $OSM_UPDATE_BASEURL"
+        osmupdate -v \
+            "$pbf_file" "$latest_diffs_file" \
+            --base-url="$OSM_UPDATE_BASEURL"
     fi
+
+    imposm3 diff \
+        -connection "$PG_CONNECT" \
+        -mapping "$MAPPING_YAML" \
+        -cachedir "$IMPOSM_CACHE_DIR" \
+        -diffdir "$IMPORT_DATA_DIR" \
+        -dbschema-import "${DB_SCHEMA} $latest_diffs_file"
+
+    local timestamp=$(extract_timestamp "$latest_diffs_file")
+    echo "Set $timestamp for latest updates from $latest_diffs_file"
+    update_timestamp "$timestamp"
 }
