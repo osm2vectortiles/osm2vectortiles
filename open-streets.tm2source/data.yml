@@ -1077,21 +1077,15 @@ Layer:
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           type, type as class
-          FROM osm_water_lines
-          WHERE geometry && !bbox! AND (
-            (
-              type in ('river', 'canal')
-              AND z(!scale_denominator!) >= 8
-              AND linelabel(z(!scale_denominator!), name, geometry)
-              AND geometry && !bbox!
-            )
-            OR (
-              type in ('stream', 'stream_intermittent')
-              AND z(!scale_denominator!) >= 13
-              AND linelabel(z(!scale_denominator!), name, geometry)
-              AND geometry && !bbox!
-            )
-          )
+          FROM (
+            SELECT * FROM waterway_label_z8toz12
+            WHERE z(!scale_denominator!) BETWEEN 8 AND 12
+            UNION ALL
+            SELECT * FROM waterway_label_z13toz14
+            WHERE z(!scale_denominator!) BETWEEN 13 AND 14
+          ) AS waterway_label
+          WHERE geometry && !bbox!
+          AND linelabel(z(!scale_denominator!), name, geometry)
         ) AS data
       type: postgis
       user: osm
