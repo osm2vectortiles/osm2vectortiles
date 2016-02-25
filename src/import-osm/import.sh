@@ -43,8 +43,20 @@ function extract_timestamp() {
     osmconvert "$file" --out-timestamp
 }
 
+function store_timestamp_history {
+    local timestamp="$1"
+    local table_name="osm_timestamps"
+
+    exec_sql "CREATE TABLE IF NOT EXISTS $table_name (timestamp timestamp)"
+    exec_sql "DELETE FROM $table_name WHERE timestamp='$timestamp'::timestamp"
+    exec_sql "INSERT INTO $table_name VALUES ('$timestamp'::timestamp)"
+}
+
 function update_timestamp() {
     local timestamp="$1"
+
+    store_timestamp_history "$timestamp"
+
 	exec_sql "UPDATE osm_admin SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_aero_lines SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_aero_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
