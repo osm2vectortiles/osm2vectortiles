@@ -28,7 +28,8 @@ function recentDirtyViews() {
         .then(function(result) { return result.max; })
         .then(function(timestamp) {
             return q.all([
-                detectDirtyTiles('poi_label_z14', timestamp, 14, 14)
+                detectDirtyTiles('poi_label_z14', timestamp, 14, 14),
+                detectDirtyTiles('housenum_label', timestamp, 14, 14)
             ]);
         }).then(_.flatten);
 }

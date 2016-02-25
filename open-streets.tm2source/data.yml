@@ -1125,19 +1125,10 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, house_num
-          FROM
-          (
-            SELECT osm_id, geometry, house_num 
-            FROM osm_housenumbers_points
-            WHERE geometry && !bbox! 
-              AND z(!scale_denominator!) >= 14
-            UNION ALL
-            SELECT osm_id, topoint(geometry) AS geometry, house_num
-            FROM osm_housenumbers_polygons
-            WHERE geometry && !bbox! 
-              AND z(!scale_denominator!) >= 14
-          ) AS housenumbers
+          SELECT osm_id, topoint(geometry) AS geometry, house_num
+          FROM housenum_label
+          WHERE geometry && !bbox!
+            AND z(!scale_denominator!) >= 14
         ) AS data
       type: postgis
       user: osm
