@@ -925,7 +925,8 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id, ref, website, poi_network(type) as network,
+          SELECT geometry, osm_id, ref, website,
+              poi_network(type) as network,
               poi_address(housenumber, street, place, city, country, postcode) as address,
               name,
               coalesce(NULLIF(name_en, ''), name) AS name_en,
@@ -936,22 +937,12 @@ Layer:
               coalesce(NULLIF(name_zh, ''), name) AS name_zh,
               format_type(type) AS type,
               scalerank_poi(type, area) AS scalerank,
+              classify_maki_label(type) AS maki,
               rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
-                           ORDER BY localrank_poi(type) ASC) AS localrank,
-              classify_maki_label(type) AS maki
-            FROM (
-              SELECT geometry, osm_id, ref, website, housenumber, street, place, city, country, postcode,
-              name, name_en, name_es, name_fr, name_de, name_ru, name_zh,
-              type, 0 AS area
-              FROM osm_poi_points
-              WHERE z(!scale_denominator!) >= 14 AND geometry && !bbox! AND name <> ''
-              UNION ALL
-              SELECT topoint(geometry) AS geometry, osm_id, ref, website, housenumber, street, place, city, country, postcode,
-              name, name_en, name_es, name_fr, name_de, name_ru, name_zh,
-              type, area
-              FROM osm_poi_polygons
-              WHERE z(!scale_denominator!) >= 14 AND geometry && !bbox! AND name <> ''
-            ) AS poi_label
+                           ORDER BY localrank_poi(type) ASC) AS localrank
+            FROM poi_label_z14
+            WHERE z(!scale_denominator!) >= 14
+              AND geometry && !bbox!
         ) AS data
       type: postgis
       user: osm

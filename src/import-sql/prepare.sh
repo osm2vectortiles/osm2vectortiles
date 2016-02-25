@@ -3,7 +3,8 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-readonly SQL_FILE=${IMPORT_DATA_DIR:-/usr/src/app/functions.sql}
+readonly SQL_FUNCTIONS_FILE=${IMPORT_DATA_DIR:-/usr/src/app/functions.sql}
+readonly SQL_VIEWS_FILE=${IMPORT_DATA_DIR:-/usr/src/app/views.sql}
 
 readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
 readonly OSM_DB=${OSM_DB:-osm}
@@ -17,7 +18,8 @@ function exec_sql_file() {
 
 function main() {
     echo "Creating functions in $OSM_DB necessary for open-streets"
-    exec_sql_file "$SQL_FILE"
+    exec_sql_file "$SQL_FUNCTIONS_FILE"
+    exec_sql_file "$SQL_VIEWS_FILE"
 }
 
 main
