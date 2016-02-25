@@ -1,6 +1,8 @@
 var _ = require('underscore');
 var q = require('q');
 var pgp = require('pg-promise')();
+var fs = require('fs');
+var path = require('path');
 
 var db = pgp({
     host: process.env.DB_PORT_5432_TCP_ADDR,
@@ -9,6 +11,9 @@ var db = pgp({
     user: 'osm',
     password: 'osm'
 });
+
+var exportDir = process.env.EXPORT_DIR || '/data/export/';
+var dirtyTilesListFile = process.env.LIST_FILE || path.join(exportDir, 'tiles.txt');
 
 function detectDirtyTiles(viewName, timestamp, minZoomLevel, maxZoomLevel) {
     return db.query(
@@ -54,7 +59,18 @@ function recentDirtyViews() {
 }
 
 recentDirtyViews().then(function(dirtyViews) {
-    console.log(JSON.stringify(dirtyViews, null, 2));
+    var tileList = dirtyViews.map(function(view) {
+        return view.dirtyTiles.map(function(tile) {
+            return tile.z + '/' + tile.x + '/' + tile.y;
+        });
+    }).map(_.flatten).join('\n');
+
+    console.log('Write dirty tiles to ' + dirtyTilesListFile);
+    console.log(tileList);
+
+    fs.writeFileSync(dirtyTilesListFile, tileList, {
+        encoding: 'utf8'
+    });
 }).catch(function(err) {
     console.error(err);
 });
