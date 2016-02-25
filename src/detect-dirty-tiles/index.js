@@ -44,18 +44,17 @@ function recentDirtyViews() {
                 detectDirtyTiles('road_label_z12toz13', timestamp, 12, 13),
                 detectDirtyTiles('road_label_z14', timestamp, 14, 14),
                 detectDirtyTiles('waterway_label_z8toz12', timestamp, 8, 12),
-                detectDirtyTiles('waterway_label_z13toz14', timestamp, 13, 14),
-                detectDirtyTiles('housenum_label', timestamp, 14, 14)
+                detectDirtyTiles('waterway_label_z13toz14', timestamp, 13, 14)
             ]);
         }).then(_.flatten);
 }
 
 recentDirtyViews().then(function(dirtyViews) {
-    var tileList = dirtyViews.map(function(view) {
-        return view.dirtyTiles.map(function(tile) {
-            return tile.z + '/' + tile.x + '/' + tile.y;
-        });
-    }).map(_.flatten).join('\n');
+    var tileList = _.flatten(
+        dirtyViews.map(function(view) { return view.dirtyTiles; })
+    ).map(function(tile) {
+        return tile.z + '/' + tile.x + '/' + tile.y;
+    }).join('\n');
 
     console.log('Write dirty tiles to ' + dirtyTilesListFile);
     console.log(tileList);
