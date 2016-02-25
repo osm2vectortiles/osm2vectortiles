@@ -15,6 +15,7 @@ function main() {
     if [ "$(ls -A $IMPORT_DATA_DIR/*.pbf 2> /dev/null)" ]; then
         local pbf_file
         for pbf_file in "$IMPORT_DATA_DIR"/*.pbf; do
+            drop_views
             import_pbf "$pbf_file"
             break
         done

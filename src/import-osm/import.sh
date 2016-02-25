@@ -66,6 +66,10 @@ function update_timestamp() {
 	exec_sql "UPDATE osm_water_polygons_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
 }
 
+function drop_views() {
+	exec_sql "DROP VIEW IF EXISTS poi_label_z14"
+}
+
 function add_timestamp_column() {
 	exec_sql "ALTER TABLE osm_admin ADD COLUMN timestamp timestamp"
 	exec_sql "ALTER TABLE osm_aero_lines ADD COLUMN timestamp timestamp"
@@ -117,7 +121,8 @@ function import_pbf_diffs() {
         -mapping "$MAPPING_YAML" \
         -cachedir "$IMPOSM_CACHE_DIR" \
         -diffdir "$IMPORT_DATA_DIR" \
-        -dbschema-import "${DB_SCHEMA} $latest_diffs_file"
+        -dbschema-import "${DB_SCHEMA}" \
+        "$latest_diffs_file"
 
     local timestamp=$(extract_timestamp "$latest_diffs_file")
     echo "Set $timestamp for latest updates from $latest_diffs_file"
