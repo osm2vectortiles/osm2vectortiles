@@ -1,0 +1,23 @@
+system:
+  name: barrier_line
+  classes:
+    cliff:
+    - cliff
+    fence:
+    - city_wall
+    - fence
+    - retaining_wall
+    - wall
+    - wire_fence
+    - yes
+    - embankment
+    - cable_barrier
+    - jersey_barrier
+    gate:
+    - gate
+    - entrance
+    - spikes
+    - bollard
+    - lift_gate
+    - kissing_gate
+    - stile

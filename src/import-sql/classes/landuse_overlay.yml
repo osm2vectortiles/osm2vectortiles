@@ -1,0 +1,8 @@
+system:
+  name: landuse_overlay
+  classes:
+    wetland:
+    - wetland
+    - marsh
+    - swamp
+    - bog
