@@ -17,14 +17,19 @@ RUN apt-get purge -y --auto-remove \
     g++ gcc libc6-dev make git \
     && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+        postgresql-client \
+        osmctools \
+    && rm -rf /var/lib/apt/lists/*
+
 VOLUME /data/import /data/cache
 ENV IMPORT_DATA_DIR=/data/import \
     IMPOSM_CACHE_DIR=/data/cache \
-    MAPPING_YAML=/usr/src/app/mapping.yml \
-    IMPOSM_BIN=imposm3
+    MAPPING_YAML=/usr/src/app/mapping.yml
 
 RUN mkdir -p /usr/src/app
 COPY . /usr/src/app/
 WORKDIR /usr/src/app
 
-CMD ["./import.sh"]
+CMD ["./import-pbf.sh"]
