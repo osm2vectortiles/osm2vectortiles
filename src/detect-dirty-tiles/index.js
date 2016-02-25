@@ -29,6 +29,10 @@ function recentDirtyViews() {
         .then(function(timestamp) {
             return q.all([
                 detectDirtyTiles('poi_label_z14', timestamp, 14, 14),
+                detectDirtyTiles('road_label_z8toz10', timestamp, 8, 10),
+                detectDirtyTiles('road_label_z11', timestamp, 11, 11),
+                detectDirtyTiles('road_label_z12toz13', timestamp, 12, 13),
+                detectDirtyTiles('road_label_z14', timestamp, 14, 14),
                 detectDirtyTiles('waterway_label_z8toz12', timestamp, 8, 12),
                 detectDirtyTiles('waterway_label_z13toz14', timestamp, 13, 14),
                 detectDirtyTiles('housenum_label', timestamp, 14, 14)

@@ -998,39 +998,20 @@ Layer:
                 PARTITION BY LabelGrid(geometry, 200 * !pixel_width!)
                 ORDER BY localrank_road(type) ASC, round(MercLength(geometry)) DESC
             ) AS localrank
-            FROM osm_roads
-            WHERE
-            geometry && !bbox! AND
-            (
-                (
-                  type IN ('motorway')
-                  AND ref <> ''
-                  AND z(!scale_denominator!) >= 8
-                )
-                OR
-                (
-                  type IN ('motorway_link', 'primary', 'primary_link', 'trunk',
-                           'trunk_link', 'secondary', 'secondary_link')
-                  AND (name <> '' OR ref <> '')
-                  AND z(!scale_denominator!) >= 11
-                )
-                OR
-                (
-                  type IN ('tertiary', 'tertiary_link', 'residential', 'unclassified',
-                      'living_street', 'pedestrian', 'construction', 'rail', 'monorail',
-                      'narrow_gauge', 'subway', 'tram')
-                  AND name <> ''
-                  AND z(!scale_denominator!) >= 12
-                )
-                OR
-                (
-                  type IN ('service', 'track', 'driveway', 'path',
-                           'cycleway', 'ski', 'steps', 'bridleway', 'footway', 'funicular',
-                           'light_rail', 'preserved')
-                  AND name <> ''
-                  AND z(!scale_denominator!) >= 14
-                )
-          )     
+            FROM (
+              SELECT * FROM road_label_z8toz10
+              WHERE z(!scale_denominator!) >= 8
+              UNION ALL
+              SELECT * FROM road_label_z11
+              WHERE z(!scale_denominator!) >= 11
+              UNION ALL
+              SELECT * FROM road_label_z12toz13
+              WHERE z(!scale_denominator!) >= 12
+              UNION ALL
+              SELECT * FROM road_label_z14
+              WHERE z(!scale_denominator!) >= 14
+            ) AS road_label
+            WHERE geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
