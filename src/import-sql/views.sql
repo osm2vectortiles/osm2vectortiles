@@ -1,3 +1,27 @@
+CREATE OR REPLACE VIEW water_label_z10 AS
+    SELECT *
+    FROM osm_water_polygons
+    WHERE area >= 100000000;
+
+CREATE OR REPLACE VIEW water_label_z11 AS
+    SELECT *
+    FROM osm_water_polygons
+    WHERE area >= 40000000;
+
+CREATE OR REPLACE VIEW water_label_z12 AS
+    SELECT *
+    FROM osm_water_polygons
+    WHERE area >= 20000000;
+
+CREATE OR REPLACE VIEW water_label_z13 AS
+    SELECT *
+    FROM osm_water_polygons
+    WHERE area >= 10000000;
+
+CREATE OR REPLACE VIEW water_label_z14 AS
+    SELECT *
+    FROM osm_water_polygons;
+
 CREATE OR REPLACE VIEW poi_label_z14 AS (
     SELECT * FROM (
 		SELECT geometry, osm_id, ref, website,
@@ -51,7 +75,7 @@ CREATE OR REPLACE VIEW waterway_label_z13toz14 AS
     FROM osm_water_lines
     WHERE type IN ('river', 'canal', 'stream', 'stream_intermittent');
 
-CREATE OR REPLACE VIEW housenum_label AS
+CREATE OR REPLACE VIEW housenum_label_z14 AS
     SELECT osm_id, geometry, house_num, timestamp
     FROM osm_housenumbers_points
     UNION ALL

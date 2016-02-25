@@ -28,6 +28,11 @@ function recentDirtyViews() {
         .then(function(result) { return result.max; })
         .then(function(timestamp) {
             return q.all([
+                detectDirtyTiles('water_label_z10', timestamp, 10, 10),
+                detectDirtyTiles('water_label_z11', timestamp, 11, 11),
+                detectDirtyTiles('water_label_z12', timestamp, 12, 12),
+                detectDirtyTiles('water_label_z13', timestamp, 13, 13),
+                detectDirtyTiles('water_label_z14', timestamp, 14, 14),
                 detectDirtyTiles('poi_label_z14', timestamp, 14, 14),
                 detectDirtyTiles('road_label_z8toz10', timestamp, 8, 10),
                 detectDirtyTiles('road_label_z11', timestamp, 11, 11),
