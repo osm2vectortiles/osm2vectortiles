@@ -792,42 +792,35 @@ Layer:
         rank() OVER (PARTITION BY LabelGrid(geometry, 200 * !pixel_width!)
                      ORDER BY scalerank ASC NULLS LAST,
                               population DESC NULLS LAST
-        ) as localrank
-        FROM osm_places
-        WHERE geometry && !bbox! AND name <> ''
-        AND (
-          (
-            scalerank < 3 AND scalerank IS NOT NULL
-            AND z(!scale_denominator!) >= 4
-          )
-          OR (
-            scalerank < 8 AND scalerank IS NOT NULL
-            AND z(!scale_denominator!) >= 6
-          )
-          OR (
-            scalerank IS NOT NULL
-            AND z(!scale_denominator!) >= 7
-          )
-          OR (
-            type IN ('city', 'town')
-            AND z(!scale_denominator!) >= 8
-          )
-          OR (
-            type IN ('town', 'district')
-            AND z(!scale_denominator!) >= 9
-          )
-          OR (
-            type = 'village'
-            AND z(!scale_denominator!) >= 11
-          )
-          OR (
-            type IN ('hamlet', 'suburb','neighbourhood')
-            AND z(!scale_denominator!) >= 13
-          )
-          OR z(!scale_denominator!) >= 14
-        )
+        ) AS localrank
+        FROM (
+            SELECT * FROM place_label_z4toz5
+            WHERE z(!scale_denominator!) BETWEEN 4 AND 5
+            UNION ALL
+            SELECT * FROM place_label_z6
+            WHERE z(!scale_denominator!) = 6
+            UNION ALL
+            SELECT * FROM place_label_z7
+            WHERE z(!scale_denominator!) = 7
+            UNION ALL
+            SELECT * FROM place_label_z8
+            WHERE z(!scale_denominator!) = 8
+            UNION ALL
+            SELECT * FROM place_label_z9toz10
+            WHERE z(!scale_denominator!) BETWEEN 9 AND 10
+            UNION ALL
+            SELECT * FROM place_label_z11toz12
+            WHERE z(!scale_denominator!) BETWEEN 11 AND 12
+            UNION ALL
+            SELECT * FROM place_label_z13
+            WHERE z(!scale_denominator!) = 13
+            UNION ALL
+            SELECT * FROM place_label_z14
+            WHERE z(!scale_denominator!) = 14
+          ) AS place_label
+        WHERE geometry && !bbox!
         ORDER BY population DESC NULLS LAST
-        ) as data
+        ) AS data
       type: postgis
       user: osm
     description: ''
@@ -888,6 +881,7 @@ Layer:
           SELECT * FROM water_label_z14
           WHERE z(!scale_denominator!) >= 14
         ) AS water_label
+        WHERE geometry && !bbox!
       ) AS data
       type: postgis
       user: osm
