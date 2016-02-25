@@ -59,6 +59,8 @@ update-scaleranks:
   - postgis:db
 detect-dirty-tiles:
   image: "osm2vectortiles/detect-dirty-tiles"
+  volumes:
+   - ./export:/data/export
   links:
   - postgis:db
 enqueue-jobs:
