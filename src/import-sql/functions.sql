@@ -91,9 +91,9 @@ CREATE OR REPLACE FUNCTION detect_dirty_tiles(
     view_name VARCHAR,
     ts timestamp
 ) RETURNS TABLE (
+    z INTEGER,
     x INTEGER,
-    y INTEGER,
-    z INTEGER
+    y INTEGER
 ) AS $$
 BEGIN
     RETURN QUERY EXECUTE 'WITH RECURSIVE dirty_tiles(x, y, z, e) AS ('

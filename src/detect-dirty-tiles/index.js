@@ -1,11 +1,40 @@
 var _ = require('underscore');
-var updatedGeometries = require('./updated-geometries.js');
+var q = require('q');
+var pgp = require('pg-promise')();
 
-updatedGeometries.getUpdatedGeometries().then(function(geometries) {
-    var statistics = _.countBy(geometries, function(geom) {
-        return geom.table;
+var db = pgp({
+    host: process.env.DB_PORT_5432_TCP_ADDR,
+    port: 5432,
+    database: 'osm',
+    user: 'osm',
+    password: 'osm'
+});
+
+function detectDirtyTiles(viewName, timestamp, minZoomLevel, maxZoomLevel) {
+    return db.query(
+        'SELECT * FROM detect_dirty_tiles($1, $2) WHERE z BETWEEN $3 AND $4',
+        [viewName, timestamp, minZoomLevel, maxZoomLevel]
+    ).then(function(rows) {
+        return {
+            viewName: viewName,
+            dirtyTiles: rows
+        };
     });
-    console.log(statistics);
+}
+
+function recentDirtyViews() {
+    return db
+        .one('SELECT MAX(timestamp) FROM osm_timestamps')
+        .then(function(result) { return result.max; })
+        .then(function(timestamp) {
+            return q.all([
+                detectDirtyTiles('poi_label_z14', timestamp, 14, 14)
+            ]);
+        }).then(_.flatten);
+}
+
+recentDirtyViews().then(function(dirtyViews) {
+    console.log(JSON.stringify(dirtyViews, null, 2));
 }).catch(function(err) {
     console.error(err);
 });

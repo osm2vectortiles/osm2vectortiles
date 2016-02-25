@@ -7,12 +7,11 @@
     "start": "node index.js"
   },
   "author": "manuelroth",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "q": "^1.4.1",
     "underscore": "^1.8.3",
-    "pg-promise": "^3.2.2",
-    "tile-cover": "^3.0.1"
+    "pg-promise": "^3.2.2"
   },
   "devDependencies": {
     "eslint": "^2.2.0",
