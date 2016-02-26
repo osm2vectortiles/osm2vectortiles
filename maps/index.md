@@ -12,7 +12,7 @@ published: true
 	<button id="vector-osm-bright" class="map-button">OSM Bright</button
 	><button id="vector-osm-basic" class="map-button">Basic Map</button>
 </div>
-</br>
+<br />
 <div id="vector-style-reference"></div>
 
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.14.3/mapbox-gl.js'></script>
@@ -65,7 +65,7 @@ published: true
 	><button id="woodcut" class="map-button">Woodcut</button><button id="pirates" class="map-button">Pirates</button
 	><button id="wheatpaste" class="map-button">Wheatpaste</button>
 </div>
-</br>
+<br />
 <div id="raster-style-reference"></div>
 
 <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
