@@ -357,6 +357,128 @@ tables:
     - name: name_zh
       key: name:zh
       type: string
+    filters:
+      exclude_tags:
+      - ["area", "yes"]
+    mappings:
+      railway:
+        mapping:
+          railway:
+          - rail
+          - tram
+          - light_rail
+          - subway
+          - narrow_gauge
+          - preserved
+          - funicular
+          - monorail
+          - disused
+          service:
+          - yard
+          - driveway
+          - alley
+          - spur
+          - siding
+          - crossover
+          - parking_aisle
+      roads:
+        mapping:
+          highway:
+          - motorway
+          - motorway_link
+          - trunk
+          - trunk_link
+          - primary
+          - primary_link
+          - secondary
+          - secondary_link
+          - tertiary
+          - tertiary_link
+          - road
+          - path
+          - track
+          - service
+          - footway
+          - bridleway
+          - cycleway
+          - steps
+          - pedestrian
+          - living_street
+          - unclassified
+          - residential
+          - raceway
+          access:
+          - private
+          aerialway:
+          - chair_lift
+          - mixed_lift
+          - drag_lift
+          - platter
+          - t-bar
+          - magic_carpet
+          - gondola
+          - cable_car
+          - rope_tow
+          - zip_line
+          - j-bar
+          - canopy
+          golf:
+          - hole
+  road_polygons:
+    type: polygon
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: type
+      type: mapping_value
+    - key: oneway
+      name: oneway
+      type: direction
+    - key: ref
+      name: ref
+      type: string
+    - key: layer
+      name: layer
+      type: integer
+    - key: layer
+      name: z_order
+      type: wayzorder
+    - key: tunnel
+      name: is_tunnel
+      type: bool
+    - key: bridge
+      name: is_bridge
+      type: bool
+    - key: service
+      name: service
+      type: string
+    - key: name
+      name: name
+      type: string
+    - name: name_int
+      key: int_name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
+    filters:
     mappings:
       railway:
         mapping:
