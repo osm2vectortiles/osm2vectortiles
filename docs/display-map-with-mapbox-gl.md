@@ -58,7 +58,7 @@ The `bright-v8.json` style is loaded from the local directory.
 
 Because we use the local sprites and fonts we don't need a Mapbox API key.
 
-```html
+{% highlight html %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,7 +89,7 @@ map.addControl(new mapboxgl.Navigation());
 </script>
 </body>
 </html>
-```
+{% endhighlight %}
 
 ## Serve the Map
 
