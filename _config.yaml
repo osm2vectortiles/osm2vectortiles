@@ -1,6 +1,6 @@
 name: OSM2VectorTiles
 permalink: pretty
-markdown: redcarpet
+markdown: kramdown
 redcarpet:
   extensions: ["fenced_code_blocks", "tables"]
 highlighter: pygments
