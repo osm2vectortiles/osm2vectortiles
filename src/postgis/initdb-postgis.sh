@@ -10,14 +10,19 @@ function create_template_postgis() {
 	EOSQL
 }
 
+function execute_sql_into_template() {
+    local sql_file="$1"
+    PGUSER="$POSTGRES_USER" psql --dbname="template_postgis" -f "$sql_file"
+}
+
 function install_cartodb() {
     echo "Loading CartoDB XYZ functions into template_postgis"
-    PGUSER="$POSTGRES_USER" psql --dbname="template_postgis" -f "$CARTODB_DIR/CDB_XYZ.sql"
+    execute_sql_into_template "$CARTODB_DIR/CDB_XYZ.sql"
 }
 
 function install_vt_util() {
     echo "Loading vt-util functions into template_postgis"
-    PGUSER="$POSTGRES_USER" psql --dbname="template_postgis" -f "$VT_UTIL_DIR/postgis-vt-util.sql"
+    execute_sql_into_template "$VT_UTIL_DIR/postgis-vt-util.sql"
 }
 
 function create_postgis_extensions() {
