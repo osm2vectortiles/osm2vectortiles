@@ -67,6 +67,7 @@ function update_metadata() {
 }
 
 function create_country_extracts() {
+	create_extract "puerto_rico.mbtiles" "-68.1976318" "17.6701939" "-65.088501" "18.7347042"
 	create_extract "afghanistan.mbtiles" "60.403889" "29.288333" "74.989862" "38.5899217"
 	create_extract "albania.mbtiles" "19.0246095" "39.5448625" "21.1574335" "42.7611669"
 	create_extract "algeria.mbtiles" "-8.7689089" "18.868147" "12.097337" "37.3962055"
