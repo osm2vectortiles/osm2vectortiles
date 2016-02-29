@@ -113,19 +113,16 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry, type, type as class
-          FROM osm_water_lines
-          WHERE (
-            geometry && !bbox! AND (
-              (
-                type IN ('river', 'canal')
-                AND z(!scale_denominator!) >= 8
-              )
-              OR (
-                type IN ('stream', 'stream_intermittent')
-                AND z(!scale_denominator!) >= 13
-              )
-            )
-          )
+          FROM (
+            SELECT *
+            FROM waterway_z8toz12
+            WHERE z(!scale_denominator!) BETWEEN 8 AND 12
+            UNION ALL
+            SELECT *
+            FROM waterway_z13toz14
+            WHERE z(!scale_denominator!) BETWEEN 13 AND 14
+          ) AS waterway
+          WHERE geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
