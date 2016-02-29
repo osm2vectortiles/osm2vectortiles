@@ -33,6 +33,8 @@ function recentDirtyViews() {
         .then(function(result) { return result.max; })
         .then(function(timestamp) {
             return q.all([
+                detectDirtyTiles('water_z6toz12', timestamp, 6, 12),
+                detectDirtyTiles('water_z13toz14', timestamp, 13, 14),
                 detectDirtyTiles('aeroway_z12toz14', timestamp, 12, 14),
                 detectDirtyTiles('barrier_line_z14', timestamp, 14, 14),
                 detectDirtyTiles('landuse_overlay_z7', timestamp, 7, 7),

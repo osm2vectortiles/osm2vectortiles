@@ -158,11 +158,11 @@ Layer:
           UNION ALL
           SELECT 0 AS osm_id, way AS geometry FROM osm_ocean_polygons
           WHERE way && !bbox!
-            AND z(!scale_denominator!) >= 1
+            AND z(!scale_denominator!) BETWEEN 1 AND 14
           UNION ALL
           SELECT 0 AS osm_id, geom AS geometry FROM ne_110m_lakes
           WHERE geom && !bbox!
-            AND z(!scale_denominator!) between 0 AND 1
+            AND z(!scale_denominator!) BETWEEN 0 AND 1
           UNION ALL
           SELECT 0 AS osm_id, geom AS geometry FROM ne_50m_lakes
           WHERE geom && !bbox!
@@ -172,13 +172,13 @@ Layer:
           WHERE geom && !bbox!
             AND z(!scale_denominator!) BETWEEN 4 AND 5
           UNION ALL
-          SELECT osm_id, geometry FROM osm_water_polygons_gen1
+          SELECT osm_id, geometry FROM water_z6toz12
           WHERE geometry && !bbox!
           AND z(!scale_denominator!) BETWEEN 6 AND 12
           UNION ALL
-          SELECT osm_id, geometry FROM osm_water_polygons
+          SELECT osm_id, geometry FROM water_z13toz14
           WHERE geometry && !bbox!
-          AND z(!scale_denominator!) > 12
+          AND z(!scale_denominator!) BETWEEN 13 AND 14
         ) AS data
       type: postgis
       user: osm
