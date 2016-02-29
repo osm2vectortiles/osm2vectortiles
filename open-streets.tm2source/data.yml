@@ -275,15 +275,14 @@ Layer:
           SELECT osm_id, geometry
           FROM (
             SELECT osm_id, geometry
-            FROM osm_buildings_gen0
-            WHERE geometry && !bbox!
-              AND z(!scale_denominator!) >= 13
+            FROM building_z13
+            WHERE z(!scale_denominator!) = 13
             UNION ALL
             SELECT osm_id, geometry
-            FROM osm_buildings
-            WHERE geometry && !bbox!
-              AND z(!scale_denominator!) >= 14
+            FROM building_z14
+            WHERE z(!scale_denominator!) = 14
           ) AS building
+          WHERE geometry && !bbox!
           ORDER BY ST_YMin(ST_Envelope(geometry)) DESC
         ) AS data
       type: postgis
@@ -329,6 +328,7 @@ Layer:
             SELECT osm_id, geometry, type FROM landuse_overlay_z13toz14
             WHERE z(!scale_denominator!) BETWEEN 13 AND 14
           ) AS landuse_overlay
+          WHERE geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
