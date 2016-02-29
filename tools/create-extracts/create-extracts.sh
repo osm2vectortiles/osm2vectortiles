@@ -7,6 +7,7 @@ readonly WORLD_MBTILES=${WORLD_MBTILES:-"world.mbtiles"}
 readonly EXTRACT_DIR=$(dirname "$WORLD_MBTILES")
 readonly MIN_ZOOM=${MIN_ZOOM:-0}
 readonly MAX_ZOOM=${MAX_ZOOM:-14}
+readonly VERSION=${VERSION:-1}
 readonly GLOBAL_BBOX="-180, -85.0511, 180, 85.0511"
 
 function create_extract() {
@@ -56,8 +57,11 @@ function update_metadata() {
     local attribution="&copy; OpenStreetMap contributors"
 
     insert_metadata_entry "$extract_file" "attribution" "$attribution"
-    update_metadata_entry "$extract_file" "name" "Open Streets v1.0"
-    update_metadata_entry "$extract_file" "description" "Open Streets v1.0"
+    insert_metadata_entry "$extract_file" "version" "$VERSION"
+    update_metadata_entry "$extract_file" "minzoom" "$MIN_ZOOM"
+    update_metadata_entry "$extract_file" "maxzoom" "$MAX_ZOOM"
+    update_metadata_entry "$extract_file" "name" "Open Streets"
+    update_metadata_entry "$extract_file" "description" "Extract from osm2vectortiles.org"
     update_metadata_entry "$extract_file" "bounds" "$extract_bounds"
     update_metadata_entry "$extract_file" "center" "$extract_center"
 }
