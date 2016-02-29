@@ -517,11 +517,9 @@ Layer:
           WHERE z(!scale_denominator!) BETWEEN 4 AND 6
             AND geom && !bbox!
           UNION ALL
-          SELECT osm_id, geometry AS geom, admin_level, 0 AS disputed, maritime
-          FROM osm_admin
-          WHERE maritime = 1
-            AND admin_level = 2
-            AND z(!scale_denominator!) >= 2
+          SELECT osm_id, geometry, admin_level, 0 AS disputed, maritime
+          FROM admin_z2to6
+          WHERE z(!scale_denominator!) BETWEEN 2 AND 6
             AND geometry && !bbox!
           UNION ALL
           SELECT 0 AS osm_id, geom, 4 AS admin_level, 0 AS disputed, 0 AS maritime
@@ -548,11 +546,9 @@ Layer:
             AND scalerank BETWEEN 7 AND 9
             AND geom && !bbox!
           UNION ALL
-          SELECT osm_id, geometry AS geom, admin_level, 0 AS disputed, maritime
-          FROM osm_admin
-          WHERE maritime = 0
-            AND ( admin_level = 2 OR admin_level = 4 )
-            AND z(!scale_denominator!) >= 7
+          SELECT osm_id, geometry, admin_level, 0 AS disputed, maritime
+          FROM admin_z7to14
+          WHERE z(!scale_denominator!) BETWEEN 7 AND 14
             AND geometry && !bbox!
           UNION ALL
           SELECT 0 AS osm_id, geom, 2 AS admin_level, 1 AS disputed, 0 AS maritime
