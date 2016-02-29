@@ -15,6 +15,7 @@ RUN npm install -g \
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         sqlite3 \
+        bc \
     && rm -rf /var/lib/apt/lists/
 
 VOLUME /data/export
