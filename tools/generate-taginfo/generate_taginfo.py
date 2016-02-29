@@ -9,8 +9,8 @@ Options:
   --version         Show version.
 """
 from collections import namedtuple, defaultdict
-
 from docopt import docopt
+import sys
 import yaml
 import json
 
@@ -66,7 +66,7 @@ def generate_taginfo(mapping_config):
            "contact_email": "me@lukasmartinelli.ch"
         },
         "tags": list(generate_tags_json(mapping_config))
-    })
+    }, indent=4, sort_keys=True)
 
 
 
