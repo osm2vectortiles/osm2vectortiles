@@ -1,4 +1,4 @@
-FROM node:0.10
+FROM node:4.3.1
 MAINTAINER Lukas Martinelli <me@lukasmartinelli.ch>
 
 RUN mkdir -p /usr/src/app
@@ -15,7 +15,7 @@ RUN npm install -g tl@0.4.0 \
 RUN apt-get update && apt-get install -y --no-install-recommends \
         python \
         python-pip \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/
 
 VOLUME /data/tm2source /data/export
 ENV SOURCE_PROJECT_DIR=/data/tm2source EXPORT_DIR=/data/export TILELIVE_BIN=tl

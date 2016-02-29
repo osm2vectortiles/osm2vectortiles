@@ -111,3 +111,7 @@ compare-visual:
    - "4001:3001"
   links:
    - serve:tileserver
+create-extracts:
+  image: "osm2vectortiles/create-extracts"
+  volumes:
+   - ./export:/data/export

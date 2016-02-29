@@ -1,11 +1,11 @@
 .PHONY: all
 
-all: postgis export import-osm import-external import-sql update-scaleranks
+all: postgis export-mbtiles import-osm import-external import-sql update-scaleranks create-extracts
 
 postgis:
 	docker build -t osm2vectortiles/postgis src/postgis
 
-export:
+export-mbtiles:
 	docker build -t osm2vectortiles/export src/export
 
 import-osm:
@@ -19,3 +19,6 @@ import-sql:
 
 update-scaleranks:
 	docker build -t osm2vectortiles/update-scaleranks src/update-scaleranks
+
+create-extracts:
+	docker build -t osm2vectortiles/create-extracts tools/create-extracts
