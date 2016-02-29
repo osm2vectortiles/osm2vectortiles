@@ -41,4 +41,9 @@ The project is under the MIT license while the data downloads use the [Open Data
 
 ## Contribute
 
-The purpose of this project is to make OSM data more accessible to anybody. Any feedback or improvement is greatly appreciated. So feel free to submit a pull request or file a bug.
+The purpose of this project is to make OSM data more accessible to anybody. Any feedback or improvement is greatly appreciated. So feel free to submit a pull request or file a bug. You can also post feedback as GitHub issue.
+
+You can help us to improve the documentation by editing the Markdown files and creating a pull request.
+The documentation is based on GitHub pages and is in the `gh-pages` branch.
+
+https://github.com/osm2vectortiles/osm2vectortiles/tree/gh-pages/docs
