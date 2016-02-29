@@ -67,6 +67,7 @@ system:
     - public_building
     bus:
     - bus_stop
+    - bus_station
     bicycle:
     - bicycle
     - bicycle_rental
@@ -77,6 +78,7 @@ system:
     car:
     - car
     - car_repair
+    - taxi
     camera:
     - video
     - electronics

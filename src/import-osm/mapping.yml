@@ -625,6 +625,8 @@ tables:
       - waste_basket
       - bicycle_rental
       - bbq
+      - taxi
+      - bus_station
       leisure:
       - park
       - playground
@@ -965,6 +967,8 @@ tables:
       - waste_basket
       - bicycle_rental
       - bbq
+      - taxi
+      - bus_station
       leisure:
       - park
       - playground
