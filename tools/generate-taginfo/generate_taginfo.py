@@ -61,7 +61,7 @@ def generate_taginfo(mapping_config):
            "description": "Free Vector Tiles from OpenStreetMap",
            "project_url": "http://osm2vectortiles.org/",
            "doc_url": "http://osm2vectortiles.org/docs/",
-           "icon_url": "http://osm2vectortiles.org/img/osm2vectortiles-logo-small-white.png",
+           "icon_url": "http://osm2vectortiles.org/favicon.ico",
            "contact_name": "Lukas Martinelli",
            "contact_email": "me@lukasmartinelli.ch"
         },
