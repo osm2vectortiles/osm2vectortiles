@@ -1,7 +1,41 @@
+CREATE OR REPLACE VIEW landuse_overlay_z7 AS
+    SELECT *
+    FROM osm_landusages_gen0
+    WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
+      AND st_area(geometry) > 20000000;
+
+CREATE OR REPLACE VIEW landuse_overlay_z8 AS
+    SELECT *
+    FROM osm_landusages_gen0
+    WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
+      AND st_area(geometry) > 6000000;
+
+CREATE OR REPLACE VIEW landuse_overlay_z9 AS
+    SELECT *
+    FROM osm_landusages_gen0
+    WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
+      AND st_area(geometry) > 2000000;
+
+CREATE OR REPLACE VIEW landuse_overlay_z10 AS
+    SELECT *
+    FROM osm_landusages_gen0
+    WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
+      AND st_area(geometry) > 500000;
+
+CREATE OR REPLACE VIEW landuse_overlay_z11toz12 AS
+    SELECT *
+    FROM osm_landusages_gen1
+    WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat');
+
+CREATE OR REPLACE VIEW landuse_overlay_z13toz14 AS
+    SELECT *
+    FROM osm_landusages
+    WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat');
+
 CREATE OR REPLACE VIEW tunnel_z12toz14 AS
     SELECT *
     FROM osm_roads
-      WHERE is_tunnel;
+    WHERE is_tunnel;
 
 CREATE OR REPLACE VIEW road_z5to6 AS
     SELECT *
@@ -42,7 +76,7 @@ CREATE OR REPLACE VIEW road_z13 AS
 CREATE OR REPLACE VIEW road_z14 AS
     SELECT *
     FROM osm_roads
-      WHERE NOT is_bridge
+    WHERE NOT is_bridge
       AND NOT is_tunnel;
 
 CREATE OR REPLACE VIEW bridge_z12to14 AS
@@ -54,7 +88,7 @@ CREATE OR REPLACE VIEW admin_z2to6 AS
     SELECT *
     FROM osm_admin
     WHERE maritime = 1
-    AND admin_level = 2;
+      AND admin_level = 2;
 
 CREATE OR REPLACE VIEW admin_z7to14 AS
     SELECT *
