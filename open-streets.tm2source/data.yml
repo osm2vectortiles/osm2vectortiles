@@ -406,41 +406,30 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry, type, classify_road_railway(type, service) AS class, oneway
-          FROM osm_roads
-          WHERE geometry && !bbox! AND (
-              -- Do not show bridges and tunnels after z12
-              z(!scale_denominator!) < 12 OR (NOT is_bridge AND NOT is_tunnel)
-          )
-          AND (
-            (
-              type IN ('motorway', 'trunk')
-              AND z(!scale_denominator!) >= 5
-            )
-            OR (
-              type IN ('primary', 'motorway_link', 'primary_link', 'trunk_link')
-              AND z(!scale_denominator!) >= 7
-            )
-            OR (
-              type IN ('secondary', 'secondary_link')
-              AND z(!scale_denominator!) >= 8
-            )
-            OR (
-              type IN ('tertiary', 'teriary_link')
-              AND z(!scale_denominator!) >= 11
-            )
-            OR (
-              classify_road(type) IN ('major_rail', 'street')
-              AND z(!scale_denominator!) >= 12
-              AND NOT is_bridge AND NOT is_tunnel
-            )
-            OR (
-              classify_road(type) IN ('minor_rail', 'street_limited', 'service')
-              AND z(!scale_denominator!) >= 13
-            )
-            OR (
-              z(!scale_denominator!) >= 14
-            )
-          ) ORDER BY z_order ASC
+          FROM (
+            SELECT * FROM road_z5to6
+            WHERE z(!scale_denominator!) BETWEEN 5 AND 6
+            UNION ALL
+            SELECT * FROM road_z7
+            WHERE z(!scale_denominator!) = 7
+            UNION ALL
+            SELECT * FROM road_z8to10
+            WHERE z(!scale_denominator!) BETWEEN 8 AND 10
+            UNION ALL
+            SELECT * FROM road_z11
+            WHERE z(!scale_denominator!) = 11
+            UNION ALL
+            SELECT * FROM road_z12
+            WHERE z(!scale_denominator!) = 12
+            UNION ALL
+            SELECT * FROM road_z13
+            WHERE z(!scale_denominator!) = 13
+            UNION ALL
+            SELECT * FROM road_z14
+            WHERE z(!scale_denominator!) = 14
+          ) AS road
+          WHERE geometry && !bbox!
+          ORDER BY z_order ASC
         ) AS data
       type: postgis
       user: osm
@@ -469,10 +458,9 @@ Layer:
       table: |-
         ( 
           SELECT osm_id, geometry, classify_road(type) AS class, type, layer, oneway
-          FROM osm_roads
-          WHERE z(!scale_denominator!) >= 12 
-            AND geometry && !bbox! 
-            AND is_bridge
+          FROM bridge_z12to14
+          WHERE z(!scale_denominator!) BETWEEN 12 AND 14
+            AND geometry && !bbox!
           ORDER BY layer ASC
         ) AS data
       type: postgis
