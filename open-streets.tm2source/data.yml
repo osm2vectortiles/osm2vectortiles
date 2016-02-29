@@ -204,14 +204,9 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry, type
-          FROM osm_aero_lines
+          FROM aeroway_z12toz14
           WHERE geometry && !bbox!
-            AND z(!scale_denominator!) >= 12
-          UNION ALL
-          SELECT osm_id, geometry, type
-          FROM osm_aero_polygons
-          WHERE geometry && !bbox!
-            AND z(!scale_denominator!) >= 12
+            AND z(!scale_denominator!) BETWEEN 12 AND 14
         ) AS data
       type: postgis
       user: osm
