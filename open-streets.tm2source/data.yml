@@ -372,10 +372,9 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry, classify_road(type) AS class, type, layer, oneway
-          FROM osm_roads
-          WHERE z(!scale_denominator!) >= 10
+          FROM tunnel_z12toz14
+          WHERE z(!scale_denominator!) BETWEEN 12 AND 14
             AND geometry && !bbox!
-            AND is_tunnel
           ORDER BY layer ASC
         ) AS data
       type: postgis
