@@ -238,15 +238,9 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry, classify_barrier_line(type) AS class
-          FROM (
-            SELECT osm_id, geometry, type FROM osm_barrier_lines
-            WHERE geometry && !bbox!
-              AND z(!scale_denominator!) >= 14
-            UNION ALL
-            SELECT osm_id, geometry, type FROM osm_barrier_polygons
-            WHERE geometry && !bbox!
-              AND z(!scale_denominator!) >= 14
-          ) AS barrier_line
+          FROM barrier_line_z14
+          WHERE geometry && !bbox!
+            AND z(!scale_denominator!) = 14
         ) AS data
       type: postgis
       user: osm
