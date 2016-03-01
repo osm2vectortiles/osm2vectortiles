@@ -9,7 +9,7 @@ WORKDIR /opt/classify
 RUN pip install -r requirements.txt
 
 ENV SQL_FUNCTIONS_FILE=/usr/src/app/functions.sql \
-    SQL_VIEWS_FILE=/usr/src/app/views.sql \
+    SQL_VIEWS_DIR=/usr/src/app/views/ \
     PATH=$PATH:/opt/classify
 WORKDIR /usr/src/app
 COPY . /usr/src/app
