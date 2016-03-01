@@ -43,7 +43,7 @@ function recentDirtyViews() {
                 detectDirtyTiles('landuse_z12', timestamp, 12, 12),
                 detectDirtyTiles('landuse_z13toz14', timestamp, 13, 14),
                 detectDirtyTiles('waterway_z8toz12', timestamp, 8, 12),
-                detectDirtyTiles('waterway_z12toz14', timestamp, 12, 14),
+                detectDirtyTiles('waterway_z13toz14', timestamp, 13, 14),
                 detectDirtyTiles('water_z6toz12', timestamp, 6, 12),
                 detectDirtyTiles('water_z13toz14', timestamp, 13, 14),
                 detectDirtyTiles('aeroway_z12toz14', timestamp, 12, 14),
