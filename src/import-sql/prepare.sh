@@ -24,6 +24,7 @@ function main() {
     exec_sql_file "${SQL_VIEWS_DIR}aeroway.sql"
     exec_sql_file "${SQL_VIEWS_DIR}barrier_line.sql"
     exec_sql_file "${SQL_VIEWS_DIR}bridge.sql"
+    exec_sql_file "${SQL_VIEWS_DIR}building.sql"
     exec_sql_file "${SQL_VIEWS_DIR}housenum_label.sql"
     exec_sql_file "${SQL_VIEWS_DIR}landuse.sql"
     exec_sql_file "${SQL_VIEWS_DIR}landuse_overlay.sql"
