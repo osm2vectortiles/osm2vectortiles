@@ -21,9 +21,7 @@ function recentDirtyViews() {
     return db.task(function (t) {
             t.one('SELECT MAX(timestamp) FROM osm_timestamps')
                 .then(function (result) {
-                    return result.max;
-                })
-                .then(function (timestamp) {
+                    var timestamp = result.max;
                     return t.batch([
                         detectDirtyTiles('landuse_z5', timestamp, 5, 5),
                         detectDirtyTiles('landuse_z6', timestamp, 6, 6),
