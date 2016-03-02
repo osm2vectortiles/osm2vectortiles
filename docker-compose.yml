@@ -57,6 +57,12 @@ update-scaleranks:
   image: "osm2vectortiles/update-scaleranks"
   links:
   - postgis:db
+detect-dirty-tiles:
+  image: "osm2vectortiles/detect-dirty-tiles"
+  volumes:
+   - ./export:/data/export
+  links:
+  - postgis:db
 enqueue-jobs:
   build: ./tools/enqueue-jobs
   environment:
@@ -86,6 +92,14 @@ export:
     BBOX: "8.4375 46.07323062540838 9.84375 47.040182144806664"
     MIN_ZOOM: "8"
     MAX_ZOOM: "14"
+export-list:
+  image: "osm2vectortiles/export"
+  command: ./export-list.sh
+  volumes:
+   - ./export:/data/export
+   - ./open-streets.tm2source:/data/tm2source
+  links:
+   - pgbouncer:db
 serve:
   image: "klokantech/tileserver-mapnik"
   volumes:
