@@ -11,7 +11,8 @@
   "dependencies": {
     "q": "^1.4.1",
     "underscore": "^1.8.3",
-    "pg-promise": "^3.2.2"
+    "pg-promise": "^3.2.2",
+    "tile-cover": "^3.0.1"
   },
   "devDependencies": {
     "eslint": "^2.2.0",
