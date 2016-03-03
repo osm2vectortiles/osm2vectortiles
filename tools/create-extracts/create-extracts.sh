@@ -75,7 +75,6 @@ function create_country_extracts() {
 	create_extract "angola.mbtiles" "11.3609793" "-18.1389449" "24.18212" "-4.2888889" &
 	create_extract "anguilla.mbtiles" "-63.7391991" "17.9609378" "-62.6125448" "18.8951194" &
 	create_extract "argentina.mbtiles" "-73.6603073" "-55.285076" "-53.5374514" "-21.6811679" &
-    wait
 	create_extract "armenia.mbtiles" "43.3471395" "38.7404775" "46.7333087" "41.400712" &
 	create_extract "australia.mbtiles" "72.1460938" "-55.4228174" "168.3249543" "-9.090427" &
 	create_extract "austria.mbtiles" "9.4307487" "46.2722761" "17.260776" "49.1205264" &
@@ -93,7 +92,6 @@ function create_country_extracts() {
 	create_extract "bolivia.mbtiles" "-69.7450072" "-23.0005473" "-57.3529999" "-9.5689437" &
 	create_extract "bosnia_and_herzegovina.mbtiles" "15.6287433" "42.4543231" "19.7217086" "45.3764771" &
 	create_extract "botswana.mbtiles" "19.8986474" "-27.0059668" "29.475304" "-17.6781369" &
-    wait
 	create_extract "brazil.mbtiles" "-74.0830624" "-33.9689055" "-28.5341163" "5.3842873" &
 	create_extract "british_indian_ocean_territory.mbtiles" "70.936504" "-7.7454078" "72.8020157" "-4.9370659" &
 	create_extract "british_virgin_islands.mbtiles" "-65.055961" "18.0055311" "-63.9597293" "19.0503802" &
@@ -111,7 +109,6 @@ function create_country_extracts() {
 	create_extract "central_african_republic.mbtiles" "14.3155426" "2.1156553" "27.5540764" "11.101389" &
 	create_extract "chad.mbtiles" "13.37348" "7.34107" "24.1" "23.5975" &
 	create_extract "chile.mbtiles" "-109.7795788" "-56.8249999" "-65.9734088" "-17.3983997" &
-    wait
 	create_extract "china.mbtiles" "73.3997347" "14.8082548" "134.8754563" "53.6608154" &
 	create_extract "colombia.mbtiles" "-82.1000001" "-4.3316871" "-66.7511906" "16.2219145" &
 	create_extract "comoros.mbtiles" "42.925305" "-12.7209999" "44.8451922" "-11.0649999" &
@@ -129,7 +126,6 @@ function create_country_extracts() {
 	create_extract "dominica.mbtiles" "-61.7869183" "14.9074207" "-60.9329894" "15.8872222" &
 	create_extract "dominican_republic.mbtiles" "-72.1657709" "17.166222" "-68.0148509" "20.234528" &
 	create_extract "east_timor.mbtiles" "123.9415703" "-9.6642774" "127.6335392" "-7.9895458" &
-    wait
 	create_extract "ecuador.mbtiles" "-92.7828789" "-5.1159313" "-75.0925039" "2.4495499" &
 	create_extract "egypt.mbtiles" "24.606389" "21.8999975" "37.2153517" "31.9330854" &
 	create_extract "el_salvador.mbtiles" "-90.2602721" "12.9262117" "-87.4498059" "14.551667" &
@@ -147,7 +143,6 @@ function create_country_extracts() {
 	create_extract "gabon.mbtiles" "8.4002246" "-4.201226" "14.639444" "2.4182171" &
 	create_extract "georgia.mbtiles" "39.7844803" "40.9552922" "46.8365373" "43.6864294" &
 	create_extract "germany.mbtiles" "5.7663153" "47.1701114" "15.1419319" "55.199161" &
-    wait
 	create_extract "ghana.mbtiles" "-3.3607859" "4.4392525" "1.3732942" "11.2748562" &
 	create_extract "greece.mbtiles" "19.1477876" "34.6006096" "29.8296986" "41.8488862" &
 	create_extract "greenland.mbtiles" "-74.394555" "59.4209376" "-9.4914437" "83.8491212" &
@@ -174,7 +169,6 @@ function create_country_extracts() {
 	create_extract "jamaica.mbtiles" "-78.6782365" "16.4899443" "-75.6541142" "18.8256394" &
 	create_extract "japan.mbtiles" "122.6141754" "20.1145811" "154.305541" "45.8112046" &
 	create_extract "jersey.mbtiles" "-2.6591666" "48.7721667" "-1.7333332" "49.5605" &
-    wait
 	create_extract "jordan.mbtiles" "34.7844372" "29.083401" "39.4012981" "33.4751558" &
 	create_extract "kazakhstan.mbtiles" "46.392161" "40.4686476" "87.4156316" "55.5804002" &
 	create_extract "kenya.mbtiles" "33.8098987" "-4.9995203" "41.999578" "4.72" &
@@ -192,7 +186,6 @@ function create_country_extracts() {
 	create_extract "lithuania.mbtiles" "20.553783" "53.7967893" "26.9355198" "56.5504213" &
 	create_extract "luxemburg.mbtiles" "5.6357006" "49.3478539" "6.6312481" "50.2827712" &
 	create_extract "macedonia.mbtiles" "20.3532236" "40.7545226" "23.134051" "42.4735359" &
-    wait
 	create_extract "madagascar.mbtiles" "42.8729705" "-25.9054593" "50.7983545" "-11.6490749" &
 	create_extract "malawi.mbtiles" "32.5703616" "-17.2295216" "36.0185731" "-9.268326" &
 	create_extract "malaysia.mbtiles" "98.8372144" "0.753821" "119.5390876" "7.6111989" &
@@ -210,7 +203,6 @@ function create_country_extracts() {
 	create_extract "montenegro.mbtiles" "18.3334249" "41.6495999" "20.4638002" "43.658844" &
 	create_extract "montserrat.mbtiles" "-62.5506669" "16.375" "-61.8353817" "17.1152978" &
 	create_extract "morocco.mbtiles" "-17.4479238" "20.5144392" "-0.8984289" "36.1027875" &
-    wait
 	create_extract "mozambique.mbtiles" "30.1131759" "-27.0209426" "41.1545908" "-10.2252148" &
 	create_extract "myanmar.mbtiles" "92.0719423" "9.4375" "101.2700796" "28.647835" &
 	create_extract "namibia.mbtiles" "11.4280384" "-29.0694499" "25.3617476" "-16.8634854" &
@@ -228,7 +220,6 @@ function create_country_extracts() {
 	create_extract "pakistan.mbtiles" "60.766944" "23.4393916" "77.2203914" "37.184107" &
 	create_extract "palau.mbtiles" "130.9685462" "2.648" "134.8714735" "8.322" &
 	create_extract "palestine.mbtiles" "33.9689732" "31.1201289" "35.6734946" "32.6521479" &
-    wait
 	create_extract "panama.mbtiles" "-83.1517244" "6.9338679" "-77.0393778" "9.9701757" &
 	create_extract "papua_new_guinea.mbtiles" "140.7416553" "-11.9555738" "159.792724" "-0.4573575" &
 	create_extract "paraguay.mbtiles" "-62.7442035" "-27.7069156" "-54.1579999" "-19.1876463" &
@@ -246,7 +237,6 @@ function create_country_extracts() {
 	create_extract "rwanda.mbtiles" "28.7617546" "-2.9389803" "30.9990738" "-0.9474509" &
 	create_extract "sao_tome_and_principe.mbtiles" "6.160642" "-0.3135136" "7.7704783" "2.0257601" &
 	create_extract "sahrawi_arab_democratic_republic.mbtiles" "-15.1405655" "21.2370952" "-8.5663889" "27.7666834" &
-    wait
 	create_extract "saint_helena_scension_and_tristan_da_cunha.mbtiles" "-14.7226944" "-40.6699999" "-5.3234152" "-7.5899999" &
 	create_extract "saint_kitts_and_nevis.mbtiles" "-63.1511289" "16.795" "-62.2303518" "17.7158146" &
 	create_extract "saint_lucia.mbtiles" "-61.3853866" "13.408" "-60.5669362" "14.3725" &
@@ -264,7 +254,6 @@ function create_country_extracts() {
 	create_extract "slovenia.mbtiles" "13.2754696" "45.3214242" "16.6967702" "46.9766816" &
 	create_extract "solomon_islands.mbtiles" "155.2190556" "-13.3424297" "170.4964667" "-4.7108499" &
 	create_extract "somalia.mbtiles" "40.8864985" "-1.9031968" "51.7177696" "12.2889121" &
-    wait
 	create_extract "south_africa.mbtiles" "16.2335213" "-47.2788334" "38.3898954" "-22.02503" &
 	create_extract "south_georgia_and_the_south_sandwich_islands.mbtiles" "-42.2349052" "-59.7839999" "-25.7468302" "-53.3531685" &
 	create_extract "south_korea.mbtiles" "124.254847" "32.77788" "132.2483256" "38.7234602" &
@@ -282,7 +271,6 @@ function create_country_extracts() {
 	create_extract "tanzania.mbtiles" "29.2269773" "-11.8612539" "40.7584071" "-0.8820299" &
 	create_extract "thailand.mbtiles" "97.2438072" "5.512851" "105.7370925" "20.5648337" &
 	create_extract "the_bahamas.mbtiles" "-80.800194" "20.6059846" "-72.347752" "27.5734551" &
-    wait
 	create_extract "the_gambia.mbtiles" "-17.1288253" "12.961" "-13.6977779" "13.9253137" &
 	create_extract "the_netherlands.mbtiles" "-70.3695875" "11.677" "7.3274985" "53.8253321" &
 	create_extract "togo.mbtiles" "-0.2439718" "5.826547" "1.9025" "11.2395355" &
@@ -300,7 +288,6 @@ function create_country_extracts() {
 	create_extract "united_arab_emirates.mbtiles" "51.3160714" "22.5316214" "56.7024458" "26.2517219" &
 	create_extract "united_kingdom.mbtiles" "-14.1155169" "49.574" "2.1919117" "61.161" &
 	create_extract "united_states_of_america.mbtiles" "-180.0999999" "-14.8608357" "180.1" "71.7048217" &
-    wait
 	create_extract "uruguay.mbtiles" "-58.5948437" "-35.8847311" "-52.9755832" "-29.9853439" &
 	create_extract "uzbekistan.mbtiles" "55.8985781" "37.0772144" "73.2397362" "45.690118" &
 	create_extract "vanuatu.mbtiles" "166.2355255" "-20.5627424" "170.549982" "-12.7713776" &
@@ -309,7 +296,6 @@ function create_country_extracts() {
 	create_extract "vietnam.mbtiles" "102.04441" "8.0790665" "114.4341924" "23.493395" &
 	create_extract "yemen.mbtiles" "41.50825" "11.8084802" "54.8389375" "19.1" &
 	create_extract "zambales.mbtiles" "117.411894" "14.5033824" "120.549421" "15.958218" &
-    wait
 	create_extract "zambia.mbtiles" "21.896389" "-18.1766964" "33.8025" "-8.1712821" &
 	create_extract "zimbabwe.mbtiles" "25.1373" "-22.5241095" "33.1627122" "-15.5097038" &
     wait
