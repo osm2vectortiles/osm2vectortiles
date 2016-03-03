@@ -19,7 +19,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/
 
 VOLUME /data/export
-ENV WORLD_MBTILES=/data/export/world.mbtiles
+ENV WORLD_MBTILES=/data/export/world.mbtiles \
+    PATCH_MBTILES=/data/export/world_z0-z5.mbtiles
 
 COPY . /usr/src/app/
 CMD ["./create-extracts.sh"]

@@ -4,11 +4,25 @@ set -o pipefail
 set -o nounset
 
 readonly WORLD_MBTILES=${WORLD_MBTILES:-"world.mbtiles"}
+readonly PATCH_MBTILES=${PATCH_MBTILES:-"world_z0-z5.mbtiles"}
 readonly EXTRACT_DIR=$(dirname "$WORLD_MBTILES")
 readonly MIN_ZOOM=${MIN_ZOOM:-0}
 readonly MAX_ZOOM=${MAX_ZOOM:-14}
 readonly VERSION=${VERSION:-1}
 readonly GLOBAL_BBOX="-180, -85.0511, 180, 85.0511"
+
+function patch_mbtiles() {
+	local mbtiles_source="$1"
+	local mbtiles_dest="$2"
+	echo "
+	PRAGMA journal_mode=PERSIST;
+	PRAGMA page_size=80000;
+	PRAGMA synchronous=OFF;
+	ATTACH DATABASE '$mbtiles_source' AS source;
+	REPLACE INTO map SELECT * FROM source.map;
+	REPLACE INTO images SELECT * FROM source.images;"\
+	| sqlite3 $mbtiles_dest
+}
 
 function create_extract() {
     local extract_file="$EXTRACT_DIR/$1"
@@ -32,6 +46,9 @@ function create_extract() {
 
     echo "Update metadata $extract_file"
     update_metadata "$extract_file" "$bounds" "$center"
+
+	echo "Patching upper zoom levels $extract_file"
+	patch_mbtiles "$PATCH_MBTILES" "$extract_file"
 }
 
 function update_metadata_entry() {
@@ -304,6 +321,10 @@ function create_country_extracts() {
 function main() {
 	if [ ! -f "$WORLD_MBTILES" ]; then
 		echo "$WORLD_MBTILES not found."
+		exit 403
+	fi
+	if [ ! -f "$PATCH_MBTILES" ]; then
+		echo "$PATCH_MBTILES not found for merging into extracts."
 		exit 403
 	fi
     create_country_extracts
