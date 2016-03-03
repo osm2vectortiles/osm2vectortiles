@@ -6,13 +6,12 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  - wget -nc -P "$HOME/cache" "https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf"
-  - mkdir -p "$TRAVIS_BUILD_DIR/import" && cp "$HOME/cache/zurich_switzerland.osm.pbf" "$TRAVIS_BUILD_DIR/import"
+  - wget -nc -P "$HOME/cache" "http://download.geofabrik.de/europe/liechtenstein-160101.osm.pbf"
+  - mkdir -p "$TRAVIS_BUILD_DIR/import" && cp "$HOME/cache/liechtenstein-160101.osm.pbf" "$TRAVIS_BUILD_DIR/import"
   - docker-compose build
   - docker build -t osm2vectortiles/postgis src/postgis
   - docker build -t osm2vectortiles/export src/export
   - docker build -t osm2vectortiles/import-osm src/import-osm
-  - docker build -t osm2vectortiles/import-external src/import-external
   - docker build -t osm2vectortiles/import-sql src/import-sql
   - docker build -t osm2vectortiles/update-scaleranks src/update-scaleranks
 script:
@@ -27,6 +26,9 @@ script:
   - docker-compose run import-sql
   - docker-compose run update-scaleranks
   - docker-compose run export
+  - docker-compose run import-osm-diff
+  - docker-compose run detect-dirty-tiles
+  - docker-compose run export-list
   - docker-compose up -d serve
   - sleep 5
 cache:

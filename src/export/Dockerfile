@@ -7,6 +7,7 @@ WORKDIR /usr/src/app
 RUN npm install -g tl@0.4.0 \
           mapnik@3.4.9 \
           mbtiles@0.8.2 \
+          tilelive@5.12.1 \
           tilelive-tmsource@0.4.2 \
           tilelive-vector@3.5.1 \
           tilelive-bridge@2.2.1 \

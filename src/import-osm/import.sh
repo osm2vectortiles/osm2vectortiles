@@ -43,8 +43,20 @@ function extract_timestamp() {
     osmconvert "$file" --out-timestamp
 }
 
+function store_timestamp_history {
+    local timestamp="$1"
+    local table_name="osm_timestamps"
+
+    exec_sql "CREATE TABLE IF NOT EXISTS $table_name (timestamp timestamp)"
+    exec_sql "DELETE FROM $table_name WHERE timestamp='$timestamp'::timestamp"
+    exec_sql "INSERT INTO $table_name VALUES ('$timestamp'::timestamp)"
+}
+
 function update_timestamp() {
     local timestamp="$1"
+
+    store_timestamp_history "$timestamp"
+
 	exec_sql "UPDATE osm_admin SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_aero_lines SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_aero_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
@@ -64,6 +76,81 @@ function update_timestamp() {
 	exec_sql "UPDATE osm_water_lines SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_water_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_water_polygons_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
+}
+
+function drop_views() {
+    # landuse views
+    exec_sql "DROP VIEW IF EXISTS landuse_z5"
+    exec_sql "DROP VIEW IF EXISTS landuse_z6"
+    exec_sql "DROP VIEW IF EXISTS landuse_z7"
+    exec_sql "DROP VIEW IF EXISTS landuse_z8"
+    exec_sql "DROP VIEW IF EXISTS landuse_z9"
+    exec_sql "DROP VIEW IF EXISTS landuse_z10"
+    exec_sql "DROP VIEW IF EXISTS landuse_z11"
+    exec_sql "DROP VIEW IF EXISTS landuse_z12"
+    exec_sql "DROP VIEW IF EXISTS landuse_z13toz14"
+    # waterway views
+    exec_sql "DROP VIEW IF EXISTS waterway_z8toz12"
+    exec_sql "DROP VIEW IF EXISTS waterway_z13toz14"
+    # water views
+    exec_sql "DROP VIEW IF EXISTS water_z6toz12"
+    exec_sql "DROP VIEW IF EXISTS water_z13toz14"
+    # aeroway views
+    exec_sql "DROP VIEW IF EXISTS aeroway_z12toz14"
+    # barrier_line views
+    exec_sql "DROP VIEW IF EXISTS barrier_line_z14"
+    # building views
+    exec_sql "DROP VIEW IF EXISTS building_z13"
+    exec_sql "DROP VIEW IF EXISTS building_z14"
+    # landuse views
+    exec_sql "DROP VIEW IF EXISTS landuse_overlay_z7"
+    exec_sql "DROP VIEW IF EXISTS landuse_overlay_z8"
+    exec_sql "DROP VIEW IF EXISTS landuse_overlay_z9"
+    exec_sql "DROP VIEW IF EXISTS landuse_overlay_z10"
+    exec_sql "DROP VIEW IF EXISTS landuse_overlay_z11toz12"
+    exec_sql "DROP VIEW IF EXISTS landuse_overlay_z13toz14"
+    # tunnel views
+    exec_sql "DROP VIEW IF EXISTS tunnel_z12toz14"
+    # road views
+    exec_sql "DROP VIEW IF EXISTS road_z5to6"
+    exec_sql "DROP VIEW IF EXISTS road_z7"
+    exec_sql "DROP VIEW IF EXISTS road_z8to10"
+    exec_sql "DROP VIEW IF EXISTS road_z11"
+    exec_sql "DROP VIEW IF EXISTS road_z12"
+    exec_sql "DROP VIEW IF EXISTS road_z13"
+    exec_sql "DROP VIEW IF EXISTS road_z14"
+    # bridge views
+    exec_sql "DROP VIEW IF EXISTS bridge_z12to14"
+    # admin views
+    exec_sql "DROP VIEW IF EXISTS admin_z2to6"
+    exec_sql "DROP VIEW IF EXISTS admin_z7to14"
+    # place_label views
+    exec_sql "DROP VIEW IF EXISTS place_label_z4toz5"
+    exec_sql "DROP VIEW IF EXISTS place_label_z6"
+    exec_sql "DROP VIEW IF EXISTS place_label_z7"
+    exec_sql "DROP VIEW IF EXISTS place_label_z8"
+    exec_sql "DROP VIEW IF EXISTS place_label_z9toz10"
+    exec_sql "DROP VIEW IF EXISTS place_label_z11toz12"
+    exec_sql "DROP VIEW IF EXISTS place_label_z13"
+    exec_sql "DROP VIEW IF EXISTS place_label_z14"
+    # water_label views
+    exec_sql "DROP VIEW IF EXISTS water_label_z10"
+    exec_sql "DROP VIEW IF EXISTS water_label_z11"
+    exec_sql "DROP VIEW IF EXISTS water_label_z12"
+    exec_sql "DROP VIEW IF EXISTS water_label_z13"
+    exec_sql "DROP VIEW IF EXISTS water_label_z14"
+    # poi_label views
+    exec_sql "DROP VIEW IF EXISTS poi_label_z14"
+    # road_label views
+    exec_sql "DROP VIEW IF EXISTS road_label_z8toz10"
+    exec_sql "DROP VIEW IF EXISTS road_label_z11"
+    exec_sql "DROP VIEW IF EXISTS road_label_z12toz13"
+    exec_sql "DROP VIEW IF EXISTS road_label_z14"
+    # waterway_label views
+    exec_sql "DROP VIEW IF EXISTS waterway_label_z8toz12"
+    exec_sql "DROP VIEW IF EXISTS waterway_label_z13toz14"
+    # housenum_label views
+    exec_sql "DROP VIEW IF EXISTS housenum_label_z14"
 }
 
 function add_timestamp_column() {
@@ -117,7 +204,8 @@ function import_pbf_diffs() {
         -mapping "$MAPPING_YAML" \
         -cachedir "$IMPOSM_CACHE_DIR" \
         -diffdir "$IMPORT_DATA_DIR" \
-        -dbschema-import "${DB_SCHEMA} $latest_diffs_file"
+        -dbschema-import "${DB_SCHEMA}" \
+        "$latest_diffs_file"
 
     local timestamp=$(extract_timestamp "$latest_diffs_file")
     echo "Set $timestamp for latest updates from $latest_diffs_file"

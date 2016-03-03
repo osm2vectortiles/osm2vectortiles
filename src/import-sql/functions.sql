@@ -86,3 +86,32 @@ BEGIN
     RETURN REPLACE(INITCAP(class), '_', ' ');
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION detect_dirty_tiles(
+    view_name VARCHAR,
+    ts timestamp
+) RETURNS TABLE (
+    z INTEGER,
+    x INTEGER,
+    y INTEGER
+) AS $$
+BEGIN
+    RETURN QUERY EXECUTE 'WITH RECURSIVE dirty_tiles(x, y, z, e) AS ('
+        'SELECT 0, 0, 0, EXISTS('
+        'SELECT 1 FROM changed_poi_points '
+        'WHERE geometry && CDB_XYZ_Extent(0, 0, 0)'
+        ')'
+        'UNION ALL '
+        'SELECT x*2 + xx, y*2 + yy, z+1, EXISTS('
+        'SELECT 1 FROM changed_poi_points '
+        'WHERE geometry && CDB_XYZ_Extent(x*2 + xx, y*2 + yy, z+1)'
+        ') FROM dirty_tiles,'
+        '(VALUES (0, 0), (0, 1), (1, 1), (1, 0)) as c(xx, yy)'
+        'WHERE e AND z < 14'
+        '), changed_poi_points AS ('
+        'SELECT * FROM ' || quote_ident(view_name) || ' WHERE timestamp = $1'
+        ')'
+        'SELECT z, x, y FROM dirty_tiles where e;'
+	USING ts;
+END;
+$$ LANGUAGE plpgsql VOLATILE;
