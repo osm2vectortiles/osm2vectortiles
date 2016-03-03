@@ -19,7 +19,7 @@ var dirtyTilesListFile = process.env.LIST_FILE || path.join(exportDir, 'tiles.tx
 
 function recentDirtyViews() {
     return db.task(function (t) {
-            t.one('SELECT MAX(timestamp) FROM osm_timestamps')
+            return t.one('SELECT MAX(timestamp) FROM osm_timestamps')
                 .then(function (result) {
                     return t.batch([
                         detectDirtyTiles('landuse_z5', 5, 5),
