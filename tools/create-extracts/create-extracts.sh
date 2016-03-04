@@ -19,7 +19,9 @@ function upload_extract() {
     s3cmd --config="$S3_CONFIG_FILE" \
           --access_key="$S3_ACCESS_KEY" \
           --secret_key="$S3_SECRET_KEY" \
-        put "$mbtiles_extract" "s3://$S3_BUCKET_NAME/$S3_PREFIX" --acl-public
+        put "$mbtiles_extract" "s3://$S3_BUCKET_NAME/$S3_PREFIX" \
+          --acl-public \
+          --multipart-chunk-size-mb=50
 }
 
 function patch_mbtiles() {
