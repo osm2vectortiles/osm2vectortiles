@@ -186,6 +186,7 @@ At lower zoom levels there is still some world data to make maps look good.
 - [Pitcairn Islands](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/pitcairn_islands.mbtiles)
 - [Poland](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/poland.mbtiles)
 - [Portugal](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/portugal.mbtiles)
+- [Puerto Rico](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/puerto_rico.mbtiles)
 - [Qatar](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/qatar.mbtiles)
 - [Republic of China](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/republic_of_china.mbtiles)
 - [Republic of Kosovo](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/republic_of_kosovo.mbtiles)
