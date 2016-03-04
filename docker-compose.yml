@@ -125,3 +125,10 @@ compare-visual:
    - "4001:3001"
   links:
    - serve:tileserver
+create-extracts:
+  image: "osm2vectortiles/create-extracts"
+  volumes:
+   - ./export:/data/export
+  environment:
+    S3_ACCESS_KEY: "${S3_ACCESS_KEY}"
+    S3_SECRET_KEY: "${S3_SECRET_KEY}"
