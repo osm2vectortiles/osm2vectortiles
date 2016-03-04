@@ -15,6 +15,7 @@ var db = pgp({
     password: 'osm'
 });
 
+var timeLabel = 'Time to calculate dirty tiles';
 var exportDir = process.env.EXPORT_DIR || '/data/export/';
 var dirtyTilesListFile = process.env.LIST_FILE || path.join(exportDir, 'tiles.txt');
 
@@ -111,9 +112,8 @@ function recentDirtyViews() {
     }).then(_.flatten);
 }
 
+console.time(timeLabel);
 recentDirtyViews().then(function (dirtyViews) {
-    var timeLabel = 'Time to calculate dirty tiles';
-    console.time(timeLabel);
     var tileList = _.uniq(_.flatten(
         dirtyViews.map(function (view) {
             return view.affectedTiles;
@@ -121,8 +121,8 @@ recentDirtyViews().then(function (dirtyViews) {
     ).map(function (tile) {
         return tile.z + '/' + tile.x + '/' + tile.y;
     })).join('\n');
-
     console.timeEnd(timeLabel);
+
     console.log('Write dirty tiles to ' + dirtyTilesListFile);
     fs.writeFileSync(dirtyTilesListFile, tileList, {
         encoding: 'utf8'
