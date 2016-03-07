@@ -66,6 +66,23 @@ Update the scaleranks of OSM places with data from Natural Earth.
 docker-compose up update-scaleranks
 ```
 
+Edit the `BBOX` environement variable in the docker-compose.yml file to match your desired extract.
+
+```
+export:
+  image: "osm2vectortiles/export"
+  command: ./export-local.sh
+  volumes:
+   - ./export:/data/export
+   - ./open-streets.tm2source:/data/tm2source
+  links:
+   - pgbouncer:db
+  environment:
+    BBOX: "8.4375 46.07323062540838 9.84375 47.040182144806664"
+    MIN_ZOOM: "8"
+    MAX_ZOOM: "14"
+```
+
 Export the data as MBTiles file to the `export` directory.
 
 ```
