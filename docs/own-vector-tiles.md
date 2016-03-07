@@ -91,25 +91,23 @@ docker-compose up export
 
 Optional: Merge lower zoom levels (z0 to z5) into extract (prerequisite: sqlite3 installed)
 
-Download lower zoom level extract:
+Download lower zoom level extract.
 
-```
+```bash
 wget -P ./export/ https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/world_z0-z5.mbtiles
 ```
 
-Merge lower zoom levels into extract:
+Download the `patch.sh` script from [the Mapbox mbutil project](https://github.com/mapbox/mbutil).
 
+```bash
+wget https://raw.githubusercontent.com/mapbox/mbutil/master/patch
+chmod +x patch
 ```
-local mbtiles_source="./export/world_z0-z5.mbtiles"
-local mbtiles_dest="./export/zurich.mbtiles"
-echo "
-PRAGMA journal_mode=PERSIST;
-PRAGMA page_size=80000;
-PRAGMA synchronous=OFF;
-ATTACH DATABASE '$mbtiles_source' AS source;
-REPLACE INTO map SELECT * FROM source.map;
-REPLACE INTO images SELECT * FROM source.images;"\
-| sqlite3 "$mbtiles_dest"
+
+Merge lower zoom levels into extract.
+
+```bash
+./patch "./export/world_z0-z5.mbtiles" "./export/zurich.mbtiles"
 ```
 
 Serve the tiles as raster tiles from `export` directory.
