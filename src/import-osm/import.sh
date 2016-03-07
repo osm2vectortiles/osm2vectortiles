@@ -223,5 +223,5 @@ function import_pbf_diffs() {
     update_timestamp "$timestamp"
 
 
-    merge_latest_diffs "$pbf_file" "latest_diffs_file"
+    merge_latest_diffs "$pbf_file" "$latest_diffs_file"
 }
