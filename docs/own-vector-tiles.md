@@ -89,9 +89,7 @@ Export the data as MBTiles file to the `export` directory.
 docker-compose up export
 ```
 
-Optional: Merge lower zoom levels (z0 to z5) into extract
-
-Prerequisite: sqlite3 installed
+Optional: Merge lower zoom levels (z0 to z5) into extract (prerequisite: sqlite3 installed)
 
 Download lower zoom level extract:
 
