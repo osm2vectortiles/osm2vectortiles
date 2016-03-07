@@ -90,6 +90,7 @@ docker-compose up export
 ```
 
 Optional: Merge lower zoom levels (z0 to z5) into extract
+
 Prerequisite: sqlite3 installed
 
 Download lower zoom level extract:
