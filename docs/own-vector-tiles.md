@@ -89,6 +89,30 @@ Export the data as MBTiles file to the `export` directory.
 docker-compose up export
 ```
 
+Optional: Merge lower zoom levels (z0 to z5) into extract
+Prerequisite: sqlite3 installed
+
+Download lower zoom level extract:
+
+```
+wget -P ./export/ https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/world_z0-z5.mbtiles
+```
+
+Merge lower zoom levels into extract:
+
+```
+local mbtiles_source="./export/world_z0-z5.mbtiles"
+local mbtiles_dest="./export/zurich.mbtiles"
+echo "
+PRAGMA journal_mode=PERSIST;
+PRAGMA page_size=80000;
+PRAGMA synchronous=OFF;
+ATTACH DATABASE '$mbtiles_source' AS source;
+REPLACE INTO map SELECT * FROM source.map;
+REPLACE INTO images SELECT * FROM source.images;"\
+| sqlite3 "$mbtiles_dest"
+```
+
 Serve the tiles as raster tiles from `export` directory.
 
 ```
