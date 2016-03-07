@@ -1,17 +1,17 @@
-FROM node:4.3.1
+FROM node:5.7.1
 MAINTAINER Lukas Martinelli <me@lukasmartinelli.ch>
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 RUN npm install -g tl@0.4.0 \
-          mapnik@3.4.9 \
+          mapnik@3.5.2 \
           mbtiles@0.8.2 \
           tilelive@5.12.1 \
-          tilelive-tmsource@0.4.2 \
-          tilelive-vector@3.5.1 \
-          tilelive-bridge@2.2.1 \
-          tilelive-mapnik@0.6.17
+          tilelive-tmsource@0.4.3 \
+          tilelive-vector@3.9.1 \
+          tilelive-bridge@2.2.3 \
+          tilelive-mapnik@0.6.18
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         python \
