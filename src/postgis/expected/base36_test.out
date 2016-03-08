@@ -1,0 +1,37 @@
+CREATE EXTENSION base36;
+SELECT base36_encode(0);
+ base36_encode 
+---------------
+ 0
+(1 row)
+
+SELECT base36_encode(1);
+ base36_encode 
+---------------
+ 1
+(1 row)
+
+SELECT base36_encode(10);
+ base36_encode 
+---------------
+ a
+(1 row)
+
+SELECT base36_encode(35);
+ base36_encode 
+---------------
+ z
+(1 row)
+
+SELECT base36_encode(36);
+ base36_encode 
+---------------
+ 10
+(1 row)
+
+SELECT base36_encode(123456789);
+ base36_encode 
+---------------
+ 21i3v9
+(1 row)
+

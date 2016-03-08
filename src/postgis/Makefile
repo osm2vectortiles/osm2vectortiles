@@ -1,5 +1,6 @@
 EXTENSION = base36        # the extensions name
 DATA = base36--0.0.1.sql  # script files to install
+REGRESS = base36_test
 MODULES = base36          # our c module file to build
 
 # postgres build stuff
