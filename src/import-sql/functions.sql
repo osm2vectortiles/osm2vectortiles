@@ -1,3 +1,24 @@
+CREATE TYPE tile AS (x INTEGER, y INTEGER, z INTEGER);
+CREATE OR REPLACE FUNCTION point_to_tile(
+    _point geometry,
+    zoom_level INTEGER
+) RETURNS tile
+AS $$
+DECLARE
+    d2r CONSTANT DOUBLE PRECISION := pi() / 180;
+    lon CONSTANT DOUBLE PRECISION := st_x(ST_Transform(_point, 4326));
+    lat CONSTANT DOUBLE PRECISION := st_y(ST_Transform(_point, 4326));
+    z2 CONSTANT DOUBLE PRECISION := pow(2, zoom_level);
+    _sin CONSTANT DOUBLE PRECISION := sin(lat * d2r);
+    t tile;
+BEGIN
+    t.x = floor(z2 * (lon / 360 + 0.5));
+    t.y = floor(z2 * (0.5 - 0.25 * log((1 + _sin) / (1 - _sin)) / pi()));
+    t.z = zoom_level;
+    RETURN t;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
 CREATE OR REPLACE FUNCTION localrank_poi(type VARCHAR) RETURNS INTEGER
 AS $$
 BEGIN
