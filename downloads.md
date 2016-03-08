@@ -22,11 +22,25 @@ The download servers are kindly provided by [Switch Engines](https://www.switch.
 City extracts are limited to the boundaries of a city and do not allow zooming out to the entire world.
 
 - [Zurich](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/zurich.mbtiles)
-- [San Francisco](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/san_francisco.mbtiles)
 - [London](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/london.mbtiles)
 - [Paris](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/paris.mbtiles)
-- [Rio de Janeiro](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/rio_de_janeiro.mbtiles)
+- [Berlin](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/berlin.mbtiles)
+- [Moscow](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/moscow.mbtiles)
+- [Istanbul](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/istanbul.mbtiles)
 - [New York](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/new_york.mbtiles)
+- [San Francisco](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/san_francisco.mbtiles)
+- [Montreal](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/montreal.mbtiles)
+- [Rio de Janeiro](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/rio_de_janeiro.mbtiles)
+- [Mexico City](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/mexico_city.mbtiles)
+- [Bogota](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/bogota.mbtiles)
+- [Melbourne](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/melbourne.mbtiles)
+- [Singapore](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/singapore.mbtiles)
+- [Beijing](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/beijing.mbtiles)
+- [Tokyo](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/tokyo.mbtiles)
+- [Seoul](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/seoul.mbtiles)
+- [Delhi](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/delhi.mbtiles)
+- [Cairo](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/cairo.mbtiles)
+- [Lagos](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/lagos.mbtiles)
 
 ## Country Extracts
 
