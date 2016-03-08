@@ -9,11 +9,7 @@ before_install:
   - wget -nc -P "$HOME/cache" "http://download.geofabrik.de/europe/liechtenstein-160101.osm.pbf"
   - mkdir -p "$TRAVIS_BUILD_DIR/import" && cp "$HOME/cache/liechtenstein-160101.osm.pbf" "$TRAVIS_BUILD_DIR/import"
   - docker-compose build
-  - docker build -t osm2vectortiles/postgis src/postgis
-  - docker build -t osm2vectortiles/export src/export
-  - docker build -t osm2vectortiles/import-osm src/import-osm
-  - docker build -t osm2vectortiles/import-sql src/import-sql
-  - docker build -t osm2vectortiles/update-scaleranks src/update-scaleranks
+  - make fast
 script:
   - docker-compose up -d postgis
   - sleep 5

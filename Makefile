@@ -2,6 +2,8 @@
 
 all: postgis export-mbtiles import-osm import-external import-sql update-scaleranks create-extracts detect-dirty-tiles
 
+fast: postgis export-mbtiles import-osm import-sql update-scaleranks create-extracts detect-dirty-tiles
+
 postgis:
 	docker build -t osm2vectortiles/postgis src/postgis
 
