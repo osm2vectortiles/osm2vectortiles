@@ -6,8 +6,6 @@ set -o nounset
 readonly WORLD_MBTILES=${WORLD_MBTILES:-"world.mbtiles"}
 readonly PATCH_MBTILES=${PATCH_MBTILES:-"world_z0-z5.mbtiles"}
 readonly EXTRACT_DIR=$(dirname "$WORLD_MBTILES")
-readonly MIN_ZOOM=${MIN_ZOOM:-0}
-readonly MAX_ZOOM=${MAX_ZOOM:-14}
 readonly VERSION=${VERSION:-1}
 readonly GLOBAL_BBOX="-180, -85.0511, 180, 85.0511"
 readonly S3_CONFIG_FILE=${S3_CONFIG_FILE:-"$HOME/.s3cfg"}
@@ -43,6 +41,8 @@ function create_extract() {
     local min_latitude="$3"
     local max_longitude="$4"
     local max_latitude="$5"
+    local min_zoom="0"
+    local max_zoom="14"
     local bounds="$min_longitude,$min_latitude,$max_longitude,$max_latitude"
 
     local center_zoom="10"
@@ -52,16 +52,40 @@ function create_extract() {
 
     echo "Create extract $extract_file"
     tilelive-copy \
-        --minzoom="$MIN_ZOOM" \
-        --maxzoom="$MAX_ZOOM" \
+        --minzoom="0" \
+        --maxzoom="14" \
         --bounds="$bounds" \
         "$WORLD_MBTILES" "$extract_file"
 
     echo "Update metadata $extract_file"
-    update_metadata "$extract_file" "$bounds" "$center"
+    update_metadata "$extract_file" "$bounds" "$center" "$min_zoom" "$max_zoom"
 
 	echo "Patching upper zoom levels $extract_file"
 	patch_mbtiles "$PATCH_MBTILES" "$extract_file"
+
+    echo "Uploading $extract_file"
+    upload_extract "$extract_file"
+}
+
+function create_lower_zoomlevel_extract() {
+    local extract_file="$EXTRACT_DIR/$1"
+    local min_zoom="$2"
+    local max_zoom="$3"
+
+    local center_zoom="1"
+    local center_longitude="-94.1629"
+    local center_latitude="34.5133"
+    local center="$center_longitude,$center_latitude,$center_zoom"
+
+    echo "Create extract $extract_file"
+    tilelive-copy \
+        --minzoom="$min_zoom" \
+        --maxzoom="$max_zoom" \
+        --bounds="$GLOBAL_BBOX" \
+        "$WORLD_MBTILES" "$extract_file"
+
+    echo "Update metadata $extract_file"
+    update_metadata "$extract_file" "$GLOBAL_BBOX" "$center" "$min_zoom" "$max_zoom"
 
     echo "Uploading $extract_file"
     upload_extract "$extract_file"
@@ -87,19 +111,23 @@ function update_metadata() {
     local extract_file="$1"
     local extract_bounds="$2"
     local extract_center="$3"
+    local min_zoom="$4"
+    local max_zoom="$5"
     local attribution="&copy; OpenStreetMap contributors"
 
     insert_metadata_entry "$extract_file" "attribution" "$attribution"
     insert_metadata_entry "$extract_file" "version" "$VERSION"
-    update_metadata_entry "$extract_file" "minzoom" "$MIN_ZOOM"
-    update_metadata_entry "$extract_file" "maxzoom" "$MAX_ZOOM"
+    update_metadata_entry "$extract_file" "minzoom" "$min_zoom"
+    update_metadata_entry "$extract_file" "maxzoom" "$max_zoom"
     update_metadata_entry "$extract_file" "name" "Open Streets"
     update_metadata_entry "$extract_file" "description" "Extract from osm2vectortiles.org"
     update_metadata_entry "$extract_file" "bounds" "$extract_bounds"
     update_metadata_entry "$extract_file" "center" "$extract_center"
 }
 
-function create_country_extracts() {
+function create_extracts() {
+	create_lower_zoomlevel_extract "world_z0-z5.mbtiles" 0 5
+	create_lower_zoomlevel_extract "world_z0-z8.mbtiles" 0 8
 	create_extract "puerto_rico.mbtiles" "-68.1976318" "17.6701939" "-65.088501" "18.7347042"
 	create_extract "afghanistan.mbtiles" "60.403889" "29.288333" "74.989862" "38.5899217"
 	create_extract "albania.mbtiles" "19.0246095" "39.5448625" "21.1574335" "42.7611669"
@@ -332,6 +360,27 @@ function create_country_extracts() {
 
 	create_extract "zambia.mbtiles" "21.896389" "-18.1766964" "33.8025" "-8.1712821"
 	create_extract "zimbabwe.mbtiles" "25.1373" "-22.5241095" "33.1627122" "-15.5097038"
+
+	create_extract "zurich.mbtiles" "8.448060" "47.320230" "8.625370" "47.434680"
+	create_extract "london.mbtiles" "-0.563" "51.261318" "0.28036" "51.686031"
+	create_extract "paris.mbtiles" "2.08679" "48.658291" "2.63791" "49.04694"
+	create_extract "istanbul.mbtiles" "28.448009" "40.802731" "29.45787" "41.23595"
+	create_extract "berlin.mbtiles" "13.05355" "52.330269" "13.72616" "52.667511"
+	create_extract "san_francisco.mbtiles" "-123.013657" "37.604031" "-122.355301" "37.832371"
+	create_extract "new_york.mbtiles" "-74.255653" "40.495682" "-73.689484" "40.917622"
+	create_extract "montreal.mbtiles" "-73.976608" "45.413479" "-73.476418" "45.704788"
+	create_extract "moscow.mbtiles" "37.31926" "55.4907" "38.09008" "56.022171"
+	create_extract "melbourne.mbtiles" "144.553207" "-38.411251" "145.507736" "-37.540112"
+	create_extract "rio_de_janeiro.mbtiles" "-43.795799" "-23.078119" "-43.101261" "-22.74906"
+	create_extract "mexico_city.mbtiles" "-99.507149" "18.94665" "-98.742912" "19.69857"
+	create_extract "bogota.mbtiles" "-74.171494" "4.56282" "-74.055634" "4.70989"
+	create_extract "singapore.mbtiles" "103.84417" "1.28469" "103.86235" "1.30287"
+	create_extract "beijing.mbtiles" "116.04142" "39.75872" "116.638641" "40.159191"
+	create_extract "tokyo.mbtiles" "139.562881" "35.523449" "139.918961" "35.81749"
+	create_extract "seoul.mbtiles" "126.7686" "37.421341" "127.18615" "37.692902"
+	create_extract "delhi.mbtiles" "76.83831" "28.404181" "77.343689" "28.88382"
+	create_extract "cairo.mbtiles" "31.20372" "30.00688" "31.311171" "30.1171"
+	create_extract "lagos.mbtiles" "3.38106" "6.42833" "3.44309" "6.46103"
 }
 
 function main() {
@@ -339,17 +388,13 @@ function main() {
 		echo "$WORLD_MBTILES not found."
 		exit 10
 	fi
-	if [ ! -f "$PATCH_MBTILES" ]; then
-		echo "$PATCH_MBTILES not found for merging into extracts."
-		exit 20
-	fi
 
 	if [ -z "${S3_ACCESS_KEY}" ]; then
 		echo "Specify the S3_ACCESS_KEY and S3_SECRET_KEY to upload extract."
 		exit 30
 	fi
 
-    create_country_extracts
+    create_extracts
 }
 
 main
