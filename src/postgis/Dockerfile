@@ -1,4 +1,4 @@
-FROM mdillon/postgis:9.4
+FROM mdillon/postgis:9.5
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
@@ -6,7 +6,7 @@ RUN apt-get update \
       ca-certificates \
       make \
       gcc \
-      postgresql-server-dev-9.4 \
+      postgresql-server-dev-9.5 \
  && rm -rf /var/lib/apt/lists/*
 
 ENV CARTODB_DIR=/opt/cartodb-postgresql \
