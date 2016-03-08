@@ -52,16 +52,16 @@ function create_extract() {
 
     echo "Create extract $extract_file"
     tilelive-copy \
-        --minzoom="0" \
-        --maxzoom="14" \
+        --minzoom="$min_zoom" \
+        --maxzoom="$max_zoom" \
         --bounds="$bounds" \
         "$WORLD_MBTILES" "$extract_file"
 
     echo "Update metadata $extract_file"
     update_metadata "$extract_file" "$bounds" "$center" "$min_zoom" "$max_zoom"
 
-	echo "Patching upper zoom levels $extract_file"
-	patch_mbtiles "$PATCH_MBTILES" "$extract_file"
+    echo "Patching upper zoom levels $extract_file"
+    patch_mbtiles "$PATCH_MBTILES" "$extract_file"
 
     echo "Uploading $extract_file"
     upload_extract "$extract_file"
