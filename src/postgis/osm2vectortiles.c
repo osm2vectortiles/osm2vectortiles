@@ -6,12 +6,11 @@
 
 PG_MODULE_MAGIC;
 
-const float8 d2r = M_PI / 180.0;
+const float8 D2R = M_PI / 180.0;
+const int32 MAX_TILES = M_PI / 180.0;
 
-
-PG_FUNCTION_INFO_V1(retcomposite);
-Datum
-retcomposite(PG_FUNCTION_ARGS)
+PG_FUNCTION_INFO_V1(point_to_tiles);
+Datum point_to_tiles(PG_FUNCTION_ARGS)
 {
     FuncCallContext     *funcctx;
     int                  call_cntr;
@@ -30,8 +29,10 @@ retcomposite(PG_FUNCTION_ARGS)
         /* switch to memory context appropriate for multiple function calls */
         oldcontext = MemoryContextSwitchTo(funcctx->multi_call_memory_ctx);
 
-        /* total number of tuples to be returned */
-        funcctx->max_calls = 15;
+        /* number of zoom levels to go down is equal
+         * to the amount of tuples returned
+         * */
+        funcctx->max_calls = PG_GETARG_INT32(2) + 1;
 
         /* Build a tuple descriptor for our result type */
         if (get_call_result_type(fcinfo, NULL, &tupdesc) != TYPEFUNC_COMPOSITE)
@@ -63,10 +64,15 @@ retcomposite(PG_FUNCTION_ARGS)
         HeapTuple    tuple;
         Datum        result;
 
+        /*
+         * Actual user defined code that does something useful
+         * This calculates the x and y coordinates of a tile
+         * based on the WGS84 latitude and longitude
+         */
 		const int32 zoom_level = call_cntr;
 		const float8 lat = PG_GETARG_FLOAT8(0);
 		const float8 lon = PG_GETARG_FLOAT8(1);
-		const float8 _sin = sin(lat * d2r);
+		const float8 _sin = sin(lat * D2R);
 		const float8 z2 = pow(2, zoom_level);
 		const int32 x = floor(z2 * (lon / 360 + 0.5));
 		const int32 y = floor(z2 * (0.5 - 0.25 * log((1 + _sin) / (1 - _sin)) / M_PI));
@@ -81,11 +87,12 @@ retcomposite(PG_FUNCTION_ARGS)
         values[1] = (char *) palloc(16 * sizeof(char));
         values[2] = (char *) palloc(16 * sizeof(char));
 
+        /* Store tuple values into C string array */
         snprintf(values[0], 16, "%d", x);
         snprintf(values[1], 16, "%d", y);
         snprintf(values[2], 16, "%d", zoom_level);
 
-        /* build a tuple */
+        /* Build a tuple */
         tuple = BuildTupleFromCStrings(attinmeta, values);
 
         /* make the tuple into a datum */
