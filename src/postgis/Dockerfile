@@ -20,11 +20,11 @@ RUN mkdir -p "$CARTODB_DIR" \
 RUN mkdir -p /opt/postgis-vt-util \
  && wget -P /opt/postgis-vt-util --quiet "$VT_UTIL_URL"
 
-WORKDIR /opt/custom-extension
-COPY . /opt/custom-extension
-RUN make install
-
 # copy new initdb file which enables the hstore extension and Mapbox vt-util functions
 RUN rm -f /docker-entrypoint-initdb.d/postgis.sh
 COPY ./initdb-postgis.sh /docker-entrypoint-initdb.d/10_postgis.sh
 COPY ./initdb-osm.sh /docker-entrypoint-initdb.d/20_osm.sh
+
+WORKDIR /opt/custom-extension
+COPY . /opt/custom-extension
+RUN make install

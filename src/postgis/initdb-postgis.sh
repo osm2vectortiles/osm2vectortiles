@@ -34,6 +34,7 @@ function create_postgis_extensions() {
 			CREATE EXTENSION postgis;
 			CREATE EXTENSION postgis_topology;
 			CREATE EXTENSION hstore;
+			CREATE EXTENSION osm2vectortiles;
 		EOSQL
     done
     }
