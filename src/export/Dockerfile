@@ -4,7 +4,8 @@ MAINTAINER Lukas Martinelli <me@lukasmartinelli.ch>
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-RUN npm install -g tl@0.8.x \
+RUN npm install -g \
+          tl@0.8.x \
           mapnik@3.5.x \
           mbtiles@0.8.x \
           tilelive@5.12.x \
