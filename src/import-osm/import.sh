@@ -185,6 +185,17 @@ function exec_sql() {
         -c "$sql_cmd" || true
 }
 
+function merge_latest_diffs() {
+    local pbf_file="$1"
+    local latest_diffs_file="$2"
+    local latest_pbf_file="$IMPORT_DATA_DIR/${pbf_file##*/}.latest.pbf"
+
+    echo "Updating $pbf_file with changes $latest_diffs_file"
+    osmconvert -v "$pbf_file" "$latest_diffs_file" -o="$latest_pbf_file"
+    rm "$pbf_file"
+    mv "$latest_pbf_file" "$pbf_file"
+}
+
 function import_pbf_diffs() {
     local pbf_file="$1"
     local latest_diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
@@ -210,4 +221,7 @@ function import_pbf_diffs() {
     local timestamp=$(extract_timestamp "$latest_diffs_file")
     echo "Set $timestamp for latest updates from $latest_diffs_file"
     update_timestamp "$timestamp"
+
+
+    merge_latest_diffs "$pbf_file" "$latest_diffs_file"
 }
