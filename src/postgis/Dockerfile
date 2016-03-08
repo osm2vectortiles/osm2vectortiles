@@ -9,7 +9,7 @@ RUN apt-get update \
 ENV CARTODB_DIR=/opt/cartodb-postgresql \
     VT_UTIL_DIR=/opt/postgis-vt-util \
     VT_UTIL_URL="https://raw.githubusercontent.com/mapbox/postgis-vt-util/v1.0.0/postgis-vt-util.sql" \
-    CARTODB_URL="https://raw.githubusercontent.com/CartoDB/cartodb-postgresql/0.14.0/scripts-available/CDB_XYZ.sql"
+    CARTODB_URL="https://raw.githubusercontent.com/CartoDB/cartodb-postgresql/0.14.1/scripts-available/CDB_XYZ.sql"
 
 RUN mkdir -p "$CARTODB_DIR" \
  && wget -P "$CARTODB_DIR" --quiet "$CARTODB_URL"
