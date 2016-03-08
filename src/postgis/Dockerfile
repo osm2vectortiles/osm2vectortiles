@@ -4,6 +4,9 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends \
       wget \
       ca-certificates \
+      make \
+      gcc \
+      postgresql-server-dev-9.4 \
  && rm -rf /var/lib/apt/lists/*
 
 ENV CARTODB_DIR=/opt/cartodb-postgresql \
@@ -16,6 +19,10 @@ RUN mkdir -p "$CARTODB_DIR" \
 
 RUN mkdir -p /opt/postgis-vt-util \
  && wget -P /opt/postgis-vt-util --quiet "$VT_UTIL_URL"
+
+WORKDIR /opt/custom-extension
+COPY . /opt/custom-extension
+RUN make install
 
 # copy new initdb file which enables the hstore extension and Mapbox vt-util functions
 RUN rm -f /docker-entrypoint-initdb.d/postgis.sh
