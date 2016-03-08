@@ -1,59 +1,57 @@
 CREATE TYPE tile AS (x INTEGER, y INTEGER, z INTEGER);
 CREATE TYPE tile_fraction AS (x DOUBLE PRECISION, y DOUBLE PRECISION, z INTEGER);
 
-
 CREATE OR REPLACE FUNCTION linestring_to_tiles(
     linestring geometry,
     zoom_level INTEGER
-) RETURNS tile[]
+) RETURNS SETOF tile
 AS $$
 DECLARE
-	t tile;
-	tiles tile[];
-	coords GEOMETRY[];
-	prev GEOMETRY;
-	start tile;
-	stop tile;
-	x DOUBLE PRECISION;
-	y DOUBLE PRECISION;
-	dx DOUBLE PRECISION;
-	dy DOUBLE PRECISION;
-	sx INTEGER;
-	sy INTEGER;
-	tMaxX DOUBLE PRECISION;
-	tMaxY DOUBLE PRECISION;
-	tdx DOUBLE PRECISION;
-	tdy DOUBLE PRECISION;
+    t tile;
+    coords GEOMETRY[];
+    prev GEOMETRY;
+    start tile;
+    stop tile;
+    x DOUBLE PRECISION;
+    y DOUBLE PRECISION;
+    dx DOUBLE PRECISION;
+    dy DOUBLE PRECISION;
+    sx INTEGER;
+    sy INTEGER;
+    tMaxX DOUBLE PRECISION;
+    tMaxY DOUBLE PRECISION;
+    tdx DOUBLE PRECISION;
+    tdy DOUBLE PRECISION;
 BEGIN
-	coords := ARRAY(SELECT geom(ST_DumpPoints(linestring)));
-	FOR i IN array_lower(coords, 1) .. array_upper(coords, 1)
+    coords := ARRAY(SELECT geom(ST_DumpPoints(linestring)));
+    FOR i IN array_lower(coords, 1) .. array_upper(coords, 1)
     LOOP
-      start := point_to_tile_fraction(coords[i], zoom_level);
-      stop := point_to_tile_fraction(coords[i + 1], zoom_level);
+        start := point_to_tile_fraction(coords[i], zoom_level);
+        stop := point_to_tile_fraction(coords[i + 1], zoom_level);
 
-      dx := x(stop) - x(start);
-      dy := y(stop) - y(start);
+        dx := x(stop) - x(start);
+        dy := y(stop) - y(start);
 
-      CONTINUE WHEN dx = 0 AND dy = 0;
+        CONTINUE WHEN dx = 0 AND dy = 0;
 
-      sx := CASE WHEN dx > 0 THEN 1 ELSE -1 END;
-      sy := CASE WHEN dy > 0 THEN 1 ELSE -1 END;
-      x := floor(x(start));
-      y := floor(y(start));
+        sx := CASE WHEN dx > 0 THEN 1 ELSE -1 END;
+        sy := CASE WHEN dy > 0 THEN 1 ELSE -1 END;
+        x := floor(x(start));
+        y := floor(y(start));
 
-      tMaxX := CASE WHEN dx = 0 THEN 'Infinity' ELSE abs(((CASE WHEN dx > 0 THEN 1 ELSE 0 END) + x - x(start)) / dx) END;
-      tMaxY := CASE WHEN dy = 0 THEN 'Infinity' ELSE abs(((CASE WHEN dy > 0 THEN 1 ELSE 0 END) + y - y(start)) / dy) END;
-      tdx := abs(sx / (dx + 0.000000000000001));
-      tdy := abs(sy / (dy + 0.000000000000001));
+        tMaxX := CASE WHEN dx = 0 THEN 'Infinity' ELSE abs(((CASE WHEN dx > 0 THEN 1 ELSE 0 END) + x - x(start)) / dx) END;
+        tMaxY := CASE WHEN dy = 0 THEN 'Infinity' ELSE abs(((CASE WHEN dy > 0 THEN 1 ELSE 0 END) + y - y(start)) / dy) END;
+        tdx := abs(sx / (dx + 0.000000000000001));
+        tdy := abs(sy / (dy + 0.000000000000001));
 
-      IF x <> st_x(prev) OR y <> st_y(prev) THEN
-        SELECT x, y, zoom_level INTO t;
-      	tiles := array_append(tiles, t);
-        prev := start;
-	  END IF;   
+        IF x <> st_x(prev) OR y <> st_y(prev) THEN
+            SELECT x, y, zoom_level INTO t;
+            RETURN NEXT t;
+            prev := start;
+        END IF;   
 
-	  WHILE tMaxX < 1 OR tMaxY < 1 LOOP
-	        IF tMaxX < tMaxY THEN
+        WHILE tMaxX < 1 OR tMaxY < 1 LOOP
+            IF tMaxX < tMaxY THEN
                 tMaxX := tMaxX + tdx;
                 x := x + sx;
             ELSE
@@ -62,36 +60,10 @@ BEGIN
             END IF;
 
             SELECT x, y, zoom_level INTO t;
-			tiles := array_append(tiles, t);
-			prev := ST_MakePoint(x, y);
-	  END LOOP;
-
+            RETURN NEXT t;
+            prev := ST_MakePoint(x, y);
+        END LOOP;
     END LOOP;
-	RETURN tiles;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION linestring_to_tiles(
-    linestring geometry,
-    zoom_level INTEGER
-) RETURNS tile[]
-AS $$
-DECLARE
-	tiles tile[];
-	coords GEOMETRY[];
-	prev GEOMETRY;
-	start tile;
-	stop tile;
-BEGIN
-	coords := ARRAY(SELECT geom(ST_DumpPoints(linestring)));
-	FOR i IN array_lower(coords, 1) .. array_upper(coords, 1)
-    LOOP
-      start := point_to_tile_fraction(coords[i], zoom_level);
-      stop := point_to_tile_fraction(coords[i + 1], zoom_level);
-      tiles := array_append(tiles, start);
-      tiles := array_append(tiles, stop);
-    END LOOP;
-	RETURN tiles;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
@@ -246,6 +218,6 @@ BEGIN
         'SELECT * FROM ' || quote_ident(view_name) || ' WHERE timestamp = $1'
         ')'
         'SELECT z, x, y FROM dirty_tiles where e;'
-	USING ts;
+    USING ts;
 END;
 $$ LANGUAGE plpgsql VOLATILE;
