@@ -22,6 +22,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     - key: admin_level
       name: admin_level
       type: integer
@@ -41,6 +43,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     - name: type
       type: mapping_value
     mapping:
@@ -59,6 +63,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     - name: type
       type: mapping_value
     mapping:
@@ -77,6 +83,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     - name: type
       type: mapping_value
     mapping:
@@ -114,6 +122,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     - name: type
       type: mapping_value
     mapping:
@@ -151,6 +161,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     mapping:
       building:
       - __any__
@@ -162,6 +174,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     - name: house_num
       type: mapping_value
     mapping:
@@ -174,6 +188,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     - name: house_num
       type: mapping_value
     mapping:
@@ -186,6 +202,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     - name: type
       type: mapping_value
     mapping:
@@ -250,6 +268,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     - key: name
       name: name
       type: string
@@ -310,6 +330,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     - name: type
       type: mapping_value
     - key: oneway
@@ -428,6 +450,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     - key: name
       name: name
       type: string
@@ -483,6 +507,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     - key: name
       name: name
       type: string
@@ -526,6 +552,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     - name: name
       key: name
       type: string
@@ -870,6 +898,8 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     - name: name
       key: name
       type: string

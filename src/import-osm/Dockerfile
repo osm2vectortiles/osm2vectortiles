@@ -1,26 +1,28 @@
 FROM golang:1.4
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y \
-      libprotobuf-dev libleveldb-dev libgeos-dev \
-      --no-install-recommends
-RUN ln -s /usr/lib/libgeos_c.so /usr/lib/libgeos.so
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+      libprotobuf-dev \
+      libleveldb-dev \
+      libgeos-dev \
+      postgresql-client \
+      osmctools \
+      --no-install-recommends \
+ && ln -s /usr/lib/libgeos_c.so /usr/lib/libgeos.so \
+ && rm -rf /var/lib/apt/lists/*
 
-WORKDIR $GOPATH
-RUN go get github.com/omniscale/imposm3 \
-    && go install github.com/omniscale/imposm3
+WORKDIR $GOPATH/src/github.com/omniscale/imposm3
+RUN go get github.com/tools/godep \
+ && git clone https://github.com/osm2vectortiles/imposm3 \
+        $GOPATH/src/github.com/omniscale/imposm3 \
+ && git reset --hard 2882ecae4769e089b9dbe0fe820e394a2280c4e5 \
+ && godep go install ./
 
 # Purge no longer needed packages to keep image small.
 # Protobuf and LevelDB dependencies cannot be removed
 # because they are dynamically linked.
 RUN apt-get purge -y --auto-remove \
     g++ gcc libc6-dev make git \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update \
- && apt-get install -y --no-install-recommends \
-        postgresql-client \
-        osmctools \
     && rm -rf /var/lib/apt/lists/*
 
 VOLUME /data/import /data/cache
