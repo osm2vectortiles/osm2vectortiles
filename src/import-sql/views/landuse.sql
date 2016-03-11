@@ -51,12 +51,6 @@ CREATE OR REPLACE VIEW landuse_z13toz14 AS
     FROM osm_landusages
     WHERE type NOT IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat');
 
-CREATE VIEW layer_building AS (
-    SELECT osm_id, timestamp, geometry FROM building_z13
-    UNION
-    SELECT osm_id, timestamp, geometry FROM building_z14
-);
-
 CREATE OR REPLACE VIEW layer_landuse AS (
     SELECT osm_id, timestamp, geometry FROM landuse_z5
     UNION
@@ -82,7 +76,7 @@ RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
 	RETURN QUERY (
 		WITH changed_geometries AS (
-		    SELECT osm_id, geometry FROM poi_label_zoom_level_changes
+		    SELECT osm_id, geometry FROM layer_landuse
 		    WHERE timestamp = ts
 		), changed_tiles AS (
 		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
