@@ -46,3 +46,21 @@ CREATE OR REPLACE VIEW place_label_z14 AS
     SELECT *
     FROM osm_places
     WHERE name <> '';
+
+CREATE OR REPLACE VIEW layer_place_label AS (
+    SELECT osm_id, timestamp, geometry FROM place_label_z4toz5
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z6
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z7
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z8
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z9toz10
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z11toz12
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z13
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z14
+);

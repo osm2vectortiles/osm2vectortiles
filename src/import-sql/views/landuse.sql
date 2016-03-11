@@ -50,3 +50,29 @@ CREATE OR REPLACE VIEW landuse_z13toz14 AS
     SELECT *
     FROM osm_landusages
     WHERE type NOT IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat');
+
+CREATE VIEW layer_building AS (
+    SELECT osm_id, timestamp, geometry FROM building_z13
+    UNION
+    SELECT osm_id, timestamp, geometry FROM building_z14
+);
+
+CREATE OR REPLACE VIEW layer_landuse AS (
+    SELECT osm_id, timestamp, geometry FROM landuse_z5
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_z6
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_z7
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_z8
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_z9
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_z10
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_z11
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_z12
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_z13toz14
+);
