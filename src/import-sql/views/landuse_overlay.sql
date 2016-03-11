@@ -31,3 +31,17 @@ CREATE OR REPLACE VIEW landuse_overlay_z13toz14 AS
     SELECT *
     FROM osm_landusages
     WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat');
+
+CREATE OR REPLACE VIEW layer_landuse_overlay AS (
+    SELECT osm_id, timestamp, geometry FROM landuse_overlay_z7
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_overlay_z8
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_overlay_z9
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_overlay_z10
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_overlay_z11toz12
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_overlay_z13toz14
+);

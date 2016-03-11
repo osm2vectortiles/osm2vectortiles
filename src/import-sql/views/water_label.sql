@@ -21,3 +21,15 @@ CREATE OR REPLACE VIEW water_label_z13 AS
 CREATE OR REPLACE VIEW water_label_z14 AS
     SELECT *
     FROM osm_water_polygons;
+
+CREATE OR REPLACE VIEW layer_water_label AS (
+    SELECT osm_id, timestamp, geometry FROM water_label_z10
+    UNION
+    SELECT osm_id, timestamp, geometry FROM water_label_z11
+    UNION
+    SELECT osm_id, timestamp, geometry FROM water_label_z12
+    UNION
+    SELECT osm_id, timestamp, geometry FROM water_label_z13
+    UNION
+    SELECT osm_id, timestamp, geometry FROM water_label_z14
+);

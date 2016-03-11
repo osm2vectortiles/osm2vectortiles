@@ -39,3 +39,19 @@ CREATE OR REPLACE VIEW road_z14 AS
     FROM osm_roads
     WHERE NOT is_bridge
       AND NOT is_tunnel;
+
+CREATE OR REPLACE VIEW layer_road AS (
+    SELECT osm_id, timestamp, geometry FROM road_z5toz6
+    UNION
+    SELECT osm_id, timestamp, geometry FROM road_z7
+    UNION
+    SELECT osm_id, timestamp, geometry FROM road_z8toz10
+    UNION
+    SELECT osm_id, timestamp, geometry FROM road_z11
+    UNION
+    SELECT osm_id, timestamp, geometry FROM road_z12
+    UNION
+    SELECT osm_id, timestamp, geometry FROM road_z13
+    UNION
+    SELECT osm_id, timestamp, geometry FROM road_z14
+);
