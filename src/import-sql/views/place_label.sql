@@ -73,9 +73,13 @@ BEGIN
 		    SELECT osm_id, geometry FROM layer_place_label
 		    WHERE timestamp = ts
 		), changed_tiles AS (
-		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
+		    SELECT DISTINCT c.osm_id, t.x, t.y, t.z
 		    FROM changed_geometries AS c
-		    INNER JOIN LATERAL overlapping_tiles(c.geometry, 14) AS t ON true
+		    INNER JOIN LATERAL point_to_tiles(
+                ST_Y(ST_Transform(c.geometry, 4324)),
+                ST_X(ST_Transform(c.geometry, 4324)),
+                14
+            ) AS t ON true
 		)
 
 		SELECT c.x, c.y, c.z FROM place_label_z14 AS l
