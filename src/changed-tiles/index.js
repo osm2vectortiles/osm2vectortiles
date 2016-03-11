@@ -43,7 +43,7 @@ function changedTilesList() {
             ]);
 
             function changed_tiles(layer) {
-                return t.any('SELECT * FROM changed_tiles_' + layer + '($2)',
+                return t.any('SELECT * FROM changed_tiles_' + layer + '($1)',
                     [result.max])
                     .then(function (rows) {
                         return {
