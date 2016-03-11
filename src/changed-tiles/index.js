@@ -72,8 +72,6 @@ changedTilesList().then(function (layers) {
     console.timeEnd(timeLabel);
 
     console.log('Write changed tiles to ' + changedTilesListFile);
-    console.log(tileList);
-
     fs.writeFileSync(changedTilesListFile, tileList, {
         encoding: 'utf8'
     });
