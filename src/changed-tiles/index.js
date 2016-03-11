@@ -20,7 +20,7 @@ var changedTilesListFile = process.env.LIST_FILE || path.join(exportDir, 'tiles.
 
 function changedTilesList() {
     return db.task(function (t) {
-        t.one('SELECT MAX(timestamp) FROM osm_timestamps')
+        return t.one('SELECT MAX(timestamp) FROM osm_timestamps')
         .then(function (result) {
             return t.batch([
                 changed_tiles('admin'),
@@ -43,8 +43,8 @@ function changedTilesList() {
             ]);
 
             function changed_tiles(layer) {
-                return t.any('SELECT * FROM changed_tiles_$1($2)',
-                    [layer, result.max])
+                return t.any('SELECT * FROM changed_tiles_' + layer + '($2)',
+                    [result.max])
                     .then(function (rows) {
                         return {
                             layer: layer,
