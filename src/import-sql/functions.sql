@@ -109,3 +109,54 @@ BEGIN
         SELECT z, x, y FROM tiles WHERE e;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION changed_tiles_latest_timestamp()
+RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
+DECLARE
+	latest_ts timestamp;
+BEGIN
+	SELECT MAX(timestamp) INTO latest_ts FROM osm_timestamps;
+	RETURN QUERY SELECT * FROM changed_tiles(latest_ts);
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION changed_tiles(ts timestamp)
+RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
+BEGIN
+	RETURN QUERY (
+	    SELECT * FROM changed_tiles_admin(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_aeroway(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_barrier_line(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_bridge(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_building(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_housenum_label(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_landuse(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_landuse_overlay(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_place_label(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_poi_label(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_road(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_road_label(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_tunnel(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_water(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_water_label(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_waterway(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_waterway_label(ts)
+	);
+END;
+$$ LANGUAGE plpgsql;
