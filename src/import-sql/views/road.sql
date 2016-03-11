@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW road_z5to6 AS
+CREATE OR REPLACE VIEW road_z5toz6 AS
     SELECT *
     FROM osm_roads
     WHERE type IN ('motorway', 'trunk');
@@ -8,7 +8,7 @@ CREATE OR REPLACE VIEW road_z7 AS
     FROM osm_roads
     WHERE type IN ('motorway', 'trunk', 'primary', 'motorway_link', 'primary_link', 'trunk_link');
 
-CREATE OR REPLACE VIEW road_z8to10 AS
+CREATE OR REPLACE VIEW road_z8toz10 AS
     SELECT *
     FROM osm_roads
     WHERE type IN ('motorway', 'trunk', 'primary', 'motorway_link', 'primary_link', 'trunk_link', 'secondary', 'secondary_link');
