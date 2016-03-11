@@ -13,7 +13,13 @@ readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
 
 function exec_sql_file() {
 	local sql_file=$1
-	PG_PASSWORD=$OSM_PASSWORD psql --host="$DB_HOST" --port=5432 --dbname="$OSM_DB" --username="$OSM_USER" -a -f "$sql_file"
+	PG_PASSWORD=$OSM_PASSWORD psql \
+        --host="$DB_HOST" \
+        --port=5432 \
+        --dbname="$OSM_DB" \
+        --username="$OSM_USER" \
+        -v ON_ERROR_STOP=1 \
+        -a -f "$sql_file"
 }
 
 function main() {
