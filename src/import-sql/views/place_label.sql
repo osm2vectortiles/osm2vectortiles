@@ -75,7 +75,7 @@ BEGIN
 		), changed_tiles AS (
 		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
 		    FROM changed_geometries AS c
-		    INNER JOIN LATERAL overlapping_tiles(c.geometry) AS t ON true
+		    INNER JOIN LATERAL overlapping_tiles(c.geometry, 14) AS t ON true
 		)
 
 		SELECT c.x, c.y, c.z FROM place_label_z14 AS l

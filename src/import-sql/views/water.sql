@@ -25,11 +25,11 @@ BEGIN
 		    INNER JOIN LATERAL overlapping_tiles(c.geometry, 14) AS t ON true
 		)
 
-		SELECT c.x, c.y, c.z FROM AS l.water_z13toz14
+		SELECT c.x, c.y, c.z FROM water_z13toz14 AS l
 		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 13 AND 14
         UNION
 
-		SELECT c.x, c.y, c.z FROM AS l.water_z6toz12
+		SELECT c.x, c.y, c.z FROM water_z6toz12 AS l
 		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 6 AND 12
 	);
 END;

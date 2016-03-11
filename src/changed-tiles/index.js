@@ -22,6 +22,8 @@ function changedTilesList() {
     return db.task(function (t) {
         return t.one('SELECT MAX(timestamp) FROM osm_timestamps')
         .then(function (result) {
+            console.log('Query dirty tiles for timestamp ' + result.max);
+
             return t.batch([
                 changed_tiles('admin'),
                 changed_tiles('aeroway'),
