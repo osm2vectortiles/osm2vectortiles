@@ -87,19 +87,25 @@ function drop_views() {
     exec_sql "DROP VIEW IF EXISTS landuse_z11"
     exec_sql "DROP VIEW IF EXISTS landuse_z12"
     exec_sql "DROP VIEW IF EXISTS landuse_z13toz14"
+    exec_sql "DROP VIEW IF EXISTS layer_landuse"
     # waterway views
     exec_sql "DROP VIEW IF EXISTS waterway_z8toz12"
     exec_sql "DROP VIEW IF EXISTS waterway_z13toz14"
+    exec_sql "DROP VIEW IF EXISTS layer_waterway"
     # water views
     exec_sql "DROP VIEW IF EXISTS water_z6toz12"
     exec_sql "DROP VIEW IF EXISTS water_z13toz14"
+    exec_sql "DROP VIEW IF EXISTS layer_water"
     # aeroway views
     exec_sql "DROP VIEW IF EXISTS aeroway_z12toz14"
+    exec_sql "DROP VIEW IF EXISTS layer_aeroway"
     # barrier_line views
     exec_sql "DROP VIEW IF EXISTS barrier_line_z14"
+    exec_sql "DROP VIEW IF EXISTS layer_barrier_line"
     # building views
     exec_sql "DROP VIEW IF EXISTS building_z13"
     exec_sql "DROP VIEW IF EXISTS building_z14"
+    exec_sql "DROP VIEW IF EXISTS layer_building"
     # landuse views
     exec_sql "DROP VIEW IF EXISTS landuse_overlay_z7"
     exec_sql "DROP VIEW IF EXISTS landuse_overlay_z8"
@@ -107,8 +113,10 @@ function drop_views() {
     exec_sql "DROP VIEW IF EXISTS landuse_overlay_z10"
     exec_sql "DROP VIEW IF EXISTS landuse_overlay_z11toz12"
     exec_sql "DROP VIEW IF EXISTS landuse_overlay_z13toz14"
+    exec_sql "DROP VIEW IF EXISTS layer_landuse_overlay"
     # tunnel views
     exec_sql "DROP VIEW IF EXISTS tunnel_z12toz14"
+    exec_sql "DROP VIEW IF EXISTS layer_tunnel"
     # road views
     exec_sql "DROP VIEW IF EXISTS road_z5to6"
     exec_sql "DROP VIEW IF EXISTS road_z7"
@@ -117,11 +125,14 @@ function drop_views() {
     exec_sql "DROP VIEW IF EXISTS road_z12"
     exec_sql "DROP VIEW IF EXISTS road_z13"
     exec_sql "DROP VIEW IF EXISTS road_z14"
+    exec_sql "DROP VIEW IF EXISTS layer_road"
     # bridge views
     exec_sql "DROP VIEW IF EXISTS bridge_z12to14"
+    exec_sql "DROP VIEW IF EXISTS layer_bridge"
     # admin views
     exec_sql "DROP VIEW IF EXISTS admin_z2to6"
     exec_sql "DROP VIEW IF EXISTS admin_z7to14"
+    exec_sql "DROP VIEW IF EXISTS layer_admin"
     # place_label views
     exec_sql "DROP VIEW IF EXISTS place_label_z4toz5"
     exec_sql "DROP VIEW IF EXISTS place_label_z6"
@@ -131,24 +142,30 @@ function drop_views() {
     exec_sql "DROP VIEW IF EXISTS place_label_z11toz12"
     exec_sql "DROP VIEW IF EXISTS place_label_z13"
     exec_sql "DROP VIEW IF EXISTS place_label_z14"
+    exec_sql "DROP VIEW IF EXISTS layer_place_label"
     # water_label views
     exec_sql "DROP VIEW IF EXISTS water_label_z10"
     exec_sql "DROP VIEW IF EXISTS water_label_z11"
     exec_sql "DROP VIEW IF EXISTS water_label_z12"
     exec_sql "DROP VIEW IF EXISTS water_label_z13"
     exec_sql "DROP VIEW IF EXISTS water_label_z14"
+    exec_sql "DROP VIEW IF EXISTS layer_water_label"
     # poi_label views
     exec_sql "DROP VIEW IF EXISTS poi_label_z14"
+    exec_sql "DROP VIEW IF EXISTS layer_poi_label"
     # road_label views
     exec_sql "DROP VIEW IF EXISTS road_label_z8toz10"
     exec_sql "DROP VIEW IF EXISTS road_label_z11"
     exec_sql "DROP VIEW IF EXISTS road_label_z12toz13"
     exec_sql "DROP VIEW IF EXISTS road_label_z14"
+    exec_sql "DROP VIEW IF EXISTS layer_road_label"
     # waterway_label views
     exec_sql "DROP VIEW IF EXISTS waterway_label_z8toz12"
     exec_sql "DROP VIEW IF EXISTS waterway_label_z13toz14"
+    exec_sql "DROP VIEW IF EXISTS layer_waterway_label"
     # housenum_label views
     exec_sql "DROP VIEW IF EXISTS housenum_label_z14"
+    exec_sql "DROP VIEW IF EXISTS layer_housenum_label"
 }
 
 function exec_sql() {

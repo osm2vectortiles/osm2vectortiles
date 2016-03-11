@@ -15,3 +15,7 @@ CREATE OR REPLACE VIEW poi_label_z14 AS
         FROM osm_poi_polygons
     ) AS poi_geoms
     WHERE name <> '';
+
+CREATE OR REPLACE VIEW layer_poi_label AS (
+    SELECT osm_id, timestamp, geometry FROM poi_label_z14
+);

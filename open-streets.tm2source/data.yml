@@ -354,13 +354,13 @@ Layer:
         (
           SELECT osm_id, geometry, type, classify_road_railway(type, service) AS class, oneway
           FROM (
-            SELECT * FROM road_z5to6
+            SELECT * FROM road_z5toz6
             WHERE z(!scale_denominator!) BETWEEN 5 AND 6
             UNION ALL
             SELECT * FROM road_z7
             WHERE z(!scale_denominator!) = 7
             UNION ALL
-            SELECT * FROM road_z8to10
+            SELECT * FROM road_z8toz10
             WHERE z(!scale_denominator!) BETWEEN 8 AND 10
             UNION ALL
             SELECT * FROM road_z11
@@ -405,7 +405,7 @@ Layer:
       table: |-
         ( 
           SELECT osm_id, geometry, classify_road(type) AS class, type, layer, oneway
-          FROM bridge_z12to14
+          FROM bridge_z12toz14
           WHERE z(!scale_denominator!) BETWEEN 12 AND 14
             AND geometry && !bbox!
           ORDER BY layer ASC
@@ -453,7 +453,7 @@ Layer:
             AND geom && !bbox!
           UNION ALL
           SELECT osm_id, geometry, admin_level, 0 AS disputed, maritime
-          FROM admin_z2to6
+          FROM admin_z2toz6
           WHERE z(!scale_denominator!) BETWEEN 2 AND 6
             AND geometry && !bbox!
           UNION ALL
@@ -482,7 +482,7 @@ Layer:
             AND geom && !bbox!
           UNION ALL
           SELECT osm_id, geometry, admin_level, 0 AS disputed, maritime
-          FROM admin_z7to14
+          FROM admin_z7toz14
           WHERE z(!scale_denominator!) BETWEEN 7 AND 14
             AND geometry && !bbox!
           UNION ALL
