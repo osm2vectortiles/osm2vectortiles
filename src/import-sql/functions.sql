@@ -116,6 +116,28 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql VOLATILE;
 
+CREATE OR REPLACE FUNCTION overlapping_tiles(
+    geom geometry,
+    max_zoom_level INTEGER
+) RETURNS TABLE (
+    tile_z INTEGER,
+    tile_x INTEGER,
+    tile_y INTEGER
+) AS $$
+BEGIN
+    RETURN QUERY
+        WITH RECURSIVE tiles(x, y, z, e) AS (
+            SELECT 0, 0, 0, geom && CDB_XYZ_Extent(0, 0, 0)
+            UNION ALL
+            SELECT x*2 + xx, y*2 + yy, z+1,
+                   geom && CDB_XYZ_Extent(x*2 + xx, y*2 + yy, z+1)
+            FROM tiles,
+            (VALUES (0, 0), (0, 1), (1, 1), (1, 0)) as c(xx, yy)
+            WHERE e AND z < max_zoom_level
+        )
+        SELECT z, x, y FROM tiles WHERE e;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
 
 CREATE OR REPLACE FUNCTION changed_tiles_landuse(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
@@ -127,7 +149,7 @@ BEGIN
 		), changed_tiles AS (
 		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
 		    FROM changed_geometries AS c
-		    INNER JOIN LATERAL overlapping_tiles(c.geometry) AS t ON true
+		    INNER JOIN LATERAL overlapping_tiles(c.geometry, 14) AS t ON true
 		)
 
 		SELECT c.x, c.y, c.z FROM landuse_z13toz14 AS l
@@ -166,3 +188,24 @@ BEGIN
 	);
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION changed_tiles_poi_label(ts timestamp)
+RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
+BEGIN
+	RETURN QUERY (
+		WITH changed_geometries AS (
+		    SELECT osm_id, geometry FROM layer_poi_label
+		    WHERE timestamp = ts
+		), changed_tiles AS (
+		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
+		    FROM changed_geometries AS c
+		    INNER JOIN LATERAL overlapping_tiles(c.geometry, 14) AS t ON true
+		)
+
+		SELECT c.x, c.y, c.z FROM poi_label_z14 AS l
+		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 14
+	);
+END;
+$$ LANGUAGE plpgsql;
+
+
