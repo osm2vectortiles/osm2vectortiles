@@ -57,8 +57,8 @@ update-scaleranks:
   image: "osm2vectortiles/update-scaleranks"
   links:
   - postgis:db
-detect-dirty-tiles:
-  image: "osm2vectortiles/detect-dirty-tiles"
+changed-tiles:
+  image: "osm2vectortiles/changed-tiles"
   volumes:
    - ./export:/data/export
   links:

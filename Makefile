@@ -1,8 +1,8 @@
 .PHONY: all
 
-all: postgis export-mbtiles import-osm import-external import-sql update-scaleranks create-extracts detect-dirty-tiles
+all: postgis export-mbtiles import-osm import-external import-sql update-scaleranks create-extracts changed-tiles
 
-fast: postgis export-mbtiles import-osm import-sql update-scaleranks create-extracts detect-dirty-tiles
+fast: postgis export-mbtiles import-osm import-sql update-scaleranks create-extracts changed-tiles
 
 postgis:
 	docker build -t osm2vectortiles/postgis src/postgis
@@ -25,5 +25,5 @@ update-scaleranks:
 create-extracts:
 	docker build -t osm2vectortiles/create-extracts tools/create-extracts
 
-detect-dirty-tiles:
-	docker build -t osm2vectortiles/detect-dirty-tiles src/detect-dirty-tiles
+changed-tiles:
+	docker build -t osm2vectortiles/changed-tiles src/changed-tiles
