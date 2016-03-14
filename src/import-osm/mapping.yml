@@ -323,7 +323,7 @@ tables:
       - locality
       - dwelling
     type: point
-  roads:
+  road_linestring:
     type: linestring
     fields:
     - name: osm_id
@@ -446,13 +446,15 @@ tables:
           - canopy
           golf:
           - hole
-  road_polygons:
+  road_polygon:
     type: polygon
     fields:
     - name: osm_id
       type: id
     - name: geometry
       type: geometry
+    - name: timestamp
+      type: pbf_timestamp
     - name: type
       type: mapping_value
     - key: oneway
