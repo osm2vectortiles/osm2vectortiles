@@ -55,100 +55,44 @@ function update_timestamp() {
     local timestamp="$1"
     store_timestamp_history "$timestamp"
 
-	exec_sql "UPDATE osm_admin SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_aero_lines SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_aero_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_barrier_lines SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_barrier_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_buildings SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_buildings_gen0 SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_housenumbers_points SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_housenumbers_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_landusages SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_landusages_gen0 SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_landusages_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_places SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_poi_points SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_poi_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_roads SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_water_lines SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_water_polygons SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_water_polygons_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_admin_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_aero_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_aero_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_barrier_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_barrier_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_building_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_building_polygon_gen0 SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_housenumber_point SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_housenumber_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_landuse_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_landuse_polygon_gen0 SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_landuse_polygon_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_place_point SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_poi_point SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_poi_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_road_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_water_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_water_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_water_polygon_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
 }
 
-function drop_views() {
-    # landuse views
-    exec_sql "DROP VIEW IF EXISTS landuse_z5 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS landuse_z6 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS landuse_z7 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS landuse_z8 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS landuse_z9 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS landuse_z10 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS landuse_z11 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS landuse_z12 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS landuse_z13toz14 CASCADE"
-    # waterway views
-    exec_sql "DROP VIEW IF EXISTS waterway_z8toz12 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS waterway_z13toz14 CASCADE"
-    # water views
-    exec_sql "DROP VIEW IF EXISTS water_z6toz12 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS water_z13toz14 CASCADE"
-    # aeroway views
-    exec_sql "DROP VIEW IF EXISTS aeroway_z12toz14 CASCADE"
-    # barrier_line views
-    exec_sql "DROP VIEW IF EXISTS barrier_line_z14 CASCADE"
-    # building views
-    exec_sql "DROP VIEW IF EXISTS building_z13 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS building_z14 CASCADE"
-    # landuse views
-    exec_sql "DROP VIEW IF EXISTS landuse_overlay_z7 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS landuse_overlay_z8 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS landuse_overlay_z9 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS landuse_overlay_z10 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS landuse_overlay_z11toz12 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS landuse_overlay_z13toz14 CASCADE"
-    # tunnel views
-    exec_sql "DROP VIEW IF EXISTS tunnel_z12toz14 CASCADE"
-    # road views
-    exec_sql "DROP VIEW IF EXISTS road_z5toz6 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS road_z7 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS road_z8toz10 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS road_z11 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS road_z12 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS road_z13 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS road_z14 CASCADE"
-    # bridge views
-    exec_sql "DROP VIEW IF EXISTS bridge_z12toz14 CASCADE"
-    # admin views
-    exec_sql "DROP VIEW IF EXISTS admin_z2toz6 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS admin_z7toz14 CASCADE"
-    # place_label views
-    exec_sql "DROP VIEW IF EXISTS place_label_z4toz5 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS place_label_z6 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS place_label_z7 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS place_label_z8 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS place_label_z9toz10 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS place_label_z11toz12 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS place_label_z13 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS place_label_z14 CASCADE"
-    # water_label views
-    exec_sql "DROP VIEW IF EXISTS water_label_z10 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS water_label_z11 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS water_label_z12 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS water_label_z13 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS water_label_z14 CASCADE"
-    # poi_label views
-    exec_sql "DROP VIEW IF EXISTS poi_label_z14 CASCADE"
-    # road_label views
-    exec_sql "DROP VIEW IF EXISTS road_label_z8toz10 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS road_label_z11 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS road_label_z12toz13 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS road_label_z14 CASCADE"
-    # waterway_label views
-    exec_sql "DROP VIEW IF EXISTS waterway_label_z8toz12 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS waterway_label_z13toz14 CASCADE"
-    # housenum_label views
-    exec_sql "DROP VIEW IF EXISTS housenum_label_z14 CASCADE"
+function drop_tables() {
+    exec_sql "DROP TABLE IF EXISTS osm_landuse_polygon CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_admin_linestring CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_aero_linestring CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_aero_polygon CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_barrier_polygon CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_barrier_linestring CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_building_polygon CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_housenumber_point CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_housenumber_polygon CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_place_polygon CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_road_polygon CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_road_linestring CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_water_linestring CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_water_polygon CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_poi_polygon CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_poi_point CASCADE"
 }
 
 function exec_sql() {
@@ -158,7 +102,7 @@ function exec_sql() {
         --port=5432 \
         --dbname="$OSM_DB" \
         --username="$OSM_USER" \
-        -c "$sql_cmd" || true
+        -c "$sql_cmd"
 }
 
 function merge_latest_diffs() {
