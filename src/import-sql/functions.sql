@@ -87,31 +87,76 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
-CREATE OR REPLACE FUNCTION detect_dirty_tiles(
-    view_name VARCHAR,
-    ts timestamp
+CREATE OR REPLACE FUNCTION overlapping_tiles(
+    geom geometry,
+    max_zoom_level INTEGER
 ) RETURNS TABLE (
-    z INTEGER,
-    x INTEGER,
-    y INTEGER
+    tile_z INTEGER,
+    tile_x INTEGER,
+    tile_y INTEGER
 ) AS $$
 BEGIN
-    RETURN QUERY EXECUTE 'WITH RECURSIVE dirty_tiles(x, y, z, e) AS ('
-        'SELECT 0, 0, 0, EXISTS('
-        'SELECT 1 FROM changed_poi_points '
-        'WHERE geometry && CDB_XYZ_Extent(0, 0, 0)'
-        ')'
-        'UNION ALL '
-        'SELECT x*2 + xx, y*2 + yy, z+1, EXISTS('
-        'SELECT 1 FROM changed_poi_points '
-        'WHERE geometry && CDB_XYZ_Extent(x*2 + xx, y*2 + yy, z+1)'
-        ') FROM dirty_tiles,'
-        '(VALUES (0, 0), (0, 1), (1, 1), (1, 0)) as c(xx, yy)'
-        'WHERE e AND z < 14'
-        '), changed_poi_points AS ('
-        'SELECT * FROM ' || quote_ident(view_name) || ' WHERE timestamp = $1'
-        ')'
-        'SELECT z, x, y FROM dirty_tiles where e;'
-	USING ts;
+    RETURN QUERY
+        WITH RECURSIVE tiles(x, y, z, e) AS (
+            SELECT 0, 0, 0, geom && CDB_XYZ_Extent(0, 0, 0)
+            UNION ALL
+            SELECT x*2 + xx, y*2 + yy, z+1,
+                   geom && CDB_XYZ_Extent(x*2 + xx, y*2 + yy, z+1)
+            FROM tiles,
+            (VALUES (0, 0), (0, 1), (1, 1), (1, 0)) as c(xx, yy)
+            WHERE e AND z < max_zoom_level
+        )
+        SELECT z, x, y FROM tiles WHERE e;
 END;
-$$ LANGUAGE plpgsql VOLATILE;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION changed_tiles_latest_timestamp()
+RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
+DECLARE
+	latest_ts timestamp;
+BEGIN
+	SELECT MAX(timestamp) INTO latest_ts FROM osm_timestamps;
+	RETURN QUERY SELECT * FROM changed_tiles(latest_ts);
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION changed_tiles(ts timestamp)
+RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
+BEGIN
+	RETURN QUERY (
+	    SELECT * FROM changed_tiles_admin(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_aeroway(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_barrier_line(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_bridge(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_building(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_housenum_label(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_landuse(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_landuse_overlay(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_place_label(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_poi_label(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_road(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_road_label(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_tunnel(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_water(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_water_label(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_waterway(ts)
+	    UNION
+	    SELECT * FROM changed_tiles_waterway_label(ts)
+	);
+END;
+$$ LANGUAGE plpgsql;
