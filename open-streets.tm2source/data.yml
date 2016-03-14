@@ -381,7 +381,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       class: String
       oneway: Number
       osm_id: Number
@@ -403,7 +403,7 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-        ( 
+        (
           SELECT osm_id, geometry, classify_road(type) AS class, type, layer, oneway
           FROM bridge_z12toz14
           WHERE z(!scale_denominator!) BETWEEN 12 AND 14
@@ -931,7 +931,6 @@ Layer:
               SELECT * FROM road_label_z14
               WHERE z(!scale_denominator!) = 14
             ) AS road_label
-            WHERE geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
