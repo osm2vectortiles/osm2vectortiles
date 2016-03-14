@@ -787,7 +787,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
+          SELECT geometry, osm_id,
           name,
           area,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
