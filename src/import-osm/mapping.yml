@@ -360,6 +360,7 @@ tables:
     filters:
       exclude_tags:
       - ["area", "yes"]
+      - ["amenity", "parking"]
     mappings:
       railway:
         mapping:
