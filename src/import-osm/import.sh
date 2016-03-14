@@ -110,18 +110,18 @@ function drop_views() {
     # tunnel views
     exec_sql "DROP VIEW IF EXISTS tunnel_z12toz14 CASCADE"
     # road views
-    exec_sql "DROP VIEW IF EXISTS road_z5to6 CASCADE"
+    exec_sql "DROP VIEW IF EXISTS road_z5toz6 CASCADE"
     exec_sql "DROP VIEW IF EXISTS road_z7 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS road_z8to10 CASCADE"
+    exec_sql "DROP VIEW IF EXISTS road_z8toz10 CASCADE"
     exec_sql "DROP VIEW IF EXISTS road_z11 CASCADE"
     exec_sql "DROP VIEW IF EXISTS road_z12 CASCADE"
     exec_sql "DROP VIEW IF EXISTS road_z13 CASCADE"
     exec_sql "DROP VIEW IF EXISTS road_z14 CASCADE"
     # bridge views
-    exec_sql "DROP VIEW IF EXISTS bridge_z12to14 CASCADE"
+    exec_sql "DROP VIEW IF EXISTS bridge_z12toz14 CASCADE"
     # admin views
-    exec_sql "DROP VIEW IF EXISTS admin_z2to6 CASCADE"
-    exec_sql "DROP VIEW IF EXISTS admin_z7to14 CASCADE"
+    exec_sql "DROP VIEW IF EXISTS admin_z2toz6 CASCADE"
+    exec_sql "DROP VIEW IF EXISTS admin_z7toz14 CASCADE"
     # place_label views
     exec_sql "DROP VIEW IF EXISTS place_label_z4toz5 CASCADE"
     exec_sql "DROP VIEW IF EXISTS place_label_z6 CASCADE"
