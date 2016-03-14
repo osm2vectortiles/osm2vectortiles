@@ -102,7 +102,7 @@ function exec_sql() {
         --port=5432 \
         --dbname="$OSM_DB" \
         --username="$OSM_USER" \
-        -c "$sql_cmd" || true
+        -c "$sql_cmd"
 }
 
 function merge_latest_diffs() {
