@@ -1,22 +1,22 @@
 generalized_tables:
-  landusages_gen0:
-    source: landusages_gen1
+  landuse_polygon_gen0:
+    source: landuse_polygon_gen1
     sql_filter: ST_Area(geometry)>500000.000000
     tolerance: 200.0
-  landusages_gen1:
-    source: landusages
+  landuse_polygon_gen1:
+    source: landuse_polygon
     sql_filter: ST_Area(geometry)>50000.000000
     tolerance: 50.0
-  water_polygons_gen1:
-    source: water_polygons
+  water_polygon_gen1:
+    source: water_polygon
     sql_filter: ST_Area(geometry)>50000.000000
     tolerance: 50.0
-  buildings_gen0:
-    source: buildings
+  building_polygon_gen0:
+    source: building_polygon
     sql_filter: ST_Area(geometry)>1700.000000
     tolerance: 0.0
 tables:
-  admin:
+  admin_linestring:
     fields:
     - name: osm_id
       type: id
@@ -37,7 +37,7 @@ tables:
       - administrative
       - maritime
     type: linestring
-  aero_lines:
+  aero_linestring:
     fields:
     - name: osm_id
       type: id
@@ -57,7 +57,7 @@ tables:
       - gate
       - taxiway
     type: linestring
-  aero_polygons:
+  aero_polygon:
     fields:
     - name: osm_id
       type: id
@@ -77,7 +77,7 @@ tables:
       - gate
       - taxiway
     type: polygon
-  barrier_lines:
+  barrier_linestring:
     fields:
     - name: osm_id
       type: id
@@ -116,7 +116,7 @@ tables:
       - embankment
       - groyne
     type: linestring
-  barrier_polygons:
+  barrier_polygon:
     fields:
     - name: osm_id
       type: id
@@ -155,7 +155,7 @@ tables:
       - embankment
       - groyne
     type: polygon
-  buildings:
+  building_polygon:
     fields:
     - name: osm_id
       type: id
@@ -167,8 +167,21 @@ tables:
       building:
       - __any__
     type: polygon
-  housenumbers_points:
+  housenumber_point:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: timestamp
+      type: pbf_timestamp
+    - name: house_num
+      type: mapping_value
+    mapping:
+      addr:housenumber:
+      - __any__
     type: point
+  housenumber_polygon:
     fields:
     - name: osm_id
       type: id
@@ -181,22 +194,8 @@ tables:
     mapping:
       addr:housenumber:
       - __any__
-  housenumbers_polygons:
     type: polygon
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - name: timestamp
-      type: pbf_timestamp
-    - name: house_num
-      type: mapping_value
-    mapping:
-      addr:housenumber:
-      - __any__
-  landusages:
-    type: polygon
+  landuse_polygon:
     fields:
     - name: osm_id
       type: id
@@ -262,7 +261,8 @@ tables:
       tourism:
       - zoo
       - camp_site
-  places:
+    type: polygon
+  place_point:
     fields:
     - name: osm_id
       type: id
@@ -567,8 +567,8 @@ tables:
           - canopy
           golf:
           - hole
-  water_polygons:
-    type: polygon
+    type: linestring
+  water_polygon:
     fields:
     - name: osm_id
       type: id
@@ -624,8 +624,8 @@ tables:
       - canal
       - drain
       - ditch
-  water_lines:
-    type: linestring
+    type: polygon
+  water_linestring:
     fields:
     - name: osm_id
       type: id
@@ -669,8 +669,8 @@ tables:
       - canal
       - drain
       - ditch
-  poi_polygons:
-    type: polygon
+    type: linestring
+  poi_polygon:
     fields:
     - name: osm_id
       type: id
@@ -1015,8 +1015,8 @@ tables:
       - canopy
       historic:
       - monument
-  poi_points:
-    type: point
+    type: polygon
+  poi_point:
     fields:
     - name: osm_id
       type: id
@@ -1359,3 +1359,4 @@ tables:
       - canopy
       historic:
       - monument
+    type: point
