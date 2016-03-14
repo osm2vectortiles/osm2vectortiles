@@ -323,6 +323,12 @@ Layer:
           FROM tunnel_z12toz14
           WHERE z(!scale_denominator!) BETWEEN 12 AND 14
             AND geometry && !bbox!
+          UNION ALL
+            SELECT osm_id, geometry, type, layer, oneway
+            FROM osm_road_polygons
+            WHERE z(!scale_denominator!) >= 10
+              AND geometry && !bbox!
+              AND is_tunnel
           ORDER BY layer ASC
         ) AS data
       type: postgis
@@ -377,6 +383,44 @@ Layer:
           ) AS road
           WHERE geometry && !bbox!
           ORDER BY z_order ASC
+            UNION ALL
+            SELECT osm_id, geometry, type, service, oneway, z_order
+            FROM osm_road_polygons
+            WHERE geometry && !bbox! AND (
+                -- Do not show bridges and tunnels after z12
+                z(!scale_denominator!) < 12 OR (NOT is_bridge AND NOT is_tunnel)
+            )
+            AND (
+              (
+                type IN ('motorway', 'trunk')
+                AND z(!scale_denominator!) >= 5
+              )
+              OR (
+                type IN ('primary', 'motorway_link', 'primary_link', 'trunk_link')
+                AND z(!scale_denominator!) >= 7
+              )
+              OR (
+                type IN ('secondary', 'secondary_link')
+                AND z(!scale_denominator!) >= 8
+              )
+              OR (
+                type IN ('tertiary', 'teriary_link')
+                AND z(!scale_denominator!) >= 11
+              )
+              OR (
+                classify_road(type) IN ('major_rail', 'street')
+                AND z(!scale_denominator!) >= 12
+                AND NOT is_bridge AND NOT is_tunnel
+              )
+              OR (
+                classify_road(type) IN ('minor_rail', 'street_limited', 'service')
+                AND z(!scale_denominator!) >= 13
+              )
+              OR (
+                z(!scale_denominator!) >= 14
+              )
+            )
+          ) ALL_ROADS ORDER BY z_order ASC
         ) AS data
       type: postgis
       user: osm
@@ -403,11 +447,26 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-        ( 
+        (
           SELECT osm_id, geometry, classify_road(type) AS class, type, layer, oneway
           FROM bridge_z12toz14
           WHERE z(!scale_denominator!) BETWEEN 12 AND 14
             AND geometry && !bbox!
+          UNION ALL
+          SELECT osm_id, geometry, classify_road(type) AS class, type, layer, oneway
+          FROM (
+            SELECT osm_id, geometry, type, layer, oneway
+            FROM osm_roads
+            WHERE z(!scale_denominator!) >= 12 
+              AND geometry && !bbox! 
+              AND is_bridge
+            UNION ALL
+            SELECT osm_id, geometry, type, layer, oneway
+            FROM osm_road_polygons
+            WHERE z(!scale_denominator!) >= 12 
+              AND geometry && !bbox! 
+              AND is_bridge
+          ) ALL_BRIDGES
           ORDER BY layer ASC
         ) AS data
       type: postgis
@@ -932,6 +991,42 @@ Layer:
               WHERE z(!scale_denominator!) = 14
             ) AS road_label
             WHERE geometry && !bbox!
+              UNION ALL
+              SELECT *
+              FROM osm_road_polygons
+              WHERE
+                geometry && !bbox! AND
+                (
+                  (
+                    type IN ('motorway')
+                    AND ref <> ''
+                    AND z(!scale_denominator!) >= 8
+                  )
+                  OR
+                  (
+                    type IN ('motorway_link', 'primary', 'primary_link', 'trunk',
+                             'trunk_link', 'secondary', 'secondary_link')
+                    AND (name <> '' OR ref <> '')
+                    AND z(!scale_denominator!) >= 11
+                  )
+                  OR
+                  (
+                    type IN ('tertiary', 'tertiary_link', 'residential', 'unclassified',
+                        'living_street', 'pedestrian', 'construction', 'rail', 'monorail',
+                        'narrow_gauge', 'subway', 'tram')
+                    AND name <> ''
+                    AND z(!scale_denominator!) >= 12
+                  )
+                  OR
+                  (
+                    type IN ('service', 'track', 'driveway', 'path',
+                             'cycleway', 'ski', 'steps', 'bridleway', 'footway', 'funicular',
+                             'light_rail', 'preserved')
+                    AND name <> ''
+                    AND z(!scale_denominator!) >= 14
+                  )
+                )
+            ) ALL_ROAD_LABELS
         ) AS data
       type: postgis
       user: osm
