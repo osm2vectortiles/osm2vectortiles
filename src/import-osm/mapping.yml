@@ -567,7 +567,6 @@ tables:
           - canopy
           golf:
           - hole
-    type: linestring
   water_polygon:
     fields:
     - name: osm_id
