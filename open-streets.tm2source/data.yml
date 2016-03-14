@@ -28,64 +28,43 @@ Layer:
         (
           SELECT osm_id, geometry, classify_landuse(type) as class, type
             FROM (
-              SELECT osm_id, geometry, type FROM osm_landusages_gen0
-              WHERE geometry && !bbox!
-              AND type IN ('wood', 'nature_reserve', 'national_park', 'forest')
-              AND (
-                (
-                  st_area(geometry) > 300000000
-                  AND z(!scale_denominator!) = 5
-                )
-                OR
-                (
-                  st_area(geometry) > 100000000
-                  AND z(!scale_denominator!) = 6
-                )
-                OR
-                (
-                  st_area(geometry) > 25000000
-                  AND z(!scale_denominator!) = 7
-                )
-                OR
-                (
-                  st_area(geometry) > 5000000
-                  AND z(!scale_denominator!) = 8
-                )
-                OR
-                (
-                  st_area(geometry) > 2000000
-                  AND z(!scale_denominator!) = 9
-                )
-                OR
-                (
-                  st_area(geometry) > 500000
-                  AND z(!scale_denominator!) = 10
-                )
-              )
+              SELECT osm_id, geometry, type
+              FROM landuse_z5
+              WHERE z(!scale_denominator!) = 5
               UNION ALL
-              SELECT osm_id, geometry, type FROM osm_landusages_gen1
-              WHERE geometry && !bbox!
-              AND (
-                  type IN ('wood', 'nature_reserve', 'national_park', 'forest')
-                  AND st_area(geometry) > 100000
-              )
-              AND z(!scale_denominator!) = 11
+              SELECT osm_id, geometry, type
+              FROM landuse_z6
+              WHERE z(!scale_denominator!) = 6
               UNION ALL
-              SELECT osm_id, geometry, type FROM osm_landusages
-              WHERE geometry && !bbox!
-              AND (
-                (
-                  type IN ('wood', 'nature_reserve', 'national_park', 'forest')
-                  AND st_area(geometry) > 10000
-                  AND z(!scale_denominator!) = 12
-                )
-                OR
-                (
-                  type NOT IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
-                  AND z(!scale_denominator!) >= 13
-                )
-              )
-            ) AS landusages
+              SELECT osm_id, geometry, type
+              FROM landuse_z7
+              WHERE z(!scale_denominator!) = 7
+              UNION ALL
+              SELECT osm_id, geometry, type
+              FROM landuse_z8
+              WHERE z(!scale_denominator!) = 8
+              UNION ALL
+              SELECT osm_id, geometry, type
+              FROM landuse_z9
+              WHERE z(!scale_denominator!) = 9
+              UNION ALL
+              SELECT osm_id, geometry, type
+              FROM landuse_z10
+              WHERE z(!scale_denominator!) = 10
+              UNION ALL
+              SELECT osm_id, geometry, type
+              FROM landuse_z11
+              WHERE z(!scale_denominator!) = 11
+              UNION ALL
+              SELECT osm_id, geometry, type
+              FROM landuse_z12
+              WHERE z(!scale_denominator!) = 12
+              UNION ALL
+              SELECT osm_id, geometry, type
+              FROM landuse_z13toz14
+              WHERE z(!scale_denominator!) BETWEEN 13 AND 14
+            ) AS landuse
+            WHERE geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
@@ -113,19 +92,16 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry, type, type as class
-          FROM osm_water_lines
-          WHERE (
-            geometry && !bbox! AND (
-              (
-                type IN ('river', 'canal')
-                AND z(!scale_denominator!) >= 8
-              )
-              OR (
-                type IN ('stream', 'stream_intermittent')
-                AND z(!scale_denominator!) >= 13
-              )
-            )
-          )
+          FROM (
+            SELECT *
+            FROM waterway_z8toz12
+            WHERE z(!scale_denominator!) BETWEEN 8 AND 12
+            UNION ALL
+            SELECT *
+            FROM waterway_z13toz14
+            WHERE z(!scale_denominator!) BETWEEN 13 AND 14
+          ) AS waterway
+          WHERE geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
@@ -158,11 +134,11 @@ Layer:
           UNION ALL
           SELECT 0 AS osm_id, way AS geometry FROM osm_ocean_polygons
           WHERE way && !bbox!
-            AND z(!scale_denominator!) >= 1
+            AND z(!scale_denominator!) BETWEEN 1 AND 14
           UNION ALL
           SELECT 0 AS osm_id, geom AS geometry FROM ne_110m_lakes
           WHERE geom && !bbox!
-            AND z(!scale_denominator!) between 0 AND 1
+            AND z(!scale_denominator!) BETWEEN 0 AND 1
           UNION ALL
           SELECT 0 AS osm_id, geom AS geometry FROM ne_50m_lakes
           WHERE geom && !bbox!
@@ -172,13 +148,13 @@ Layer:
           WHERE geom && !bbox!
             AND z(!scale_denominator!) BETWEEN 4 AND 5
           UNION ALL
-          SELECT osm_id, geometry FROM osm_water_polygons_gen1
+          SELECT osm_id, geometry FROM water_z6toz12
           WHERE geometry && !bbox!
           AND z(!scale_denominator!) BETWEEN 6 AND 12
           UNION ALL
-          SELECT osm_id, geometry FROM osm_water_polygons
+          SELECT osm_id, geometry FROM water_z13toz14
           WHERE geometry && !bbox!
-          AND z(!scale_denominator!) > 12
+          AND z(!scale_denominator!) BETWEEN 13 AND 14
         ) AS data
       type: postgis
       user: osm
@@ -204,14 +180,9 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry, type
-          FROM osm_aero_lines
+          FROM aeroway_z12toz14
           WHERE geometry && !bbox!
-            AND z(!scale_denominator!) >= 12
-          UNION ALL
-          SELECT osm_id, geometry, type
-          FROM osm_aero_polygons
-          WHERE geometry && !bbox!
-            AND z(!scale_denominator!) >= 12
+            AND z(!scale_denominator!) BETWEEN 12 AND 14
         ) AS data
       type: postgis
       user: osm
@@ -238,15 +209,9 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry, classify_barrier_line(type) AS class
-          FROM (
-            SELECT osm_id, geometry, type FROM osm_barrier_lines
-            WHERE geometry && !bbox!
-              AND z(!scale_denominator!) >= 14
-            UNION ALL
-            SELECT osm_id, geometry, type FROM osm_barrier_polygons
-            WHERE geometry && !bbox!
-              AND z(!scale_denominator!) >= 14
-          ) AS barrier_line
+          FROM barrier_line_z14
+          WHERE geometry && !bbox!
+            AND z(!scale_denominator!) = 14
         ) AS data
       type: postgis
       user: osm
@@ -275,15 +240,14 @@ Layer:
           SELECT osm_id, geometry
           FROM (
             SELECT osm_id, geometry
-            FROM osm_buildings_gen0
-            WHERE geometry && !bbox!
-              AND z(!scale_denominator!) >= 13
+            FROM building_z13
+            WHERE z(!scale_denominator!) = 13
             UNION ALL
             SELECT osm_id, geometry
-            FROM osm_buildings
-            WHERE geometry && !bbox!
-              AND z(!scale_denominator!) >= 14
+            FROM building_z14
+            WHERE z(!scale_denominator!) = 14
           ) AS building
+          WHERE geometry && !bbox!
           ORDER BY ST_YMin(ST_Envelope(geometry)) DESC
         ) AS data
       type: postgis
@@ -311,41 +275,25 @@ Layer:
         (
           SELECT osm_id, geometry, classify_landuse_overlay(type) AS class
           FROM (
-            SELECT osm_id, geometry, type FROM osm_landusages_gen0
-            WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
-            AND geometry && !bbox!
-            AND (
-              (
-                st_area(geometry) > 20000000
-                AND z(!scale_denominator!) = 7
-              )
-              OR
-              (
-                st_area(geometry) > 6000000
-                AND z(!scale_denominator!) = 8
-              )
-              OR
-              (
-                st_area(geometry) > 2000000
-                AND z(!scale_denominator!) = 9
-              )
-              OR
-              (
-                st_area(geometry) > 500000
-                AND z(!scale_denominator!) = 10
-              )
-            )
+            SELECT osm_id, geometry, type FROM landuse_overlay_z7
+            WHERE z(!scale_denominator!) = 7
             UNION ALL
-            SELECT osm_id, geometry, type FROM osm_landusages_gen1
-            WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
-            AND geometry && !bbox!
-            AND z(!scale_denominator!) BETWEEN 11 AND 12
+            SELECT osm_id, geometry, type FROM landuse_overlay_z8
+            WHERE z(!scale_denominator!) = 8
             UNION ALL
-            SELECT osm_id, geometry, type FROM osm_landusages
-            WHERE type IN ('wetland', 'marsh', 'swamp', 'bog', 'mud', 'tidalflat')
-            AND geometry && !bbox!
-            AND z(!scale_denominator!) >= 13
+            SELECT osm_id, geometry, type FROM landuse_overlay_z9
+            WHERE z(!scale_denominator!) = 9
+            UNION ALL
+            SELECT osm_id, geometry, type FROM landuse_overlay_z10
+            WHERE z(!scale_denominator!) = 10
+            UNION ALL
+            SELECT osm_id, geometry, type FROM landuse_overlay_z11toz12
+            WHERE z(!scale_denominator!) BETWEEN 11 AND 12
+            UNION ALL
+            SELECT osm_id, geometry, type FROM landuse_overlay_z13toz14
+            WHERE z(!scale_denominator!) BETWEEN 13 AND 14
           ) AS landuse_overlay
+          WHERE geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
@@ -372,19 +320,9 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry, classify_road(type) AS class, type, layer, oneway
-          FROM (
-            SELECT osm_id, geometry, type, layer, oneway
-            FROM osm_roads
-            WHERE z(!scale_denominator!) >= 10
-              AND geometry && !bbox!
-              AND is_tunnel
-            UNION ALL
-            SELECT osm_id, geometry, type, layer, oneway
-            FROM osm_road_polygons
-            WHERE z(!scale_denominator!) >= 10
-              AND geometry && !bbox!
-              AND is_tunnel
-          ) ALL_TUNNELS
+          FROM tunnel_z12toz14
+          WHERE z(!scale_denominator!) BETWEEN 12 AND 14
+            AND geometry && !bbox!
           ORDER BY layer ASC
         ) AS data
       type: postgis
@@ -416,85 +354,34 @@ Layer:
         (
           SELECT osm_id, geometry, type, classify_road_railway(type, service) AS class, oneway
           FROM (
-            SELECT osm_id, geometry, type, service, oneway, z_order
-            FROM osm_roads
-            WHERE geometry && !bbox! AND (
-                -- Do not show bridges and tunnels after z12
-                z(!scale_denominator!) < 12 OR (NOT is_bridge AND NOT is_tunnel)
-            )
-            AND (
-              (
-                type IN ('motorway', 'trunk')
-                AND z(!scale_denominator!) >= 5
-              )
-              OR (
-                type IN ('primary', 'motorway_link', 'primary_link', 'trunk_link')
-                AND z(!scale_denominator!) >= 7
-              )
-              OR (
-                type IN ('secondary', 'secondary_link')
-                AND z(!scale_denominator!) >= 8
-              )
-              OR (
-                type IN ('tertiary', 'teriary_link')
-                AND z(!scale_denominator!) >= 11
-              )
-              OR (
-                classify_road(type) IN ('major_rail', 'street')
-                AND z(!scale_denominator!) >= 12
-                AND NOT is_bridge AND NOT is_tunnel
-              )
-              OR (
-                classify_road(type) IN ('minor_rail', 'street_limited', 'service')
-                AND z(!scale_denominator!) >= 13
-              )
-              OR (
-                z(!scale_denominator!) >= 14
-              )
-            )
+            SELECT * FROM road_z5toz6
+            WHERE z(!scale_denominator!) BETWEEN 5 AND 6
             UNION ALL
-            SELECT osm_id, geometry, type, service, oneway, z_order
-            FROM osm_road_polygons
-            WHERE geometry && !bbox! AND (
-                -- Do not show bridges and tunnels after z12
-                z(!scale_denominator!) < 12 OR (NOT is_bridge AND NOT is_tunnel)
-            )
-            AND (
-              (
-                type IN ('motorway', 'trunk')
-                AND z(!scale_denominator!) >= 5
-              )
-              OR (
-                type IN ('primary', 'motorway_link', 'primary_link', 'trunk_link')
-                AND z(!scale_denominator!) >= 7
-              )
-              OR (
-                type IN ('secondary', 'secondary_link')
-                AND z(!scale_denominator!) >= 8
-              )
-              OR (
-                type IN ('tertiary', 'teriary_link')
-                AND z(!scale_denominator!) >= 11
-              )
-              OR (
-                classify_road(type) IN ('major_rail', 'street')
-                AND z(!scale_denominator!) >= 12
-                AND NOT is_bridge AND NOT is_tunnel
-              )
-              OR (
-                classify_road(type) IN ('minor_rail', 'street_limited', 'service')
-                AND z(!scale_denominator!) >= 13
-              )
-              OR (
-                z(!scale_denominator!) >= 14
-              )
-            )
-          ) ALL_ROADS ORDER BY z_order ASC
+            SELECT * FROM road_z7
+            WHERE z(!scale_denominator!) = 7
+            UNION ALL
+            SELECT * FROM road_z8toz10
+            WHERE z(!scale_denominator!) BETWEEN 8 AND 10
+            UNION ALL
+            SELECT * FROM road_z11
+            WHERE z(!scale_denominator!) = 11
+            UNION ALL
+            SELECT * FROM road_z12
+            WHERE z(!scale_denominator!) = 12
+            UNION ALL
+            SELECT * FROM road_z13
+            WHERE z(!scale_denominator!) = 13
+            UNION ALL
+            SELECT * FROM road_z14
+            WHERE z(!scale_denominator!) = 14
+          ) AS road
+          WHERE geometry && !bbox!
+          ORDER BY z_order ASC
         ) AS data
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       class: String
       oneway: Number
       osm_id: Number
@@ -516,21 +403,11 @@ Layer:
       port: 5432
       srid: ''
       table: |-
-        ( 
+        (
           SELECT osm_id, geometry, classify_road(type) AS class, type, layer, oneway
-          FROM (
-            SELECT osm_id, geometry, type, layer, oneway
-            FROM osm_roads
-            WHERE z(!scale_denominator!) >= 12 
-              AND geometry && !bbox! 
-              AND is_bridge
-            UNION ALL
-            SELECT osm_id, geometry, type, layer, oneway
-            FROM osm_road_polygons
-            WHERE z(!scale_denominator!) >= 12 
-              AND geometry && !bbox! 
-              AND is_bridge
-          ) ALL_BRIDGES
+          FROM bridge_z12toz14
+          WHERE z(!scale_denominator!) BETWEEN 12 AND 14
+            AND geometry && !bbox!
           ORDER BY layer ASC
         ) AS data
       type: postgis
@@ -575,11 +452,9 @@ Layer:
           WHERE z(!scale_denominator!) BETWEEN 4 AND 6
             AND geom && !bbox!
           UNION ALL
-          SELECT osm_id, geometry AS geom, admin_level, 0 AS disputed, maritime
-          FROM osm_admin
-          WHERE maritime = 1
-            AND admin_level = 2
-            AND z(!scale_denominator!) >= 2
+          SELECT osm_id, geometry, admin_level, 0 AS disputed, maritime
+          FROM admin_z2toz6
+          WHERE z(!scale_denominator!) BETWEEN 2 AND 6
             AND geometry && !bbox!
           UNION ALL
           SELECT 0 AS osm_id, geom, 4 AS admin_level, 0 AS disputed, 0 AS maritime
@@ -606,16 +481,14 @@ Layer:
             AND scalerank BETWEEN 7 AND 9
             AND geom && !bbox!
           UNION ALL
-          SELECT osm_id, geometry AS geom, admin_level, 0 AS disputed, maritime
-          FROM osm_admin
-          WHERE maritime = 0
-            AND ( admin_level = 2 OR admin_level = 4 )
-            AND z(!scale_denominator!) >= 7
+          SELECT osm_id, geometry, admin_level, 0 AS disputed, maritime
+          FROM admin_z7toz14
+          WHERE z(!scale_denominator!) BETWEEN 7 AND 14
             AND geometry && !bbox!
           UNION ALL
           SELECT 0 AS osm_id, geom, 2 AS admin_level, 1 AS disputed, 0 AS maritime
           FROM ne_10m_admin_0_boundary_lines_disputed_areas
-          WHERE z(!scale_denominator!) >= 7
+          WHERE z(!scale_denominator!) BETWEEN 7 AND 14
             AND geom && !bbox!
         ) AS data
       type: postgis
@@ -850,42 +723,35 @@ Layer:
         rank() OVER (PARTITION BY LabelGrid(geometry, 200 * !pixel_width!)
                      ORDER BY scalerank ASC NULLS LAST,
                               population DESC NULLS LAST
-        ) as localrank
-        FROM osm_places
-        WHERE geometry && !bbox! AND name <> ''
-        AND (
-          (
-            scalerank < 3 AND scalerank IS NOT NULL
-            AND z(!scale_denominator!) >= 4
-          )
-          OR (
-            scalerank < 8 AND scalerank IS NOT NULL
-            AND z(!scale_denominator!) >= 6
-          )
-          OR (
-            scalerank IS NOT NULL
-            AND z(!scale_denominator!) >= 7
-          )
-          OR (
-            type IN ('city', 'town')
-            AND z(!scale_denominator!) >= 8
-          )
-          OR (
-            type IN ('town', 'district')
-            AND z(!scale_denominator!) >= 9
-          )
-          OR (
-            type = 'village'
-            AND z(!scale_denominator!) >= 11
-          )
-          OR (
-            type IN ('hamlet', 'suburb','neighbourhood')
-            AND z(!scale_denominator!) >= 13
-          )
-          OR z(!scale_denominator!) >= 14
-        )
+        ) AS localrank
+        FROM (
+            SELECT * FROM place_label_z4toz5
+            WHERE z(!scale_denominator!) BETWEEN 4 AND 5
+            UNION ALL
+            SELECT * FROM place_label_z6
+            WHERE z(!scale_denominator!) = 6
+            UNION ALL
+            SELECT * FROM place_label_z7
+            WHERE z(!scale_denominator!) = 7
+            UNION ALL
+            SELECT * FROM place_label_z8
+            WHERE z(!scale_denominator!) = 8
+            UNION ALL
+            SELECT * FROM place_label_z9toz10
+            WHERE z(!scale_denominator!) BETWEEN 9 AND 10
+            UNION ALL
+            SELECT * FROM place_label_z11toz12
+            WHERE z(!scale_denominator!) BETWEEN 11 AND 12
+            UNION ALL
+            SELECT * FROM place_label_z13
+            WHERE z(!scale_denominator!) = 13
+            UNION ALL
+            SELECT * FROM place_label_z14
+            WHERE z(!scale_denominator!) = 14
+          ) AS place_label
+        WHERE geometry && !bbox!
         ORDER BY population DESC NULLS LAST
-        ) as data
+        ) AS data
       type: postgis
       user: osm
     description: ''
@@ -921,7 +787,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT ST_PointOnSurface(geometry) AS geometry, osm_id,
+          SELECT geometry, osm_id,
           name,
           area,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
@@ -930,27 +796,23 @@ Layer:
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh
-          FROM osm_water_polygons
-          WHERE geometry && !bbox! AND
-          (
-            (
-              area >= 100000000
-              AND z(!scale_denominator!) >= 10
-            )
-            OR (
-              area >= 40000000
-              AND z(!scale_denominator!) >= 11
-            )
-            OR (
-              area >= 20000000
-              AND z(!scale_denominator!) >= 12
-            )
-            OR (
-              area >= 10000000
-              AND z(!scale_denominator!) >= 13
-            )
-            OR z(!scale_denominator!) >= 14
-          )
+          FROM (
+            SELECT * FROM water_label_z10
+            WHERE z(!scale_denominator!) = 10
+            UNION ALL
+            SELECT * FROM water_label_z11
+            WHERE z(!scale_denominator!) = 11
+            UNION ALL
+            SELECT * FROM water_label_z12
+            WHERE z(!scale_denominator!) = 12
+            UNION ALL
+            SELECT * FROM water_label_z13
+            WHERE z(!scale_denominator!) = 13
+            UNION ALL
+            SELECT * FROM water_label_z14
+            WHERE z(!scale_denominator!) = 14
+          ) AS water_label
+          WHERE geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
@@ -983,7 +845,8 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id, ref, website, poi_network(type) as network,
+          SELECT geometry, osm_id, ref, website,
+              poi_network(type) as network,
               poi_address(housenumber, street, place, city, country, postcode) as address,
               name,
               coalesce(NULLIF(name_en, ''), name) AS name_en,
@@ -994,22 +857,12 @@ Layer:
               coalesce(NULLIF(name_zh, ''), name) AS name_zh,
               format_type(type) AS type,
               scalerank_poi(type, area) AS scalerank,
+              classify_maki_label(type) AS maki,
               rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
-                           ORDER BY localrank_poi(type) ASC) AS localrank,
-              classify_maki_label(type) AS maki
-            FROM (
-              SELECT geometry, osm_id, ref, website, housenumber, street, place, city, country, postcode,
-              name, name_en, name_es, name_fr, name_de, name_ru, name_zh,
-              type, 0 AS area
-              FROM osm_poi_points
-              WHERE z(!scale_denominator!) >= 14 AND geometry && !bbox! AND name <> ''
-              UNION ALL
-              SELECT topoint(geometry) AS geometry, osm_id, ref, website, housenumber, street, place, city, country, postcode,
-              name, name_en, name_es, name_fr, name_de, name_ru, name_zh,
-              type, area
-              FROM osm_poi_polygons
-              WHERE z(!scale_denominator!) >= 14 AND geometry && !bbox! AND name <> ''
-            ) AS poi_label
+                           ORDER BY localrank_poi(type) ASC) AS localrank
+            FROM poi_label_z14
+            WHERE z(!scale_denominator!) = 14
+              AND geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
@@ -1066,76 +919,18 @@ Layer:
                 ORDER BY localrank_road(type) ASC, round(MercLength(geometry)) DESC
             ) AS localrank
             FROM (
-              SELECT *
-              FROM osm_roads
-              WHERE
-              geometry && !bbox! AND
-                (
-                  (
-                    type IN ('motorway')
-                    AND ref <> ''
-                    AND z(!scale_denominator!) >= 8
-                  )
-                  OR
-                  (
-                    type IN ('motorway_link', 'primary', 'primary_link', 'trunk',
-                             'trunk_link', 'secondary', 'secondary_link')
-                    AND (name <> '' OR ref <> '')
-                    AND z(!scale_denominator!) >= 11
-                  )
-                  OR
-                  (
-                    type IN ('tertiary', 'tertiary_link', 'residential', 'unclassified',
-                        'living_street', 'pedestrian', 'construction', 'rail', 'monorail',
-                        'narrow_gauge', 'subway', 'tram')
-                    AND name <> ''
-                    AND z(!scale_denominator!) >= 12
-                  )
-                  OR
-                  (
-                    type IN ('service', 'track', 'driveway', 'path',
-                             'cycleway', 'ski', 'steps', 'bridleway', 'footway', 'funicular',
-                             'light_rail', 'preserved')
-                    AND name <> ''
-                    AND z(!scale_denominator!) >= 14
-                  )
-                )
+              SELECT * FROM road_label_z8toz10
+              WHERE z(!scale_denominator!) BETWEEN 8 AND 10
               UNION ALL
-              SELECT *
-              FROM osm_road_polygons
-              WHERE
-                geometry && !bbox! AND
-                (
-                  (
-                    type IN ('motorway')
-                    AND ref <> ''
-                    AND z(!scale_denominator!) >= 8
-                  )
-                  OR
-                  (
-                    type IN ('motorway_link', 'primary', 'primary_link', 'trunk',
-                             'trunk_link', 'secondary', 'secondary_link')
-                    AND (name <> '' OR ref <> '')
-                    AND z(!scale_denominator!) >= 11
-                  )
-                  OR
-                  (
-                    type IN ('tertiary', 'tertiary_link', 'residential', 'unclassified',
-                        'living_street', 'pedestrian', 'construction', 'rail', 'monorail',
-                        'narrow_gauge', 'subway', 'tram')
-                    AND name <> ''
-                    AND z(!scale_denominator!) >= 12
-                  )
-                  OR
-                  (
-                    type IN ('service', 'track', 'driveway', 'path',
-                             'cycleway', 'ski', 'steps', 'bridleway', 'footway', 'funicular',
-                             'light_rail', 'preserved')
-                    AND name <> ''
-                    AND z(!scale_denominator!) >= 14
-                  )
-                )
-            ) ALL_ROAD_LABELS  
+              SELECT * FROM road_label_z11
+              WHERE z(!scale_denominator!) = 11
+              UNION ALL
+              SELECT * FROM road_label_z12toz13
+              WHERE z(!scale_denominator!) BETWEEN 12 AND 13
+              UNION ALL
+              SELECT * FROM road_label_z14
+              WHERE z(!scale_denominator!) = 14
+            ) AS road_label
         ) AS data
       type: postgis
       user: osm
@@ -1182,21 +977,15 @@ Layer:
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           type, type as class
-          FROM osm_water_lines
-          WHERE geometry && !bbox! AND (
-            (
-              type in ('river', 'canal')
-              AND z(!scale_denominator!) >= 8
-              AND linelabel(z(!scale_denominator!), name, geometry)
-              AND geometry && !bbox!
-            )
-            OR (
-              type in ('stream', 'stream_intermittent')
-              AND z(!scale_denominator!) >= 13
-              AND linelabel(z(!scale_denominator!), name, geometry)
-              AND geometry && !bbox!
-            )
-          )
+          FROM (
+            SELECT * FROM waterway_label_z8toz12
+            WHERE z(!scale_denominator!) BETWEEN 8 AND 12
+            UNION ALL
+            SELECT * FROM waterway_label_z13toz14
+            WHERE z(!scale_denominator!) BETWEEN 13 AND 14
+          ) AS waterway_label
+          WHERE geometry && !bbox!
+          AND linelabel(z(!scale_denominator!), name, geometry)
         ) AS data
       type: postgis
       user: osm
@@ -1230,19 +1019,10 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, house_num
-          FROM
-          (
-            SELECT osm_id, geometry, house_num 
-            FROM osm_housenumbers_points
-            WHERE geometry && !bbox! 
-              AND z(!scale_denominator!) >= 14
-            UNION ALL
-            SELECT osm_id, topoint(geometry) AS geometry, house_num
-            FROM osm_housenumbers_polygons
-            WHERE geometry && !bbox! 
-              AND z(!scale_denominator!) >= 14
-          ) AS housenumbers
+          SELECT osm_id, topoint(geometry) AS geometry, house_num
+          FROM housenum_label_z14
+          WHERE geometry && !bbox!
+            AND z(!scale_denominator!) = 14
         ) AS data
       type: postgis
       user: osm

@@ -1,159 +1,6 @@
-classifications:
-  road:
-    motorway:
-    - motorway
-    motorway_link:
-    - motorway_link
-    driveway:
-    - driveway
-    main:
-    - primary
-    - primary_link
-    - trunk
-    - trunk_link
-    - secondary
-    - secondary_link
-    - tertiary
-    - tertiary_link
-    street:
-    - residential
-    - unclassified
-    - living_street
-    - road
-    - raceway
-    street_limited:
-    - pedestrian
-    - construction
-    - private
-    service:
-    - service
-    - track
-    - alley
-    - spur
-    - siding
-    - crossover
-    path:
-    - path
-    - cycleway
-    - ski
-    - steps
-    - bridleway
-    - footway
-    major_rail:
-    - rail
-    - monorail
-    - narrow_gauge
-    - subway
-    minor_rail:
-    - funicular
-    - light_rail
-    - preserved
-    - tram
-    - disused
-    - yard
-    aerialway:
-    - chair_lift
-    - mixed_lift
-    - drag_lift
-    - platter
-    - t-bar
-    - magic_carpet
-    - gondola
-    - cable_car
-    - rope_tow
-    - zip_line
-    - j-bar
-    - canopy
-    golf:
-    - hole
-  landuse:
-    agriculture:
-    - orchard
-    - farm
-    - farmland
-    - farmyard
-    - allotments
-    - vineyard
-    - plant_nursery
-    cemetery:
-    - cemetery
-    - christian
-    - jewish
-    glacier:
-    - glacier
-    grass:
-    - grass
-    - grassland
-    - meadow
-    hospital:
-    - hospital
-    industrial:
-    - industrial
-    park:
-    - park
-    - dog_park
-    - common
-    - garden
-    - golf_course
-    - playground
-    - recreation_ground
-    - nature_reserve
-    - national_park
-    - village_green
-    - zoo
-    - sports_centre
-    - camp_site
-    pitch:
-    - athletics
-    - chess
-    - pitch
-    sand:
-    - sand
-    school:
-    - school
-    - college
-    - university
-    scrub:
-    - scrub
-    wood:
-    - wood
-    - forest
-    wetland:
-    - wetland
-    - swamp
-    - bog
-    - marsh
-    wetland_noveg:
-    - mud
-    - tidalflat
-  landuse_overlay:
-    wetland:
-    - wetland
-    - marsh
-    - swamp
-    - bog
-  barrier_line:
-    cliff:
-    - cliff
-    fence:
-    - city_wall
-    - fence
-    - retaining_wall
-    - wall
-    - wire_fence
-    - yes
-    - embankment
-    - cable_barrier
-    - jersey_barrier
-    gate:
-    - gate
-    - entrance
-    - spikes
-    - bollard
-    - lift_gate
-    - kissing_gate
-    - stile
-  maki_label:
+system:
+  name: maki_label
+  classes:
     aerialway:
     - chair_lift
     - mixed_lift
@@ -220,6 +67,7 @@ classifications:
     - public_building
     bus:
     - bus_stop
+    - bus_station
     bicycle:
     - bicycle
     - bicycle_rental
@@ -230,9 +78,10 @@ classifications:
     car:
     - car
     - car_repair
+    - taxi
     camera:
     - video
-    - electronics 
+    - electronics
     cemetery:
     - grave_yard
     - cemetery
@@ -266,7 +115,7 @@ classifications:
     garden:
     - garden
     gift:
-    - gift 
+    - gift
     golf:
     - golf
     - golf_course
@@ -484,7 +333,7 @@ classifications:
     skiing:
     - skiing
     slaughterhouse:
-    - butcher 
+    - butcher
     soccer:
     - soccer
     swimming:

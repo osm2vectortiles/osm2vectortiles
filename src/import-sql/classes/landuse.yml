@@ -1,0 +1,62 @@
+system:
+  name: landuse
+  classes:
+    agriculture:
+    - orchard
+    - farm
+    - farmland
+    - farmyard
+    - allotments
+    - vineyard
+    - plant_nursery
+    cemetery:
+    - cemetery
+    - christian
+    - jewish
+    glacier:
+    - glacier
+    grass:
+    - grass
+    - grassland
+    - meadow
+    hospital:
+    - hospital
+    industrial:
+    - industrial
+    park:
+    - park
+    - dog_park
+    - common
+    - garden
+    - golf_course
+    - playground
+    - recreation_ground
+    - nature_reserve
+    - national_park
+    - village_green
+    - zoo
+    - sports_centre
+    - camp_site
+    pitch:
+    - athletics
+    - chess
+    - pitch
+    sand:
+    - sand
+    school:
+    - school
+    - college
+    - university
+    scrub:
+    - scrub
+    wood:
+    - wood
+    - forest
+    wetland:
+    - wetland
+    - swamp
+    - bog
+    - marsh
+    wetland_noveg:
+    - mud
+    - tidalflat

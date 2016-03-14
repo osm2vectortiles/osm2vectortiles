@@ -20,12 +20,24 @@ pgbouncer:
    - "6432"
 import-osm:
   image: "osm2vectortiles/import-osm"
+  command: ./import-pbf.sh
   volumes:
    - ./import:/data/import
   volumes_from:
    - cache
   links:
    - postgis:db
+import-osm-diff:
+  image: "osm2vectortiles/import-osm"
+  command: ./import-diff.sh
+  volumes:
+   - ./import:/data/import
+  volumes_from:
+   - cache
+  links:
+   - postgis:db
+  environment:
+     OSM_UPDATE_BASEURL: "http://download.geofabrik.de/europe/liechtenstein-updates/"
 import-labels:
   image: "osm2vectortiles/import-external"
   command: ./import-labels.sh
@@ -43,6 +55,12 @@ import-water:
   - postgis:db
 update-scaleranks:
   image: "osm2vectortiles/update-scaleranks"
+  links:
+  - postgis:db
+changed-tiles:
+  image: "osm2vectortiles/changed-tiles"
+  volumes:
+   - ./export:/data/export
   links:
   - postgis:db
 enqueue-jobs:
@@ -74,6 +92,14 @@ export:
     BBOX: "8.4375 46.07323062540838 9.84375 47.040182144806664"
     MIN_ZOOM: "8"
     MAX_ZOOM: "14"
+export-list:
+  image: "osm2vectortiles/export"
+  command: ./export-list.sh
+  volumes:
+   - ./export:/data/export
+   - ./open-streets.tm2source:/data/tm2source
+  links:
+   - pgbouncer:db
 serve:
   image: "klokantech/tileserver-mapnik"
   volumes:
@@ -99,3 +125,10 @@ compare-visual:
    - "4001:3001"
   links:
    - serve:tileserver
+create-extracts:
+  image: "osm2vectortiles/create-extracts"
+  volumes:
+   - ./export:/data/export
+  environment:
+    S3_ACCESS_KEY: "${S3_ACCESS_KEY}"
+    S3_SECRET_KEY: "${S3_SECRET_KEY}"
