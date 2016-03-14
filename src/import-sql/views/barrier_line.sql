@@ -1,9 +1,9 @@
 CREATE OR REPLACE VIEW barrier_line_z14 AS
     SELECT *
-    FROM osm_barrier_lines
+    FROM osm_barrier_linestring
     UNION ALL
     SELECT *
-    FROM osm_barrier_polygons;
+    FROM osm_barrier_polygon;
 
 CREATE OR REPLACE VIEW layer_barrier_line AS (
     SELECT osm_id, timestamp, geometry FROM barrier_line_z14

@@ -1,6 +1,6 @@
 CREATE OR REPLACE VIEW bridge_z12toz14 AS
     SELECT *
-    FROM osm_roads
+    FROM osm_road_linestring
     WHERE is_bridge;
 
 CREATE OR REPLACE VIEW layer_bridge AS (

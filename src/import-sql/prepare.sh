@@ -41,7 +41,7 @@ function main() {
     exec_sql_file "${SQL_VIEWS_DIR}tunnel.sql"
     exec_sql_file "${SQL_VIEWS_DIR}water.sql"
     exec_sql_file "${SQL_VIEWS_DIR}water_label.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}water_way.sql"
+    exec_sql_file "${SQL_VIEWS_DIR}waterway.sql"
     exec_sql_file "${SQL_VIEWS_DIR}waterway_label.sql"
 }
 
