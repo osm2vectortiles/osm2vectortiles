@@ -7,32 +7,32 @@ $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE VIEW landuse_overlay_z7 AS
     SELECT *
-    FROM osm_landusages_gen0
+    FROM osm_landuse_polygon_gen0
     WHERE is_landuse_overlay(type) AND st_area(geometry) > 20000000;
 
 CREATE OR REPLACE VIEW landuse_overlay_z8 AS
     SELECT *
-    FROM osm_landusages_gen0
+    FROM osm_landuse_polygon_gen0
     WHERE is_landuse_overlay(type) AND st_area(geometry) > 6000000;
 
 CREATE OR REPLACE VIEW landuse_overlay_z9 AS
     SELECT *
-    FROM osm_landusages_gen0
+    FROM osm_landuse_polygon_gen0
     WHERE is_landuse_overlay(type) AND st_area(geometry) > 2000000;
 
 CREATE OR REPLACE VIEW landuse_overlay_z10 AS
     SELECT *
-    FROM osm_landusages_gen0
+    FROM osm_landuse_polygon_gen0
     WHERE is_landuse_overlay(type) AND st_area(geometry) > 500000;
 
 CREATE OR REPLACE VIEW landuse_overlay_z11toz12 AS
     SELECT *
-    FROM osm_landusages_gen1
+    FROM osm_landuse_polygon_gen1
     WHERE is_landuse_overlay(type);
 
 CREATE OR REPLACE VIEW landuse_overlay_z13toz14 AS
     SELECT *
-    FROM osm_landusages
+    FROM osm_landuse_polygon
     WHERE is_landuse_overlay(type);
 
 CREATE OR REPLACE VIEW layer_landuse_overlay AS (
