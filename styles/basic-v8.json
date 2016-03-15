@@ -514,7 +514,7 @@
       ],
       "minzoom": 5,
       "layout": {
-        "icon-image": "{maki}-12",
+        "icon-image": "{maki}-11",
         "text-offset": [
           0,
           0.5

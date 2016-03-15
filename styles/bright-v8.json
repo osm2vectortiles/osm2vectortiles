@@ -2150,7 +2150,7 @@
             ],
             "minzoom": 16,
             "layout": {
-                "icon-image": "{maki}-12",
+                "icon-image": "{maki}-11",
                 "text-font": [
                     "Open Sans Semibold",
                     "Arial Unicode MS Bold"
@@ -2195,7 +2195,7 @@
             ],
             "minzoom": 15,
             "layout": {
-                "icon-image": "{maki}-12",
+                "icon-image": "{maki}-11",
                 "text-font": [
                     "Open Sans Semibold",
                     "Arial Unicode MS Bold"
@@ -2240,7 +2240,7 @@
             ],
             "minzoom": 14,
             "layout": {
-                "icon-image": "{maki}-12",
+                "icon-image": "{maki}-11",
                 "text-font": [
                     "Open Sans Semibold",
                     "Arial Unicode MS Bold"
@@ -2285,7 +2285,7 @@
             ],
             "minzoom": 13,
             "layout": {
-                "icon-image": "{maki}-12",
+                "icon-image": "{maki}-11",
                 "text-font": [
                     "Open Sans Semibold",
                     "Arial Unicode MS Bold"
