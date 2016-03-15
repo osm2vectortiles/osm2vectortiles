@@ -126,16 +126,6 @@ function import_pbf_diffs() {
     local pbf_file="$1"
     local latest_diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
 
-    cd "$IMPORT_DATA_DIR"
-    if [ "$OSM_UPDATE_BASEURL" = false ]; then
-        osmupdate "$pbf_file" "$latest_diffs_file"
-    else
-        echo "Downloading diffs from $OSM_UPDATE_BASEURL"
-        osmupdate -v \
-            "$pbf_file" "$latest_diffs_file" \
-            --base-url="$OSM_UPDATE_BASEURL"
-    fi
-
     imposm3 diff \
         -connection "$PG_CONNECT" \
         -mapping "$MAPPING_YAML" \
@@ -147,7 +137,6 @@ function import_pbf_diffs() {
     local timestamp=$(extract_timestamp "$latest_diffs_file")
     echo "Set $timestamp for latest updates from $latest_diffs_file"
     update_timestamp "$timestamp"
-
 
     merge_latest_diffs "$pbf_file" "$latest_diffs_file"
 }
