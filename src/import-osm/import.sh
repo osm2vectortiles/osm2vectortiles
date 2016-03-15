@@ -55,6 +55,7 @@ function update_timestamp() {
     local timestamp="$1"
     store_timestamp_history "$timestamp"
 
+	exec_sql "UPDATE osm_changes SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_admin_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_aero_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_aero_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"

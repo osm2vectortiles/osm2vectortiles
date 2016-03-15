@@ -23,9 +23,11 @@ function exec_sql_file() {
 }
 
 function main() {
-    echo "Creating functions in $OSM_DB necessary for open-streets"
+    echo "Creating triggers in $OSM_DB"
+    exec_sql_file "$SQL_TRIGGERS_FILE"
+    echo "Creating functions in $OSM_DB"
     exec_sql_file "$SQL_FUNCTIONS_FILE"
-    echo "Creating views in $OSM_DB necessary for open-streets"
+    echo "Creating views in $OSM_DB"
     exec_sql_file "${SQL_VIEWS_DIR}admin.sql"
     exec_sql_file "${SQL_VIEWS_DIR}aeroway.sql"
     exec_sql_file "${SQL_VIEWS_DIR}barrier_line.sql"
