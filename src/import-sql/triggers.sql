@@ -141,27 +141,12 @@ CREATE TRIGGER osm_water_polygon_track_changes
 BEFORE INSERT OR DELETE ON osm_water_polygon
 FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
 
-DROP TRIGGER IF EXISTS osm_water_polygon_gen1_track_changes ON osm_water_polygon_gen1;
-CREATE TRIGGER osm_water_polygon_gen1_track_changes
-BEFORE INSERT OR DELETE ON osm_water_polygon_gen1
-FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
-
 -- Landuse
 
 DROP TRIGGER IF EXISTS osm_landuse_polygon_track_changes ON osm_landuse_polygon;
 CREATE TRIGGER osm_landuse_polygon_track_changes
 BEFORE INSERT OR DELETE ON osm_landuse_polygon
 FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
-
-DROP TRIGGER IF EXISTS osm_landuse_polygon_gen0_track_changes ON osm_landuse_polygon_gen0;
--- CREATE TRIGGER osm_landuse_polygon_gen0_track_changes
--- BEFORE INSERT OR DELETE ON osm_landuse_polygon_gen0
--- FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
-
-DROP TRIGGER IF EXISTS osm_landuse_polygon_gen1_track_changes ON osm_landuse_polygon_gen1;
--- CREATE TRIGGER osm_landuse_polygon_gen1_track_changes
--- BEFORE INSERT OR DELETE ON osm_landuse_polygon_gen1
--- FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
 
 -- Aeroways
 
@@ -181,12 +166,6 @@ DROP TRIGGER IF EXISTS osm_building_polygon_track_changes ON osm_building_polygo
 CREATE TRIGGER osm_building_polygon_track_changes
 BEFORE INSERT OR DELETE ON osm_building_polygon
 FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
-
-DROP TRIGGER IF EXISTS osm_building_polygon_gen0_track_changes ON osm_building_polygon_gen0;
--- CREATE TRIGGER osm_building_polygon_gen0_track_changes
--- BEFORE INSERT OR DELETE ON osm_building_polygon_gen0
--- FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
- -- Housenumber
 
 DROP TRIGGER IF EXISTS osm_housenumber_polygon_track_changes ON osm_housenumber_polygon;
 CREATE TRIGGER osm_housenumber_polygon_track_changes
