@@ -1,10 +1,9 @@
 CREATE TABLE IF NOT EXISTS osm_delete (
-	osm_id bigint,
+    osm_id bigint,
     geometry geometry,
     timestamp timestamp,
     table_name text,
     sha1 bytea
-    --PRIMARY KEY (osm_id, geometry, timestamp, table_name, sha1)
 );
 
 CREATE TABLE IF NOT EXISTS osm_create (
@@ -12,7 +11,6 @@ CREATE TABLE IF NOT EXISTS osm_create (
     timestamp timestamp,
     table_name text,
     sha1 bytea
-    --PRIMARY KEY (osm_id, geometry, timestamp, table_name, sha1)
 );
 
 CREATE TABLE IF NOT EXISTS osm_modify (
@@ -20,7 +18,6 @@ CREATE TABLE IF NOT EXISTS osm_modify (
     timestamp timestamp,
     table_name text,
     sha1 bytea
-    --PRIMARY KEY (osm_id, geometry, timestamp, table_name, sha1)
 );
 
 CREATE OR REPLACE FUNCTION cleanup_osm_changes() returns VOID
@@ -51,12 +48,12 @@ BEGIN
         row_data = ROW(OLD.*);
         row_hash := digest(row_data, 'sha1');
 
-		INSERT INTO osm_delete(osm_id, geometry, timestamp, table_name, sha1)
+        INSERT INTO osm_delete(osm_id, geometry, timestamp, table_name, sha1)
         VALUES(OLD.osm_id, OLD.geometry, NULL, TG_TABLE_NAME::TEXT, row_hash);
-		RETURN OLD;
+        RETURN OLD;
      END IF;
 
-     IF (TG_OP = 'INSERT') THEN        
+     IF (TG_OP = 'INSERT') THEN
         original_id := NEW.id;
         NEW.id := NULL;
         row_data := ROW(NEW.*);
@@ -67,15 +64,15 @@ BEGIN
             DELETE FROM osm_delete
             WHERE osm_id = NEW.osm_id
               AND timestamp IS NULL
-              AND table_name = TG_TABLE_NAME::TEXT   
+              AND table_name = TG_TABLE_NAME::TEXT
               RETURNING *
         ) SELECT count(*) INTO deleted_count;
 
-        IF (deleted_count >= 1) THEN       
+        IF (deleted_count >= 1) THEN
             SELECT COUNT(*) INTO duplicate_count
             FROM  osm_modify
             WHERE osm_id = NEW.osm_id
-              AND table_name = TG_TABLE_NAME::TEXT   
+              AND table_name = TG_TABLE_NAME::TEXT
               AND sha1 = row_hash;
 
             IF (duplicate_count = 0) THEN
@@ -87,13 +84,105 @@ BEGIN
             VALUES(NEW.osm_id, NULL, TG_TABLE_NAME::TEXT, row_hash);
         END IF;
 
-		RETURN NEW;
+        RETURN NEW;
      END IF;
 
      RETURN NULL;
 END;
 $$ language plpgsql;
 
-DROP TRIGGER IF EXISTS osm_poi_points_track_changes ON osm_poi_point;
-CREATE TRIGGER osm_poi_points_track_changes BEFORE INSERT OR DELETE
-    ON osm_poi_point FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+-- POI
+
+DROP TRIGGER IF EXISTS osm_poi_point_track_changes ON osm_poi_point;
+CREATE TRIGGER osm_poi_point_track_changes
+BEFORE INSERT OR DELETE ON osm_poi_point
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+DROP TRIGGER IF EXISTS osm_poi_polygon_track_changes ON osm_poi_polygon;
+CREATE TRIGGER osm_poi_polygon_track_changes
+BEFORE INSERT OR DELETE ON osm_poi_polygon
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+-- Roads
+
+DROP TRIGGER IF EXISTS osm_road_polygon_track_changes ON osm_road_polygon;
+CREATE TRIGGER osm_road_polygon_track_changes
+BEFORE INSERT OR DELETE ON osm_road_polygon
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+DROP TRIGGER IF EXISTS osm_road_linestring_track_changes ON osm_road_linestring;
+CREATE TRIGGER osm_road_linestring_track_changes
+BEFORE INSERT OR DELETE ON osm_road_linestring
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+-- Admin
+
+DROP TRIGGER IF EXISTS osm_admin_linestring_track_changes ON osm_admin_linestring;
+CREATE TRIGGER osm_admin_linestring_track_changes
+BEFORE INSERT OR DELETE ON osm_admin_linestring
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+-- Water
+
+DROP TRIGGER IF EXISTS osm_water_polygon_track_changes ON osm_water_polygon;
+CREATE TRIGGER osm_water_polygon_track_changes
+BEFORE INSERT OR DELETE ON osm_water_polygon
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+DROP TRIGGER IF EXISTS osm_water_polygon_gen1_track_changes ON osm_water_polygon_gen1;
+CREATE TRIGGER osm_water_polygon_gen1_track_changes
+BEFORE INSERT OR DELETE ON osm_water_polygon_gen1
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+-- Landuse
+
+DROP TRIGGER IF EXISTS osm_landuse_polygon_track_changes ON osm_landuse_polygon;
+CREATE TRIGGER osm_landuse_polygon_track_changes
+BEFORE INSERT OR DELETE ON osm_landuse_polygon
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+DROP TRIGGER IF EXISTS osm_landuse_polygon_gen0_track_changes ON osm_landuse_polygon_gen0;
+CREATE TRIGGER osm_landuse_polygon_gen0_track_changes
+BEFORE INSERT OR DELETE ON osm_landuse_polygon_gen0
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+DROP TRIGGER IF EXISTS osm_landuse_polygon_gen1_track_changes ON osm_landuse_polygon_gen1;
+CREATE TRIGGER osm_landuse_polygon_gen1_track_changes
+BEFORE INSERT OR DELETE ON osm_landuse_polygon_gen1
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+--Aeroways
+
+DROP TRIGGER IF EXISTS osm_aero_polygon_track_changes ON osm_aero_polygon;
+CREATE TRIGGER osm_aero_polygon_track_changes
+BEFORE INSERT OR DELETE ON osm_aero_polygon
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+DROP TRIGGER IF EXISTS osm_aero_linestring_track_changes ON osm_aero_linestring;
+CREATE TRIGGER osm_aero_linestring_track_changes
+BEFORE INSERT OR DELETE ON osm_aero_linestring
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+-- Buildings
+
+DROP TRIGGER IF EXISTS osm_building_polygon_track_changes ON osm_building_polygon;
+CREATE TRIGGER osm_building_polygon_track_changes
+BEFORE INSERT OR DELETE ON osm_building_polygon
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+DROP TRIGGER IF EXISTS osm_building_polygon_gen0_track_changes ON osm_building_polygon_gen0;
+CREATE TRIGGER osm_building_polygon_gen0_track_changes
+BEFORE INSERT OR DELETE ON osm_building_polygon_gen0
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+--Barrier
+
+DROP TRIGGER IF EXISTS osm_barrier_polygon_track_changes ON osm_barrier_polygon;
+CREATE TRIGGER osm_barrier_polygon_track_changes
+BEFORE INSERT OR DELETE ON osm_barrier_polygon
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+DROP TRIGGER IF EXISTS osm_barrier_linestring_track_changes ON osm_barrier_polygon;
+CREATE TRIGGER osm_barrier_linestring_track_changes
+BEFORE INSERT OR DELETE ON osm_barrier_linestring
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
