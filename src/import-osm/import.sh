@@ -11,8 +11,6 @@ readonly OSM_DB=${OSM_DB:-osm}
 readonly OSM_USER=${OSM_USER:-osm}
 readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
 
-readonly OSM_UPDATE_BASEURL=${OSM_UPDATE_BASEURL:-false}
-
 readonly DB_SCHEMA=${OSM_SCHEMA:-public}
 readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
 readonly PG_CONNECT="postgis://$OSM_USER:$OSM_PASSWORD@$DB_HOST/$OSM_DB"
