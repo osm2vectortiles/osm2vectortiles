@@ -18,9 +18,18 @@ CREATE OR REPLACE FUNCTION changed_tiles_waterway_label(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
 	RETURN QUERY (
-		WITH changed_geometries AS (
+		WITH created_or_updated_osm_ids AS (
+            SELECT osm_id FROM osm_create
+            WHERE table_name = 'osm_water_linestring' AND timestamp = ts
+            UNION
+            SELECT osm_id FROM osm_update
+            WHERE table_name = 'osm_water_linestring' AND timestamp = ts
+        ), changed_geometries AS (
+        	SELECT osm_id, timestamp, geometry FROM osm_delete
+            WHERE table_name = 'osm_water_linestring'
+            UNION
 		    SELECT osm_id, geometry FROM layer_waterway_label
-		    WHERE timestamp = ts
+		    WHERE timestamp = ts AND osm_id IN created_or_updated_osm_ids
 		), changed_tiles AS (
 		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
 		    FROM changed_geometries AS c
