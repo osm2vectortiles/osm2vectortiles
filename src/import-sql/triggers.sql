@@ -91,6 +91,13 @@ BEGIN
 END;
 $$ language plpgsql;
 
+-- Place
+
+DROP TRIGGER IF EXISTS osm_place_point_track_changes ON osm_place_point;
+CREATE TRIGGER osm_place_point_track_changes
+BEFORE INSERT OR DELETE ON osm_place_point
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
 -- POI
 
 DROP TRIGGER IF EXISTS osm_poi_point_track_changes ON osm_poi_point;
@@ -123,6 +130,11 @@ BEFORE INSERT OR DELETE ON osm_admin_linestring
 FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
 
 -- Water
+
+DROP TRIGGER IF EXISTS osm_water_linestring_track_changes ON osm_water_linestring;
+CREATE TRIGGER osm_water_linestring_track_changes
+BEFORE INSERT OR DELETE ON osm_water_linestring
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
 
 DROP TRIGGER IF EXISTS osm_water_polygon_track_changes ON osm_water_polygon;
 CREATE TRIGGER osm_water_polygon_track_changes
@@ -175,6 +187,18 @@ CREATE TRIGGER osm_building_polygon_gen0_track_changes
 BEFORE INSERT OR DELETE ON osm_building_polygon_gen0
 FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
 
+-- Housenumber
+
+DROP TRIGGER IF EXISTS osm_housenumber_polygon_track_changes ON osm_housenumber_polygon;
+CREATE TRIGGER osm_housenumber_polygon_track_changes
+BEFORE INSERT OR DELETE ON osm_housenumber_polygon
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+DROP TRIGGER IF EXISTS osm_housenumber_point_track_changes ON osm_housenumber_point;
+CREATE TRIGGER osm_housenumber_point_track_changes
+BEFORE INSERT OR DELETE ON osm_housenumber_point
+FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
 --Barrier
 
 DROP TRIGGER IF EXISTS osm_barrier_polygon_track_changes ON osm_barrier_polygon;
@@ -182,7 +206,7 @@ CREATE TRIGGER osm_barrier_polygon_track_changes
 BEFORE INSERT OR DELETE ON osm_barrier_polygon
 FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
 
-DROP TRIGGER IF EXISTS osm_barrier_linestring_track_changes ON osm_barrier_polygon;
+DROP TRIGGER IF EXISTS osm_barrier_linestring_track_changes ON osm_barrier_linestring;
 CREATE TRIGGER osm_barrier_linestring_track_changes
 BEFORE INSERT OR DELETE ON osm_barrier_linestring
 FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
