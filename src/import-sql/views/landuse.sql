@@ -86,7 +86,7 @@ BEGIN
             WHERE table_name = 'osm_landuse_polygon_gen0' OR table_name = 'osm_landuse_polygon_gen1' OR table_name = 'osm_landuse_polygon'
             UNION
 		    SELECT osm_id, geometry FROM layer_landuse
-		    WHERE timestamp = ts AND osm_id IN created_or_updated_osm_ids
+		    WHERE timestamp = ts AND osm_id IN (SELECT osm_id FROM created_or_updated_osm_ids)
 		), changed_tiles AS (
 		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
 		    FROM changed_geometries AS c
