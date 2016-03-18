@@ -55,7 +55,10 @@ function update_timestamp() {
     local timestamp="$1"
     store_timestamp_history "$timestamp"
 
-	exec_sql "UPDATE osm_changes SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_create SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_delete SET timestamp='$timestamp' WHERE timestamp IS NULL"
+	exec_sql "UPDATE osm_modify SET timestamp='$timestamp' WHERE timestamp IS NULL"
+
 	exec_sql "UPDATE osm_admin_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_aero_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_aero_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
@@ -102,6 +105,10 @@ function drop_tables() {
     exec_sql "DROP TABLE IF EXISTS osm_poi_point CASCADE"
 }
 
+function cleanup_osm_changes() {
+    exec_sql "SELECT cleanup_osm_changes()"
+}
+
 function exec_sql() {
 	local sql_cmd="$1"
 	PG_PASSWORD=$OSM_PASSWORD psql \
@@ -127,6 +134,7 @@ function import_pbf_diffs() {
     local pbf_file="$1"
     local latest_diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
 
+    cleanup_osm_changes
     imposm3 diff \
         -connection "$PG_CONNECT" \
         -mapping "$MAPPING_YAML" \
@@ -138,6 +146,7 @@ function import_pbf_diffs() {
     local timestamp=$(extract_timestamp "$latest_diffs_file")
     echo "Set $timestamp for latest updates from $latest_diffs_file"
     update_timestamp "$timestamp"
+    cleanup_osm_changes
 
     merge_latest_diffs "$pbf_file" "$latest_diffs_file"
 }
