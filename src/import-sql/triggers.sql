@@ -154,16 +154,16 @@ BEFORE INSERT OR DELETE ON osm_landuse_polygon
 FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
 
 DROP TRIGGER IF EXISTS osm_landuse_polygon_gen0_track_changes ON osm_landuse_polygon_gen0;
-CREATE TRIGGER osm_landuse_polygon_gen0_track_changes
-BEFORE INSERT OR DELETE ON osm_landuse_polygon_gen0
-FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+-- CREATE TRIGGER osm_landuse_polygon_gen0_track_changes
+-- BEFORE INSERT OR DELETE ON osm_landuse_polygon_gen0
+-- FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
 
 DROP TRIGGER IF EXISTS osm_landuse_polygon_gen1_track_changes ON osm_landuse_polygon_gen1;
-CREATE TRIGGER osm_landuse_polygon_gen1_track_changes
-BEFORE INSERT OR DELETE ON osm_landuse_polygon_gen1
-FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+-- CREATE TRIGGER osm_landuse_polygon_gen1_track_changes
+-- BEFORE INSERT OR DELETE ON osm_landuse_polygon_gen1
+-- FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
 
---Aeroways
+-- Aeroways
 
 DROP TRIGGER IF EXISTS osm_aero_polygon_track_changes ON osm_aero_polygon;
 CREATE TRIGGER osm_aero_polygon_track_changes
@@ -183,11 +183,10 @@ BEFORE INSERT OR DELETE ON osm_building_polygon
 FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
 
 DROP TRIGGER IF EXISTS osm_building_polygon_gen0_track_changes ON osm_building_polygon_gen0;
-CREATE TRIGGER osm_building_polygon_gen0_track_changes
-BEFORE INSERT OR DELETE ON osm_building_polygon_gen0
-FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
-
--- Housenumber
+-- CREATE TRIGGER osm_building_polygon_gen0_track_changes
+-- BEFORE INSERT OR DELETE ON osm_building_polygon_gen0
+-- FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+ -- Housenumber
 
 DROP TRIGGER IF EXISTS osm_housenumber_polygon_track_changes ON osm_housenumber_polygon;
 CREATE TRIGGER osm_housenumber_polygon_track_changes
@@ -199,7 +198,7 @@ CREATE TRIGGER osm_housenumber_point_track_changes
 BEFORE INSERT OR DELETE ON osm_housenumber_point
 FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
 
---Barrier
+-- Barrier
 
 DROP TRIGGER IF EXISTS osm_barrier_polygon_track_changes ON osm_barrier_polygon;
 CREATE TRIGGER osm_barrier_polygon_track_changes
