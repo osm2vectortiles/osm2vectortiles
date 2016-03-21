@@ -18,13 +18,13 @@ BEGIN
 	RETURN QUERY (
 		WITH created_or_updated_osm_ids AS (
 	    	SELECT osm_id FROM osm_create 
-	    	WHERE (table_name = 'osm_water_polygon_gen1' OR table_name = 'osm_water_polygon') AND timestamp = ts
+	        WHERE 'osm_water_polygon' AND timestamp = ts
 	    	UNION
 	    	SELECT osm_id FROM osm_update
-	    	WHERE (table_name = 'osm_water_polygon_gen1' OR table_name = 'osm_water_polygon') AND timestamp = ts
+	        WHERE table_name = 'osm_water_polygon' AND timestamp = ts
 		), changed_geometries AS (
 			SELECT osm_id, timestamp, geometry FROM osm_delete
-            WHERE table_name = 'osm_water_polygon_gen1' OR table_name = 'osm_water_polygon'
+            WHERE table_name = 'osm_water_polygon'
             UNION
 		    SELECT osm_id, geometry FROM layer_water
 		    WHERE timestamp = ts AND osm_id IN (SELECT osm_id FROM created_or_updated_osm_ids)

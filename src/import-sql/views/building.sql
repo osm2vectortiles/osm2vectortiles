@@ -16,15 +16,15 @@ CREATE OR REPLACE FUNCTION changed_tiles_building(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
 	RETURN QUERY (
-		WITH created_or_updated_osm_ids AS (
+	    WITH created_or_updated_osm_ids AS (
 	    	SELECT osm_id FROM osm_create 
-	    	WHERE (table_name = 'osm_building_polygon_gen0' OR table_name = 'osm_building_polygon') AND timestamp = ts
+	        WHERE table_name = 'osm_building_polygon' AND timestamp = ts
 	    	UNION
 	    	SELECT osm_id FROM osm_update
-	    	WHERE (table_name = 'osm_building_polygon_gen0' OR table_name = 'osm_building_polygon') AND timestamp = ts
+	        WHERE table_name = 'osm_building_polygon' AND timestamp = ts
 		), changed_geometries AS (
 			SELECT osm_id, timestamp, geometry FROM osm_delete
-    		WHERE table_name = 'osm_building_polygon_gen0' OR table_name = 'osm_building_polygon'
+    	    WHERE table_name = 'osm_building_polygon'
     		UNION
 		    SELECT osm_id, geometry FROM layer_building
 		    WHERE timestamp = ts AND osm_id IN (SELECT osm_id FROM created_or_updated_osm_ids)
