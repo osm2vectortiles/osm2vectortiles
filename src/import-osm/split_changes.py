@@ -14,25 +14,24 @@ Options:
 import os
 import sys
 import gzip
-import xml.etree.ElementTree as ET
+from lxml import etree
 from docopt import docopt
 
 
 
 def main(args):
     change_file = args['<change_file>']
-    filter_change_type = args['--type']
+    change_type = args['--type']
     possible_change_types = ['delete', 'modify', 'create']
 
     with gzip.open(change_file, 'rb') as file_handle:
-        tree = ET.parse(file_handle)
-        root = tree.getroot()
-        for change_type in possible_change_types:
-            if change_type != filter_change_type:
-                for tag in root.findall(change_type):
-                    root.remove(tag)
+        context = etree.iterparse(file_handle, events=('end',), tag=)
 
-        tree.write(sys.stdout)
+
+        context = etree.iterparse(file_handle, events=('end',), tag=change_type)
+        for event, elem in context:
+            etree.ElementTree(elem).write(sys.stdout, encoding='UTF-8')
+            elem.clear()
 
 
 if __name__ == '__main__':

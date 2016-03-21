@@ -5,6 +5,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
       libprotobuf-dev \
       libleveldb-dev \
       libgeos-dev \
+      libxml2-dev \
+      libxslt-dev \
+      python-dev \
       postgresql-client \
       osmctools \
       python-pip \
@@ -19,13 +22,6 @@ RUN go get github.com/tools/godep \
  && git reset --hard fe896035de33092753e72bc18a61dad5d8050a99 \
  && go get \
  && go install
-
-# Purge no longer needed packages to keep image small.
-# Protobuf and LevelDB dependencies cannot be removed
-# because they are dynamically linked.
-RUN apt-get purge -y --auto-remove \
-    g++ gcc libc6-dev make git \
-    && rm -rf /var/lib/apt/lists/*
 
 VOLUME /data/import /data/cache
 ENV IMPORT_DATA_DIR=/data/import \
