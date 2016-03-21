@@ -128,23 +128,42 @@ function merge_latest_diffs() {
     mv "$latest_pbf_file" "$pbf_file"
 }
 
-function import_pbf_diffs() {
-    local pbf_file="$1"
-    local latest_diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
-
-    cleanup_osm_changes
+function imposm_diff() {
+    local diffs_file="$1"
     imposm3 diff \
         -connection "$PG_CONNECT" \
         -mapping "$MAPPING_YAML" \
         -cachedir "$IMPOSM_CACHE_DIR" \
         -diffdir "$IMPORT_DATA_DIR" \
         -dbschema-import "${DB_SCHEMA}" \
-        "$latest_diffs_file"
+        "$diffs_file"
+}
 
-    local timestamp=$(extract_timestamp "$latest_diffs_file")
-    echo "Set $timestamp for latest updates from $latest_diffs_file"
+function import_pbf_diffs() {
+    local pbf_file="$1"
+    local diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
+
+    local delete_file="$IMPORT_DATA_DIR/latest_delete.osc.gz"
+    local modify_file="$IMPORT_DATA_DIR/latest_modify.osc.gz"
+    local create_file="$IMPORT_DATA_DIR/latest_create.osc.gz"
+
+    ./split_changes.py "$diffs_file" --type="delete" | gzip > "$delete_file"
+    ./split_changes.py "$diffs_file" --type="modify" | gzip > "$modify_file"
+    ./split_changes.py "$diffs_file" --type="create" | gzip > "$create_file"
+
+    echo "Import deletes from $delete_file"
+    imposm_diff "$delete_file"
+    echo "Import modifications from $delete_file"
+    imposm_diff "$modify_file"
+    echo "Import creates from $delete_file"
+    imposm_diff "$create_file"
+
+    cleanup_osm_changes
+
+    local timestamp=$(extract_timestamp "$diffs_file")
+    echo "Set $timestamp for latest updates from $diffs_file"
     update_timestamp "$timestamp"
     cleanup_osm_changes
 
-    merge_latest_diffs "$pbf_file" "$latest_diffs_file"
+    merge_latest_diffs "$pbf_file" "$diffs_file"
 }
