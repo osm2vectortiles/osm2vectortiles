@@ -43,7 +43,7 @@ BEGIN
             SELECT osm_id FROM osm_create 
             WHERE (table_name = 'osm_road_linestring' OR table_name = 'osm_road_polygon') AND timestamp = ts
             UNION
-            SELECT osm_id FROM osm_update
+            SELECT osm_id FROM osm_modify
             WHERE (table_name = 'osm_road_linestring' OR table_name = 'osm_road_polygon') AND timestamp = ts
         ), changed_geometries AS (
             SELECT osm_id, timestamp, geometry FROM osm_delete
