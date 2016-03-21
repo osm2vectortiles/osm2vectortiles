@@ -153,22 +153,20 @@ function import_pbf_diffs() {
     local diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
 
     local delete_file="$IMPORT_DATA_DIR/latest_delete.osc.gz"
-    local modify_file="$IMPORT_DATA_DIR/latest_modify.osc.gz"
-    local create_file="$IMPORT_DATA_DIR/latest_create.osc.gz"
+    local modify_create_file="$IMPORT_DATA_DIR/latest_modify_create.osc.gz"
+    local delete_xsl="filter_delete.xsl"
+    local modify_create_xsl="filter_modify_create.xsl"
 
-    ./split_changes.py "$diffs_file" --type="delete" | gzip > "$delete_file"
-    ./split_changes.py "$diffs_file" --type="modify" | gzip > "$modify_file"
-    ./split_changes.py "$diffs_file" --type="create" | gzip > "$create_file"
+    xsltproc "$delete_xsl" "$diffs_file" | gzip > "$delete_file"
+    xsltproc "$modify_create_xsl" "$diffs_file" | gzip > "$modify_create_file"
 
     echo "Import deletes from $delete_file"
     enable_change_tracking
     imposm_diff "$delete_file"
     disable_change_tracking
 
-    echo "Import modifications from $delete_file"
-    imposm_diff "$modify_file"
-    echo "Import creates from $delete_file"
-    imposm_diff "$create_file"
+    echo "Import creates and modifications from $modify_create_file"
+    imposm_diff "$modify_create_file"
 
     cleanup_osm_changes
 

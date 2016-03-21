@@ -5,12 +5,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
       libprotobuf-dev \
       libleveldb-dev \
       libgeos-dev \
-      libxml2-dev \
-      libxslt-dev \
-      python-dev \
+      xsltproc \
       postgresql-client \
       osmctools \
-      python-pip \
       --no-install-recommends \
  && ln -s /usr/lib/libgeos_c.so /usr/lib/libgeos.so \
  && rm -rf /var/lib/apt/lists/*
@@ -29,8 +26,6 @@ ENV IMPORT_DATA_DIR=/data/import \
     MAPPING_YAML=/usr/src/app/mapping.yml
 
 WORKDIR /usr/src/app
-COPY requirements.txt /usr/src/app/requirements.txt
-RUN pip install -r /usr/src/app/requirements.txt
 COPY . /usr/src/app/
 
 CMD ["./import-pbf.sh"]

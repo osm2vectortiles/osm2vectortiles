@@ -32,6 +32,7 @@ import-osm-diff:
   command: ./import-diff.sh
   volumes:
    - ./import:/data/import
+   - ./src/import-osm:/usr/src/app
   volumes_from:
    - cache
   links:
