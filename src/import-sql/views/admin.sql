@@ -29,7 +29,7 @@ BEGIN
 			SELECT osm_id, timestamp, geometry FROM osm_delete
     		WHERE table_name = 'osm_admin_linestring'
     		UNION
-		    SELECT osm_id, geometry FROM layer_admin
+		    SELECT osm_id, timestamp, geometry FROM layer_admin
 		    WHERE timestamp = ts AND osm_id IN (SELECT osm_id FROM created_or_updated_osm_ids)
 		), changed_tiles AS (
 		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z

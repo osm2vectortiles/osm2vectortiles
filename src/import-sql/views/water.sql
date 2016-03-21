@@ -18,7 +18,7 @@ BEGIN
 	RETURN QUERY (
 		WITH created_or_updated_osm_ids AS (
 	    	SELECT osm_id FROM osm_create 
-	        WHERE 'osm_water_polygon' AND timestamp = ts
+	        WHERE table_name = 'osm_water_polygon' AND timestamp = ts
 	    	UNION
 	    	SELECT osm_id FROM osm_modify
 	        WHERE table_name = 'osm_water_polygon' AND timestamp = ts
@@ -26,7 +26,7 @@ BEGIN
 			SELECT osm_id, timestamp, geometry FROM osm_delete
             WHERE table_name = 'osm_water_polygon'
             UNION
-		    SELECT osm_id, geometry FROM layer_water
+		    SELECT osm_id, timestamp, geometry FROM layer_water
 		    WHERE timestamp = ts AND osm_id IN (SELECT osm_id FROM created_or_updated_osm_ids)
 		), changed_tiles AS (
 		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
