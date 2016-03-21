@@ -188,3 +188,47 @@ DROP TRIGGER IF EXISTS osm_barrier_linestring_track_changes ON osm_barrier_lines
 CREATE TRIGGER osm_barrier_linestring_track_changes
 BEFORE INSERT OR DELETE ON osm_barrier_linestring
 FOR EACH ROW EXECUTE PROCEDURE track_osm_changes();
+
+CREATE OR REPLACE FUNCTION disable_change_tracking() returns VOID
+AS $$
+BEGIN
+    ALTER TABLE osm_place_point DISABLE TRIGGER USER;
+    ALTER TABLE osm_poi_point DISABLE TRIGGER USER;
+    ALTER TABLE osm_poi_polygon DISABLE TRIGGER USER;
+    ALTER TABLE osm_road_polygon DISABLE TRIGGER USER;
+    ALTER TABLE osm_road_linestring DISABLE TRIGGER USER;
+    ALTER TABLE osm_admin_linestring DISABLE TRIGGER USER;
+    ALTER TABLE osm_water_linestring DISABLE TRIGGER USER;
+    ALTER TABLE osm_water_polygon DISABLE TRIGGER USER;
+    ALTER TABLE osm_landuse_polygon DISABLE TRIGGER USER;
+    ALTER TABLE osm_aero_polygon DISABLE TRIGGER USER;
+    ALTER TABLE osm_aero_linestring DISABLE TRIGGER USER;
+    ALTER TABLE osm_building_polygon DISABLE TRIGGER USER;
+    ALTER TABLE osm_housenumber_polygon DISABLE TRIGGER USER;
+    ALTER TABLE osm_housenumber_point DISABLE TRIGGER USER;
+    ALTER TABLE osm_barrier_polygon DISABLE TRIGGER USER;
+    ALTER TABLE osm_barrier_linestring DISABLE TRIGGER USER;
+END;
+$$ language plpgsql;
+
+CREATE OR REPLACE FUNCTION enable_change_tracking() returns VOID
+AS $$
+BEGIN
+    ALTER TABLE osm_place_point ENABLE TRIGGER USER;
+    ALTER TABLE osm_poi_point ENABLE TRIGGER USER;
+    ALTER TABLE osm_poi_polygon ENABLE TRIGGER USER;
+    ALTER TABLE osm_road_polygon ENABLE TRIGGER USER;
+    ALTER TABLE osm_road_linestring ENABLE TRIGGER USER;
+    ALTER TABLE osm_admin_linestring ENABLE TRIGGER USER;
+    ALTER TABLE osm_water_linestring ENABLE TRIGGER USER;
+    ALTER TABLE osm_water_polygon ENABLE TRIGGER USER;
+    ALTER TABLE osm_landuse_polygon ENABLE TRIGGER USER;
+    ALTER TABLE osm_aero_polygon ENABLE TRIGGER USER;
+    ALTER TABLE osm_aero_linestring ENABLE TRIGGER USER;
+    ALTER TABLE osm_building_polygon ENABLE TRIGGER USER;
+    ALTER TABLE osm_housenumber_polygon ENABLE TRIGGER USER;
+    ALTER TABLE osm_housenumber_point ENABLE TRIGGER USER;
+    ALTER TABLE osm_barrier_polygon ENABLE TRIGGER USER;
+    ALTER TABLE osm_barrier_linestring ENABLE TRIGGER USER;
+END;
+$$ language plpgsql;

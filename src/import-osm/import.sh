@@ -79,6 +79,15 @@ function update_timestamp() {
 	exec_sql "UPDATE osm_water_polygon_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
 }
 
+function enable_change_tracking() {
+    exec_sql "SELECT enable_change_tracking()"
+}
+
+function disable_change_tracking() {
+    exec_sql "SELECT disable_change_tracking()"
+}
+
+
 function drop_tables() {
     exec_sql "DROP TABLE IF EXISTS osm_landuse_polygon CASCADE"
     exec_sql "DROP TABLE IF EXISTS osm_landuse_polygon_gen0 CASCADE"
@@ -152,7 +161,10 @@ function import_pbf_diffs() {
     ./split_changes.py "$diffs_file" --type="create" | gzip > "$create_file"
 
     echo "Import deletes from $delete_file"
+    enable_change_tracking
     imposm_diff "$delete_file"
+    disable_change_tracking
+
     echo "Import modifications from $delete_file"
     imposm_diff "$modify_file"
     echo "Import creates from $delete_file"
