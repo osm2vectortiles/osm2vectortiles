@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS osm_delete (
     osm_id bigint,
     geometry geometry,
     timestamp timestamp,
-    table_name text,
+    table_name text
 );
 
 CREATE OR REPLACE FUNCTION cleanup_osm_changes() returns VOID
@@ -10,9 +10,6 @@ AS $$
 DECLARE
     latest_ts timestamp;
 BEGIN
-    SELECT MAX(timestamp) INTO latest_ts FROM osm_modify;
-    DELETE FROM osm_modify WHERE timestamp <> latest_ts;
-
     SELECT MAX(timestamp) INTO latest_ts FROM osm_delete;
     DELETE FROM osm_delete WHERE timestamp <> latest_ts;
 END;
