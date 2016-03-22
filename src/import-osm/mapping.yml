@@ -249,6 +249,9 @@ tables:
       - rock
       - bare_rock
       - scree
+      - grassland
+      - heath
+      - fell
       wetland:
       - marsh
       - swamp

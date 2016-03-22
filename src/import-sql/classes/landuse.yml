@@ -19,6 +19,8 @@ system:
     - grass
     - grassland
     - meadow
+    - heath
+    - fell
     hospital:
     - hospital
     industrial:
