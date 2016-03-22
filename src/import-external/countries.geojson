@@ -3590,9 +3590,6 @@
     {
       "type": "Feature",
       "properties": {
-        "marker-color": "#7e7e7e",
-        "marker-size": "medium",
-        "marker-symbol": "",
         "osm_id": 432424926,
         "iso3166_1_alpha_2": "DZ",
         "name": "الجزائر Algérie",
