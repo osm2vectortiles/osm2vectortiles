@@ -5,6 +5,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
       libprotobuf-dev \
       libleveldb-dev \
       libgeos-dev \
+      xsltproc \
       postgresql-client \
       osmctools \
       --no-install-recommends \
@@ -15,8 +16,7 @@ WORKDIR $GOPATH/src/github.com/omniscale/imposm3
 RUN go get github.com/tools/godep \
  && git clone https://github.com/osm2vectortiles/imposm3 \
         $GOPATH/src/github.com/omniscale/imposm3 \
- && git checkout filter-changes \
- && git reset --hard 05604a902340aa5c1f3db3bbed4e1586c0f378de \
+ && git reset --hard fe896035de33092753e72bc18a61dad5d8050a99 \
  && go get \
  && go install
 

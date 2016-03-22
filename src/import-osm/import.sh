@@ -137,31 +137,36 @@ function merge_latest_diffs() {
     mv "$latest_pbf_file" "$pbf_file"
 }
 
+function imposm_diff() {
+    local diffs_file="$1"
+    imposm3 diff \
+        -connection "$PG_CONNECT" \
+        -mapping "$MAPPING_YAML" \
+        -cachedir "$IMPOSM_CACHE_DIR" \
+        -diffdir "$IMPORT_DATA_DIR" \
+        -dbschema-import "${DB_SCHEMA}" \
+        "$diffs_file"
+}
+
 function import_pbf_diffs() {
     local pbf_file="$1"
     local diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
 
-    echo "Import deletes from $diffs_file"
+    local delete_file="$IMPORT_DATA_DIR/latest_delete.osc.gz"
+    local modify_create_file="$IMPORT_DATA_DIR/latest_modify_create.osc.gz"
+    local delete_xsl="filter_delete.xsl"
+    local modify_create_xsl="filter_modify_create.xsl"
+
+    xsltproc "$delete_xsl" "$diffs_file" | gzip > "$delete_file"
+    xsltproc "$modify_create_xsl" "$diffs_file" | gzip > "$modify_create_file"
+
+    echo "Import deletes from $delete_file"
     enable_change_tracking
-    imposm3 diff \
-        -no-create -no-modify \
-        -connection "$PG_CONNECT" \
-        -mapping "$MAPPING_YAML" \
-        -cachedir "$IMPOSM_CACHE_DIR" \
-        -diffdir "$IMPORT_DATA_DIR" \
-        -dbschema-import "${DB_SCHEMA}" \
-        "$diffs_file"
+    imposm_diff "$delete_file"
     disable_change_tracking
 
-    echo "Import creates and modifications from $diffs_file"
-    imposm3 diff \
-        -no-delete \
-        -connection "$PG_CONNECT" \
-        -mapping "$MAPPING_YAML" \
-        -cachedir "$IMPOSM_CACHE_DIR" \
-        -diffdir "$IMPORT_DATA_DIR" \
-        -dbschema-import "${DB_SCHEMA}" \
-        "$diffs_file"
+    echo "Import creates and modifications from $modify_create_file"
+    imposm_diff "$modify_create_file"
 
     cleanup_osm_changes
 
