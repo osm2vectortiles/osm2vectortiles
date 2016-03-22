@@ -43,6 +43,7 @@ system:
     - pitch
     sand:
     - sand
+    - beach
     school:
     - school
     - college

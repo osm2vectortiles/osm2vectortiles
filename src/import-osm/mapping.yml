@@ -244,6 +244,7 @@ tables:
       - scrub
       - wetland
       - mud
+      - beach
       wetland:
       - marsh
       - swamp
