@@ -16,7 +16,8 @@ RUN go get github.com/tools/godep \
  && git clone https://github.com/osm2vectortiles/imposm3 \
         $GOPATH/src/github.com/omniscale/imposm3 \
  && git reset --hard fe896035de33092753e72bc18a61dad5d8050a99 \
- && godep go install ./
+ && go get \
+ && go install
 
 # Purge no longer needed packages to keep image small.
 # Protobuf and LevelDB dependencies cannot be removed
