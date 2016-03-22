@@ -32,7 +32,7 @@ function import_pbf() {
         -write -optimize -diff
 
     local timestamp=$(extract_timestamp "$pbf_file")
-    update_timestamp "$timestamp"
+    store_timestamp_history "$timestamp"
 }
 
 function extract_timestamp() {
@@ -160,8 +160,6 @@ function import_pbf_diffs() {
         -diffdir "$IMPORT_DATA_DIR" \
         -dbschema-import "${DB_SCHEMA}" \
         "$diffs_file"
-
-    cleanup_osm_changes
 
     local timestamp=$(extract_timestamp "$diffs_file")
     echo "Set $timestamp for latest updates from $diffs_file"
