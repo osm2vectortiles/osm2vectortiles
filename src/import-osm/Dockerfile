@@ -20,6 +20,13 @@ RUN go get github.com/tools/godep \
  && go get \
  && go install
 
+# Purge no longer needed packages to keep image small.
+# Protobuf and LevelDB dependencies cannot be removed
+# because they are dynamically linked.
+RUN apt-get purge -y --auto-remove \
+    g++ gcc libc6-dev make git \
+    && rm -rf /var/lib/apt/lists/*
+
 VOLUME /data/import /data/cache
 ENV IMPORT_DATA_DIR=/data/import \
     IMPOSM_CACHE_DIR=/data/cache \

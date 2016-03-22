@@ -1,4 +1,4 @@
-# OSM2VectorTiles [![Build Status](https://travis-ci.org/osm2vectortiles/osm2vectortiles.svg)](https://travis-ci.org/osm2vectortiles/osm2vectortiles) [![MIT and ODbL licensed](https://img.shields.io/badge/license-MIT/ODbL-blue.svg)](https://github.com/osm2vectortiles/osm2vectortiles#license)
+# OSM2VectorTiles[![Build Status](https://travis-ci.org/osm2vectortiles/osm2vectortiles.svg?branch=master)](https://travis-ci.org/osm2vectortiles/osm2vectortiles) [![MIT and ODbL licensed](https://img.shields.io/badge/license-MIT/ODbL-blue.svg)](https://github.com/osm2vectortiles/osm2vectortiles#license)
 
 
 OSM2VectorTiles makes is possible to create vector tiles from OpenStreetMap data. For a detailed documentation, please visit our [project website](http://osm2vectortiles.org/docs/).
