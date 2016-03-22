@@ -41,6 +41,11 @@ system:
     - athletics
     - chess
     - pitch
+    rock:
+    - rock
+    - bare_rock
+    - scree
+    - quarry
     sand:
     - sand
     - beach

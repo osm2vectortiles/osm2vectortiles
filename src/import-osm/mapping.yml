@@ -225,6 +225,7 @@ tables:
       - forest
       - cemetery
       - beach
+      - quarry
       leisure:
       - park
       - playground
@@ -245,6 +246,9 @@ tables:
       - wetland
       - mud
       - beach
+      - rock
+      - bare_rock
+      - scree
       wetland:
       - marsh
       - swamp
