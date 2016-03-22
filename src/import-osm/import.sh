@@ -53,9 +53,7 @@ function update_timestamp() {
     local timestamp="$1"
     store_timestamp_history "$timestamp"
 
-	exec_sql "UPDATE osm_create SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_delete SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_modify SET timestamp='$timestamp' WHERE timestamp IS NULL"
 
 	exec_sql "UPDATE osm_admin_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_aero_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
@@ -170,5 +168,7 @@ function import_pbf_diffs() {
     update_timestamp "$timestamp"
     cleanup_osm_changes
 
-    merge_latest_diffs "$pbf_file" "$diffs_file"
+    # Merging back together is kind of a trap i fell into many
+    # times when testing. Need a better way to handle this.
+    # merge_latest_diffs "$pbf_file" "$diffs_file"
 }
