@@ -13,14 +13,9 @@ CREATE OR REPLACE FUNCTION changed_tiles_aeroway(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
 	RETURN QUERY (
-		WITH changed_geometries AS (
-			SELECT osm_id, timestamp, geometry FROM osm_delete
-    		WHERE table_name = 'osm_aero_linestring' OR table_name = 'osm_aero_polygon'
-    		UNION
-		    SELECT osm_id, timestamp, geometry FROM layer_aeroway 
-		), changed_tiles AS (
+		WITH changed_tiles AS (
 		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-		    FROM changed_geometries AS c
+		    FROM layer_aeroway AS c
 		    INNER JOIN LATERAL overlapping_tiles(c.geometry, 14) AS t ON c.timestamp = ts
 		)
 

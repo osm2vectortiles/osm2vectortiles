@@ -38,14 +38,9 @@ CREATE OR REPLACE FUNCTION changed_tiles_water_label(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
 	RETURN QUERY (
-		WITH changed_geometries AS (
-            SELECT osm_id, timestamp, geometry FROM osm_delete
-            WHERE table_name = 'osm_water_polygon'
-            UNION
-		    SELECT osm_id, timestamp, geometry FROM layer_water_label
-		), changed_tiles AS (
+		WITH changed_tiles AS (
 		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-		    FROM changed_geometries AS c
+		    FROM layer_water_label AS c
 		    INNER JOIN LATERAL overlapping_tiles(c.geometry, 14) AS t ON c.timestamp = ts
 		)
 
