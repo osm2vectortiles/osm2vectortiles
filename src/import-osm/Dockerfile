@@ -15,7 +15,7 @@ WORKDIR $GOPATH/src/github.com/omniscale/imposm3
 RUN go get github.com/tools/godep \
  && git clone https://github.com/osm2vectortiles/imposm3 \
         $GOPATH/src/github.com/omniscale/imposm3 \
- && git reset --hard 2882ecae4769e089b9dbe0fe820e394a2280c4e5 \
+ && git reset --hard fe896035de33092753e72bc18a61dad5d8050a99 \
  && godep go install ./
 
 # Purge no longer needed packages to keep image small.
