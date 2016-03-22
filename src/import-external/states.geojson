@@ -4,6 +4,52 @@
     {
       "type": "Feature",
       "properties": {
+        "osm_id": "474582475",
+        "area_sqkm": 1717854,
+        "abbr": "Alas.",
+        "ref": "AK",
+        "name": "Alaska",
+        "name_en": "Alaska",
+        "name_de": "Alaska",
+        "name_fr": "Alaska",
+        "name_es": "Alaska",
+        "name_zh": null,
+        "name_ru": "Аляска"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.680909,
+          64.4459613
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2281482629",
+        "area_sqkm": 170304,
+        "abbr": "Fla.",
+        "ref": "FL",
+        "name": "Florida",
+        "name_en": "Florida",
+        "name_de": "Florida",
+        "name_fr": "Floride",
+        "name_es": "Florida",
+        "name_zh": "佛罗里达州",
+        "name_ru": "Флорида"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.4639835,
+          27.7567667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "osm_id": "671022",
         "area_sqkm": 422102,
         "abbr": "Calif.",
@@ -757,6 +803,29 @@
         "coordinates": [
           -114.9999999,
           55
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2648961820",
+        "area_sqkm": 651900,
+        "abbr": null,
+        "ref": "SK",
+        "name": "Saskatchewan",
+        "name_en": "Saskatchewan",
+        "name_de": "Saskatchewan",
+        "name_fr": "Saskatchewan",
+        "name_es": "Saskatchewan",
+        "name_zh": null,
+        "name_ru": "Саскачеван"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -106,
+          54
         ]
       }
     },
