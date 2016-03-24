@@ -19,7 +19,8 @@ The download servers are kindly provided by [Switch Engines](https://www.switch.
 
 ## City Extracts
 
-City extracts are limited to the boundaries of a city and do not allow zooming out to the entire world.
+All city extracts consist of a bounding box of the city containing all details down to zoom level 14.
+At lower zoom levels there is still some world data to make maps look good.
 
 - [Zurich](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/zurich.mbtiles)
 - [London](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/london.mbtiles)
