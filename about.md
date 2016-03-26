@@ -8,15 +8,17 @@ published: true
 
 <div class="row pady-4 bordertop-block">
     <div class="col8">
-<p><a href="http://osm2vectortiles.org">OSM2VectorTiles</a> is a project simplifying installation of free world maps powered by OpenStreetMap. It offers freely downloadable OSM vector tiles, and a set of open-source tools for use and generating of the maps.
+<p><a href="http://osm2vectortiles.org">OSM2VectorTiles</a> is a project simplifying installation of free world maps powered by OpenStreetMap. It offers freely downloadable OSM vector tiles, and <a href="github.com/osm2vectortiles/osm2vectortiles">a set of open-source tools</a> for use and generating of the maps.
 </p>
 
 <p>
-Within minutes anybody can run on a laptop or private server his own instance of a zoomable OpenStreetMap map, with a customised design and use it in websites and mobile applications or in intranet - even behind a firewall or without internet connection.
+Within minutes anybody can run on a laptop or private server his own instance of a zoomable <a href="https://openstreetmap.org">OpenStreetMap</a> map, with a customised design and use it in websites and mobile applications or in intranet - even behind a firewall or without internet connection.
 </p>
 
 <p>
-The open-source project is result of cooperation between <a href="http://www.klokantech.com/">Klokan Technologies GmbH</a> and students from <a href="http://hsr.ch/geometalab">Geometa Lab HSR, Switzerland</a>.
+The open-source project is the result of the bachelor thesis of Manuel Roth and Lukas Martinelli
+from the <a href="http://hsr.ch/geometalab">University of Applied Sciences Rapperswil, Switzerland</a>
+in close collaboration with <a href="http://www.klokantech.com/">Klokan Technologies GmbH</a>.
 </p>
 
 <p>
