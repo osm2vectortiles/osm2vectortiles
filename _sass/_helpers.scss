@@ -217,3 +217,10 @@ center, .center, .text-center{text-align: center;}
     font-style: italic;
   }
 }
+
+.readable {
+    text-align: center;
+    max-width: 40em;
+    margin-left: auto;
+    margin-right: auto;
+}

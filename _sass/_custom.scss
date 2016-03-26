@@ -46,6 +46,7 @@ body{
   height: 270px;
   border-top: 4px solid #2571a2;
   border-bottom: 1px solid #439595;
+
   h1{
     margin: 100px 0 0 0;
     font-size: 45px;
@@ -86,14 +87,17 @@ body{
 @media(max-width: 841px){
   .banner{
 
-    h1{font-size: 30px;}
+    h1{
+      font-size: 30px;
+      margin-top: 50px;
+    }
 
     &.home{
-      height: 460px;
+      height: 400px;
 
       img{
         margin-left: -205px;
-        top: 302px;
+        top: 242px;
         width: 410px;
         height: 196px;
       }
@@ -108,22 +112,30 @@ body{
 }
 
 @media(max-width: 451px){
-
-  body.home{ 
+  body.home{
     h1{
       font-size: 24px;
     }
   }
   .banner{
     &.home{
+      height: 350px;
 
       img{
         margin-left: -151px;
-        top: 337px;
+        top: 227px;
         width: 320px;
         height: 153px;
       }
     }
+  }
+  .container-branding {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .title-branding {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }
 
