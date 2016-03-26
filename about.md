@@ -18,7 +18,7 @@ Within minutes anybody can run on a laptop or private server his own instance of
 <p>
 The open-source project is the result of the bachelor thesis of Manuel Roth and Lukas Martinelli
 from the <a href="http://hsr.ch/geometalab">University of Applied Sciences Rapperswil, Switzerland</a>
-in close collaboration with <a href="http://www.klokantech.com/">Klokan Technologies GmbH</a>.
+supported and made possible by <a href="http://www.klokantech.com/">Klokan Technologies GmbH</a>.
 </p>
 
 <p>
