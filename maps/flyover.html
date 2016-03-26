@@ -1,0 +1,50 @@
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title></title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+	<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.15.0/mapbox-gl.js"></script>
+	<link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.15.0/mapbox-gl.css" rel="stylesheet">
+  <style>
+      body { margin:0; padding:0; }
+      #map { position:absolute; top:0; bottom:0; width:100%; }
+  </style>
+</head>
+<body>
+
+<div id='map'></div>
+<script>
+
+function rotator(){
+  map.easeTo({bearing:60, duration:10000, pitch:55, zoom:18});
+  window.setTimeout(function(){
+    map.easeTo({bearing:180, duration:10000, pitch:0, zoom:14});
+    window.setTimeout(function(){
+      map.easeTo({bearing:300, duration:10000, pitch:30, zoom:16});
+      window.setTimeout(function(){
+        rotator()
+      }, 10000)
+    }, 10000)
+  }, 10000)
+}
+
+mapboxgl.accessToken = 'pk.eyJ1IjoicGV0ZXJxbGl1IiwiYSI6ImpvZmV0UEEifQ._D4bRmVcGfJvo1wjuOpA1g';
+if (!mapboxgl.supported()) {
+		var vectorMapContainer = document.getElementById("vector-map");
+		vectorMapContainer.innerHTML = 'Your browser does not support Mapbox GL. Either your browser does not support WebGL or it is disabled, please check <a href="https://get.webgl.org/">http://get.webgl.org</a> for more information.'
+	} else {
+	var map = new mapboxgl.Map({
+		container: 'map',
+		style: '/styles/bright-v8.json',
+		center: [8.54137, 47.36840],
+		zoom: 14.66
+	});
+
+	map.on('load', function(){
+    rotator()
+	});
+}
+</script>
+
+</body>
+</html>
