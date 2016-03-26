@@ -145,3 +145,26 @@ body{
   padding: 0 8px;
   font-size: 1em;
 }
+
+.contributors {
+    img {
+        max-width: 100%;
+    }
+}
+
+.contributor-profile {
+  text-align: center;
+
+  h3{
+    &:hover{
+    }
+  }
+
+  .circular:hover {
+    opacity: .95;
+  }
+
+  &:hover{
+    text-decoration: none;
+  }
+}

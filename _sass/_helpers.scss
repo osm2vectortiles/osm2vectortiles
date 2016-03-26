@@ -224,3 +224,15 @@ center, .center, .text-center{text-align: center;}
     margin-left: auto;
     margin-right: auto;
 }
+
+.circular {
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+}
