@@ -41,7 +41,10 @@ if (!mapboxgl.supported()) {
 	});
 
 	map.on('load', function(){
-    rotator()
+    if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      //mobile devices are usually to weak for rendering the flyover
+      rotator()
+    }
 	});
 }
 </script>
