@@ -235,4 +235,12 @@ center, .center, .text-center{text-align: center;}
     box-shadow: 0 0 8px rgba(0, 0, 0, .2);
     -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .2);
     -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+
+    @media(max-width: 841px){
+        width: 150px;
+        height: 150px;
+        border-radius: 75px;
+        -webkit-border-radius: 75px;
+        -moz-border-radius: 75px;
+    }
 }
