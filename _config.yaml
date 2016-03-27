@@ -7,6 +7,7 @@ tweet: "Create a custom base map in minutes with free vector tiles from OpenStre
 # Build settings
 markdown: kramdown
 kramdown:
+  hard_wrap: false
   input: GFM
   auto_ids: true
   syntax_highlighter: rouge
