@@ -16,6 +16,8 @@ Options:
 
 import os
 import json
+import hashlib
+
 
 import mercantile
 import boto.sqs
@@ -40,30 +42,24 @@ def tiles_for_zoom_level(zoom_level):
             yield tile
 
 
-def connect_job_queue():
-    conn = boto.sqs.connect_to_region(os.getenv('AWS_REGION', 'eu-central-1'))
-    queue_name = os.getenv('QUEUE_NAME', 'osm2vectortiles_jobs')
-    queue = conn.get_queue(queue_name)
-    if queue is None:
-        raise ValueError('Could not connect to queue {}'.format(queue_name))
-
-    return queue
-
-
 def create_list_batch_job(tile_list):
     return {
+        'id': hashlib.sha1(
+            json.dumps(tile_list, sort_keys=True).encode('utf-8')
+        ).hexdigest(),
         'type': 'list',
         'tiles':  tile_list
     }
 
 
 def create_pyramid_job(x, y, min_zoom, max_zoom, bounds):
-    return {
-        'x': tile.x,
-        'y': tile.y,
-        'type': 'pyramid',
-        'min_zoom': tile.z,
-        'max_zoom': 14,
+    pyramid = {
+        'tile': {
+            'x': tile.x,
+            'y': tile.y,
+            'min_zoom': tile.z,
+            'max_zoom': 14
+        },
         'bounds': {
             'west': bounds.west,
             'south': bounds.south,
@@ -72,20 +68,27 @@ def create_pyramid_job(x, y, min_zoom, max_zoom, bounds):
         }
     }
 
+    return {
+        'id': hashlib.sha1(
+            json.dumps(pyramid, sort_keys=True).encode('utf-8')
+        ).hexdigest(),
+        'type': 'pyramid',
+        'pyramid': pyramid
+    }
 
 def split_tiles_into_batch_jobs(tiles):
     tiles_batch = []
 
-    for line in file_handle:
-        tiles_batch.append(line)
-        if len(job_list) > batch_size:
+    for tile in tiles:
+        tiles_batch.append(tile)
+        if len(tiles_batch) > batch_size:
             yield create_list_batch_job(tiles_batch)
             tiles_batch = []
 
     yield create_list_batch_job(tiles_batch)
 
 
-def pyramid_jobs(x, y, z, max_zoom)
+def pyramid_jobs(x, y, z, max_zoom):
         tiles = all_descendant_tiles(x=x, y=y, zoom=0, max_zoom=zoom_level)
         pyramid_zoom_level_tiles = (t for t in tiles if t.z == zoom_level)
 
@@ -108,14 +111,18 @@ if __name__ == '__main__':
             print(job)
 
     if  args['list']:
-        batch_size = int(args['<batch_size>'])
+        batch_size = int(args['--batch-size'])
 
         tiles = []
-        with open(args['list_file'],"r") as file_handle:
+        with open(args['<list_file>'],"r") as file_handle:
             for line in file_handle:
-                tiles.append(line)
+                z, x, y = line.split('/')
+                tiles.append({
+                    'x': int(x),   
+                    'y': int(y),  
+                    'z': int(z)
+                })
 
+        tiles.sort(key = lambda t: (t['z'], t['x'], t['y']))
         for job in split_tiles_into_batch_jobs(tiles):
-            print(job)
-
-
+            print(json.dumps(job))

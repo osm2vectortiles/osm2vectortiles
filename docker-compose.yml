@@ -65,6 +65,8 @@ changed-tiles:
   - postgis:db
 enqueue-jobs:
   build: ./tools/enqueue-jobs
+  volumes:
+   - ./export:/data/export
   environment:
     AWS_REGION: "eu-central-1"
     TASK_ZOOM_LEVEL: 8
