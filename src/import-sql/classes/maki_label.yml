@@ -213,6 +213,7 @@ system:
     - turning_circle
     harbor:
     - marina
+    - dock
     ice-cream:
     - chocolate
     - confectionery

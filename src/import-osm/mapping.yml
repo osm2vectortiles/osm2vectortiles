@@ -1025,6 +1025,8 @@ tables:
       - canopy
       historic:
       - monument
+      waterway:
+      - dock
     type: polygon
   poi_point:
     fields:
@@ -1371,4 +1373,6 @@ tables:
       - canopy
       historic:
       - monument
+      waterway:
+      - dock
     type: point
