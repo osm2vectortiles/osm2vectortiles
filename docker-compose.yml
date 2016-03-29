@@ -67,14 +67,10 @@ changed-tiles:
    - ./export:/data/export
   links:
   - postgis:db
-enqueue-jobs:
-  build: ./tools/enqueue-jobs
+generate-jobs:
+  image: "osm2vectortiles/generate-jobs"
   volumes:
    - ./export:/data/export
-  environment:
-    AWS_REGION: "eu-central-1"
-    TASK_ZOOM_LEVEL: 8
-    QUEUE_NAME: "osm2vectortiles_jobs"
 export-worker:
   image: "osm2vectortiles/export"
   command: ./export-worker.sh

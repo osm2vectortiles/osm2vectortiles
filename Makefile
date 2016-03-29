@@ -1,8 +1,8 @@
 .PHONY: all
 
-all: postgis export-mbtiles import-osm import-external import-sql update-scaleranks create-extracts changed-tiles
+all: postgis export-mbtiles import-osm import-external import-sql update-scaleranks create-extracts changed-tiles generate-jobs
 
-fast: postgis export-mbtiles import-osm import-sql update-scaleranks create-extracts changed-tiles
+fast: postgis export-mbtiles import-osm import-sql update-scaleranks create-extracts changed-tiles generate-jobs
 
 postgis:
 	docker build -t osm2vectortiles/postgis src/postgis
@@ -27,3 +27,6 @@ create-extracts:
 
 changed-tiles:
 	docker build -t osm2vectortiles/changed-tiles src/changed-tiles
+
+generate-jobs:
+	docker build -t osm2vectortiles/generate-jobs src/generate-jobs
