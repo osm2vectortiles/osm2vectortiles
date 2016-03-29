@@ -91,29 +91,69 @@ def upload_mbtiles(bucket, mbtiles_file):
     obj.set_contents_from_filename(mbtiles_file)
 
 
+def create_tilelive_bbox(bounds):
+    return = '{} {} {} {}'.format(
+        bounds['west'], bounds['south'],
+        bounds['east'], bounds['north']
+    )
+    
+def render_tile_list_command(source, sink, link_file)
+    return = [
+        'tilelive-copy',
+        '--scheme', 'list',
+        '--list', list_file,
+        source, sink
+    ]
+
+def render_pyramid_command(source, sink, bounds, min_zoom, max_zoom)
+    return [
+        'tilelive-copy',
+        '--scheme', 'pyramid',
+        '--bounds', bounds,
+        '--minzoom', str(min_zoom),
+        '--maxzoom', str(max_zoom),
+        source, sink
+    ]
+
 def export_remote(tm2source, rabbitmq_url, queue_name, render_scheme, bucket_name):
     bucket = connect_s3(bucket_name)
 
-    def complete_job(task_id, body, logging_info):
-        mbtiles_file = task_id + '.mbtiles'
-        bounds = body['bounds']
-        bbox = '{} {} {} {}'.format(
-            bounds['west'], bounds['south'],
-            bounds['east'], bounds['north']
-        )
+    connection = pika.BlockingConnection(pika.URLParameters(rabbitmq_url))
+    channel = connection.channel()
+    configure_rabbitmq(channel)
 
-        tilelive_command = create_tilelive_command(
-            tm2source,
-            mbtiles_file,
-            bbox,
-            body['min_zoom'],
-            body['max_zoom'],
-            render_scheme
-        )
+    def callback(ch, method, properties, body):
+        msg = json.loads(body.decode('utf-8'))
+        task_id = msg['id']
+        mbtiles_file = task_id + '.mbtiles'
+
+        source = 'tmsource://' + os.path.abspath(tm2source)
+        sink = 'mbtiles://' + os.path.abspath(mbtiles_file)
+        tileinfo = msg['tile']
+        tilelive_cmd = []
+
+        if body['type'] == 'pyramid':
+            tilelive_cmd = render_pyramid_command(
+                source, sink,          
+                bounds=create_tilelive_bbox(tile['bounds']),
+                min_zoom=tileinfo['min_zoom'],
+                max_zoom=tileinfo['max_zoom']
+            )
+        elif body['type'] == 'list':
+            list_file='/tmp/tiles.txt'
+            with open(list_file, 'w') as fh:
+                write_list_file(fh)
+
+            tilelive_cmd = render_tile_list_command(
+                source, sink,          
+                list_file=list_file,
+            )
+        else:
+            raise ValueError("Message must be either of type pyramid or list")
 
         start = time.time()
         subprocess.check_output(
-            tilelive_command,
+            tilelive_cmd,
             stderr=subprocess.STDOUT,
         )
         end = time.time()
@@ -125,16 +165,9 @@ def export_remote(tm2source, rabbitmq_url, queue_name, render_scheme, bucket_nam
         export_logger.info('Upload mbtiles {}'.format(mbtiles_file),
                            extra=logging_info)
 
-        queue.delete_message(message)
 
-    connection = pika.BlockingConnection(pika.URLParameters(rabbitmq_url))
-    channel = connection.channel()
-    configure_rabbitmq(channel)
 
-    def callback(ch, method, properties, body):
-        print('Yaaay')
-        body = json.loads(body.decode('utf-8'))
-        print(body)
+
 
     channel.basic_consume(callback, queue=queue_name)
 
@@ -164,6 +197,11 @@ def durable_publish(channel, queue, body):
 
 def reject(channel, method):
     channel.basic_reject(delivery_tag=method.delivery_tag, requeue=False)
+
+
+def write_list_file(fh, tiles):
+    for tile in tiles:
+        fh.write('{}/{}/{}\n'.format(tile['z'], tile['x'], tile['y']))
 
 
 def main(args):
