@@ -79,6 +79,7 @@ export-worker:
   links:
    - pgbouncer:db
    - rabbitmq:rabbitmq
+   - mock-s3:mock-s3
   environment:
     AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
     AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
@@ -145,3 +146,10 @@ create-extracts:
   environment:
     S3_ACCESS_KEY: "${S3_ACCESS_KEY}"
     S3_SECRET_KEY: "${S3_SECRET_KEY}"
+mock-s3:
+  image: "ianblenke/mock-s3"
+  ports:
+   - "8080"
+  environment:
+    MAKE_BUCKETS: "osm2vectortiles-jobs"
+    MOCK_S3_TRACE: "true"

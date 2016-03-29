@@ -2,7 +2,7 @@
 """Wrapper around tilelive for exporting vector tiles from tm2source.
 
 Usage:
-  export_remote.py <sqs_queue> --tm2source=<tm2source> [--bucket=<bucket>] [--render_scheme=<scheme>]
+  export_remote.py <rabbitmq_url> --tm2source=<tm2source> [--job-queue=<job-queue>] [--bucket=<bucket>] [--render_scheme=<scheme>]
   export_remote.py (-h | --help)
   export_remote.py --version
 
@@ -10,6 +10,7 @@ Options:
   -h --help                 Show this screen.
   --version                 Show version.
   --render_scheme=<scheme>  Either pyramid or scanline [default: pyramid]
+  --job-queue=<job-queue>   Job queue name [default: jobs]
   --tm2source=<tm2source>   Directory of tm2source
   --bucket=<bucket>         S3 Bucket name for storing results [default: osm2vectortiles-jobs]
 
@@ -20,10 +21,12 @@ import time
 import logging
 import subprocess
 import re
+import sys
 import os
 import os.path
 import json
 
+from boto.s3.connection import S3Connection, OrdinaryCallingFormat
 import boto.sqs
 import pika
 from docopt import docopt
@@ -65,7 +68,20 @@ def connect_job_queue(queue_name):
 
 
 def connect_s3(bucket_name):
-    conn = boto.s3.connect_to_region(os.getenv('AWS_REGION', 'eu-central-1'))
+    #boto.set_stream_logger('paws')
+    port = int(os.getenv('AWS_S3_PORT', 8080))
+    print(port)
+    is_secure = port == 443
+    conn = S3Connection(
+        os.getenv('AWS_ACCESS_KEY_ID', 'dummy'),
+        os.getenv('AWS_SECRET_ACCESS_KEY', 'dummy'),
+        is_secure=is_secure,
+        port=port,
+        host=os.getenv('AWS_S3_HOST', 'mock-s3'),
+        calling_format=OrdinaryCallingFormat()
+    )
+
+    conn.create_bucket(bucket_name)
     return conn.get_bucket(bucket_name)
 
 
@@ -75,7 +91,7 @@ def upload_mbtiles(bucket, mbtiles_file):
     obj.set_contents_from_filename(mbtiles_file)
 
 
-def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
+def export_remote(tm2source, rabbitmq_url, queue_name, render_scheme, bucket_name):
     bucket = connect_s3(bucket_name)
 
     def complete_job(task_id, body, logging_info):
@@ -116,10 +132,11 @@ def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
     configure_rabbitmq(channel)
 
     def callback(ch, method, properties, body):
+        print('Yaaay')
         body = json.loads(body.decode('utf-8'))
         print(body)
 
-    channel.basic_consume(callback, queue=queue)
+    channel.basic_consume(callback, queue=queue_name)
 
     try:
         channel.start_consuming()
@@ -151,7 +168,7 @@ def reject(channel, method):
 
 def main(args):
     formatter = logging.Formatter('%(ip)s %(task_id)s %(message)s')
-    handler = watchtower.CloudWatchLogHandler()
+    handler = logging.StreamHandler(sys.stdout)
     handler.setFormatter(formatter)
 
     mapnik_logger.addHandler(handler)
@@ -159,7 +176,8 @@ def main(args):
 
     export_remote(
         args['--tm2source'],
-        args['<sqs_queue>'],
+        args['<rabbitmq_url>'],
+        args['--job-queue'],
         args['--render_scheme'],
         args['--bucket'],
     )
