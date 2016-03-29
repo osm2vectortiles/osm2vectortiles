@@ -797,6 +797,8 @@ tables:
       - swimming_area
       - water_park
       - golf_course
+      - miniature_golf
+      - marina
       - stadium
       - ice_rink
       - garden
@@ -1141,6 +1143,8 @@ tables:
       - swimming_area
       - water_park
       - golf_course
+      - miniature_golf
+      - marina
       - stadium
       - ice_rink
       - garden

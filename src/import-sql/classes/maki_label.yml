@@ -119,6 +119,7 @@ system:
     golf:
     - golf
     - golf_course
+    - miniature_golf
     grocery:
     - supermarket
     - deli
@@ -210,6 +211,8 @@ system:
     highway:
     - motorway_junction
     - turning_circle
+    harbor:
+    - marina
     ice-cream:
     - chocolate
     - confectionery
