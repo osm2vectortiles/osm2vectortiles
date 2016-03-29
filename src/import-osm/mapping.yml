@@ -390,7 +390,6 @@ tables:
     filters:
       exclude_tags:
       - ["area", "yes"]
-      - ["amenity", "parking"]
     mappings:
       railway:
         mapping:
@@ -412,6 +411,8 @@ tables:
           - siding
           - crossover
           - parking_aisle
+          - emergency_access
+          - drive-through
       roads:
         mapping:
           highway:
@@ -511,7 +512,6 @@ tables:
     - name: name_zh
       key: name:zh
       type: string
-    filters:
     mappings:
       railway:
         mapping:
@@ -533,6 +533,7 @@ tables:
           - siding
           - crossover
           - parking_aisle
+          - drive-through
       roads:
         mapping:
           highway:
@@ -576,6 +577,8 @@ tables:
           - canopy
           golf:
           - hole
+          amenity:
+          - parking
   water_polygon:
     fields:
     - name: osm_id

@@ -33,6 +33,12 @@ system:
     - spur
     - siding
     - crossover
+    - parking
+    - parking_aisle
+    - yard
+    - driveway
+    - emergency_access
+    - drive-through
     path:
     - path
     - cycleway
