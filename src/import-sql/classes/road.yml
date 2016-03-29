@@ -43,6 +43,7 @@ system:
     - path
     - cycleway
     - ski
+    - piste
     - steps
     - bridleway
     - footway
@@ -73,3 +74,6 @@ system:
     - canopy
     golf:
     - hole
+    ferry:
+    - ferry
+    

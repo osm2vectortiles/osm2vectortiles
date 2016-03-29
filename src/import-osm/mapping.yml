@@ -467,6 +467,10 @@ tables:
           - canopy
           golf:
           - hole
+          route:
+          - ferry
+          - ski
+          - piste
   road_polygon:
     type: polygon
     fields:
