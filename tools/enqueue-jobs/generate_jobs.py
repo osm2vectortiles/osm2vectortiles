@@ -2,7 +2,7 @@
 """Generate jobs for rendering tiles in pyramid and list format in JSON format
 
 Usage:
-  generate_jobs.py pyramid <x> <y> <z> --max-zoom=<max-zoom>
+  generate_jobs.py pyramid <x> <y> <z> --job-zoom=<job-zoom>
   generate_jobs.py list <list_file> --batch-size=<batch_size>
   generate_jobs.py (-h | --help)
   generate_jobs.py --version
@@ -10,7 +10,7 @@ Usage:
 Options:
   -h --help                    Show this screen.
   --version                    Show version.
-  --max-zoom=<max-zoom>        Max zoom level for pyramid jobs.
+  --job-zoom=<job-zoom>        Max zoom level for pyramid jobs.
   --batch-size=<batch_size>    Amount of tiles for list jobs.
 """
 
@@ -55,10 +55,10 @@ def create_list_batch_job(tile_list):
 def create_pyramid_job(x, y, min_zoom, max_zoom, bounds):
     pyramid = {
         'tile': {
-            'x': tile.x,
-            'y': tile.y,
-            'min_zoom': tile.z,
-            'max_zoom': 14
+            'x': x,
+            'y': y,
+            'min_zoom': z,
+            'max_zoom': max_zoom
         },
         'bounds': {
             'west': bounds.west,
@@ -76,6 +76,7 @@ def create_pyramid_job(x, y, min_zoom, max_zoom, bounds):
         'pyramid': pyramid
     }
 
+
 def split_tiles_into_batch_jobs(tiles):
     tiles_batch = []
 
@@ -88,27 +89,37 @@ def split_tiles_into_batch_jobs(tiles):
     yield create_list_batch_job(tiles_batch)
 
 
-def pyramid_jobs(x, y, z, max_zoom):
-        tiles = all_descendant_tiles(x=x, y=y, zoom=0, max_zoom=zoom_level)
-        pyramid_zoom_level_tiles = (t for t in tiles if t.z == zoom_level)
+def pyramid_jobs(x, y, z, job_zoom):
+        if z == job_zoom:
+            bounds = mercantile.bounds(x, y, z)
+            yield create_pyramid_job(
+                x=x, y=y,
+                min_zoom=z, max_zoom=14,
+                 bounds=bounds
+            )
+            return
+
+        tiles = all_descendant_tiles(x, y, z, job_zoom)
+        pyramid_zoom_level_tiles = (t for t in tiles if t.z == job_zoom)
 
         for tile in pyramid_zoom_level_tiles:
             bounds = mercantile.bounds(tile.x, tile.y, tile.z)
-            yield create_pyramid_job(tile.x, tile.y, min_zoom=0,
-                                     max_zoom=tile.z, bounds=bounds)
+            yield create_pyramid_job(tile.x, tile.y, min_zoom=tile.z,
+                                     max_zoom=14, bounds=bounds)
+
 
 if __name__ == '__main__':
     args = docopt(__doc__, version='0.1')
 
     if  args['pyramid']:
-        zoom_level = int(args['<max-zoom>'])
+        job_zoom = int(args['--job-zoom'])
 
         x = int(args['<x>'])
         y = int(args['<y>'])
         z = int(args['<z>'])
 
-        for job in pyramid_jobs(x, y, z, zoom_level):
-            print(job)
+        for job in pyramid_jobs(x, y, z, job_zoom):
+            print(json.dumps(job), flush=True)
 
     if  args['list']:
         batch_size = int(args['--batch-size'])
@@ -118,11 +129,11 @@ if __name__ == '__main__':
             for line in file_handle:
                 z, x, y = line.split('/')
                 tiles.append({
-                    'x': int(x),   
-                    'y': int(y),  
+                    'x': int(x),
+                    'y': int(y),
                     'z': int(z)
                 })
 
         tiles.sort(key = lambda t: (t['z'], t['x'], t['y']))
         for job in split_tiles_into_batch_jobs(tiles):
-            print(json.dumps(job))
+            print(json.dumps(job), flush=True)
