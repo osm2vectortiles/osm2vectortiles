@@ -308,8 +308,8 @@ tables:
       name: population
       type: integer
     - key: capital
-      name: is_capital
-      type: bool
+      name: capital
+      type: integer
     - key: admin_level
       name: admin_level
       type: integer
@@ -330,6 +330,8 @@ tables:
       - neighbourhood
       - locality
       - dwelling
+      - island
+      - islet
     type: point
   road_linestring:
     type: linestring

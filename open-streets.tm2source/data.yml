@@ -717,7 +717,7 @@ Layer:
         coalesce(NULLIF(name_ru, ''), name) AS name_ru,
         coalesce(NULLIF(name_zh, ''), name) AS name_zh, 
         type,
-        CASE WHEN is_capital THEN 1 ELSE NULL END AS capital,
+        capital,
         NULL AS ldir,
         normalize_scalerank(scalerank) AS scalerank,
         rank() OVER (PARTITION BY LabelGrid(geometry, 200 * !pixel_width!)
@@ -756,7 +756,7 @@ Layer:
       user: osm
     description: ''
     fields: 
-      capital: String
+      capital: Number
       ldir: String
       localrank: Number
       name: String
