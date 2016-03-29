@@ -18,7 +18,6 @@ import os
 import json
 import hashlib
 
-
 import mercantile
 import boto.sqs
 from boto.sqs.message import Message
