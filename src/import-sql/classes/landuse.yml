@@ -68,3 +68,21 @@ system:
     wetland_noveg:
     - mud
     - tidalflat
+    residential:
+    - residential
+    commercial:
+    - commercial
+    retail:
+    - retail
+    military:
+    - military
+    railway:
+    - railway
+    greenfield:
+    - greenfield
+    landfill:
+    - landfill
+    salt_pond:
+    - salt_pond
+    winter_sports:
+    - winter_sports

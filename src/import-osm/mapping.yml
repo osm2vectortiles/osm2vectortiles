@@ -226,6 +226,15 @@ tables:
       - cemetery
       - beach
       - quarry
+      - residential
+      - commercial
+      - retail
+      - military
+      - railway
+      - greenfield
+      - landfill
+      - salt_pond
+      - winter_sports
       leisure:
       - park
       - playground
@@ -329,7 +338,7 @@ tables:
       - suburb
       - neighbourhood
       - locality
-      - dwelling
+      - isolated_dwelling
       - island
       - islet
     type: point
