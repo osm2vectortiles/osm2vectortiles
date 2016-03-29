@@ -78,6 +78,7 @@ export-worker:
    - ./open-streets.tm2source:/data/tm2source
   links:
    - pgbouncer:db
+   - rabbitmq:rabbitmq
   environment:
     AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
     AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"

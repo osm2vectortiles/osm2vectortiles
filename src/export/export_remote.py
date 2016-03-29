@@ -25,6 +25,7 @@ import os.path
 import json
 
 import boto.sqs
+import pika
 from docopt import docopt
 
 
@@ -39,16 +40,16 @@ def local_ip():
 
 def create_tilelive_command(tm2source, mbtiles_file, bbox,
                             min_zoom=8, max_zoom=12, scheme='pyramid'):
-    tilelive_binary = os.getenv('TILELIVE_BIN', 'tl')
+    tilelive_binary = os.getenv('TILELIVE_BIN', 'tilelive-copy')
     source = 'tmsource://' + os.path.abspath(tm2source)
     sink = 'mbtiles://' + os.path.abspath(mbtiles_file)
 
     cmd = [
-        tilelive_binary, 'copy',
-        '-s', 'pyramid',
-        '-b', bbox,
-        '--min-zoom', str(min_zoom),
-        '--max-zoom', str(max_zoom),
+        tilelive_binary,
+        '--scheme', 'pyramid',
+        '--bounds', bbox,
+        '--minzoom', str(min_zoom),
+        '--maxzoom', str(max_zoom),
         source, sink
     ]
 
@@ -76,8 +77,6 @@ def upload_mbtiles(bucket, mbtiles_file):
 
 def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
     bucket = connect_s3(bucket_name)
-    queue = connect_job_queue(sqs_queue)
-    timeout = int(os.getenv('JOB_TIMEOUT', 15 * 60))
 
     def complete_job(task_id, body, logging_info):
         mbtiles_file = task_id + '.mbtiles'
@@ -112,31 +111,42 @@ def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
 
         queue.delete_message(message)
 
-    while True:
-        message = queue.read(visibility_timeout=timeout)
-        if message:
-            body = json.loads(message.get_body())
-            task_id = '{}_{}_z{}-z{}'.format(
-                body['x'],
-                body['y'],
-                body['min_zoom'],
-                body['max_zoom']
-            )
-            logging_info = {
-                'ip': local_ip(),
-                'task_id':  task_id
-            }
-            try:
-                complete_job(task_id, body, logging_info)
-            except subprocess.CalledProcessError as err:
-                export_logger.exception('Could not complete job: ' + err.output,
-                                        exc_info=True, extra=logging_info)
-            except Exception:
-                export_logger.exception('Could not complete job',
-                                        exc_info=True, extra=logging_info)
-        else:
-            print('No jobs to read')
-            break
+    connection = pika.BlockingConnection(pika.URLParameters(rabbitmq_url))
+    channel = connection.channel()
+    configure_rabbitmq(channel)
+
+    def callback(ch, method, properties, body):
+        body = json.loads(body.decode('utf-8'))
+        print(body)
+
+    channel.basic_consume(callback, queue=queue)
+
+    try:
+        channel.start_consuming()
+    except KeyboardInterrupt:
+        channel.stop_consuming()
+
+    connection.close()
+
+
+def configure_rabbitmq(channel):
+    """Setup all queues and topics for RabbitMQ"""
+
+    def queue_declare(queue):
+        return channel.queue_declare(queue=queue, durable=True)
+
+    queue_declare('jobs')
+    queue_declare('results')
+
+
+def durable_publish(channel, queue, body):
+    properties = pika.BasicProperties(delivery_mode=2)
+    channel.basic_publish(exchange='', routing_key=queue,
+                          body=body, properties=properties)
+
+
+def reject(channel, method):
+    channel.basic_reject(delivery_tag=method.delivery_tag, requeue=False)
 
 
 def main(args):
