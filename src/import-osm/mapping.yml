@@ -1010,23 +1010,12 @@ tables:
       - cycle_barrier
       - toll_booth
       - border_control
-      aerialway:
-      - chair_lift
-      - mixed_lift
-      - drag_lift
-      - platter
-      - t-bar
-      - magic_carpet
-      - gondola
-      - cable_car
-      - rope_tow
-      - zip_line
-      - j-bar
-      - canopy
       historic:
       - monument
       waterway:
       - dock
+      aerialway:
+      - station
     type: polygon
   poi_point:
     fields:
@@ -1358,21 +1347,10 @@ tables:
       - cycle_barrier
       - toll_booth
       - border_control
-      aerialway:
-      - chair_lift
-      - mixed_lift
-      - drag_lift
-      - platter
-      - t-bar
-      - magic_carpet
-      - gondola
-      - cable_car
-      - rope_tow
-      - zip_line
-      - j-bar
-      - canopy
       historic:
       - monument
       waterway:
       - dock
+      aerialway:
+      - station
     type: point

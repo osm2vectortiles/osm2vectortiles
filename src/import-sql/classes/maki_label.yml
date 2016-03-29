@@ -1,19 +1,6 @@
 system:
   name: maki_label
   classes:
-    aerialway:
-    - chair_lift
-    - mixed_lift
-    - drag_lift
-    - platter
-    - t-bar
-    - magic_carpet
-    - gondola
-    - cable_car
-    - rope_tow
-    - zip_line
-    - j-bar
-    - canopy
     airport:
     - aerodrome
     - terminal
@@ -334,8 +321,8 @@ system:
     - watches
     - weapons
     - wholesale
-    skiing:
-    - skiing
+    aerialway:
+    - station
     slaughterhouse:
     - butcher
     soccer:
