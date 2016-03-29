@@ -91,7 +91,7 @@ export:
   links:
    - pgbouncer:db
   environment:
-    BBOX: "8.4375 46.07323062540838 9.84375 47.040182144806664"
+    BBOX: "9.39,47.01,9.7,47.29"
     MIN_ZOOM: "8"
     MAX_ZOOM: "14"
 export-list:
