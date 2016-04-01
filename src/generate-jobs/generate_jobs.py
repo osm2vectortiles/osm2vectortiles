@@ -14,13 +14,10 @@ Options:
   --batch-size=<batch_size>    Amount of tiles for list jobs.
 """
 
-import os
 import json
 import hashlib
 
 import mercantile
-import boto.sqs
-from boto.sqs.message import Message
 from docopt import docopt
 
 
@@ -94,7 +91,7 @@ def pyramid_jobs(x, y, z, job_zoom):
             yield create_pyramid_job(
                 x=x, y=y,
                 min_zoom=z, max_zoom=14,
-                 bounds=bounds
+                bounds=bounds
             )
             return
 
@@ -110,7 +107,7 @@ def pyramid_jobs(x, y, z, job_zoom):
 if __name__ == '__main__':
     args = docopt(__doc__, version='0.1')
 
-    if  args['pyramid']:
+    if args['pyramid']:
         job_zoom = int(args['--job-zoom'])
 
         x = int(args['<x>'])
@@ -120,11 +117,11 @@ if __name__ == '__main__':
         for job in pyramid_jobs(x, y, z, job_zoom):
             print(json.dumps(job), flush=True)
 
-    if  args['list']:
+    if args['list']:
         batch_size = int(args['--batch-size'])
 
         tiles = []
-        with open(args['<list_file>'],"r") as file_handle:
+        with open(args['<list_file>'], "r") as file_handle:
             for line in file_handle:
                 z, x, y = line.split('/')
                 tiles.append({
@@ -133,6 +130,6 @@ if __name__ == '__main__':
                     'z': int(z)
                 })
 
-        tiles.sort(key = lambda t: (t['z'], t['x'], t['y']))
+        tiles.sort(key=lambda t: (t['z'], t['x'], t['y']))
         for job in split_tiles_into_batch_jobs(tiles):
             print(json.dumps(job), flush=True)
