@@ -71,6 +71,116 @@ tables:
       - apron
       - helipad
     type: polygon
+  airport_point:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: timestamp
+      type: pbf_timestamp
+    - key: name
+      name: name
+      type: string
+    - name: name_int
+      key: int_name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
+    - name: iata
+      key: iata
+      type: string
+    - name: ref
+      key: ref
+      type: string
+    - name: icao
+      key: icao
+      type: string
+    - name: faa
+      key: faa
+      type: string
+    - name: type
+      key: aerodrome:type
+      type: string
+    - name: kind
+      type: mapping_value
+    mapping:
+      aeroway:
+      - aerodrome
+      - heliport
+    type: point
+  airport_polygon:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: timestamp
+      type: pbf_timestamp
+    - key: name
+      name: name
+      type: string
+    - name: name_int
+      key: int_name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
+    - name: iata
+      key: iata
+      type: string
+    - name: ref
+      key: ref
+      type: string
+    - name: icao
+      key: icao
+      type: string
+    - name: faa
+      key: faa
+      type: string
+    - name: type
+      key: aerodrome:type
+      type: string
+    - name: kind
+      type: mapping_value
+    - name: area
+      type: pseudoarea
+    mapping:
+      aeroway:
+      - aerodrome
+      - heliport
+    type: polygon
   barrier_linestring:
     fields:
     - name: osm_id
@@ -1036,13 +1146,6 @@ tables:
       - weapons
       - wholesale
       - wine
-      aeroway:
-      - aerodrome
-      - terminal
-      - helipad
-      - apron
-      - gate
-      - taxiway
       highway:
       - motorway_junction
       - turning_circle
@@ -1373,13 +1476,6 @@ tables:
       - weapons
       - wholesale
       - wine
-      aeroway:
-      - aerodrome
-      - terminal
-      - helipad
-      - apron
-      - gate
-      - taxiway
       highway:
       - motorway_junction
       - turning_circle

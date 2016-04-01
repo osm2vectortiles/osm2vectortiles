@@ -1,12 +1,6 @@
 system:
   name: maki_label
   classes:
-    airport:
-    - aerodrome
-    - terminal
-    - apron
-    - gate
-    - taxiway
     american-football:
     - american_football
     art-gallery:
