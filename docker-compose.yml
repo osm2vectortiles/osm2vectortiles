@@ -71,6 +71,13 @@ generate-jobs:
   image: "osm2vectortiles/generate-jobs"
   volumes:
    - ./export:/data/export
+merge-jobs:
+  image: "osm2vectortiles/merge-jobs"
+  volumes:
+   - ./export:/data/export
+  links:
+   - rabbitmq:rabbitmq
+   - mock-s3:mock-s3
 export-worker:
   image: "osm2vectortiles/export"
   command: ./export-worker.sh
