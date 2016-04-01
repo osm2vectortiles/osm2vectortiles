@@ -18,11 +18,13 @@ import json
 import sqlite3
 import pika
 import humanize
+import functools
 from urllib.request import urlretrieve
 from docopt import docopt
 
 
 def merge_mbtiles(source, target):
+    """Patch source database into target database"""
     with sqlite3.connect(target) as conn:
         cursor = conn.cursor()
         cursor.executescript("""
@@ -35,6 +37,14 @@ def merge_mbtiles(source, target):
         """.format(source))
         conn.commit()
         cursor.close()
+
+
+def compare_file_after_action(filename, action):
+    """Returns file size difference of a file after an action is executed"""
+    old_target_size = os.path.getsize(filename)
+    action()
+    new_target_size = os.path.getsize(filename)
+    return new_target_size - old_target_size
 
 
 def merge_results(rabbitmq_url, merge_target, result_queue_name):
@@ -60,10 +70,8 @@ def merge_results(rabbitmq_url, merge_target, result_queue_name):
             humanize.naturalsize(merge_source_size))
         )
 
-        old_target_size = os.path.getsize(merge_target)
-        merge_mbtiles(merge_source, merge_target)
-        new_target_size = os.path.getsize(merge_target)
-        diff_size = new_target_size - old_target_size
+        action = functools.partial(merge_mbtiles, merge_source, merge_target)
+        diff_size = compare_file_after_action(merge_target, action)
 
         print("Merge {} from {} into {}".format(
             humanize.naturalsize(diff_size),
