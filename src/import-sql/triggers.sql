@@ -126,6 +126,13 @@ CREATE TRIGGER osm_barrier_linestring_track_changes
 BEFORE DELETE ON osm_barrier_linestring
 FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
 
+-- Mountain Peaks
+
+DROP TRIGGER IF EXISTS osm_mountain_peak_point_track_changes ON osm_mountain_peak_point;
+CREATE TRIGGER osm_mountain_peak_point_track_changes
+BEFORE DELETE ON osm_mountain_peak_point
+FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
+
 CREATE OR REPLACE FUNCTION disable_change_tracking() returns VOID
 AS $$
 BEGIN
@@ -145,6 +152,7 @@ BEGIN
     ALTER TABLE osm_housenumber_point DISABLE TRIGGER USER;
     ALTER TABLE osm_barrier_polygon DISABLE TRIGGER USER;
     ALTER TABLE osm_barrier_linestring DISABLE TRIGGER USER;
+    ALTER TABLE osm_mountain_peak_point DISABLE TRIGGER USER;
 END;
 $$ language plpgsql;
 
@@ -167,5 +175,6 @@ BEGIN
     ALTER TABLE osm_housenumber_point ENABLE TRIGGER USER;
     ALTER TABLE osm_barrier_polygon ENABLE TRIGGER USER;
     ALTER TABLE osm_barrier_linestring ENABLE TRIGGER USER;
+    ALTER TABLE osm_mountain_peak_point ENABLE TRIGGER USER;
 END;
 $$ language plpgsql;

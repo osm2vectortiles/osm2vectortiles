@@ -87,6 +87,13 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+CREATE OR REPLACE FUNCTION meter_to_feet(meter INTEGER) RETURNS INTEGER
+AS $$
+BEGIN
+    RETURN round(meter * 3.28084);
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
 CREATE OR REPLACE FUNCTION overlapping_tiles(
     geom geometry,
     max_zoom_level INTEGER
@@ -170,6 +177,8 @@ BEGIN
 	    SELECT * FROM changed_tiles_waterway(ts)
 	    UNION
 	    SELECT * FROM changed_tiles_waterway_label(ts)
+        UNION
+        SELECT * FROM changed_tiles_mountain_peak_label(ts)
 	);
 END;
 $$ LANGUAGE plpgsql;

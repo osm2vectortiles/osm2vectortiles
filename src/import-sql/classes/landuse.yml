@@ -19,6 +19,8 @@ system:
     - grass
     - grassland
     - meadow
+    - heath
+    - fell
     hospital:
     - hospital
     industrial:
@@ -41,8 +43,14 @@ system:
     - athletics
     - chess
     - pitch
+    rock:
+    - rock
+    - bare_rock
+    - scree
+    - quarry
     sand:
     - sand
+    - beach
     school:
     - school
     - college
@@ -60,3 +68,21 @@ system:
     wetland_noveg:
     - mud
     - tidalflat
+    residential:
+    - residential
+    commercial:
+    - commercial
+    retail:
+    - retail
+    military:
+    - military
+    railway:
+    - railway
+    greenfield:
+    - greenfield
+    landfill:
+    - landfill
+    salt_pond:
+    - salt_pond
+    winter_sports:
+    - winter_sports

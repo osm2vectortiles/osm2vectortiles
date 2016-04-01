@@ -225,6 +225,16 @@ tables:
       - forest
       - cemetery
       - beach
+      - quarry
+      - residential
+      - commercial
+      - retail
+      - military
+      - railway
+      - greenfield
+      - landfill
+      - salt_pond
+      - winter_sports
       leisure:
       - park
       - playground
@@ -244,6 +254,13 @@ tables:
       - scrub
       - wetland
       - mud
+      - beach
+      - rock
+      - bare_rock
+      - scree
+      - grassland
+      - heath
+      - fell
       wetland:
       - marsh
       - swamp
@@ -300,8 +317,8 @@ tables:
       name: population
       type: integer
     - key: capital
-      name: is_capital
-      type: bool
+      name: capital
+      type: integer
     - key: admin_level
       name: admin_level
       type: integer
@@ -321,7 +338,9 @@ tables:
       - suburb
       - neighbourhood
       - locality
-      - dwelling
+      - isolated_dwelling
+      - island
+      - islet
     type: point
   road_linestring:
     type: linestring
@@ -382,7 +401,6 @@ tables:
     filters:
       exclude_tags:
       - ["area", "yes"]
-      - ["amenity", "parking"]
     mappings:
       railway:
         mapping:
@@ -404,6 +422,8 @@ tables:
           - siding
           - crossover
           - parking_aisle
+          - emergency_access
+          - drive-through
       roads:
         mapping:
           highway:
@@ -447,6 +467,10 @@ tables:
           - canopy
           golf:
           - hole
+          route:
+          - ferry
+          - ski
+          - piste
   road_polygon:
     type: polygon
     fields:
@@ -503,7 +527,6 @@ tables:
     - name: name_zh
       key: name:zh
       type: string
-    filters:
     mappings:
       railway:
         mapping:
@@ -525,6 +548,7 @@ tables:
           - siding
           - crossover
           - parking_aisle
+          - drive-through
       roads:
         mapping:
           highway:
@@ -568,6 +592,8 @@ tables:
           - canopy
           golf:
           - hole
+          amenity:
+          - parking
   water_polygon:
     fields:
     - name: osm_id
@@ -670,6 +696,48 @@ tables:
       - drain
       - ditch
     type: linestring
+  mountain_peak_point:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: timestamp
+      type: pbf_timestamp
+    - key: ele
+      name: elevation_m
+      type: integer
+    - key: name
+      name: name
+      type: string
+    - name: name_int
+      key: int_name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
+    - name: type
+      type: mapping_value
+    mapping:
+      natural:
+      - peak
+      - volcano
+    type: point
   poi_polygon:
     fields:
     - name: osm_id
@@ -789,6 +857,8 @@ tables:
       - swimming_area
       - water_park
       - golf_course
+      - miniature_golf
+      - marina
       - stadium
       - ice_rink
       - garden
@@ -1000,21 +1070,12 @@ tables:
       - cycle_barrier
       - toll_booth
       - border_control
-      aerialway:
-      - chair_lift
-      - mixed_lift
-      - drag_lift
-      - platter
-      - t-bar
-      - magic_carpet
-      - gondola
-      - cable_car
-      - rope_tow
-      - zip_line
-      - j-bar
-      - canopy
       historic:
       - monument
+      waterway:
+      - dock
+      aerialway:
+      - station
     type: polygon
   poi_point:
     fields:
@@ -1133,6 +1194,8 @@ tables:
       - swimming_area
       - water_park
       - golf_course
+      - miniature_golf
+      - marina
       - stadium
       - ice_rink
       - garden
@@ -1344,19 +1407,10 @@ tables:
       - cycle_barrier
       - toll_booth
       - border_control
-      aerialway:
-      - chair_lift
-      - mixed_lift
-      - drag_lift
-      - platter
-      - t-bar
-      - magic_carpet
-      - gondola
-      - cable_car
-      - rope_tow
-      - zip_line
-      - j-bar
-      - canopy
       historic:
       - monument
+      waterway:
+      - dock
+      aerialway:
+      - station
     type: point
