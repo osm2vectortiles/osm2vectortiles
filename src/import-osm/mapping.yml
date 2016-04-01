@@ -696,6 +696,48 @@ tables:
       - drain
       - ditch
     type: linestring
+  mountain_peak_point:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: timestamp
+      type: pbf_timestamp
+    - key: ele
+      name: elevation_m
+      type: integer
+    - key: name
+      name: name
+      type: string
+    - name: name_int
+      key: int_name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
+    - name: type
+      type: mapping_value
+    mapping:
+      natural:
+      - peak
+      - volcano
+    type: point
   poi_polygon:
     fields:
     - name: osm_id
