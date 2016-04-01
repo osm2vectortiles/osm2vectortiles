@@ -47,6 +47,22 @@ def compare_file_after_action(filename, action):
     return new_target_size - old_target_size
 
 
+def download_mbtiles(download_url):
+    """Download MBTiles specified in message and return local filepath"""
+    merge_source = os.path.basename(download_url)
+    urlretrieve(download_url, merge_source)
+
+    if not os.path.isfile(merge_source):
+        raise ValueError('File {} does not exist'.format(merge_source))
+
+    merge_source_size = os.path.getsize(merge_source)
+    print('Download {} ({})'.format(
+        download_url,
+        humanize.naturalsize(merge_source_size))
+    )
+    return merge_source
+
+
 def merge_results(rabbitmq_url, merge_target, result_queue_name):
     if not os.path.isfile(merge_target):
         raise ValueError('File {} does not exist'.format(merge_target))
@@ -56,20 +72,7 @@ def merge_results(rabbitmq_url, merge_target, result_queue_name):
 
     def callback(ch, method, properties, body):
         msg = json.loads(body.decode('utf-8'))
-        download_url = msg['url']
-        merge_source = os.path.basename(download_url)
-
-        urlretrieve(download_url, merge_source)
-
-        merge_source_size = os.path.getsize(merge_source)
-        if not os.path.isfile(merge_source):
-            raise ValueError('File {} does not exist'.format(merge_source))
-
-        print('Download {} ({})'.format(
-            download_url,
-            humanize.naturalsize(merge_source_size))
-        )
-
+        merge_source = download_mbtiles(msg['url'])
         action = functools.partial(merge_mbtiles, merge_source, merge_target)
         diff_size = compare_file_after_action(merge_target, action)
 
