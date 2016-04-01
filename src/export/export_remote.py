@@ -88,7 +88,6 @@ def export_remote(tm2source, rabbitmq_url, queue_name, render_scheme, bucket_nam
 
     def callback(ch, method, properties, body):
         msg = json.loads(body.decode('utf-8'))
-        print(msg)
         task_id = msg['id']
         mbtiles_file = task_id + '.mbtiles'
 
@@ -119,10 +118,7 @@ def export_remote(tm2source, rabbitmq_url, queue_name, render_scheme, bucket_nam
             raise ValueError("Message must be either of type pyramid or list")
 
         start = time.time()
-        subprocess.check_output(
-            tilelive_cmd,
-            stderr=subprocess.STDOUT,
-        )
+        subprocess.check_call(tilelive_cmd)
         end = time.time()
 
         print('Elapsed time: {}'.format(int(end - start)))

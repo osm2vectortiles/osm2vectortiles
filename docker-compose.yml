@@ -150,6 +150,3 @@ mock-s3:
   image: "ianblenke/mock-s3"
   ports:
    - "8080"
-  environment:
-    MAKE_BUCKETS: "osm2vectortiles-jobs"
-    MOCK_S3_TRACE: "true"
