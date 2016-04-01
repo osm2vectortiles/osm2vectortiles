@@ -13,7 +13,7 @@ allows you to create interactive customizable maps
 to organize your own geo-data. It is using OSM2VectorTiles based basemaps to provide
 a variety of basemaps to choose from for it's users.
 
-![MapHub.net basemaps](/media/maphub.png)
+[![MapHub.net basemaps](/media/maphub.png)](https://maphub.net/)
 
 ## NOAA
 
