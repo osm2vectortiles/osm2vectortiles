@@ -13,8 +13,6 @@ before_install:
 script:
   - docker-compose up -d postgis
   - sleep 5
-  - docker-compose up -d pgbouncer
-  - sleep 5
   - docker-compose run import-osm
   - docker-compose run import-natural-earth
   - docker-compose run import-water
