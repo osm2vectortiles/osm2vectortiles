@@ -112,5 +112,5 @@ function addClickListener(name, url, styleRefString) {
 
 ## Bookmarks
 
-We have [bookmarks of several special features and locations](/maps/bookmarks/) to visually examin the map quality.
+We have [bookmarks of several special features and locations](/maps/bookmarks) to visually examin the map quality.
 
