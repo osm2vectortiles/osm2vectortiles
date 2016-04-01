@@ -77,7 +77,7 @@ export-worker:
   volumes:
    - ./open-streets.tm2source:/data/tm2source
   links:
-   - pgbouncer:db
+   - postgis:db
    - rabbitmq:rabbitmq
    - mock-s3:mock-s3
   environment:
@@ -91,7 +91,7 @@ export:
    - ./export:/data/export
    - ./open-streets.tm2source:/data/tm2source
   links:
-   - pgbouncer:db
+   - postgis:db
   environment:
     BBOX: "9.39,47.01,9.7,47.29"
     MIN_ZOOM: "8"
@@ -103,7 +103,7 @@ export-list:
    - ./export:/data/export
    - ./open-streets.tm2source:/data/tm2source
   links:
-   - pgbouncer:db
+   - postgis:db
 serve:
   image: "klokantech/tileserver-mapnik"
   volumes:
