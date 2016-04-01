@@ -180,9 +180,16 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry, type
-          FROM aeroway_z12toz14
+          FROM (
+            SELECT *
+            FROM aeroway_z9
+            WHERE z(!scale_denominator!) = 9
+            UNION ALL
+            SELECT *
+            FROM aeroway_z10toz14
+            WHERE z(!scale_denominator!) BETWEEN 10 AND 14
+          ) AS aeroway
           WHERE geometry && !bbox!
-            AND z(!scale_denominator!) BETWEEN 12 AND 14
         ) AS data
       type: postgis
       user: osm

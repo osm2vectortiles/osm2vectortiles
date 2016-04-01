@@ -50,12 +50,9 @@ tables:
     mapping:
       aeroway:
       - runway
-      - aerodrome
-      - terminal
-      - helipad
-      - apron
-      - gate
       - taxiway
+      - apron
+      - helipad
     type: linestring
   aero_polygon:
     fields:
@@ -70,12 +67,9 @@ tables:
     mapping:
       aeroway:
       - runway
-      - aerodrome
-      - terminal
-      - helipad
-      - apron
-      - gate
       - taxiway
+      - apron
+      - helipad
     type: polygon
   barrier_linestring:
     fields:
