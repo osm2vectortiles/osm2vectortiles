@@ -10,7 +10,7 @@ echo "Running pgtune...  minimal tunning for OSM DW"
 # and suggested workload, and output a new file.
 # see more : https://github.com/elitwin/pgtune
 python /pgtune/pgtune --version 9.4 \
-                      --connections 20 \
+                      --connections 30 \
                       --type DW \
                       --input-config $PGDATA/postgresql.conf \
                       --output-config $PGDATA/postgresql.conf.pgtune
