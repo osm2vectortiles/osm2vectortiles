@@ -11,8 +11,6 @@ readonly OSM_DB=${OSM_DB:-osm}
 readonly OSM_USER=${OSM_USER:-osm}
 readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
 
-readonly OSM_UPDATE_BASEURL=${OSM_UPDATE_BASEURL:-false}
-
 readonly DB_SCHEMA=${OSM_SCHEMA:-public}
 readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
 readonly PG_CONNECT="postgis://$OSM_USER:$OSM_PASSWORD@$DB_HOST/$OSM_DB"
@@ -34,7 +32,7 @@ function import_pbf() {
         -write -optimize -diff
 
     local timestamp=$(extract_timestamp "$pbf_file")
-    update_timestamp "$timestamp"
+    store_timestamp_history "$timestamp"
 }
 
 function extract_timestamp() {
@@ -54,6 +52,8 @@ function store_timestamp_history {
 function update_timestamp() {
     local timestamp="$1"
     store_timestamp_history "$timestamp"
+
+	exec_sql "UPDATE osm_delete SET timestamp='$timestamp' WHERE timestamp IS NULL"
 
 	exec_sql "UPDATE osm_admin_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_aero_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
@@ -76,6 +76,15 @@ function update_timestamp() {
 	exec_sql "UPDATE osm_water_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_water_polygon_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
 }
+
+function enable_change_tracking() {
+    exec_sql "SELECT enable_change_tracking()"
+}
+
+function disable_change_tracking() {
+    exec_sql "SELECT disable_change_tracking()"
+}
+
 
 function drop_tables() {
     exec_sql "DROP TABLE IF EXISTS osm_landuse_polygon CASCADE"
@@ -101,6 +110,10 @@ function drop_tables() {
     exec_sql "DROP TABLE IF EXISTS osm_poi_point CASCADE"
 }
 
+function cleanup_osm_changes() {
+    exec_sql "SELECT cleanup_osm_changes()"
+}
+
 function exec_sql() {
 	local sql_cmd="$1"
 	PG_PASSWORD=$OSM_PASSWORD psql \
@@ -111,43 +124,34 @@ function exec_sql() {
         -c "$sql_cmd"
 }
 
-function merge_latest_diffs() {
-    local pbf_file="$1"
-    local latest_diffs_file="$2"
-    local latest_pbf_file="$IMPORT_DATA_DIR/${pbf_file##*/}.latest.pbf"
-
-    echo "Updating $pbf_file with changes $latest_diffs_file"
-    osmconvert -v "$pbf_file" "$latest_diffs_file" -o="$latest_pbf_file"
-    rm "$pbf_file"
-    mv "$latest_pbf_file" "$pbf_file"
-}
-
 function import_pbf_diffs() {
     local pbf_file="$1"
-    local latest_diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
+    local diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
 
-    cd "$IMPORT_DATA_DIR"
-    if [ "$OSM_UPDATE_BASEURL" = false ]; then
-        osmupdate "$pbf_file" "$latest_diffs_file"
-    else
-        echo "Downloading diffs from $OSM_UPDATE_BASEURL"
-        osmupdate -v \
-            "$pbf_file" "$latest_diffs_file" \
-            --base-url="$OSM_UPDATE_BASEURL"
-    fi
-
+    echo "Import deletes from $diffs_file"
+    enable_change_tracking
     imposm3 diff \
+        -no-create -no-modify \
         -connection "$PG_CONNECT" \
         -mapping "$MAPPING_YAML" \
         -cachedir "$IMPOSM_CACHE_DIR" \
         -diffdir "$IMPORT_DATA_DIR" \
         -dbschema-import "${DB_SCHEMA}" \
-        "$latest_diffs_file"
+        "$diffs_file"
+    disable_change_tracking
 
-    local timestamp=$(extract_timestamp "$latest_diffs_file")
-    echo "Set $timestamp for latest updates from $latest_diffs_file"
+    echo "Import creates and modifications from $diffs_file"
+    imposm3 diff \
+        -no-delete \
+        -connection "$PG_CONNECT" \
+        -mapping "$MAPPING_YAML" \
+        -cachedir "$IMPOSM_CACHE_DIR" \
+        -diffdir "$IMPORT_DATA_DIR" \
+        -dbschema-import "${DB_SCHEMA}" \
+        "$diffs_file"
+
+    local timestamp=$(extract_timestamp "$diffs_file")
+    echo "Set $timestamp for latest updates from $diffs_file"
     update_timestamp "$timestamp"
-
-
-    merge_latest_diffs "$pbf_file" "$latest_diffs_file"
+    cleanup_osm_changes
 }
