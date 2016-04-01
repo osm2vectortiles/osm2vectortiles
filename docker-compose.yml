@@ -2,6 +2,10 @@ pgdata:
   image: "tianon/true"
   volumes:
   - /var/lib/postgresql/data
+rabbitdata:
+  image: "tianon/true"
+  volumes:
+  - /var/lib/rabbitmq
 cache:
   image: "tianon/true"
   volumes:
@@ -69,19 +73,19 @@ changed-tiles:
    - ./export:/data/export
   links:
   - postgis:db
-enqueue-jobs:
-  build: ./tools/enqueue-jobs
-  environment:
-    AWS_REGION: "eu-central-1"
-    TASK_ZOOM_LEVEL: 8
-    QUEUE_NAME: "osm2vectortiles_jobs"
+generate-jobs:
+  image: "osm2vectortiles/generate-jobs"
+  volumes:
+   - ./export:/data/export
 export-worker:
   image: "osm2vectortiles/export"
   command: ./export-worker.sh
   volumes:
    - ./open-streets.tm2source:/data/tm2source
   links:
-   - pgbouncer:db
+   - postgis:db
+   - rabbitmq:rabbitmq
+   - mock-s3:mock-s3
   environment:
     AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
     AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
@@ -93,9 +97,9 @@ export:
    - ./export:/data/export
    - ./open-streets.tm2source:/data/tm2source
   links:
-   - pgbouncer:db
+   - postgis:db
   environment:
-    BBOX: "8.4375 46.07323062540838 9.84375 47.040182144806664"
+    BBOX: "9.39,47.01,9.7,47.29"
     MIN_ZOOM: "8"
     MAX_ZOOM: "14"
 export-list:
@@ -105,7 +109,7 @@ export-list:
    - ./export:/data/export
    - ./open-streets.tm2source:/data/tm2source
   links:
-   - pgbouncer:db
+   - postgis:db
 serve:
   image: "klokantech/tileserver-mapnik"
   volumes:
@@ -124,6 +128,16 @@ mapbox-studio:
    - postgis:db
   ports:
    - "3000:3000"
+rabbitmq:
+  image: "rabbitmq:3.6.1-management"
+  ports:
+  - "15672:15672"
+  - "5672:5672"
+  volumes_from:
+   - rabbitdata
+  environment:
+    RABBITMQ_DEFAULT_USER: "osm"
+    RABBITMQ_DEFAULT_PASS: "osm"
 create-extracts:
   image: "osm2vectortiles/create-extracts"
   volumes:
@@ -131,3 +145,7 @@ create-extracts:
   environment:
     S3_ACCESS_KEY: "${S3_ACCESS_KEY}"
     S3_SECRET_KEY: "${S3_SECRET_KEY}"
+mock-s3:
+  image: "ianblenke/mock-s3"
+  ports:
+   - "8080"

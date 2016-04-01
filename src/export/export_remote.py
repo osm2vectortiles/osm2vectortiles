@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-"""Wrapper around tilelive for exporting vector tiles from tm2source.
+"""Wrapper around tilelive-copy for exporting vector tiles from tm2source.
 
 Usage:
-  export_remote.py <sqs_queue> --tm2source=<tm2source> [--bucket=<bucket>] [--render_scheme=<scheme>]
+  export_remote.py <rabbitmq_url> --tm2source=<tm2source> [--job-queue=<job-queue>] [--bucket=<bucket>] [--render_scheme=<scheme>]
   export_remote.py (-h | --help)
   export_remote.py --version
 
@@ -10,146 +10,190 @@ Options:
   -h --help                 Show this screen.
   --version                 Show version.
   --render_scheme=<scheme>  Either pyramid or scanline [default: pyramid]
+  --job-queue=<job-queue>   Job queue name [default: jobs]
   --tm2source=<tm2source>   Directory of tm2source
   --bucket=<bucket>         S3 Bucket name for storing results [default: osm2vectortiles-jobs]
 
 """
-import watchtower
-import socket
 import time
-import logging
 import subprocess
 import re
+import sys
 import os
 import os.path
 import json
 
-import boto.sqs
+from boto.s3.connection import S3Connection, OrdinaryCallingFormat
+import pika
 from docopt import docopt
 
 
-logging.basicConfig(level=logging.INFO)
-mapnik_logger = logging.getLogger("mapnik")
-export_logger = logging.getLogger("export")
+def s3_url(host, port, bucket_name, file_name):
+    protocol = 'https' if port == 443 else 'http'
+    return '{}://{}:{}/{}/{}'.format(
+        protocol, host, port,
+        bucket_name, file_name
+    )
 
 
-def local_ip():
-    return socket.gethostbyname(socket.gethostname())
+def connect_s3(host, port, bucket_name):
+    # boto.set_stream_logger('paws')
+    is_secure = port == 443
+    conn = S3Connection(
+        os.getenv('AWS_ACCESS_KEY_ID', 'dummy'),
+        os.getenv('AWS_SECRET_ACCESS_KEY', 'dummy'),
+        is_secure=is_secure,
+        port=port,
+        host=host,
+        calling_format=OrdinaryCallingFormat()
+    )
 
-
-def create_tilelive_command(tm2source, mbtiles_file, bbox,
-                            min_zoom=8, max_zoom=12, scheme='pyramid'):
-    tilelive_binary = os.getenv('TILELIVE_BIN', 'tl')
-    source = 'tmsource://' + os.path.abspath(tm2source)
-    sink = 'mbtiles://' + os.path.abspath(mbtiles_file)
-
-    cmd = [
-        tilelive_binary, 'copy',
-        '-s', 'pyramid',
-        '-b', bbox,
-        '--min-zoom', str(min_zoom),
-        '--max-zoom', str(max_zoom),
-        source, sink
-    ]
-
-    return cmd
-
-
-def connect_job_queue(queue_name):
-    conn = boto.sqs.connect_to_region(os.getenv('AWS_REGION', 'eu-central-1'))
-    queue = conn.get_queue(queue_name)
-    if queue is None:
-        raise ValueError('Could not connect to queue {}'.format(queue_name))
-    return queue
-
-
-def connect_s3(bucket_name):
-    conn = boto.s3.connect_to_region(os.getenv('AWS_REGION', 'eu-central-1'))
+    conn.create_bucket(bucket_name)
     return conn.get_bucket(bucket_name)
 
 
 def upload_mbtiles(bucket, mbtiles_file):
+    """Upload mbtiles file to a bucket with the filename as S3 key"""
     keyname = os.path.basename(mbtiles_file)
     obj = bucket.new_key(keyname)
     obj.set_contents_from_filename(mbtiles_file)
 
 
-def export_remote(tm2source, sqs_queue, render_scheme, bucket_name):
-    bucket = connect_s3(bucket_name)
-    queue = connect_job_queue(sqs_queue)
-    timeout = int(os.getenv('JOB_TIMEOUT', 15 * 60))
+def create_tilelive_bbox(bounds):
+    return '{},{},{},{}'.format(
+        bounds['west'], bounds['south'],
+        bounds['east'], bounds['north']
+    )
 
-    def complete_job(task_id, body, logging_info):
+
+def create_result_message(task_id, download_link, original_job_msg):
+    return {
+        'id': task_id,
+        'url': download_link,
+        'job': original_job_msg
+    }
+
+
+def render_tile_list_command(source, sink, list_file):
+    return [
+        'tilelive-copy',
+        '--scheme', 'list',
+        '--list', list_file,
+        source, sink
+    ]
+
+
+def render_pyramid_command(source, sink, bounds, min_zoom, max_zoom):
+    return [
+        'tilelive-copy',
+        '--scheme', 'pyramid',
+        '--bounds', bounds,
+        '--minzoom', str(min_zoom),
+        '--maxzoom', str(max_zoom),
+        source, sink
+    ]
+
+
+def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
+                  render_scheme, bucket_name):
+    host = os.getenv('AWS_S3_HOST', 'mock-s3')
+    port = int(os.getenv('AWS_S3_PORT', 8080))
+
+    bucket = connect_s3(host, port, bucket_name)
+
+    connection = pika.BlockingConnection(pika.URLParameters(rabbitmq_url))
+    channel = connection.channel()
+    configure_rabbitmq(channel)
+
+    def callback(ch, method, properties, body):
+        msg = json.loads(body.decode('utf-8'))
+        task_id = msg['id']
         mbtiles_file = task_id + '.mbtiles'
-        bounds = body['bounds']
-        bbox = '{} {} {} {}'.format(
-            bounds['west'], bounds['south'],
-            bounds['east'], bounds['north']
-        )
 
-        tilelive_command = create_tilelive_command(
-            tm2source,
-            mbtiles_file,
-            bbox,
-            body['min_zoom'],
-            body['max_zoom'],
-            render_scheme
-        )
+        source = 'tmsource://' + os.path.abspath(tm2source)
+        sink = 'mbtiles://' + os.path.abspath(mbtiles_file)
+        tilelive_cmd = []
+
+        if msg['type'] == 'pyramid':
+            pyramid = msg['pyramid']
+            tileinfo = pyramid['tile']
+
+            tilelive_cmd = render_pyramid_command(
+                source, sink,
+                bounds=create_tilelive_bbox(pyramid['bounds']),
+                min_zoom=tileinfo['min_zoom'],
+                max_zoom=tileinfo['max_zoom']
+            )
+        elif msg['type'] == 'list':
+            list_file='/tmp/tiles.txt'
+            with open(list_file, 'w') as fh:
+                write_list_file(fh)
+
+            tilelive_cmd = render_tile_list_command(
+                source, sink,
+                list_file=list_file,
+            )
+        else:
+            raise ValueError("Message must be either of type pyramid or list")
 
         start = time.time()
-        subprocess.check_output(
-            tilelive_command,
-            stderr=subprocess.STDOUT,
-        )
+        subprocess.check_call(tilelive_cmd)
         end = time.time()
 
-        export_logger.info('Elapsed time: {}'.format(int(end - start)),
-                           extra=logging_info)
+        print('Elapsed time: {}'.format(int(end - start)))
+
         upload_mbtiles(bucket, mbtiles_file)
         os.remove(mbtiles_file)
-        export_logger.info('Upload mbtiles {}'.format(mbtiles_file),
-                           extra=logging_info)
 
-        queue.delete_message(message)
+        print('Upload mbtiles {}'.format(mbtiles_file))
 
-    while True:
-        message = queue.read(visibility_timeout=timeout)
-        if message:
-            body = json.loads(message.get_body())
-            task_id = '{}_{}_z{}-z{}'.format(
-                body['x'],
-                body['y'],
-                body['min_zoom'],
-                body['max_zoom']
-            )
-            logging_info = {
-                'ip': local_ip(),
-                'task_id':  task_id
-            }
-            try:
-                complete_job(task_id, body, logging_info)
-            except subprocess.CalledProcessError as err:
-                export_logger.exception('Could not complete job: ' + err.output,
-                                        exc_info=True, extra=logging_info)
-            except Exception:
-                export_logger.exception('Could not complete job',
-                                        exc_info=True, extra=logging_info)
-        else:
-            print('No jobs to read')
-            break
+        download_link = s3_url(host, port, bucket_name, mbtiles_file)
+        result_msg = create_result_message(task_id, download_link, msg)
+        durable_publish(channel, result_queue_name, body=json.dumps(result_msg))
+
+        channel.basic_ack(delivery_tag=method.delivery_tag)
+
+
+    channel.basic_consume(callback, queue=queue_name)
+    try:
+        channel.start_consuming()
+    except KeyboardInterrupt:
+        channel.stop_consuming()
+
+    connection.close()
+
+
+def configure_rabbitmq(channel):
+    """Setup all queues and topics for RabbitMQ"""
+
+    def queue_declare(queue):
+        return channel.queue_declare(queue=queue, durable=True)
+
+    queue_declare('jobs')
+    queue_declare('results')
+
+
+def durable_publish(channel, queue, body):
+    """
+    Publish a message body to a queue in a channel and ensure it stays
+    durable on RabbitMQ server restart
+    """
+    properties = pika.BasicProperties(delivery_mode=2)
+    channel.basic_publish(exchange='', routing_key=queue,
+                          body=body, properties=properties)
+
+
+def write_list_file(fh, tiles):
+    for tile in tiles:
+        fh.write('{}/{}/{}\n'.format(tile['z'], tile['x'], tile['y']))
 
 
 def main(args):
-    formatter = logging.Formatter('%(ip)s %(task_id)s %(message)s')
-    handler = watchtower.CloudWatchLogHandler()
-    handler.setFormatter(formatter)
-
-    mapnik_logger.addHandler(handler)
-    export_logger.addHandler(handler)
-
     export_remote(
         args['--tm2source'],
-        args['<sqs_queue>'],
+        args['<rabbitmq_url>'],
+        args['--job-queue'],
+        'results',
         args['--render_scheme'],
         args['--bucket'],
     )
