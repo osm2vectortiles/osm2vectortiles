@@ -62,7 +62,7 @@ def merge_results(rabbitmq_url, merge_target, result_queue_name):
             cursor.close()
 
         new_target_size = os.path.getsize(merge_target)
-        diff_size = old_target_size - new_target_size
+        diff_size = new_target_size - old_target_size
         print("Merge {} from {} into {}".format(
             humanize.naturalsize(diff_size),
             merge_source,

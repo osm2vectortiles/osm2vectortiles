@@ -22,6 +22,7 @@ import sys
 import os
 import os.path
 import json
+import humanize
 
 from boto.s3.connection import S3Connection, OrdinaryCallingFormat
 import pika
@@ -56,7 +57,7 @@ def upload_mbtiles(bucket, mbtiles_file):
     """Upload mbtiles file to a bucket with the filename as S3 key"""
     keyname = os.path.basename(mbtiles_file)
     obj = bucket.new_key(keyname)
-    obj.set_contents_from_filename(mbtiles_file)
+    obj.set_contents_from_filename(mbtiles_file, replace=True)
 
 
 def create_tilelive_bbox(bounds):
@@ -140,7 +141,7 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
         subprocess.check_call(tilelive_cmd)
         end = time.time()
 
-        print('Elapsed time: {}'.format(int(end - start)))
+        print('Rendering time: {}'.format(humanize.naturaltime(end - start)))
 
         upload_mbtiles(bucket, mbtiles_file)
         os.remove(mbtiles_file)
