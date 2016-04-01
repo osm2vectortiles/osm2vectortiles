@@ -90,30 +90,7 @@ function disable_change_tracking() {
 
 
 function drop_tables() {
-    exec_sql "DROP TABLE IF EXISTS osm_landuse_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_landuse_polygon_gen0 CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_landuse_polygon_gen1 CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_admin_linestring CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_aero_linestring CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_aero_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_airport_point CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_airport_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_barrier_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_barrier_linestring CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_building_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_building_polygon_gen0 CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_building_polygon_gen1 CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_housenumber_point CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_housenumber_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_place_point CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_road_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_road_linestring CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_water_linestring CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_water_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_water_polygon_gen1 CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_poi_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_poi_point CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_mountain_peak_point CASCADE"
+    exec_sql_file "drop_tables.sql"
 }
 
 function cleanup_osm_changes() {
@@ -128,6 +105,17 @@ function exec_sql() {
         --dbname="$OSM_DB" \
         --username="$OSM_USER" \
         -c "$sql_cmd"
+}
+
+function exec_sql_file() {
+    local sql_file=$1
+    PG_PASSWORD=$OSM_PASSWORD psql \
+        --host="$DB_HOST" \
+        --port=5432 \
+        --dbname="$OSM_DB" \
+        --username="$OSM_USER" \
+        -v ON_ERROR_STOP=1 \
+        -a -f "$sql_file"
 }
 
 function import_pbf_diffs() {
