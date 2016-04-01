@@ -75,6 +75,7 @@ function update_timestamp() {
 	exec_sql "UPDATE osm_water_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_water_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_water_polygon_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
+    exec_sql "UPDATE osm_mountain_peak_point SET timestamp='$timestamp' WHERE timestamp IS NULL"
 }
 
 function enable_change_tracking() {
@@ -108,6 +109,7 @@ function drop_tables() {
     exec_sql "DROP TABLE IF EXISTS osm_water_polygon_gen1 CASCADE"
     exec_sql "DROP TABLE IF EXISTS osm_poi_polygon CASCADE"
     exec_sql "DROP TABLE IF EXISTS osm_poi_point CASCADE"
+    exec_sql "DROP TABLE IF EXISTS osm_mountain_peak_point CASCADE"
 }
 
 function cleanup_osm_changes() {
