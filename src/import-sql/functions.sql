@@ -127,10 +127,23 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION deleted_tiles(ts timestamp)
+RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
+BEGIN
+	RETURN QUERY (
+		SELECT DISTINCT t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
+		FROM osm_delete AS d
+		INNER JOIN LATERAL overlapping_tiles(d.geometry, 14) AS t ON d.timestamp = ts
+	);
+END;
+$$ LANGUAGE plpgsql;
+
 CREATE OR REPLACE FUNCTION changed_tiles(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
 	RETURN QUERY (
+	    SELECT * FROM deleted_tiles(ts)
+        UNION
 	    SELECT * FROM changed_tiles_admin(ts)
 	    UNION
 	    SELECT * FROM changed_tiles_aeroway(ts)

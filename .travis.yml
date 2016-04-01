@@ -22,9 +22,9 @@ script:
   - docker-compose run import-sql
   - docker-compose run update-scaleranks
   - docker-compose run export
+  - docker-compose run update-osm-diff
   - docker-compose run import-osm-diff
   - docker-compose run changed-tiles
-  - docker-compose run export-list
   - docker-compose up -d serve
   - sleep 5
 cache:
