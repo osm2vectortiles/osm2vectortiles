@@ -154,8 +154,4 @@ function import_pbf_diffs() {
     echo "Set $timestamp for latest updates from $diffs_file"
     update_timestamp "$timestamp"
     cleanup_osm_changes
-
-    # Merging back together is kind of a trap i fell into many
-    # times when testing. Need a better way to handle this.
-    # merge_latest_diffs "$pbf_file" "$diffs_file"
 }
