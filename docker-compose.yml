@@ -118,13 +118,6 @@ mapbox-studio:
    - postgis:db
   ports:
    - "3000:3000"
-compare-visual:
-  image: "osm2vectortiles/compare-visual"
-  ports:
-   - "4000:3000"
-   - "4001:3001"
-  links:
-   - serve:tileserver
 create-extracts:
   image: "osm2vectortiles/create-extracts"
   volumes:
