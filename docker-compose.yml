@@ -16,12 +16,6 @@ postgis:
    - pgdata
   ports:
    - "5432"
-pgbouncer:
-  image: "osm2vectortiles/pgbouncer"
-  links:
-   - postgis:pg
-  ports:
-   - "6432"
 import-osm:
   image: "osm2vectortiles/import-osm"
   command: ./import-pbf.sh
