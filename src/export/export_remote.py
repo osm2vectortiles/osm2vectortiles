@@ -28,16 +28,23 @@ import pika
 from docopt import docopt
 
 
-def connect_s3(bucket_name):
+def s3_url(host, port, bucket_name, file_name):
+    protocol = 'https' if port == 443 else 'http'
+    return '{}://{}:{}/{}/{}'.format(
+        protocol, host, port,
+        bucket_name, file_name
+    )
+
+
+def connect_s3(host, port, bucket_name):
     # boto.set_stream_logger('paws')
-    port = int(os.getenv('AWS_S3_PORT', 8080))
     is_secure = port == 443
     conn = S3Connection(
         os.getenv('AWS_ACCESS_KEY_ID', 'dummy'),
         os.getenv('AWS_SECRET_ACCESS_KEY', 'dummy'),
         is_secure=is_secure,
         port=port,
-        host=os.getenv('AWS_S3_HOST', 'mock-s3'),
+        host=host,
         calling_format=OrdinaryCallingFormat()
     )
 
@@ -57,6 +64,14 @@ def create_tilelive_bbox(bounds):
         bounds['west'], bounds['south'],
         bounds['east'], bounds['north']
     )
+
+
+def create_result_message(task_id, download_link, original_job_msg):
+    return {
+        'id': task_id,
+        'url': download_link,
+        'job': original_job_msg
+    }
 
 
 def render_tile_list_command(source, sink, list_file):
@@ -79,8 +94,12 @@ def render_pyramid_command(source, sink, bounds, min_zoom, max_zoom):
     ]
 
 
-def export_remote(tm2source, rabbitmq_url, queue_name, render_scheme, bucket_name):
-    bucket = connect_s3(bucket_name)
+def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
+                  render_scheme, bucket_name):
+    host = os.getenv('AWS_S3_HOST', 'mock-s3')
+    port = int(os.getenv('AWS_S3_PORT', 8080))
+
+    bucket = connect_s3(host, port, bucket_name)
 
     connection = pika.BlockingConnection(pika.URLParameters(rabbitmq_url))
     channel = connection.channel()
@@ -128,9 +147,14 @@ def export_remote(tm2source, rabbitmq_url, queue_name, render_scheme, bucket_nam
 
         print('Upload mbtiles {}'.format(mbtiles_file))
 
+        download_link = s3_url(host, port, bucket_name, mbtiles_file)
+        result_msg = create_result_message(task_id, download_link, msg)
+        durable_publish(channel, result_queue_name, body=json.dumps(result_msg))
+
+        channel.basic_ack(delivery_tag=method.delivery_tag)
+
 
     channel.basic_consume(callback, queue=queue_name)
-
     try:
         channel.start_consuming()
     except KeyboardInterrupt:
@@ -159,10 +183,6 @@ def durable_publish(channel, queue, body):
                           body=body, properties=properties)
 
 
-def reject(channel, method):
-    channel.basic_reject(delivery_tag=method.delivery_tag, requeue=False)
-
-
 def write_list_file(fh, tiles):
     for tile in tiles:
         fh.write('{}/{}/{}\n'.format(tile['z'], tile['x'], tile['y']))
@@ -173,6 +193,7 @@ def main(args):
         args['--tm2source'],
         args['<rabbitmq_url>'],
         args['--job-queue'],
+        'results',
         args['--render_scheme'],
         args['--bucket'],
     )
