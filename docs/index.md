@@ -40,11 +40,11 @@ Targeted at people who want to reuse our process or want to contribute.
 [Tobin Bradley](http://fuzzytolerance.info/) created an awesome video tutorial series
 that will introduce you into web maps, vector tiles and using osm2vectortiles.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xI7QkEodCac" frameborder="0" allowfullscreen></iframe>
+<iframe width="430" height="242" src="https://www.youtube.com/embed/xI7QkEodCac" frameborder="0" style="display: inline;" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/GPArNrRL79Q" frameborder="0" allowfullscreen></iframe>
+<iframe width="430" height="242" src="https://www.youtube.com/embed/GPArNrRL79Q" frameborder="0" style="display: inline;" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/6nLZVdbmSYw" frameborder="0" allowfullscreen></iframe>
+<iframe width="430" height="242" src="https://www.youtube.com/embed/6nLZVdbmSYw" frameborder="0" style="display: inline;" allowfullscreen></iframe>
 
 ## Academic Material
 
