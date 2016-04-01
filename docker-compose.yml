@@ -32,10 +32,16 @@ import-osm-diff:
   command: ./import-diff.sh
   volumes:
    - ./import:/data/import
+   - ./src/import-osm:/usr/src/app
   volumes_from:
    - cache
   links:
    - postgis:db
+update-osm-diff:
+  image: "osm2vectortiles/import-osm"
+  command: ./import-osmupdate.sh
+  volumes:
+   - ./import:/data/import
   environment:
      OSM_UPDATE_BASEURL: "http://download.geofabrik.de/europe/liechtenstein-updates/"
 import-labels:
