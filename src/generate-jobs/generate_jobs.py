@@ -16,13 +16,15 @@ Options:
 
 import json
 import hashlib
-
 import mercantile
 from docopt import docopt
 
 
 def all_descendant_tiles(x, y, zoom, max_zoom):
-    """Return all subtiles contained within a tile"""
+    """
+    Return all child tiles contained within a tile defined by x, y, zoom
+    down to the max_zom level.
+    """
     if zoom < max_zoom:
         for child_tile in mercantile.children(x, y, zoom):
             yield child_tile
@@ -30,19 +32,13 @@ def all_descendant_tiles(x, y, zoom, max_zoom):
                                             child_tile.z, max_zoom)
 
 
-def tiles_for_zoom_level(zoom_level):
-    tiles = all_descendant_tiles(x=0, y=0, zoom=0, max_zoom=zoom_level)
-
-    for tile in tiles:
-        if tile.z == zoom_level:
-            yield tile
-
-
 def create_list_batch_job(tile_list):
+    def payload_id():
+        hash_obj = json.dumps(tile_list, sort_keys=True).encode('utf-8')
+        return hashlib.sha1(hash_obj).hexdigest()
+
     return {
-        'id': hashlib.sha1(
-            json.dumps(tile_list, sort_keys=True).encode('utf-8')
-        ).hexdigest(),
+        'id': payload_id(),
         'type': 'list',
         'tiles':  tile_list
     }
@@ -64,16 +60,22 @@ def create_pyramid_job(x, y, min_zoom, max_zoom, bounds):
         }
     }
 
+    def payload_id():
+        hash_obj = json.dumps(pyramid, sort_keys=True).encode('utf-8')
+        return hashlib.sha1(hash_obj).hexdigest()
+
     return {
-        'id': hashlib.sha1(
-            json.dumps(pyramid, sort_keys=True).encode('utf-8')
-        ).hexdigest(),
+        'id': payload_id(),
         'type': 'pyramid',
         'pyramid': pyramid
     }
 
 
-def split_tiles_into_batch_jobs(tiles):
+def split_tiles_into_batch_jobs(tiles, batch_size):
+    """
+    Split list of tiles into batch jobs containing the
+    instruction to render a list of tiles with the size of batch_size
+    """
     tiles_batch = []
 
     for tile in tiles:
@@ -86,22 +88,26 @@ def split_tiles_into_batch_jobs(tiles):
 
 
 def pyramid_jobs(x, y, z, job_zoom):
-        if z == job_zoom:
-            bounds = mercantile.bounds(x, y, z)
-            yield create_pyramid_job(
-                x=x, y=y,
-                min_zoom=z, max_zoom=14,
-                bounds=bounds
-            )
-            return
+    """
+    Generate pyramid jobs for a given job_zoom level
+    starting at with the parent tile defined by x, y, z.
+    """
+    if z == job_zoom:
+        bounds = mercantile.bounds(x, y, z)
+        yield create_pyramid_job(
+            x=x, y=y,
+            min_zoom=z, max_zoom=14,
+            bounds=bounds
+        )
+        return
 
-        tiles = all_descendant_tiles(x, y, z, job_zoom)
-        pyramid_zoom_level_tiles = (t for t in tiles if t.z == job_zoom)
+    tiles = all_descendant_tiles(x, y, z, job_zoom)
+    pyramid_zoom_level_tiles = (t for t in tiles if t.z == job_zoom)
 
-        for tile in pyramid_zoom_level_tiles:
-            bounds = mercantile.bounds(tile.x, tile.y, tile.z)
-            yield create_pyramid_job(tile.x, tile.y, min_zoom=tile.z,
-                                     max_zoom=14, bounds=bounds)
+    for tile in pyramid_zoom_level_tiles:
+        bounds = mercantile.bounds(tile.x, tile.y, tile.z)
+        yield create_pyramid_job(tile.x, tile.y, min_zoom=tile.z,
+                                 max_zoom=14, bounds=bounds)
 
 
 if __name__ == '__main__':
@@ -120,16 +126,20 @@ if __name__ == '__main__':
     if args['list']:
         batch_size = int(args['--batch-size'])
 
-        tiles = []
-        with open(args['<list_file>'], "r") as file_handle:
-            for line in file_handle:
-                z, x, y = line.split('/')
-                tiles.append({
-                    'x': int(x),
-                    'y': int(y),
-                    'z': int(z)
-                })
+        def convert_line_to_tile(line):
+            z, x, y = line.split('/')
+            return {
+                'x': int(x),
+                'y': int(y),
+                'z': int(z)
+            }
 
-        tiles.sort(key=lambda t: (t['z'], t['x'], t['y']))
-        for job in split_tiles_into_batch_jobs(tiles):
-            print(json.dumps(job), flush=True)
+        with open(args['<list_file>'], "r") as file_handle:
+            tiles = [convert_line_to_tile(l) for l in file_handle]
+
+            # Sorting the tiles should result in besser job
+            # locality when dividing it into batches
+            tiles.sort(key=lambda t: (t['z'], t['x'], t['y']))
+
+            for job in split_tiles_into_batch_jobs(tiles, batch_size):
+                print(json.dumps(job), flush=True)
