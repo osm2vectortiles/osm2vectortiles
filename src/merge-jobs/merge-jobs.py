@@ -22,6 +22,21 @@ from urllib.request import urlretrieve
 from docopt import docopt
 
 
+def merge_mbtiles(source, target):
+    with sqlite3.connect(target) as conn:
+        cursor = conn.cursor()
+        cursor.executescript("""
+            PRAGMA journal_mode=PERSIST;
+            PRAGMA page_size=80000;
+            PRAGMA synchronous=OFF;
+            ATTACH DATABASE '{0}' AS source;
+            REPLACE INTO map SELECT * FROM source.map;
+            REPLACE INTO images SELECT * FROM source.images;
+        """.format(source))
+        conn.commit()
+        cursor.close()
+
+
 def merge_results(rabbitmq_url, merge_target, result_queue_name):
     if not os.path.isfile(merge_target):
         raise ValueError('File {} does not exist'.format(merge_target))
@@ -31,11 +46,10 @@ def merge_results(rabbitmq_url, merge_target, result_queue_name):
 
     def callback(ch, method, properties, body):
         msg = json.loads(body.decode('utf-8'))
-        task_id = msg['id']
         download_url = msg['url']
         merge_source = os.path.basename(download_url)
 
-        urlretrieve (download_url, merge_source)
+        urlretrieve(download_url, merge_source)
 
         merge_source_size = os.path.getsize(merge_source)
         if not os.path.isfile(merge_source):
@@ -45,24 +59,12 @@ def merge_results(rabbitmq_url, merge_target, result_queue_name):
             download_url,
             humanize.naturalsize(merge_source_size))
         )
-        
+
         old_target_size = os.path.getsize(merge_target)
-
-        with sqlite3.connect(merge_target) as conn:
-            cursor = conn.cursor()
-            cursor.executescript("""
-                PRAGMA journal_mode=PERSIST;
-                PRAGMA page_size=80000;
-                PRAGMA synchronous=OFF;
-                ATTACH DATABASE '{0}' AS source;
-                REPLACE INTO map SELECT * FROM source.map;
-                REPLACE INTO images SELECT * FROM source.images;
-            """.format(merge_source))
-            conn.commit()
-            cursor.close()
-
+        merge_mbtiles(merge_source, merge_target)
         new_target_size = os.path.getsize(merge_target)
         diff_size = new_target_size - old_target_size
+
         print("Merge {} from {} into {}".format(
             humanize.naturalsize(diff_size),
             merge_source,
