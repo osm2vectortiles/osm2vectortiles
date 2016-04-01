@@ -12,7 +12,7 @@ before_install:
   - make fast
 script:
   - docker-compose up -d postgis
-  - sleep 5
+  - sleep 10
   - docker-compose run import-osm
   - docker-compose run import-natural-earth
   - docker-compose run import-water
