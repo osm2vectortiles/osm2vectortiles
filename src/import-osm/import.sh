@@ -78,12 +78,20 @@ function update_timestamp() {
     exec_sql "UPDATE osm_mountain_peak_point SET timestamp='$timestamp' WHERE timestamp IS NULL"
 }
 
-function enable_change_tracking() {
-    exec_sql "SELECT enable_change_tracking()"
+function enable_update_tracking() {
+    exec_sql "SELECT enable_update_tracking()"
 }
 
-function disable_change_tracking() {
-    exec_sql "SELECT disable_change_tracking()"
+function disable_update_tracking() {
+    exec_sql "SELECT disable_update_tracking()"
+}
+
+function enable_delete_tracking() {
+    exec_sql "SELECT enable_delete_tracking()"
+}
+
+function disable_delete_tracking() {
+    exec_sql "SELECT disable_delete_tracking()"
 }
 
 
@@ -113,7 +121,7 @@ function drop_tables() {
 }
 
 function cleanup_osm_changes() {
-    exec_sql "SELECT cleanup_osm_changes()"
+    exec_sql "SELECT cleanup_osm_tracking_tables()"
 }
 
 function exec_sql() {
@@ -131,7 +139,7 @@ function import_pbf_diffs() {
     local diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
 
     echo "Import deletes from $diffs_file"
-    enable_change_tracking
+    enable_delete_tracking
     imposm3 diff \
         -no-create -no-modify \
         -connection "$PG_CONNECT" \
@@ -140,9 +148,10 @@ function import_pbf_diffs() {
         -diffdir "$IMPORT_DATA_DIR" \
         -dbschema-import "${DB_SCHEMA}" \
         "$diffs_file"
-    disable_change_tracking
+    disable_delete_tracking
 
     echo "Import creates and modifications from $diffs_file"
+    enable_update_tracking
     imposm3 diff \
         -no-delete \
         -connection "$PG_CONNECT" \
@@ -151,6 +160,7 @@ function import_pbf_diffs() {
         -diffdir "$IMPORT_DATA_DIR" \
         -dbschema-import "${DB_SCHEMA}" \
         "$diffs_file"
+    disable_update_tracking
 
     local timestamp=$(extract_timestamp "$diffs_file")
     echo "Set $timestamp for latest updates from $diffs_file"
