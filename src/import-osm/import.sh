@@ -53,29 +53,7 @@ function update_timestamp() {
     local timestamp="$1"
     store_timestamp_history "$timestamp"
 
-	exec_sql "UPDATE osm_delete SET timestamp='$timestamp' WHERE timestamp IS NULL"
-
-	exec_sql "UPDATE osm_admin_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_aero_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_aero_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_barrier_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_barrier_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_building_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_building_polygon_gen0 SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_housenumber_point SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_housenumber_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_landuse_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_landuse_polygon_gen0 SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_landuse_polygon_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_place_point SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_poi_point SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_poi_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_road_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_road_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_water_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_water_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
-	exec_sql "UPDATE osm_water_polygon_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
-    exec_sql "UPDATE osm_mountain_peak_point SET timestamp='$timestamp' WHERE timestamp IS NULL"
+    exec_sql "SELECT update_timestamp('$timestamp')"
 }
 
 function enable_update_tracking() {
@@ -94,30 +72,8 @@ function disable_delete_tracking() {
     exec_sql "SELECT disable_delete_tracking()"
 }
 
-
 function drop_tables() {
-    exec_sql "DROP TABLE IF EXISTS osm_landuse_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_landuse_polygon_gen0 CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_landuse_polygon_gen1 CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_admin_linestring CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_aero_linestring CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_aero_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_barrier_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_barrier_linestring CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_building_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_building_polygon_gen0 CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_building_polygon_gen1 CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_housenumber_point CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_housenumber_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_place_point CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_road_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_road_linestring CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_water_linestring CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_water_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_water_polygon_gen1 CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_poi_polygon CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_poi_point CASCADE"
-    exec_sql "DROP TABLE IF EXISTS osm_mountain_peak_point CASCADE"
+    exec_sql "SELECT drop_tables()"
 }
 
 function cleanup_osm_changes() {
