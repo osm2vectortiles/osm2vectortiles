@@ -34,7 +34,7 @@ on Tobin Bradley's homepage](http://fuzzytolerance.info/blog/2016/03/21/GeoPorta
 
 ## ArcBruTile
 
-[ArcBruTile](https://arcbrutile.codeplex.com/) support displaying the raster maps from OSM2VectorTiles
+[ArcBruTile](https://arcbrutile.codeplex.com/) supports displaying the raster maps from OSM2VectorTiles
 in [ArcGIS Desktop](http://www.esri.com/software/arcgis/arcgis-for-desktop).
 It supports the raster maps `Bright`, `Retro`, `Comic`, `Light`, `Dark`, `Woodcut`, `Pirates` and `Wheatpaste`.
 
