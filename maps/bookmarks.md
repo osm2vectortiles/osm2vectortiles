@@ -12,6 +12,28 @@ for visually examining osm2vectortiles.
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.15.0/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.15.0/mapbox-gl.css' rel='stylesheet' />
 
+## Cities
+
+### Zurich
+
+<div class="map-preview" data-lat="47.3782" data-lon="8.5395" data-zoom="11"></div>
+
+### London
+
+<div class="map-preview" data-lat="51.5071" data-lon="-0.1266" data-zoom="11"></div>
+
+### Paris
+
+<div class="map-preview" data-lat="48.85618" data-lon="2.35214" data-zoom="11"></div>
+
+### New York
+
+<div class="map-preview" data-lat="40.7306" data-lon="-73.9860" data-zoom="11"></div>
+
+### Rome
+
+<div class="map-preview" data-lat="41.89346" data-lon="12.48273" data-zoom="11"></div>
+
 ## Airports
 
 ### Zurich Airport
