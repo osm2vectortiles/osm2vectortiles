@@ -6,8 +6,8 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  - wget -nc -P "$HOME/cache" "http://download.geofabrik.de/europe/liechtenstein-160101.osm.pbf"
-  - mkdir -p "$TRAVIS_BUILD_DIR/import" && cp "$HOME/cache/liechtenstein-160101.osm.pbf" "$TRAVIS_BUILD_DIR/import"
+  - wget -nc -P "$HOME/cache" "http://download.geofabrik.de/europe/liechtenstein-160401.osm.pbf"
+  - mkdir -p "$TRAVIS_BUILD_DIR/import" && cp "$HOME/cache/liechtenstein-160401.osm.pbf" "$TRAVIS_BUILD_DIR/import"
   - docker-compose build
   - make fast
 script:
