@@ -1059,6 +1059,52 @@ Layer:
     properties:
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: rail_station_label
+    Datasource:
+      dbname: osm
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: db
+      key_field: ''
+      key_field_as_attribute: ''
+      max_size: 512
+      password: osm
+      port: 5432
+      srid: ''
+      table: |-
+        (
+          SELECT geometry, osm_id,
+          name,
+          coalesce(NULLIF(name_en, ''), name) AS name_en,
+          coalesce(NULLIF(name_es, ''), name) AS name_es,
+          coalesce(NULLIF(name_fr, ''), name) AS name_fr,
+          coalesce(NULLIF(name_de, ''), name) AS name_de,
+          coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+          coalesce(NULLIF(name_zh, ''), name) AS name_zh,
+          classify_rail_station(type) AS maki,
+          classify_rail_station(type) AS network,
+          FROM rail_station_label_z12toz14
+          WHERE geometry && !bbox!
+          AND z(!scale_denominator!) BETWEEN 12 AND 14
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields:
+      osm_id: Number
+      maki: String
+      name: String
+      name_de: String
+      name_en: String
+      name_es: String
+      name_fr: String
+      name_ru: String
+      name_zh: String
+      network: String
+    properties:
+      "buffer-size": 64
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: mountain_peak_label
     Datasource:
       dbname: osm

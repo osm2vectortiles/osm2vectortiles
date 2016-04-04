@@ -246,13 +246,6 @@ system:
     - post_office
     prison:
     - prison
-    rail:
-    - station
-    railway:
-    - halt
-    - tram_stop
-    - crossing
-    - level_crossing
     restaurant:
     - restaurant
     school:

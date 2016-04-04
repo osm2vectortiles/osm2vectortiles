@@ -49,16 +49,14 @@ system:
     - footway
     major_rail:
     - rail
-    - monorail
-    - narrow_gauge
+    - tram
+    - light_rail
     - subway
     minor_rail:
-    - funicular
-    - light_rail
-    - preserved
-    - tram
-    - disused
     - yard
+    - spur
+    - siding
+    - crossover
     aerialway:
     - chair_lift
     - mixed_lift

@@ -513,21 +513,11 @@ tables:
           - tram
           - light_rail
           - subway
-          - narrow_gauge
-          - preserved
-          - funicular
-          - monorail
-          - disused
           service:
           - yard
-          - driveway
-          - alley
           - spur
           - siding
           - crossover
-          - parking_aisle
-          - emergency_access
-          - drive-through
       roads:
         mapping:
           highway:
@@ -639,20 +629,11 @@ tables:
           - tram
           - light_rail
           - subway
-          - narrow_gauge
-          - preserved
-          - funicular
-          - monorail
-          - disused
           service:
           - yard
-          - driveway
-          - alley
           - spur
           - siding
           - crossover
-          - parking_aisle
-          - drive-through
       roads:
         mapping:
           highway:
@@ -698,6 +679,51 @@ tables:
           - hole
           amenity:
           - parking
+  rail_station_point:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: timestamp
+      type: pbf_timestamp
+    - key: name
+      name: name
+      type: string
+    - name: name_int
+      key: int_name
+      type: string
+    - name: name_fr
+      key: name:fr
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: name_de
+      key: name:de
+      type: string
+    - name: name_es
+      key: name:es
+      type: string
+    - name: name_ru
+      key: name:ru
+      type: string
+    - name: name_zh
+      key: name:zh
+      type: string
+    - name: type
+      type: mapping_value
+    mapping:
+      railway:
+      - station
+      - stop
+      - halt
+      - tram_stop
+      - subway_entrance
+      station:
+      - subway
+      - light_rail
+    type: point
   water_polygon:
     fields:
     - name: osm_id
@@ -1150,14 +1176,6 @@ tables:
       - motorway_junction
       - turning_circle
       - bus_stop
-      railway:
-      - station
-      - platform
-      - halt
-      - tram_stop
-      - crossing
-      - level_crossing
-      - subway_entrance
       barrier:
       - sally_port
       - lift_gate
@@ -1480,14 +1498,6 @@ tables:
       - motorway_junction
       - turning_circle
       - bus_stop
-      railway:
-      - station
-      - platform
-      - halt
-      - tram_stop
-      - crossing
-      - level_crossing
-      - subway_entrance
       barrier:
       - sally_port
       - lift_gate

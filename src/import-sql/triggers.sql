@@ -145,6 +145,13 @@ CREATE TRIGGER osm_airport_polygon_track_changes
 BEFORE DELETE ON osm_airport_polygon
 FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
 
+-- Rail Station
+
+DROP TRIGGER IF EXISTS osm_rail_station_point_track_changes ON osm_rail_station_point;
+CREATE TRIGGER osm_rail_station_point_track_changes
+BEFORE DELETE ON osm_rail_station_point
+FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
+
 CREATE OR REPLACE FUNCTION disable_change_tracking() returns VOID
 AS $$
 BEGIN
@@ -167,6 +174,7 @@ BEGIN
     ALTER TABLE osm_mountain_peak_point DISABLE TRIGGER USER;
     ALTER TABLE osm_airport_point DISABLE TRIGGER USER;
     ALTER TABLE osm_airport_polygon DISABLE TRIGGER USER;
+    ALTER TABLE osm_rail_station_point DISABLE TRIGGER USER;
 END;
 $$ language plpgsql;
 
@@ -192,5 +200,6 @@ BEGIN
     ALTER TABLE osm_mountain_peak_point ENABLE TRIGGER USER;
     ALTER TABLE osm_airport_point ENABLE TRIGGER USER;
     ALTER TABLE osm_airport_polygon ENABLE TRIGGER USER;
+    ALTER TABLE osm_rail_station_point ENABLE TRIGGER USER;
 END;
 $$ language plpgsql;

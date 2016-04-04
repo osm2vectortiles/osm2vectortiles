@@ -207,6 +207,8 @@ BEGIN
         SELECT * FROM changed_tiles_mountain_peak_label(ts)
         UNION
         SELECT * FROM changed_tiles_airport_label(ts)
+        UNION
+        SELECT * FROM changed_tiles_rail_station_label(ts)
 	);
 END;
 $$ LANGUAGE plpgsql;
