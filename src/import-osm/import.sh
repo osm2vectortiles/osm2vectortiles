@@ -15,6 +15,8 @@ readonly DB_SCHEMA=${OSM_SCHEMA:-public}
 readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
 readonly PG_CONNECT="postgis://$OSM_USER:$OSM_PASSWORD@$DB_HOST/$OSM_DB"
 
+readonly HISTORY_TABLE="osm_timestamps"
+
 function download_pbf() {
     local pbf_url=$1
 	wget -q  --directory-prefix "$IMPORT_DATA_DIR" --no-clobber "$pbf_url"
@@ -22,6 +24,7 @@ function download_pbf() {
 
 function import_pbf() {
     local pbf_file="$1"
+    create_timestamp_history
     imposm3 import \
         -connection "$PG_CONNECT" \
         -mapping "$MAPPING_YAML" \
@@ -40,13 +43,16 @@ function extract_timestamp() {
     osmconvert "$file" --out-timestamp
 }
 
+function create_timestamp_history() {
+    exec_sql "DROP TABLE IF EXISTS $HISTORY_TABLE"
+    exec_sql "CREATE TABLE $HISTORY_TABLE (timestamp timestamp)"
+}
+
 function store_timestamp_history {
     local timestamp="$1"
-    local table_name="osm_timestamps"
 
-    exec_sql "CREATE TABLE IF NOT EXISTS $table_name (timestamp timestamp)"
-    exec_sql "DELETE FROM $table_name WHERE timestamp='$timestamp'::timestamp"
-    exec_sql "INSERT INTO $table_name VALUES ('$timestamp'::timestamp)"
+    exec_sql "DELETE FROM $HISTORY_TABLE WHERE timestamp='$timestamp'::timestamp"
+    exec_sql "INSERT INTO $HISTORY_TABLE VALUES ('$timestamp'::timestamp)"
 }
 
 function update_timestamp() {
@@ -54,14 +60,6 @@ function update_timestamp() {
     store_timestamp_history "$timestamp"
 
     exec_sql "SELECT update_timestamp('$timestamp')"
-}
-
-function enable_update_tracking() {
-    exec_sql "SELECT enable_update_tracking()"
-}
-
-function disable_update_tracking() {
-    exec_sql "SELECT disable_update_tracking()"
 }
 
 function enable_delete_tracking() {
@@ -72,8 +70,14 @@ function disable_delete_tracking() {
     exec_sql "SELECT disable_delete_tracking()"
 }
 
+function create_tracking_triggers() {
+    exec_sql "SELECT create_tracking_triggers()"
+}
+
 function drop_tables() {
-    exec_sql "SELECT drop_tables()"
+    # if drop function does not exist
+    # the tables don't exist yet as well
+    exec_sql "SELECT drop_tables()" || true
 }
 
 function cleanup_osm_changes() {
@@ -94,10 +98,10 @@ function import_pbf_diffs() {
     local pbf_file="$1"
     local diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
 
-    echo "Import deletes from $diffs_file"
+    echo "Import changes from $diffs_file"
+    create_tracking_triggers
     enable_delete_tracking
     imposm3 diff \
-        -no-create -no-modify \
         -connection "$PG_CONNECT" \
         -mapping "$MAPPING_YAML" \
         -cachedir "$IMPOSM_CACHE_DIR" \
@@ -105,18 +109,6 @@ function import_pbf_diffs() {
         -dbschema-import "${DB_SCHEMA}" \
         "$diffs_file"
     disable_delete_tracking
-
-    echo "Import creates and modifications from $diffs_file"
-    enable_update_tracking
-    imposm3 diff \
-        -no-delete \
-        -connection "$PG_CONNECT" \
-        -mapping "$MAPPING_YAML" \
-        -cachedir "$IMPOSM_CACHE_DIR" \
-        -diffdir "$IMPORT_DATA_DIR" \
-        -dbschema-import "${DB_SCHEMA}" \
-        "$diffs_file"
-    disable_update_tracking
 
     local timestamp=$(extract_timestamp "$diffs_file")
     echo "Set $timestamp for latest updates from $diffs_file"
