@@ -1083,7 +1083,7 @@ Layer:
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           classify_rail_station(type) AS maki,
-          classify_rail_station(type) AS network,
+          classify_rail_station(type) AS network
           FROM rail_station_label_z12toz14
           WHERE geometry && !bbox!
           AND z(!scale_denominator!) BETWEEN 12 AND 14
