@@ -26,9 +26,11 @@ system:
     - road
     - raceway
     street_limited:
-    - pedestrian
-    - construction
     - private
+    pedestrian:
+    - pedestrian
+    construction:
+    - construction
     service:
     - service
     - track
