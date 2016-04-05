@@ -191,8 +191,6 @@ BEGIN
 	    UNION
 	    SELECT * FROM changed_tiles_barrier_line(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_bridge(ts)
-	    UNION
 	    SELECT * FROM changed_tiles_building(ts)
 	    UNION
 	    SELECT * FROM changed_tiles_housenum_label(ts)
@@ -208,8 +206,6 @@ BEGIN
 	    SELECT * FROM changed_tiles_road(ts)
 	    UNION
 	    SELECT * FROM changed_tiles_road_label(ts)
-	    UNION
-	    SELECT * FROM changed_tiles_tunnel(ts)
 	    UNION
 	    SELECT * FROM changed_tiles_water(ts)
 	    UNION

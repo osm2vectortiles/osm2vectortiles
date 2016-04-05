@@ -39,8 +39,6 @@ function main() {
     exec_sql_file "${SQL_VIEWS_DIR}poi_label.sql"
     exec_sql_file "${SQL_VIEWS_DIR}road.sql"
     exec_sql_file "${SQL_VIEWS_DIR}road_label.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}bridge.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}tunnel.sql"
     exec_sql_file "${SQL_VIEWS_DIR}water.sql"
     exec_sql_file "${SQL_VIEWS_DIR}water_label.sql"
     exec_sql_file "${SQL_VIEWS_DIR}waterway.sql"
