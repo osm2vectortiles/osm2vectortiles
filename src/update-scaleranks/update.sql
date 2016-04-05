@@ -9,9 +9,12 @@ FROM
         ne.name ILIKE osm.name OR
         ne.name ILIKE osm.name_en OR
         ne.namealt ILIKE osm.name OR
-        ne.namealt ILIKE osm.name_en
+        ne.namealt ILIKE osm.name_en OR
+        ne.meganame ILIKE osm.name OR
+        ne.meganame ILIKE osm.name_en
     )
     AND (osm.type = 'city' OR osm.type = 'town' OR osm.type = 'village')
     AND st_dwithin(ne.geom, osm.geometry, 50000)
     ) AS improved_places
 WHERE osm_place_point.osm_id = improved_places.osm_id;
+
