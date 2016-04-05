@@ -668,6 +668,7 @@ tables:
           - raceway
           access:
           - private
+          - no
           aerialway:
           - chair_lift
           - mixed_lift
@@ -685,6 +686,8 @@ tables:
           - hole
           amenity:
           - parking
+          public_transport:
+          - platform
   rail_station_point:
     fields:
     - name: osm_id

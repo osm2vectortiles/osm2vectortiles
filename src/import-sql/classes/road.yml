@@ -5,45 +5,47 @@ system:
     - motorway
     motorway_link:
     - motorway_link
-    driveway:
-    - driveway
-    primary:
-    - primary
-    - primary_link
-    secondary:
-    - secondary
-    - secondary_link
-    tertiary:
-    - tertiary
-    - tertiary_link
     trunk:
     - trunk
+    primary:
+    - primary
+    secondary:
+    - secondary
+    tertiary:
+    - tertiary
+    link:
     - trunk_link
+    - primary_link
+    - secondary_link
+    - tertiary_link
+    driveway:
+    - driveway
     street:
-    - residential
     - unclassified
-    - living_street
+    - residential
     - road
+    - living_street
     - raceway
     street_limited:
     - private
+    - no
     pedestrian:
     - pedestrian
+    - platform
     construction:
     - construction
-    service:
-    - service
+    track:
     - track
+    service:
     - alley
-    - spur
-    - siding
-    - crossover
-    - parking
-    - parking_aisle
-    - yard
-    - driveway
     - emergency_access
     - drive-through
+    - driveway
+    - parking
+    - parking_aisle
+    - service
+    ferry:
+    - ferry
     path:
     - path
     - cycleway
@@ -77,6 +79,3 @@ system:
     - canopy
     golf:
     - hole
-    ferry:
-    - ferry
-    
