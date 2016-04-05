@@ -2094,28 +2094,6 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "424311883",
-        "iso3166_1_alpha_2": "VA",
-        "name": "Civitatis Vaticanæ",
-        "name_en": "Vatican City",
-        "name_de": "Vatikanstadt",
-        "name_fr": "Cité du Vatican",
-        "name_es": "Ciudad del Vaticano",
-        "name_zh": "梵蒂冈",
-        "name_ru": "Ватикан",
-        "rank": 6
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          12.4528349,
-          41.9034912
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "osm_id": "424311890",
         "iso3166_1_alpha_2": "VE",
         "name": "Venezuela",
