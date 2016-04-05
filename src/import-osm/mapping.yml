@@ -478,8 +478,17 @@ tables:
     - key: ford
       name: is_ford
       type: bool
+    - key: construction
+      name: construction
+      type: string
+    - key: tracktype
+      name: tracktype
+      type: string
     - key: service
       name: service
+      type: string
+    - key: access
+      name: access
       type: string
     - key: name
       name: name
@@ -516,11 +525,6 @@ tables:
           - tram
           - light_rail
           - subway
-          service:
-          - yard
-          - spur
-          - siding
-          - crossover
       roads:
         mapping:
           highway:
@@ -534,21 +538,20 @@ tables:
           - secondary_link
           - tertiary
           - tertiary_link
-          - road
-          - path
-          - track
-          - service
-          - footway
-          - bridleway
-          - cycleway
-          - steps
-          - pedestrian
-          - living_street
           - unclassified
           - residential
+          - road
+          - living_street
           - raceway
-          access:
-          - private
+          - pedestrian
+          - construction
+          - track
+          - service
+          - path
+          - cycleway
+          - steps
+          - bridleway
+          - footway
           aerialway:
           - chair_lift
           - mixed_lift
@@ -564,6 +567,8 @@ tables:
           - canopy
           golf:
           - hole
+          public_transport:
+          - platform
           route:
           - ferry
           - ski
@@ -600,8 +605,17 @@ tables:
     - key: ford
       name: is_ford
       type: bool
+    - key: construction
+      name: construction
+      type: string
+    - key: tracktype
+      name: tracktype
+      type: string
     - key: service
       name: service
+      type: string
+    - key: access
+      name: access
       type: string
     - key: name
       name: name
@@ -635,11 +649,6 @@ tables:
           - tram
           - light_rail
           - subway
-          service:
-          - yard
-          - spur
-          - siding
-          - crossover
       roads:
         mapping:
           highway:
@@ -653,22 +662,20 @@ tables:
           - secondary_link
           - tertiary
           - tertiary_link
-          - road
-          - path
-          - track
-          - service
-          - footway
-          - bridleway
-          - cycleway
-          - steps
-          - pedestrian
-          - living_street
           - unclassified
           - residential
+          - road
+          - living_street
           - raceway
-          access:
-          - private
-          - no
+          - pedestrian
+          - construction
+          - track
+          - service
+          - path
+          - cycleway
+          - steps
+          - bridleway
+          - footway
           aerialway:
           - chair_lift
           - mixed_lift
@@ -684,10 +691,12 @@ tables:
           - canopy
           golf:
           - hole
-          amenity:
-          - parking
           public_transport:
           - platform
+          route:
+          - ferry
+          - ski
+          - piste
   rail_station_point:
     fields:
     - name: osm_id

@@ -18,17 +18,12 @@ system:
     - primary_link
     - secondary_link
     - tertiary_link
-    driveway:
-    - driveway
     street:
     - unclassified
     - residential
     - road
     - living_street
     - raceway
-    street_limited:
-    - private
-    - no
     pedestrian:
     - pedestrian
     - platform
@@ -37,12 +32,6 @@ system:
     track:
     - track
     service:
-    - alley
-    - emergency_access
-    - drive-through
-    - driveway
-    - parking
-    - parking_aisle
     - service
     ferry:
     - ferry
@@ -59,11 +48,6 @@ system:
     - tram
     - light_rail
     - subway
-    minor_rail:
-    - yard
-    - spur
-    - siding
-    - crossover
     aerialway:
     - chair_lift
     - mixed_lift

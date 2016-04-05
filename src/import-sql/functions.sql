@@ -67,11 +67,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
-CREATE OR REPLACE FUNCTION classify_road_railway(type VARCHAR, service VARCHAR) RETURNS VARCHAR
+CREATE OR REPLACE FUNCTION classify_road_railway(type VARCHAR, service VARCHAR, access VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN
     RETURN CASE
         WHEN type = 'rail' AND service IN ('yard', 'siding', 'spur', 'crossover') THEN 'minor_rail'
+        WHEN access IN ('private', 'no') THEN 'street_limited'
         ELSE classify_road(type)
     END;
 END;
