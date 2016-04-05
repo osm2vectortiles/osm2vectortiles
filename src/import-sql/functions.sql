@@ -89,6 +89,21 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+CREATE OR REPLACE FUNCTION classify_structure(is_tunnel BOOLEAN, is_bridge BOOLEAN, is_ford BOOLEAN) RETURNS VARCHAR
+AS $$
+BEGIN
+    IF is_tunnel THEN
+        RETURN 'tunnel';
+    ELSIF is_bridge THEN
+        RETURN 'bridge';
+    ELSIF is_ford THEN
+        RETURN 'ford';
+    ELSE
+        RETURN 'none';
+    END IF;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
 CREATE OR REPLACE FUNCTION poi_address(housenumber VARCHAR, street VARCHAR, place VARCHAR, city VARCHAR, country VARCHAR, postcode VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN

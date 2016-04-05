@@ -475,6 +475,9 @@ tables:
     - key: bridge
       name: is_bridge
       type: bool
+    - key: ford
+      name: is_ford
+      type: bool
     - key: service
       name: service
       type: string
@@ -593,6 +596,9 @@ tables:
       type: bool
     - key: bridge
       name: is_bridge
+      type: bool
+    - key: ford
+      name: is_ford
       type: bool
     - key: service
       name: service
