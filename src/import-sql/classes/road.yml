@@ -7,15 +7,18 @@ system:
     - motorway_link
     driveway:
     - driveway
-    main:
+    primary:
     - primary
     - primary_link
-    - trunk
-    - trunk_link
+    secondary:
     - secondary
     - secondary_link
+    tertiary:
     - tertiary
     - tertiary_link
+    trunk:
+    - trunk
+    - trunk_link
     street:
     - residential
     - unclassified
