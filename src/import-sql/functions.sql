@@ -78,6 +78,25 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+CREATE OR REPLACE FUNCTION road_type(class VARCHAR, type VARCHAR, construction VARCHAR, track VARCHAR, service VARCHAR) RETURNS VARCHAR
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN class = 'construction' THEN 'construction:' || construction
+        WHEN class = 'track' THEN 'track:' || track
+        WHEN class = 'service' THEN 'service:' || service
+        WHEN class = 'golf' THEN 'golf'
+        WHEN class IN ('major_rail', 'minor_rail') THEN 'rail'
+        WHEN class = 'mtb' THEN 'mountain_bike'
+        WHEN class = 'aerialway' AND type IN ('gondola', 'mixed_lift', 'chair_lift') 'aerialway:' || type
+        WHEN class = 'aerialway' AND type = 'cable_car' THEN 'aerialway:cablecar'
+        WHEN class = 'aerialway' AND type IN ('drag_lift', 't-bar', 'j-bar', 'platter', 'rope_tow', 'zip_line') THEN 'aerialway:drag_lift'
+        WHEN class = 'aerialway' AND type IN ('magic_carpet', 'canopy') THEN 'aerialway:magic_carpet'
+        ELSE type
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
 CREATE OR REPLACE FUNCTION classify_airport_label(kind VARCHAR, type VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN

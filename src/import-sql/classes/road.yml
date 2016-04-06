@@ -36,30 +36,33 @@ system:
     ferry:
     - ferry
     path:
-    - path
-    - cycleway
-    - ski
-    - piste
     - steps
-    - bridleway
+    - corridor
+    - crossing
+    - piste
+    - mtb
+    - hiking
+    - cycleway
     - footway
+    - path
+    - bridleway
     major_rail:
     - rail
     - tram
     - light_rail
     - subway
     aerialway:
-    - chair_lift
-    - mixed_lift
-    - drag_lift
-    - platter
-    - t-bar
-    - magic_carpet
-    - gondola
     - cable_car
+    - gondola
+    - mixed_lift
+    - chair_lift
+    - drag_lift
+    - t-bar
+    - j-bar
+    - platter
     - rope_tow
     - zip_line
-    - j-bar
+    - magic_carpet
     - canopy
     golf:
     - hole

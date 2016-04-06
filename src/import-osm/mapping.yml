@@ -552,18 +552,20 @@ tables:
           - steps
           - bridleway
           - footway
+          - corridor
+          - crossing
           aerialway:
-          - chair_lift
-          - mixed_lift
-          - drag_lift
-          - platter
-          - t-bar
-          - magic_carpet
-          - gondola
           - cable_car
+          - gondola
+          - mixed_lift
+          - chair_lift
+          - drag_lift
+          - t-bar
+          - j-bar
+          - platter
           - rope_tow
           - zip_line
-          - j-bar
+          - magic_carpet
           - canopy
           golf:
           - hole
@@ -571,8 +573,9 @@ tables:
           - platform
           route:
           - ferry
-          - ski
           - piste
+          - mtb
+          - hiking
   road_polygon:
     type: polygon
     fields:
@@ -677,17 +680,17 @@ tables:
           - bridleway
           - footway
           aerialway:
-          - chair_lift
-          - mixed_lift
-          - drag_lift
-          - platter
-          - t-bar
-          - magic_carpet
-          - gondola
           - cable_car
+          - gondola
+          - mixed_lift
+          - chair_lift
+          - drag_lift
+          - t-bar
+          - j-bar
+          - platter
           - rope_tow
           - zip_line
-          - j-bar
+          - magic_carpet
           - canopy
           golf:
           - hole
@@ -695,8 +698,9 @@ tables:
           - platform
           route:
           - ferry
-          - ski
           - piste
+          - mtb
+          - hiking
   rail_station_point:
     fields:
     - name: osm_id
