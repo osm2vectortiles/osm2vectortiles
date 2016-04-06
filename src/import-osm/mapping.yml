@@ -214,6 +214,7 @@ tables:
       - guard_rail
       natural:
       - cliff
+      - earth_bank
       man_made:
       - pier
       - breakwater
@@ -253,6 +254,7 @@ tables:
       - guard_rail
       natural:
       - cliff
+      - earth_bank
       man_made:
       - pier
       - breakwater
