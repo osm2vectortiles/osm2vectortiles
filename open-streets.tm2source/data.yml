@@ -327,7 +327,7 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry,
-          road_type(classify_road_railway(type, service, access), type, construction, track, service) AS type,
+          road_type(classify_road_railway(type, service, access), type, construction, tracktype, service) AS type,
           classify_road_railway(type, service, access) AS class, oneway, structure
           FROM (
             SELECT * FROM road_z5toz6

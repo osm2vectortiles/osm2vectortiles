@@ -78,12 +78,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
-CREATE OR REPLACE FUNCTION road_type(class VARCHAR, type VARCHAR, construction VARCHAR, track VARCHAR, service VARCHAR) RETURNS VARCHAR
+CREATE OR REPLACE FUNCTION road_type(class VARCHAR, type VARCHAR, construction VARCHAR, tracktype VARCHAR, service VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN
     RETURN CASE
         WHEN class = 'construction' THEN 'construction:' || construction
-        WHEN class = 'track' THEN 'track:' || track
+        WHEN class = 'track' THEN 'track:' || tracktype
         WHEN class = 'service' THEN 'service:' || service
         WHEN class = 'golf' THEN 'golf'
         WHEN class IN ('major_rail', 'minor_rail') THEN 'rail'
