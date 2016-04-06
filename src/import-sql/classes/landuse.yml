@@ -1,6 +1,8 @@
 system:
   name: landuse
   classes:
+    aboriginal_lands:
+    - aboriginal_lands
     agriculture:
     - orchard
     - farm
@@ -58,14 +60,6 @@ system:
     wood:
     - wood
     - forest
-    wetland:
-    - wetland
-    - swamp
-    - bog
-    - marsh
-    wetland_noveg:
-    - mud
-    - tidalflat
     residential:
     - residential
     commercial:
