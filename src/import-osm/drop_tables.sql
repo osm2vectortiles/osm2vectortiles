@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS osm_building_polygon_gen1 CASCADE;
 DROP TABLE IF EXISTS osm_housenumber_point CASCADE;
 DROP TABLE IF EXISTS osm_housenumber_polygon CASCADE;
 DROP TABLE IF EXISTS osm_place_point CASCADE;
+DROP TABLE IF EXISTS osm_place_polygon CASCADE;
 DROP TABLE IF EXISTS osm_road_polygon CASCADE;
 DROP TABLE IF EXISTS osm_road_linestring CASCADE;
 DROP TABLE IF EXISTS osm_water_linestring CASCADE;

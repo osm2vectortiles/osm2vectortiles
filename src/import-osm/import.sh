@@ -70,6 +70,7 @@ function update_timestamp() {
 	exec_sql "UPDATE osm_landuse_polygon_gen0 SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_landuse_polygon_gen1 SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_place_point SET timestamp='$timestamp' WHERE timestamp IS NULL"
+    exec_sql "UPDATE osm_place_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_poi_point SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_poi_polygon SET timestamp='$timestamp' WHERE timestamp IS NULL"
 	exec_sql "UPDATE osm_road_linestring SET timestamp='$timestamp' WHERE timestamp IS NULL"

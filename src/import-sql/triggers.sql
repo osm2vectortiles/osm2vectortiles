@@ -35,6 +35,11 @@ CREATE TRIGGER osm_place_point_track_changes
 BEFORE DELETE ON osm_place_point
 FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
 
+DROP TRIGGER IF EXISTS osm_place_polygon_track_changes ON osm_place_polygon;
+CREATE TRIGGER osm_place_polygon_track_changes
+BEFORE DELETE ON osm_place_polygon
+FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
+
 -- POI
 
 DROP TRIGGER IF EXISTS osm_poi_point_track_changes ON osm_poi_point;
@@ -156,6 +161,7 @@ CREATE OR REPLACE FUNCTION disable_change_tracking() returns VOID
 AS $$
 BEGIN
     ALTER TABLE osm_place_point DISABLE TRIGGER USER;
+    ALTER TABLE osm_place_polygon DISABLE TRIGGER USER;
     ALTER TABLE osm_poi_point DISABLE TRIGGER USER;
     ALTER TABLE osm_poi_polygon DISABLE TRIGGER USER;
     ALTER TABLE osm_road_polygon DISABLE TRIGGER USER;
@@ -182,6 +188,7 @@ CREATE OR REPLACE FUNCTION enable_change_tracking() returns VOID
 AS $$
 BEGIN
     ALTER TABLE osm_place_point ENABLE TRIGGER USER;
+    ALTER TABLE osm_place_polygon ENABLE TRIGGER USER;
     ALTER TABLE osm_poi_point ENABLE TRIGGER USER;
     ALTER TABLE osm_poi_polygon ENABLE TRIGGER USER;
     ALTER TABLE osm_road_polygon ENABLE TRIGGER USER;
