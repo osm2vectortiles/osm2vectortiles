@@ -1073,6 +1073,7 @@ tables:
       - bbq
       - taxi
       - bus_station
+      - marketplace
       leisure:
       - park
       - playground
@@ -1201,6 +1202,7 @@ tables:
       - books
       - boutique
       - butcher
+      - camera
       - car
       - car_repair
       - carpet
@@ -1395,6 +1397,7 @@ tables:
       - bbq
       - taxi
       - bus_station
+      - marketplace
       leisure:
       - park
       - playground
@@ -1523,6 +1526,7 @@ tables:
       - books
       - boutique
       - butcher
+      - camera
       - car
       - car_repair
       - carpet

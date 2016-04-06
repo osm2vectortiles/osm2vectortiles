@@ -60,9 +60,6 @@ system:
     - car
     - car_repair
     - taxi
-    camera:
-    - video
-    - electronics
     cemetery:
     - grave_yard
     - cemetery
@@ -107,6 +104,7 @@ system:
     - delicatessen
     - department_store
     - greengrocer
+    - marketplace
     sport:
     - multi
     - equestrian
@@ -258,6 +256,7 @@ system:
     - beauty
     - bed
     - boutique
+    - camera
     - carpet
     - charity
     - chemist
@@ -271,10 +270,12 @@ system:
     - garden_centre
     - doityourself
     - erotic
+    - electronics
     - fabric
     - florist
     - furniture
     - video_games
+    - video
     - general
     - gift
     - hardware
