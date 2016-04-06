@@ -6,3 +6,7 @@ system:
     - marsh
     - swamp
     - bog
+    national_park:
+    - national_park
+    - nature_reserve
+    - protected_area

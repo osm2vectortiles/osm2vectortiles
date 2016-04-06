@@ -33,8 +33,6 @@ system:
     - golf_course
     - playground
     - recreation_ground
-    - nature_reserve
-    - national_park
     - village_green
     - zoo
     - sports_centre

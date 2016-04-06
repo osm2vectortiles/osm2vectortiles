@@ -282,6 +282,12 @@ Layer:
         (
           SELECT osm_id, geometry, classify_landuse_overlay(type) AS class
           FROM (
+            SELECT osm_id, geometry, type FROM landuse_overlay_z5
+            WHERE z(!scale_denominator!) = 5
+            UNION ALL
+            SELECT osm_id, geometry, type FROM landuse_overlay_z6
+            WHERE z(!scale_denominator!) = 6
+            UNION ALL
             SELECT osm_id, geometry, type FROM landuse_overlay_z7
             WHERE z(!scale_denominator!) = 7
             UNION ALL
