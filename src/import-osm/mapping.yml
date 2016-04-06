@@ -267,6 +267,9 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: underground
+      key: building:levels:underground
+      type: integer
     - name: timestamp
       type: pbf_timestamp
     mapping:
