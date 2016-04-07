@@ -57,11 +57,10 @@ CREATE OR REPLACE FUNCTION scalerank_airport_label(maki VARCHAR, area REAL, aero
 AS $$
 BEGIN
     RETURN CASE
-        WHEN maki = 'heliport' THEN 4
-        WHEN maki = 'airfield' AND area < 145000 THEN 4
-        WHEN maki = 'airfield' AND area >= 145000 THEN 3
-        WHEN maki = 'airport' AND area < 300000 THEN 2
         WHEN (maki = 'airport' AND area >= 300000) OR aerodrome = 'international' THEN 1
+        WHEN maki = 'airport' AND area < 300000 THEN 2
+        WHEN maki = 'airfield' AND area >= 145000 THEN 3
+        WHEN maki = 'airfield' AND area < 145000 THEN 4
         ELSE 4
     END;
 END;
