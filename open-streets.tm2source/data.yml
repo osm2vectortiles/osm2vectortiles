@@ -808,7 +808,7 @@ Layer:
               coalesce(NULLIF(name_zh, ''), name) AS name_zh,
               format_type(type) AS type,
               scalerank_poi(type, area) AS scalerank,
-              classify_maki_label(type) AS maki,
+              coalesce(classify_maki_label(type), 'marker') AS maki,
               rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
                            ORDER BY localrank_poi(type) ASC) AS localrank
             FROM poi_label_z14
