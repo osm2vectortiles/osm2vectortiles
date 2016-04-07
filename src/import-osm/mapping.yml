@@ -566,7 +566,7 @@ tables:
     - key: service
       name: service
       type: string
-    - key: access
+    - key: motor_vehicle
       name: access
       type: string
     - key: name
@@ -696,7 +696,7 @@ tables:
     - key: service
       name: service
       type: string
-    - key: access
+    - key: motor_vehicle
       name: access
       type: string
     - key: name

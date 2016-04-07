@@ -72,7 +72,7 @@ AS $$
 BEGIN
     RETURN CASE
         WHEN type = 'rail' AND service IN ('yard', 'siding', 'spur', 'crossover') THEN 'minor_rail'
-        WHEN access IN ('private', 'no') THEN 'street_limited'
+        WHEN access IN ('no', 'private', 'permissive', 'agriculture', 'use_sidepath', 'delivery', 'designated', 'dismount', 'discouraged', 'forestry', 'destination', 'customers') THEN 'street_limited'
         ELSE classify_road(type)
     END;
 END;
