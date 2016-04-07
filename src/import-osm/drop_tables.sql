@@ -23,3 +23,4 @@ DROP TABLE IF EXISTS osm_water_polygon_gen1 CASCADE;
 DROP TABLE IF EXISTS osm_poi_polygon CASCADE;
 DROP TABLE IF EXISTS osm_poi_point CASCADE;
 DROP TABLE IF EXISTS osm_mountain_peak_point CASCADE;
+DROP TABLE IF EXISTS osm_rail_station_point CASCADE;
