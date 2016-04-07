@@ -97,6 +97,17 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+CREATE OR REPLACE FUNCTION road_oneway(oneway INTEGER) RETURNS VARCHAR
+AS $$
+BEGIN
+    IF oneway = 1 THEN
+        RETURN 'true';
+    ELSE
+        RETURN 'false';
+    END IF;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
 CREATE OR REPLACE FUNCTION classify_airport_label(kind VARCHAR, type VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN
