@@ -99,7 +99,7 @@ $$ LANGUAGE plpgsql IMMUTABLE;
 CREATE OR REPLACE FUNCTION road_type_value(left_value VARCHAR, right_value VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN
-    IF right_value IS NULL THEN
+    IF right_value = '' OR right_value IS NULL THEN
         RETURN left_value;
     ELSE
         RETURN left_value || ':' || right_value;
