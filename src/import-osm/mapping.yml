@@ -116,7 +116,7 @@ tables:
       key: faa
       type: string
     - name: type
-      key: aerodrome:type
+      key: type
       type: string
     - name: kind
       type: mapping_value
@@ -170,7 +170,7 @@ tables:
       key: faa
       type: string
     - name: type
-      key: aerodrome:type
+      key: type
       type: string
     - name: kind
       type: mapping_value
