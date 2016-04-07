@@ -124,8 +124,8 @@ AS $$
 BEGIN
     RETURN CASE
         WHEN kind = 'heliport' THEN 'heliport'
-        WHEN kind = 'aerodrome' AND type = 'public' THEN 'airport'
-        WHEN kind = 'aerodrome' AND type IN ('private', 'military/public') THEN 'airfield'
+        WHEN kind = 'aerodrome' AND type IN ('public', 'Public') THEN 'airport'
+        WHEN kind = 'aerodrome' AND type IN ('private', 'Private', 'military/public', 'Military/Public') THEN 'airfield'
         ELSE ''
     END;
 END;
