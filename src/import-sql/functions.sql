@@ -158,10 +158,10 @@ $$ LANGUAGE plpgsql IMMUTABLE;
 CREATE OR REPLACE FUNCTION is_underground(level INTEGER) RETURNS VARCHAR
 AS $$
 BEGIN
-    IF level = 0 THEN
-        RETURN 'false';
-    ELSE
+    IF level >= 1 THEN
         RETURN 'true';
+    ELSE
+        RETURN 'false';
     END IF;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
