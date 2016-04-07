@@ -82,18 +82,29 @@ CREATE OR REPLACE FUNCTION road_type(class VARCHAR, type VARCHAR, construction V
 AS $$
 BEGIN
     RETURN CASE
-        WHEN class = 'construction' THEN 'construction:' || construction
-        WHEN class = 'track' THEN 'track:' || tracktype
-        WHEN class = 'service' THEN 'service:' || service
+        WHEN class = 'construction' THEN road_type_value(class, construction)
+        WHEN class = 'track' THEN road_type_value(class, tracktype)
+        WHEN class = 'service' THEN road_type_value(class, service)
         WHEN class = 'golf' THEN 'golf'
         WHEN class IN ('major_rail', 'minor_rail') THEN 'rail'
         WHEN class = 'mtb' THEN 'mountain_bike'
-        WHEN class = 'aerialway' AND type IN ('gondola', 'mixed_lift', 'chair_lift') THEN 'aerialway:' || type
+        WHEN class = 'aerialway' AND type IN ('gondola', 'mixed_lift', 'chair_lift') THEN road_type_value(class, type)
         WHEN class = 'aerialway' AND type = 'cable_car' THEN 'aerialway:cablecar'
         WHEN class = 'aerialway' AND type IN ('drag_lift', 't-bar', 'j-bar', 'platter', 'rope_tow', 'zip_line') THEN 'aerialway:drag_lift'
         WHEN class = 'aerialway' AND type IN ('magic_carpet', 'canopy') THEN 'aerialway:magic_carpet'
         ELSE type
     END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION road_type_value(left_value VARCHAR, right_value VARCHAR) RETURNS VARCHAR
+AS $$
+BEGIN
+    IF right_value IS NULL THEN
+        RETURN left_value;
+    ELSE
+        RETURN left_value || ':' || right_value;
+    END IF;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
