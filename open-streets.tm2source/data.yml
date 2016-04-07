@@ -980,7 +980,7 @@ Layer:
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           coalesce(NULLIF(iata, ''), NULLIF(ref, ''), NULLIF(icao, ''), faa) AS ref,
           classify_airport_label(kind, type) AS maki,
-          scalerank_airport_label(classify_airport_label(kind, type), area) AS scalerank
+          scalerank_airport_label(classify_airport_label(kind, type), area, aerodrome) AS scalerank
           FROM airport_label_z9toz14
           WHERE geometry && !bbox!
           AND z(!scale_denominator!) BETWEEN 9 AND 14

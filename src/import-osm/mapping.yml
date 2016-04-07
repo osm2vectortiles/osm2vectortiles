@@ -115,6 +115,9 @@ tables:
     - name: faa
       key: faa
       type: string
+    - name: aerodrome
+      key: aerodrome
+      type: string
     - name: type
       key: type
       type: string
@@ -168,6 +171,9 @@ tables:
       type: string
     - name: faa
       key: faa
+      type: string
+    - name: aerodrome
+      key: aerodrome
       type: string
     - name: type
       key: type

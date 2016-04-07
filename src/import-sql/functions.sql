@@ -53,7 +53,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
-CREATE OR REPLACE FUNCTION scalerank_airport_label(maki VARCHAR, area REAL) RETURNS INTEGER
+CREATE OR REPLACE FUNCTION scalerank_airport_label(maki VARCHAR, area REAL, aerodrome VARCHAR) RETURNS INTEGER
 AS $$
 BEGIN
     RETURN CASE
@@ -61,7 +61,7 @@ BEGIN
         WHEN maki = 'airfield' AND area < 145000 THEN 4
         WHEN maki = 'airfield' AND area >= 145000 THEN 3
         WHEN maki = 'airport' AND area < 300000 THEN 2
-        WHEN maki = 'airport' AND area >= 300000 THEN 1
+        WHEN (maki = 'airport' AND area >= 300000) OR aerodrome = 'international' THEN 1
         ELSE 4
     END;
 END;
@@ -126,7 +126,7 @@ BEGIN
         WHEN kind = 'heliport' THEN 'heliport'
         WHEN kind = 'aerodrome' AND type IN ('public', 'Public') THEN 'airport'
         WHEN kind = 'aerodrome' AND type IN ('private', 'Private', 'military/public', 'Military/Public') THEN 'airfield'
-        ELSE ''
+        ELSE 'airfield'
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
