@@ -7,7 +7,7 @@ AS $$
 $$ LANGUAGE SQL IMMUTABLE STRICT;
 
 -- Returns a polygon representing the bounding box of a given XYZ tile
-CREATE OR REPLACE FUNCTION XYZ_Extent(x INTEGER, y INTEGER, z INTEGER)
+CREATE OR REPLACE FUNCTION XYZ_Extent(x INTEGER, y INTEGER, z INTEGER, buffer INTEGER)
 RETURNS GEOMETRY
 AS $$
 DECLARE
@@ -23,7 +23,7 @@ DECLARE
   tile_size INTEGER;
 BEGIN
   -- Size of each tile in pixels (1:1 aspect ratio)
-  tile_size := 256;
+  tile_size := 256 + (2 * buffer);
 
   initial_resolution := CDB_XYZ_Resolution(0);
 
