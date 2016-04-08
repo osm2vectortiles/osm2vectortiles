@@ -6,9 +6,9 @@ _prefs:
   saveCenter: true
 attribution: ''
 center: 
-  - 8.8225
-  - 47.2334
-  - 14
+  - 9.5469
+  - 47.1304
+  - 13
 description: Open Streets
 Layer: 
   - id: landuse
@@ -19,14 +19,14 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, classify_landuse(type) as class, type
+          SELECT osm_id_polygon(osm_id) as osm_id, geometry, classify_landuse(type) as class, type
             FROM (
               SELECT osm_id, geometry, type
               FROM landuse_z5
@@ -71,7 +71,6 @@ Layer:
     description: ''
     fields: 
       class: String
-      osm_id: Number
       type: String
     properties: 
       "buffer-size": 4
@@ -83,15 +82,15 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, type, type as class
+          SELECT osm_id_linestring(osm_id) as osm_id, geometry, type, type as class
           FROM (
             SELECT *
             FROM waterway_z8toz12
@@ -108,7 +107,6 @@ Layer:
     description: ''
     fields: 
       class: String
-      osm_id: Number
       type: String
     properties: 
       "buffer-size": 4
@@ -120,8 +118,8 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
@@ -159,8 +157,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
-      osm_id: Number
+    fields: {}
     properties: 
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -171,15 +168,15 @@ Layer:
       geometry_field: geometry
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, type
+          SELECT osm_id_geometry(osm_id, geometry) as osm_id, geometry, type
           FROM (
             SELECT *
             FROM aeroway_z9
@@ -195,7 +192,6 @@ Layer:
       user: osm
     description: ''
     fields: 
-      osm_id: Number
       type: String
     properties: 
       "buffer-size": 4
@@ -207,15 +203,15 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, classify_barrier_line(type) AS class
+          SELECT osm_id_geometry(osm_id, geometry) as osm_id, geometry, classify_barrier_line(type) AS class
           FROM barrier_line_z14
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) = 14
@@ -225,7 +221,6 @@ Layer:
     description: ''
     fields: 
       class: String
-      osm_id: Number
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -237,14 +232,14 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry
+          SELECT osm_id_polygon(osm_id) as osm_id, geometry
           FROM (
             SELECT osm_id, geometry
             FROM building_z13
@@ -260,8 +255,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
-      osm_id: Number
+    fields: {}
     properties: 
       "buffer-size": 2
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -273,14 +267,14 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, classify_landuse_overlay(type) AS class
+          SELECT osm_id_polygon(osm_id) AS osm_id, geometry, classify_landuse_overlay(type) AS class
           FROM (
             SELECT osm_id, geometry, type FROM landuse_overlay_z7
             WHERE z(!scale_denominator!) = 7
@@ -307,7 +301,6 @@ Layer:
     description: ''
     fields: 
       class: String
-      osm_id: Number
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -319,14 +312,14 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, classify_road(type) AS class, type, layer, oneway
+          SELECT osm_id_geometry(osm_id, geometry) as osm_id, geometry, classify_road(type) AS class, type, layer, oneway
           FROM tunnel_z12toz14
           WHERE z(!scale_denominator!) BETWEEN 12 AND 14
             AND geometry && !bbox!
@@ -339,7 +332,6 @@ Layer:
       class: String
       layer: Number
       oneway: Number
-      osm_id: Number
       type: String
     properties: 
       "buffer-size": 4
@@ -352,14 +344,14 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, type, classify_road_railway(type, service) AS class, oneway
+          SELECT osm_id_geometry(osm_id, geometry) as osm_id, geometry, type, classify_road_railway(type, service) AS class, oneway
           FROM (
             SELECT * FROM road_z5toz6
             WHERE z(!scale_denominator!) BETWEEN 5 AND 6
@@ -391,7 +383,6 @@ Layer:
     fields: 
       class: String
       oneway: Number
-      osm_id: Number
       type: String
     properties: 
       "buffer-size": 4
@@ -404,14 +395,14 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, classify_road(type) AS class, type, layer, oneway
+          SELECT osm_id_geometry(osm_id, geometry) as osm_id, geometry, classify_road(type) AS class, type, layer, oneway
           FROM bridge_z12toz14
           WHERE z(!scale_denominator!) BETWEEN 12 AND 14
             AND geometry && !bbox!
@@ -424,7 +415,6 @@ Layer:
       class: String
       layer: Number
       oneway: Number
-      osm_id: Number
       type: String
     properties: 
       "buffer-size": 4
@@ -436,8 +426,8 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
@@ -505,7 +495,6 @@ Layer:
       admin_level: Number
       disputed: Number
       maritime: Number
-      osm_id: Number
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -516,15 +505,15 @@ Layer:
       geometry_field: wkb_geometry
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, wkb_geometry,
+          SELECT osm_id_point(osm_id) AS osm_id, wkb_geometry,
           iso3166_1_alpha_2 as code,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
@@ -579,7 +568,6 @@ Layer:
       name_fr: String
       name_ru: String
       name_zh: String
-      osm_id: Number
       scalerank: Number
     properties: 
       "buffer-size": 256
@@ -591,15 +579,15 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, wkb_geometry,
+          SELECT osm_id_point(osm_id) as osm_id, wkb_geometry,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -644,7 +632,6 @@ Layer:
       name_fr: String
       name_ru: String
       name_zh: String
-      osm_id: String
       placement: String
     properties: 
       "buffer-size": 256
@@ -656,15 +643,15 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, wkb_geometry, abbr,
+          SELECT osm_id_point(osm_id) as osm_id, wkb_geometry, abbr,
           area_sqkm as area,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
@@ -696,7 +683,6 @@ Layer:
       name_fr: String
       name_ru: String
       name_zh: String
-      osm_id: Number
     properties: 
       "buffer-size": 256
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -707,15 +693,15 @@ Layer:
       geometry_field: geometry
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-        SELECT osm_id, geometry,  
+        SELECT osm_id_point(osm_id) as osm_id, geometry,
         name,
         coalesce(NULLIF(name_en, ''), name) AS name_en,
         coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -773,7 +759,6 @@ Layer:
       name_fr: String
       name_ru: String
       name_zh: String
-      osm_id: Number
       scalerank: String
       type: String
     properties: 
@@ -786,15 +771,15 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id,
+          SELECT osm_id_polygon(osm_id) AS osm_id, geometry,
           name,
           area,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
@@ -833,7 +818,6 @@ Layer:
       name_fr: String
       name_ru: String
       name_zh: String
-      osm_id: Number
     properties: 
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -844,15 +828,15 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id, ref, website,
+          SELECT osm_id_point(osm_id) AS osm_id, geometry, ref, website,
               poi_network(type) as network,
               poi_address(housenumber, street, place, city, country, postcode) as address,
               name,
@@ -886,7 +870,6 @@ Layer:
       name_ru: String
       name_zh: String
       network: String
-      osm_id: Number
       ref: String
       scalerank: Number
       type: String
@@ -901,15 +884,15 @@ Layer:
       geometry_field: geometry
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id, name,
+          SELECT osm_id_linestring(osm_id) AS osm_id, geometry, name,
             coalesce(NULLIF(name_en, ''), name) AS name_en,
             coalesce(NULLIF(name_es, ''), name) AS name_es,
             coalesce(NULLIF(name_fr, ''), name) AS name_fr,
@@ -953,7 +936,6 @@ Layer:
       name_fr: String
       name_ru: String
       name_zh: String
-      osm_id: Number
       ref: String
       reflen: Number
       shield: String
@@ -967,16 +949,15 @@ Layer:
       geometry_field: geometry
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id,
-          name,
+          SELECT osm_id_linestring(osm_id) AS osm_id, geometry, name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
@@ -1006,7 +987,6 @@ Layer:
       name_fr: String
       name_ru: String
       name_zh: String
-      osm_id: Number
       type: String
     properties: 
       "buffer-size": 8
@@ -1060,21 +1040,21 @@ Layer:
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: mountain_peak_label
-    Datasource:
+    Datasource: 
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry,
+          SELECT osm_id_point(osm_id) as osm_id, geometry,
           meter_to_feet(elevation_m) AS elevation_ft,
           elevation_m,
           type AS maki,
@@ -1092,8 +1072,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields:
-      osm_id: Number
+    fields: 
       elevation_ft: Number
       elevation_m: Number
       maki: String
@@ -1104,7 +1083,7 @@ Layer:
       name_fr: String
       name_ru: String
       name_zh: String
-    properties:
+    properties: 
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: housenum_label
@@ -1114,15 +1093,15 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, topoint(geometry) AS geometry, house_num
+          SELECT osm_id_polygon(osm_id) AS osm_id, topoint(geometry) AS geometry, house_num
           FROM housenum_label_z14
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) = 14
@@ -1132,7 +1111,6 @@ Layer:
     description: ''
     fields: 
       house_num: String
-      osm_id: Number
     properties: 
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over

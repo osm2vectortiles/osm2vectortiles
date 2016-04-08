@@ -210,3 +210,38 @@ BEGIN
 	);
 END;
 $$ LANGUAGE plpgsql;
+
+-- OSM ID transformations
+
+CREATE OR REPLACE FUNCTION osm_id_point(osm_id BIGINT) RETURNS BIGINT AS $$
+BEGIN
+    RETURN (osm_id * 10);
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION osm_id_linestring(osm_id BIGINT) RETURNS BIGINT AS $$
+BEGIN
+    RETURN CASE
+        WHEN osm_id >= 0 THEN (osm_id * 10) + 1
+        ELSE (osm_id * 10) + 3
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION osm_id_polygon(osm_id BIGINT) RETURNS BIGINT AS $$
+BEGIN
+    RETURN CASE
+        WHEN osm_id >= 0 THEN (osm_id * 10) + 2
+        ELSE (osm_id * 10) + 4
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION osm_id_geometry(osm_id BIGINT, geom geometry) RETURNS BIGINT AS $$
+BEGIN RETURN CASE
+        WHEN GeometryType(geom) = 'LINESTRING' THEN osm_id_linestring(osm_id)
+        WHEN GeometryType(geom) = 'POINT' THEN osm_id_linestring(osm_id)
+        WHEN GeometryType(geom) = 'POLYGON' THEN osm_id_polygon(osm_id)
+      END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
