@@ -531,8 +531,8 @@ tables:
       boundary:
       - aboriginal_lands
     type: polygon
-  road_linestring:
-    type: linestring
+  road_geometry:
+    type: geometry
     fields:
     - name: osm_id
       type: id
@@ -598,19 +598,66 @@ tables:
     - name: name_zh
       key: name:zh
       type: string
-    filters:
-      exclude_tags:
-      - ["area", "yes"]
-    mappings:
-      railway:
-        mapping:
+    type_mappings:
+      polygons:
           railway:
           - rail
           - tram
           - light_rail
           - subway
-      roads:
-        mapping:
+          highway:
+          - motorway
+          - motorway_link
+          - trunk
+          - trunk_link
+          - primary
+          - primary_link
+          - secondary
+          - secondary_link
+          - tertiary
+          - tertiary_link
+          - unclassified
+          - residential
+          - road
+          - living_street
+          - raceway
+          - pedestrian
+          - construction
+          - track
+          - service
+          - path
+          - cycleway
+          - steps
+          - bridleway
+          - footway
+          aerialway:
+          - cable_car
+          - gondola
+          - mixed_lift
+          - chair_lift
+          - drag_lift
+          - t-bar
+          - j-bar
+          - platter
+          - rope_tow
+          - zip_line
+          - magic_carpet
+          - canopy
+          golf:
+          - hole
+          public_transport:
+          - platform
+          route:
+          - ferry
+          - piste
+          - mtb
+          - hiking
+      linestrings:
+          railway:
+          - rail
+          - tram
+          - light_rail
+          - subway
           highway:
           - motorway
           - motorway_link
@@ -638,130 +685,6 @@ tables:
           - footway
           - corridor
           - crossing
-          aerialway:
-          - cable_car
-          - gondola
-          - mixed_lift
-          - chair_lift
-          - drag_lift
-          - t-bar
-          - j-bar
-          - platter
-          - rope_tow
-          - zip_line
-          - magic_carpet
-          - canopy
-          golf:
-          - hole
-          public_transport:
-          - platform
-          route:
-          - ferry
-          - piste
-          - mtb
-          - hiking
-  road_polygon:
-    type: polygon
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - name: timestamp
-      type: pbf_timestamp
-    - name: type
-      type: mapping_value
-    - key: oneway
-      name: oneway
-      type: direction
-    - key: ref
-      name: ref
-      type: string
-    - key: layer
-      name: layer
-      type: integer
-    - name: z_order
-      type: wayzorder
-    - key: tunnel
-      name: is_tunnel
-      type: bool
-    - key: bridge
-      name: is_bridge
-      type: bool
-    - key: ford
-      name: is_ford
-      type: bool
-    - key: construction
-      name: construction
-      type: string
-    - key: tracktype
-      name: tracktype
-      type: string
-    - key: service
-      name: service
-      type: string
-    - key: motor_vehicle
-      name: access
-      type: string
-    - key: name
-      name: name
-      type: string
-    - name: name_int
-      key: int_name
-      type: string
-    - name: name_fr
-      key: name:fr
-      type: string
-    - name: name_en
-      key: name:en
-      type: string
-    - name: name_de
-      key: name:de
-      type: string
-    - name: name_es
-      key: name:es
-      type: string
-    - name: name_ru
-      key: name:ru
-      type: string
-    - name: name_zh
-      key: name:zh
-      type: string
-    mappings:
-      railway:
-        mapping:
-          railway:
-          - rail
-          - tram
-          - light_rail
-          - subway
-      roads:
-        mapping:
-          highway:
-          - motorway
-          - motorway_link
-          - trunk
-          - trunk_link
-          - primary
-          - primary_link
-          - secondary
-          - secondary_link
-          - tertiary
-          - tertiary_link
-          - unclassified
-          - residential
-          - road
-          - living_street
-          - raceway
-          - pedestrian
-          - construction
-          - track
-          - service
-          - path
-          - cycleway
-          - steps
-          - bridleway
-          - footway
           aerialway:
           - cable_car
           - gondola
