@@ -75,8 +75,7 @@ BEGIN
     PERFORM recreate_osm_delete_tracking('osm_poi_point');
     PERFORM recreate_osm_delete_tracking('osm_poi_polygon');
     -- Roads
-    PERFORM recreate_osm_delete_tracking('osm_road_polygon');
-    PERFORM recreate_osm_delete_tracking('osm_road_linestring');
+    PERFORM recreate_osm_delete_tracking('osm_road_geometry');
     -- Admin
     PERFORM recreate_osm_delete_tracking('osm_admin_linestring');
     -- Water
@@ -129,8 +128,7 @@ BEGIN
     UPDATE osm_place_polygon SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_poi_point SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_poi_polygon SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_road_linestring SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_road_polygon SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_road_geometry SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_water_linestring SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_water_polygon SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_water_polygon_gen1 SET timestamp=ts WHERE timestamp IS NULL;
@@ -166,8 +164,7 @@ BEGIN
     DROP TABLE osm_place_polygon CASCADE;
     DROP TABLE osm_poi_point CASCADE;
     DROP TABLE osm_poi_polygon CASCADE;
-    DROP TABLE osm_road_linestring CASCADE;
-    DROP TABLE osm_road_polygon CASCADE;
+    DROP TABLE osm_road_geometry CASCADE;
     DROP TABLE osm_water_linestring CASCADE;
     DROP TABLE osm_water_polygon CASCADE;
     DROP TABLE osm_water_polygon_gen1 CASCADE;
@@ -187,8 +184,7 @@ BEGIN
     ALTER TABLE osm_place_polygon DISABLE TRIGGER USER;
     ALTER TABLE osm_poi_point DISABLE TRIGGER USER;
     ALTER TABLE osm_poi_polygon DISABLE TRIGGER USER;
-    ALTER TABLE osm_road_polygon DISABLE TRIGGER USER;
-    ALTER TABLE osm_road_linestring DISABLE TRIGGER USER;
+    ALTER TABLE osm_road_geometry DISABLE TRIGGER USER;
     ALTER TABLE osm_admin_linestring DISABLE TRIGGER USER;
     ALTER TABLE osm_water_linestring DISABLE TRIGGER USER;
     ALTER TABLE osm_water_polygon DISABLE TRIGGER USER;
@@ -214,8 +210,7 @@ BEGIN
     ALTER TABLE osm_place_polygon ENABLE TRIGGER USER;
     ALTER TABLE osm_poi_point ENABLE TRIGGER USER;
     ALTER TABLE osm_poi_polygon ENABLE TRIGGER USER;
-    ALTER TABLE osm_road_polygon ENABLE TRIGGER USER;
-    ALTER TABLE osm_road_linestring ENABLE TRIGGER USER;
+    ALTER TABLE osm_road_geometry ENABLE TRIGGER USER;
     ALTER TABLE osm_admin_linestring ENABLE TRIGGER USER;
     ALTER TABLE osm_water_linestring ENABLE TRIGGER USER;
     ALTER TABLE osm_water_polygon ENABLE TRIGGER USER;
