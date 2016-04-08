@@ -7,6 +7,24 @@ CREATE TABLE IF NOT EXISTS osm_delete (
     table_name text
 );
 
+CREATE OR REPLACE FUNCTION drop_osm_delete_indizes() returns VOID
+AS $$
+BEGIN
+    DROP INDEX IF EXISTS osm_delete_geom;
+    DROP INDEX IF EXISTS osm_delete_geom_geohash;
+END;
+$$ language plpgsql;
+
+CREATE OR REPLACE FUNCTION create_osm_delete_indizes() returns VOID
+AS $$
+BEGIN
+    CREATE INDEX osm_delete_geom ON osm_delete
+    USING gist (geometry);
+    CREATE INDEX osm_delete_geom_geohash ON osm_delete
+    USING btree (st_geohash(st_transform(st_setsrid(box2d(geometry)::geometry, 3857), 4326)));
+END;
+$$ language plpgsql;
+
 CREATE OR REPLACE FUNCTION cleanup_osm_tracking_tables() returns VOID
 AS $$
 DECLARE

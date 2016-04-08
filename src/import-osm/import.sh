@@ -66,6 +66,14 @@ function enable_delete_tracking() {
     exec_sql "SELECT enable_delete_tracking()"
 }
 
+function drop_osm_delete_indizes() {
+    exec_sql "SELECT drop_osm_delete_indizes()"
+}
+
+function create_osm_delete_indizes() {
+    exec_sql "SELECT create_osm_delete_indizes()"
+}
+
 function disable_delete_tracking() {
     exec_sql "SELECT disable_delete_tracking()"
 }
@@ -99,8 +107,14 @@ function import_pbf_diffs() {
     local diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
 
     echo "Import changes from $diffs_file"
+
+    echo "Drop indizes for faster inserts"
+    drop_osm_delete_indizes
+
+    echo "Enable change tracking for deletes and updates"
     create_tracking_triggers
     enable_delete_tracking
+
     imposm3 diff \
         -connection "$PG_CONNECT" \
         -mapping "$MAPPING_YAML" \
@@ -108,10 +122,16 @@ function import_pbf_diffs() {
         -diffdir "$IMPORT_DATA_DIR" \
         -dbschema-import "${DB_SCHEMA}" \
         "$diffs_file"
+
+    echo "Disable change tracking"
     disable_delete_tracking
 
     local timestamp=$(extract_timestamp "$diffs_file")
     echo "Set $timestamp for latest updates from $diffs_file"
     update_timestamp "$timestamp"
+
+    echo "Create indizes for faster dirty tile calculation"
+    create_osm_delete_indizes
+
     cleanup_osm_changes
 }
