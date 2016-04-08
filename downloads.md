@@ -8,7 +8,7 @@ published: true
 
 The rendered vector tiles provided as download are under
 the [Open Database License](https://tldrlegal.com/license/odc-open-database-license-(odbl)) the same license [OpenStreetMap is using](https://www.openstreetmap.org/copyright).
-The OSM data is from the [weekly planet file 2015-11-15](http://planet.osm.org/planet/2015/planet-151116.osm.bz2) rendered using [osm2vectortiles **v1.0**](https://github.com/osm2vectortiles/osm2vectortiles/releases/tag/v1.0). The  next rendering will take place in May 2016.
+The OSM data is from the planet file of [15th of November 2015](http://planet.osm.org/planet/2015/planet-151116.osm.bz2) rendered using [osm2vectortiles **v1.0**](https://github.com/osm2vectortiles/osm2vectortiles/releases/tag/v1.0). The  next rendering will take place in May 2016.
 
 ## Planet
 
