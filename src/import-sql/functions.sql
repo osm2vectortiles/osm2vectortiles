@@ -53,27 +53,68 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
-CREATE OR REPLACE FUNCTION scalerank_airport_label(maki VARCHAR, area REAL) RETURNS INTEGER
+CREATE OR REPLACE FUNCTION scalerank_airport_label(maki VARCHAR, area REAL, aerodrome VARCHAR) RETURNS INTEGER
 AS $$
 BEGIN
     RETURN CASE
-        WHEN maki = 'heliport' THEN 4
-        WHEN maki = 'airfield' AND area < 145000 THEN 4
-        WHEN maki = 'airfield' AND area >= 145000 THEN 3
+        WHEN (maki = 'airport' AND area >= 300000) OR aerodrome = 'international' THEN 1
         WHEN maki = 'airport' AND area < 300000 THEN 2
-        WHEN maki = 'airport' AND area >= 300000 THEN 1
+        WHEN maki = 'airfield' AND area >= 145000 THEN 3
+        WHEN maki = 'airfield' AND area < 145000 THEN 4
         ELSE 4
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
-CREATE OR REPLACE FUNCTION classify_road_railway(type VARCHAR, service VARCHAR) RETURNS VARCHAR
+CREATE OR REPLACE FUNCTION road_class(type VARCHAR, service VARCHAR, access VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN
     RETURN CASE
         WHEN type = 'rail' AND service IN ('yard', 'siding', 'spur', 'crossover') THEN 'minor_rail'
+        WHEN access IN ('no', 'private', 'permissive', 'agriculture', 'use_sidepath', 'delivery', 'designated', 'dismount', 'discouraged', 'forestry', 'destination', 'customers') THEN 'street_limited'
         ELSE classify_road(type)
     END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION road_type(class VARCHAR, type VARCHAR, construction VARCHAR, tracktype VARCHAR, service VARCHAR) RETURNS VARCHAR
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN class = 'construction' THEN road_type_value(class, construction)
+        WHEN class = 'track' THEN road_type_value(class, tracktype)
+        WHEN class = 'service' THEN road_type_value(class, service)
+        WHEN class = 'golf' THEN 'golf'
+        WHEN class IN ('major_rail', 'minor_rail') THEN 'rail'
+        WHEN class = 'mtb' THEN 'mountain_bike'
+        WHEN class = 'aerialway' AND type IN ('gondola', 'mixed_lift', 'chair_lift') THEN road_type_value(class, type)
+        WHEN class = 'aerialway' AND type = 'cable_car' THEN 'aerialway:cablecar'
+        WHEN class = 'aerialway' AND type IN ('drag_lift', 't-bar', 'j-bar', 'platter', 'rope_tow', 'zip_line') THEN 'aerialway:drag_lift'
+        WHEN class = 'aerialway' AND type IN ('magic_carpet', 'canopy') THEN 'aerialway:magic_carpet'
+        ELSE type
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION road_type_value(left_value VARCHAR, right_value VARCHAR) RETURNS VARCHAR
+AS $$
+BEGIN
+    IF right_value = '' OR right_value IS NULL THEN
+        RETURN left_value;
+    ELSE
+        RETURN left_value || ':' || right_value;
+    END IF;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION road_oneway(oneway INTEGER) RETURNS VARCHAR
+AS $$
+BEGIN
+    IF oneway = 1 THEN
+        RETURN 'true';
+    ELSE
+        RETURN 'false';
+    END IF;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
@@ -82,10 +123,25 @@ AS $$
 BEGIN
     RETURN CASE
         WHEN kind = 'heliport' THEN 'heliport'
-        WHEN kind = 'aerodrome' AND type = 'public' THEN 'airport'
-        WHEN kind = 'aerodrome' AND type IN ('private', 'military/public') THEN 'airfield'
-        ELSE ''
+        WHEN kind = 'aerodrome' AND type IN ('public', 'Public') THEN 'airport'
+        WHEN kind = 'aerodrome' AND type IN ('private', 'Private', 'military/public', 'Military/Public') THEN 'airfield'
+        ELSE 'airfield'
     END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION classify_structure(is_tunnel BOOLEAN, is_bridge BOOLEAN, is_ford BOOLEAN) RETURNS VARCHAR
+AS $$
+BEGIN
+    IF is_tunnel THEN
+        RETURN 'tunnel';
+    ELSIF is_bridge THEN
+        RETURN 'bridge';
+    ELSIF is_ford THEN
+        RETURN 'ford';
+    ELSE
+        RETURN 'none';
+    END IF;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
@@ -117,6 +173,28 @@ CREATE OR REPLACE FUNCTION meter_to_feet(meter INTEGER) RETURNS INTEGER
 AS $$
 BEGIN
     RETURN round(meter * 3.28084);
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION is_underground(level INTEGER) RETURNS VARCHAR
+AS $$
+BEGIN
+    IF level >= 1 THEN
+        RETURN 'true';
+    ELSE
+        RETURN 'false';
+    END IF;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION mountain_peak_type(type VARCHAR) RETURNS VARCHAR
+AS $$
+BEGIN
+    IF type = 'volcano' THEN
+        RETURN type;
+    ELSE
+        RETURN 'mountain';
+    END IF;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
@@ -176,8 +254,6 @@ BEGIN
 	    UNION
 	    SELECT * FROM changed_tiles_barrier_line(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_bridge(ts)
-	    UNION
 	    SELECT * FROM changed_tiles_building(ts)
 	    UNION
 	    SELECT * FROM changed_tiles_housenum_label(ts)
@@ -194,8 +270,6 @@ BEGIN
 	    UNION
 	    SELECT * FROM changed_tiles_road_label(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_tunnel(ts)
-	    UNION
 	    SELECT * FROM changed_tiles_water(ts)
 	    UNION
 	    SELECT * FROM changed_tiles_water_label(ts)
@@ -207,6 +281,8 @@ BEGIN
         SELECT * FROM changed_tiles_mountain_peak_label(ts)
         UNION
         SELECT * FROM changed_tiles_airport_label(ts)
+        UNION
+        SELECT * FROM changed_tiles_rail_station_label(ts)
 	);
 END;
 $$ LANGUAGE plpgsql;

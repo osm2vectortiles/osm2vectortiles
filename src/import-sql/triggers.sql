@@ -70,6 +70,7 @@ AS $$
 BEGIN
     -- Place
     PERFORM recreate_osm_delete_tracking('osm_place_point');
+    PERFORM recreate_osm_delete_tracking('osm_place_polygon');
     -- POI
     PERFORM recreate_osm_delete_tracking('osm_poi_point');
     PERFORM recreate_osm_delete_tracking('osm_poi_polygon');
@@ -95,6 +96,11 @@ BEGIN
     PERFORM recreate_osm_delete_tracking('osm_barrier_linestring');
     -- Mountain Peaks
     PERFORM recreate_osm_delete_tracking('osm_mountain_peak_point');
+    -- Rail Station Label
+    PERFORM recreate_osm_delete_tracking('osm_rail_station_point');
+    -- Airport Label
+    PERFORM recreate_osm_delete_tracking('osm_airport_point');
+    PERFORM recreate_osm_delete_tracking('osm_airport_polygon');
 END;
 $$ language plpgsql;
 
@@ -120,6 +126,7 @@ BEGIN
 	UPDATE osm_landuse_polygon_gen0 SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_landuse_polygon_gen1 SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_place_point SET timestamp=ts WHERE timestamp IS NULL;
+    UPDATE osm_place_polygon SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_poi_point SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_poi_polygon SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_road_linestring SET timestamp=ts WHERE timestamp IS NULL;
@@ -128,6 +135,9 @@ BEGIN
 	UPDATE osm_water_polygon SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_water_polygon_gen1 SET timestamp=ts WHERE timestamp IS NULL;
     UPDATE osm_mountain_peak_point SET timestamp=ts WHERE timestamp IS NULL;
+    UPDATE osm_rail_station_point SET timestamp=ts WHERE timestamp IS NULL;
+    UPDATE osm_airport_point SET timestamp=ts WHERE timestamp IS NULL;
+    UPDATE osm_airport_polygon SET timestamp=ts WHERE timestamp IS NULL;
 END;
 $$ language plpgsql;
 
@@ -153,6 +163,7 @@ BEGIN
     DROP TABLE osm_landuse_polygon_gen0 CASCADE;
     DROP TABLE osm_landuse_polygon_gen1 CASCADE;
     DROP TABLE osm_place_point CASCADE;
+    DROP TABLE osm_place_polygon CASCADE;
     DROP TABLE osm_poi_point CASCADE;
     DROP TABLE osm_poi_polygon CASCADE;
     DROP TABLE osm_road_linestring CASCADE;
@@ -161,6 +172,9 @@ BEGIN
     DROP TABLE osm_water_polygon CASCADE;
     DROP TABLE osm_water_polygon_gen1 CASCADE;
     DROP TABLE osm_mountain_peak_point CASCADE;
+    DROP TABLE osm_rail_station_point CASCADE;
+    DROP TABLE osm_airport_point CASCADE;
+    DROP TABLE osm_airport_polygon CASCADE;
 END;
 $$ language plpgsql;
 
@@ -170,6 +184,7 @@ CREATE OR REPLACE FUNCTION disable_delete_tracking() returns VOID
 AS $$
 BEGIN
     ALTER TABLE osm_place_point DISABLE TRIGGER USER;
+    ALTER TABLE osm_place_polygon DISABLE TRIGGER USER;
     ALTER TABLE osm_poi_point DISABLE TRIGGER USER;
     ALTER TABLE osm_poi_polygon DISABLE TRIGGER USER;
     ALTER TABLE osm_road_polygon DISABLE TRIGGER USER;
@@ -188,6 +203,7 @@ BEGIN
     ALTER TABLE osm_mountain_peak_point DISABLE TRIGGER USER;
     ALTER TABLE osm_airport_point DISABLE TRIGGER USER;
     ALTER TABLE osm_airport_polygon DISABLE TRIGGER USER;
+    ALTER TABLE osm_rail_station_point DISABLE TRIGGER USER;
 END;
 $$ language plpgsql;
 
@@ -195,6 +211,7 @@ CREATE OR REPLACE FUNCTION enable_delete_tracking() returns VOID
 AS $$
 BEGIN
     ALTER TABLE osm_place_point ENABLE TRIGGER USER;
+    ALTER TABLE osm_place_polygon ENABLE TRIGGER USER;
     ALTER TABLE osm_poi_point ENABLE TRIGGER USER;
     ALTER TABLE osm_poi_polygon ENABLE TRIGGER USER;
     ALTER TABLE osm_road_polygon ENABLE TRIGGER USER;
@@ -213,5 +230,6 @@ BEGIN
     ALTER TABLE osm_mountain_peak_point ENABLE TRIGGER USER;
     ALTER TABLE osm_airport_point ENABLE TRIGGER USER;
     ALTER TABLE osm_airport_polygon ENABLE TRIGGER USER;
+    ALTER TABLE osm_rail_station_point ENABLE TRIGGER USER;
 END;
 $$ language plpgsql;

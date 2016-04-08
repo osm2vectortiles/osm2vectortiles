@@ -1,0 +1,15 @@
+system:
+  name: rail_station
+  classes:
+    rail:
+    - station
+    rail-metro:
+    - stop
+    - subway
+    - tram_stop
+    rail-light:
+    - light_rail
+    - halt
+    entrance:
+    - subway_entrance
+    
