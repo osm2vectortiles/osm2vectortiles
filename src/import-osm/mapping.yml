@@ -551,8 +551,7 @@ tables:
     - key: layer
       name: layer
       type: integer
-    - key: layer
-      name: z_order
+    - name: z_order
       type: wayzorder
     - key: tunnel
       name: is_tunnel
@@ -681,8 +680,7 @@ tables:
     - key: layer
       name: layer
       type: integer
-    - key: layer
-      name: z_order
+    - name: z_order
       type: wayzorder
     - key: tunnel
       name: is_tunnel
