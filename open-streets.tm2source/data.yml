@@ -1067,7 +1067,7 @@ Layer:
           SELECT osm_id, geometry,
           meter_to_feet(elevation_m) AS elevation_ft,
           elevation_m,
-          type AS maki,
+          mountain_peak_type(type) AS maki,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,

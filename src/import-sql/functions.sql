@@ -187,6 +187,17 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+CREATE OR REPLACE FUNCTION mountain_peak_type(type INTEGER) RETURNS VARCHAR
+AS $$
+BEGIN
+    IF type = 'volcano' THEN
+        RETURN type;
+    ELSE
+        RETURN 'mountain';
+    END IF;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
 CREATE OR REPLACE FUNCTION overlapping_tiles(
     geom geometry,
     max_zoom_level INTEGER
