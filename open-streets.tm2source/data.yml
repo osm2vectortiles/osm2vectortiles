@@ -867,6 +867,7 @@ Layer:
               SELECT * FROM road_label_z14
               WHERE z(!scale_denominator!) = 14
             ) AS road_label
+            WHERE geometry && !bbox!
         ) AS data
       type: postgis
       user: osm
