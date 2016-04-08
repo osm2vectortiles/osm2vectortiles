@@ -1,0 +1,21 @@
+{
+  "name": "compare",
+  "version": "1.0.0",
+  "description": "Tool to output interesting information about a vector tile. It takes an mbtiles file and z/x/y coordinates as input.",
+  "main": "tileInfo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Manuel Roth",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "mbtiles": "^0.8.2",
+    "pbf": "^1.3.5",
+    "tilejson": "^1.0.1",
+    "tilelive": "^5.12.2",
+    "tilelive-mapbox": "^0.4.0",
+    "tl": "^0.8.1",
+    "vector-tile": "^1.2.0"
+  }
+}
