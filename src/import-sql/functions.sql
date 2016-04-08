@@ -131,10 +131,10 @@ CREATE OR REPLACE FUNCTION overlapping_tiles(
 BEGIN
     RETURN QUERY
         WITH RECURSIVE tiles(x, y, z, e) AS (
-            SELECT 0, 0, 0, geom && CDB_XYZ_Extent(0, 0, 0)
+            SELECT 0, 0, 0, geom && XYZ_Extent(0, 0, 0)
             UNION ALL
             SELECT x*2 + xx, y*2 + yy, z+1,
-                   geom && CDB_XYZ_Extent(x*2 + xx, y*2 + yy, z+1)
+                   geom && XYZ_Extent(x*2 + xx, y*2 + yy, z+1)
             FROM tiles,
             (VALUES (0, 0), (0, 1), (1, 1), (1, 0)) as c(xx, yy)
             WHERE e AND z < max_zoom_level
