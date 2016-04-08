@@ -4,7 +4,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640027",
+        "osm_id": 305640027,
         "name": "North Pacific Ocean",
         "name_en": "North Pacific Ocean",
         "name_de": null,
@@ -46,7 +46,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640308",
+        "osm_id": 305640308,
         "name": "Lincoln Sea",
         "name_en": "Lincoln Sea",
         "name_de": "Lincolnsee",
@@ -67,7 +67,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640040",
+        "osm_id": 305640040,
         "name": "Arabian Sea",
         "name_en": "Arabian Sea",
         "name_de": "Arabisches Meer",
@@ -88,7 +88,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639392",
+        "osm_id": 305639392,
         "name": "Scotia Sea",
         "name_en": "Scotia Sea",
         "name_de": "Schottische See",
@@ -109,7 +109,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639493",
+        "osm_id": 305639493,
         "name": "North Sea",
         "name_en": "North Sea",
         "name_de": "Nordsee",
@@ -130,7 +130,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640288",
+        "osm_id": 305640288,
         "name": "South Atlantic Ocean",
         "name_en": null,
         "name_de": null,
@@ -151,7 +151,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640292",
+        "osm_id": 305640292,
         "name": "South Pacific Ocean",
         "name_en": "South Pacific Ocean",
         "name_de": null,
@@ -172,7 +172,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640064",
+        "osm_id": 305640064,
         "name": "Bering Sea",
         "name_en": "Bering Sea",
         "name_de": "Beringmeer",
@@ -193,7 +193,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640074",
+        "osm_id": 305640074,
         "name": "Indian Ocean",
         "name_en": "Indian Ocean",
         "name_de": "Indischer Ozean",
@@ -214,7 +214,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639396",
+        "osm_id": 305639396,
         "name": "Greenland Sea",
         "name_en": "Greenland Sea",
         "name_de": "Grönlandsee",
@@ -235,7 +235,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639751",
+        "osm_id": 305639751,
         "name": "Bellingshausen Sea",
         "name_en": "Bellingshausen Sea",
         "name_de": "Bellingshausen-See",
@@ -256,7 +256,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639346",
+        "osm_id": 305639346,
         "name": "Ross Sea",
         "name_en": "Ross Sea",
         "name_de": "Rossmeer",
@@ -277,7 +277,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639181",
+        "osm_id": 305639181,
         "name": "Andaman Sea",
         "name_en": "Andaman Sea",
         "name_de": "Andamanensee",
@@ -298,7 +298,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639206",
+        "osm_id": 305639206,
         "name": "Bay of Bengal",
         "name_en": "Bay of Bengal",
         "name_de": "Golf von Bengalen",
@@ -319,7 +319,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639693",
+        "osm_id": 305639693,
         "name": "Arafura Sea",
         "name_en": "Arafura Sea",
         "name_de": "Arafurasee",
@@ -340,7 +340,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639726",
+        "osm_id": 305639726,
         "name": "North Atlantic Ocean",
         "name_en": "North Atlantic Ocean",
         "name_de": null,
@@ -361,7 +361,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639366",
+        "osm_id": 305639366,
         "name": "Irish Sea",
         "name_en": "Irish Sea",
         "name_de": "Irische See",
@@ -406,7 +406,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639170",
+        "osm_id": 305639170,
         "name": "Philippine Sea",
         "name_en": "Philippine Sea",
         "name_de": "Philippinensee",
@@ -427,7 +427,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639165",
+        "osm_id": 305639165,
         "name": "Sargasso Sea",
         "name_en": "Sargasso Sea",
         "name_de": "Sargassosee",
@@ -448,7 +448,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639182",
+        "osm_id": 305639182,
         "name": "Yellow Sea",
         "name_en": "Yellow Sea",
         "name_de": "Gelbes Meer",
@@ -469,7 +469,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639187",
+        "osm_id": 305639187,
         "name": "Sea of Okhotsk",
         "name_en": "Sea of Okhotsk",
         "name_de": "Ochotskisches Meer",
@@ -490,7 +490,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639403",
+        "osm_id": 305639403,
         "name": "Alboran Sea",
         "name_en": "Alboran Sea",
         "name_de": "Alborán-Meer",
@@ -511,7 +511,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640303",
+        "osm_id": 305640303,
         "name": null,
         "name_en": "Flores Sea",
         "name_de": "Floressee",
@@ -532,7 +532,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640118",
+        "osm_id": 305640118,
         "name": null,
         "name_en": "Halmahera Sea",
         "name_de": "Halmaherasee",
@@ -553,7 +553,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640052",
+        "osm_id": 305640052,
         "name": null,
         "name_en": "Tasman Sea",
         "name_de": "Tasmansee",
@@ -574,7 +574,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639424",
+        "osm_id": 305639424,
         "name": null,
         "name_en": "Ceram Sea",
         "name_de": "Seramsee",
@@ -595,7 +595,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640098",
+        "osm_id": 305640098,
         "name": "瀬戸内海",
         "name_en": "Seto Inland Sea",
         "name_de": "Seto-Inlandsee",
@@ -616,7 +616,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640097",
+        "osm_id": 305640097,
         "name": "Баренцево море",
         "name_en": "Barents Sea",
         "name_de": "Barentssee",
@@ -637,7 +637,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640107",
+        "osm_id": 305640107,
         "name": "Чукотское море",
         "name_en": "Chukchi Sea",
         "name_de": "Tschuktschensee",
@@ -658,7 +658,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640082",
+        "osm_id": 305640082,
         "name": "Bali Sea",
         "name_en": "Bali Sea",
         "name_de": "Balisee",
@@ -679,7 +679,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "3570303559",
+        "osm_id": 3570303559,
         "name": "Saaristomeri",
         "name_en": "Archipelago Sea",
         "name_de": "Schärenmeer",
@@ -700,7 +700,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640284",
+        "osm_id": 305640284,
         "name": "Marmara Denizi",
         "name_en": "Sea of Marmara",
         "name_de": "Marmarameer",
@@ -721,7 +721,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "1245344600",
+        "osm_id": 1245344600,
         "name": "Golfo di Genova",
         "name_en": null,
         "name_de": null,
@@ -742,7 +742,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "313463793",
+        "osm_id": 313463793,
         "name": "Golfo de Paria",
         "name_en": "Gulf of Paria",
         "name_de": null,
@@ -763,7 +763,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "936282562",
+        "osm_id": 936282562,
         "name": "Lake Michigan",
         "name_en": "Lake Michigan",
         "name_de": "Michigansee",
@@ -784,7 +784,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "3657107035",
+        "osm_id": 3657107035,
         "name": "Libyan Sea",
         "name_en": "Libyan Sea",
         "name_de": "Libysches Meer",
@@ -805,7 +805,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "936282549",
+        "osm_id": 936282549,
         "name": "Lake Huron",
         "name_en": "Lake Huron",
         "name_de": "Huronsee",
@@ -826,7 +826,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640289",
+        "osm_id": 305640289,
         "name": "Ålands hav",
         "name_en": "Sea of Åland",
         "name_de": "Åländer See",
@@ -847,7 +847,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639335",
+        "osm_id": 305639335,
         "name": "Азовское море",
         "name_en": "Sea of Azov",
         "name_de": "Asowsches Meer",
@@ -868,7 +868,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "3650594065",
+        "osm_id": 3650594065,
         "name": "安芸灘",
         "name_en": "Aki-nada",
         "name_de": null,
@@ -889,7 +889,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "3650265669",
+        "osm_id": 3650265669,
         "name": "Аральское море",
         "name_en": "Aral Sea",
         "name_de": null,
@@ -910,7 +910,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "2831053013",
+        "osm_id": 2831053013,
         "name": "Печорское море",
         "name_en": "Pechora Sea",
         "name_de": "Petschorasee",
@@ -931,7 +931,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639355",
+        "osm_id": 305639355,
         "name": "Davis Sea",
         "name_en": "Davis Sea",
         "name_de": "Davissee",
@@ -952,7 +952,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639157",
+        "osm_id": 305639157,
         "name": "Southern Ocean",
         "name_en": "Southern Ocean",
         "name_de": "Südlicher Ozean",
@@ -973,7 +973,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "3650204850",
+        "osm_id": 3650204850,
         "name": "Каспийское Море",
         "name_en": "Caspian Sea",
         "name_de": null,
@@ -994,7 +994,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640298",
+        "osm_id": 305640298,
         "name": "Amundsen Sea",
         "name_en": "Amundsen Sea",
         "name_de": "Amundsen-See",
@@ -1015,7 +1015,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "2483364661",
+        "osm_id": 2483364661,
         "name": "Sea of Japan & East Sea",
         "name_en": "Sea of Japan & East Sea",
         "name_de": "Japanisches Meer",
@@ -1036,7 +1036,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "316793545",
+        "osm_id": 316793545,
         "name": "Gulf of Tadjoura",
         "name_en": "Gulf of Tadjoura",
         "name_de": "Golf von Tadjoura",
@@ -1057,7 +1057,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639192",
+        "osm_id": 305639192,
         "name": "Savu Sea",
         "name_en": "Savu Sea",
         "name_de": "Sawusee",
@@ -1078,7 +1078,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640000",
+        "osm_id": 305640000,
         "name": "Ligurian Sea",
         "name_en": "Ligurian Sea",
         "name_de": "Ligurisches Meer",
@@ -1099,7 +1099,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639697",
+        "osm_id": 305639697,
         "name": "Celtic Sea",
         "name_en": "Celtic Sea",
         "name_de": "Keltische See",
@@ -1120,7 +1120,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "1646703917",
+        "osm_id": 1646703917,
         "name": "Waddenzee",
         "name_en": "Wadden Sea",
         "name_de": "Wattenmeer",
@@ -1141,7 +1141,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640128",
+        "osm_id": 305640128,
         "name": "Laut Banda",
         "name_en": "Banda Sea",
         "name_de": "Bandasee",
@@ -1162,7 +1162,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "2515637409",
+        "osm_id": 2515637409,
         "name": "Ικάριο πέλαγος",
         "name_en": "Icarian Sea",
         "name_de": "Ikarisches Meer",
@@ -1214,7 +1214,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639710",
+        "osm_id": 305639710,
         "name": "Arctic Ocean",
         "name_en": "Arctic Ocean",
         "name_de": "Arktischer Ozean",
@@ -1245,7 +1245,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639714",
+        "osm_id": 305639714,
         "name": "Weddell Sea",
         "name_en": "Weddell Sea",
         "name_de": "Weddell-Meer",
@@ -1276,7 +1276,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640096",
+        "osm_id": 305640096,
         "name": "Bismarck Sea",
         "name_en": "Bismarck Sea",
         "name_de": "Bismarcksee",
@@ -1315,7 +1315,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "316793178",
+        "osm_id": 316793178,
         "name": "Gulf of Aden",
         "name_en": "Gulf of Aden",
         "name_de": "Golf von Aden",
@@ -1354,7 +1354,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639729",
+        "osm_id": 305639729,
         "name": "Laccadive Sea",
         "name_en": "Laccadive Sea",
         "name_de": "Lakkadivensee",
@@ -1385,7 +1385,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640030",
+        "osm_id": 305640030,
         "name": "Norwegian Sea",
         "name_en": "Norwegian Sea",
         "name_de": "Europäisches Nordmeer",
@@ -1420,7 +1420,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639417",
+        "osm_id": 305639417,
         "name": "Labrador Sea",
         "name_en": "Labrador Sea",
         "name_de": "Labradorsee",
@@ -1455,7 +1455,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640085",
+        "osm_id": 305640085,
         "name": "Molucca Sea",
         "name_en": "Molucca Sea",
         "name_de": "Molukkensee",
@@ -1494,7 +1494,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640105",
+        "osm_id": 305640105,
         "name": "Solomon Sea",
         "name_en": "Solomon Sea",
         "name_de": "Salomonensee",
@@ -1529,7 +1529,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639712",
+        "osm_id": 305639712,
         "name": "Beaufort Sea",
         "name_en": "Beaufort Sea",
         "name_de": "Beaufortsee",
@@ -1576,7 +1576,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640071",
+        "osm_id": 305640071,
         "name": "Celebes Sea",
         "name_en": "Celebes Sea",
         "name_de": "Celebessee",
@@ -1615,7 +1615,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639414",
+        "osm_id": 305639414,
         "name": "East China Sea",
         "name_en": "East China Sea",
         "name_de": "Ostchinesisches Meer",
@@ -1650,7 +1650,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639363",
+        "osm_id": 305639363,
         "name": "Java Sea",
         "name_en": "Java Sea",
         "name_de": "Javasee",
@@ -1681,7 +1681,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639193",
+        "osm_id": 305639193,
         "name": "Persian Gulf",
         "name_en": "Persian Gulf",
         "name_de": "Persischer Golf",
@@ -1716,7 +1716,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640275",
+        "osm_id": 305640275,
         "name": "Mediterranean Sea",
         "name_en": "Mediterranean Sea",
         "name_de": "Mittelmeer",
@@ -1759,7 +1759,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640273",
+        "osm_id": 305640273,
         "name": "Tyrrhenian Sea",
         "name_en": "Tyrrhenian Sea",
         "name_de": "Tyrrhenisches Meer",
@@ -1794,7 +1794,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639344",
+        "osm_id": 305639344,
         "name": "Red Sea",
         "name_en": "Red Sea",
         "name_de": "Rotes Meer",
@@ -1821,7 +1821,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639702",
+        "osm_id": 305639702,
         "name": "English Channel",
         "name_en": "English Channel",
         "name_de": "Ärmelkanal",
@@ -1856,7 +1856,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639183",
+        "osm_id": 305639183,
         "name": "Sulu Sea",
         "name_en": "Sulu Sea",
         "name_de": "Sulusee",
@@ -1891,7 +1891,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640123",
+        "osm_id": 305640123,
         "name": "Caribbean Sea",
         "name_en": "Caribbean Sea",
         "name_de": "Karibisches Meer",
@@ -1934,7 +1934,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640277",
+        "osm_id": 305640277,
         "name": "Baltic Sea",
         "name_en": "Baltic Sea",
         "name_de": "Ostsee",
@@ -1973,7 +1973,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639734",
+        "osm_id": 305639734,
         "name": "Gulf of California",
         "name_en": "Gulf of California",
         "name_de": "Golf von Kalifornien",
@@ -2008,7 +2008,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639382",
+        "osm_id": 305639382,
         "name": "Mar Balear",
         "name_en": "Balearic Sea",
         "name_de": "Balearen-Meer",
@@ -2043,7 +2043,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640059",
+        "osm_id": 305640059,
         "name": "Αιγαίο Πέλαγος",
         "name_en": "Aegean Sea",
         "name_de": "Ägäisches Meer",
@@ -2078,7 +2078,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639216",
+        "osm_id": 305639216,
         "name": "Белое море",
         "name_en": "White Sea",
         "name_de": "Weißes Meer",
@@ -2113,7 +2113,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "303209363",
+        "osm_id": 303209363,
         "name": "South Sea",
         "name_en": "South Sea",
         "name_de": "Südchinesisches Meer",
@@ -2148,7 +2148,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639191",
+        "osm_id": 305639191,
         "name": "Карское море",
         "name_en": "Kara Sea",
         "name_de": "Karasee",
@@ -2183,7 +2183,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639695",
+        "osm_id": 305639695,
         "name": "Восточно-Сибирское море",
         "name_en": "East Siberian Sea",
         "name_de": "Ostsibirische See",
@@ -2218,7 +2218,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305639198",
+        "osm_id": 305639198,
         "name": "Κρητικό πέλαγος",
         "name_en": "Sea of Crete",
         "name_de": "Kretisches Meer",
@@ -2261,7 +2261,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Bahia de Campeche",
         "name_en": null,
         "name_de": null,
@@ -2300,7 +2300,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Adriatic Sea",
         "name_en": null,
         "name_de": null,
@@ -2339,7 +2339,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Black Sea",
         "name_en": null,
         "name_de": null,
@@ -2378,7 +2378,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Skagerrak",
         "name_en": null,
         "name_de": null,
@@ -2417,7 +2417,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Kattegat",
         "name_en": null,
         "name_de": null,
@@ -2456,7 +2456,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Gulf of Bothnia",
         "name_en": null,
         "name_de": null,
@@ -2495,7 +2495,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Gulf of Finland",
         "name_en": null,
         "name_de": null,
@@ -2534,7 +2534,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "-644762446",
+        "osm_id": -644762446,
         "name": "",
         "name_en": null,
         "name_de": null,
@@ -2569,7 +2569,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Gulf of Oman",
         "name_en": null,
         "name_de": null,
@@ -2608,7 +2608,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Gulf of Tonkin",
         "name_en": null,
         "name_de": null,
@@ -2647,7 +2647,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Hudson Strait",
         "name_en": null,
         "name_de": null,
@@ -2686,7 +2686,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Cumberland Sd.",
         "name_en": null,
         "name_de": null,
@@ -2725,7 +2725,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Foxe Basin",
         "name_en": null,
         "name_de": null,
@@ -2764,7 +2764,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Davis Strait",
         "name_en": null,
         "name_de": null,
@@ -2803,7 +2803,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Baffin Bay",
         "name_en": null,
         "name_de": null,
@@ -2842,7 +2842,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Melville Bay",
         "name_en": null,
         "name_de": null,
@@ -2881,7 +2881,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Taiwan Strait",
         "name_en": null,
         "name_de": null,
@@ -2920,7 +2920,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Selat Makassar",
         "name_en": null,
         "name_de": null,
@@ -2959,7 +2959,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Laut Seram",
         "name_en": null,
         "name_de": null,
@@ -2998,7 +2998,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Laptev Sea",
         "name_en": null,
         "name_de": null,
@@ -3037,7 +3037,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "",
         "name_en": null,
         "name_de": null,
@@ -3076,7 +3076,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Gulf of Maine",
         "name_en": null,
         "name_de": null,
@@ -3115,7 +3115,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "0",
+        "osm_id": 0,
         "name": "Gulf of St. Lawrence",
         "name_en": null,
         "name_de": null,
@@ -3154,7 +3154,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "305640305",
+        "osm_id": 305640305,
         "name": "Море Лаптевых",
         "name_en": "Laptev Sea",
         "name_de": "Laptewsee",
