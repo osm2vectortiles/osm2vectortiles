@@ -53,12 +53,38 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+CREATE OR REPLACE FUNCTION scalerank_airport_label(maki VARCHAR, area REAL) RETURNS INTEGER
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN maki = 'heliport' THEN 4
+        WHEN maki = 'airfield' AND area < 145000 THEN 4
+        WHEN maki = 'airfield' AND area >= 145000 THEN 3
+        WHEN maki = 'airport' AND area < 300000 THEN 2
+        WHEN maki = 'airport' AND area >= 300000 THEN 1
+        ELSE 4
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
 CREATE OR REPLACE FUNCTION classify_road_railway(type VARCHAR, service VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN
     RETURN CASE
         WHEN type = 'rail' AND service IN ('yard', 'siding', 'spur', 'crossover') THEN 'minor_rail'
         ELSE classify_road(type)
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION classify_airport_label(kind VARCHAR, type VARCHAR) RETURNS VARCHAR
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN kind = 'heliport' THEN 'heliport'
+        WHEN kind = 'aerodrome' AND type = 'public' THEN 'airport'
+        WHEN kind = 'aerodrome' AND type IN ('private', 'military/public') THEN 'airfield'
+        ELSE ''
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
@@ -179,6 +205,8 @@ BEGIN
 	    SELECT * FROM changed_tiles_waterway_label(ts)
         UNION
         SELECT * FROM changed_tiles_mountain_peak_label(ts)
+        UNION
+        SELECT * FROM changed_tiles_airport_label(ts)
 	);
 END;
 $$ LANGUAGE plpgsql;

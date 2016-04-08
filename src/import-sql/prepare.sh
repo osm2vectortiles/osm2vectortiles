@@ -46,6 +46,7 @@ function main() {
     exec_sql_file "${SQL_VIEWS_DIR}waterway.sql"
     exec_sql_file "${SQL_VIEWS_DIR}waterway_label.sql"
     exec_sql_file "${SQL_VIEWS_DIR}mountain_peak_label.sql"
+    exec_sql_file "${SQL_VIEWS_DIR}airport_label.sql"
 }
 
 main

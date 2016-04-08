@@ -58,7 +58,6 @@ function store_timestamp_history {
 function update_timestamp() {
     local timestamp="$1"
     store_timestamp_history "$timestamp"
-
     exec_sql "SELECT update_timestamp('$timestamp')"
 }
 
@@ -100,6 +99,17 @@ function exec_sql() {
         --dbname="$OSM_DB" \
         --username="$OSM_USER" \
         -c "$sql_cmd"
+}
+
+function exec_sql_file() {
+    local sql_file=$1
+    PG_PASSWORD=$OSM_PASSWORD psql \
+        --host="$DB_HOST" \
+        --port=5432 \
+        --dbname="$OSM_DB" \
+        --username="$OSM_USER" \
+        -v ON_ERROR_STOP=1 \
+        -a -f "$sql_file"
 }
 
 function import_pbf_diffs() {

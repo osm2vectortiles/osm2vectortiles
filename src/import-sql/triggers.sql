@@ -186,6 +186,8 @@ BEGIN
     ALTER TABLE osm_barrier_polygon DISABLE TRIGGER USER;
     ALTER TABLE osm_barrier_linestring DISABLE TRIGGER USER;
     ALTER TABLE osm_mountain_peak_point DISABLE TRIGGER USER;
+    ALTER TABLE osm_airport_point DISABLE TRIGGER USER;
+    ALTER TABLE osm_airport_polygon DISABLE TRIGGER USER;
 END;
 $$ language plpgsql;
 
@@ -209,5 +211,7 @@ BEGIN
     ALTER TABLE osm_barrier_polygon ENABLE TRIGGER USER;
     ALTER TABLE osm_barrier_linestring ENABLE TRIGGER USER;
     ALTER TABLE osm_mountain_peak_point ENABLE TRIGGER USER;
+    ALTER TABLE osm_airport_point ENABLE TRIGGER USER;
+    ALTER TABLE osm_airport_polygon ENABLE TRIGGER USER;
 END;
 $$ language plpgsql;
