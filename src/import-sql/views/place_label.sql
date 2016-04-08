@@ -4,7 +4,7 @@ CREATE OR REPLACE VIEW place_label_z4toz5 AS
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_point
         UNION ALL
-        SELECT osm_id, topoint(geometry) AS geometry, timestamp, name, name_int, name_fr, name_en, name_de,
+        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_polygon
     ) AS place_geoms
@@ -18,7 +18,7 @@ CREATE OR REPLACE VIEW place_label_z6 AS
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_point
         UNION ALL
-        SELECT osm_id, topoint(geometry) AS geometry, timestamp, name, name_int, name_fr, name_en, name_de,
+        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_polygon
     ) AS place_geoms
@@ -32,7 +32,7 @@ CREATE OR REPLACE VIEW place_label_z7 AS
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_point
         UNION ALL
-        SELECT osm_id, topoint(geometry) AS geometry, timestamp, name, name_int, name_fr, name_en, name_de,
+        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_polygon
     ) AS place_geoms
@@ -45,7 +45,7 @@ CREATE OR REPLACE VIEW place_label_z8 AS
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_point
         UNION ALL
-        SELECT osm_id, topoint(geometry) AS geometry, timestamp, name, name_int, name_fr, name_en, name_de,
+        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_polygon
     ) AS place_geoms
@@ -58,7 +58,7 @@ CREATE OR REPLACE VIEW place_label_z9toz10 AS
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_point
         UNION ALL
-        SELECT osm_id, topoint(geometry) AS geometry, timestamp, name, name_int, name_fr, name_en, name_de,
+        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_polygon
     ) AS place_geoms
@@ -71,7 +71,7 @@ CREATE OR REPLACE VIEW place_label_z11toz12 AS
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_point
         UNION ALL
-        SELECT osm_id, topoint(geometry) AS geometry, timestamp, name, name_int, name_fr, name_en, name_de,
+        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_polygon
     ) AS place_geoms
@@ -84,7 +84,7 @@ CREATE OR REPLACE VIEW place_label_z13 AS
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_point
         UNION ALL
-        SELECT osm_id, topoint(geometry) AS geometry, timestamp, name, name_int, name_fr, name_en, name_de,
+        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_polygon
     ) AS place_geoms
@@ -97,7 +97,7 @@ CREATE OR REPLACE VIEW place_label_z14 AS
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_point
         UNION ALL
-        SELECT osm_id, topoint(geometry) AS geometry, timestamp, name, name_int, name_fr, name_en, name_de,
+        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
         name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
         FROM osm_place_polygon
     ) AS place_geoms

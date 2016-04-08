@@ -647,7 +647,7 @@ Layer:
       srid: ''
       table: |-
         (
-        SELECT osm_id_point(osm_id) as osm_id, geometry,
+        SELECT osm_id_geometry(osm_id, geometry) as osm_id, topoint(geometry) AS geometry,
         name,
         coalesce(NULLIF(name_en, ''), name) AS name_en,
         coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -725,7 +725,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_polygon(osm_id) AS osm_id, geometry,
+          SELECT osm_id_polygon(osm_id) AS osm_id, topoint(geometry) AS geometry,
           name,
           area,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
@@ -782,7 +782,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_point(osm_id) AS osm_id, geometry, ref, website,
+          SELECT osm_id_geometry(osm_id, geometry) AS osm_id, topoint(geometry) AS geometry, ref, website,
               poi_network(type) as network,
               poi_address(housenumber, street, place, city, country, postcode) as address,
               name,
@@ -952,7 +952,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id_geometry(osm_id, geometry) as osm_id,
+          SELECT topoint(geometry) AS geometry, osm_id_geometry(osm_id, geometry) as osm_id,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -1091,7 +1091,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_polygon(osm_id) AS osm_id, topoint(geometry) AS geometry, house_num
+          SELECT osm_id_geometry(osm_id, geometry) AS osm_id, topoint(geometry) AS geometry, house_num
           FROM housenum_label_z14
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) = 14
