@@ -928,27 +928,6 @@ tables:
     - name: name_zh
       key: name:zh
       type: string
-    - name: website
-      key: website
-      type: string
-    - name: housenumber
-      key: addr:housenumber
-      type: string
-    - name: street
-      key: addr:street
-      type: string
-    - name: place
-      key: addr:place
-      type: string
-    - name: city
-      key: addr:city
-      type: string
-    - name: postcode
-      key: addr:postcode
-      type: string
-    - name: country
-      key: addr:country
-      type: string
     - key: ref
       name: ref
       type: string
@@ -1253,27 +1232,6 @@ tables:
       type: string
     - name: name_zh
       key: name:zh
-      type: string
-    - name: website
-      key: website
-      type: string
-    - name: housenumber
-      key: addr:housenumber
-      type: string
-    - name: street
-      key: addr:street
-      type: string
-    - name: place
-      key: addr:place
-      type: string
-    - name: city
-      key: addr:city
-      type: string
-    - name: postcode
-      key: addr:postcode
-      type: string
-    - name: country
-      key: addr:country
       type: string
     - key: ref
       name: ref

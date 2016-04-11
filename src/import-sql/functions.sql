@@ -145,23 +145,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
-CREATE OR REPLACE FUNCTION poi_address(housenumber VARCHAR, street VARCHAR, place VARCHAR, city VARCHAR, country VARCHAR, postcode VARCHAR) RETURNS VARCHAR
-AS $$
-BEGIN
-    RETURN concat_ws(' ', housenumber, street, place, city, country, postcode);
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION poi_network(type VARCHAR) RETURNS VARCHAR
-AS $$
-BEGIN
-    RETURN CASE
-        WHEN type IN ('station') THEN 'rail'
-        ELSE ''
-    END;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
 CREATE OR REPLACE FUNCTION format_type(class VARCHAR) RETURNS VARCHAR
 AS $$
 BEGIN

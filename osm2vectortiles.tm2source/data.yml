@@ -788,10 +788,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_geometry(osm_id, geometry) AS osm_id, topoint(geometry) AS geometry, ref, website,
-              poi_network(type) as network,
-              poi_address(housenumber, street, place, city, country, postcode) as address,
-              name,
+          SELECT osm_id_geometry(osm_id, geometry) AS osm_id, topoint(geometry) AS geometry, ref, name,
               coalesce(NULLIF(name_en, ''), name) AS name_en,
               coalesce(NULLIF(name_es, ''), name) AS name_es,
               coalesce(NULLIF(name_fr, ''), name) AS name_fr,
