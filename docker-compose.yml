@@ -82,7 +82,7 @@ export-worker:
   image: "osm2vectortiles/export"
   command: ./export-worker.sh
   volumes:
-   - ./open-streets.tm2source:/data/tm2source
+   - ./osm2vectortiles.tm2source:/data/tm2source
   links:
    - postgis:db
    - rabbitmq:rabbitmq
@@ -96,7 +96,7 @@ export:
   command: ./export-local.sh
   volumes:
    - ./export:/data/export
-   - ./open-streets.tm2source:/data/tm2source
+   - ./osm2vectortiles.tm2source:/data/tm2source
   links:
    - postgis:db
   environment:
@@ -108,7 +108,7 @@ export-list:
   command: ./export-list.sh
   volumes:
    - ./export:/data/export
-   - ./open-streets.tm2source:/data/tm2source
+   - ./osm2vectortiles.tm2source:/data/tm2source
   links:
    - postgis:db
 serve:
@@ -124,7 +124,7 @@ import-sql:
 mapbox-studio:
   image: "osm2vectortiles/mapbox-studio"
   volumes:
-   - ./open-streets.tm2source:/projects/open-streets.tm2source
+   - ./osm2vectortiles.tm2source:/projects/osm2vectortiles.tm2source
   links:
    - postgis:db
   ports:
