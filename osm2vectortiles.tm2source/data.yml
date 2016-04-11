@@ -6,9 +6,9 @@ _prefs:
   saveCenter: true
 attribution: © OpenStreetMap contributors
 center: 
-  - 9.5725
-  - 47.1166
-  - 12
+  - 9.5732
+  - 47.1164
+  - 10
 description: |-
   Free global vector tiles from OpenStreetMap compatible with Mapbox Streets v7.
   
@@ -111,8 +111,8 @@ Layer:
       user: osm
     description: ''
     fields: 
-      class: String
-      type: String
+      class: "One of: river, canal, stream, stream_intermittent, ditch, drain"
+      type: "One of: river, canal, stream, ditch, drain"
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -197,7 +197,7 @@ Layer:
       user: osm
     description: ''
     fields: 
-      type: String
+      type: "One of: runway, taxiway, apron"
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -225,7 +225,7 @@ Layer:
       user: osm
     description: ''
     fields: 
-      class: String
+      class: "One of: fence, hedge, cliff, gate"
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -261,7 +261,7 @@ Layer:
       user: osm
     description: ''
     fields: 
-      underground: String
+      underground: "Text. Whether building is underground. One of: 'true', 'false'"
     properties: 
       "buffer-size": 2
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -312,7 +312,7 @@ Layer:
       user: osm
     description: ''
     fields: 
-      class: String
+      class: "One of: national_park, wetland, wetland_noveg"
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -363,10 +363,10 @@ Layer:
       user: osm
     description: ''
     fields: 
-      class: String
-      oneway: Number
-      structure: String
-      type: String
+      class: "One of: 'motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'link', 'street', 'street_limited', 'pedestrian', 'construction', 'track', 'service', 'ferry', 'path', 'golf'"
+      oneway: "Text. Whether traffic on the road is one-way. One of: 'true', 'false'"
+      structure: "Text. One of: 'none', 'bridge', 'tunnel', 'ford'. Available from zoom level 13+."
+      type: In most cases, values will be that of the primary key from OpenStreetMap tags.
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -443,9 +443,9 @@ Layer:
       user: osm
     description: ''
     fields: 
-      admin_level: Number
-      disputed: Number
-      maritime: Number
+      admin_level: The OSM administrative level of the boundary
+      disputed: Number. Disputed boundaries are 1, all others are 0.
+      maritime: Number. Maritime boundaries are 1, all others are 0.
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -511,7 +511,7 @@ Layer:
       user: osm
     description: ''
     fields: 
-      code: String
+      code: ISO 3166-1 Alpha-2 code
       name: Local name of the country
       name_de: German name of the country
       name_en: English name of the country
@@ -519,7 +519,7 @@ Layer:
       name_fr: French name of the country
       name_ru: Russian name of the country
       name_zh: Chinese name of the country
-      scalerank: Number
+      scalerank: Number, 1-6. Useful for styling text sizes.
     properties: 
       "buffer-size": 256
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -575,7 +575,7 @@ Layer:
       user: osm
     description: ''
     fields: 
-      labelrank: Number
+      labelrank: Number, 1-6. Useful for styling text sizes.
       name: Local name of the sea
       name_de: German name of the sea
       name_en: English name of the sea
@@ -583,7 +583,7 @@ Layer:
       name_fr: French name of the sea
       name_ru: Russian name of the sea
       name_zh: Chinese name of the sea
-      placement: String
+      placement: "One of: point, line"
     properties: 
       "buffer-size": 256
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -625,8 +625,8 @@ Layer:
       user: osm
     description: ''
     fields: 
-      abbr: String
-      area: Number
+      abbr: Abbreviated state name
+      area: The area of the state in kilometers²
       name: Local name of the state
       name_de: German name of the state
       name_en: English name of the state
@@ -700,9 +700,9 @@ Layer:
       user: osm
     description: ''
     fields: 
-      capital: Number
-      ldir: String
-      localrank: Number
+      capital: "Admin level the city is a capital of, if any. One of: 2, 3, 4, 5, 6, null"
+      ldir: "A hint for label placement at low zoom levels. One of: N, E, S, W, NE, SE, SW, NW, null"
+      localrank: Number. Priority relative to nearby places. Useful for limiting label density.
       name: Local name of the place
       name_de: German name of the place
       name_en: English name of the place
@@ -710,8 +710,8 @@ Layer:
       name_fr: French name of the place
       name_ru: Russian name of the place
       name_zh: Chinese name of the place
-      scalerank: String
-      type: String
+      scalerank: Number, 0-9 or null. Useful for styling text & marker sizes.
+      type: "One of: city, town, village, hamlet, suburb, neighbourhood, island, islet, archipelago, residential, aboriginal_lands"
     properties: 
       "buffer-size": 128
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -761,7 +761,7 @@ Layer:
       user: osm
     description: ''
     fields: 
-      area: Number
+      area: The area of the water polygon in Mercator meters²
       name: Local name of the water body
       name_de: German name of the water body
       name_en: English name of the water body
@@ -811,8 +811,8 @@ Layer:
     description: ''
     fields: 
       address: String
-      localrank: Number
-      maki: String
+      localrank: Number. Priority relative to nearby POIs. Useful for limiting label density.
+      maki: The name of the Maki icon that should be used for the POI
       name: Local name of the POI
       name_de: German name of the POI
       name_en: English name of the POI
@@ -821,9 +821,9 @@ Layer:
       name_ru: Russian name of the POI
       name_zh: Chinese name of the POI
       network: String
-      ref: String
-      scalerank: Number
-      type: String
+      ref: Short reference code, if any
+      scalerank: Number. 1-5. Useful for styling icon sizes and minimum zoom levels.
+      type: The original OSM tag value
       website: String
     properties: 
       "buffer-size": 128
@@ -878,9 +878,9 @@ Layer:
       user: osm
     description: ''
     fields: 
-      class: String
-      len: Number
-      localrank: Number
+      class: "One of: motorway, motorway_link, 'trunk', 'primary', 'secondary', 'tertiary', 'link', 'street', 'street_limited', 'pedestrian', 'construction', 'track', 'service', 'ferry', 'path', 'golf'"
+      len: Number. Approximate length of the road segment in Mercator meters.
+      localrank: Number. Used for shield points only. Priority relative to nearby shields. Useful for limiting shield density.
       name: Local name of the road
       name_de: German name of the road
       name_en: English name of the road
@@ -888,9 +888,9 @@ Layer:
       name_fr: French name of the road
       name_ru: Russian name of the road
       name_zh: Chinese name of the road
-      ref: String
-      reflen: Number
-      shield: String
+      ref: Route number of the road
+      reflen: Number. How many characters long the ref tag is. Useful for shield styling.
+      shield: "The shield style to use. One of: default, mx-federal, mx-state, us-highway, us-highway-alternate, us-highway-business, us-highway-duplex, us-interstate, us-interstate-business, us-interstate-duplex, us-interstate-truck, us-state"
     properties: 
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -931,7 +931,7 @@ Layer:
       user: osm
     description: ''
     fields: 
-      class: String
+      class: "One of: river, canal, stream, stream_intermittent"
       name: Local name of the waterway
       name_de: German name of the waterway
       name_en: English name of the waterway
@@ -939,7 +939,7 @@ Layer:
       name_fr: French name of the waterway
       name_ru: Russian name of the waterway
       name_zh: Chinese name of the waterway
-      type: String
+      type: "One of: river, canal, stream"
     properties: 
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -1023,7 +1023,7 @@ Layer:
       user: osm
     description: ''
     fields: 
-      maki: String
+      maki: "One of: rail, rail-metro, rail-light, entrance"
       name: Local name of the rail station
       name_de: German name of the rail station
       name_en: English name of the rail station
@@ -1031,7 +1031,7 @@ Layer:
       name_fr: French name of the rail station
       name_ru: Russian name of the rail station
       name_zh: Chinese name of the rail station
-      network: String
+      network: The network(s) that the station serves. Useful for icon styling.
     properties: 
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -1069,9 +1069,9 @@ Layer:
       user: osm
     description: ''
     fields: 
-      elevation_ft: Number
-      elevation_m: Number
-      maki: String
+      elevation_ft: Integer elevation in feet
+      elevation_m: Integer elevation in meters
+      maki: "One of: 'mountain', 'volcano'"
       name: Local name of the mountain peak
       name_de: German name of the mountain peak
       name_en: English name of the mountain peak
