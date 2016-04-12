@@ -1,3 +1,18 @@
+CREATE OR REPLACE FUNCTION road_structure(is_tunnel BOOLEAN, is_bridge BOOLEAN, is_ford BOOLEAN) RETURNS VARCHAR
+AS $$
+BEGIN
+    IF is_tunnel THEN
+        RETURN 'tunnel';
+    ELSIF is_bridge THEN
+        RETURN 'bridge';
+    ELSIF is_ford THEN
+        RETURN 'ford';
+    ELSE
+        RETURN 'none';
+    END IF;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
 CREATE OR REPLACE VIEW road_z5toz6 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
     FROM osm_road_geometry
@@ -25,13 +40,13 @@ CREATE OR REPLACE VIEW road_z12 AS
       AND type IN ('motorway', 'trunk', 'primary', 'motorway_link', 'primary_link', 'trunk_link', 'secondary', 'secondary_link', 'tertiary', 'teriary_link');
 
 CREATE OR REPLACE VIEW road_z13 AS
-    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, classify_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order, timestamp
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order, timestamp
     FROM osm_road_geometry
     WHERE classify_road(type) IN ('minor_rail', 'street_limited', 'service')
       AND type IN ('motorway', 'trunk', 'primary', 'motorway_link', 'primary_link', 'trunk_link', 'secondary', 'secondary_link', 'tertiary', 'teriary_link');
 
 CREATE OR REPLACE VIEW road_z14 AS
-    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, classify_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order, timestamp
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order, timestamp
     FROM osm_road_geometry;
 
 CREATE OR REPLACE VIEW road_layer AS (
@@ -152,21 +167,6 @@ BEGIN
         RETURN 'true';
     ELSE
         RETURN 'false';
-    END IF;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION classify_structure(is_tunnel BOOLEAN, is_bridge BOOLEAN, is_ford BOOLEAN) RETURNS VARCHAR
-AS $$
-BEGIN
-    IF is_tunnel THEN
-        RETURN 'tunnel';
-    ELSIF is_bridge THEN
-        RETURN 'bridge';
-    ELSIF is_ford THEN
-        RETURN 'ford';
-    ELSE
-        RETURN 'none';
     END IF;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
