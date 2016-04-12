@@ -15,7 +15,7 @@ CREATE OR REPLACE VIEW layer_poi_label AS (
     SELECT osm_id, timestamp, geometry FROM poi_label_z14
 );
 
-CREATE OR REPLACE FUNCTION changed_tiles_poi_label(ts timestamp)
+CREATE OR REPLACE FUNCTION poi_label_changed_tiles(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
     RETURN QUERY (
