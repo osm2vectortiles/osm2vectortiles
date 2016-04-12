@@ -1,10 +1,10 @@
 CREATE OR REPLACE VIEW airport_label_z9toz14 AS
     SELECT osm_id, geometry, name, name_en, name_es, name_fr, name_de, name_ru, name_zh, 
-        iata, ref, icao, faa, type, kind, 0 AS area, timestamp
+        iata, ref, icao, faa, aerodrome, type, kind, 0 AS area, timestamp
     FROM osm_airport_point
     UNION ALL
-    SELECT osm_id, topoint(geometry) AS geometry, name, name_en, name_es, name_fr, name_de, 
-        name_ru, name_zh, iata, ref, icao, faa, type, kind, area, timestamp
+    SELECT osm_id, geometry, name, name_en, name_es, name_fr, name_de,
+        name_ru, name_zh, iata, ref, icao, faa, aerodrome, type, kind, area, timestamp
     FROM osm_airport_polygon;
 
 CREATE OR REPLACE VIEW layer_airport_label AS (

@@ -1,3 +1,5 @@
+-- Delete and update tracking
+
 CREATE TABLE IF NOT EXISTS osm_delete (
     osm_id bigint,
     geometry geometry,
@@ -5,7 +7,25 @@ CREATE TABLE IF NOT EXISTS osm_delete (
     table_name text
 );
 
-CREATE OR REPLACE FUNCTION cleanup_osm_changes() returns VOID
+CREATE OR REPLACE FUNCTION drop_osm_delete_indizes() returns VOID
+AS $$
+BEGIN
+    DROP INDEX IF EXISTS osm_delete_geom;
+    DROP INDEX IF EXISTS osm_delete_geom_geohash;
+END;
+$$ language plpgsql;
+
+CREATE OR REPLACE FUNCTION create_osm_delete_indizes() returns VOID
+AS $$
+BEGIN
+    CREATE INDEX osm_delete_geom ON osm_delete
+    USING gist (geometry);
+    CREATE INDEX osm_delete_geom_geohash ON osm_delete
+    USING btree (st_geohash(st_transform(st_setsrid(box2d(geometry)::geometry, 3857), 4326)));
+END;
+$$ language plpgsql;
+
+CREATE OR REPLACE FUNCTION cleanup_osm_tracking_tables() returns VOID
 AS $$
 DECLARE
     latest_ts timestamp;
@@ -15,7 +35,7 @@ BEGIN
 END;
 $$ language plpgsql;
 
-CREATE OR REPLACE FUNCTION track_osm_deletes() returns TRIGGER
+CREATE OR REPLACE FUNCTION track_osm_delete() returns TRIGGER
 AS $$
 BEGIN
      IF (TG_OP = 'DELETE') THEN
@@ -28,131 +48,143 @@ BEGIN
 END;
 $$ language plpgsql;
 
--- Place
+-- Trigger utilities
 
-DROP TRIGGER IF EXISTS osm_place_point_track_changes ON osm_place_point;
-CREATE TRIGGER osm_place_point_track_changes
-BEFORE DELETE ON osm_place_point
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
+CREATE OR REPLACE FUNCTION recreate_osm_delete_tracking(table_name text) returns VOID
+AS $$
+BEGIN
+    EXECUTE format(
+        'DROP TRIGGER IF EXISTS %I_track_delete ON %I;
+        CREATE TRIGGER %I_track_delete
+        BEFORE DELETE ON %I
+        FOR EACH ROW EXECUTE PROCEDURE track_osm_delete()',
+        table_name, table_name, table_name, table_name
+    );
+END;
+$$ language plpgsql;
 
--- POI
+-- Create triggers
 
-DROP TRIGGER IF EXISTS osm_poi_point_track_changes ON osm_poi_point;
-CREATE TRIGGER osm_poi_point_track_changes
-BEFORE DELETE ON osm_poi_point
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
+CREATE OR REPLACE FUNCTION create_tracking_triggers() returns VOID
+AS $$
+BEGIN
+    -- Place
+    PERFORM recreate_osm_delete_tracking('osm_place_point');
+    PERFORM recreate_osm_delete_tracking('osm_place_polygon');
+    -- POI
+    PERFORM recreate_osm_delete_tracking('osm_poi_point');
+    PERFORM recreate_osm_delete_tracking('osm_poi_polygon');
+    -- Roads
+    PERFORM recreate_osm_delete_tracking('osm_road_geometry');
+    -- Admin
+    PERFORM recreate_osm_delete_tracking('osm_admin_linestring');
+    -- Water
+    PERFORM recreate_osm_delete_tracking('osm_water_linestring');
+    PERFORM recreate_osm_delete_tracking('osm_water_polygon');
+    -- Landuse
+    PERFORM recreate_osm_delete_tracking('osm_landuse_polygon');
+    -- Aeroways
+    PERFORM recreate_osm_delete_tracking('osm_aero_polygon');
+    PERFORM recreate_osm_delete_tracking('osm_aero_linestring');
+    -- Buildings
+    PERFORM recreate_osm_delete_tracking('osm_building_polygon');
+    PERFORM recreate_osm_delete_tracking('osm_housenumber_polygon');
+    PERFORM recreate_osm_delete_tracking('osm_housenumber_point');
+    -- Barrier
+    PERFORM recreate_osm_delete_tracking('osm_barrier_polygon');
+    PERFORM recreate_osm_delete_tracking('osm_barrier_linestring');
+    -- Mountain Peaks
+    PERFORM recreate_osm_delete_tracking('osm_mountain_peak_point');
+    -- Rail Station Label
+    PERFORM recreate_osm_delete_tracking('osm_rail_station_point');
+    -- Airport Label
+    PERFORM recreate_osm_delete_tracking('osm_airport_point');
+    PERFORM recreate_osm_delete_tracking('osm_airport_polygon');
+END;
+$$ language plpgsql;
 
-DROP TRIGGER IF EXISTS osm_poi_polygon_track_changes ON osm_poi_polygon;
-CREATE TRIGGER osm_poi_polygon_track_changes
-BEFORE DELETE ON osm_poi_polygon
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
+-- Timestamp tracking
 
--- Roads
+CREATE OR REPLACE FUNCTION update_timestamp(ts timestamp) returns VOID
+AS $$
+BEGIN
+    -- Tracking tables
+	UPDATE osm_delete SET timestamp=ts WHERE timestamp IS NULL;
 
-DROP TRIGGER IF EXISTS osm_road_polygon_track_changes ON osm_road_polygon;
-CREATE TRIGGER osm_road_polygon_track_changes
-BEFORE DELETE ON osm_road_polygon
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
+    -- Normal tables
+	UPDATE osm_admin_linestring SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_aero_linestring SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_aero_polygon SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_barrier_linestring SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_barrier_polygon SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_building_polygon SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_building_polygon_gen0 SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_housenumber_point SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_housenumber_polygon SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_landuse_polygon SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_landuse_polygon_gen0 SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_landuse_polygon_gen1 SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_place_point SET timestamp=ts WHERE timestamp IS NULL;
+    UPDATE osm_place_polygon SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_poi_point SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_poi_polygon SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_road_geometry SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_water_linestring SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_water_polygon SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_water_polygon_gen1 SET timestamp=ts WHERE timestamp IS NULL;
+    UPDATE osm_mountain_peak_point SET timestamp=ts WHERE timestamp IS NULL;
+    UPDATE osm_rail_station_point SET timestamp=ts WHERE timestamp IS NULL;
+    UPDATE osm_airport_point SET timestamp=ts WHERE timestamp IS NULL;
+    UPDATE osm_airport_polygon SET timestamp=ts WHERE timestamp IS NULL;
+END;
+$$ language plpgsql;
 
-DROP TRIGGER IF EXISTS osm_road_linestring_track_changes ON osm_road_linestring;
-CREATE TRIGGER osm_road_linestring_track_changes
-BEFORE DELETE ON osm_road_linestring
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
+-- Table Management
 
--- Admin
+CREATE OR REPLACE FUNCTION drop_tables() returns VOID
+AS $$
+BEGIN
+    -- Tracking tables
+    DROP TABLE osm_delete CASCADE;
 
-DROP TRIGGER IF EXISTS osm_admin_linestring_track_changes ON osm_admin_linestring;
-CREATE TRIGGER osm_admin_linestring_track_changes
-BEFORE DELETE ON osm_admin_linestring
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
+    -- Normal tables
+    DROP TABLE osm_admin_linestring CASCADE;
+    DROP TABLE osm_aero_linestring CASCADE;
+    DROP TABLE osm_aero_polygon CASCADE;
+    DROP TABLE osm_barrier_linestring CASCADE;
+    DROP TABLE osm_barrier_polygon CASCADE;
+    DROP TABLE osm_building_polygon CASCADE;
+    DROP TABLE osm_building_polygon_gen0 CASCADE;
+    DROP TABLE osm_housenumber_point CASCADE;
+    DROP TABLE osm_housenumber_polygon CASCADE;
+    DROP TABLE osm_landuse_polygon CASCADE;
+    DROP TABLE osm_landuse_polygon_gen0 CASCADE;
+    DROP TABLE osm_landuse_polygon_gen1 CASCADE;
+    DROP TABLE osm_place_point CASCADE;
+    DROP TABLE osm_place_polygon CASCADE;
+    DROP TABLE osm_poi_point CASCADE;
+    DROP TABLE osm_poi_polygon CASCADE;
+    DROP TABLE osm_road_geometry CASCADE;
+    DROP TABLE osm_water_linestring CASCADE;
+    DROP TABLE osm_water_polygon CASCADE;
+    DROP TABLE osm_water_polygon_gen1 CASCADE;
+    DROP TABLE osm_mountain_peak_point CASCADE;
+    DROP TABLE osm_rail_station_point CASCADE;
+    DROP TABLE osm_airport_point CASCADE;
+    DROP TABLE osm_airport_polygon CASCADE;
+END;
+$$ language plpgsql;
 
--- Water
+-- Change tracking
 
-DROP TRIGGER IF EXISTS osm_water_linestring_track_changes ON osm_water_linestring;
-CREATE TRIGGER osm_water_linestring_track_changes
-BEFORE DELETE ON osm_water_linestring
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
-
-DROP TRIGGER IF EXISTS osm_water_polygon_track_changes ON osm_water_polygon;
-CREATE TRIGGER osm_water_polygon_track_changes
-BEFORE DELETE ON osm_water_polygon
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
-
--- Landuse
-
-DROP TRIGGER IF EXISTS osm_landuse_polygon_track_changes ON osm_landuse_polygon;
-CREATE TRIGGER osm_landuse_polygon_track_changes
-BEFORE DELETE ON osm_landuse_polygon
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
-
--- Aeroways
-
-DROP TRIGGER IF EXISTS osm_aero_polygon_track_changes ON osm_aero_polygon;
-CREATE TRIGGER osm_aero_polygon_track_changes
-BEFORE DELETE ON osm_aero_polygon
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
-
-DROP TRIGGER IF EXISTS osm_aero_linestring_track_changes ON osm_aero_linestring;
-CREATE TRIGGER osm_aero_linestring_track_changes
-BEFORE DELETE ON osm_aero_linestring
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
-
--- Buildings
-
-DROP TRIGGER IF EXISTS osm_building_polygon_track_changes ON osm_building_polygon;
-CREATE TRIGGER osm_building_polygon_track_changes
-BEFORE DELETE ON osm_building_polygon
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
-
-DROP TRIGGER IF EXISTS osm_housenumber_polygon_track_changes ON osm_housenumber_polygon;
-CREATE TRIGGER osm_housenumber_polygon_track_changes
-BEFORE DELETE ON osm_housenumber_polygon
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
-
-DROP TRIGGER IF EXISTS osm_housenumber_point_track_changes ON osm_housenumber_point;
-CREATE TRIGGER osm_housenumber_point_track_changes
-BEFORE DELETE ON osm_housenumber_point
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
-
--- Barrier
-
-DROP TRIGGER IF EXISTS osm_barrier_polygon_track_changes ON osm_barrier_polygon;
-CREATE TRIGGER osm_barrier_polygon_track_changes
-BEFORE DELETE ON osm_barrier_polygon
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
-
-DROP TRIGGER IF EXISTS osm_barrier_linestring_track_changes ON osm_barrier_linestring;
-CREATE TRIGGER osm_barrier_linestring_track_changes
-BEFORE DELETE ON osm_barrier_linestring
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
-
--- Mountain Peaks
-
-DROP TRIGGER IF EXISTS osm_mountain_peak_point_track_changes ON osm_mountain_peak_point;
-CREATE TRIGGER osm_mountain_peak_point_track_changes
-BEFORE DELETE ON osm_mountain_peak_point
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
-
--- Airport
-
-DROP TRIGGER IF EXISTS osm_airport_point_track_changes ON osm_airport_point;
-CREATE TRIGGER osm_airport_point_track_changes
-BEFORE DELETE ON osm_airport_point
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
-
-DROP TRIGGER IF EXISTS osm_airport_polygon_track_changes ON osm_airport_polygon;
-CREATE TRIGGER osm_airport_polygon_track_changes
-BEFORE DELETE ON osm_airport_polygon
-FOR EACH ROW EXECUTE PROCEDURE track_osm_deletes();
-
-CREATE OR REPLACE FUNCTION disable_change_tracking() returns VOID
+CREATE OR REPLACE FUNCTION disable_delete_tracking() returns VOID
 AS $$
 BEGIN
     ALTER TABLE osm_place_point DISABLE TRIGGER USER;
+    ALTER TABLE osm_place_polygon DISABLE TRIGGER USER;
     ALTER TABLE osm_poi_point DISABLE TRIGGER USER;
     ALTER TABLE osm_poi_polygon DISABLE TRIGGER USER;
-    ALTER TABLE osm_road_polygon DISABLE TRIGGER USER;
-    ALTER TABLE osm_road_linestring DISABLE TRIGGER USER;
+    ALTER TABLE osm_road_geometry DISABLE TRIGGER USER;
     ALTER TABLE osm_admin_linestring DISABLE TRIGGER USER;
     ALTER TABLE osm_water_linestring DISABLE TRIGGER USER;
     ALTER TABLE osm_water_polygon DISABLE TRIGGER USER;
@@ -167,17 +199,18 @@ BEGIN
     ALTER TABLE osm_mountain_peak_point DISABLE TRIGGER USER;
     ALTER TABLE osm_airport_point DISABLE TRIGGER USER;
     ALTER TABLE osm_airport_polygon DISABLE TRIGGER USER;
+    ALTER TABLE osm_rail_station_point DISABLE TRIGGER USER;
 END;
 $$ language plpgsql;
 
-CREATE OR REPLACE FUNCTION enable_change_tracking() returns VOID
+CREATE OR REPLACE FUNCTION enable_delete_tracking() returns VOID
 AS $$
 BEGIN
     ALTER TABLE osm_place_point ENABLE TRIGGER USER;
+    ALTER TABLE osm_place_polygon ENABLE TRIGGER USER;
     ALTER TABLE osm_poi_point ENABLE TRIGGER USER;
     ALTER TABLE osm_poi_polygon ENABLE TRIGGER USER;
-    ALTER TABLE osm_road_polygon ENABLE TRIGGER USER;
-    ALTER TABLE osm_road_linestring ENABLE TRIGGER USER;
+    ALTER TABLE osm_road_geometry ENABLE TRIGGER USER;
     ALTER TABLE osm_admin_linestring ENABLE TRIGGER USER;
     ALTER TABLE osm_water_linestring ENABLE TRIGGER USER;
     ALTER TABLE osm_water_polygon ENABLE TRIGGER USER;
@@ -192,5 +225,6 @@ BEGIN
     ALTER TABLE osm_mountain_peak_point ENABLE TRIGGER USER;
     ALTER TABLE osm_airport_point ENABLE TRIGGER USER;
     ALTER TABLE osm_airport_polygon ENABLE TRIGGER USER;
+    ALTER TABLE osm_rail_station_point ENABLE TRIGGER USER;
 END;
 $$ language plpgsql;

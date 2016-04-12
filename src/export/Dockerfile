@@ -1,4 +1,4 @@
-FROM node:0.10
+FROM node:5
 MAINTAINER Lukas Martinelli <me@lukasmartinelli.ch>
 
 RUN mkdir -p /usr/src/app

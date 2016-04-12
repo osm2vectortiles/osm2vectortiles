@@ -19,5 +19,6 @@ RUN classify.py sql classes/barrier_line.yml >> $SQL_FUNCTIONS_FILE \
  && classify.py sql classes/landuse_overlay.yml >> $SQL_FUNCTIONS_FILE \
  && classify.py sql classes/landuse.yml >> $SQL_FUNCTIONS_FILE \
  && classify.py sql classes/road.yml >> $SQL_FUNCTIONS_FILE \
+ && classify.py sql classes/rail_station.yml >> $SQL_FUNCTIONS_FILE \
  && classify.py sql classes/maki_label.yml >> $SQL_FUNCTIONS_FILE
 CMD ["./prepare.sh"]
