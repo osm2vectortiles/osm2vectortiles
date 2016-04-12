@@ -17,14 +17,13 @@ Options:
 """
 import time
 import subprocess
-import re
-import sys
 import os
 import os.path
 import json
 import humanize
 
 from boto.s3.connection import S3Connection, OrdinaryCallingFormat
+
 import pika
 from docopt import docopt
 
@@ -38,6 +37,7 @@ def s3_url(host, port, bucket_name, file_name):
 
 
 def connect_s3(host, port, bucket_name):
+    # import boto
     # boto.set_stream_logger('paws')
     is_secure = port == 443
     conn = S3Connection(
@@ -126,7 +126,7 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
                 max_zoom=tileinfo['max_zoom']
             )
         elif msg['type'] == 'list':
-            list_file='/tmp/tiles.txt'
+            list_file = '/tmp/tiles.txt'
             with open(list_file, 'w') as fh:
                 write_list_file(fh)
 
