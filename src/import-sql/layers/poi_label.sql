@@ -11,7 +11,7 @@ CREATE OR REPLACE VIEW poi_label_z14 AS (
     WHERE name IS NOT NULL AND name <> ''
 );
 
-CREATE OR REPLACE VIEW layer_poi_label AS (
+CREATE OR REPLACE VIEW poi_label_layer AS (
     SELECT osm_id, timestamp, geometry FROM poi_label_z14
 );
 
@@ -21,7 +21,7 @@ BEGIN
     RETURN QUERY (
         WITH changed_tiles AS (
             SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-            FROM layer_poi_label AS c
+            FROM poi_label_layer AS c
             INNER JOIN LATERAL overlapping_tiles(c.geometry, 14) AS t ON c.timestamp = ts
         )
 
