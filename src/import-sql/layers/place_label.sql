@@ -103,7 +103,7 @@ CREATE OR REPLACE VIEW place_label_z14 AS
     ) AS place_geoms
     WHERE name IS NOT NULL;
 
-CREATE OR REPLACE VIEW layer_place_label AS (
+CREATE OR REPLACE VIEW place_label_layer AS (
     SELECT osm_id, timestamp, geometry FROM place_label_z4toz5
     UNION
     SELECT osm_id, timestamp, geometry FROM place_label_z6
@@ -121,13 +121,13 @@ CREATE OR REPLACE VIEW layer_place_label AS (
     SELECT osm_id, timestamp, geometry FROM place_label_z14
 );
 
-CREATE OR REPLACE FUNCTION changed_tiles_place_label(ts timestamp)
+CREATE OR REPLACE FUNCTION place_label_changed_tiles(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
 	RETURN QUERY (
 		WITH changed_tiles AS (
 		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-		    FROM layer_place_label AS c
+		    FROM place_label_layer AS c
             INNER JOIN LATERAL overlapping_tiles(c.geometry, 14) AS t ON c.timestamp = ts
 		)
 
@@ -164,3 +164,13 @@ BEGIN
 	);
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION normalize_scalerank(scalerank INTEGER) RETURNS INTEGER
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN scalerank >= 9 THEN 9
+        ELSE scalerank
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;

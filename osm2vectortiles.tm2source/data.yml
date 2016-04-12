@@ -244,7 +244,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_polygon(osm_id) as osm_id, geometry, is_underground(underground) AS underground
+          SELECT osm_id_polygon(osm_id) as osm_id, geometry, building_is_underground(underground) AS underground
           FROM (
             SELECT osm_id, geometry, underground
             FROM building_z13
@@ -788,8 +788,8 @@ Layer:
       table: |-
         (
           SELECT osm_id_geometry(osm_id, geometry) AS osm_id, topoint(geometry) AS geometry, ref, website,
-              poi_network(type) as network,
-              poi_address(housenumber, street, place, city, country, postcode) as address,
+              poi_label_network(type) as network,
+              poi_label_address(housenumber, street, place, city, country, postcode) as address,
               name,
               coalesce(NULLIF(name_en, ''), name) AS name_en,
               coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -798,10 +798,10 @@ Layer:
               coalesce(NULLIF(name_ru, ''), name) AS name_ru,
               coalesce(NULLIF(name_zh, ''), name) AS name_zh,
               format_type(type) AS type,
-              scalerank_poi(type, area) AS scalerank,
+              poi_label_scalerank(type, area) AS scalerank,
               coalesce(classify_maki_label(type), 'marker') AS maki,
               rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
-                           ORDER BY localrank_poi(type) ASC) AS localrank
+                           ORDER BY poi_label_localrank(type) ASC) AS localrank
             FROM poi_label_z14
             WHERE z(!scale_denominator!) = 14
               AND geometry && !bbox!
@@ -857,7 +857,7 @@ Layer:
             'default' as shield,
             rank() OVER (
                 PARTITION BY LabelGrid(geometry, 200 * !pixel_width!)
-                ORDER BY localrank_road(type) ASC, round(MercLength(geometry)) DESC
+                ORDER BY road_localrank(type) ASC, round(MercLength(geometry)) DESC
             ) AS localrank
             FROM (
               SELECT * FROM road_label_z8toz10
@@ -968,7 +968,7 @@ Layer:
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           coalesce(NULLIF(iata, ''), NULLIF(ref, ''), NULLIF(icao, ''), faa) AS ref,
           classify_airport_label(kind, type) AS maki,
-          scalerank_airport_label(classify_airport_label(kind, type), area, aerodrome) AS scalerank
+          airport_label_scalerank(classify_airport_label(kind, type), area, aerodrome) AS scalerank
           FROM airport_label_z9toz14
           WHERE geometry && !bbox!
           AND z(!scale_denominator!) BETWEEN 9 AND 14
