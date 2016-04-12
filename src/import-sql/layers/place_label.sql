@@ -42,7 +42,7 @@ CREATE OR REPLACE VIEW place_label_z13 AS (
       AND type IN ('city', 'town', 'district', 'village', 'hamlet', 'suburb','neighbourhood')
 );
 
-CREATE OR REPLACE VIEW place_label_z14 AS
+CREATE OR REPLACE VIEW place_label_z14 AS (
     SELECT * FROM osm_place_geometry
     WHERE name IS NOT NULL
 );

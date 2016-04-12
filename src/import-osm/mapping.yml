@@ -443,7 +443,7 @@ tables:
       name: scalerank
       type: integer
     type_mappings:
-      linestrings:
+      point:
         place:
         - city
         - town
