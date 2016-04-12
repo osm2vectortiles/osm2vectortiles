@@ -1,107 +1,51 @@
-CREATE OR REPLACE VIEW place_label_z4toz5 AS
-    SELECT * FROM (
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_point
-        UNION ALL
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_polygon
-    ) AS place_geoms
+CREATE OR REPLACE VIEW place_label_z4toz5 AS (
+    SELECT * FROM osm_place_geometry
     WHERE name IS NOT NULL
-        AND scalerank IS NOT NULL
-        AND scalerank < 3;
+      AND scalerank IS NOT NULL
+      AND scalerank < 3
+);
 
-CREATE OR REPLACE VIEW place_label_z6 AS
-    SELECT * FROM (
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_point
-        UNION ALL
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_polygon
-    ) AS place_geoms
+CREATE OR REPLACE VIEW place_label_z6 AS (
+    SELECT * FROM osm_place_geometry
     WHERE name IS NOT NULL
-        AND scalerank IS NOT NULL
-        AND scalerank < 8;
+      AND scalerank IS NOT NULL
+      AND scalerank < 8
+);
 
-CREATE OR REPLACE VIEW place_label_z7 AS
-    SELECT * FROM (
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_point
-        UNION ALL
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_polygon
-    ) AS place_geoms
+CREATE OR REPLACE VIEW place_label_z7 AS (
+    SELECT * FROM osm_place_geometry
     WHERE name IS NOT NULL
-        AND scalerank IS NOT NULL;
+      AND scalerank IS NOT NULL
+);
 
-CREATE OR REPLACE VIEW place_label_z8 AS
-    SELECT * FROM (
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_point
-        UNION ALL
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_polygon
-    ) AS place_geoms
+CREATE OR REPLACE VIEW place_label_z8 AS (
+    SELECT * FROM osm_place_geometry
     WHERE name IS NOT NULL
-        AND type IN ('city', 'town');
+      AND type IN ('city', 'town')
+);
 
-CREATE OR REPLACE VIEW place_label_z9toz10 AS
-    SELECT * FROM (
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_point
-        UNION ALL
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_polygon
-    ) AS place_geoms
+CREATE OR REPLACE VIEW place_label_z9toz10 AS (
+    SELECT * FROM osm_place_geometry
     WHERE name IS NOT NULL
-        AND type IN ('city', 'town', 'district');
+      AND type IN ('city', 'town', 'district')
+);
 
-CREATE OR REPLACE VIEW place_label_z11toz12 AS
-    SELECT * FROM (
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_point
-        UNION ALL
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_polygon
-    ) AS place_geoms
+CREATE OR REPLACE VIEW place_label_z11toz12 AS (
+    SELECT * FROM osm_place_geometry
     WHERE name IS NOT NULL
-        AND type IN ('city', 'town', 'district', 'village');
+      AND type IN ('city', 'town', 'district', 'village')
+);
 
-CREATE OR REPLACE VIEW place_label_z13 AS
-    SELECT * FROM (
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_point
-        UNION ALL
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_polygon
-    ) AS place_geoms
+CREATE OR REPLACE VIEW place_label_z13 AS (
+    SELECT * FROM osm_place_geometry
     WHERE name IS NOT NULL
-        AND type IN ('city', 'town', 'district', 'village', 'hamlet', 'suburb','neighbourhood');
+      AND type IN ('city', 'town', 'district', 'village', 'hamlet', 'suburb','neighbourhood')
+);
 
 CREATE OR REPLACE VIEW place_label_z14 AS
-    SELECT * FROM (
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_point
-        UNION ALL
-        SELECT osm_id, geometry, timestamp, name, name_int, name_fr, name_en, name_de,
-        name_es, name_ru, name_zh, type, population, capital, admin_level, scalerank
-        FROM osm_place_polygon
-    ) AS place_geoms
-    WHERE name IS NOT NULL;
+    SELECT * FROM osm_place_geometry
+    WHERE name IS NOT NULL
+);
 
 CREATE OR REPLACE VIEW place_label_layer AS (
     SELECT osm_id, timestamp, geometry FROM place_label_z4toz5
