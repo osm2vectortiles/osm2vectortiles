@@ -13,6 +13,17 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+CREATE OR REPLACE FUNCTION road_class(type VARCHAR, service VARCHAR, access VARCHAR) RETURNS VARCHAR
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN type = 'rail' AND service IN ('yard', 'siding', 'spur', 'crossover') THEN 'minor_rail'
+        WHEN access IN ('no', 'private', 'permissive', 'agriculture', 'use_sidepath', 'delivery', 'designated', 'dismount', 'discouraged', 'forestry', 'destination', 'customers') THEN 'street_limited'
+        ELSE classify_road(type)
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
 CREATE OR REPLACE VIEW road_z5 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
     FROM osm_road_geometry
@@ -124,17 +135,6 @@ BEGIN
         WHEN type IN ('secondary') THEN 40
         WHEN type IN ('tertiary') THEN 50
         ELSE 100
-    END;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION road_class(type VARCHAR, service VARCHAR, access VARCHAR) RETURNS VARCHAR
-AS $$
-BEGIN
-    RETURN CASE
-        WHEN type = 'rail' AND service IN ('yard', 'siding', 'spur', 'crossover') THEN 'minor_rail'
-        WHEN access IN ('no', 'private', 'permissive', 'agriculture', 'use_sidepath', 'delivery', 'designated', 'dismount', 'discouraged', 'forestry', 'destination', 'customers') THEN 'street_limited'
-        ELSE classify_road(type)
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
