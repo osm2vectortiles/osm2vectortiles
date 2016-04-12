@@ -39,13 +39,13 @@ function main() {
     exec_sql_file "${SQL_VIEWS_DIR}poi_label.sql"
     exec_sql_file "${SQL_VIEWS_DIR}road.sql"
     exec_sql_file "${SQL_VIEWS_DIR}road_label.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}bridge.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}tunnel.sql"
     exec_sql_file "${SQL_VIEWS_DIR}water.sql"
     exec_sql_file "${SQL_VIEWS_DIR}water_label.sql"
     exec_sql_file "${SQL_VIEWS_DIR}waterway.sql"
     exec_sql_file "${SQL_VIEWS_DIR}waterway_label.sql"
     exec_sql_file "${SQL_VIEWS_DIR}mountain_peak_label.sql"
+    exec_sql_file "${SQL_VIEWS_DIR}airport_label.sql"
+    exec_sql_file "${SQL_VIEWS_DIR}rail_station_label.sql"
 }
 
 main

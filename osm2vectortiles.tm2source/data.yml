@@ -4,12 +4,17 @@ _prefs:
   mapid: ''
   rev: ''
   saveCenter: true
-attribution: ''
+attribution: © OpenStreetMap contributors
 center: 
-  - 8.8225
-  - 47.2334
-  - 14
-description: Open Streets
+  - 9.5732
+  - 47.1164
+  - 10
+description: |-
+  Free global vector tiles from OpenStreetMap compatible with Mapbox Streets v7.
+  
+  
+  
+  http://osm2vectortiles.org
 Layer: 
   - id: landuse
     Datasource: 
@@ -19,14 +24,14 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, classify_landuse(type) as class, type
+          SELECT osm_id_polygon(osm_id) as osm_id, geometry, classify_landuse(type) as class, type
             FROM (
               SELECT osm_id, geometry, type
               FROM landuse_z5
@@ -70,9 +75,8 @@ Layer:
       user: osm
     description: ''
     fields: 
-      class: String
-      osm_id: Number
-      type: String
+      class: "One of: agriculture, cemetery, glacier, grass, hospital, industrial, park, parking, piste, pitch, rock, sand, school, scrub, wood, aboriginal lands"
+      type: OSM tag, more specific than class
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -83,15 +87,15 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, type, type as class
+          SELECT osm_id_linestring(osm_id) as osm_id, geometry, type, type as class
           FROM (
             SELECT *
             FROM waterway_z8toz12
@@ -107,9 +111,8 @@ Layer:
       user: osm
     description: ''
     fields: 
-      class: String
-      osm_id: Number
-      type: String
+      class: "One of: river, canal, stream, stream_intermittent, ditch, drain"
+      type: "One of: river, canal, stream, ditch, drain"
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -120,8 +123,8 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
@@ -159,8 +162,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
-      osm_id: Number
+    fields: {}
     properties: 
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -171,25 +173,31 @@ Layer:
       geometry_field: geometry
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, type
-          FROM aeroway_z12toz14
+          SELECT osm_id_geometry(osm_id, geometry) as osm_id, geometry, type
+          FROM (
+            SELECT *
+            FROM aeroway_z9
+            WHERE z(!scale_denominator!) = 9
+            UNION ALL
+            SELECT *
+            FROM aeroway_z10toz14
+            WHERE z(!scale_denominator!) BETWEEN 10 AND 14
+          ) AS aeroway
           WHERE geometry && !bbox!
-            AND z(!scale_denominator!) BETWEEN 12 AND 14
         ) AS data
       type: postgis
       user: osm
     description: ''
     fields: 
-      osm_id: Number
-      type: String
+      type: "One of: runway, taxiway, apron"
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -200,15 +208,15 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, classify_barrier_line(type) AS class
+          SELECT osm_id_geometry(osm_id, geometry) as osm_id, geometry, classify_barrier_line(type) AS class
           FROM barrier_line_z14
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) = 14
@@ -217,8 +225,7 @@ Layer:
       user: osm
     description: ''
     fields: 
-      class: String
-      osm_id: Number
+      class: "One of: fence, hedge, cliff, gate"
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -230,20 +237,20 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry
+          SELECT osm_id_polygon(osm_id) as osm_id, geometry, is_underground(underground) AS underground
           FROM (
-            SELECT osm_id, geometry
+            SELECT osm_id, geometry, underground
             FROM building_z13
             WHERE z(!scale_denominator!) = 13
             UNION ALL
-            SELECT osm_id, geometry
+            SELECT osm_id, geometry, underground
             FROM building_z14
             WHERE z(!scale_denominator!) = 14
           ) AS building
@@ -254,7 +261,7 @@ Layer:
       user: osm
     description: ''
     fields: 
-      osm_id: Number
+      underground: "Text. Whether building is underground. One of: 'true', 'false'"
     properties: 
       "buffer-size": 2
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -266,15 +273,21 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, classify_landuse_overlay(type) AS class
+          SELECT osm_id_polygon(osm_id) AS osm_id, geometry, classify_landuse_overlay(type) AS class
           FROM (
+            SELECT osm_id, geometry, type FROM landuse_overlay_z5
+            WHERE z(!scale_denominator!) = 5
+            UNION ALL
+            SELECT osm_id, geometry, type FROM landuse_overlay_z6
+            WHERE z(!scale_denominator!) = 6
+            UNION ALL
             SELECT osm_id, geometry, type FROM landuse_overlay_z7
             WHERE z(!scale_denominator!) = 7
             UNION ALL
@@ -299,41 +312,7 @@ Layer:
       user: osm
     description: ''
     fields: 
-      class: String
-      osm_id: Number
-    properties: 
-      "buffer-size": 4
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
-  - id: tunnel
-    Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
-      geometry_field: geometry
-      geometry_table: ''
-      host: db
-      key_field: osm_id
-      key_field_as_attribute: ''
-      max_size: 512
-      password: osm
-      port: 5432
-      srid: ''
-      table: |-
-        (
-          SELECT osm_id, geometry, classify_road(type) AS class, type, layer, oneway
-          FROM tunnel_z12toz14
-          WHERE z(!scale_denominator!) BETWEEN 12 AND 14
-            AND geometry && !bbox!
-          ORDER BY layer ASC
-        ) AS data
-      type: postgis
-      user: osm
-    description: ''
-    fields: 
-      class: String
-      layer: Number
-      oneway: Number
-      osm_id: Number
-      type: String
+      class: "One of: national_park, wetland, wetland_noveg"
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -345,14 +324,16 @@ Layer:
       geometry_table: ''
       host: db
       key_field: osm_id
-      key_field_as_attribute: ''
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, type, classify_road_railway(type, service) AS class, oneway
+          SELECT osm_id_geometry(osm_id, geometry) as osm_id, geometry,
+          road_type(road_class(type, service, access), type, construction, tracktype, service) AS type,
+          road_class(type, service, access) AS class, road_oneway(oneway) AS oneway, structure
           FROM (
             SELECT * FROM road_z5toz6
             WHERE z(!scale_denominator!) BETWEEN 5 AND 6
@@ -382,43 +363,10 @@ Layer:
       user: osm
     description: ''
     fields: 
-      class: String
-      oneway: Number
-      osm_id: Number
-      type: String
-    properties: 
-      "buffer-size": 4
-    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
-  - id: bridge
-    Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
-      geometry_field: geometry
-      geometry_table: ''
-      host: db
-      key_field: osm_id
-      key_field_as_attribute: ''
-      max_size: 512
-      password: osm
-      port: 5432
-      srid: ''
-      table: |-
-        (
-          SELECT osm_id, geometry, classify_road(type) AS class, type, layer, oneway
-          FROM bridge_z12toz14
-          WHERE z(!scale_denominator!) BETWEEN 12 AND 14
-            AND geometry && !bbox!
-          ORDER BY layer ASC
-        ) AS data
-      type: postgis
-      user: osm
-    description: ''
-    fields: 
-      class: String
-      layer: Number
-      oneway: Number
-      osm_id: Number
-      type: String
+      class: "One of: 'motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'link', 'street', 'street_limited', 'pedestrian', 'construction', 'track', 'service', 'ferry', 'path', 'golf'"
+      oneway: "Text. Whether traffic on the road is one-way. One of: 'true', 'false'"
+      structure: "Text. One of: 'none', 'bridge', 'tunnel', 'ford'. Available from zoom level 13+."
+      type: In most cases, values will be that of the primary key from OpenStreetMap tags.
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -429,8 +377,8 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
@@ -495,10 +443,9 @@ Layer:
       user: osm
     description: ''
     fields: 
-      admin_level: Number
-      disputed: Number
-      maritime: Number
-      osm_id: Number
+      admin_level: The OSM administrative level of the boundary
+      disputed: Number. Disputed boundaries are 1, all others are 0.
+      maritime: Number. Maritime boundaries are 1, all others are 0.
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -509,15 +456,15 @@ Layer:
       geometry_field: wkb_geometry
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, wkb_geometry,
+          SELECT osm_id_point(osm_id) AS osm_id, wkb_geometry,
           iso3166_1_alpha_2 as code,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
@@ -564,16 +511,15 @@ Layer:
       user: osm
     description: ''
     fields: 
-      code: String
-      name: String
-      name_de: String
-      name_en: String
-      name_es: String
-      name_fr: String
-      name_ru: String
-      name_zh: String
-      osm_id: Number
-      scalerank: Number
+      code: ISO 3166-1 Alpha-2 code
+      name: Local name of the country
+      name_de: German name of the country
+      name_en: English name of the country
+      name_es: Spanish name of the country
+      name_fr: French name of the country
+      name_ru: Russian name of the country
+      name_zh: Chinese name of the country
+      scalerank: Number, 1-6. Useful for styling text sizes.
     properties: 
       "buffer-size": 256
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -584,15 +530,15 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, wkb_geometry,
+          SELECT osm_id_point(osm_id) as osm_id, wkb_geometry,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -629,16 +575,15 @@ Layer:
       user: osm
     description: ''
     fields: 
-      labelrank: Number
-      name: String
-      name_de: String
-      name_en: String
-      name_es: String
-      name_fr: String
-      name_ru: String
-      name_zh: String
-      osm_id: String
-      placement: String
+      labelrank: Number, 1-6. Useful for styling text sizes.
+      name: Local name of the sea
+      name_de: German name of the sea
+      name_en: English name of the sea
+      name_es: Spanish name of the sea
+      name_fr: French name of the sea
+      name_ru: Russian name of the sea
+      name_zh: Chinese name of the sea
+      placement: "One of: point, line"
     properties: 
       "buffer-size": 256
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -649,15 +594,15 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, wkb_geometry, abbr,
+          SELECT osm_id_point(osm_id) as osm_id, wkb_geometry, abbr,
           area_sqkm as area,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
@@ -680,16 +625,15 @@ Layer:
       user: osm
     description: ''
     fields: 
-      abbr: String
-      area: Number
-      name: String
-      name_de: String
-      name_en: String
-      name_es: String
-      name_fr: String
-      name_ru: String
-      name_zh: String
-      osm_id: Number
+      abbr: Abbreviated state name
+      area: The area of the state in kilometers²
+      name: Local name of the state
+      name_de: German name of the state
+      name_en: English name of the state
+      name_es: Spanish name of the state
+      name_fr: French name of the state
+      name_ru: Russian name of the state
+      name_zh: Chinese name of the state
     properties: 
       "buffer-size": 256
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -700,15 +644,15 @@ Layer:
       geometry_field: geometry
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-        SELECT osm_id, geometry,  
+        SELECT osm_id_geometry(osm_id, geometry) as osm_id, topoint(geometry) AS geometry,
         name,
         coalesce(NULLIF(name_en, ''), name) AS name_en,
         coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -756,19 +700,18 @@ Layer:
       user: osm
     description: ''
     fields: 
-      capital: Number
-      ldir: String
-      localrank: Number
-      name: String
-      name_de: String
-      name_en: String
-      name_es: String
-      name_fr: String
-      name_ru: String
-      name_zh: String
-      osm_id: Number
-      scalerank: String
-      type: String
+      capital: "Admin level the city is a capital of, if any. One of: 2, 3, 4, 5, 6, null"
+      ldir: "A hint for label placement at low zoom levels. One of: N, E, S, W, NE, SE, SW, NW, null"
+      localrank: Number. Priority relative to nearby places. Useful for limiting label density.
+      name: Local name of the place
+      name_de: German name of the place
+      name_en: English name of the place
+      name_es: Spanish name of the place
+      name_fr: French name of the place
+      name_ru: Russian name of the place
+      name_zh: Chinese name of the place
+      scalerank: Number, 0-9 or null. Useful for styling text & marker sizes.
+      type: "One of: city, town, village, hamlet, suburb, neighbourhood, island, islet, archipelago, residential, aboriginal_lands"
     properties: 
       "buffer-size": 128
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -779,15 +722,15 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id,
+          SELECT osm_id_polygon(osm_id) AS osm_id, topoint(geometry) AS geometry,
           name,
           area,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
@@ -818,15 +761,14 @@ Layer:
       user: osm
     description: ''
     fields: 
-      area: Number
-      name: String
-      name_de: String
-      name_en: String
-      name_es: String
-      name_fr: String
-      name_ru: String
-      name_zh: String
-      osm_id: Number
+      area: The area of the water polygon in Mercator meters²
+      name: Local name of the water body
+      name_de: German name of the water body
+      name_en: English name of the water body
+      name_es: Spanish name of the water body
+      name_fr: French name of the water body
+      name_ru: Russian name of the water body
+      name_zh: Chinese name of the water body
     properties: 
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -837,15 +779,15 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id, ref, website,
+          SELECT osm_id_geometry(osm_id, geometry) AS osm_id, topoint(geometry) AS geometry, ref, website,
               poi_network(type) as network,
               poi_address(housenumber, street, place, city, country, postcode) as address,
               name,
@@ -857,7 +799,7 @@ Layer:
               coalesce(NULLIF(name_zh, ''), name) AS name_zh,
               format_type(type) AS type,
               scalerank_poi(type, area) AS scalerank,
-              classify_maki_label(type) AS maki,
+              coalesce(classify_maki_label(type), 'marker') AS maki,
               rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
                            ORDER BY localrank_poi(type) ASC) AS localrank
             FROM poi_label_z14
@@ -869,20 +811,19 @@ Layer:
     description: ''
     fields: 
       address: String
-      localrank: Number
-      maki: String
-      name: String
-      name_de: String
-      name_en: String
-      name_es: String
-      name_fr: String
-      name_ru: String
-      name_zh: String
+      localrank: Number. Priority relative to nearby POIs. Useful for limiting label density.
+      maki: The name of the Maki icon that should be used for the POI
+      name: Local name of the POI
+      name_de: German name of the POI
+      name_en: English name of the POI
+      name_es: Spanish name of the POI
+      name_fr: French name of the POI
+      name_ru: Russian name of the POI
+      name_zh: Chinese name of the POI
       network: String
-      osm_id: Number
-      ref: String
-      scalerank: Number
-      type: String
+      ref: Short reference code, if any
+      scalerank: Number. 1-5. Useful for styling icon sizes and minimum zoom levels.
+      type: The original OSM tag value
       website: String
     properties: 
       "buffer-size": 128
@@ -894,15 +835,15 @@ Layer:
       geometry_field: geometry
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id, name,
+          SELECT osm_id_linestring(osm_id) AS osm_id, geometry, name,
             coalesce(NULLIF(name_en, ''), name) AS name_en,
             coalesce(NULLIF(name_es, ''), name) AS name_es,
             coalesce(NULLIF(name_fr, ''), name) AS name_fr,
@@ -912,7 +853,7 @@ Layer:
             nullif(ref, '') AS ref,
             nullif(char_length(ref), 0) AS reflen,
             round(MercLength(geometry)) as len,
-            classify_road(type) as class,
+            road_class(type, service, access) AS class,
             'default' as shield,
             rank() OVER (
                 PARTITION BY LabelGrid(geometry, 200 * !pixel_width!)
@@ -931,25 +872,25 @@ Layer:
               SELECT * FROM road_label_z14
               WHERE z(!scale_denominator!) = 14
             ) AS road_label
+            WHERE geometry && !bbox! AND GeometryType(geometry) = 'LINESTRING'
         ) AS data
       type: postgis
       user: osm
     description: ''
     fields: 
-      class: String
-      len: Number
-      localrank: Number
-      name: String
-      name_de: String
-      name_en: String
-      name_es: String
-      name_fr: String
-      name_ru: String
-      name_zh: String
-      osm_id: Number
-      ref: String
-      reflen: Number
-      shield: String
+      class: "One of: motorway, motorway_link, 'trunk', 'primary', 'secondary', 'tertiary', 'link', 'street', 'street_limited', 'pedestrian', 'construction', 'track', 'service', 'ferry', 'path', 'golf'"
+      len: Number. Approximate length of the road segment in Mercator meters.
+      localrank: Number. Used for shield points only. Priority relative to nearby shields. Useful for limiting shield density.
+      name: Local name of the road
+      name_de: German name of the road
+      name_en: English name of the road
+      name_es: Spanish name of the road
+      name_fr: French name of the road
+      name_ru: Russian name of the road
+      name_zh: Chinese name of the road
+      ref: Route number of the road
+      reflen: Number. How many characters long the ref tag is. Useful for shield styling.
+      shield: "The shield style to use. One of: default, mx-federal, mx-state, us-highway, us-highway-alternate, us-highway-business, us-highway-duplex, us-interstate, us-interstate-business, us-interstate-duplex, us-interstate-truck, us-state"
     properties: 
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -960,16 +901,15 @@ Layer:
       geometry_field: geometry
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id,
-          name,
+          SELECT osm_id_linestring(osm_id) AS osm_id, geometry, name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
@@ -991,38 +931,129 @@ Layer:
       user: osm
     description: ''
     fields: 
-      class: String
-      name: String
-      name_de: String
-      name_en: String
-      name_es: String
-      name_fr: String
-      name_ru: String
-      name_zh: String
-      osm_id: Number
-      type: String
+      class: "One of: river, canal, stream, stream_intermittent"
+      name: Local name of the waterway
+      name_de: German name of the waterway
+      name_en: English name of the waterway
+      name_es: Spanish name of the waterway
+      name_fr: French name of the waterway
+      name_ru: Russian name of the waterway
+      name_zh: Chinese name of the waterway
+      type: "One of: river, canal, stream"
     properties: 
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
-  - id: mountain_peak_label
-    Datasource:
+  - id: airport_label
+    Datasource: 
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
-      geometry_field: ''
+      geometry_field: geometry
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry,
+          SELECT topoint(geometry) AS geometry, osm_id_geometry(osm_id, geometry) as osm_id,
+          name,
+          coalesce(NULLIF(name_en, ''), name) AS name_en,
+          coalesce(NULLIF(name_es, ''), name) AS name_es,
+          coalesce(NULLIF(name_fr, ''), name) AS name_fr,
+          coalesce(NULLIF(name_de, ''), name) AS name_de,
+          coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+          coalesce(NULLIF(name_zh, ''), name) AS name_zh,
+          coalesce(NULLIF(iata, ''), NULLIF(ref, ''), NULLIF(icao, ''), faa) AS ref,
+          classify_airport_label(kind, type) AS maki,
+          scalerank_airport_label(classify_airport_label(kind, type), area, aerodrome) AS scalerank
+          FROM airport_label_z9toz14
+          WHERE geometry && !bbox!
+          AND z(!scale_denominator!) BETWEEN 9 AND 14
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      maki: "One of: airport, airfield, heliport, rocket"
+      name: Local name of the airport
+      name_de: German name of the airport
+      name_en: English name of the airport
+      name_es: Spanish name of the airport
+      name_fr: French name of the airport
+      name_ru: Russian name of the airport
+      name_zh: Chinese name of the airport
+      ref: A 3-4 character IATA, FAA, ICAO, or other reference code
+      scalerank: Number 1-4. Useful for styling icon sizes.
+    properties: 
+      "buffer-size": 64
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: rail_station_label
+    Datasource: 
+      dbname: osm
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: db
+      key_field: osm_id
+      key_field_as_attribute: false
+      max_size: 512
+      password: osm
+      port: 5432
+      srid: ''
+      table: |-
+        (
+          SELECT geometry, osm_id_point(osm_id) as osm_id,
+          name,
+          coalesce(NULLIF(name_en, ''), name) AS name_en,
+          coalesce(NULLIF(name_es, ''), name) AS name_es,
+          coalesce(NULLIF(name_fr, ''), name) AS name_fr,
+          coalesce(NULLIF(name_de, ''), name) AS name_de,
+          coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+          coalesce(NULLIF(name_zh, ''), name) AS name_zh,
+          classify_rail_station(type) AS maki,
+          classify_rail_station(type) AS network
+          FROM rail_station_label_z12toz14
+          WHERE geometry && !bbox!
+          AND z(!scale_denominator!) BETWEEN 12 AND 14
+        ) AS data
+      type: postgis
+      user: osm
+    description: ''
+    fields: 
+      maki: "One of: rail, rail-metro, rail-light, entrance"
+      name: Local name of the rail station
+      name_de: German name of the rail station
+      name_en: English name of the rail station
+      name_es: Spanish name of the rail station
+      name_fr: French name of the rail station
+      name_ru: Russian name of the rail station
+      name_zh: Chinese name of the rail station
+      network: The network(s) that the station serves. Useful for icon styling.
+    properties: 
+      "buffer-size": 64
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: mountain_peak_label
+    Datasource: 
+      dbname: osm
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: ''
+      geometry_table: ''
+      host: db
+      key_field: osm_id
+      key_field_as_attribute: false
+      max_size: 512
+      password: osm
+      port: 5432
+      srid: ''
+      table: |-
+        (
+          SELECT osm_id_point(osm_id) as osm_id, geometry,
           meter_to_feet(elevation_m) AS elevation_ft,
           elevation_m,
-          type AS maki,
+          mountain_peak_type(type) AS maki,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -1037,19 +1068,18 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields:
-      osm_id: Number
-      elevation_ft: Number
-      elevation_m: Number
-      maki: String
-      name: String
-      name_de: String
-      name_en: String
-      name_es: String
-      name_fr: String
-      name_ru: String
-      name_zh: String
-    properties:
+    fields: 
+      elevation_ft: Integer elevation in feet
+      elevation_m: Integer elevation in meters
+      maki: "One of: 'mountain', 'volcano'"
+      name: Local name of the mountain peak
+      name_de: German name of the mountain peak
+      name_en: English name of the mountain peak
+      name_es: Spanish name of the mountain peak
+      name_fr: French name of the mountain peak
+      name_ru: Russian name of the mountain peak
+      name_zh: Chinese name of the mountain peak
+    properties: 
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: housenum_label
@@ -1059,15 +1089,15 @@ Layer:
       geometry_field: ''
       geometry_table: ''
       host: db
-      key_field: ''
-      key_field_as_attribute: ''
+      key_field: osm_id
+      key_field_as_attribute: false
       max_size: 512
       password: osm
       port: 5432
       srid: ''
       table: |-
         (
-          SELECT osm_id, topoint(geometry) AS geometry, house_num
+          SELECT osm_id_geometry(osm_id, geometry) AS osm_id, topoint(geometry) AS geometry, house_num
           FROM housenum_label_z14
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) = 14
@@ -1076,11 +1106,10 @@ Layer:
       user: osm
     description: ''
     fields: 
-      house_num: String
-      osm_id: Number
+      house_num: House number
     properties: 
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
 maxzoom: 14
 minzoom: 0
-name: Open Streets
+name: OSM2VectorTiles v1.4

@@ -1,12 +1,6 @@
 system:
   name: maki_label
   classes:
-    airport:
-    - aerodrome
-    - terminal
-    - apron
-    - gate
-    - taxiway
     american-football:
     - american_football
     art-gallery:
@@ -66,9 +60,6 @@ system:
     - car
     - car_repair
     - taxi
-    camera:
-    - video
-    - electronics
     cemetery:
     - grave_yard
     - cemetery
@@ -113,6 +104,7 @@ system:
     - delicatessen
     - department_store
     - greengrocer
+    - marketplace
     sport:
     - multi
     - equestrian
@@ -252,13 +244,6 @@ system:
     - post_office
     prison:
     - prison
-    rail:
-    - station
-    railway:
-    - halt
-    - tram_stop
-    - crossing
-    - level_crossing
     restaurant:
     - restaurant
     school:
@@ -271,6 +256,7 @@ system:
     - beauty
     - bed
     - boutique
+    - camera
     - carpet
     - charity
     - chemist
@@ -284,10 +270,12 @@ system:
     - garden_centre
     - doityourself
     - erotic
+    - electronics
     - fabric
     - florist
     - furniture
     - video_games
+    - video
     - general
     - gift
     - hardware

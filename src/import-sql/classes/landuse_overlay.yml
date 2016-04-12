@@ -1,8 +1,15 @@
 system:
   name: landuse_overlay
   classes:
+    national_park:
+    - national_park
+    - nature_reserve
+    - protected_area
     wetland:
     - wetland
     - marsh
     - swamp
     - bog
+    wetland_noveg:
+    - mud
+    - tidalflat

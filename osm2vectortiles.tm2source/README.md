@@ -1,6 +1,6 @@
-# open-streets.tm2source
+# OSM2VectorTiles tm2source Project
 
-[Mapbox Steets v5](https://www.mapbox.com/developers/vector-tiles/mapbox-streets-v5/) compatible data source.
+[Mapbox Steets v7](https://www.mapbox.com/developers/vector-tiles/mapbox-streets-v7/) compatible data source.
 
 ## Requirements
 

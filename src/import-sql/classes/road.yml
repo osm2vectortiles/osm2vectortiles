@@ -5,75 +5,64 @@ system:
     - motorway
     motorway_link:
     - motorway_link
-    driveway:
-    - driveway
-    main:
-    - primary
-    - primary_link
+    trunk:
     - trunk
-    - trunk_link
+    primary:
+    - primary
+    secondary:
     - secondary
-    - secondary_link
+    tertiary:
     - tertiary
+    link:
+    - trunk_link
+    - primary_link
+    - secondary_link
     - tertiary_link
     street:
-    - residential
     - unclassified
-    - living_street
+    - residential
     - road
+    - living_street
     - raceway
-    street_limited:
+    pedestrian:
     - pedestrian
+    - platform
+    construction:
     - construction
-    - private
+    track:
+    - track
     service:
     - service
-    - track
-    - alley
-    - spur
-    - siding
-    - crossover
-    - parking
-    - parking_aisle
-    - yard
-    - driveway
-    - emergency_access
-    - drive-through
+    ferry:
+    - ferry
     path:
-    - path
-    - cycleway
-    - ski
-    - piste
     - steps
-    - bridleway
+    - corridor
+    - crossing
+    - piste
+    - mtb
+    - hiking
+    - cycleway
     - footway
+    - path
+    - bridleway
     major_rail:
     - rail
-    - monorail
-    - narrow_gauge
-    - subway
-    minor_rail:
-    - funicular
-    - light_rail
-    - preserved
     - tram
-    - disused
-    - yard
+    - light_rail
+    - subway
     aerialway:
-    - chair_lift
-    - mixed_lift
-    - drag_lift
-    - platter
-    - t-bar
-    - magic_carpet
-    - gondola
     - cable_car
+    - gondola
+    - mixed_lift
+    - chair_lift
+    - drag_lift
+    - t-bar
+    - j-bar
+    - platter
     - rope_tow
     - zip_line
-    - j-bar
+    - magic_carpet
     - canopy
     golf:
     - hole
-    ferry:
-    - ferry
-    

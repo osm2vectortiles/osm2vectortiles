@@ -3,6 +3,7 @@ system:
   classes:
     cliff:
     - cliff
+    - earth_bank
     fence:
     - city_wall
     - fence
