@@ -1,17 +1,11 @@
 CREATE OR REPLACE VIEW poi_label_z14 AS (
     SELECT * FROM (
-		SELECT geometry, osm_id, ref, website,
-			housenumber, street, place, city, country, postcode,
-			name, name_en, name_es, name_fr, name_de, name_ru, name_zh,
-			type, 0 AS area,
-            timestamp
+		SELECT geometry, osm_id, ref,name, name_en, name_es, name_fr,
+		name_de, name_ru, name_zh, type, 0 AS area, timestamp
 		FROM osm_poi_point
         UNION ALL
-		SELECT geometry, osm_id, ref, website,
-			housenumber, street, place, city, country, postcode,
-			name, name_en, name_es, name_fr, name_de, name_ru, name_zh,
-			type, area,
-            timestamp
+		SELECT geometry, osm_id, ref,name, name_en, name_es, name_fr,
+		name_de, name_ru, name_zh, type, area, timestamp
         FROM osm_poi_polygon
     ) AS poi_geoms
     WHERE name IS NOT NULL AND name <> ''
