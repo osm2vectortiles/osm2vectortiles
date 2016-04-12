@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Compare Open Streets with Mapbox Streets</title>
+  <meta charset="utf-8" />
+  <script src='//api.tiles.mapbox.com/mapbox-gl-js/v0.16.0/mapbox-gl.js'></script>
+  <link href='//api.tiles.mapbox.com/mapbox-gl-js/v0.16.0/mapbox-gl.css' rel='stylesheet' />
+  <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+    #map1 { position:absolute; top:0; bottom:0; left:0; right:50%; }
+    #map2 { position:absolute; top:0; bottom:0; left:50%; right:0; }
+  </style>
+</head>
+<body>
+  <div id='map1'></div>
+  <div id='map2'></div>
+  <script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w';
+
+  var zurichViewport = [8.4766, 47.3774]
+
+	var map1 = new mapboxgl.Map({
+			container: 'map1',
+			style: 'mapbox://styles/morgenkaffee/cimxjgllv00u69wnj7mfsgdj1',
+			center: zurichViewport,
+      zoom: 12
+	});
+
+  var map2 = new mapboxgl.Map({
+      container: 'map2',
+      style: '/bright-v8.json',
+			center: zurichViewport,
+      zoom: 12
+  });
+
+  map1.on('moveend', follow).on('zoomend', follow);
+  map2.on('moveend', follow).on('zoomend', follow);
+
+  var quiet = false;
+  function follow(e) {
+      if (quiet) return;
+      quiet = true;
+      if (e.target === map1) sync(map2, e);
+      if (e.target === map2) sync(map1, e);
+      quiet = false;
+  }
+
+  function sync(map, e) {
+      map.jumpTo({
+					center: e.target.getCenter(),
+					zoom: e.target.getZoom()
+      });
+  }
+</script>
+ </body>
+</html>
