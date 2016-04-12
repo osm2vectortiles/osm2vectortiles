@@ -25,7 +25,7 @@ CREATE OR REPLACE VIEW road_label_z14 AS
         'narrow_gauge', 'subway', 'tram', 'service', 'track', 'driveway', 'path', 'cycleway', 'ski', 'steps', 'bridleway', 'footway', 'funicular', 'light_rail', 'preserved')
       AND name <> '';
 
-CREATE OR REPLACE VIEW layer_road_label AS (
+CREATE OR REPLACE VIEW road_label_layer AS (
     SELECT osm_id, timestamp, geometry FROM road_label_z8toz10
     UNION
     SELECT osm_id, timestamp, geometry FROM road_label_z11
@@ -35,13 +35,13 @@ CREATE OR REPLACE VIEW layer_road_label AS (
     SELECT osm_id, timestamp, geometry FROM road_label_z14
 );
 
-CREATE OR REPLACE FUNCTION changed_tiles_road_label(ts timestamp)
+CREATE OR REPLACE FUNCTION road_label_changed_tiles(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
 	RETURN QUERY (
 		WITH changed_tiles AS (
 		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-		    FROM layer_road_label AS c
+		    FROM road_label_layer AS c
             INNER JOIN LATERAL overlapping_tiles(c.geometry, 14) AS t ON c.timestamp = ts
 		)
 

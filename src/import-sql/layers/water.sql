@@ -6,19 +6,19 @@ CREATE OR REPLACE VIEW water_z13toz14 AS
     SELECT *
     FROM osm_water_polygon;
 
-CREATE OR REPLACE VIEW layer_water AS (
+CREATE OR REPLACE VIEW water_layer AS (
     SELECT osm_id, timestamp, geometry FROM water_z6toz12
     UNION
     SELECT osm_id, timestamp, geometry FROM water_z13toz14
 );
 
-CREATE OR REPLACE FUNCTION changed_tiles_water(ts timestamp)
+CREATE OR REPLACE FUNCTION water_changed_tiles(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
 	RETURN QUERY (
 		WITH changed_tiles AS (
 		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-		    FROM layer_water AS c
+		    FROM water_layer AS c
 		    INNER JOIN LATERAL overlapping_tiles(c.geometry, 14) AS t ON c.timestamp = ts
 		)
 

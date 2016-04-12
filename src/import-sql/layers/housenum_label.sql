@@ -5,16 +5,16 @@ CREATE OR REPLACE VIEW housenum_label_z14 AS
     SELECT osm_id, geometry, house_num, timestamp
     FROM osm_housenumber_polygon;
 
-CREATE OR REPLACE VIEW layer_housenum_label AS (
+CREATE OR REPLACE VIEW housenum_label_layer AS (
     SELECT osm_id, timestamp, geometry FROM housenum_label_z14
 );
-CREATE OR REPLACE FUNCTION changed_tiles_housenum_label(ts timestamp)
+CREATE OR REPLACE FUNCTION housenum_label_changed_tiles(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
 	RETURN QUERY (
 		WITH changed_tiles AS (
 		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-		    FROM layer_housenum_label AS c
+		    FROM housenum_label_layer AS c
 		    INNER JOIN LATERAL overlapping_tiles(c.geometry, 14) AS t ON c.timestamp = ts
 		)
 
