@@ -37,12 +37,12 @@ CREATE OR REPLACE VIEW road_z6toz7 AS
 CREATE OR REPLACE VIEW road_z8toz9 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
     FROM osm_road_geometry
-    WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'major_rail',);
+    WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'major_rail');
 
 CREATE OR REPLACE VIEW road_z10 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
     FROM osm_road_geometry
-    WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail',);
+    WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail');
 
 CREATE OR REPLACE VIEW road_z11 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
