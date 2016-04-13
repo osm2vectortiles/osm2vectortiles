@@ -57,7 +57,7 @@ CREATE OR REPLACE VIEW road_z12 AS
 CREATE OR REPLACE VIEW road_z13 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order, timestamp
     FROM osm_road_geometry
-    WHERE classify_road(type) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry', 'link', 'construction', 'pedestrian', 'street_limited', 'aerialway', 'path', 'track');
+    WHERE classify_road(type) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry', 'link', 'construction', 'pedestrian', 'street_limited', 'aerialway', 'track');
 
 CREATE OR REPLACE VIEW road_z14 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order, timestamp
