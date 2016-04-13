@@ -33,7 +33,7 @@ CREATE OR REPLACE VIEW place_label_z9toz10 AS (
 CREATE OR REPLACE VIEW place_label_z11toz12 AS (
     SELECT * FROM osm_place_point
     WHERE name IS NOT NULL
-      AND type IN ('city', 'town', 'district', 'village')
+      AND type IN ('city', 'town', 'district', 'village', 'suburb')
 );
 
 CREATE OR REPLACE VIEW place_label_z13 AS (
