@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW water_z6toz12 AS
+CREATE OR REPLACE VIEW water_z5toz12 AS
     SELECT *
     FROM osm_water_polygon_gen1;
 
@@ -7,7 +7,7 @@ CREATE OR REPLACE VIEW water_z13toz14 AS
     FROM osm_water_polygon;
 
 CREATE OR REPLACE VIEW water_layer AS (
-    SELECT osm_id, timestamp, geometry FROM water_z6toz12
+    SELECT osm_id, timestamp, geometry FROM water_z5toz12
     UNION
     SELECT osm_id, timestamp, geometry FROM water_z13toz14
 );
@@ -26,8 +26,8 @@ BEGIN
 		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 13 AND 14
         UNION
 
-		SELECT c.x, c.y, c.z FROM water_z6toz12 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 6 AND 12
+		SELECT c.x, c.y, c.z FROM water_z5toz12 AS l
+		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 5 AND 12
 	);
 END;
 $$ LANGUAGE plpgsql;

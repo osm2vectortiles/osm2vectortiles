@@ -149,11 +149,11 @@ Layer:
           UNION ALL
           SELECT 0 AS osm_id, geom AS geometry FROM ne_10m_lakes
           WHERE geom && !bbox!
-            AND z(!scale_denominator!) BETWEEN 4 AND 5
+            AND z(!scale_denominator!) = 4
           UNION ALL
-          SELECT osm_id, geometry FROM water_z6toz12
+          SELECT osm_id, geometry FROM water_z5toz12
           WHERE geometry && !bbox!
-          AND z(!scale_denominator!) BETWEEN 6 AND 12
+          AND z(!scale_denominator!) BETWEEN 5 AND 12
           UNION ALL
           SELECT osm_id, geometry FROM water_z13toz14
           WHERE geometry && !bbox!

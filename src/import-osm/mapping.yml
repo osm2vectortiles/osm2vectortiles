@@ -9,8 +9,8 @@ generalized_tables:
     tolerance: 50.0
   water_polygon_gen1:
     source: water_polygon
-    sql_filter: ST_Area(geometry)>50000.000000
-    tolerance: 50.0
+    sql_filter: ST_Area(geometry)>40000.000000
+    tolerance: 30.0
   building_polygon_gen0:
     source: building_polygon
     sql_filter: ST_Area(geometry)>1700.000000
