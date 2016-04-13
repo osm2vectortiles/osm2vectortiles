@@ -444,7 +444,7 @@ tables:
       type: integer
     mapping:
     type_mappings:
-      point:
+      points:
         place:
         - city
         - town
