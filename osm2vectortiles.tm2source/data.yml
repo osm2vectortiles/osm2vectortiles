@@ -1046,9 +1046,14 @@ Layer:
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           classify_rail_station(type) AS maki,
           classify_rail_station(type) AS network
-          FROM rail_station_label_z12toz14
+          FROM (
+            SELECT * FROM rail_station_label_z12toz13
+            WHERE z(!scale_denominator!) BETWEEN 12 AND 13
+            UNION ALL
+            SELECT * FROM rail_station_label_z14
+            WHERE z(!scale_denominator!) = 14
+          ) AS t
           WHERE geometry && !bbox!
-          AND z(!scale_denominator!) BETWEEN 12 AND 14
         ) AS data
       type: postgis
       user: osm
