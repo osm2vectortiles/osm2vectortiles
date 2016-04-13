@@ -675,7 +675,6 @@ tables:
     mapping:
       railway:
       - station
-      - stop
       - halt
       - tram_stop
       - subway_entrance
