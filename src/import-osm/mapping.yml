@@ -446,22 +446,22 @@ tables:
     type_mappings:
       point:
         place:
-          city
-          town
-          village
-          hamlet
-          suburb
-          neighbourhood
-          isolated_dwelling
+        - city
+        - town
+        - village
+        - hamlet
+        - suburb
+        - neighbourhood
+        - isolated_dwelling
       polygons:
         place:
-          island
-          islet
-          archipelago
+        - island
+        - islet
+        - archipelago
         landuse:
-          residential
+        - residential
         boundary:
-          aboriginal_lands
+        - aboriginal_lands
   road_geometry:
     type: geometry
     fields:
