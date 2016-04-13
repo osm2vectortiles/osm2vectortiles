@@ -113,16 +113,21 @@ function update_metadata() {
     local extract_center="$3"
     local min_zoom="$4"
     local max_zoom="$5"
-    local attribution="&copy; OpenStreetMap contributors"
+    local attribution='<a href="http://www.openstreetmap.org/about/">&copy; OpenStreetMap contributors</a>'
+    local filesize="$(wc -c $extract_file)"
 
+    insert_metadata_entry "$extract_file" "type" "baselayer"
     insert_metadata_entry "$extract_file" "attribution" "$attribution"
     insert_metadata_entry "$extract_file" "version" "$VERSION"
     update_metadata_entry "$extract_file" "minzoom" "$min_zoom"
     update_metadata_entry "$extract_file" "maxzoom" "$max_zoom"
-    update_metadata_entry "$extract_file" "name" "Open Streets"
+    update_metadata_entry "$extract_file" "name" "osm2vectortiles"
+    update_metadata_entry "$extract_file" "id" "osm2vectortiles"
     update_metadata_entry "$extract_file" "description" "Extract from osm2vectortiles.org"
     update_metadata_entry "$extract_file" "bounds" "$extract_bounds"
     update_metadata_entry "$extract_file" "center" "$extract_center"
+    update_metadata_entry "$extract_file" "basename" "${extract_file##*/}"
+    update_metadata_entry "$extract_file" "filesize" "$filesize"
 }
 
 function create_extracts() {
