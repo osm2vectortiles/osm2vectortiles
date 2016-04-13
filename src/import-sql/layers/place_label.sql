@@ -39,25 +39,25 @@ CREATE OR REPLACE VIEW place_label_z8 AS (
 CREATE OR REPLACE VIEW place_label_z9 AS (
     SELECT * FROM osm_place_geometry
     WHERE name <> ''
-      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village')
+      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town')
 );
 
 CREATE OR REPLACE VIEW place_label_z10 AS (
     SELECT * FROM osm_place_geometry
     WHERE name <> ''
-      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village', 'suburb')
+      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village')
 );
 
 CREATE OR REPLACE VIEW place_label_z11toz12 AS (
     SELECT * FROM osm_place_geometry
     WHERE name <> ''
-      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village', 'suburb', 'hamlet')
+      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village', 'suburb')
 );
 
 CREATE OR REPLACE VIEW place_label_z13 AS (
     SELECT * FROM osm_place_geometry
     WHERE name <> ''
-      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village', 'suburb', 'hamlet', 'neighbourhood', 'residential')
+      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village', 'suburb', 'hamlet')
 );
 
 CREATE OR REPLACE VIEW place_label_z14 AS (
