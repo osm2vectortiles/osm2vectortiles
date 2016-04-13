@@ -395,8 +395,8 @@ tables:
       - zoo
       - camp_site
     type: polygon
-  place_geometry:
-    type: geometry
+  place_point:
+    type: point
     fields:
     - name: osm_id
       type: id
@@ -442,49 +442,23 @@ tables:
     - key: scalerank
       name: scalerank
       type: integer
-    type_mappings:
-      point:
-        place:
-        - city
-        - town
-        - village
-        - hamlet
-        - suburb
-        - neighbourhood
-        - island
-        - islet
-        - archipelago
-        - region
-        - county
-        - district
-        - municipality
-        - locality
-        - isolated_dwelling
-        landuse:
-        - residential
-        boundary:
-        - aboriginal_lands
-      polygons:
-        place:
-        - city
-        - town
-        - village
-        - hamlet
-        - suburb
-        - neighbourhood
-        - island
-        - islet
-        - archipelago
-        - region
-        - county
-        - district
-        - municipality
-        - locality
-        - isolated_dwelling
-        landuse:
-        - residential
-        boundary:
-        - aboriginal_lands
+    mapping:
+      place:
+      - city
+      - town
+      - village
+      - hamlet
+      - suburb
+      - neighbourhood
+      - island
+      - islet
+      - archipelago
+      - region
+      - county
+      - district
+      - municipality
+      - locality
+      - isolated_dwelling
   road_geometry:
     type: geometry
     fields:
