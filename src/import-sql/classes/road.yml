@@ -48,7 +48,6 @@ system:
     - bridleway
     major_rail:
     - rail
-    - tram
     - light_rail
     - subway
     aerialway:

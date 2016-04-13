@@ -602,7 +602,6 @@ tables:
       polygons:
           railway:
           - rail
-          - tram
           - light_rail
           - subway
           highway:
@@ -655,7 +654,6 @@ tables:
       linestrings:
           railway:
           - rail
-          - tram
           - light_rail
           - subway
           highway:
