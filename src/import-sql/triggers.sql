@@ -69,7 +69,7 @@ CREATE OR REPLACE FUNCTION create_tracking_triggers() returns VOID
 AS $$
 BEGIN
     -- Place
-    PERFORM recreate_osm_delete_tracking('osm_place_point');
+    PERFORM recreate_osm_delete_tracking('osm_place_geometry');
     -- POI
     PERFORM recreate_osm_delete_tracking('osm_poi_point');
     PERFORM recreate_osm_delete_tracking('osm_poi_polygon');
@@ -123,7 +123,7 @@ BEGIN
 	UPDATE osm_landuse_polygon SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_landuse_polygon_gen0 SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_landuse_polygon_gen1 SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_place_point SET timestamp=ts WHERE timestamp IS NULL;
+	UPDATE osm_place_geometry SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_poi_point SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_poi_polygon SET timestamp=ts WHERE timestamp IS NULL;
 	UPDATE osm_road_geometry SET timestamp=ts WHERE timestamp IS NULL;
@@ -158,7 +158,7 @@ BEGIN
     DROP TABLE osm_landuse_polygon CASCADE;
     DROP TABLE osm_landuse_polygon_gen0 CASCADE;
     DROP TABLE osm_landuse_polygon_gen1 CASCADE;
-    DROP TABLE osm_place_point CASCADE;
+    DROP TABLE osm_place_geometry CASCADE;
     DROP TABLE osm_poi_point CASCADE;
     DROP TABLE osm_poi_polygon CASCADE;
     DROP TABLE osm_road_geometry CASCADE;
@@ -177,7 +177,7 @@ $$ language plpgsql;
 CREATE OR REPLACE FUNCTION disable_delete_tracking() returns VOID
 AS $$
 BEGIN
-    ALTER TABLE osm_place_point DISABLE TRIGGER USER;
+    ALTER TABLE osm_place_geometry DISABLE TRIGGER USER;
     ALTER TABLE osm_poi_point DISABLE TRIGGER USER;
     ALTER TABLE osm_poi_polygon DISABLE TRIGGER USER;
     ALTER TABLE osm_road_geometry DISABLE TRIGGER USER;
@@ -202,7 +202,7 @@ $$ language plpgsql;
 CREATE OR REPLACE FUNCTION enable_delete_tracking() returns VOID
 AS $$
 BEGIN
-    ALTER TABLE osm_place_point ENABLE TRIGGER USER;
+    ALTER TABLE osm_place_geometry ENABLE TRIGGER USER;
     ALTER TABLE osm_poi_point ENABLE TRIGGER USER;
     ALTER TABLE osm_poi_polygon ENABLE TRIGGER USER;
     ALTER TABLE osm_road_geometry ENABLE TRIGGER USER;
