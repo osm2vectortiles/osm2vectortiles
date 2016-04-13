@@ -13,48 +13,64 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
-CREATE OR REPLACE VIEW road_z5toz6 AS
-    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
-    FROM osm_road_geometry
-    WHERE type IN ('motorway', 'trunk');
+CREATE OR REPLACE FUNCTION road_class(type VARCHAR, service VARCHAR, access VARCHAR) RETURNS VARCHAR
+AS $$
+BEGIN
+    RETURN CASE
+        WHEN type = 'rail' AND service IN ('yard', 'siding', 'spur', 'crossover') THEN 'minor_rail'
+        WHEN access IN ('no', 'private') THEN 'street_limited'
+        ELSE classify_road(type)
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
 
-CREATE OR REPLACE VIEW road_z7 AS
+CREATE OR REPLACE VIEW road_z5 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
     FROM osm_road_geometry
-    WHERE type IN ('motorway', 'trunk', 'primary', 'motorway_link', 'primary_link', 'trunk_link');
+    WHERE road_class(type, service, access) IN ('motorway', 'trunk');
 
-CREATE OR REPLACE VIEW road_z8toz10 AS
+CREATE OR REPLACE VIEW road_z6toz7 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
     FROM osm_road_geometry
-    WHERE type IN ('motorway', 'trunk', 'primary', 'motorway_link', 'primary_link', 'trunk_link', 'secondary', 'secondary_link');
+    WHERE road_class(type, service, access) IN ('motorway', 'trunk', 'primary');
+
+CREATE OR REPLACE VIEW road_z8toz9 AS
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
+    FROM osm_road_geometry
+    WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'major_rail');
+
+CREATE OR REPLACE VIEW road_z10 AS
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
+    FROM osm_road_geometry
+    WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail');
 
 CREATE OR REPLACE VIEW road_z11 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
     FROM osm_road_geometry
-    WHERE type IN ('motorway', 'trunk', 'primary', 'motorway_link', 'primary_link', 'trunk_link', 'secondary', 'secondary_link', 'tertiary', 'teriary_link');
+    WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry');
 
 CREATE OR REPLACE VIEW road_z12 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
     FROM osm_road_geometry
-    WHERE classify_road(type) IN ('major_rail', 'street')
-      AND type IN ('motorway', 'trunk', 'primary', 'motorway_link', 'primary_link', 'trunk_link', 'secondary', 'secondary_link', 'tertiary', 'teriary_link');
+    WHERE classify_road(type) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry', 'service', 'link', 'construction', 'pedestrian', 'street_limited', 'aerialway');
 
 CREATE OR REPLACE VIEW road_z13 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order, timestamp
     FROM osm_road_geometry
-    WHERE classify_road(type) IN ('minor_rail', 'street_limited', 'service')
-      AND type IN ('motorway', 'trunk', 'primary', 'motorway_link', 'primary_link', 'trunk_link', 'secondary', 'secondary_link', 'tertiary', 'teriary_link');
+    WHERE classify_road(type) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry', 'service', 'link', 'construction', 'pedestrian', 'street_limited', 'aerialway', 'track');
 
 CREATE OR REPLACE VIEW road_z14 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order, timestamp
     FROM osm_road_geometry;
 
 CREATE OR REPLACE VIEW road_layer AS (
-    SELECT osm_id, timestamp, geometry FROM road_z5toz6
+    SELECT osm_id, timestamp, geometry FROM road_z5
     UNION
-    SELECT osm_id, timestamp, geometry FROM road_z7
+    SELECT osm_id, timestamp, geometry FROM road_z6toz7
     UNION
-    SELECT osm_id, timestamp, geometry FROM road_z8toz10
+    SELECT osm_id, timestamp, geometry FROM road_z8toz9
+    UNION
+    SELECT osm_id, timestamp, geometry FROM road_z10
     UNION
     SELECT osm_id, timestamp, geometry FROM road_z11
     UNION
@@ -91,16 +107,20 @@ BEGIN
 		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 11
 		UNION
 
-		SELECT c.x, c.y, c.z FROM road_z8toz10 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 8 AND 10
+        SELECT c.x, c.y, c.z FROM road_z10 AS l
+        INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 10
+        UNION
+
+		SELECT c.x, c.y, c.z FROM road_z8toz9 AS l
+		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 8 AND 9
 		UNION
 
-		SELECT c.x, c.y, c.z FROM road_z7 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 7
+		SELECT c.x, c.y, c.z FROM road_z6toz7 AS l
+		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 6 AND 7
 		UNION
 
-		SELECT c.x, c.y, c.z FROM road_z5toz6 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 5 AND 6 
+		SELECT c.x, c.y, c.z FROM road_z5 AS l
+		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 5
 	);
 END;
 $$ LANGUAGE plpgsql;
@@ -115,17 +135,6 @@ BEGIN
         WHEN type IN ('secondary') THEN 40
         WHEN type IN ('tertiary') THEN 50
         ELSE 100
-    END;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION road_class(type VARCHAR, service VARCHAR, access VARCHAR) RETURNS VARCHAR
-AS $$
-BEGIN
-    RETURN CASE
-        WHEN type = 'rail' AND service IN ('yard', 'siding', 'spur', 'crossover') THEN 'minor_rail'
-        WHEN access IN ('no', 'private', 'permissive', 'agriculture', 'use_sidepath', 'delivery', 'designated', 'dismount', 'discouraged', 'forestry', 'destination', 'customers') THEN 'street_limited'
-        ELSE classify_road(type)
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;

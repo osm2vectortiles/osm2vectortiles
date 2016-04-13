@@ -533,7 +533,6 @@ tables:
       polygons:
           railway:
           - rail
-          - tram
           - light_rail
           - subway
           highway:
@@ -552,7 +551,6 @@ tables:
           - road
           - living_street
           - raceway
-          - pedestrian
           - construction
           - track
           - service
@@ -586,7 +584,6 @@ tables:
       linestrings:
           railway:
           - rail
-          - tram
           - light_rail
           - subway
           highway:
@@ -605,7 +602,6 @@ tables:
           - road
           - living_street
           - raceway
-          - pedestrian
           - construction
           - track
           - service
