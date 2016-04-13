@@ -1,62 +1,84 @@
-CREATE OR REPLACE VIEW place_label_z4toz5 AS (
+CREATE OR REPLACE VIEW place_label_z3 AS (
     SELECT * FROM osm_place_geometry
-    WHERE name IS NOT NULL
+    WHERE name <> ''
       AND scalerank IS NOT NULL
-      AND scalerank < 3
+      AND scalerank BETWEEN 1 AND 2
+      AND type = 'city'
 );
 
-CREATE OR REPLACE VIEW place_label_z6 AS (
+CREATE OR REPLACE VIEW place_label_z4 AS (
     SELECT * FROM osm_place_geometry
-    WHERE name IS NOT NULL
+    WHERE name <> ''
       AND scalerank IS NOT NULL
-      AND scalerank < 8
+      AND scalerank BETWEEN 1 AND 4
+      AND type = 'city'
 );
 
-CREATE OR REPLACE VIEW place_label_z7 AS (
+CREATE OR REPLACE VIEW place_label_z5 AS (
     SELECT * FROM osm_place_geometry
-    WHERE name IS NOT NULL
+    WHERE name <> ''
       AND scalerank IS NOT NULL
+      AND scalerank BETWEEN 1 AND 7
+      AND type = 'city'
+);
+
+CREATE OR REPLACE VIEW place_label_z6toz7 AS (
+    SELECT * FROM osm_place_geometry
+    WHERE name <> ''
+      AND scalerank IS NOT NULL
+      AND scalerank BETWEEN 1 AND 10
+      AND type IN ('city', 'town')
 );
 
 CREATE OR REPLACE VIEW place_label_z8 AS (
     SELECT * FROM osm_place_geometry
-    WHERE name IS NOT NULL
+    WHERE name <> ''
       AND type IN ('city', 'town')
 );
 
-CREATE OR REPLACE VIEW place_label_z9toz10 AS (
+CREATE OR REPLACE VIEW place_label_z9 AS (
     SELECT * FROM osm_place_geometry
-    WHERE name IS NOT NULL
-      AND type IN ('city', 'town', 'district')
+    WHERE name <> ''
+      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village')
+);
+
+CREATE OR REPLACE VIEW place_label_z10 AS (
+    SELECT * FROM osm_place_geometry
+    WHERE name <> ''
+      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village', 'suburb')
 );
 
 CREATE OR REPLACE VIEW place_label_z11toz12 AS (
     SELECT * FROM osm_place_geometry
-    WHERE name IS NOT NULL
-      AND type IN ('city', 'town', 'district', 'village', 'suburb')
+    WHERE name <> ''
+      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village', 'suburb', 'hamlet')
 );
 
 CREATE OR REPLACE VIEW place_label_z13 AS (
     SELECT * FROM osm_place_geometry
-    WHERE name IS NOT NULL
-      AND type IN ('city', 'town', 'district', 'village', 'hamlet', 'suburb','neighbourhood')
+    WHERE name <> ''
+      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village', 'suburb', 'hamlet', 'neighbourhood', 'residential')
 );
 
 CREATE OR REPLACE VIEW place_label_z14 AS (
     SELECT * FROM osm_place_geometry
-    WHERE name IS NOT NULL
+    WHERE name <> ''
 );
 
 CREATE OR REPLACE VIEW place_label_layer AS (
-    SELECT osm_id, timestamp, geometry FROM place_label_z4toz5
+    SELECT osm_id, timestamp, geometry FROM place_label_z3
     UNION
-    SELECT osm_id, timestamp, geometry FROM place_label_z6
+    SELECT osm_id, timestamp, geometry FROM place_label_z4
     UNION
-    SELECT osm_id, timestamp, geometry FROM place_label_z7
+    SELECT osm_id, timestamp, geometry FROM place_label_z5
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z6toz7
     UNION
     SELECT osm_id, timestamp, geometry FROM place_label_z8
     UNION
-    SELECT osm_id, timestamp, geometry FROM place_label_z9toz10
+    SELECT osm_id, timestamp, geometry FROM place_label_z9
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z10
     UNION
     SELECT osm_id, timestamp, geometry FROM place_label_z11toz12
     UNION
@@ -85,26 +107,34 @@ BEGIN
 
 		SELECT c.x, c.y, c.z FROM place_label_z11toz12 AS l
 		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 11 AND 12
+        UNION
+
+        SELECT c.x, c.y, c.z FROM place_label_z10 AS l
+        INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 10
 		UNION
 
-		SELECT c.x, c.y, c.z FROM place_label_z9toz10 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 9 AND 10
+		SELECT c.x, c.y, c.z FROM place_label_z9 AS l
+		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 9
 		UNION
 
 		SELECT c.x, c.y, c.z FROM place_label_z8 AS l
 		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 8
 		UNION
 
-		SELECT c.x, c.y, c.z FROM place_label_z7 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 7
+		SELECT c.x, c.y, c.z FROM place_label_z6toz7 AS l
+		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 6 AND 7
+        UNION
+
+        SELECT c.x, c.y, c.z FROM place_label_z5 AS l
+        INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 5
+        UNION
+
+        SELECT c.x, c.y, c.z FROM place_label_z4 AS l
+        INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 4
 		UNION
 
-		SELECT c.x, c.y, c.z FROM place_label_z6 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 6
-		UNION
-
-		SELECT c.x, c.y, c.z FROM place_label_z4toz5 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 4 AND 5
+		SELECT c.x, c.y, c.z FROM place_label_z3 AS l
+		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 3
 	);
 END;
 $$ LANGUAGE plpgsql;

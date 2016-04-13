@@ -670,20 +670,26 @@ Layer:
                               population DESC NULLS LAST
         ) AS localrank
         FROM (
-            SELECT * FROM place_label_z4toz5
-            WHERE z(!scale_denominator!) BETWEEN 4 AND 5
+            SELECT * FROM place_label_z3
+            WHERE z(!scale_denominator!) = 3
             UNION ALL
-            SELECT * FROM place_label_z6
-            WHERE z(!scale_denominator!) = 6
+            SELECT * FROM place_label_z4
+            WHERE z(!scale_denominator!) = 4
             UNION ALL
-            SELECT * FROM place_label_z7
-            WHERE z(!scale_denominator!) = 7
+            SELECT * FROM place_label_z5
+            WHERE z(!scale_denominator!) = 5
+            UNION ALL
+            SELECT * FROM place_label_z6toz7
+            WHERE z(!scale_denominator!) BETWEEN 6 AND 7
             UNION ALL
             SELECT * FROM place_label_z8
             WHERE z(!scale_denominator!) = 8
             UNION ALL
-            SELECT * FROM place_label_z9toz10
-            WHERE z(!scale_denominator!) BETWEEN 9 AND 10
+            SELECT * FROM place_label_z9
+            WHERE z(!scale_denominator!) = 9
+            UNION ALL
+            SELECT * FROM place_label_z10
+            WHERE z(!scale_denominator!) = 10
             UNION ALL
             SELECT * FROM place_label_z11toz12
             WHERE z(!scale_denominator!) BETWEEN 11 AND 12
