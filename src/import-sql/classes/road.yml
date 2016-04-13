@@ -25,7 +25,6 @@ system:
     - living_street
     - raceway
     pedestrian:
-    - pedestrian
     - platform
     construction:
     - construction

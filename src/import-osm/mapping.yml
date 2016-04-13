@@ -620,7 +620,6 @@ tables:
           - road
           - living_street
           - raceway
-          - pedestrian
           - construction
           - track
           - service
