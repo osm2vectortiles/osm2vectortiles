@@ -6,11 +6,23 @@ _prefs:
   saveCenter: true
 attribution: © OpenStreetMap contributors
 center: 
-  - 9.5732
-  - 47.1164
-  - 10
+  - 8.5388
+  - 47.3434
+  - 12
 description: |-
   Free global vector tiles from OpenStreetMap compatible with Mapbox Streets v7.
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -313,7 +325,7 @@ Layer:
     description: ''
     fields: 
       class: "One of: national_park, wetland, wetland_noveg"
-      type: "OSM tag, more specific than class"
+      type: OSM tag, more specific than class
     properties: 
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -817,7 +829,6 @@ Layer:
       user: osm
     description: ''
     fields: 
-      address: String
       localrank: Number. Priority relative to nearby POIs. Useful for limiting label density.
       maki: The name of the Maki icon that should be used for the POI
       name: Local name of the POI
@@ -827,11 +838,9 @@ Layer:
       name_fr: French name of the POI
       name_ru: Russian name of the POI
       name_zh: Chinese name of the POI
-      network: String
       ref: Short reference code, if any
       scalerank: Number. 1-5. Useful for styling icon sizes and minimum zoom levels.
       type: The original OSM tag value
-      website: String
     properties: 
       "buffer-size": 128
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
@@ -850,7 +859,14 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_linestring(osm_id) AS osm_id, geometry, name,
+          SELECT * FROM
+          (
+          SELECT osm_id_linestring(osm_id) AS osm_id,
+            CASE WHEN z(!scale_denominator!) < 11
+                 THEN st_startpoint(geometry)
+                 ELSE geometry
+            END AS geometry,
+            name,
             coalesce(NULLIF(name_en, ''), name) AS name_en,
             coalesce(NULLIF(name_es, ''), name) AS name_es,
             coalesce(NULLIF(name_fr, ''), name) AS name_fr,
@@ -863,7 +879,10 @@ Layer:
             road_class(type, service, access) AS class,
             'default' as shield,
             rank() OVER (
-                PARTITION BY LabelGrid(geometry, 200 * !pixel_width!)
+                PARTITION BY LabelGrid(geometry, (CASE WHEN z(!scale_denominator!) >= 11
+                                                       THEN 300
+                                                       ELSE 200 
+                                                   END) * !pixel_width!)
                 ORDER BY road_localrank(type) ASC, round(MercLength(geometry)) DESC
             ) AS localrank
             FROM (
@@ -879,8 +898,13 @@ Layer:
               SELECT * FROM road_label_z14
               WHERE z(!scale_denominator!) = 14
             ) AS road_label
-            WHERE geometry && !bbox! AND GeometryType(geometry) = 'LINESTRING'
-        ) AS data
+            WHERE geometry && !bbox!
+              AND GeometryType(geometry) = 'LINESTRING'
+          ) AS t1
+          WHERE (z(!scale_denominator!) BETWEEN 8 AND 10 AND localrank < 2)
+             OR (z(!scale_denominator!) BETWEEN 11 AND 12 AND localrank < 5)
+             OR (z(!scale_denominator!) BETWEEN 13 AND 14)
+        ) AS t2
       type: postgis
       user: osm
     description: ''
