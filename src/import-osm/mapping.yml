@@ -877,7 +877,6 @@ tables:
       - embassy
       - community_centre
       - nursing_home
-      - arts_centre
       - university
       - school
       - kindergarten
@@ -952,7 +951,6 @@ tables:
       - hockey
       - gymnastics
       - running
-      - american_football
       - canoe
       - rugby_union
       - skating
@@ -1180,7 +1178,6 @@ tables:
       - embassy
       - community_centre
       - nursing_home
-      - arts_centre
       - university
       - school
       - kindergarten
@@ -1255,7 +1252,6 @@ tables:
       - hockey
       - gymnastics
       - running
-      - american_football
       - canoe
       - rugby_union
       - skating
