@@ -104,6 +104,7 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
 
     connection = pika.BlockingConnection(pika.URLParameters(rabbitmq_url))
     channel = connection.channel()
+    channel.confirm_delivery()
     configure_rabbitmq(channel)
 
     def callback(ch, method, properties, body):
@@ -150,10 +151,13 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
 
         download_link = s3_url(host, port, bucket_name, mbtiles_file)
         result_msg = create_result_message(task_id, download_link, msg)
-        durable_publish(channel, result_queue_name, body=json.dumps(result_msg))
 
         channel.basic_ack(delivery_tag=method.delivery_tag)
 
+        # Publish needs to be after ACK otherwise
+        # RabbitMQ will close the connection
+        durable_publish(channel, result_queue_name,
+                        body=json.dumps(result_msg))
 
     channel.basic_consume(callback, queue=queue_name)
     try:
@@ -179,7 +183,8 @@ def durable_publish(channel, queue, body):
     Publish a message body to a queue in a channel and ensure it stays
     durable on RabbitMQ server restart
     """
-    properties = pika.BasicProperties(delivery_mode=2)
+    properties = pika.BasicProperties(delivery_mode=2,
+                                      content_type='application/json')
     channel.basic_publish(exchange='', routing_key=queue,
                           body=body, properties=properties)
 
