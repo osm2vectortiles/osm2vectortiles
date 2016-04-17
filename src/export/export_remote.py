@@ -153,12 +153,10 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
         download_link = s3_url(host, port, bucket_name, mbtiles_file)
         result_msg = create_result_message(task_id, download_link, msg)
 
-        channel.basic_ack(delivery_tag=method.delivery_tag)
-
-        # Publish needs to be after ACK otherwise
-        # RabbitMQ will close the connection
         durable_publish(channel, result_queue_name,
                         body=json.dumps(result_msg))
+        channel.basic_ack(delivery_tag=method.delivery_tag)
+
 
     channel.basic_consume(callback, queue=queue_name)
     try:
