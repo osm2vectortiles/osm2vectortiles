@@ -104,6 +104,7 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
 
     connection = pika.BlockingConnection(pika.URLParameters(rabbitmq_url))
     channel = connection.channel()
+    channel.basic_qos(prefetch_count=1)
     channel.confirm_delivery()
     configure_rabbitmq(channel)
 
