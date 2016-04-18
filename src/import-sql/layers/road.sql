@@ -63,65 +63,25 @@ CREATE OR REPLACE VIEW road_z14 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order, timestamp
     FROM osm_road_geometry;
 
-CREATE OR REPLACE VIEW road_layer AS (
-    SELECT osm_id, timestamp, geometry FROM road_z5
-    UNION
-    SELECT osm_id, timestamp, geometry FROM road_z6toz7
-    UNION
-    SELECT osm_id, timestamp, geometry FROM road_z8toz9
-    UNION
-    SELECT osm_id, timestamp, geometry FROM road_z10
-    UNION
-    SELECT osm_id, timestamp, geometry FROM road_z11
-    UNION
-    SELECT osm_id, timestamp, geometry FROM road_z12
-    UNION
-    SELECT osm_id, timestamp, geometry FROM road_z13
-    UNION
-    SELECT osm_id, timestamp, geometry FROM road_z14
-);
-
 CREATE OR REPLACE FUNCTION road_changed_tiles(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
+DECLARE
+    -- road label has buffer of 4 but if we take buffer of 8 we can at the
+    -- same time also cover the changed tiles of road_label
+    buffer_size CONSTANT integer := 8;
 BEGIN
-	RETURN QUERY (
-		WITH changed_tiles AS (
-		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-		    FROM road_layer AS c
-        INNER JOIN LATERAL overlapping_tiles(c.geometry, 14) AS t ON c.timestamp = ts
-		)
-
-		SELECT c.x, c.y, c.z FROM road_z14 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 14
-		UNION
-
-		SELECT c.x, c.y, c.z FROM road_z13 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 13
-		UNION
-
-		SELECT c.x, c.y, c.z FROM road_z12 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 12
-		UNION
-
-		SELECT c.x, c.y, c.z FROM road_z11 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 11
-		UNION
-
-        SELECT c.x, c.y, c.z FROM road_z10 AS l
-        INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 10
-        UNION
-
-		SELECT c.x, c.y, c.z FROM road_z8toz9 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 8 AND 9
-		UNION
-
-		SELECT c.x, c.y, c.z FROM road_z6toz7 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 6 AND 7
-		UNION
-
-		SELECT c.x, c.y, c.z FROM road_z5 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 5
-	);
+    RETURN QUERY (
+        WITH geoms AS (
+            SELECT osm_id, timestamp, geometry FROM osm_delete
+            WHERE table_name = 'osm_road_geometry'
+            UNION ALL
+            SELECT osm_id, timestamp, geometry FROM osm_road_geometry
+        )
+        SELECT DISTINCT t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
+        FROM geoms AS c
+        INNER JOIN LATERAL overlapping_tiles(c.geometry, 14, buffer_size)
+                           AS t ON c.timestamp = ts
+    );
 END;
 $$ LANGUAGE plpgsql;
 

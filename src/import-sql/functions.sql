@@ -1,6 +1,7 @@
 CREATE OR REPLACE FUNCTION overlapping_tiles(
     geom geometry,
-    max_zoom_level INTEGER
+    max_zoom_level INTEGER,
+    buffer_size INTEGER
 ) RETURNS TABLE (
     tile_z INTEGER,
     tile_x INTEGER,
@@ -9,10 +10,10 @@ CREATE OR REPLACE FUNCTION overlapping_tiles(
 BEGIN
     RETURN QUERY
         WITH RECURSIVE tiles(x, y, z, e) AS (
-            SELECT 0, 0, 0, geom && XYZ_Extent(0, 0, 0)
+            SELECT 0, 0, 0, geom && XYZ_Extent(0, 0, 0, buffer_size)
             UNION ALL
             SELECT x*2 + xx, y*2 + yy, z+1,
-                   geom && XYZ_Extent(x*2 + xx, y*2 + yy, z+1)
+                   geom && XYZ_Extent(x*2 + xx, y*2 + yy, z+1, buffer_size)
             FROM tiles,
             (VALUES (0, 0), (0, 1), (1, 1), (1, 0)) as c(xx, yy)
             WHERE e AND z < max_zoom_level
@@ -31,23 +32,10 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION deleted_tiles(ts timestamp)
-RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
-BEGIN
-	RETURN QUERY (
-		SELECT DISTINCT t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-		FROM osm_delete AS d
-		INNER JOIN LATERAL overlapping_tiles(d.geometry, 14) AS t ON d.timestamp = ts
-	);
-END;
-$$ LANGUAGE plpgsql;
-
 CREATE OR REPLACE FUNCTION changed_tiles(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
 	RETURN QUERY (
-	    SELECT * FROM deleted_tiles(ts)
-        UNION
 	    SELECT * FROM admin_changed_tiles(ts)
 	    UNION
 	    SELECT * FROM aeroway_changed_tiles(ts)
