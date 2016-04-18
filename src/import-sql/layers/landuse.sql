@@ -37,13 +37,13 @@ CREATE OR REPLACE VIEW landuse_z10 AS
 CREATE OR REPLACE VIEW landuse_z11 AS
     SELECT *
     FROM osm_landuse_polygon_gen1
-    WHERE classify_landuse(type) IN ('wood', 'cemetery', 'park', 'school')
+    WHERE classify_landuse(type) IN ('wood', 'cemetery', 'park', 'school', 'hospital')
       AND st_area(geometry) > 50000;
 
 CREATE OR REPLACE VIEW landuse_z12 AS
     SELECT *
     FROM osm_landuse_polygon
-    WHERE classify_landuse(type) IN ('wood', 'cemetery', 'park', 'school')
+    WHERE classify_landuse(type) IN ('wood', 'cemetery', 'park', 'school', 'hospital')
       AND st_area(geometry) > 10000;
 
 CREATE OR REPLACE VIEW landuse_z13toz14 AS
