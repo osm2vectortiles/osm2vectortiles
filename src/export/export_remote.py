@@ -17,14 +17,13 @@ Options:
 """
 import time
 import subprocess
-import re
-import sys
 import os
 import os.path
 import json
 import humanize
 
 from boto.s3.connection import S3Connection, OrdinaryCallingFormat
+
 import pika
 from docopt import docopt
 
@@ -38,6 +37,7 @@ def s3_url(host, port, bucket_name, file_name):
 
 
 def connect_s3(host, port, bucket_name):
+    # import boto
     # boto.set_stream_logger('paws')
     is_secure = port == 443
     conn = S3Connection(
@@ -104,6 +104,8 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
 
     connection = pika.BlockingConnection(pika.URLParameters(rabbitmq_url))
     channel = connection.channel()
+    channel.basic_qos(prefetch_count=1)
+    channel.confirm_delivery()
     configure_rabbitmq(channel)
 
     def callback(ch, method, properties, body):
@@ -126,7 +128,7 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
                 max_zoom=tileinfo['max_zoom']
             )
         elif msg['type'] == 'list':
-            list_file='/tmp/tiles.txt'
+            list_file = '/tmp/tiles.txt'
             with open(list_file, 'w') as fh:
                 write_list_file(fh)
 
@@ -150,8 +152,9 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
 
         download_link = s3_url(host, port, bucket_name, mbtiles_file)
         result_msg = create_result_message(task_id, download_link, msg)
-        durable_publish(channel, result_queue_name, body=json.dumps(result_msg))
 
+        durable_publish(channel, result_queue_name,
+                        body=json.dumps(result_msg))
         channel.basic_ack(delivery_tag=method.delivery_tag)
 
 
@@ -179,7 +182,8 @@ def durable_publish(channel, queue, body):
     Publish a message body to a queue in a channel and ensure it stays
     durable on RabbitMQ server restart
     """
-    properties = pika.BasicProperties(delivery_mode=2)
+    properties = pika.BasicProperties(delivery_mode=2,
+                                      content_type='application/json')
     channel.basic_publish(exchange='', routing_key=queue,
                           body=body, properties=properties)
 

@@ -100,7 +100,7 @@ export:
   links:
    - postgis:db
   environment:
-    BBOX: "9.39,47.01,9.7,47.29"
+    BBOX: "8.34,47.27,8.75,47.53"
     MIN_ZOOM: "8"
     MAX_ZOOM: "14"
 export-list:
@@ -150,3 +150,11 @@ mock-s3:
   image: "ianblenke/mock-s3"
   ports:
    - "8080"
+compare-visual:
+  image: "osm2vectortiles/compare-visual"
+  ports:
+   - "3030:3030"
+  volumes:
+   - ./osm2vectortiles.tm2source:/data/tm2source
+  links:
+   - postgis:db

@@ -4,7 +4,7 @@ set -o pipefail
 set -o nounset
 
 readonly SQL_FUNCTIONS_FILE=${IMPORT_DATA_DIR:-/usr/src/app/functions.sql}
-readonly SQL_VIEWS_DIR=${IMPORT_DATA_DIR:-/usr/src/app/views/}
+readonly SQL_LAYERS_DIR=${IMPORT_DATA_DIR:-/usr/src/app/layers/}
 
 readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
 readonly OSM_DB=${OSM_DB:-osm}
@@ -28,25 +28,25 @@ function main() {
     echo "Creating functions in $OSM_DB"
     exec_sql_file "$SQL_FUNCTIONS_FILE"
     exec_sql_file "$SQL_XYZ_EXTENT_FILE"
-    echo "Creating views in $OSM_DB"
-    exec_sql_file "${SQL_VIEWS_DIR}admin.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}aeroway.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}barrier_line.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}building.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}housenum_label.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}landuse.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}landuse_overlay.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}place_label.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}poi_label.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}road.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}road_label.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}water.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}water_label.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}waterway.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}waterway_label.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}mountain_peak_label.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}airport_label.sql"
-    exec_sql_file "${SQL_VIEWS_DIR}rail_station_label.sql"
+    echo "Creating layers in $OSM_DB"
+    exec_sql_file "${SQL_LAYERS_DIR}admin.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}aeroway.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}barrier_line.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}building.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}housenum_label.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}landuse.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}landuse_overlay.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}place_label.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}poi_label.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}road.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}road_label.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}water.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}water_label.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}waterway.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}waterway_label.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}mountain_peak_label.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}airport_label.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}rail_station_label.sql"
 }
 
 main

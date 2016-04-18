@@ -1,203 +1,3 @@
-CREATE OR REPLACE FUNCTION localrank_poi(type VARCHAR) RETURNS INTEGER
-AS $$
-BEGIN
-    RETURN CASE
-        WHEN type IN ('station', 'subway_entrance', 'park', 'cemetery', 'bank', 'supermarket', 'car', 'library', 'university', 'college', 'police', 'townhall', 'courthouse') THEN 2
-        WHEN type IN ('nature_reserve', 'garden', 'public_building') THEN 3
-        WHEN type IN ('stadium') THEN 90
-        WHEN type IN ('hospital') THEN 100
-        WHEN type IN ('zoo') THEN 200
-        WHEN type IN ('university', 'school', 'college', 'kindergarten') THEN 300
-        WHEN type IN ('supermarket', 'department_store') THEN 400
-        WHEN type IN ('nature_reserve', 'swimming_area') THEN 500
-        WHEN type IN ('attraction') THEN 600
-        ELSE 1000
-    END;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION localrank_road(type VARCHAR) RETURNS INTEGER
-AS $$
-BEGIN
-    RETURN CASE
-        WHEN type IN ('motorway') THEN 10
-        WHEN type IN ('trunk') THEN 20
-        WHEN type IN ('primary') THEN 30
-        WHEN type IN ('secondary') THEN 40
-        WHEN type IN ('tertiary') THEN 50
-        ELSE 100
-    END;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION normalize_scalerank(scalerank INTEGER) RETURNS INTEGER
-AS $$
-BEGIN
-    RETURN CASE
-        WHEN scalerank >= 9 THEN 9
-        ELSE scalerank
-    END;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION scalerank_poi(type VARCHAR, area REAL) RETURNS INTEGER
-AS $$
-BEGIN
-    RETURN CASE
-        WHEN area > 145000 THEN 1
-        WHEN area > 12780 THEN 2
-        WHEN area > 2960 THEN 3
-        WHEN type IN ('station') THEN 1
-        ELSE 4
-    END;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION scalerank_airport_label(maki VARCHAR, area REAL, aerodrome VARCHAR) RETURNS INTEGER
-AS $$
-BEGIN
-    RETURN CASE
-        WHEN (maki = 'airport' AND area >= 300000) OR aerodrome = 'international' THEN 1
-        WHEN maki = 'airport' AND area < 300000 THEN 2
-        WHEN maki = 'airfield' AND area >= 145000 THEN 3
-        WHEN maki = 'airfield' AND area < 145000 THEN 4
-        ELSE 4
-    END;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION road_class(type VARCHAR, service VARCHAR, access VARCHAR) RETURNS VARCHAR
-AS $$
-BEGIN
-    RETURN CASE
-        WHEN type = 'rail' AND service IN ('yard', 'siding', 'spur', 'crossover') THEN 'minor_rail'
-        WHEN access IN ('no', 'private', 'permissive', 'agriculture', 'use_sidepath', 'delivery', 'designated', 'dismount', 'discouraged', 'forestry', 'destination', 'customers') THEN 'street_limited'
-        ELSE classify_road(type)
-    END;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION road_type(class VARCHAR, type VARCHAR, construction VARCHAR, tracktype VARCHAR, service VARCHAR) RETURNS VARCHAR
-AS $$
-BEGIN
-    RETURN CASE
-        WHEN class = 'construction' THEN road_type_value(class, construction)
-        WHEN class = 'track' THEN road_type_value(class, tracktype)
-        WHEN class = 'service' THEN road_type_value(class, service)
-        WHEN class = 'golf' THEN 'golf'
-        WHEN class IN ('major_rail', 'minor_rail') THEN 'rail'
-        WHEN class = 'mtb' THEN 'mountain_bike'
-        WHEN class = 'aerialway' AND type IN ('gondola', 'mixed_lift', 'chair_lift') THEN road_type_value(class, type)
-        WHEN class = 'aerialway' AND type = 'cable_car' THEN 'aerialway:cablecar'
-        WHEN class = 'aerialway' AND type IN ('drag_lift', 't-bar', 'j-bar', 'platter', 'rope_tow', 'zip_line') THEN 'aerialway:drag_lift'
-        WHEN class = 'aerialway' AND type IN ('magic_carpet', 'canopy') THEN 'aerialway:magic_carpet'
-        ELSE type
-    END;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION road_type_value(left_value VARCHAR, right_value VARCHAR) RETURNS VARCHAR
-AS $$
-BEGIN
-    IF right_value = '' OR right_value IS NULL THEN
-        RETURN left_value;
-    ELSE
-        RETURN left_value || ':' || right_value;
-    END IF;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION road_oneway(oneway INTEGER) RETURNS VARCHAR
-AS $$
-BEGIN
-    IF oneway = 1 THEN
-        RETURN 'true';
-    ELSE
-        RETURN 'false';
-    END IF;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION classify_airport_label(kind VARCHAR, type VARCHAR) RETURNS VARCHAR
-AS $$
-BEGIN
-    RETURN CASE
-        WHEN kind = 'heliport' THEN 'heliport'
-        WHEN kind = 'aerodrome' AND type IN ('public', 'Public') THEN 'airport'
-        WHEN kind = 'aerodrome' AND type IN ('private', 'Private', 'military/public', 'Military/Public') THEN 'airfield'
-        ELSE 'airfield'
-    END;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION classify_structure(is_tunnel BOOLEAN, is_bridge BOOLEAN, is_ford BOOLEAN) RETURNS VARCHAR
-AS $$
-BEGIN
-    IF is_tunnel THEN
-        RETURN 'tunnel';
-    ELSIF is_bridge THEN
-        RETURN 'bridge';
-    ELSIF is_ford THEN
-        RETURN 'ford';
-    ELSE
-        RETURN 'none';
-    END IF;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION poi_address(housenumber VARCHAR, street VARCHAR, place VARCHAR, city VARCHAR, country VARCHAR, postcode VARCHAR) RETURNS VARCHAR
-AS $$
-BEGIN
-    RETURN concat_ws(' ', housenumber, street, place, city, country, postcode);
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION poi_network(type VARCHAR) RETURNS VARCHAR
-AS $$
-BEGIN
-    RETURN CASE
-        WHEN type IN ('station') THEN 'rail'
-        ELSE ''
-    END;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION format_type(class VARCHAR) RETURNS VARCHAR
-AS $$
-BEGIN
-    RETURN REPLACE(INITCAP(class), '_', ' ');
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION meter_to_feet(meter INTEGER) RETURNS INTEGER
-AS $$
-BEGIN
-    RETURN round(meter * 3.28084);
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION is_underground(level INTEGER) RETURNS VARCHAR
-AS $$
-BEGIN
-    IF level >= 1 THEN
-        RETURN 'true';
-    ELSE
-        RETURN 'false';
-    END IF;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION mountain_peak_type(type VARCHAR) RETURNS VARCHAR
-AS $$
-BEGIN
-    IF type = 'volcano' THEN
-        RETURN type;
-    ELSE
-        RETURN 'mountain';
-    END IF;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
-
 CREATE OR REPLACE FUNCTION overlapping_tiles(
     geom geometry,
     max_zoom_level INTEGER
@@ -248,41 +48,41 @@ BEGIN
 	RETURN QUERY (
 	    SELECT * FROM deleted_tiles(ts)
         UNION
-	    SELECT * FROM changed_tiles_admin(ts)
+	    SELECT * FROM admin_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_aeroway(ts)
+	    SELECT * FROM aeroway_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_barrier_line(ts)
+	    SELECT * FROM barrier_line_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_building(ts)
+	    SELECT * FROM building_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_housenum_label(ts)
+	    SELECT * FROM housenum_label_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_landuse(ts)
+	    SELECT * FROM landuse_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_landuse_overlay(ts)
+	    SELECT * FROM landuse_overlay_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_place_label(ts)
+	    SELECT * FROM place_label_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_poi_label(ts)
+	    SELECT * FROM poi_label_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_road(ts)
+	    SELECT * FROM road_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_road_label(ts)
+	    SELECT * FROM road_label_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_water(ts)
+	    SELECT * FROM water_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_water_label(ts)
+	    SELECT * FROM water_label_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_waterway(ts)
+	    SELECT * FROM waterway_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM changed_tiles_waterway_label(ts)
+	    SELECT * FROM waterway_label_changed_tiles(ts)
         UNION
-        SELECT * FROM changed_tiles_mountain_peak_label(ts)
+        SELECT * FROM mountain_peak_label_changed_tiles(ts)
         UNION
-        SELECT * FROM changed_tiles_airport_label(ts)
+        SELECT * FROM airport_label_changed_tiles(ts)
         UNION
-        SELECT * FROM changed_tiles_rail_station_label(ts)
+        SELECT * FROM rail_station_label_changed_tiles(ts)
 	);
 END;
 $$ LANGUAGE plpgsql;

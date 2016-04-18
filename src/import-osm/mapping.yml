@@ -9,8 +9,8 @@ generalized_tables:
     tolerance: 50.0
   water_polygon_gen1:
     source: water_polygon
-    sql_filter: ST_Area(geometry)>50000.000000
-    tolerance: 50.0
+    sql_filter: ST_Area(geometry)>40000.000000
+    tolerance: 30.0
   building_polygon_gen0:
     source: building_polygon
     sql_filter: ST_Area(geometry)>1700.000000
@@ -395,7 +395,8 @@ tables:
       - zoo
       - camp_site
     type: polygon
-  place_point:
+  place_geometry:
+    type: geometry
     fields:
     - name: osm_id
       type: id
@@ -442,95 +443,25 @@ tables:
       name: scalerank
       type: integer
     mapping:
-      place:
-      - city
-      - town
-      - village
-      - hamlet
-      - suburb
-      - neighbourhood
-      - island
-      - islet
-      - archipelago
-      - region
-      - county
-      - district
-      - municipality
-      - locality
-      - isolated_dwelling
-      landuse:
-      - residential
-      boundary:
-      - aboriginal_lands
-    type: point
-  place_polygon:
-    fields:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - name: timestamp
-      type: pbf_timestamp
-    - key: name
-      name: name
-      type: string
-    - name: name_int
-      key: int_name
-      type: string
-    - name: name_fr
-      key: name:fr
-      type: string
-    - name: name_en
-      key: name:en
-      type: string
-    - name: name_de
-      key: name:de
-      type: string
-    - name: name_es
-      key: name:es
-      type: string
-    - name: name_ru
-      key: name:ru
-      type: string
-    - name: name_zh
-      key: name:zh
-      type: string
-    - name: type
-      type: mapping_value
-    - key: population
-      name: population
-      type: integer
-    - key: capital
-      name: capital
-      type: integer
-    - key: admin_level
-      name: admin_level
-      type: integer
-    - key: scalerank
-      name: scalerank
-      type: integer
-    mapping:
-      place:
-      - city
-      - town
-      - village
-      - hamlet
-      - suburb
-      - neighbourhood
-      - island
-      - islet
-      - archipelago
-      - region
-      - county
-      - district
-      - municipality
-      - locality
-      - isolated_dwelling
-      landuse:
-      - residential
-      boundary:
-      - aboriginal_lands
-    type: polygon
+    type_mappings:
+      points:
+        place:
+        - city
+        - town
+        - village
+        - hamlet
+        - suburb
+        - neighbourhood
+        - isolated_dwelling
+      polygons:
+        place:
+        - island
+        - islet
+        - archipelago
+        landuse:
+        - residential
+        boundary:
+        - aboriginal_lands
   road_geometry:
     type: geometry
     fields:
@@ -602,7 +533,6 @@ tables:
       polygons:
           railway:
           - rail
-          - tram
           - light_rail
           - subway
           highway:
@@ -621,7 +551,6 @@ tables:
           - road
           - living_street
           - raceway
-          - pedestrian
           - construction
           - track
           - service
@@ -655,7 +584,6 @@ tables:
       linestrings:
           railway:
           - rail
-          - tram
           - light_rail
           - subway
           highway:
@@ -674,7 +602,6 @@ tables:
           - road
           - living_street
           - raceway
-          - pedestrian
           - construction
           - track
           - service
@@ -744,7 +671,6 @@ tables:
     mapping:
       railway:
       - station
-      - stop
       - halt
       - tram_stop
       - subway_entrance
@@ -928,27 +854,6 @@ tables:
     - name: name_zh
       key: name:zh
       type: string
-    - name: website
-      key: website
-      type: string
-    - name: housenumber
-      key: addr:housenumber
-      type: string
-    - name: street
-      key: addr:street
-      type: string
-    - name: place
-      key: addr:place
-      type: string
-    - name: city
-      key: addr:city
-      type: string
-    - name: postcode
-      key: addr:postcode
-      type: string
-    - name: country
-      key: addr:country
-      type: string
     - key: ref
       name: ref
       type: string
@@ -972,7 +877,6 @@ tables:
       - embassy
       - community_centre
       - nursing_home
-      - arts_centre
       - university
       - school
       - kindergarten
@@ -1047,7 +951,6 @@ tables:
       - hockey
       - gymnastics
       - running
-      - american_football
       - canoe
       - rugby_union
       - skating
@@ -1254,27 +1157,6 @@ tables:
     - name: name_zh
       key: name:zh
       type: string
-    - name: website
-      key: website
-      type: string
-    - name: housenumber
-      key: addr:housenumber
-      type: string
-    - name: street
-      key: addr:street
-      type: string
-    - name: place
-      key: addr:place
-      type: string
-    - name: city
-      key: addr:city
-      type: string
-    - name: postcode
-      key: addr:postcode
-      type: string
-    - name: country
-      key: addr:country
-      type: string
     - key: ref
       name: ref
       type: string
@@ -1296,7 +1178,6 @@ tables:
       - embassy
       - community_centre
       - nursing_home
-      - arts_centre
       - university
       - school
       - kindergarten
@@ -1371,7 +1252,6 @@ tables:
       - hockey
       - gymnastics
       - running
-      - american_football
       - canoe
       - rugby_union
       - skating

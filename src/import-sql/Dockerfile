@@ -11,7 +11,7 @@ RUN pip install -r requirements.txt
 ENV SQL_FUNCTIONS_FILE=/usr/src/app/functions.sql \
     SQL_TRIGGERS_FILE=/usr/src/app/triggers.sql \
     SQL_XYZ_EXTENT_FILE=/usr/src/app/xyz_extent.sql \
-    SQL_VIEWS_DIR=/usr/src/app/views/ \
+    SQL_LAYERS_DIR=/usr/src/app/layers/ \
     PATH=$PATH:/opt/classify
 WORKDIR /usr/src/app
 COPY . /usr/src/app

@@ -45,7 +45,7 @@ CREATE OR REPLACE VIEW landuse_overlay_z13toz14 AS
     FROM osm_landuse_polygon
     WHERE is_landuse_overlay(type);
 
-CREATE OR REPLACE VIEW layer_landuse_overlay AS (
+CREATE OR REPLACE VIEW landuse_overlay_layer AS (
     SELECT osm_id, timestamp, geometry FROM landuse_overlay_z5
     UNION
     SELECT osm_id, timestamp, geometry FROM landuse_overlay_z6
@@ -63,13 +63,13 @@ CREATE OR REPLACE VIEW layer_landuse_overlay AS (
     SELECT osm_id, timestamp, geometry FROM landuse_overlay_z13toz14
 );
 
-CREATE OR REPLACE FUNCTION changed_tiles_landuse_overlay(ts timestamp)
+CREATE OR REPLACE FUNCTION landuse_overlay_changed_tiles(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
 	RETURN QUERY (
 		WITH changed_tiles AS (
 		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-		    FROM layer_landuse_overlay AS c
+		    FROM landuse_overlay_layer AS c
             INNER JOIN LATERAL overlapping_tiles(c.geometry, 14) AS t ON c.timestamp = ts
 		)
 
