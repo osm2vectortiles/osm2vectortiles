@@ -1,5 +1,5 @@
 -- Return pixel resolution at the given zoom level
-CREATE OR REPLACE FUNCTION CDB_XYZ_Resolution(z INTEGER)
+CREATE OR REPLACE FUNCTION XYZ_Resolution(z INTEGER)
 RETURNS FLOAT8
 AS $$
   -- circumference divided by 256 is z0 resolution, then divide by 2^z
@@ -25,7 +25,7 @@ BEGIN
   -- Size of each tile in pixels (1:1 aspect ratio)
   tile_size := 256 + (2 * buffer);
 
-  initial_resolution := CDB_XYZ_Resolution(0);
+  initial_resolution := XYZ_Resolution(0);
 
   origin_shift := (initial_resolution * tile_size) / 2.0;
 
