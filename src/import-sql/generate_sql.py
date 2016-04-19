@@ -14,11 +14,12 @@ from docopt import docopt
 import yaml
 
 
+SQL_INDENT = 8 * " "
 Class = namedtuple('Class', ['name', 'values'])
 
 
 def generate_sql_class(source, func_suffix='class'):
-    def generate_when_statement(class_name, mapping_values):
+    def gen_when_stmt(class_name, mapping_values):
         in_statements = ["'{}'".format(value) for value in mapping_values]
         return " " * 12 + "WHEN type IN ({0}) THEN '{1}'".format(
             ','.join(in_statements),
@@ -28,7 +29,7 @@ def generate_sql_class(source, func_suffix='class'):
     system_name = source['system']['name']
     classes = find_classes(source)
 
-    when_statements = [generate_when_statement(cl, val) for cl, val in classes]
+    when_statements = [gen_when_stmt(cl, val) for cl, val in classes]
 
     return """CREATE OR REPLACE FUNCTION {0}_{1}(type VARCHAR)
 RETURNS VARCHAR AS $$
@@ -55,7 +56,6 @@ def generate_changed_tiles(
         func_changed_tiles_query='changed_tiles_table'
     ):
 
-    indent = 8 * " "
 
     def gen_select_stmt(table):
         return "SELECT * FROM {0}('{1}', ts, {2}, {3}, {4})".format(
@@ -66,8 +66,8 @@ def generate_changed_tiles(
             table.max_zoom,
         )
 
-    stmts = [indent + gen_select_stmt(t) for t in tables]
-    separator = '\n' + indent + 'UNION\n'
+    stmts = [2 * SQL_INDENT + gen_select_stmt(t) for t in tables]
+    separator = '\n' + 2 * SQL_INDENT + 'UNION\n'
     return """CREATE OR REPLACE FUNCTION {0}(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
@@ -88,9 +88,8 @@ def generate_static_table_view(tables, view_name='osm_tables'):
         '{3} AS max_zoom').format(table.name, table.buffer,
                                   table.min_zoom, table.max_zoom)
 
-    indent = 4 * " "
-    stmts = [indent + gen_select_stmt(t) for t in tables]
-    sep = '\n' + indent + 'UNION\n'
+    stmts = [SQL_INDENT + gen_select_stmt(t) for t in tables]
+    sep = '\n' + SQL_INDENT + 'UNION\n'
     return 'CREATE OR REPLACE VIEW {0} AS (\n{1}\n);'.format(view_name,
                                                              sep.join(stmts))
 
@@ -123,7 +122,6 @@ if __name__ == '__main__':
         source = yaml.load(f)
         if args['class']:
             print(generate_sql_class(source))
-
         if args['changed_tiles']:
             print(generate_changed_tiles(find_tables_with_deletes(source)))
         if args['tables']:
