@@ -10,6 +10,7 @@ Usage:
   generate_sql.py create_delete_tables <yaml-source>
   generate_sql.py create_delete_indizes <yaml-source>
   generate_sql.py changed_tiles <yaml-source>
+  generate_sql.py tables <yaml-source>
   generate_sql.py (-h | --help)
 Options:
   -h --help                 Show this screen.
@@ -215,6 +216,22 @@ $$ language plpgsql;
     """.format(func_name, separator.join(stmts))
 
 
+def generate_static_table_view(tables, view_name='osm_tables'):
+
+    def gen_select_stmt(table):
+        return ("SELECT '{0}' AS table_name,"
+        '{1} AS buffer_size,'
+        '{2} AS min_zoom,'
+        '{3} AS max_zoom').format(table.name, table.buffer,
+                                  table.min_zoom, table.max_zoom)
+
+    indent = 4 * " "
+    stmts = [indent + gen_select_stmt(t) for t in tables]
+    sep = '\n' + indent + 'UNION\n'
+    return 'CREATE OR REPLACE VIEW {0} AS (\n{1}\n);'.format(view_name,
+                                                             sep.join(stmts))
+
+
 def find_delete_tables(config, delete_suffix='delete'):
     for src_table in find_tables(config):
         yield Table(src_table.name + '_' + delete_suffix,
@@ -261,3 +278,5 @@ if __name__ == '__main__':
             print(generate_create_delete_indizes(find_delete_tables(source)))
         if args['changed_tiles']:
             print(generate_changed_tiles(find_tables_with_deletes(source)))
+        if args['tables']:
+            print(generate_static_table_view(find_tables(source)))
