@@ -2,9 +2,6 @@
 """Generate SQL functions from custom YAML definitions
 Usage:
   generate_sql.py class <yaml-source>
-  generate_sql.py tracking_triggers <yaml-source>
-  generate_sql.py create_delete_tables <yaml-source>
-  generate_sql.py create_delete_indizes <yaml-source>
   generate_sql.py changed_tiles <yaml-source>
   generate_sql.py tables <yaml-source>
   generate_sql.py (-h | --help)
@@ -50,66 +47,6 @@ def find_classes(config):
 
 
 Table = namedtuple('Table', ['name', 'buffer', 'min_zoom', 'max_zoom'])
-
-
-def generate_create_delete_indizes(
-        tables,
-        func_name='create_osm_delete_indizes',
-        create_index_func='create_osm_delete_index'
-    ):
-
-    def gen_perform_stmt(table):
-        return "PERFORM {0}('{1}');".format(create_index_func, table.name)
-
-    indent = 4 * " "
-    stmts = [indent + gen_perform_stmt(t) for t in tables]
-    return """CREATE OR REPLACE FUNCTION {0}() returns VOID
-AS $$
-BEGIN
-{1}
-END;
-$$ language plpgsql;
-    """.format(func_name, "\n".join(stmts))
-
-
-def generate_tracking_triggers(
-        tables,
-        func_name='create_tracking_triggers',
-        recreate_func_name='recreate_osm_delete_tracking'
-    ):
-
-    def gen_perform_stmt(table):
-        return "PERFORM {0}('{1}');".format(recreate_func_name, table.name)
-
-    indent = 4 * " "
-    stmts = [indent + gen_perform_stmt(t) for t in tables]
-    return """CREATE OR REPLACE FUNCTION {0}() returns VOID
-AS $$
-BEGIN
-{1}
-END;
-$$ language plpgsql;
-    """.format(func_name, "\n".join(stmts))
-
-
-def generate_create_delete_tables(
-        tables,
-        func_name='create_delete_tables',
-        create_table_func='create_delete_table'
-    ):
-
-    def gen_perform_stmt(table):
-        return "PERFORM {0}('{1}');".format(create_table_func, table.name)
-
-    indent = 4 * " "
-    stmts = [indent + gen_perform_stmt(t) for t in tables]
-    return """CREATE OR REPLACE FUNCTION {0}() returns VOID
-AS $$
-BEGIN
-{1}
-END;
-$$ language plpgsql;
-    """.format(func_name, "\n".join(stmts))
 
 
 def generate_changed_tiles(
@@ -187,13 +124,6 @@ if __name__ == '__main__':
         if args['class']:
             print(generate_sql_class(source))
 
-        tables = find_tables(source)
-        if args['tracking_triggers']:
-            print(generate_tracking_triggers(find_tables(source)))
-        if args['create_delete_tables']:
-            print(generate_create_delete_tables(find_delete_tables(source)))
-        if args['create_delete_indizes']:
-            print(generate_create_delete_indizes(find_delete_tables(source)))
         if args['changed_tiles']:
             print(generate_changed_tiles(find_tables_with_deletes(source)))
         if args['tables']:

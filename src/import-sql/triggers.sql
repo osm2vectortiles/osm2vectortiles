@@ -101,3 +101,26 @@ BEGIN
     FROM osm_tables;
 END;
 $$ language plpgsql;
+
+
+CREATE OR REPLACE FUNCTION create_osm_delete_indizes() RETURNS VOID AS $$
+BEGIN
+    SELECT create_osm_delete_index(table_name)
+    FROM osm_tables_delete;
+END;
+$$ language plpgsql;
+
+
+CREATE OR REPLACE FUNCTION create_delete_tables() RETURNS VOID AS $$
+BEGIN
+    SELECT create_delete_table(table_name)
+    FROM osm_tables_delete;
+END;
+$$ language plpgsql;
+
+CREATE OR REPLACE FUNCTION create_tracking_triggers() RETURNS VOID AS $$
+BEGIN
+    SELECT recreate_osm_delete_tracking(table_name)
+    FROM osm_tables;
+END;
+$$ language plpgsql;
