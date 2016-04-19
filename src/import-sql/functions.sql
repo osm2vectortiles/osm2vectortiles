@@ -40,14 +40,13 @@ CREATE OR REPLACE FUNCTION changed_tiles_table(
     max_zoom INTEGER
 ) RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
-    EXECUTE format('
+    RETURN QUERY EXECUTE format('
         SELECT DISTINCT t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-        FROM %1$I AS g
-        INNER JOIN LATERAL overlapping_tiles(g.geometry, %3$s, %4$s)
-                           AS t ON g.timestamp = %5$L
-
-        WHERE 3 BETWEEN %2$s AND %3$s
-    ', table_name, min_zoom, max_zoom, buffer_size, ts);
+        FROM %I AS g
+        INNER JOIN LATERAL overlapping_tiles(g.geometry, $2, $3)
+                           AS t ON g.timestamp = $4
+        WHERE 3 BETWEEN $1 AND $2
+    ', table_name) USING min_zoom, max_zoom, buffer_size, ts;
 END;
 $$ LANGUAGE plpgsql;
 
