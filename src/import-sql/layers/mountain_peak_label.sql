@@ -2,7 +2,7 @@ CREATE OR REPLACE VIEW mountain_peak_label_z12toz14 AS
     SELECT *
     FROM osm_mountain_peak_point;
 
-CREATE OR REPLACE FUNCTION mountain_peak_changed_tiles(ts timestamp)
+CREATE OR REPLACE FUNCTION mountain_peak_label_changed_tiles(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 DECLARE
     buffer_size CONSTANT integer := 64;

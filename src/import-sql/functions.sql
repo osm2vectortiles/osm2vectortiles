@@ -48,23 +48,15 @@ BEGIN
 	    UNION
 	    SELECT * FROM landuse_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM landuse_overlay_changed_tiles(ts)
-	    UNION
 	    SELECT * FROM place_label_changed_tiles(ts)
 	    UNION
 	    SELECT * FROM poi_label_changed_tiles(ts)
 	    UNION
 	    SELECT * FROM road_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM road_label_changed_tiles(ts)
-	    UNION
 	    SELECT * FROM water_changed_tiles(ts)
 	    UNION
-	    SELECT * FROM water_label_changed_tiles(ts)
-	    UNION
 	    SELECT * FROM waterway_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM waterway_label_changed_tiles(ts)
         UNION
         SELECT * FROM mountain_peak_label_changed_tiles(ts)
         UNION

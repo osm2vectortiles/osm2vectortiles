@@ -9,7 +9,7 @@ CREATE OR REPLACE VIEW rail_station_label_z12toz13 AS (
     WHERE classify_rail_station(type) = 'rail'
 );
 
-CREATE OR REPLACE FUNCTION mountain_peak_changed_tiles(ts timestamp)
+CREATE OR REPLACE FUNCTION rail_station_label_changed_tiles(ts timestamp)
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 DECLARE
     buffer_size CONSTANT integer := 64;
