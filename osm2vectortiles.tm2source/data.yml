@@ -143,13 +143,17 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT 0 AS osm_id, ST_SimplifyPreserveTopology(way, 200) AS geometry FROM osm_ocean_polygons
-          WHERE way && !bbox!
-            AND z(!scale_denominator!) = 0
+          SELECT 0 AS osm_id, geom AS geometry FROM ne_50m_ocean
+          WHERE geom && !bbox!
+            AND z(!scale_denominator!) BETWEEN 0 AND 2
+          UNION ALL
+          SELECT 0 AS osm_id, geom AS geometry FROM ne_10m_ocean
+          WHERE geom && !bbox!
+            AND z(!scale_denominator!) BETWEEN 3 AND 4
           UNION ALL
           SELECT 0 AS osm_id, way AS geometry FROM osm_ocean_polygons
           WHERE way && !bbox!
-            AND z(!scale_denominator!) BETWEEN 1 AND 14
+            AND z(!scale_denominator!) BETWEEN 5 AND 14
           UNION ALL
           SELECT 0 AS osm_id, geom AS geometry FROM ne_110m_lakes
           WHERE geom && !bbox!
