@@ -94,14 +94,20 @@ CREATE OR REPLACE VIEW osm_tables_delete AS (
 );
 
 CREATE OR REPLACE FUNCTION update_timestamp(ts timestamp) RETURNS VOID AS $$
-DECLARE
-    t osm_tables%ROWTYPE;
+DECLARE t osm_tables%ROWTYPE;
 BEGIN
-    FOR t IN SELECT * FROM osm_tables
-    LOOP
-        EXECUTE format('UPDATE %I SET timestamp=%L WHERE timestamp IS NULL;',
-            t.table_name, ts
-        );
+    FOR t IN SELECT * FROM osm_tables LOOP
+        EXECUTE format('UPDATE %I SET timestamp=$1 WHERE timestamp IS NULL;',
+                       t.table_name) USING t;
     END LOOP;
 END;
-$$ language plpgsql
+$$ language plpgsql;
+
+CREATE OR REPLACE FUNCTION drop_tables() returns VOID AS $$
+DECLARE t osm_tables%ROWTYPE;
+BEGIN
+    FOR t IN SELECT * FROM osm_tables LOOP
+        EXECUTE format('DROP TABLE %I CASCADE', t.table_name);
+    END LOOP;
+END;
+$$ language plpgsql;

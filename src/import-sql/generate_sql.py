@@ -3,7 +3,6 @@
 Usage:
   generate_sql.py class <yaml-source>
   generate_sql.py tracking_triggers <yaml-source>
-  generate_sql.py drop_tables <yaml-source>
   generate_sql.py enable_triggers <yaml-source>
   generate_sql.py disable_triggers <yaml-source>
   generate_sql.py create_delete_tables <yaml-source>
@@ -77,22 +76,6 @@ def modify_triggers(tables, func_name, enable=True):
 
     indent = 4 * " "
     stmts = [indent + gen_modify_trigger_stmt(t) for t in tables]
-    return """CREATE OR REPLACE FUNCTION {0}() returns VOID
-AS $$
-BEGIN
-{1}
-END;
-$$ language plpgsql;
-    """.format(func_name, "\n".join(stmts))
-
-
-def generate_drop_tables(tables, func_name='drop_tables'):
-
-    def gen_drop_stmt(table):
-        return 'DROP TABLE {0} CASCADE;'.format(table.name)
-
-    indent = 4 * " "
-    stmts = [indent + gen_drop_stmt(t) for t in tables]
     return """CREATE OR REPLACE FUNCTION {0}() returns VOID
 AS $$
 BEGIN
@@ -244,8 +227,6 @@ if __name__ == '__main__':
             print(generate_enable_triggers(find_tables(source)))
         if args['disable_triggers']:
             print(generate_disable_triggers(find_tables(source)))
-        if args['drop_tables']:
-            print(generate_drop_tables(find_tables_with_deletes(source)))
         if args['create_delete_tables']:
             print(generate_create_delete_tables(find_delete_tables(source)))
         if args['create_delete_indizes']:
