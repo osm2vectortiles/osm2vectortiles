@@ -1,6 +1,6 @@
 .PHONY: all
 
-all: postgis export-mbtiles import-osm import-external import-sql update-scaleranks create-extracts changed-tiles generate-jobs merge-jobs compare-visual
+all: postgis export-mbtiles import-osm import-external import-sql update-scaleranks create-extracts changed-tiles generate-jobs merge-jobs compare-visual mapping-qa-report
 
 fast: postgis export-mbtiles import-osm import-sql update-scaleranks create-extracts changed-tiles generate-jobs merge-jobs
 
@@ -36,3 +36,6 @@ merge-jobs:
 
 compare-visual:
 	docker build -t osm2vectortiles/compare-visual tools/compare-visual
+
+mapping-qa-report:
+	docker build -t osm2vectortiles/mapping-qa-report tools/mapping-qa-report
