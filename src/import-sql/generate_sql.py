@@ -49,9 +49,28 @@ Table = namedtuple('Table', ['name', 'buffer', 'min_zoom', 'max_zoom'])
 
 
 def generate_sql_tracking(source):
-    tables = find_tables(source)
-    print(list(tables))
+    tables = list(find_tables(source))
+    return generate_tracking_triggers(tables)
 
+
+def generate_tracking_triggers(
+        tables,
+        func_name='create_tracking_triggers',
+        recreate_func_name='recreate_osm_delete_tracking'
+    ):
+
+    def gen_perform_stmt(table):
+        return "PERFORM {0}('{1}');".format(recreate_func_name, table.name)
+
+    indent = 4 * " "
+    stmts = [indent + gen_perform_stmt(t) for t in tables]
+    return """CREATE OR REPLACE FUNCTION {0}() returns VOID
+AS $$
+BEGIN
+{1}
+END;
+$$ language plpgsql;
+    """.format(func_name, "\n".join(stmts))
 
 
 def find_tables(config):

@@ -63,45 +63,6 @@ BEGIN
 END;
 $$ language plpgsql;
 
--- Create triggers
-
-CREATE OR REPLACE FUNCTION create_tracking_triggers() returns VOID
-AS $$
-BEGIN
-    -- Place
-    PERFORM recreate_osm_delete_tracking('osm_place_geometry');
-    -- POI
-    PERFORM recreate_osm_delete_tracking('osm_poi_point');
-    PERFORM recreate_osm_delete_tracking('osm_poi_polygon');
-    -- Roads
-    PERFORM recreate_osm_delete_tracking('osm_road_geometry');
-    -- Admin
-    PERFORM recreate_osm_delete_tracking('osm_admin_linestring');
-    -- Water
-    PERFORM recreate_osm_delete_tracking('osm_water_linestring');
-    PERFORM recreate_osm_delete_tracking('osm_water_polygon');
-    -- Landuse
-    PERFORM recreate_osm_delete_tracking('osm_landuse_polygon');
-    -- Aeroways
-    PERFORM recreate_osm_delete_tracking('osm_aero_polygon');
-    PERFORM recreate_osm_delete_tracking('osm_aero_linestring');
-    -- Buildings
-    PERFORM recreate_osm_delete_tracking('osm_building_polygon');
-    PERFORM recreate_osm_delete_tracking('osm_housenumber_polygon');
-    PERFORM recreate_osm_delete_tracking('osm_housenumber_point');
-    -- Barrier
-    PERFORM recreate_osm_delete_tracking('osm_barrier_polygon');
-    PERFORM recreate_osm_delete_tracking('osm_barrier_linestring');
-    -- Mountain Peaks
-    PERFORM recreate_osm_delete_tracking('osm_mountain_peak_point');
-    -- Rail Station Label
-    PERFORM recreate_osm_delete_tracking('osm_rail_station_point');
-    -- Airport Label
-    PERFORM recreate_osm_delete_tracking('osm_airport_point');
-    PERFORM recreate_osm_delete_tracking('osm_airport_polygon');
-END;
-$$ language plpgsql;
-
 -- Timestamp tracking
 
 CREATE OR REPLACE FUNCTION update_timestamp(ts timestamp) returns VOID
