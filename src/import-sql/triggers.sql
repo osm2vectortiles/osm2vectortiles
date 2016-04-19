@@ -1,11 +1,16 @@
--- Delete and update tracking
-
---TODO: Remove all old indizes
-CREATE OR REPLACE FUNCTION drop_osm_delete_indizes() returns VOID
+CREATE OR REPLACE FUNCTION drop_osm_delete_index(table_name TEXT) returns VOID
 AS $$
 BEGIN
-    DROP INDEX IF EXISTS osm_delete_geom;
-    DROP INDEX IF EXISTS osm_delete_geom_geohash;
+    EXECUTE format('DROP INDEX IF EXISTS %I', table_name || '_geom');
+    EXECUTE format('DROP INDEX IF EXISTS %I', table_name || '_geom_geohash');
+END;
+$$ language plpgsql;
+
+
+CREATE OR REPLACE FUNCTION drop_osm_delete_indizes() RETURNS VOID AS $$
+BEGIN
+    PERFORM drop_osm_delete_index(table_name)
+    FROM osm_tables_delete;
 END;
 $$ language plpgsql;
 
