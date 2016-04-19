@@ -43,7 +43,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_polygon(osm_id) as osm_id, geometry, classify_landuse(type) as class, type
+          SELECT osm_id_polygon(osm_id) as osm_id, geometry, landuse_class(type) as class, type
             FROM (
               SELECT osm_id, geometry, type
               FROM landuse_z5
@@ -228,7 +228,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_geometry(osm_id, geometry) as osm_id, geometry, classify_barrier_line(type) AS class
+          SELECT osm_id_geometry(osm_id, geometry) as osm_id, geometry, barrier_line_class(type) AS class
           FROM barrier_line_z14
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) = 14
@@ -292,7 +292,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_polygon(osm_id) AS osm_id, geometry, classify_landuse_overlay(type) AS class, type
+          SELECT osm_id_polygon(osm_id) AS osm_id, geometry, landuse_overlay_class(type) AS class, type
           FROM (
             SELECT osm_id, geometry, type FROM landuse_overlay_z5
             WHERE z(!scale_denominator!) = 5
@@ -818,7 +818,7 @@ Layer:
               coalesce(NULLIF(name_zh, ''), name) AS name_zh,
               format_type(type) AS type,
               poi_label_scalerank(type, area) AS scalerank,
-              coalesce(classify_maki_label(type), 'marker') AS maki,
+              coalesce(maki_label_class(type), 'marker') AS maki,
               rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
                            ORDER BY poi_label_localrank(type) ASC) AS localrank
             FROM poi_label_z14
@@ -998,8 +998,8 @@ Layer:
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           coalesce(NULLIF(iata, ''), NULLIF(ref, ''), NULLIF(icao, ''), faa) AS ref,
-          classify_airport_label(kind, type) AS maki,
-          airport_label_scalerank(classify_airport_label(kind, type), area, aerodrome) AS scalerank
+          airport_label_class(kind, type) AS maki,
+          airport_label_scalerank(airport_label_class(kind, type), area, aerodrome) AS scalerank
           FROM airport_label_z9toz14
           WHERE geometry && !bbox!
           AND z(!scale_denominator!) BETWEEN 9 AND 14
@@ -1044,8 +1044,8 @@ Layer:
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
-          classify_rail_station(type) AS maki,
-          classify_rail_station(type) AS network
+          rail_station_class(type) AS maki,
+          rail_station_class(type) AS network
           FROM (
             SELECT * FROM rail_station_label_z12toz13
             WHERE z(!scale_denominator!) BETWEEN 12 AND 13

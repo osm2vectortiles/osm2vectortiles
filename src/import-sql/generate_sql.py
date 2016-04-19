@@ -7,6 +7,8 @@ Usage:
   generate_sql.py drop_tables <yaml-source>
   generate_sql.py enable_triggers <yaml-source>
   generate_sql.py disable_triggers <yaml-source>
+  generate_sql.py create_delete_tables <yaml-source>
+  generate_sql.py create_delete_indizes <yaml-source>
   generate_sql.py (-h | --help)
 Options:
   -h --help                 Show this screen.
@@ -122,6 +124,26 @@ $$ language plpgsql;
     """.format(func_name, "\n".join(stmts))
 
 
+def generate_create_delete_indizes(
+        tables,
+        func_name='create_osm_delete_indizes',
+        create_index_func='create_osm_delete_index'
+    ):
+
+    def gen_perform_stmt(table):
+        return "PERFORM {0}('{1}');".format(create_index_func, table.name)
+
+    indent = 4 * " "
+    stmts = [indent + gen_perform_stmt(t) for t in tables]
+    return """CREATE OR REPLACE FUNCTION {0}() returns VOID
+AS $$
+BEGIN
+{1}
+END;
+$$ language plpgsql;
+    """.format(func_name, "\n".join(stmts))
+
+
 def generate_tracking_triggers(
         tables,
         func_name='create_tracking_triggers',
@@ -142,13 +164,39 @@ $$ language plpgsql;
     """.format(func_name, "\n".join(stmts))
 
 
-def find_tables_with_deletes(config, delete_suffix='delete'):
+def generate_create_delete_tables(
+        tables,
+        func_name='create_delete_tables',
+        create_table_func='create_delete_table'
+    ):
+
+    def gen_perform_stmt(table):
+        return "PERFORM {0}('{1}');".format(create_table_func, table.name)
+
+    indent = 4 * " "
+    stmts = [indent + gen_perform_stmt(t) for t in tables]
+    return """CREATE OR REPLACE FUNCTION {0}() returns VOID
+AS $$
+BEGIN
+{1}
+END;
+$$ language plpgsql;
+    """.format(func_name, "\n".join(stmts))
+
+
+def find_delete_tables(config, delete_suffix='delete'):
     for src_table in find_tables(config):
-        yield src_table
         yield Table(src_table.name + '_' + delete_suffix,
                     src_table.buffer,
-                    src_table.min_zoom,
-                    src_table.max_zoom)
+                    src_table.min_zoom, src_table.max_zoom)
+
+
+def find_tables_with_deletes(config):
+    for src_table in find_tables(config):
+        yield src_table
+
+    for delete_table in find_delete_tables(config):
+        yield delete_table
 
 
 def find_tables(config, schema_prefix='osm'):
@@ -176,3 +224,7 @@ if __name__ == '__main__':
             print(generate_update_timestamp(find_tables_with_deletes(source)))
         if args['drop_tables']:
             print(generate_drop_tables(find_tables_with_deletes(source)))
+        if args['create_delete_tables']:
+            print(generate_create_delete_tables(find_delete_tables(source)))
+        if args['create_delete_indizes']:
+            print(generate_create_delete_indizes(find_delete_tables(source)))

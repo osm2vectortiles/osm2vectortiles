@@ -12,8 +12,7 @@ ENV SQL_FUNCTIONS_FILE=/usr/src/app/functions.sql \
     SQL_GENERATED_FILE=/usr/src/app/gen.sql \
     SQL_TRIGGERS_FILE=/usr/src/app/triggers.sql \
     SQL_XYZ_EXTENT_FILE=/usr/src/app/xyz_extent.sql \
-    SQL_LAYERS_DIR=/usr/src/app/layers/ \
-    PATH=$PATH:/opt/classify
+    SQL_LAYERS_DIR=/usr/src/app/layers/
 COPY . /usr/src/app
 
 # Generate class functions
@@ -29,6 +28,8 @@ RUN ./generate_sql.py tracking_triggers tables.yml >> $SQL_GENERATED_FILE \
  && ./generate_sql.py update_timestamp tables.yml >> $SQL_GENERATED_FILE \
  && ./generate_sql.py drop_tables tables.yml >> $SQL_GENERATED_FILE \
  && ./generate_sql.py enable_triggers tables.yml >> $SQL_GENERATED_FILE \
- && ./generate_sql.py disable_triggers tables.yml >> $SQL_GENERATED_FILE
+ && ./generate_sql.py disable_triggers tables.yml >> $SQL_GENERATED_FILE \
+ && ./generate_sql.py create_delete_tables tables.yml >> $SQL_GENERATED_FILE \
+ && ./generate_sql.py create_delete_indizes tables.yml >> $SQL_GENERATED_FILE
 
 CMD ["./prepare.sh"]

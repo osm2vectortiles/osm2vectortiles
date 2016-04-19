@@ -1,5 +1,5 @@
 system:
-  name: road
+  name: road_type
   classes:
     motorway:
     - motorway

@@ -24,6 +24,7 @@ function download_pbf() {
 
 function import_pbf() {
     local pbf_file="$1"
+    drop_tables
     create_timestamp_history
     imposm3 import \
         -connection "$PG_CONNECT" \
@@ -77,6 +78,10 @@ function disable_delete_tracking() {
     exec_sql "SELECT disable_delete_tracking()"
 }
 
+function create_delete_tables() {
+    exec_sql "SELECT create_delete_tables()"
+}
+
 function create_tracking_triggers() {
     exec_sql "SELECT create_tracking_triggers()"
 }
@@ -116,7 +121,8 @@ function import_pbf_diffs() {
     local pbf_file="$1"
     local diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
 
-    echo "Import changes from $diffs_file"
+    echo "Create tracking tables"
+    create_delete_tables
 
     echo "Drop indizes for faster inserts"
     drop_osm_delete_indizes
@@ -125,6 +131,7 @@ function import_pbf_diffs() {
     create_tracking_triggers
     enable_delete_tracking
 
+    echo "Import changes from $diffs_file"
     imposm3 diff \
         -connection "$PG_CONNECT" \
         -mapping "$MAPPING_YAML" \

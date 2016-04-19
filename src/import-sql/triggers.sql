@@ -1,17 +1,21 @@
 -- Delete and update tracking
 
-CREATE TABLE IF NOT EXISTS osm_delete (
-    osm_id bigint,
-    geometry geometry,
-    timestamp timestamp,
-    table_name text
-);
-
 CREATE OR REPLACE FUNCTION drop_osm_delete_indizes() returns VOID
 AS $$
 BEGIN
     DROP INDEX IF EXISTS osm_delete_geom;
     DROP INDEX IF EXISTS osm_delete_geom_geohash;
+END;
+$$ language plpgsql;
+
+CREATE OR REPLACE FUNCTION create_osm_delete_index(table_name TEXT) returns VOID
+AS $$
+BEGIN
+    EXECUTE 'CREATE INDEX osm_delete_geom ON $1 USING gist (geometry)'
+    USING table_name;
+    EXECUTE 'CREATE INDEX osm_delete_geom_geohash ON $1
+    USING btree (st_geohash(st_transform(st_setsrid(box2d(geometry)::geometry, 3857), 4326)))'
+    USING table_name;
 END;
 $$ language plpgsql;
 
@@ -39,12 +43,25 @@ CREATE OR REPLACE FUNCTION track_osm_delete() returns TRIGGER
 AS $$
 BEGIN
      IF (TG_OP = 'DELETE') THEN
-        INSERT INTO osm_delete(osm_id, geometry, timestamp, table_name)
-        VALUES(OLD.osm_id, OLD.geometry, NULL, TG_TABLE_NAME::TEXT);
+        EXECUTE 'INSERT INTO $1(osm_id, geometry, timestamp)
+                 VALUES(OLD.osm_id, OLD.geometry, NULL)
+                ' USING TG_TABLE_NAME::TEXT || '_delete';
         RETURN OLD;
      END IF;
 
      RETURN NULL;
+END;
+$$ language plpgsql;
+
+
+CREATE OR REPLACE FUNCTION create_delete_table(table_name TEXT) returns VOID
+AS $$
+BEGIN
+    EXECUTE 'CREATE TABLE IF NOT EXISTS $1 (
+        osm_id bigint,
+        geometry geometry,
+        timestamp timestamp
+    )' USING table_name;
 END;
 $$ language plpgsql;
 
