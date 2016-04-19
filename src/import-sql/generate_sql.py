@@ -2,9 +2,11 @@
 """Generate SQL functions from custom YAML definitions
 Usage:
   generate_sql.py class <yaml-source>
-  generate_sql.py tracking <yaml-source>
+  generate_sql.py tracking_triggers <yaml-source>
   generate_sql.py update_timestamp <yaml-source>
   generate_sql.py drop_tables <yaml-source>
+  generate_sql.py enable_triggers <yaml-source>
+  generate_sql.py disable_triggers <yaml-source>
   generate_sql.py (-h | --help)
 Options:
   -h --help                 Show this screen.
@@ -50,10 +52,41 @@ def find_classes(config):
 Table = namedtuple('Table', ['name', 'buffer', 'min_zoom', 'max_zoom'])
 
 
+def generate_enable_triggers(tables, func_name='enable_delete_tracking'):
+    return modify_triggers(tables, func_name, enable=True)
+
+
+def generate_disable_triggers(tables, func_name='disable_delete_tracking'):
+    return modify_triggers(tables, func_name, enable=False)
+
+
+def modify_triggers(tables, func_name, enable=True):
+    if enable:
+        enabling_keyword = 'ENABLE'
+    else:
+        enabling_keyword = 'DISABLE'
+
+
+    def gen_modify_trigger_stmt(table):
+        return 'ALTER TABLE {0} {1} TRIGGER USER;'.format(
+            table.name, enabling_keyword
+        )
+
+    indent = 4 * " "
+    stmts = [indent + gen_modify_trigger_stmt(t) for t in tables]
+    return """CREATE OR REPLACE FUNCTION {0}() returns VOID
+AS $$
+BEGIN
+{1}
+END;
+$$ language plpgsql;
+    """.format(func_name, "\n".join(stmts))
+
+
 def generate_drop_tables(tables, func_name='drop_tables'):
 
     def gen_drop_stmt(table):
-	return 'DROP TABLE {0} CASCADE;'.format(table.name)
+        return 'DROP TABLE {0} CASCADE;'.format(table.name)
 
     indent = 4 * " "
     stmts = [indent + gen_drop_stmt(t) for t in tables]
@@ -73,7 +106,7 @@ def generate_update_timestamp(
     ):
 
     def gen_update_stmt(table):
-	return 'UPDATE {0} SET {1}=ts WHERE {1} IS NULL;'.format(
+        return 'UPDATE {0} SET {1}=ts WHERE {1} IS NULL;'.format(
             table.name,
             timestamp_field
         );
@@ -133,8 +166,12 @@ if __name__ == '__main__':
             print(generate_sql_class(source))
 
         tables = find_tables(source)
-        if args['tracking']:
+        if args['tracking_triggers']:
             print(generate_tracking_triggers(find_tables(source)))
+        if args['enable_triggers']:
+            print(generate_enable_triggers(find_tables(source)))
+        if args['disable_triggers']:
+            print(generate_disable_triggers(find_tables(source)))
         if args['update_timestamp']:
             print(generate_update_timestamp(find_tables_with_deletes(source)))
         if args['drop_tables']:
