@@ -74,23 +74,3 @@ BEGIN
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
-
-CREATE OR REPLACE FUNCTION place_label_changed_tiles(ts timestamp)
-RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
-DECLARE
-    buffer_size CONSTANT integer := 128;
-BEGIN
-    RETURN QUERY (
-        WITH geoms AS (
-            SELECT osm_id, timestamp, geometry FROM osm_delete
-            WHERE table_name = 'osm_place_geometry'
-            UNION ALL
-            SELECT osm_id, timestamp, geometry FROM osm_place_geometry
-        )
-        SELECT DISTINCT t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-        FROM geoms AS c
-        INNER JOIN LATERAL overlapping_tiles(c.geometry, 14, buffer_size)
-                           AS t ON c.timestamp = ts
-    );
-END;
-$$ LANGUAGE plpgsql;

@@ -15,29 +15,6 @@ CREATE OR REPLACE VIEW poi_label_layer AS (
     SELECT osm_id, timestamp, geometry FROM poi_label_z14
 );
 
-CREATE OR REPLACE FUNCTION poi_label_changed_tiles(ts timestamp)
-RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
-DECLARE
-    buffer_size CONSTANT integer := 128;
-BEGIN
-    RETURN QUERY (
-        WITH geoms AS (
-            SELECT osm_id, timestamp, geometry FROM osm_delete
-            WHERE table_name = 'osm_poi_point'
-               OR table_name = 'osm_poi_polygon'
-            UNION ALL
-            SELECT osm_id, timestamp, geometry FROM osm_poi_point
-            UNION ALL
-            SELECT osm_id, timestamp, geometry FROM osm_poi_polygon
-        )
-        SELECT DISTINCT t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-        FROM geoms AS c
-        INNER JOIN LATERAL overlapping_tiles(c.geometry, 14, buffer_size)
-                           AS t ON c.timestamp = ts
-    );
-END;
-$$ LANGUAGE plpgsql;
-
 CREATE OR REPLACE FUNCTION poi_label_localrank(type VARCHAR) RETURNS INTEGER
 AS $$
 BEGIN

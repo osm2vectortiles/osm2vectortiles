@@ -44,6 +44,3 @@ CREATE OR REPLACE VIEW landuse_overlay_z13toz14 AS
     SELECT *
     FROM osm_landuse_polygon
     WHERE is_landuse_overlay(type);
-
--- A landuse overlay changed tiles function is not needed since
--- landuse already contains all of those changes

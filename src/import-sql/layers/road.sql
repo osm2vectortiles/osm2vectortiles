@@ -63,28 +63,6 @@ CREATE OR REPLACE VIEW road_z14 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order, timestamp
     FROM osm_road_geometry;
 
-CREATE OR REPLACE FUNCTION road_changed_tiles(ts timestamp)
-RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
-DECLARE
-    -- road label has buffer of 4 but if we take buffer of 8 we can at the
-    -- same time also cover the changed tiles of road_label
-    buffer_size CONSTANT integer := 8;
-BEGIN
-    RETURN QUERY (
-        WITH geoms AS (
-            SELECT osm_id, timestamp, geometry FROM osm_delete
-            WHERE table_name = 'osm_road_geometry'
-            UNION ALL
-            SELECT osm_id, timestamp, geometry FROM osm_road_geometry
-        )
-        SELECT DISTINCT t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-        FROM geoms AS c
-        INNER JOIN LATERAL overlapping_tiles(c.geometry, 14, buffer_size)
-                           AS t ON c.timestamp = ts
-    );
-END;
-$$ LANGUAGE plpgsql;
-
 CREATE OR REPLACE FUNCTION road_localrank(type VARCHAR) RETURNS INTEGER
 AS $$
 BEGIN
