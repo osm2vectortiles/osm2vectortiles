@@ -111,3 +111,25 @@ BEGIN
     END LOOP;
 END;
 $$ language plpgsql;
+
+CREATE OR REPLACE FUNCTION modify_delete_tracking(table_name TEXT, enable BOOLEAN)
+RETURNS VOID AS $$
+BEGIN
+    EXECUTE format('ALTER TABLE %I %s TRIGGER USER', table_name,
+                   CASE WHEN enable THEN 'ENABLE' ELSE 'DISABLE' END);
+END;
+$$ language plpgsql;
+
+CREATE OR REPLACE FUNCTION enable_delete_tracking() RETURNS VOID AS $$
+BEGIN
+    SELECT modify_delete_tracking(table_name, true)
+    FROM osm_tables;
+END;
+$$ language plpgsql;
+
+CREATE OR REPLACE FUNCTION disable_delete_tracking() RETURNS VOID AS $$
+BEGIN
+    SELECT modify_delete_tracking(table_name, false)
+    FROM osm_tables;
+END;
+$$ language plpgsql;

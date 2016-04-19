@@ -25,8 +25,6 @@ RUN ./generate_sql.py class classes/barrier_line.yml >> $SQL_GENERATED_FILE \
 
 # Generate table functions
 RUN ./generate_sql.py tracking_triggers tables.yml >> $SQL_GENERATED_FILE \
- && ./generate_sql.py enable_triggers tables.yml >> $SQL_GENERATED_FILE \
- && ./generate_sql.py disable_triggers tables.yml >> $SQL_GENERATED_FILE \
  && ./generate_sql.py create_delete_tables tables.yml >> $SQL_GENERATED_FILE \
  && ./generate_sql.py create_delete_indizes tables.yml >> $SQL_GENERATED_FILE \
  && ./generate_sql.py changed_tiles tables.yml >> $SQL_GENERATED_FILE \
