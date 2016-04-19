@@ -24,4 +24,11 @@ RUN ./generate_sql.py class classes/barrier_line.yml >> $SQL_GENERATED_FILE \
  && ./generate_sql.py class classes/rail_station.yml >> $SQL_GENERATED_FILE \
  && ./generate_sql.py class classes/maki_label.yml >> $SQL_GENERATED_FILE
 
+# Generate table functions
+RUN ./generate_sql.py tracking_triggers tables.yml >> $SQL_GENERATED_FILE \
+ && ./generate_sql.py update_timestamp tables.yml >> $SQL_GENERATED_FILE \
+ && ./generate_sql.py drop_tables tables.yml >> $SQL_GENERATED_FILE \
+ && ./generate_sql.py enable_triggers tables.yml >> $SQL_GENERATED_FILE \
+ && ./generate_sql.py disable_triggers tables.yml >> $SQL_GENERATED_FILE
+
 CMD ["./prepare.sh"]
