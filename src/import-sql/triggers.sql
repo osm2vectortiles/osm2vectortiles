@@ -1,5 +1,6 @@
 -- Delete and update tracking
 
+--TODO: Remove all old indizes
 CREATE OR REPLACE FUNCTION drop_osm_delete_indizes() returns VOID
 AS $$
 BEGIN
@@ -11,21 +12,10 @@ $$ language plpgsql;
 CREATE OR REPLACE FUNCTION create_osm_delete_index(table_name TEXT) returns VOID
 AS $$
 BEGIN
-    EXECUTE 'CREATE INDEX osm_delete_geom ON $1 USING gist (geometry)'
-    USING table_name;
-    EXECUTE 'CREATE INDEX osm_delete_geom_geohash ON $1
-    USING btree (st_geohash(st_transform(st_setsrid(box2d(geometry)::geometry, 3857), 4326)))'
-    USING table_name;
-END;
-$$ language plpgsql;
-
-CREATE OR REPLACE FUNCTION create_osm_delete_indizes() returns VOID
-AS $$
-BEGIN
-    CREATE INDEX osm_delete_geom ON osm_delete
-    USING gist (geometry);
-    CREATE INDEX osm_delete_geom_geohash ON osm_delete
-    USING btree (st_geohash(st_transform(st_setsrid(box2d(geometry)::geometry, 3857), 4326)));
+    EXECUTE format('CREATE INDEX %I ON %I USING gist (geometry)', table_name || '_geom', table_name);
+    EXECUTE format('CREATE INDEX %I ON %I
+    USING btree (st_geohash(st_transform(st_setsrid(box2d(geometry)::geometry, 3857), 4326)))',
+    table_name || '_geom_geohash', table_name);
 END;
 $$ language plpgsql;
 
@@ -39,13 +29,17 @@ BEGIN
 END;
 $$ language plpgsql;
 
+-- TODO: Perhaps a dynamic trigger is really slow
+-- if it is a performance problem we should generate static
+-- triggers for each table
 CREATE OR REPLACE FUNCTION track_osm_delete() returns TRIGGER
 AS $$
 BEGIN
      IF (TG_OP = 'DELETE') THEN
-        EXECUTE 'INSERT INTO $1(osm_id, geometry, timestamp)
-                 VALUES(OLD.osm_id, OLD.geometry, NULL)
-                ' USING TG_TABLE_NAME::TEXT || '_delete';
+        EXECUTE format('
+            INSERT INTO %I(osm_id, geometry)
+            VALUES($1, $2)', TG_TABLE_NAME::TEXT || '_delete')
+            USING OLD.osm_id, OLD.geometry;
         RETURN OLD;
      END IF;
 
@@ -57,11 +51,11 @@ $$ language plpgsql;
 CREATE OR REPLACE FUNCTION create_delete_table(table_name TEXT) returns VOID
 AS $$
 BEGIN
-    EXECUTE 'CREATE TABLE IF NOT EXISTS $1 (
+    EXECUTE format('CREATE TABLE IF NOT EXISTS %I (
         osm_id bigint,
         geometry geometry,
         timestamp timestamp
-    )' USING table_name;
+    )', table_name);
 END;
 $$ language plpgsql;
 
@@ -90,14 +84,14 @@ $$ language plpgsql;
 
 CREATE OR REPLACE FUNCTION enable_delete_tracking() RETURNS VOID AS $$
 BEGIN
-    SELECT modify_delete_tracking(table_name, true)
+    PERFORM modify_delete_tracking(table_name, true)
     FROM osm_tables;
 END;
 $$ language plpgsql;
 
 CREATE OR REPLACE FUNCTION disable_delete_tracking() RETURNS VOID AS $$
 BEGIN
-    SELECT modify_delete_tracking(table_name, false)
+    PERFORM modify_delete_tracking(table_name, false)
     FROM osm_tables;
 END;
 $$ language plpgsql;
@@ -105,7 +99,7 @@ $$ language plpgsql;
 
 CREATE OR REPLACE FUNCTION create_osm_delete_indizes() RETURNS VOID AS $$
 BEGIN
-    SELECT create_osm_delete_index(table_name)
+    PERFORM create_osm_delete_index(table_name)
     FROM osm_tables_delete;
 END;
 $$ language plpgsql;
@@ -113,14 +107,42 @@ $$ language plpgsql;
 
 CREATE OR REPLACE FUNCTION create_delete_tables() RETURNS VOID AS $$
 BEGIN
-    SELECT create_delete_table(table_name)
+    PERFORM create_delete_table(table_name)
     FROM osm_tables_delete;
 END;
 $$ language plpgsql;
 
 CREATE OR REPLACE FUNCTION create_tracking_triggers() RETURNS VOID AS $$
 BEGIN
-    SELECT recreate_osm_delete_tracking(table_name)
+    PERFORM recreate_osm_delete_tracking(table_name)
     FROM osm_tables;
+END;
+$$ language plpgsql;
+
+CREATE OR REPLACE VIEW osm_tables_delete AS (
+    SELECT table_name || '_delete' AS table_name, buffer_size, min_zoom, max_zoom
+    FROM osm_tables
+);
+
+CREATE OR REPLACE FUNCTION update_timestamp(ts timestamp) RETURNS VOID AS $$
+DECLARE t osm_tables%ROWTYPE;
+BEGIN
+    FOR t IN SELECT * FROM osm_tables LOOP
+        EXECUTE format('UPDATE %I SET timestamp=$1 WHERE timestamp IS NULL;',
+                       t.table_name) USING ts;
+    END LOOP;
+END;
+$$ language plpgsql;
+
+CREATE OR REPLACE FUNCTION drop_tables() returns VOID AS $$
+DECLARE t osm_tables%ROWTYPE;
+BEGIN
+    FOR t IN
+        SELECT * FROM osm_tables
+        UNION
+        SELECT * FROM osm_tables_delete
+    LOOP
+        EXECUTE format('DROP TABLE %I CASCADE', t.table_name);
+    END LOOP;
 END;
 $$ language plpgsql;

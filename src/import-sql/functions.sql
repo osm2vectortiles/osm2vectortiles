@@ -85,33 +85,3 @@ BEGIN RETURN CASE
       END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
-
--- SQL generation code
-
-CREATE OR REPLACE VIEW osm_tables_delete AS (
-    SELECT table_name || '_delete' AS table_name, buffer_size, min_zoom, max_zoom
-    FROM osm_tables
-);
-
-CREATE OR REPLACE FUNCTION update_timestamp(ts timestamp) RETURNS VOID AS $$
-DECLARE t osm_tables%ROWTYPE;
-BEGIN
-    FOR t IN SELECT * FROM osm_tables LOOP
-        EXECUTE format('UPDATE %I SET timestamp=$1 WHERE timestamp IS NULL;',
-                       t.table_name) USING t;
-    END LOOP;
-END;
-$$ language plpgsql;
-
-CREATE OR REPLACE FUNCTION drop_tables() returns VOID AS $$
-DECLARE t osm_tables%ROWTYPE;
-BEGIN
-    FOR t IN 
-        SELECT * FROM osm_tables
-        UNION
-        SELECT * FROM osm_tables_delete
-    LOOP
-        EXECUTE format('DROP TABLE %I CASCADE', t.table_name);
-    END LOOP;
-END;
-$$ language plpgsql;
