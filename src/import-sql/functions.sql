@@ -32,38 +32,22 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION changed_tiles(ts timestamp)
-RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
+CREATE OR REPLACE FUNCTION changed_tiles_table(
+    table_name TEXT,
+    ts TIMESTAMP,
+    buffer_size INTEGER,
+    min_zoom INTEGER,
+    max_zoom INTEGER
+) RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
-	RETURN QUERY (
-	    SELECT * FROM admin_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM aeroway_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM barrier_line_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM building_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM housenum_label_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM landuse_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM place_label_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM poi_label_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM road_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM water_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM waterway_changed_tiles(ts)
-        UNION
-        SELECT * FROM mountain_peak_label_changed_tiles(ts)
-        UNION
-        SELECT * FROM airport_label_changed_tiles(ts)
-        UNION
-        SELECT * FROM rail_station_label_changed_tiles(ts)
-	);
+    EXECUTE format('
+        SELECT DISTINCT t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
+        FROM %1$I AS g
+        INNER JOIN LATERAL overlapping_tiles(g.geometry, %3$s, %4$s)
+                           AS t ON g.timestamp = %5$L
+
+        WHERE 3 BETWEEN %2$s AND %3$s
+    ', table_name, min_zoom, max_zoom, buffer_size, ts);
 END;
 $$ LANGUAGE plpgsql;
 

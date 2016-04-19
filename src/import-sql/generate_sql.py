@@ -9,6 +9,7 @@ Usage:
   generate_sql.py disable_triggers <yaml-source>
   generate_sql.py create_delete_tables <yaml-source>
   generate_sql.py create_delete_indizes <yaml-source>
+  generate_sql.py changed_tiles <yaml-source>
   generate_sql.py (-h | --help)
 Options:
   -h --help                 Show this screen.
@@ -184,6 +185,36 @@ $$ language plpgsql;
     """.format(func_name, "\n".join(stmts))
 
 
+def generate_changed_tiles(
+        tables,
+        func_name='changed_tiles',
+        func_changed_tiles_query='changed_tiles_table'
+    ):
+
+    indent = 8 * " "
+
+    def gen_select_stmt(table):
+        return "SELECT * FROM {0}('{1}', ts, {2}, {3}, {4})".format(
+            func_changed_tiles_query,
+            table.name,
+            table.buffer,
+            table.min_zoom,
+            table.max_zoom,
+        )
+
+    stmts = [indent + gen_select_stmt(t) for t in tables]
+    separator = '\n' + indent + 'UNION\n'
+    return """CREATE OR REPLACE FUNCTION {0}(ts timestamp)
+RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
+BEGIN
+    RETURN QUERY (
+{1}
+    );
+END;
+$$ language plpgsql;
+    """.format(func_name, separator.join(stmts))
+
+
 def find_delete_tables(config, delete_suffix='delete'):
     for src_table in find_tables(config):
         yield Table(src_table.name + '_' + delete_suffix,
@@ -228,3 +259,5 @@ if __name__ == '__main__':
             print(generate_create_delete_tables(find_delete_tables(source)))
         if args['create_delete_indizes']:
             print(generate_create_delete_indizes(find_delete_tables(source)))
+        if args['changed_tiles']:
+            print(generate_changed_tiles(find_tables_with_deletes(source)))
