@@ -2,6 +2,7 @@
 """Generate SQL functions from custom YAML definitions
 Usage:
   generate_sql.py class <yaml-source>
+  generate_sql.py tracking <yaml-source>
   generate_sql.py (-h | --help)
 Options:
   -h --help                 Show this screen.
@@ -44,6 +45,21 @@ def find_classes(config):
         yield Class(cl_name, mapped_values)
 
 
+Table = namedtuple('Table', ['name', 'buffer', 'min_zoom', 'max_zoom'])
+
+
+def generate_sql_tracking(source):
+    tables = find_tables(source)
+    print(list(tables))
+
+
+
+def find_tables(config):
+    for table_name, config_values in config['tables'].items():
+        yield Table(table_name, config_values['buffer'],
+                    config_values['min_zoom'], config_values['max_zoom'])
+
+
 if __name__ == '__main__':
     args = docopt(__doc__)
 
@@ -51,3 +67,5 @@ if __name__ == '__main__':
         source = yaml.load(f)
         if args['class']:
             print(generate_sql_class(source))
+        if args['tracking']:
+            print(generate_sql_tracking(source))
