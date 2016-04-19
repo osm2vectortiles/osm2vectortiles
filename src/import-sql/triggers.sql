@@ -28,9 +28,12 @@ CREATE OR REPLACE FUNCTION cleanup_osm_tracking_tables() returns VOID
 AS $$
 DECLARE
     latest_ts timestamp;
+    t osm_tables%ROWTYPE;
 BEGIN
-    SELECT MAX(timestamp) INTO latest_ts FROM osm_delete;
-    DELETE FROM osm_delete WHERE timestamp <> latest_ts;
+    SELECT MAX(timestamp) INTO latest_ts FROM osm_timestamps;
+    FOR t IN SELECT * FROM osm_tables_delete LOOP
+        EXECUTE format('DELETE FROM %I WHERE timestamp <> $1', t.table_name) USING latest_ts;
+    END LOOP;
 END;
 $$ language plpgsql;
 
