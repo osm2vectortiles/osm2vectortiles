@@ -63,42 +63,6 @@ BEGIN
 END;
 $$ language plpgsql;
 
-
--- Table Management
-
-CREATE OR REPLACE FUNCTION drop_tables() returns VOID
-AS $$
-BEGIN
-    -- Tracking tables
-    DROP TABLE osm_delete CASCADE;
-
-    -- Normal tables
-    DROP TABLE osm_admin_linestring CASCADE;
-    DROP TABLE osm_aero_linestring CASCADE;
-    DROP TABLE osm_aero_polygon CASCADE;
-    DROP TABLE osm_barrier_linestring CASCADE;
-    DROP TABLE osm_barrier_polygon CASCADE;
-    DROP TABLE osm_building_polygon CASCADE;
-    DROP TABLE osm_building_polygon_gen0 CASCADE;
-    DROP TABLE osm_housenumber_point CASCADE;
-    DROP TABLE osm_housenumber_polygon CASCADE;
-    DROP TABLE osm_landuse_polygon CASCADE;
-    DROP TABLE osm_landuse_polygon_gen0 CASCADE;
-    DROP TABLE osm_landuse_polygon_gen1 CASCADE;
-    DROP TABLE osm_place_geometry CASCADE;
-    DROP TABLE osm_poi_point CASCADE;
-    DROP TABLE osm_poi_polygon CASCADE;
-    DROP TABLE osm_road_geometry CASCADE;
-    DROP TABLE osm_water_linestring CASCADE;
-    DROP TABLE osm_water_polygon CASCADE;
-    DROP TABLE osm_water_polygon_gen1 CASCADE;
-    DROP TABLE osm_mountain_peak_point CASCADE;
-    DROP TABLE osm_rail_station_point CASCADE;
-    DROP TABLE osm_airport_point CASCADE;
-    DROP TABLE osm_airport_polygon CASCADE;
-END;
-$$ language plpgsql;
-
 -- Change tracking
 
 CREATE OR REPLACE FUNCTION disable_delete_tracking() returns VOID
