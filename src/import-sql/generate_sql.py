@@ -3,6 +3,7 @@
 Usage:
   generate_sql.py class <yaml-source>
   generate_sql.py tracking <yaml-source>
+  generate_sql.py update_timestamp <yaml-source>
   generate_sql.py (-h | --help)
 Options:
   -h --help                 Show this screen.
@@ -48,9 +49,27 @@ def find_classes(config):
 Table = namedtuple('Table', ['name', 'buffer', 'min_zoom', 'max_zoom'])
 
 
-def generate_sql_tracking(source):
-    tables = list(find_tables(source))
-    return generate_tracking_triggers(tables)
+def generate_update_timestamp(
+        tables,
+        func_name='update_timestamp',
+        timestamp_field='timestamp'
+    ):
+
+    def gen_update_stmt(table):
+	return 'UPDATE {0} SET {1}=ts WHERE {1} IS NULL;'.format(
+            table.name,
+            timestamp_field
+        );
+
+    indent = 4 * " "
+    stmts = [indent + gen_update_stmt(t) for t in tables]
+    return """CREATE OR REPLACE FUNCTION {0}(ts timestamp) returns VOID
+AS $$
+BEGIN
+{1}
+END;
+$$ language plpgsql;
+    """.format(func_name, "\n".join(stmts))
 
 
 def generate_tracking_triggers(
@@ -73,9 +92,18 @@ $$ language plpgsql;
     """.format(func_name, "\n".join(stmts))
 
 
-def find_tables(config):
+def find_tables_with_deletes(config, delete_suffix='delete'):
+    for src_table in find_tables(config):
+        yield src_table
+        yield Table(src_table.name + '_' + delete_suffix,
+                    src_table.buffer,
+                    src_table.min_zoom,
+                    src_table.max_zoom)
+
+
+def find_tables(config, schema_prefix='osm'):
     for table_name, config_values in config['tables'].items():
-        yield Table(table_name, config_values['buffer'],
+        yield Table(schema_prefix + '_' + table_name,config_values['buffer'],
                     config_values['min_zoom'], config_values['max_zoom'])
 
 
@@ -86,5 +114,9 @@ if __name__ == '__main__':
         source = yaml.load(f)
         if args['class']:
             print(generate_sql_class(source))
+
+        tables = find_tables(source)
         if args['tracking']:
-            print(generate_sql_tracking(source))
+            print(generate_tracking_triggers(find_tables(source)))
+        if args['update_timestamp']:
+            print(generate_update_timestamp(find_tables_with_deletes(source)))

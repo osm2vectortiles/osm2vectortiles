@@ -63,40 +63,6 @@ BEGIN
 END;
 $$ language plpgsql;
 
--- Timestamp tracking
-
-CREATE OR REPLACE FUNCTION update_timestamp(ts timestamp) returns VOID
-AS $$
-BEGIN
-    -- Tracking tables
-	UPDATE osm_delete SET timestamp=ts WHERE timestamp IS NULL;
-
-    -- Normal tables
-	UPDATE osm_admin_linestring SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_aero_linestring SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_aero_polygon SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_barrier_linestring SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_barrier_polygon SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_building_polygon SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_building_polygon_gen0 SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_housenumber_point SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_housenumber_polygon SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_landuse_polygon SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_landuse_polygon_gen0 SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_landuse_polygon_gen1 SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_place_geometry SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_poi_point SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_poi_polygon SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_road_geometry SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_water_linestring SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_water_polygon SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_water_polygon_gen1 SET timestamp=ts WHERE timestamp IS NULL;
-    UPDATE osm_mountain_peak_point SET timestamp=ts WHERE timestamp IS NULL;
-    UPDATE osm_rail_station_point SET timestamp=ts WHERE timestamp IS NULL;
-    UPDATE osm_airport_point SET timestamp=ts WHERE timestamp IS NULL;
-    UPDATE osm_airport_polygon SET timestamp=ts WHERE timestamp IS NULL;
-END;
-$$ language plpgsql;
 
 -- Table Management
 
