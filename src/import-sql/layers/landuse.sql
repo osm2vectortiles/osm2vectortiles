@@ -2,31 +2,31 @@ CREATE OR REPLACE VIEW landuse_z5 AS
     SELECT *
     FROM osm_landuse_polygon_gen0
     WHERE classify_landuse(type) IN ('wood', 'grass')
-      AND st_area(geometry) > 32000000;
+      AND st_area(geometry) > 300000000;
 
 CREATE OR REPLACE VIEW landuse_z6 AS
     SELECT *
     FROM osm_landuse_polygon_gen0
     WHERE classify_landuse(type) IN ('wood', 'grass')
-      AND st_area(geometry) > 16000000;
+      AND st_area(geometry) > 100000000;
 
 CREATE OR REPLACE VIEW landuse_z7 AS
     SELECT *
     FROM osm_landuse_polygon_gen0
     WHERE classify_landuse(type) IN ('wood', 'grass')
-      AND st_area(geometry) > 8000000;
+      AND st_area(geometry) > 25000000;
 
 CREATE OR REPLACE VIEW landuse_z8 AS
     SELECT *
     FROM osm_landuse_polygon_gen0
     WHERE classify_landuse(type) IN ('wood', 'grass')
-      AND st_area(geometry) > 2000000;
+      AND st_area(geometry) > 5000000;
 
 CREATE OR REPLACE VIEW landuse_z9 AS
     SELECT *
     FROM osm_landuse_polygon_gen0
     WHERE classify_landuse(type) IN ('wood', 'grass', 'cemetery', 'park', 'school')
-      AND st_area(geometry) > 200000;
+      AND st_area(geometry) > 500000;
 
 CREATE OR REPLACE VIEW landuse_z10 AS
     SELECT *
