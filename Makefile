@@ -23,7 +23,7 @@ update-scaleranks:
 	docker build -t osm2vectortiles/update-scaleranks src/update-scaleranks
 
 create-extracts:
-	docker build -t osm2vectortiles/create-extracts tools/create-extracts
+	docker build -t osm2vectortiles/create-extracts src/create-extracts
 
 changed-tiles:
 	docker build -t osm2vectortiles/changed-tiles src/changed-tiles
