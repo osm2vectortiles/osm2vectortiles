@@ -163,4 +163,4 @@ mapping-qa-report:
   links:
    - postgis:db
   volumes:
-   - ./export:/data/export
+   - ./export:/data
