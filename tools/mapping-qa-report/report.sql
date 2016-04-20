@@ -70,6 +70,6 @@ WITH vlayers AS (
     array['mountain_peak_label_layer']
   )
 )
-SELECT *, round ((used_features::numeric*100) / all_features::numeric, 2) as percent
+SELECT *, round((used_features::numeric * 100) / all_features::numeric, 2) as percent
 FROM vlayers
 ORDER BY tid;

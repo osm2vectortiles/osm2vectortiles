@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION count_osmid( tablelist TEXT[] )  RETURNS  bigint AS $$
+CREATE OR REPLACE FUNCTION count_osmid(tablelist TEXT[]) RETURNS  bigint AS $$
 DECLARE
   i int8 := 0;
   feature_count bigint;
@@ -39,7 +39,7 @@ RETURNS TABLE (
 BEGIN
   RETURN QUERY
   SELECT id as tid,
-	     count_osmid(iosmlist) as all_features,
+         count_osmid(iosmlist) as all_features,
          count_osmid(ilayerlist) as used_features,
          iosmlist as osmlist,
          ilayerlist as layerlist;
