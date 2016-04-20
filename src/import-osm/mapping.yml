@@ -442,8 +442,9 @@ tables:
     - key: scalerank
       name: scalerank
       type: integer
-    mapping:
-    type_mappings:
+    exclude_tags:
+    - [ "name", "nil" ]
+    type_mapping:
       points:
         place:
         - city
@@ -861,6 +862,8 @@ tables:
       type: mapping_value
     - name: area
       type: pseudoarea
+    exclude_tags:
+    - [ "name", "nil" ]
     mapping:
       amenity:
       - arts_centre
@@ -1162,6 +1165,8 @@ tables:
       type: string
     - name: type
       type: mapping_value
+    exclude_tags:
+    - [ "name", "nil" ]
     mapping:
       amenity:
       - arts_centre
