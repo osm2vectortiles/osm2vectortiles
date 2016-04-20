@@ -442,8 +442,6 @@ tables:
     - key: scalerank
       name: scalerank
       type: integer
-    exclude_tags:
-    - [ "name", "nil" ]
     type_mapping:
       points:
         place:
