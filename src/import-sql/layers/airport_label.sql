@@ -7,6 +7,10 @@ CREATE OR REPLACE VIEW airport_label_z9toz14 AS
         name_ru, name_zh, iata, ref, icao, faa, aerodrome, type, kind, area, timestamp
     FROM osm_airport_polygon;
 
+CREATE OR REPLACE VIEW airport_label_layer AS (
+    SELECT osm_id, timestamp, geometry FROM airport_label_z9toz14
+);
+
 CREATE OR REPLACE FUNCTION airport_label_scalerank(maki VARCHAR, area REAL, aerodrome VARCHAR) RETURNS INTEGER
 AS $$
 BEGIN

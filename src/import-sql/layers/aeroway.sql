@@ -13,3 +13,10 @@ CREATE OR REPLACE VIEW aeroway_z10toz14 AS
     UNION ALL
     SELECT *
     FROM osm_aero_polygon;
+
+CREATE OR REPLACE VIEW aeroway_layer AS (
+    SELECT osm_id, timestamp, geometry FROM aeroway_z9
+    UNION
+    SELECT osm_id, timestamp, geometry FROM aeroway_z10toz14
+);
+

@@ -44,3 +44,21 @@ CREATE OR REPLACE VIEW landuse_overlay_z13toz14 AS
     SELECT *
     FROM osm_landuse_polygon
     WHERE is_landuse_overlay(type);
+
+CREATE OR REPLACE VIEW landuse_overlay_layer AS (
+    SELECT osm_id, timestamp, geometry FROM landuse_overlay_z5
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_overlay_z6
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_overlay_z7
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_overlay_z8
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_overlay_z9
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_overlay_z10
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_overlay_z11toz12
+    UNION
+    SELECT osm_id, timestamp, geometry FROM landuse_overlay_z13toz14
+);

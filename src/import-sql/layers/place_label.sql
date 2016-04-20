@@ -65,6 +65,26 @@ CREATE OR REPLACE VIEW place_label_z14 AS (
     WHERE name <> ''
 );
 
+CREATE OR REPLACE VIEW place_label_layer AS (
+    SELECT osm_id, timestamp, geometry FROM place_label_z4
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z5
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z6toz7
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z8
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z9
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z10
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z11toz12
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z13
+    UNION
+    SELECT osm_id, timestamp, geometry FROM place_label_z14
+);
+
 CREATE OR REPLACE FUNCTION normalize_scalerank(scalerank INTEGER) RETURNS INTEGER
 AS $$
 BEGIN

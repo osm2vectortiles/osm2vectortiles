@@ -63,6 +63,24 @@ CREATE OR REPLACE VIEW road_z14 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order, timestamp
     FROM osm_road_geometry;
 
+CREATE OR REPLACE VIEW road_layer AS (
+    SELECT osm_id, timestamp, geometry FROM road_z5
+    UNION
+    SELECT osm_id, timestamp, geometry FROM road_z6toz7
+    UNION
+    SELECT osm_id, timestamp, geometry FROM road_z8toz9
+    UNION
+    SELECT osm_id, timestamp, geometry FROM road_z10
+    UNION
+    SELECT osm_id, timestamp, geometry FROM road_z11
+    UNION
+    SELECT osm_id, timestamp, geometry FROM road_z12
+    UNION
+    SELECT osm_id, timestamp, geometry FROM road_z13
+    UNION
+    SELECT osm_id, timestamp, geometry FROM road_z14
+);
+
 CREATE OR REPLACE FUNCTION road_localrank(type VARCHAR) RETURNS INTEGER
 AS $$
 BEGIN
