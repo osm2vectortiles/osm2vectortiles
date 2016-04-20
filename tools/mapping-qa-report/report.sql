@@ -1,4 +1,4 @@
-﻿WITH vlayers AS (
+WITH vlayers AS (
   SELECT * FROM compare_layer_feature_count(
     'osm_admin_linestring',
     array['osm_admin_linestring'],
@@ -18,7 +18,7 @@
     'osm_barrier_*',
     array['osm_barrier_linestring', 'osm_barrier_polygon'],
     array['barrier_line_layer']
-  ) 
+  )
   UNION SELECT * FROM compare_layer_feature_count(
     'osm_place_*',
     array['osm_place_geometry'],
