@@ -35,6 +35,9 @@ function import_pbf() {
         -dbschema-import="${DB_SCHEMA}" \
         -write -optimize -diff
 
+    echo "Create osm_water_point table with precalculated centroids"
+    create_osm_water_point_table
+
     local timestamp=$(extract_timestamp "$pbf_file")
     store_timestamp_history "$timestamp"
 }
@@ -42,6 +45,10 @@ function import_pbf() {
 function extract_timestamp() {
     local file="$1"
     osmconvert "$file" --out-timestamp
+}
+
+function create_osm_water_point_table() {
+    exec_sql_file "water_point_table.sql"
 }
 
 function create_timestamp_history() {

@@ -756,7 +756,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_polygon(osm_id) AS osm_id, topoint(geometry) AS geometry,
+          SELECT osm_id_polygon(osm_id) AS osm_id, geometry AS geometry,
           name,
           area,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
