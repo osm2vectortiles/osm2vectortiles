@@ -67,7 +67,5 @@ CREATE OR REPLACE VIEW admin_z7toz14 AS
     FROM ne_10m_admin_0_boundary_lines_disputed_areas;
 
 CREATE OR REPLACE VIEW admin_layer AS (
-    SELECT osm_id, timestamp, geometry FROM admin_z2toz6
-    UNION
-    SELECT osm_id, timestamp, geometry FROM admin_z7toz14
+    SELECT osm_id, timestamp, geometry FROM osm_admin_linestring
 );

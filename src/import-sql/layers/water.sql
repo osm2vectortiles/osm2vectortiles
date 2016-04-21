@@ -48,7 +48,7 @@ CREATE OR REPLACE VIEW water_z13toz14 AS
     FROM osm_water_polygon;
 
 CREATE OR REPLACE VIEW water_layer AS (
-    SELECT osm_id, timestamp, geometry FROM water_z5toz12
+    SELECT osm_id, timestamp, geometry FROM osm_water_polygon
     UNION
-    SELECT osm_id, timestamp, geometry FROM water_z13toz14
+    SELECT osm_id, timestamp, geometry FROM osm_water_polygon_gen1
 );
