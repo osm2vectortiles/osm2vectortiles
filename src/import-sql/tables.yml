@@ -56,7 +56,7 @@ tables:
     min_zoom: 12
     max_zoom: 14
   water_polygon:
-    buffer: 64
+    buffer: 8
     min_zoom: 5
     max_zoom: 14
   water_linestring:
