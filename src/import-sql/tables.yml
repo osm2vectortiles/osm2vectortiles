@@ -68,10 +68,10 @@ tables:
     min_zoom: 12
     max_zoom: 14
   poi_polygon:
-    buffer: 128
+    buffer: 64
     min_zoom: 14
     max_zoom: 14
   poi_point:
-    buffer: 128
+    buffer: 64
     min_zoom: 14
     max_zoom: 14
