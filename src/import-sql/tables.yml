@@ -54,7 +54,7 @@ tables:
     max_zoom: 14
   rail_station_point:
     buffer: 64
-    min_zoom: 5
+    min_zoom: 12
     max_zoom: 14
   water_polygon:
     buffer: 64
