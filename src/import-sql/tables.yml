@@ -56,11 +56,11 @@ tables:
     min_zoom: 12
     max_zoom: 14
   water_polygon:
-    buffer: 8
+    buffer: 64
     min_zoom: 5
     max_zoom: 14
   water_linestring:
-    buffer: 4
+    buffer: 8
     min_zoom: 8
     max_zoom: 14
   mountain_peak_point:
