@@ -24,8 +24,6 @@ system:
     - road
     - living_street
     - raceway
-    pedestrian:
-    - platform
     construction:
     - construction
     track:

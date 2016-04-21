@@ -574,8 +574,6 @@ tables:
           - canopy
           golf:
           - hole
-          public_transport:
-          - platform
           route:
           - ferry
           - piste
@@ -627,8 +625,6 @@ tables:
           - canopy
           golf:
           - hole
-          public_transport:
-          - platform
           route:
           - ferry
           - piste
