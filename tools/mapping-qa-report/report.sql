@@ -41,7 +41,7 @@ WITH vlayers AS (
   )
   UNION SELECT * FROM compare_layer_feature_count(
     'osm_water_polygon_*',
-    array['osm_water_polygon_gen1', 'osm_water_polygon'],
+    array['osm_water_polygon_gen1', 'osm_water_polygon', 'osm_water_point'],
     array['water_layer', 'water_label_layer']
   )
   UNION SELECT * FROM compare_layer_feature_count(
