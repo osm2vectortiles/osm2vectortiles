@@ -10,7 +10,7 @@ BEGIN
   IF numpars = 0 THEN
     fullcode = ' select null ';
   ELSIF numpars = 1 THEN
-     fullcode = ' select count( distinct osm_id ) as alluid from ' || tablelist[1];
+     fullcode = ' select count( distinct osm_id ) as alluid from ' || tablelist[1] || ' where osm_id <> 0';
   ELSE
      FOREACH table_name IN ARRAY tablelist
      LOOP
@@ -21,7 +21,7 @@ BEGIN
         END IF ;
         i = i + 1;
      END LOOP;
-     fullcode = ' select count( distinct osm_id ) as  alluid   from  (' || code || ')  as sq';
+     fullcode = ' select count( distinct osm_id ) as  alluid   from  (' || code || ')  as sq where osm_id <> 0';
   END IF;
   EXECUTE fullcode INTO feature_count;
   RETURN feature_count;
