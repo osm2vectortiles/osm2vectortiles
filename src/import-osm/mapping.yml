@@ -442,7 +442,9 @@ tables:
     - key: scalerank
       name: scalerank
       type: integer
-    type_mapping:
+    exclude_tags:
+    - [ "name", "nil" ]
+    type_mappings:
       points:
         place:
         - city
