@@ -92,9 +92,6 @@ tables:
     - key: name
       name: name
       type: string
-    - name: name_int
-      key: int_name
-      type: string
     - name: name_fr
       key: name:fr
       type: string
@@ -148,9 +145,6 @@ tables:
       type: pbf_timestamp
     - key: name
       name: name
-      type: string
-    - name: name_int
-      key: int_name
       type: string
     - name: name_fr
       key: name:fr
@@ -417,9 +411,6 @@ tables:
     - key: name
       name: name
       type: string
-    - name: name_int
-      key: int_name
-      type: string
     - name: name_fr
       key: name:fr
       type: string
@@ -519,9 +510,6 @@ tables:
       type: string
     - key: name
       name: name
-      type: string
-    - name: name_int
-      key: int_name
       type: string
     - name: name_fr
       key: name:fr
@@ -653,9 +641,6 @@ tables:
     - key: name
       name: name
       type: string
-    - name: name_int
-      key: int_name
-      type: string
     - name: name_fr
       key: name:fr
       type: string
@@ -696,9 +681,6 @@ tables:
       type: pbf_timestamp
     - key: name
       name: name
-      type: string
-    - name: name_int
-      key: int_name
       type: string
     - name: name_fr
       key: name:fr
@@ -754,9 +736,6 @@ tables:
     - key: name
       name: name
       type: string
-    - name: name_int
-      key: int_name
-      type: string
     - name: name_fr
       key: name:fr
       type: string
@@ -802,9 +781,6 @@ tables:
     - key: name
       name: name
       type: string
-    - name: name_int
-      key: int_name
-      type: string
     - name: name_fr
       key: name:fr
       type: string
@@ -840,9 +816,6 @@ tables:
       type: pbf_timestamp
     - name: name
       key: name
-      type: string
-    - name: name_int
-      key: int_name
       type: string
     - name: name_fr
       key: name:fr
@@ -1146,9 +1119,6 @@ tables:
       type: pbf_timestamp
     - name: name
       key: name
-      type: string
-    - name: name_int
-      key: int_name
       type: string
     - name: name_fr
       key: name:fr

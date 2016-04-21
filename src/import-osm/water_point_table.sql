@@ -3,7 +3,7 @@ CREATE TABLE osm_water_point AS
 SELECT osm_id,
        topoint(geometry) AS geometry,
        timestamp,
-       name, name_int, name_fr, name_en, name_de,
+       name, name_fr, name_en, name_de,
        name_es, name_ru, name_zh,
        area
 FROM osm_water_polygon;
