@@ -16,5 +16,7 @@ CREATE OR REPLACE VIEW waterway_z14 AS
 CREATE OR REPLACE VIEW waterway_layer AS (
     SELECT osm_id, timestamp, geometry FROM waterway_z8toz12
     UNION
-    SELECT osm_id, timestamp, geometry FROM waterway_z13toz14
+    SELECT osm_id, timestamp, geometry FROM waterway_z13
+    UNION
+    SELECT osm_id, timestamp, geometry FROM waterway_z14
 );
