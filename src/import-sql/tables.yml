@@ -40,7 +40,7 @@ tables:
     min_zoom: 14
     max_zoom: 14
   landuse_polygon:
-    buffer: 4
+    buffer: 8
     min_zoom: 5
     max_zoom: 14
   place_geometry:
