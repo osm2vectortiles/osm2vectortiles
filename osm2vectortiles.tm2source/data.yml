@@ -143,17 +143,25 @@ Layer:
       srid: ''
       table: |-
         (
+          SELECT 0 AS osm_id, geom AS geometry FROM ne_110m_ocean
+          WHERE geom && !bbox!
+            AND z(!scale_denominator!) = 0
+          UNION ALL
           SELECT 0 AS osm_id, geom AS geometry FROM ne_50m_ocean
           WHERE geom && !bbox!
-            AND z(!scale_denominator!) BETWEEN 0 AND 2
+            AND z(!scale_denominator!) = 1
           UNION ALL
           SELECT 0 AS osm_id, geom AS geometry FROM ne_10m_ocean
           WHERE geom && !bbox!
-            AND z(!scale_denominator!) BETWEEN 3 AND 4
+            AND z(!scale_denominator!) BETWEEN 2 AND 3
+          UNION ALL
+          SELECT 0 AS osm_id, way AS geometry FROM osm_ocean_polygons_gen0
+          WHERE way && !bbox!
+            AND z(!scale_denominator!) BETWEEN 4 AND 7
           UNION ALL
           SELECT 0 AS osm_id, way AS geometry FROM osm_ocean_polygons
           WHERE way && !bbox!
-            AND z(!scale_denominator!) BETWEEN 5 AND 14
+            AND z(!scale_denominator!) BETWEEN 8 AND 14
           UNION ALL
           SELECT 0 AS osm_id, geom AS geometry FROM ne_110m_lakes
           WHERE geom && !bbox!
