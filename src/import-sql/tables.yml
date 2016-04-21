@@ -35,7 +35,6 @@ tables:
     buffer: 64
     min_zoom: 14
     max_zoom: 14
-    buffer: 64
   housenumber_polygon:
     buffer: 64
     min_zoom: 14
