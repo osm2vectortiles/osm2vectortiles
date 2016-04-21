@@ -14,14 +14,14 @@ CREATE OR REPLACE VIEW road_label_z12toz13 AS
     SELECT *
     FROM osm_road_geometry
     WHERE type IN ('motorway', 'motorway_link', 'primary', 'primary_link', 'trunk', 'trunk_link', 'secondary', 'secondary_link',
-        'tertiary', 'tertiary_link', 'residential', 'unclassified', 'living_street', 'pedestrian', 'construction', 'rail', 'monorail', 'narrow_gauge', 'subway', 'tram')
+        'tertiary', 'tertiary_link', 'residential', 'unclassified', 'living_street', 'construction', 'rail', 'monorail', 'narrow_gauge', 'subway', 'tram')
       AND name <> '';
 
 CREATE OR REPLACE VIEW road_label_z14 AS
     SELECT *
     FROM osm_road_geometry
     WHERE type IN ('motorway', 'motorway_link', 'primary', 'primary_link', 'trunk', 'trunk_link', 'secondary', 'secondary_link',
-        'tertiary', 'tertiary_link', 'residential', 'unclassified', 'living_street', 'pedestrian', 'construction', 'rail', 'monorail',
+        'tertiary', 'tertiary_link', 'residential', 'unclassified', 'living_street', 'construction', 'rail', 'monorail',
         'narrow_gauge', 'subway', 'tram', 'service', 'track', 'driveway', 'path', 'cycleway', 'ski', 'steps', 'bridleway', 'footway', 'funicular', 'light_rail', 'preserved')
       AND name <> '';
 

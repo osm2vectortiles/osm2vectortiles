@@ -12,6 +12,11 @@ RUN mkdir -p /data/import \
     && rm water-polygons-split-3857.zip
 
 RUN mkdir -p /data/import \
+    && wget --quiet http://data.openstreetmapdata.com/simplified-water-polygons-complete-3857.zip \
+    && unzip -oj simplified-water-polygons-complete-3857.zip -d /data/import \
+    && rm simplified-water-polygons-complete-3857.zip
+
+RUN mkdir -p /data/import \
     && wget http://naciscdn.org/naturalearth/packages/natural_earth_vector.sqlite.zip \
     && unzip -oj natural_earth_vector.sqlite.zip -d /data/import \
     && rm natural_earth_vector.sqlite.zip

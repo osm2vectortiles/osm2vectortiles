@@ -32,6 +32,16 @@ tables:
       key: maritime
     - name: area
       type: pseudoarea
+    filters:
+      exclude_tags:
+      - [ "admin_level", "__nil__" ]
+      - [ "admin_level", "3" ]
+      - [ "admin_level", "5" ]
+      - [ "admin_level", "6" ]
+      - [ "admin_level", "7" ]
+      - [ "admin_level", "8" ]
+      - [ "admin_level", "9" ]
+      - [ "admin_level", "10" ]
     mapping:
       boundary:
       - administrative
@@ -442,7 +452,9 @@ tables:
     - key: scalerank
       name: scalerank
       type: integer
-    mapping:
+    filters:
+      exclude_tags:
+      - [ "name", "__nil__" ]
     type_mappings:
       points:
         place:
@@ -574,8 +586,6 @@ tables:
           - canopy
           golf:
           - hole
-          public_transport:
-          - platform
           route:
           - ferry
           - piste
@@ -627,8 +637,6 @@ tables:
           - canopy
           golf:
           - hole
-          public_transport:
-          - platform
           route:
           - ferry
           - piste
@@ -861,6 +869,9 @@ tables:
       type: mapping_value
     - name: area
       type: pseudoarea
+    filters:
+      exclude_tags:
+      - [ "name", "__nil__" ]
     mapping:
       amenity:
       - arts_centre
@@ -1162,6 +1173,9 @@ tables:
       type: string
     - name: type
       type: mapping_value
+    filters:
+      exclude_tags:
+      - [ "name", "__nil__" ]
     mapping:
       amenity:
       - arts_centre
