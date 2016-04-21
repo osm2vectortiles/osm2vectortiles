@@ -31,17 +31,17 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION compare_layer_feature_count(id text, iosmlist TEXT[], ilayerlist TEXT[])
 RETURNS TABLE (
    tid text,
-   all_features bigint,
-   used_features bigint,
-   osmlist TEXT[],
-   layerlist TEXT[]
+   db_features bigint,
+   vt_features bigint,
+   tables TEXT[],
+   layers TEXT[]
 ) AS $$
 BEGIN
   RETURN QUERY
   SELECT id as tid,
-         count_osmid(iosmlist) as all_features,
-         count_osmid(ilayerlist) as used_features,
-         iosmlist as osmlist,
-         ilayerlist as layerlist;
+         count_osmid(iosmlist) as db_features,
+         count_osmid(ilayerlist) as vt_features,
+         iosmlist as tables,
+         ilayerlist as layers;
 END;
 $$ LANGUAGE plpgsql;
