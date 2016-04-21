@@ -147,45 +147,38 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT 0 AS osm_id, geom AS geometry FROM ne_110m_ocean
-          WHERE geom && !bbox!
-            AND z(!scale_denominator!) = 0
-          UNION ALL
-          SELECT 0 AS osm_id, geom AS geometry FROM ne_50m_ocean
-          WHERE geom && !bbox!
-            AND z(!scale_denominator!) = 1
-          UNION ALL
-          SELECT 0 AS osm_id, geom AS geometry FROM ne_10m_ocean
-          WHERE geom && !bbox!
-            AND z(!scale_denominator!) BETWEEN 2 AND 3
-          UNION ALL
-          SELECT 0 AS osm_id, way AS geometry FROM osm_ocean_polygons_gen0
-          WHERE way && !bbox!
-            AND z(!scale_denominator!) BETWEEN 4 AND 7
-          UNION ALL
-          SELECT 0 AS osm_id, way AS geometry FROM osm_ocean_polygons
-          WHERE way && !bbox!
-            AND z(!scale_denominator!) BETWEEN 8 AND 14
-          UNION ALL
-          SELECT 0 AS osm_id, geom AS geometry FROM ne_110m_lakes
-          WHERE geom && !bbox!
-            AND z(!scale_denominator!) BETWEEN 0 AND 1
-          UNION ALL
-          SELECT 0 AS osm_id, geom AS geometry FROM ne_50m_lakes
-          WHERE geom && !bbox!
-            AND z(!scale_denominator!) BETWEEN 2 AND 3
-          UNION ALL
-          SELECT 0 AS osm_id, geom AS geometry FROM ne_10m_lakes
-          WHERE geom && !bbox!
-            AND z(!scale_denominator!) = 4
-          UNION ALL
-          SELECT osm_id, geometry FROM water_z5toz12
+          SELECT osm_id, geometry
+          FROM (
+            SELECT osm_id, geometry
+            FROM water_z0
+            WHERE z(!scale_denominator!) = 0
+            UNION ALL
+            SELECT osm_id, geometry
+            FROM water_z1
+            WHERE z(!scale_denominator!) = 1
+            UNION ALL
+            SELECT osm_id, geometry
+            FROM water_z2toz3
+            WHERE z(!scale_denominator!) BETWEEN 2 AND 3
+            UNION ALL
+            SELECT osm_id, geometry
+            FROM water_z4
+            WHERE z(!scale_denominator!) = 4
+            UNION ALL
+            SELECT osm_id, geometry
+            FROM water_z5toz7
+            WHERE z(!scale_denominator!) BETWEEN 5 AND 7
+            UNION ALL
+            SELECT osm_id, geometry
+            FROM water_z8toz12
+            WHERE z(!scale_denominator!) BETWEEN 8 AND 12
+            UNION ALL
+            SELECT osm_id, geometry
+            FROM water_z13toz14
+            WHERE z(!scale_denominator!) BETWEEN 13 AND 14
+            UNION ALL
+          ) AS water
           WHERE geometry && !bbox!
-          AND z(!scale_denominator!) BETWEEN 5 AND 12
-          UNION ALL
-          SELECT osm_id, geometry FROM water_z13toz14
-          WHERE geometry && !bbox!
-          AND z(!scale_denominator!) BETWEEN 13 AND 14
         ) AS data
       type: postgis
       user: osm
