@@ -6,29 +6,11 @@ CREATE OR REPLACE VIEW rail_station_label_z14 AS (
 CREATE OR REPLACE VIEW rail_station_label_z12toz13 AS (
     SELECT *
     FROM osm_rail_station_point
-    WHERE classify_rail_station(type) = 'rail'
+    WHERE rail_station_class(type) = 'rail'
 );
 
 CREATE OR REPLACE VIEW rail_station_label_layer AS (
-    SELECT osm_id, timestamp, geometry FROM rail_station_label_z14
-    UNION ALL
     SELECT osm_id, timestamp, geometry FROM rail_station_label_z12toz13
+    UNION ALL
+    SELECT osm_id, timestamp, geometry FROM rail_station_label_z14
 );
-
-CREATE OR REPLACE FUNCTION rail_station_label_changed_tiles(ts timestamp)
-RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
-BEGIN
-	RETURN QUERY (
-		WITH changed_tiles AS (
-		    SELECT DISTINCT c.osm_id, t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-		    FROM rail_station_label_layer AS c
-		    INNER JOIN LATERAL overlapping_tiles(c.geometry, 14) AS t ON c.timestamp = ts
-		)
-		SELECT c.x, c.y, c.z FROM rail_station_label_z14 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z = 14
-        UNION
-		SELECT c.x, c.y, c.z FROM rail_station_label_z12toz13 AS l
-		INNER JOIN changed_tiles AS c ON c.osm_id = l.osm_id AND c.z BETWEEN 12 AND 13
-	);
-END;
-$$ LANGUAGE plpgsql;

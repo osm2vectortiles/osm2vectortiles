@@ -4,20 +4,27 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/lukasmartinelli/classify.git /opt/classify
-WORKDIR /opt/classify
+WORKDIR /usr/src/app/
+COPY requirements.txt /usr/src/app/
 RUN pip install -r requirements.txt
 
 ENV SQL_FUNCTIONS_FILE=/usr/src/app/functions.sql \
+    SQL_GENERATED_FILE=/usr/src/app/gen.sql \
     SQL_TRIGGERS_FILE=/usr/src/app/triggers.sql \
-    SQL_LAYERS_DIR=/usr/src/app/layers/ \
-    PATH=$PATH:/opt/classify
-WORKDIR /usr/src/app
+    SQL_XYZ_EXTENT_FILE=/usr/src/app/xyz_extent.sql \
+    SQL_LAYERS_DIR=/usr/src/app/layers/
 COPY . /usr/src/app
-RUN classify.py sql classes/barrier_line.yml >> $SQL_FUNCTIONS_FILE \
- && classify.py sql classes/landuse_overlay.yml >> $SQL_FUNCTIONS_FILE \
- && classify.py sql classes/landuse.yml >> $SQL_FUNCTIONS_FILE \
- && classify.py sql classes/road.yml >> $SQL_FUNCTIONS_FILE \
- && classify.py sql classes/rail_station.yml >> $SQL_FUNCTIONS_FILE \
- && classify.py sql classes/maki_label.yml >> $SQL_FUNCTIONS_FILE
+
+# Generate class functions
+RUN ./generate_sql.py class classes/barrier_line.yml >> $SQL_GENERATED_FILE \
+ && ./generate_sql.py class classes/landuse_overlay.yml >> $SQL_GENERATED_FILE \
+ && ./generate_sql.py class classes/landuse.yml >> $SQL_GENERATED_FILE \
+ && ./generate_sql.py class classes/road.yml >> $SQL_GENERATED_FILE \
+ && ./generate_sql.py class classes/rail_station.yml >> $SQL_GENERATED_FILE \
+ && ./generate_sql.py class classes/maki_label.yml >> $SQL_GENERATED_FILE
+
+# Generate table functions
+RUN ./generate_sql.py changed_tiles tables.yml >> $SQL_GENERATED_FILE \
+ && ./generate_sql.py tables tables.yml >> $SQL_GENERATED_FILE
+
 CMD ["./prepare.sh"]

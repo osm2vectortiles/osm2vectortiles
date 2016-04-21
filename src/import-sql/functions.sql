@@ -1,6 +1,7 @@
 CREATE OR REPLACE FUNCTION overlapping_tiles(
     geom geometry,
-    max_zoom_level INTEGER
+    max_zoom_level INTEGER,
+    buffer_size INTEGER
 ) RETURNS TABLE (
     tile_z INTEGER,
     tile_x INTEGER,
@@ -9,10 +10,10 @@ CREATE OR REPLACE FUNCTION overlapping_tiles(
 BEGIN
     RETURN QUERY
         WITH RECURSIVE tiles(x, y, z, e) AS (
-            SELECT 0, 0, 0, geom && CDB_XYZ_Extent(0, 0, 0)
+            SELECT 0, 0, 0, geom && XYZ_Extent(0, 0, 0, buffer_size)
             UNION ALL
             SELECT x*2 + xx, y*2 + yy, z+1,
-                   geom && CDB_XYZ_Extent(x*2 + xx, y*2 + yy, z+1)
+                   geom && XYZ_Extent(x*2 + xx, y*2 + yy, z+1, buffer_size)
             FROM tiles,
             (VALUES (0, 0), (0, 1), (1, 1), (1, 0)) as c(xx, yy)
             WHERE e AND z < max_zoom_level
@@ -31,59 +32,21 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION deleted_tiles(ts timestamp)
-RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
+CREATE OR REPLACE FUNCTION changed_tiles_table(
+    table_name TEXT,
+    ts TIMESTAMP,
+    buffer_size INTEGER,
+    min_zoom INTEGER,
+    max_zoom INTEGER
+) RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
 BEGIN
-	RETURN QUERY (
-		SELECT DISTINCT t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
-		FROM osm_delete AS d
-		INNER JOIN LATERAL overlapping_tiles(d.geometry, 14) AS t ON d.timestamp = ts
-	);
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION changed_tiles(ts timestamp)
-RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
-BEGIN
-	RETURN QUERY (
-	    SELECT * FROM deleted_tiles(ts)
-        UNION
-	    SELECT * FROM admin_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM aeroway_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM barrier_line_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM building_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM housenum_label_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM landuse_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM landuse_overlay_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM place_label_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM poi_label_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM road_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM road_label_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM water_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM water_label_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM waterway_changed_tiles(ts)
-	    UNION
-	    SELECT * FROM waterway_label_changed_tiles(ts)
-        UNION
-        SELECT * FROM mountain_peak_label_changed_tiles(ts)
-        UNION
-        SELECT * FROM airport_label_changed_tiles(ts)
-        UNION
-        SELECT * FROM rail_station_label_changed_tiles(ts)
-	);
+    RETURN QUERY EXECUTE format('
+        SELECT DISTINCT t.tile_x AS x, t.tile_y AS y, t.tile_z AS z
+        FROM %I AS g
+        INNER JOIN LATERAL overlapping_tiles(g.geometry, $2, $3)
+                           AS t ON g.timestamp = $4
+        WHERE 3 BETWEEN $1 AND $2
+    ', table_name) USING min_zoom, max_zoom, buffer_size, ts;
 END;
 $$ LANGUAGE plpgsql;
 

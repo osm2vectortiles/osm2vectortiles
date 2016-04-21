@@ -1,27 +1,26 @@
--- Delete and update tracking
-
-CREATE TABLE IF NOT EXISTS osm_delete (
-    osm_id bigint,
-    geometry geometry,
-    timestamp timestamp,
-    table_name text
-);
-
-CREATE OR REPLACE FUNCTION drop_osm_delete_indizes() returns VOID
+CREATE OR REPLACE FUNCTION drop_osm_delete_index(table_name TEXT) returns VOID
 AS $$
 BEGIN
-    DROP INDEX IF EXISTS osm_delete_geom;
-    DROP INDEX IF EXISTS osm_delete_geom_geohash;
+    EXECUTE format('DROP INDEX IF EXISTS %I', table_name || '_geom');
+    EXECUTE format('DROP INDEX IF EXISTS %I', table_name || '_geom_geohash');
 END;
 $$ language plpgsql;
 
-CREATE OR REPLACE FUNCTION create_osm_delete_indizes() returns VOID
+
+CREATE OR REPLACE FUNCTION drop_osm_delete_indizes() RETURNS VOID AS $$
+BEGIN
+    PERFORM drop_osm_delete_index(table_name)
+    FROM osm_tables_delete;
+END;
+$$ language plpgsql;
+
+CREATE OR REPLACE FUNCTION create_osm_delete_index(table_name TEXT) returns VOID
 AS $$
 BEGIN
-    CREATE INDEX osm_delete_geom ON osm_delete
-    USING gist (geometry);
-    CREATE INDEX osm_delete_geom_geohash ON osm_delete
-    USING btree (st_geohash(st_transform(st_setsrid(box2d(geometry)::geometry, 3857), 4326)));
+    EXECUTE format('CREATE INDEX %I ON %I USING gist (geometry)', table_name || '_geom', table_name);
+    EXECUTE format('CREATE INDEX %I ON %I
+    USING btree (st_geohash(st_transform(st_setsrid(box2d(geometry)::geometry, 3857), 4326)))',
+    table_name || '_geom_geohash', table_name);
 END;
 $$ language plpgsql;
 
@@ -29,22 +28,42 @@ CREATE OR REPLACE FUNCTION cleanup_osm_tracking_tables() returns VOID
 AS $$
 DECLARE
     latest_ts timestamp;
+    t osm_tables%ROWTYPE;
 BEGIN
-    SELECT MAX(timestamp) INTO latest_ts FROM osm_delete;
-    DELETE FROM osm_delete WHERE timestamp <> latest_ts;
+    SELECT MAX(timestamp) INTO latest_ts FROM osm_timestamps;
+    FOR t IN SELECT * FROM osm_tables_delete LOOP
+        EXECUTE format('DELETE FROM %I WHERE timestamp <> $1', t.table_name) USING latest_ts;
+    END LOOP;
 END;
 $$ language plpgsql;
 
+-- TODO: Perhaps a dynamic trigger is really slow
+-- if it is a performance problem we should generate static
+-- triggers for each table
 CREATE OR REPLACE FUNCTION track_osm_delete() returns TRIGGER
 AS $$
 BEGIN
      IF (TG_OP = 'DELETE') THEN
-        INSERT INTO osm_delete(osm_id, geometry, timestamp, table_name)
-        VALUES(OLD.osm_id, OLD.geometry, NULL, TG_TABLE_NAME::TEXT);
+        EXECUTE format('
+            INSERT INTO %I(osm_id, geometry)
+            VALUES($1, $2)', TG_TABLE_NAME::TEXT || '_delete')
+            USING OLD.osm_id, OLD.geometry;
         RETURN OLD;
      END IF;
 
      RETURN NULL;
+END;
+$$ language plpgsql;
+
+
+CREATE OR REPLACE FUNCTION create_delete_table(table_name TEXT) returns VOID
+AS $$
+BEGIN
+    EXECUTE format('CREATE TABLE IF NOT EXISTS %I (
+        osm_id bigint,
+        geometry geometry,
+        timestamp timestamp
+    )', table_name);
 END;
 $$ language plpgsql;
 
@@ -63,163 +82,75 @@ BEGIN
 END;
 $$ language plpgsql;
 
--- Create triggers
-
-CREATE OR REPLACE FUNCTION create_tracking_triggers() returns VOID
-AS $$
+CREATE OR REPLACE FUNCTION modify_delete_tracking(table_name TEXT, enable BOOLEAN)
+RETURNS VOID AS $$
 BEGIN
-    -- Place
-    PERFORM recreate_osm_delete_tracking('osm_place_geometry');
-    -- POI
-    PERFORM recreate_osm_delete_tracking('osm_poi_point');
-    PERFORM recreate_osm_delete_tracking('osm_poi_polygon');
-    -- Roads
-    PERFORM recreate_osm_delete_tracking('osm_road_geometry');
-    -- Admin
-    PERFORM recreate_osm_delete_tracking('osm_admin_linestring');
-    -- Water
-    PERFORM recreate_osm_delete_tracking('osm_water_linestring');
-    PERFORM recreate_osm_delete_tracking('osm_water_polygon');
-    -- Landuse
-    PERFORM recreate_osm_delete_tracking('osm_landuse_polygon');
-    -- Aeroways
-    PERFORM recreate_osm_delete_tracking('osm_aero_polygon');
-    PERFORM recreate_osm_delete_tracking('osm_aero_linestring');
-    -- Buildings
-    PERFORM recreate_osm_delete_tracking('osm_building_polygon');
-    PERFORM recreate_osm_delete_tracking('osm_housenumber_polygon');
-    PERFORM recreate_osm_delete_tracking('osm_housenumber_point');
-    -- Barrier
-    PERFORM recreate_osm_delete_tracking('osm_barrier_polygon');
-    PERFORM recreate_osm_delete_tracking('osm_barrier_linestring');
-    -- Mountain Peaks
-    PERFORM recreate_osm_delete_tracking('osm_mountain_peak_point');
-    -- Rail Station Label
-    PERFORM recreate_osm_delete_tracking('osm_rail_station_point');
-    -- Airport Label
-    PERFORM recreate_osm_delete_tracking('osm_airport_point');
-    PERFORM recreate_osm_delete_tracking('osm_airport_polygon');
+    EXECUTE format('ALTER TABLE %I %s TRIGGER USER', table_name,
+                   CASE WHEN enable THEN 'ENABLE' ELSE 'DISABLE' END);
 END;
 $$ language plpgsql;
 
--- Timestamp tracking
-
-CREATE OR REPLACE FUNCTION update_timestamp(ts timestamp) returns VOID
-AS $$
+CREATE OR REPLACE FUNCTION enable_delete_tracking() RETURNS VOID AS $$
 BEGIN
-    -- Tracking tables
-	UPDATE osm_delete SET timestamp=ts WHERE timestamp IS NULL;
-
-    -- Normal tables
-	UPDATE osm_admin_linestring SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_aero_linestring SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_aero_polygon SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_barrier_linestring SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_barrier_polygon SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_building_polygon SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_building_polygon_gen0 SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_housenumber_point SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_housenumber_polygon SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_landuse_polygon SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_landuse_polygon_gen0 SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_landuse_polygon_gen1 SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_place_geometry SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_poi_point SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_poi_polygon SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_road_geometry SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_water_linestring SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_water_polygon SET timestamp=ts WHERE timestamp IS NULL;
-	UPDATE osm_water_polygon_gen1 SET timestamp=ts WHERE timestamp IS NULL;
-    UPDATE osm_mountain_peak_point SET timestamp=ts WHERE timestamp IS NULL;
-    UPDATE osm_rail_station_point SET timestamp=ts WHERE timestamp IS NULL;
-    UPDATE osm_airport_point SET timestamp=ts WHERE timestamp IS NULL;
-    UPDATE osm_airport_polygon SET timestamp=ts WHERE timestamp IS NULL;
+    PERFORM modify_delete_tracking(table_name, true)
+    FROM osm_tables;
 END;
 $$ language plpgsql;
 
--- Table Management
-
-CREATE OR REPLACE FUNCTION drop_tables() returns VOID
-AS $$
+CREATE OR REPLACE FUNCTION disable_delete_tracking() RETURNS VOID AS $$
 BEGIN
-    -- Tracking tables
-    DROP TABLE osm_delete CASCADE;
-
-    -- Normal tables
-    DROP TABLE osm_admin_linestring CASCADE;
-    DROP TABLE osm_aero_linestring CASCADE;
-    DROP TABLE osm_aero_polygon CASCADE;
-    DROP TABLE osm_barrier_linestring CASCADE;
-    DROP TABLE osm_barrier_polygon CASCADE;
-    DROP TABLE osm_building_polygon CASCADE;
-    DROP TABLE osm_building_polygon_gen0 CASCADE;
-    DROP TABLE osm_housenumber_point CASCADE;
-    DROP TABLE osm_housenumber_polygon CASCADE;
-    DROP TABLE osm_landuse_polygon CASCADE;
-    DROP TABLE osm_landuse_polygon_gen0 CASCADE;
-    DROP TABLE osm_landuse_polygon_gen1 CASCADE;
-    DROP TABLE osm_place_geometry CASCADE;
-    DROP TABLE osm_poi_point CASCADE;
-    DROP TABLE osm_poi_polygon CASCADE;
-    DROP TABLE osm_road_geometry CASCADE;
-    DROP TABLE osm_water_linestring CASCADE;
-    DROP TABLE osm_water_polygon CASCADE;
-    DROP TABLE osm_water_polygon_gen1 CASCADE;
-    DROP TABLE osm_mountain_peak_point CASCADE;
-    DROP TABLE osm_rail_station_point CASCADE;
-    DROP TABLE osm_airport_point CASCADE;
-    DROP TABLE osm_airport_polygon CASCADE;
+    PERFORM modify_delete_tracking(table_name, false)
+    FROM osm_tables;
 END;
 $$ language plpgsql;
 
--- Change tracking
 
-CREATE OR REPLACE FUNCTION disable_delete_tracking() returns VOID
-AS $$
+CREATE OR REPLACE FUNCTION create_osm_delete_indizes() RETURNS VOID AS $$
 BEGIN
-    ALTER TABLE osm_place_geometry DISABLE TRIGGER USER;
-    ALTER TABLE osm_poi_point DISABLE TRIGGER USER;
-    ALTER TABLE osm_poi_polygon DISABLE TRIGGER USER;
-    ALTER TABLE osm_road_geometry DISABLE TRIGGER USER;
-    ALTER TABLE osm_admin_linestring DISABLE TRIGGER USER;
-    ALTER TABLE osm_water_linestring DISABLE TRIGGER USER;
-    ALTER TABLE osm_water_polygon DISABLE TRIGGER USER;
-    ALTER TABLE osm_landuse_polygon DISABLE TRIGGER USER;
-    ALTER TABLE osm_aero_polygon DISABLE TRIGGER USER;
-    ALTER TABLE osm_aero_linestring DISABLE TRIGGER USER;
-    ALTER TABLE osm_building_polygon DISABLE TRIGGER USER;
-    ALTER TABLE osm_housenumber_polygon DISABLE TRIGGER USER;
-    ALTER TABLE osm_housenumber_point DISABLE TRIGGER USER;
-    ALTER TABLE osm_barrier_polygon DISABLE TRIGGER USER;
-    ALTER TABLE osm_barrier_linestring DISABLE TRIGGER USER;
-    ALTER TABLE osm_mountain_peak_point DISABLE TRIGGER USER;
-    ALTER TABLE osm_airport_point DISABLE TRIGGER USER;
-    ALTER TABLE osm_airport_polygon DISABLE TRIGGER USER;
-    ALTER TABLE osm_rail_station_point DISABLE TRIGGER USER;
+    PERFORM create_osm_delete_index(table_name)
+    FROM osm_tables_delete;
 END;
 $$ language plpgsql;
 
-CREATE OR REPLACE FUNCTION enable_delete_tracking() returns VOID
-AS $$
+
+CREATE OR REPLACE FUNCTION create_delete_tables() RETURNS VOID AS $$
 BEGIN
-    ALTER TABLE osm_place_geometry ENABLE TRIGGER USER;
-    ALTER TABLE osm_poi_point ENABLE TRIGGER USER;
-    ALTER TABLE osm_poi_polygon ENABLE TRIGGER USER;
-    ALTER TABLE osm_road_geometry ENABLE TRIGGER USER;
-    ALTER TABLE osm_admin_linestring ENABLE TRIGGER USER;
-    ALTER TABLE osm_water_linestring ENABLE TRIGGER USER;
-    ALTER TABLE osm_water_polygon ENABLE TRIGGER USER;
-    ALTER TABLE osm_landuse_polygon ENABLE TRIGGER USER;
-    ALTER TABLE osm_aero_polygon ENABLE TRIGGER USER;
-    ALTER TABLE osm_aero_linestring ENABLE TRIGGER USER;
-    ALTER TABLE osm_building_polygon ENABLE TRIGGER USER;
-    ALTER TABLE osm_housenumber_polygon ENABLE TRIGGER USER;
-    ALTER TABLE osm_housenumber_point ENABLE TRIGGER USER;
-    ALTER TABLE osm_barrier_polygon ENABLE TRIGGER USER;
-    ALTER TABLE osm_barrier_linestring ENABLE TRIGGER USER;
-    ALTER TABLE osm_mountain_peak_point ENABLE TRIGGER USER;
-    ALTER TABLE osm_airport_point ENABLE TRIGGER USER;
-    ALTER TABLE osm_airport_polygon ENABLE TRIGGER USER;
-    ALTER TABLE osm_rail_station_point ENABLE TRIGGER USER;
+    PERFORM create_delete_table(table_name)
+    FROM osm_tables_delete;
+END;
+$$ language plpgsql;
+
+CREATE OR REPLACE FUNCTION create_tracking_triggers() RETURNS VOID AS $$
+BEGIN
+    PERFORM recreate_osm_delete_tracking(table_name)
+    FROM osm_tables;
+END;
+$$ language plpgsql;
+
+CREATE OR REPLACE VIEW osm_tables_delete AS (
+    SELECT table_name || '_delete' AS table_name, buffer_size, min_zoom, max_zoom
+    FROM osm_tables
+);
+
+CREATE OR REPLACE FUNCTION update_timestamp(ts timestamp) RETURNS VOID AS $$
+DECLARE t osm_tables%ROWTYPE;
+BEGIN
+    FOR t IN SELECT * FROM osm_tables LOOP
+        EXECUTE format('UPDATE %I SET timestamp=$1 WHERE timestamp IS NULL;',
+                       t.table_name) USING ts;
+    END LOOP;
+END;
+$$ language plpgsql;
+
+CREATE OR REPLACE FUNCTION drop_tables() returns VOID AS $$
+DECLARE t osm_tables%ROWTYPE;
+BEGIN
+    FOR t IN
+        SELECT * FROM osm_tables
+        UNION
+        SELECT * FROM osm_tables_delete
+    LOOP
+        EXECUTE format('DROP TABLE %I CASCADE', t.table_name);
+    END LOOP;
 END;
 $$ language plpgsql;
