@@ -10,7 +10,7 @@ CREATE OR REPLACE VIEW rail_station_label_z12toz13 AS (
 );
 
 CREATE OR REPLACE VIEW rail_station_label_layer AS (
-    SELECT osm_id, timestamp, geometry FROM rail_station_label_z12toz13
+    SELECT osm_id FROM rail_station_label_z12toz13
     UNION ALL
-    SELECT osm_id, timestamp, geometry FROM rail_station_label_z14
+    SELECT osm_id FROM rail_station_label_z14
 );

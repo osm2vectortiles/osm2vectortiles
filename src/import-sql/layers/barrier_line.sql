@@ -6,5 +6,5 @@ CREATE OR REPLACE VIEW barrier_line_z14 AS
     FROM osm_barrier_polygon;
 
 CREATE OR REPLACE VIEW barrier_line_layer AS (
-    SELECT osm_id, timestamp, geometry FROM barrier_line_z14
+    SELECT osm_id FROM barrier_line_z14
 );
