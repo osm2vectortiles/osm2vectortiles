@@ -8,8 +8,8 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
   - wget -nc -P "$HOME/cache" "http://download.geofabrik.de/europe/liechtenstein-160401.osm.pbf"
   - mkdir -p "$TRAVIS_BUILD_DIR/import" && cp "$HOME/cache/liechtenstein-160401.osm.pbf" "$TRAVIS_BUILD_DIR/import"
-  - docker-compose pull
-  - make fast
+  - docker-compose pull import-external export import-osm
+  - make
 script:
   - docker-compose up -d postgis
   - sleep 10
