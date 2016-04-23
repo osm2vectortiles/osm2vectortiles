@@ -536,8 +536,8 @@ Layer:
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh, 
-          case when GeometryType(wkb_geometry) = 'LINESTRING' then 'line'
-               else 'POINT' end as placement,
+          case when ST_GeometryType(wkb_geometry) = 'ST_LineString' then 'line'
+               else 'point' end as placement,
           rank AS labelrank
           FROM custom_seas
           WHERE wkb_geometry && !bbox! AND (
@@ -873,7 +873,7 @@ Layer:
               WHERE z(!scale_denominator!) = 14
             ) AS road_label
             WHERE geometry && !bbox!
-              AND GeometryType(geometry) = 'LINESTRING'
+              AND ST_GeometryType(geometry) = 'ST_LineString'
           ) AS t1
           WHERE (z(!scale_denominator!) BETWEEN 8 AND 10 AND localrank < 2)
              OR (z(!scale_denominator!) BETWEEN 11 AND 12 AND localrank < 5)
