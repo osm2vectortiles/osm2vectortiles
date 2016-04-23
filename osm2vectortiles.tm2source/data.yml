@@ -45,9 +45,10 @@ Layer:
         (
           SELECT osm_id_polygon(osm_id) as osm_id, geometry, landuse_class(type) as class, type
             FROM (
-              SELECT osm_id, geometry, type
+              SELECT MAX(osm_id) AS osm_id, ST_Collect(geometry) AS geometry, type
               FROM landuse_z5toz8
               WHERE z(!scale_denominator!) BETWEEN 5 AND 8
+              GROUP BY type
               UNION ALL
               SELECT osm_id, geometry, type
               FROM landuse_z9
