@@ -41,6 +41,9 @@ function import_pbf() {
     echo "Create osm_landuse_clustered table"
     create_osm_landuse_clustered_table
 
+    echo "Update scaleranks from Natural Earth data"
+    update_scaleranks
+
     local timestamp=$(extract_timestamp "$pbf_file")
     store_timestamp_history "$timestamp"
 }
@@ -48,6 +51,10 @@ function import_pbf() {
 function extract_timestamp() {
     local file="$1"
     osmconvert "$file" --out-timestamp
+}
+
+function update_scaleranks() {
+    exec_sql_file "update_scaleranks.sql"
 }
 
 function create_osm_landuse_clustered_table() {

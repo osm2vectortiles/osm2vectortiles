@@ -3,28 +3,20 @@ language: bash
 services:
   - docker
 before_install:
-  - curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-  - wget -nc -P "$HOME/cache" "http://download.geofabrik.de/europe/liechtenstein-160401.osm.pbf"
-  - mkdir -p "$TRAVIS_BUILD_DIR/import" && cp "$HOME/cache/liechtenstein-160401.osm.pbf" "$TRAVIS_BUILD_DIR/import"
-  - docker-compose build
+  - wget -nc -P "$TRAVIS_BUILD_DIR/import" "http://download.geofabrik.de/europe/liechtenstein-160401.osm.pbf"
+  - docker-compose pull import-external export import-osm postgis
+  # Avoid building really expensive images
   - make fast
 script:
+  # Test import
   - docker-compose up -d postgis
   - sleep 10
+  - docker-compose run import-external
   - docker-compose run import-osm
-  - docker-compose run import-natural-earth
-  - docker-compose run import-water
-  - docker-compose run import-labels
   - docker-compose run import-sql
-  - docker-compose run update-scaleranks
+  # Test export
   - docker-compose run export
+  # Test changed tiles
   - docker-compose run update-osm-diff
   - docker-compose run import-osm-diff
   - docker-compose run changed-tiles
-  - docker-compose up -d serve
-  - sleep 5
-cache:
-  directories:
-    - $HOME/cache

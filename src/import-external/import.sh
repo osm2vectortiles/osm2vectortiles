@@ -3,14 +3,10 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-source import-natural-earth.sh
-source import-labels.sh
-source import-water.sh
-
-function import_all_external() {
-    import_natural_earth
-    import_labels
-    import_water
+function import_all() {
+    ./import-natural-earth.sh && \
+    ./import-water.sh && \
+    ./import-labels.sh
 }
 
-import_all_external
+import_all
