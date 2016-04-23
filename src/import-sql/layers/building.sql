@@ -7,9 +7,9 @@ CREATE OR REPLACE VIEW building_z14 AS
     FROM osm_building_polygon;
 
 CREATE OR REPLACE VIEW building_layer AS (
-    SELECT osm_id, timestamp, geometry FROM building_z13
+    SELECT osm_id FROM building_z13
     UNION
-    SELECT osm_id, timestamp, geometry FROM building_z14
+    SELECT osm_id FROM building_z14
 );
 
 CREATE OR REPLACE FUNCTION building_is_underground(level INTEGER) RETURNS VARCHAR

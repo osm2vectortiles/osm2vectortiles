@@ -1,18 +1,18 @@
 CREATE OR REPLACE VIEW poi_label_z14 AS (
     SELECT * FROM (
         SELECT geometry, osm_id, ref, name, name_en, name_es, name_fr,
-        name_de, name_ru, name_zh, type, 0 AS area, timestamp
+        name_de, name_ru, name_zh, type, 0 AS area
         FROM osm_poi_point
         UNION ALL
         SELECT geometry, osm_id, ref, name, name_en, name_es, name_fr,
-        name_de, name_ru, name_zh, type, area, timestamp
+        name_de, name_ru, name_zh, type, area
         FROM osm_poi_polygon
     ) AS poi_geoms
     WHERE name IS NOT NULL AND name <> ''
 );
 
 CREATE OR REPLACE VIEW poi_label_layer AS (
-    SELECT osm_id, timestamp, geometry FROM poi_label_z14
+    SELECT osm_id FROM poi_label_z14
 );
 
 CREATE OR REPLACE FUNCTION poi_label_localrank(type VARCHAR) RETURNS INTEGER

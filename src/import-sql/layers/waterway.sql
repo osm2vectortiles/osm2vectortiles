@@ -14,9 +14,9 @@ CREATE OR REPLACE VIEW waterway_z14 AS
     WHERE type IN ('river', 'canal', 'stream', 'stream_intermittent', 'ditch', 'drain');
 
 CREATE OR REPLACE VIEW waterway_layer AS (
-    SELECT osm_id, timestamp, geometry FROM waterway_z8toz12
+    SELECT osm_id FROM waterway_z8toz12
     UNION
-    SELECT osm_id, timestamp, geometry FROM waterway_z13
+    SELECT osm_id FROM waterway_z13
     UNION
-    SELECT osm_id, timestamp, geometry FROM waterway_z14
+    SELECT osm_id FROM waterway_z14
 );
