@@ -8,10 +8,8 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
   - wget -nc -P "$HOME/cache" "http://download.geofabrik.de/europe/liechtenstein-160401.osm.pbf"
   - mkdir -p "$TRAVIS_BUILD_DIR/import" && cp "$HOME/cache/liechtenstein-160401.osm.pbf" "$TRAVIS_BUILD_DIR/import"
-  - if [ -f "$HOME/cache/docker.tar" ]; then docker load -i "$HOME/cache/docker.tar"; fi
-  - docker-compose build
+  - docker-compose pull
   - make fast
-  - docker save -o "$HOME/cache/docker.tar" osm2vectortiles/import-external osm2vectortiles/export osm2vectortiles/import-osm
 script:
   - docker-compose up -d postgis
   - sleep 10
