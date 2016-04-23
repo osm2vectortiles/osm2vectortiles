@@ -1,5 +1,5 @@
 CREATE OR REPLACE VIEW landuse_z5toz8 AS
-    SELECT 0 AS osm_id, geometry, 'wood' AS type
+    SELECT 0 AS osm_id, geometry, type
     FROM osm_landuse_clustered;
 
 CREATE OR REPLACE VIEW landuse_z9 AS
