@@ -61,10 +61,6 @@ import-water:
   command: ./import-water.sh
   links:
   - postgis:db
-update-scaleranks:
-  image: "osm2vectortiles/update-scaleranks"
-  links:
-  - postgis:db
 changed-tiles:
   image: "osm2vectortiles/changed-tiles"
   volumes:
