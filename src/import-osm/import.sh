@@ -41,6 +41,9 @@ function import_pbf() {
     echo "Create osm_landuse_clustered table"
     create_osm_landuse_clustered_table
 
+    echo "Create osm_road_clustered tables"
+    create_osm_road_clustered_tables
+
     local timestamp=$(extract_timestamp "$pbf_file")
     store_timestamp_history "$timestamp"
 }
@@ -50,12 +53,16 @@ function extract_timestamp() {
     osmconvert "$file" --out-timestamp
 }
 
+function create_osm_water_point_table() {
+    exec_sql_file "water_point_table.sql"
+}
+
 function create_osm_landuse_clustered_table() {
     exec_sql_file "landuse_clustered_table.sql"
 }
 
-function create_osm_water_point_table() {
-    exec_sql_file "water_point_table.sql"
+function create_osm_road_clustered_tables() {
+    exec_sql_file "road_clustered_tables.sql"
 }
 
 function create_timestamp_history() {
