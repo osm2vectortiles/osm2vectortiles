@@ -33,50 +33,50 @@ CREATE OR REPLACE VIEW road_z6toz7 AS
     FROM osm_road_clustered_z6toz7;
 
 CREATE OR REPLACE VIEW road_z8toz9 AS
-    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order
     FROM osm_road_geometry
     WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'major_rail');
 
 CREATE OR REPLACE VIEW road_z10 AS
-    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order
     FROM osm_road_geometry
     WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail');
 
 CREATE OR REPLACE VIEW road_z11 AS
-    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order
     FROM osm_road_geometry
     WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry');
 
 CREATE OR REPLACE VIEW road_z12 AS
-    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order, timestamp
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order
     FROM osm_road_geometry
     WHERE road_type_class(type) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry', 'service', 'link', 'construction', 'street_limited', 'aerialway');
 
 CREATE OR REPLACE VIEW road_z13 AS
-    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order, timestamp
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order
     FROM osm_road_geometry
     WHERE road_type_class(type) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry', 'service', 'link', 'construction', 'street_limited', 'aerialway', 'track');
 
 CREATE OR REPLACE VIEW road_z14 AS
-    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order, timestamp
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order
     FROM osm_road_geometry;
 
 CREATE OR REPLACE VIEW road_layer AS (
-    SELECT osm_id, timestamp, geometry FROM road_z5
+    SELECT osm_id FROM road_z5
     UNION
-    SELECT osm_id, timestamp, geometry FROM road_z6toz7
+    SELECT osm_id FROM road_z6toz7
     UNION
-    SELECT osm_id, timestamp, geometry FROM road_z8toz9
+    SELECT osm_id FROM road_z8toz9
     UNION
-    SELECT osm_id, timestamp, geometry FROM road_z10
+    SELECT osm_id FROM road_z10
     UNION
-    SELECT osm_id, timestamp, geometry FROM road_z11
+    SELECT osm_id FROM road_z11
     UNION
-    SELECT osm_id, timestamp, geometry FROM road_z12
+    SELECT osm_id FROM road_z12
     UNION
-    SELECT osm_id, timestamp, geometry FROM road_z13
+    SELECT osm_id FROM road_z13
     UNION
-    SELECT osm_id, timestamp, geometry FROM road_z14
+    SELECT osm_id FROM road_z14
 );
 
 CREATE OR REPLACE FUNCTION road_localrank(type VARCHAR) RETURNS INTEGER
