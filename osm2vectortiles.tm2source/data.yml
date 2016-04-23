@@ -265,7 +265,8 @@ Layer:
             WHERE z(!scale_denominator!) = 14
           ) AS building
           WHERE geometry && !bbox!
-          GROUP BY underground
+          GROUP BY underground, ST_YMin(ST_Envelope(geometry))
+          ORDER BY ST_YMin(ST_Envelope(geometry)) DESC
         ) AS data
       type: postgis
       user: osm
