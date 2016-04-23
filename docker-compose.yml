@@ -42,6 +42,10 @@ update-osm-diff:
    - ./import:/data/import
   environment:
      OSM_UPDATE_BASEURL: "http://download.geofabrik.de/europe/switzerland-updates/"
+import-external:
+  image: "osm2vectortiles/import-external"
+  links:
+  - postgis:db
 import-labels:
   image: "osm2vectortiles/import-external"
   command: ./import-labels.sh

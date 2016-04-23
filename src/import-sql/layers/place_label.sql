@@ -2,7 +2,7 @@ CREATE OR REPLACE VIEW place_label_z3 AS (
     SELECT * FROM osm_place_geometry
     WHERE name <> ''
       AND scalerank IS NOT NULL
-      AND scalerank BETWEEN 1 AND 2
+      AND scalerank BETWEEN 0 AND 2
       AND type = 'city'
 );
 
@@ -10,7 +10,7 @@ CREATE OR REPLACE VIEW place_label_z4 AS (
     SELECT * FROM osm_place_geometry
     WHERE name <> ''
       AND scalerank IS NOT NULL
-      AND scalerank BETWEEN 1 AND 4
+      AND scalerank BETWEEN 0 AND 4
       AND type = 'city'
 );
 
@@ -18,7 +18,7 @@ CREATE OR REPLACE VIEW place_label_z5 AS (
     SELECT * FROM osm_place_geometry
     WHERE name <> ''
       AND scalerank IS NOT NULL
-      AND scalerank BETWEEN 1 AND 7
+      AND scalerank BETWEEN 0 AND 7
       AND type = 'city'
 );
 
@@ -26,7 +26,7 @@ CREATE OR REPLACE VIEW place_label_z6toz7 AS (
     SELECT * FROM osm_place_geometry
     WHERE name <> ''
       AND scalerank IS NOT NULL
-      AND scalerank BETWEEN 1 AND 10
+      AND scalerank BETWEEN 0 AND 10
       AND type IN ('city', 'town')
 );
 
