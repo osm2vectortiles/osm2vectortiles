@@ -38,6 +38,9 @@ function import_pbf() {
     echo "Create osm_water_point table with precalculated centroids"
     create_osm_water_point_table
 
+    echo "Update osm_place_polygon with point geometry"
+    update_place_point
+
     echo "Create osm_landuse_clustered table"
     create_osm_landuse_clustered_table
 
@@ -51,6 +54,10 @@ function import_pbf() {
 function extract_timestamp() {
     local file="$1"
     osmconvert "$file" --out-timestamp
+}
+
+function update_place_point() {
+    exec_sql_file "place_point_update.sql"
 }
 
 function update_scaleranks() {
@@ -163,6 +170,12 @@ function import_pbf_diffs() {
 
     echo "Disable change tracking"
     disable_delete_tracking
+
+    echo "Create osm_water_point table with precalculated centroids"
+    create_osm_water_point_table
+
+    echo "Update osm_place_polygon with point geometry"
+    update_place_point
 
     local timestamp=$(extract_timestamp "$diffs_file")
     echo "Set $timestamp for latest updates from $diffs_file"

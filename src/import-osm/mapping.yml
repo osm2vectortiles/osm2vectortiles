@@ -399,7 +399,7 @@ tables:
       - zoo
       - camp_site
     type: polygon
-  place_geometry:
+  place_point:
     type: geometry
     fields:
     - name: osm_id
