@@ -43,13 +43,14 @@ Layer:
       srid: ''
       table: |-
         (
+          SELECT osm_id_polygon(MAX(osm_id)) AS osm_id, ST_Collect(geometry) AS geometry, landuse_class(type) AS class, type
+          FROM landuse_z5toz8
+          WHERE z(!scale_denominator!) BETWEEN 5 AND 8
+            AND geometry && !bbox!
+          GROUP BY type
+          UNION ALL
           SELECT osm_id_polygon(osm_id) as osm_id, geometry, landuse_class(type) as class, type
             FROM (
-              SELECT MAX(osm_id) AS osm_id, ST_Collect(geometry) AS geometry, type
-              FROM landuse_z5toz8
-              WHERE z(!scale_denominator!) BETWEEN 5 AND 8
-              GROUP BY type
-              UNION ALL
               SELECT osm_id, geometry, type
               FROM landuse_z9
               WHERE z(!scale_denominator!) = 9
@@ -344,43 +345,45 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_geometry(osm_id, geometry) as osm_id, geometry,
-          road_type(road_class(type, service, access), type, construction, tracktype, service) AS type,
-          road_class(type, service, access) AS class, road_oneway(oneway) AS oneway, structure
-          FROM (
-            SELECT MAX(osm_id) AS osm_id, ST_Collect(geometry) AS geometry,
-                   type, NULL as construction, NULL as tracktype,
-                   NULL as service, NULL as access,
-                   0 as oneway, NULL AS structure, 0 AS z_order
-            FROM (
+          SELECT osm_id, geometry, type, class, oneway, structure FROM (
+              SELECT osm_id_polygon(MAX(osm_id)) as osm_id, ST_Collect(geometry) AS geometry,
+              road_type(road_class(type, NULL, NULL), type, NULL, NULL, NULL) AS type,
+              road_class(type, NULL, NULL) AS class, road_oneway(0) AS oneway, 'none' AS structure, NULL AS z_order
+              FROM (
                 SELECT * FROM road_z5
                 WHERE z(!scale_denominator!) = 5
                 UNION ALL
                 SELECT * FROM road_z6toz7
                 WHERE z(!scale_denominator!) BETWEEN 6 AND 7
-            ) AS road_grouped_zoom_levels
-            GROUP BY type
-            UNION ALL
-            SELECT * FROM road_z8toz9
-            WHERE z(!scale_denominator!) BETWEEN 8 AND 9
-            UNION ALL
-            SELECT * FROM road_z10
-            WHERE z(!scale_denominator!) = 10
-            UNION ALL
-            SELECT * FROM road_z11
-            WHERE z(!scale_denominator!) = 11
-            UNION ALL
-            SELECT * FROM road_z12
-            WHERE z(!scale_denominator!) = 12
-            UNION ALL
-            SELECT * FROM road_z13
-            WHERE z(!scale_denominator!) = 13
-            UNION ALL
-            SELECT * FROM road_z14
-            WHERE z(!scale_denominator!) = 14
-          ) AS t
-          WHERE geometry && !bbox!
-          ORDER BY z_order ASC
+              ) AS road_grouped_zoom_levels
+              WHERE geometry && !bbox!
+              GROUP BY type
+              UNION ALL
+              SELECT osm_id_geometry(osm_id, geometry) as osm_id, geometry,
+              road_type(road_class(type, service, access), type, construction, tracktype, service) AS type,
+              road_class(type, service, access) AS class, road_oneway(oneway) AS oneway, structure, z_order
+               FROM (
+                SELECT * FROM road_z8toz9
+                WHERE z(!scale_denominator!) BETWEEN 8 AND 9
+                UNION ALL
+                SELECT * FROM road_z10
+                WHERE z(!scale_denominator!) = 10
+                UNION ALL
+                SELECT * FROM road_z11
+                WHERE z(!scale_denominator!) = 11
+                UNION ALL
+                SELECT * FROM road_z12
+                WHERE z(!scale_denominator!) = 12
+                UNION ALL
+                SELECT * FROM road_z13
+                WHERE z(!scale_denominator!) = 13
+                UNION ALL
+                SELECT * FROM road_z14
+                WHERE z(!scale_denominator!) = 14
+               ) AS t2
+              WHERE geometry && !bbox!
+              ORDER BY z_order ASC
+           ) AS ordered_roads
         ) AS data
       type: postgis
       user: osm
