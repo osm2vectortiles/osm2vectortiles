@@ -349,25 +349,22 @@ Layer:
           road_class(type, service, access) AS class, road_oneway(oneway) AS oneway, structure
           FROM (
             SELECT MAX(osm_id) AS osm_id, ST_Collect(geometry) AS geometry,
-                   type, construction, tracktype, service, access, oneway,
-                   structure, z_order
+                   NULL as type, NULL as construction, NULL as tracktype,
+                   NULL as service, NULL as access,
+                   0 as oneway, NULL AS structure, 0 AS z_order
             FROM (
                 SELECT * FROM road_z5
                 WHERE z(!scale_denominator!) = 5
                 UNION ALL
                 SELECT * FROM road_z6toz7
                 WHERE z(!scale_denominator!) BETWEEN 6 AND 7
-                UNION ALL
-                SELECT * FROM road_z8toz9
-                WHERE z(!scale_denominator!) BETWEEN 8 AND 9
-                UNION ALL
-                SELECT * FROM road_z10
-                WHERE z(!scale_denominator!) = 10
             ) AS road_grouped_zoom_levels
-            WHERE geometry && !bbox!
-            GROUP BY type, service, access,
-                     construction, tracktype, oneway,
-                     structure, z_order
+            UNION ALL
+            SELECT * FROM road_z8toz9
+            WHERE z(!scale_denominator!) BETWEEN 8 AND 9
+            UNION ALL
+            SELECT * FROM road_z10
+            WHERE z(!scale_denominator!) = 10
             UNION ALL
             SELECT * FROM road_z11
             WHERE z(!scale_denominator!) = 11
