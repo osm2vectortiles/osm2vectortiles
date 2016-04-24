@@ -3,7 +3,7 @@ CREATE OR REPLACE VIEW mountain_peak_label_z12toz14 AS
     FROM osm_mountain_peak_point;
 
 CREATE OR REPLACE VIEW mountain_peak_label_layer AS (
-    SELECT osm_id, timestamp, geometry FROM mountain_peak_label_z12toz14
+    SELECT osm_id FROM mountain_peak_label_z12toz14
 );
 
 CREATE OR REPLACE FUNCTION meter_to_feet(meter INTEGER) RETURNS INTEGER

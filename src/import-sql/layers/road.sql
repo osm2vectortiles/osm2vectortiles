@@ -25,20 +25,24 @@ END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
 CREATE OR REPLACE VIEW road_z5 AS
-    SELECT 0 AS osm_id, geometry, type, '' AS construction, '' AS tracktype, '' AS service, '' AS access, 0 AS oneway, 'none' AS structure, 0 AS z_order
-    FROM osm_road_clustered_z5;
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order
+    FROM osm_road_geometry
+    WHERE road_class(type, service, access) IN ('motorway', 'trunk');
 
 CREATE OR REPLACE VIEW road_z6toz7 AS
-    SELECT 0 AS osm_id, geometry, type, '' AS construction, '' AS tracktype, '' AS service, '' AS access, 0 AS oneway, 'none' AS structure, 0 AS z_order
-    FROM osm_road_clustered_z6toz7;
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order
+    FROM osm_road_geometry
+    WHERE road_class(type, service, access) IN ('motorway', 'trunk', 'primary');
 
 CREATE OR REPLACE VIEW road_z8toz9 AS
-    SELECT 0 AS osm_id, geometry, type, '' AS construction, '' AS tracktype, '' AS service, '' AS access, 0 AS oneway, 'none' AS structure, 0 AS z_order
-    FROM osm_road_clustered_z8toz9;
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order
+    FROM osm_road_geometry
+    WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'major_rail');
 
 CREATE OR REPLACE VIEW road_z10 AS
-    SELECT 0 AS osm_id, geometry, type, '' AS construction, '' AS tracktype, '' AS service, '' AS access, 0 AS oneway, 'none' AS structure, 0 AS z_order
-    FROM osm_road_clustered_z10;
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order
+    FROM osm_road_geometry
+    WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail');
 
 CREATE OR REPLACE VIEW road_z11 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order

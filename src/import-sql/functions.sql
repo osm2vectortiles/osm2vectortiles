@@ -78,9 +78,10 @@ $$ LANGUAGE plpgsql IMMUTABLE;
 
 CREATE OR REPLACE FUNCTION osm_id_geometry(osm_id BIGINT, geom geometry) RETURNS BIGINT AS $$
 BEGIN RETURN CASE
-        WHEN GeometryType(geom) = 'LINESTRING' THEN osm_id_linestring(osm_id)
-        WHEN GeometryType(geom) = 'POINT' THEN osm_id_linestring(osm_id)
-        WHEN GeometryType(geom) = 'POLYGON' THEN osm_id_polygon(osm_id)
+        WHEN ST_GeometryType(geom) IN ('ST_LineString', 'ST_MultiLineString') THEN osm_id_linestring(osm_id)
+        WHEN ST_GeometryType(geom) IN ('ST_Point', 'ST_MultiPoint') THEN osm_id_point(osm_id)
+        WHEN ST_GeometryType(geom) IN ('ST_Polygon', 'ST_MultiPolygon') THEN osm_id_polygon(osm_id)
+        ELSE osm_id_point(osm_id)
       END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;

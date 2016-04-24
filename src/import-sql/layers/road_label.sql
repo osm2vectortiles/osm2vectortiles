@@ -26,11 +26,11 @@ CREATE OR REPLACE VIEW road_label_z14 AS
       AND name <> '';
 
 CREATE OR REPLACE VIEW road_label_layer AS (
-    SELECT osm_id, timestamp, geometry FROM road_label_z8toz10
+    SELECT osm_id FROM road_label_z8toz10
     UNION
-    SELECT osm_id, timestamp, geometry FROM road_label_z11
+    SELECT osm_id FROM road_label_z11
     UNION
-    SELECT osm_id, timestamp, geometry FROM road_label_z12toz13
+    SELECT osm_id FROM road_label_z12toz13
     UNION
-    SELECT osm_id, timestamp, geometry FROM road_label_z14
+    SELECT osm_id FROM road_label_z14
 );

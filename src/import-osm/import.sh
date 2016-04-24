@@ -38,11 +38,8 @@ function import_pbf() {
     echo "Create osm_water_point table with precalculated centroids"
     create_osm_water_point_table
 
-    echo "Create osm_landuse_clustered table"
-    create_osm_landuse_clustered_table
-
-    echo "Create osm_road_clustered tables"
-    create_osm_road_clustered_tables
+    echo "Update scaleranks from Natural Earth data"
+    update_scaleranks
 
     local timestamp=$(extract_timestamp "$pbf_file")
     store_timestamp_history "$timestamp"
@@ -53,8 +50,13 @@ function extract_timestamp() {
     osmconvert "$file" --out-timestamp
 }
 
+
 function create_osm_water_point_table() {
     exec_sql_file "water_point_table.sql"
+}
+
+function update_scaleranks() {
+    exec_sql_file "update_scaleranks.sql"
 }
 
 function create_osm_landuse_clustered_table() {

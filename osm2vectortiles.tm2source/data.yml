@@ -45,9 +45,10 @@ Layer:
         (
           SELECT osm_id_polygon(osm_id) as osm_id, geometry, landuse_class(type) as class, type
             FROM (
-              SELECT osm_id, geometry, type
+              SELECT MAX(osm_id) AS osm_id, ST_Collect(geometry) AS geometry, type
               FROM landuse_z5toz8
               WHERE z(!scale_denominator!) BETWEEN 5 AND 8
+              GROUP BY type
               UNION ALL
               SELECT osm_id, geometry, type
               FROM landuse_z9
@@ -252,7 +253,9 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_polygon(osm_id) as osm_id, geometry, building_is_underground(underground) AS underground
+          SELECT osm_id_polygon(max(osm_id)) as osm_id,
+          ST_Collect(geometry) AS geometry,
+          building_is_underground(underground) AS underground
           FROM (
             SELECT osm_id, geometry, underground
             FROM building_z13
@@ -263,6 +266,7 @@ Layer:
             WHERE z(!scale_denominator!) = 14
           ) AS building
           WHERE geometry && !bbox!
+          GROUP BY underground, ST_YMin(ST_Envelope(geometry))
           ORDER BY ST_YMin(ST_Envelope(geometry)) DESC
         ) AS data
       type: postgis
@@ -344,11 +348,17 @@ Layer:
           road_type(road_class(type, service, access), type, construction, tracktype, service) AS type,
           road_class(type, service, access) AS class, road_oneway(oneway) AS oneway, structure
           FROM (
-            SELECT * FROM road_z5
-            WHERE z(!scale_denominator!) = 5
-            UNION ALL
-            SELECT * FROM road_z6toz7
-            WHERE z(!scale_denominator!) BETWEEN 6 AND 7
+            SELECT MAX(osm_id) AS osm_id, ST_Collect(geometry) AS geometry,
+                   NULL as type, NULL as construction, NULL as tracktype,
+                   NULL as service, NULL as access,
+                   0 as oneway, NULL AS structure, 0 AS z_order
+            FROM (
+                SELECT * FROM road_z5
+                WHERE z(!scale_denominator!) = 5
+                UNION ALL
+                SELECT * FROM road_z6toz7
+                WHERE z(!scale_denominator!) BETWEEN 6 AND 7
+            ) AS road_grouped_zoom_levels
             UNION ALL
             SELECT * FROM road_z8toz9
             WHERE z(!scale_denominator!) BETWEEN 8 AND 9
@@ -367,7 +377,7 @@ Layer:
             UNION ALL
             SELECT * FROM road_z14
             WHERE z(!scale_denominator!) = 14
-          ) AS road
+          ) AS t
           WHERE geometry && !bbox!
           ORDER BY z_order ASC
         ) AS data
@@ -536,8 +546,8 @@ Layer:
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh, 
-          case when GeometryType(wkb_geometry) = 'LINESTRING' then 'line'
-               else 'POINT' end as placement,
+          case when ST_GeometryType(wkb_geometry) = 'ST_LineString' then 'line'
+               else 'point' end as placement,
           rank AS labelrank
           FROM custom_seas
           WHERE wkb_geometry && !bbox! AND (
@@ -873,7 +883,7 @@ Layer:
               WHERE z(!scale_denominator!) = 14
             ) AS road_label
             WHERE geometry && !bbox!
-              AND GeometryType(geometry) = 'LINESTRING'
+              AND ST_GeometryType(geometry) = 'ST_LineString'
           ) AS t1
           WHERE (z(!scale_denominator!) BETWEEN 8 AND 10 AND localrank < 2)
              OR (z(!scale_denominator!) BETWEEN 11 AND 12 AND localrank < 5)
