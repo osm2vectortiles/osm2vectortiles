@@ -254,8 +254,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_polygon(max(osm_id)) as osm_id,
-          ST_Collect(geometry) AS geometry,
+          SELECT osm_id, geometry,
           building_is_underground(underground) AS underground
           FROM (
             SELECT osm_id, geometry, underground
@@ -267,7 +266,6 @@ Layer:
             WHERE z(!scale_denominator!) = 14
           ) AS building
           WHERE geometry && !bbox!
-          GROUP BY underground, ST_YMin(ST_Envelope(geometry))
           ORDER BY ST_YMin(ST_Envelope(geometry)) DESC
         ) AS data
       type: postgis
