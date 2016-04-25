@@ -52,30 +52,45 @@ $$ LANGUAGE plpgsql;
 
 -- OSM ID transformations
 
+-- Reproject the osm id from the imposm3 single id space into the normal imposm3 id space
+CREATE OR REPLACE FUNCTION transform_osm_id(osm_id BIGINT) RETURNS BIGINT AS $$
+BEGIN
+    RETURN CASE
+        WHEN osm_id < -1e17 THEN osm_id + 1e17
+        WHEN osm_id BETWEEN -1e17 AND 0 THEN ABS(osm_id)
+        ELSE osm_id
+    END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
 CREATE OR REPLACE FUNCTION osm_id_point(osm_id BIGINT) RETURNS BIGINT AS $$
 BEGIN
     RETURN (osm_id * 10);
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+-- Handle normal ways (positive osm ids) and ways from relations (negative osm ids)
 CREATE OR REPLACE FUNCTION osm_id_linestring(osm_id BIGINT) RETURNS BIGINT AS $$
 BEGIN
     RETURN CASE
-        WHEN osm_id >= 0 THEN (osm_id * 10) + 1
-        ELSE (osm_id * 10) + 3
+        WHEN transform_osm_id(osm_id) >= 0 THEN (transform_osm_id(osm_id) * 10) + 1
+        ELSE (transform_osm_id(osm_id) * 10) + 3
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+-- Handle constructed polygons from ways (positive osm ids) and
+-- polygons from relations (negative osm ids)
 CREATE OR REPLACE FUNCTION osm_id_polygon(osm_id BIGINT) RETURNS BIGINT AS $$
 BEGIN
     RETURN CASE
-        WHEN osm_id >= 0 THEN (osm_id * 10) + 2
-        ELSE (osm_id * 10) + 4
+        WHEN transform_osm_id(osm_id) >= 0 THEN (transform_osm_id(osm_id) * 10) + 2
+        ELSE (transform_osm_id(osm_id) * 10) + 4
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+-- Determine osm_id based on geometry type and choose the appropriate osm_id function
 CREATE OR REPLACE FUNCTION osm_id_geometry(osm_id BIGINT, geom geometry) RETURNS BIGINT AS $$
 BEGIN RETURN CASE
         WHEN ST_GeometryType(geom) IN ('ST_LineString', 'ST_MultiLineString') THEN osm_id_linestring(osm_id)
