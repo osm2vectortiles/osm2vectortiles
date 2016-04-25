@@ -886,6 +886,7 @@ tables:
       - taxi
       - bus_station
       - marketplace
+      - toilets
       leisure:
       - park
       - playground
@@ -905,6 +906,7 @@ tables:
       - cemetery
       - basin
       - reservoir
+      - brownfield
       sport:
       - swimming
       - tennis
@@ -1001,6 +1003,8 @@ tables:
       - viewpoint
       - zoo
       - theme_park
+      - information
+      - picnic_site
       shop:
       - accessories
       - alcohol
@@ -1189,6 +1193,7 @@ tables:
       - taxi
       - bus_station
       - marketplace
+      - toilets
       leisure:
       - park
       - playground
@@ -1208,6 +1213,7 @@ tables:
       - cemetery
       - basin
       - reservoir
+      - brownfield
       sport:
       - swimming
       - tennis
@@ -1304,6 +1310,8 @@ tables:
       - viewpoint
       - zoo
       - theme_park
+      - information
+      - picnic_site
       shop:
       - accessories
       - alcohol
