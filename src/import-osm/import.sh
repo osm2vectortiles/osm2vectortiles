@@ -50,21 +50,12 @@ function extract_timestamp() {
     osmconvert "$file" --out-timestamp
 }
 
-
 function create_osm_water_point_table() {
     exec_sql_file "water_point_table.sql"
 }
 
 function update_scaleranks() {
     exec_sql_file "update_scaleranks.sql"
-}
-
-function create_osm_landuse_clustered_table() {
-    exec_sql_file "landuse_clustered_table.sql"
-}
-
-function create_osm_road_clustered_tables() {
-    exec_sql_file "road_clustered_tables.sql"
 }
 
 function create_timestamp_history() {
