@@ -705,15 +705,7 @@ tables:
     - name: area
       type: pseudoarea
     mapping:
-      amenity:
-      - swimming_pool
-      landuse:
-      - basin
-      - reservoir
-      - pond
       leisure:
-      - swimming_pool
-      water:
       - swimming_pool
       natural:
       - water
@@ -913,6 +905,8 @@ tables:
       - garden
       landuse:
       - cemetery
+      - basin
+      - reservoir
       sport:
       - swimming
       - tennis
@@ -1214,6 +1208,8 @@ tables:
       - garden
       landuse:
       - cemetery
+      - basin
+      - reservoir
       sport:
       - swimming
       - tennis
