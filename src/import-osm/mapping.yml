@@ -559,6 +559,7 @@ tables:
           - steps
           - bridleway
           - footway
+          - pedestrian
           aerialway:
           - cable_car
           - gondola
@@ -610,6 +611,7 @@ tables:
           - footway
           - corridor
           - crossing
+          - pedestrian
           aerialway:
           - cable_car
           - gondola
