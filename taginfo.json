@@ -1,2806 +1,1666 @@
 {
-    "data_format": 1,
-    "project": {
-        "contact_email": "me@lukasmartinelli.ch",
-        "contact_name": "Lukas Martinelli",
-        "description": "Free Vector Tiles from OpenStreetMap",
-        "doc_url": "http://osm2vectortiles.org/docs/",
-        "icon_url": "http://osm2vectortiles.org/favicon.ico",
-        "name": "OSM2VectorTiles",
-        "project_url": "http://osm2vectortiles.org/"
+    "data_format":1,
+    "project":{
+        "contact_email":"me@lukasmartinelli.ch",
+        "contact_name":"Lukas Martinelli",
+        "description":"Free Vector Tiles from OpenStreetMap",
+        "doc_url":"http://osm2vectortiles.org/docs/",
+        "icon_url":"http://osm2vectortiles.org/favicon.ico",
+        "name":"OSM2VectorTiles",
+        "project_url":"http://osm2vectortiles.org/"
     },
-    "tags": [
+    "tags":[
         {
-            "key": "waterway",
-            "value": "stream"
+            "key":"shop",
+            "value":"outdoor"
         },
         {
-            "key": "waterway",
-            "value": "stream_intermittent"
+            "key":"shop",
+            "value":"art"
         },
         {
-            "key": "waterway",
-            "value": "river"
+            "key":"shop",
+            "value":"shoes"
         },
         {
-            "key": "waterway",
-            "value": "canal"
+            "key":"shop",
+            "value":"photo"
         },
         {
-            "key": "waterway",
-            "value": "drain"
+            "key":"shop",
+            "value":"delicatessen"
         },
         {
-            "key": "waterway",
-            "value": "ditch"
+            "key":"shop",
+            "value":"weapons"
         },
         {
-            "key": "waterway",
-            "value": "river"
+            "key":"shop",
+            "value":"department_store"
         },
         {
-            "key": "waterway",
-            "value": "riverbank"
+            "key":"shop",
+            "value":"accessories"
         },
         {
-            "key": "waterway",
-            "value": "stream"
+            "key":"shop",
+            "value":"hearing_aids"
         },
         {
-            "key": "waterway",
-            "value": "stream_intermittent"
+            "key":"shop",
+            "value":"general"
         },
         {
-            "key": "waterway",
-            "value": "canal"
+            "key":"shop",
+            "value":"hardware"
         },
         {
-            "key": "waterway",
-            "value": "drain"
+            "key":"shop",
+            "value":"jewelry"
         },
         {
-            "key": "waterway",
-            "value": "ditch"
+            "key":"shop",
+            "value":"erotic"
         },
         {
-            "key": "boundary",
-            "value": "national_park"
+            "key":"shop",
+            "value":"books"
         },
         {
-            "key": "boundary",
-            "value": "administrative"
+            "key":"shop",
+            "value":"video"
         },
         {
-            "key": "boundary",
-            "value": "maritime"
+            "key":"shop",
+            "value":"butcher"
         },
         {
-            "key": "building",
-            "value": "__any__"
+            "key":"shop",
+            "value":"video_games"
         },
         {
-            "key": "roads",
-            "value": "golf"
+            "key":"shop",
+            "value":"toys"
         },
         {
-            "key": "roads",
-            "value": "aerialway"
+            "key":"shop",
+            "value":"florist"
         },
         {
-            "key": "roads",
-            "value": "access"
+            "key":"shop",
+            "value":"bicycle"
         },
         {
-            "key": "roads",
-            "value": "highway"
+            "key":"shop",
+            "value":"furniture"
         },
         {
-            "key": "sport",
-            "value": "swimming"
+            "key":"shop",
+            "value":"car_repair"
         },
         {
-            "key": "sport",
-            "value": "tennis"
+            "key":"shop",
+            "value":"carpet"
         },
         {
-            "key": "sport",
-            "value": "soccer"
+            "key":"shop",
+            "value":"tattoo"
         },
         {
-            "key": "sport",
-            "value": "baseball"
+            "key":"shop",
+            "value":"confectionery"
         },
         {
-            "key": "sport",
-            "value": "basketball"
+            "key":"shop",
+            "value":"alcohol"
         },
         {
-            "key": "sport",
-            "value": "multi"
+            "key":"shop",
+            "value":"wholesale"
         },
         {
-            "key": "sport",
-            "value": "golf"
+            "key":"shop",
+            "value":"pet"
         },
         {
-            "key": "sport",
-            "value": "equestrian"
+            "key":"shop",
+            "value":"boutique"
         },
         {
-            "key": "sport",
-            "value": "athletics"
+            "key":"shop",
+            "value":"motorcycle"
         },
         {
-            "key": "sport",
-            "value": "volleyball"
+            "key":"shop",
+            "value":"convenience"
         },
         {
-            "key": "sport",
-            "value": "climbing"
+            "key":"shop",
+            "value":"antiques"
         },
         {
-            "key": "sport",
-            "value": "bowls"
+            "key":"shop",
+            "value":"sports"
         },
         {
-            "key": "sport",
-            "value": "american_football"
+            "key":"shop",
+            "value":"newsagent"
         },
         {
-            "key": "sport",
-            "value": "skateboard"
+            "key":"shop",
+            "value":"musical_instrument"
         },
         {
-            "key": "sport",
-            "value": "shooting"
+            "key":"shop",
+            "value":"camera"
         },
         {
-            "key": "sport",
-            "value": "skiing"
+            "key":"shop",
+            "value":"music"
         },
         {
-            "key": "sport",
-            "value": "boules"
+            "key":"shop",
+            "value":"cosmetics"
         },
         {
-            "key": "sport",
-            "value": "beachvolleyball"
+            "key":"shop",
+            "value":"perfumery"
         },
         {
-            "key": "sport",
-            "value": "cricket"
+            "key":"shop",
+            "value":"stationery"
         },
         {
-            "key": "sport",
-            "value": "table_tennis"
+            "key":"shop",
+            "value":"electronics"
         },
         {
-            "key": "sport",
-            "value": "hockey"
+            "key":"shop",
+            "value":"doityourself"
         },
         {
-            "key": "sport",
-            "value": "gymnastics"
+            "key":"shop",
+            "value":"chemist"
         },
         {
-            "key": "sport",
-            "value": "running"
+            "key":"shop",
+            "value":"coffee"
         },
         {
-            "key": "sport",
-            "value": "american_football"
+            "key":"shop",
+            "value":"mobile_phone"
         },
         {
-            "key": "sport",
-            "value": "canoe"
+            "key":"shop",
+            "value":"laundry"
         },
         {
-            "key": "sport",
-            "value": "rugby_union"
+            "key":"shop",
+            "value":"beauty"
         },
         {
-            "key": "sport",
-            "value": "skating"
+            "key":"shop",
+            "value":"hairdresser"
         },
         {
-            "key": "sport",
-            "value": "scuba_diving"
+            "key":"shop",
+            "value":"deli"
         },
         {
-            "key": "sport",
-            "value": "motor"
+            "key":"shop",
+            "value":"beverages"
         },
         {
-            "key": "sport",
-            "value": "horse_racing"
+            "key":"shop",
+            "value":"kiosk"
         },
         {
-            "key": "sport",
-            "value": "handball"
+            "key":"shop",
+            "value":"supermarket"
         },
         {
-            "key": "sport",
-            "value": "team_handball"
+            "key":"shop",
+            "value":"chocolate"
         },
         {
-            "key": "sport",
-            "value": "karting"
+            "key":"shop",
+            "value":"hifi"
         },
         {
-            "key": "sport",
-            "value": "cycling"
+            "key":"shop",
+            "value":"tailor"
         },
         {
-            "key": "sport",
-            "value": "archery"
+            "key":"shop",
+            "value":"lamps"
         },
         {
-            "key": "sport",
-            "value": "motocross"
+            "key":"shop",
+            "value":"watches"
         },
         {
-            "key": "sport",
-            "value": "pelota"
+            "key":"shop",
+            "value":"ticket"
         },
         {
-            "key": "sport",
-            "value": "rugby"
+            "key":"shop",
+            "value":"ice_cream"
         },
         {
-            "key": "sport",
-            "value": "gaelic_games"
+            "key":"shop",
+            "value":"greengrocer"
         },
         {
-            "key": "sport",
-            "value": "model_aerodrome"
+            "key":"shop",
+            "value":"charity"
         },
         {
-            "key": "sport",
-            "value": "netball"
+            "key":"shop",
+            "value":"tobacco"
         },
         {
-            "key": "sport",
-            "value": "rugby_league"
+            "key":"shop",
+            "value":"copyshop"
         },
         {
-            "key": "sport",
-            "value": "free_flying"
+            "key":"shop",
+            "value":"optician"
         },
         {
-            "key": "sport",
-            "value": "rowing"
+            "key":"shop",
+            "value":"gift"
         },
         {
-            "key": "sport",
-            "value": "chess"
+            "key":"shop",
+            "value":"car"
         },
         {
-            "key": "sport",
-            "value": "australian_football"
+            "key":"shop",
+            "value":"fabric"
         },
         {
-            "key": "sport",
-            "value": "cricket_nets"
+            "key":"shop",
+            "value":"mall"
         },
         {
-            "key": "sport",
-            "value": "racquet"
+            "key":"shop",
+            "value":"bed"
         },
         {
-            "key": "sport",
-            "value": "bmx"
+            "key":"shop",
+            "value":"perfume"
         },
         {
-            "key": "sport",
-            "value": "sailing"
+            "key":"shop",
+            "value":"bag"
         },
         {
-            "key": "sport",
-            "value": "ice_stock"
+            "key":"shop",
+            "value":"bakery"
         },
         {
-            "key": "sport",
-            "value": "badminton"
+            "key":"shop",
+            "value":"computer"
         },
         {
-            "key": "sport",
-            "value": "paddle_tennis"
+            "key":"shop",
+            "value":"travel_agency"
         },
         {
-            "key": "sport",
-            "value": "dog_racing"
+            "key":"shop",
+            "value":"garden_centre"
         },
         {
-            "key": "sport",
-            "value": "fatsal"
+            "key":"shop",
+            "value":"second_hand"
         },
         {
-            "key": "sport",
-            "value": "billiards"
+            "key":"shop",
+            "value":"dry_cleaning"
         },
         {
-            "key": "sport",
-            "value": "ice_hockey"
+            "key":"shop",
+            "value":"wine"
         },
         {
-            "key": "sport",
-            "value": "yoga"
+            "key":"shop",
+            "value":"interior_decoration"
         },
         {
-            "key": "sport",
-            "value": "disc_golf"
+            "key":"shop",
+            "value":"massage"
         },
         {
-            "key": "sport",
-            "value": "orienteering"
+            "key":"shop",
+            "value":"clothes"
         },
         {
-            "key": "sport",
-            "value": "toboggan"
+            "key":"amenity",
+            "value":"grave_yard"
         },
         {
-            "key": "sport",
-            "value": "horseshoes"
+            "key":"amenity",
+            "value":"taxi"
         },
         {
-            "key": "sport",
-            "value": "paragliding"
+            "key":"amenity",
+            "value":"marketplace"
         },
         {
-            "key": "sport",
-            "value": "korfball"
+            "key":"amenity",
+            "value":"public_building"
         },
         {
-            "key": "sport",
-            "value": "diving"
+            "key":"amenity",
+            "value":"cinema"
         },
         {
-            "key": "sport",
-            "value": "rc_car"
+            "key":"amenity",
+            "value":"recycling"
         },
         {
-            "key": "sport",
-            "value": "canadian_football"
+            "key":"amenity",
+            "value":"telephone"
         },
         {
-            "key": "sport",
-            "value": "field_hockey"
+            "key":"amenity",
+            "value":"library"
         },
         {
-            "key": "sport",
-            "value": "shooting_range"
+            "key":"amenity",
+            "value":"embassy"
         },
         {
-            "key": "sport",
-            "value": "boxing"
+            "key":"amenity",
+            "value":"nursing_home"
         },
         {
-            "key": "sport",
-            "value": "curling"
+            "key":"amenity",
+            "value":"post_office"
         },
         {
-            "key": "sport",
-            "value": "surfing"
+            "key":"amenity",
+            "value":"cafe"
         },
         {
-            "key": "sport",
-            "value": "water_ski"
+            "key":"amenity",
+            "value":"toilets"
         },
         {
-            "key": "sport",
-            "value": "judo"
+            "key":"amenity",
+            "value":"police"
         },
         {
-            "key": "sport",
-            "value": "croquet"
+            "key":"amenity",
+            "value":"townhall"
         },
         {
-            "key": "sport",
-            "value": "paintball"
+            "key":"amenity",
+            "value":"food_court"
         },
         {
-            "key": "sport",
-            "value": "climbing_adventure"
+            "key":"amenity",
+            "value":"community_centre"
         },
         {
-            "key": "sport",
-            "value": "long_jump"
+            "key":"amenity",
+            "value":"hospital"
         },
         {
-            "key": "sport",
-            "value": "table_soccer"
+            "key":"amenity",
+            "value":"veterinary"
         },
         {
-            "key": "sport",
-            "value": "swimming"
+            "key":"amenity",
+            "value":"pharmacy"
         },
         {
-            "key": "sport",
-            "value": "tennis"
+            "key":"amenity",
+            "value":"kindergarten"
         },
         {
-            "key": "sport",
-            "value": "soccer"
+            "key":"amenity",
+            "value":"shelter"
         },
         {
-            "key": "sport",
-            "value": "baseball"
+            "key":"amenity",
+            "value":"bicycle_rental"
         },
         {
-            "key": "sport",
-            "value": "basketball"
+            "key":"amenity",
+            "value":"prison"
         },
         {
-            "key": "sport",
-            "value": "multi"
+            "key":"amenity",
+            "value":"fuel"
         },
         {
-            "key": "sport",
-            "value": "golf"
+            "key":"amenity",
+            "value":"bbq"
         },
         {
-            "key": "sport",
-            "value": "equestrian"
+            "key":"amenity",
+            "value":"fast_food"
         },
         {
-            "key": "sport",
-            "value": "athletics"
+            "key":"amenity",
+            "value":"fire_station"
         },
         {
-            "key": "sport",
-            "value": "volleyball"
+            "key":"amenity",
+            "value":"theatre"
         },
         {
-            "key": "sport",
-            "value": "climbing"
+            "key":"amenity",
+            "value":"post_box"
         },
         {
-            "key": "sport",
-            "value": "bowls"
+            "key":"amenity",
+            "value":"arts_centre"
         },
         {
-            "key": "sport",
-            "value": "american_football"
+            "key":"amenity",
+            "value":"pub"
         },
         {
-            "key": "sport",
-            "value": "skateboard"
+            "key":"amenity",
+            "value":"waste_basket"
         },
         {
-            "key": "sport",
-            "value": "shooting"
+            "key":"amenity",
+            "value":"dentist"
         },
         {
-            "key": "sport",
-            "value": "skiing"
+            "key":"amenity",
+            "value":"doctors"
         },
         {
-            "key": "sport",
-            "value": "boules"
+            "key":"amenity",
+            "value":"biergarten"
         },
         {
-            "key": "sport",
-            "value": "beachvolleyball"
+            "key":"amenity",
+            "value":"bank"
         },
         {
-            "key": "sport",
-            "value": "cricket"
+            "key":"amenity",
+            "value":"courthouse"
         },
         {
-            "key": "sport",
-            "value": "table_tennis"
+            "key":"amenity",
+            "value":"place_of_worship"
         },
         {
-            "key": "sport",
-            "value": "hockey"
+            "key":"amenity",
+            "value":"school"
         },
         {
-            "key": "sport",
-            "value": "gymnastics"
+            "key":"amenity",
+            "value":"bar"
         },
         {
-            "key": "sport",
-            "value": "running"
+            "key":"amenity",
+            "value":"restaurant"
         },
         {
-            "key": "sport",
-            "value": "american_football"
+            "key":"amenity",
+            "value":"ferry_terminal"
         },
         {
-            "key": "sport",
-            "value": "canoe"
+            "key":"amenity",
+            "value":"university"
         },
         {
-            "key": "sport",
-            "value": "rugby_union"
+            "key":"amenity",
+            "value":"nightclub"
         },
         {
-            "key": "sport",
-            "value": "skating"
+            "key":"amenity",
+            "value":"swimming_pool"
         },
         {
-            "key": "sport",
-            "value": "scuba_diving"
+            "key":"amenity",
+            "value":"bus_station"
         },
         {
-            "key": "sport",
-            "value": "motor"
+            "key":"amenity",
+            "value":"college"
         },
         {
-            "key": "sport",
-            "value": "horse_racing"
+            "key":"golf",
+            "value":"hole"
         },
         {
-            "key": "sport",
-            "value": "handball"
+            "key":"cemetery",
+            "value":"__any__"
         },
         {
-            "key": "sport",
-            "value": "team_handball"
+            "key":"wetland",
+            "value":"tidalflat"
         },
         {
-            "key": "sport",
-            "value": "karting"
+            "key":"wetland",
+            "value":"swamp"
         },
         {
-            "key": "sport",
-            "value": "cycling"
+            "key":"wetland",
+            "value":"marsh"
         },
         {
-            "key": "sport",
-            "value": "archery"
+            "key":"wetland",
+            "value":"bog"
         },
         {
-            "key": "sport",
-            "value": "motocross"
+            "key":"waterway",
+            "value":"canal"
         },
         {
-            "key": "sport",
-            "value": "pelota"
+            "key":"waterway",
+            "value":"drain"
         },
         {
-            "key": "sport",
-            "value": "rugby"
+            "key":"waterway",
+            "value":"stream"
         },
         {
-            "key": "sport",
-            "value": "gaelic_games"
+            "key":"waterway",
+            "value":"ditch"
         },
         {
-            "key": "sport",
-            "value": "model_aerodrome"
+            "key":"waterway",
+            "value":"stream_intermittent"
         },
         {
-            "key": "sport",
-            "value": "netball"
+            "key":"waterway",
+            "value":"dock"
         },
         {
-            "key": "sport",
-            "value": "rugby_league"
+            "key":"waterway",
+            "value":"river"
         },
         {
-            "key": "sport",
-            "value": "free_flying"
+            "key":"waterway",
+            "value":"riverbank"
         },
         {
-            "key": "sport",
-            "value": "rowing"
+            "key":"sport",
+            "value":"skating"
         },
         {
-            "key": "sport",
-            "value": "chess"
+            "key":"sport",
+            "value":"water_ski"
         },
         {
-            "key": "sport",
-            "value": "australian_football"
+            "key":"sport",
+            "value":"model_aerodrome"
         },
         {
-            "key": "sport",
-            "value": "cricket_nets"
+            "key":"sport",
+            "value":"golf"
         },
         {
-            "key": "sport",
-            "value": "racquet"
+            "key":"sport",
+            "value":"orienteering"
         },
         {
-            "key": "sport",
-            "value": "bmx"
+            "key":"sport",
+            "value":"canoe"
         },
         {
-            "key": "sport",
-            "value": "sailing"
+            "key":"sport",
+            "value":"curling"
         },
         {
-            "key": "sport",
-            "value": "ice_stock"
+            "key":"sport",
+            "value":"karting"
         },
         {
-            "key": "sport",
-            "value": "badminton"
+            "key":"sport",
+            "value":"beachvolleyball"
         },
         {
-            "key": "sport",
-            "value": "paddle_tennis"
+            "key":"sport",
+            "value":"horse_racing"
         },
         {
-            "key": "sport",
-            "value": "dog_racing"
+            "key":"sport",
+            "value":"australian_football"
         },
         {
-            "key": "sport",
-            "value": "fatsal"
+            "key":"sport",
+            "value":"gymnastics"
         },
         {
-            "key": "sport",
-            "value": "billiards"
+            "key":"sport",
+            "value":"motor"
         },
         {
-            "key": "sport",
-            "value": "ice_hockey"
+            "key":"sport",
+            "value":"skiing"
         },
         {
-            "key": "sport",
-            "value": "yoga"
+            "key":"sport",
+            "value":"handball"
         },
         {
-            "key": "sport",
-            "value": "disc_golf"
+            "key":"sport",
+            "value":"motocross"
         },
         {
-            "key": "sport",
-            "value": "orienteering"
+            "key":"sport",
+            "value":"shooting"
         },
         {
-            "key": "sport",
-            "value": "toboggan"
+            "key":"sport",
+            "value":"disc_golf"
         },
         {
-            "key": "sport",
-            "value": "horseshoes"
+            "key":"sport",
+            "value":"racquet"
         },
         {
-            "key": "sport",
-            "value": "paragliding"
+            "key":"sport",
+            "value":"table_soccer"
         },
         {
-            "key": "sport",
-            "value": "korfball"
+            "key":"sport",
+            "value":"basketball"
         },
         {
-            "key": "sport",
-            "value": "diving"
+            "key":"sport",
+            "value":"cycling"
         },
         {
-            "key": "sport",
-            "value": "rc_car"
+            "key":"sport",
+            "value":"toboggan"
         },
         {
-            "key": "sport",
-            "value": "canadian_football"
+            "key":"sport",
+            "value":"korfball"
         },
         {
-            "key": "sport",
-            "value": "field_hockey"
+            "key":"sport",
+            "value":"boxing"
         },
         {
-            "key": "sport",
-            "value": "shooting_range"
+            "key":"sport",
+            "value":"tennis"
         },
         {
-            "key": "sport",
-            "value": "boxing"
+            "key":"sport",
+            "value":"netball"
         },
         {
-            "key": "sport",
-            "value": "curling"
+            "key":"sport",
+            "value":"team_handball"
         },
         {
-            "key": "sport",
-            "value": "surfing"
+            "key":"sport",
+            "value":"shooting_range"
         },
         {
-            "key": "sport",
-            "value": "water_ski"
+            "key":"sport",
+            "value":"hockey"
         },
         {
-            "key": "sport",
-            "value": "judo"
+            "key":"sport",
+            "value":"rugby_league"
         },
         {
-            "key": "sport",
-            "value": "croquet"
+            "key":"sport",
+            "value":"yoga"
         },
         {
-            "key": "sport",
-            "value": "paintball"
+            "key":"sport",
+            "value":"soccer"
         },
         {
-            "key": "sport",
-            "value": "climbing_adventure"
+            "key":"sport",
+            "value":"canadian_football"
         },
         {
-            "key": "sport",
-            "value": "long_jump"
+            "key":"sport",
+            "value":"climbing_adventure"
         },
         {
-            "key": "sport",
-            "value": "table_soccer"
+            "key":"sport",
+            "value":"chess"
         },
         {
-            "key": "historic",
-            "value": "monument"
+            "key":"sport",
+            "value":"ice_hockey"
         },
         {
-            "key": "historic",
-            "value": "monument"
+            "key":"sport",
+            "value":"cricket"
         },
         {
-            "key": "addr:housenumber",
-            "value": "__any__"
+            "key":"sport",
+            "value":"equestrian"
         },
         {
-            "key": "addr:housenumber",
-            "value": "__any__"
+            "key":"sport",
+            "value":"rugby_union"
         },
         {
-            "key": "aeroway",
-            "value": "aerodrome"
+            "key":"sport",
+            "value":"horseshoes"
         },
         {
-            "key": "aeroway",
-            "value": "terminal"
+            "key":"sport",
+            "value":"long_jump"
         },
         {
-            "key": "aeroway",
-            "value": "helipad"
+            "key":"sport",
+            "value":"judo"
         },
         {
-            "key": "aeroway",
-            "value": "apron"
+            "key":"sport",
+            "value":"croquet"
         },
         {
-            "key": "aeroway",
-            "value": "gate"
+            "key":"sport",
+            "value":"running"
         },
         {
-            "key": "aeroway",
-            "value": "taxiway"
+            "key":"sport",
+            "value":"free_flying"
         },
         {
-            "key": "aeroway",
-            "value": "runway"
+            "key":"sport",
+            "value":"baseball"
         },
         {
-            "key": "aeroway",
-            "value": "aerodrome"
+            "key":"sport",
+            "value":"bowls"
         },
         {
-            "key": "aeroway",
-            "value": "terminal"
+            "key":"sport",
+            "value":"billiards"
         },
         {
-            "key": "aeroway",
-            "value": "helipad"
+            "key":"sport",
+            "value":"climbing"
         },
         {
-            "key": "aeroway",
-            "value": "apron"
+            "key":"sport",
+            "value":"bmx"
         },
         {
-            "key": "aeroway",
-            "value": "gate"
+            "key":"sport",
+            "value":"scuba_diving"
         },
         {
-            "key": "aeroway",
-            "value": "taxiway"
+            "key":"sport",
+            "value":"ice_stock"
         },
         {
-            "key": "aeroway",
-            "value": "aerodrome"
+            "key":"sport",
+            "value":"archery"
         },
         {
-            "key": "aeroway",
-            "value": "terminal"
+            "key":"sport",
+            "value":"multi"
         },
         {
-            "key": "aeroway",
-            "value": "helipad"
+            "key":"sport",
+            "value":"gaelic_games"
         },
         {
-            "key": "aeroway",
-            "value": "apron"
+            "key":"sport",
+            "value":"rugby"
         },
         {
-            "key": "aeroway",
-            "value": "gate"
+            "key":"sport",
+            "value":"pelota"
         },
         {
-            "key": "aeroway",
-            "value": "taxiway"
+            "key":"sport",
+            "value":"sailing"
         },
         {
-            "key": "aeroway",
-            "value": "runway"
+            "key":"sport",
+            "value":"diving"
         },
         {
-            "key": "aeroway",
-            "value": "aerodrome"
+            "key":"sport",
+            "value":"rowing"
         },
         {
-            "key": "aeroway",
-            "value": "terminal"
+            "key":"sport",
+            "value":"american_football"
         },
         {
-            "key": "aeroway",
-            "value": "helipad"
+            "key":"sport",
+            "value":"skateboard"
         },
         {
-            "key": "aeroway",
-            "value": "apron"
+            "key":"sport",
+            "value":"dog_racing"
         },
         {
-            "key": "aeroway",
-            "value": "gate"
+            "key":"sport",
+            "value":"volleyball"
         },
         {
-            "key": "aeroway",
-            "value": "taxiway"
+            "key":"sport",
+            "value":"surfing"
         },
         {
-            "key": "leisure",
-            "value": "park"
+            "key":"sport",
+            "value":"boules"
         },
         {
-            "key": "leisure",
-            "value": "playground"
+            "key":"sport",
+            "value":"paddle_tennis"
         },
         {
-            "key": "leisure",
-            "value": "dog_park"
+            "key":"sport",
+            "value":"badminton"
         },
         {
-            "key": "leisure",
-            "value": "national_reserve"
+            "key":"sport",
+            "value":"rc_car"
         },
         {
-            "key": "leisure",
-            "value": "nature_reserve"
+            "key":"sport",
+            "value":"table_tennis"
         },
         {
-            "key": "leisure",
-            "value": "golf_course"
+            "key":"sport",
+            "value":"field_hockey"
         },
         {
-            "key": "leisure",
-            "value": "common"
+            "key":"sport",
+            "value":"cricket_nets"
         },
         {
-            "key": "leisure",
-            "value": "garden"
+            "key":"sport",
+            "value":"athletics"
         },
         {
-            "key": "leisure",
-            "value": "recreation_ground"
+            "key":"sport",
+            "value":"paragliding"
         },
         {
-            "key": "leisure",
-            "value": "sports_centre"
+            "key":"sport",
+            "value":"paintball"
         },
         {
-            "key": "leisure",
-            "value": "pitch"
+            "key":"sport",
+            "value":"fatsal"
         },
         {
-            "key": "leisure",
-            "value": "swimming_pool"
+            "key":"sport",
+            "value":"swimming"
         },
         {
-            "key": "leisure",
-            "value": "park"
+            "key":"addr:housenumber",
+            "value":"__any__"
         },
         {
-            "key": "leisure",
-            "value": "playground"
+            "key":"aerialway",
+            "value":"t-bar"
         },
         {
-            "key": "leisure",
-            "value": "dog_park"
+            "key":"aerialway",
+            "value":"zip_line"
         },
         {
-            "key": "leisure",
-            "value": "sports_centre"
+            "key":"aerialway",
+            "value":"j-bar"
         },
         {
-            "key": "leisure",
-            "value": "pitch"
+            "key":"aerialway",
+            "value":"gondola"
         },
         {
-            "key": "leisure",
-            "value": "swimming_pool"
+            "key":"aerialway",
+            "value":"drag_lift"
         },
         {
-            "key": "leisure",
-            "value": "swimming_area"
+            "key":"aerialway",
+            "value":"station"
         },
         {
-            "key": "leisure",
-            "value": "water_park"
+            "key":"aerialway",
+            "value":"mixed_lift"
         },
         {
-            "key": "leisure",
-            "value": "golf_course"
+            "key":"aerialway",
+            "value":"chair_lift"
         },
         {
-            "key": "leisure",
-            "value": "stadium"
+            "key":"aerialway",
+            "value":"rope_tow"
         },
         {
-            "key": "leisure",
-            "value": "ice_rink"
+            "key":"aerialway",
+            "value":"canopy"
         },
         {
-            "key": "leisure",
-            "value": "garden"
+            "key":"aerialway",
+            "value":"platter"
         },
         {
-            "key": "leisure",
-            "value": "park"
+            "key":"aerialway",
+            "value":"cable_car"
         },
         {
-            "key": "leisure",
-            "value": "playground"
+            "key":"aerialway",
+            "value":"magic_carpet"
         },
         {
-            "key": "leisure",
-            "value": "dog_park"
+            "key":"man_made",
+            "value":"breakwater"
         },
         {
-            "key": "leisure",
-            "value": "sports_centre"
+            "key":"man_made",
+            "value":"groyne"
         },
         {
-            "key": "leisure",
-            "value": "pitch"
+            "key":"man_made",
+            "value":"pier"
         },
         {
-            "key": "leisure",
-            "value": "swimming_pool"
+            "key":"man_made",
+            "value":"embankment"
         },
         {
-            "key": "leisure",
-            "value": "swimming_area"
+            "key":"station",
+            "value":"subway"
         },
         {
-            "key": "leisure",
-            "value": "water_park"
+            "key":"station",
+            "value":"light_rail"
         },
         {
-            "key": "leisure",
-            "value": "golf_course"
+            "key":"boundary",
+            "value":"national_park"
         },
         {
-            "key": "leisure",
-            "value": "stadium"
+            "key":"boundary",
+            "value":"protected_area"
         },
         {
-            "key": "leisure",
-            "value": "ice_rink"
+            "key":"boundary",
+            "value":"administrative"
         },
         {
-            "key": "leisure",
-            "value": "garden"
+            "key":"boundary",
+            "value":"maritime"
         },
         {
-            "key": "man_made",
-            "value": "pier"
+            "key":"boundary",
+            "value":"aboriginal_lands"
         },
         {
-            "key": "man_made",
-            "value": "breakwater"
+            "key":"highway",
+            "value":"primary"
         },
         {
-            "key": "man_made",
-            "value": "embankment"
+            "key":"highway",
+            "value":"pedestrian"
         },
         {
-            "key": "man_made",
-            "value": "groyne"
+            "key":"highway",
+            "value":"bridleway"
         },
         {
-            "key": "man_made",
-            "value": "pier"
+            "key":"highway",
+            "value":"secondary_link"
         },
         {
-            "key": "man_made",
-            "value": "breakwater"
+            "key":"highway",
+            "value":"tertiary"
         },
         {
-            "key": "man_made",
-            "value": "embankment"
+            "key":"highway",
+            "value":"turning_circle"
         },
         {
-            "key": "man_made",
-            "value": "groyne"
+            "key":"highway",
+            "value":"primary_link"
         },
         {
-            "key": "landuse",
-            "value": "allotments"
+            "key":"highway",
+            "value":"service"
         },
         {
-            "key": "landuse",
-            "value": "farm"
+            "key":"highway",
+            "value":"residential"
         },
         {
-            "key": "landuse",
-            "value": "farmland"
+            "key":"highway",
+            "value":"motorway_link"
         },
         {
-            "key": "landuse",
-            "value": "farmyard"
+            "key":"highway",
+            "value":"cycleway"
         },
         {
-            "key": "landuse",
-            "value": "orchard"
+            "key":"highway",
+            "value":"corridor"
         },
         {
-            "key": "landuse",
-            "value": "greenhouse_horticulture"
+            "key":"highway",
+            "value":"trunk_link"
         },
         {
-            "key": "landuse",
-            "value": "plant_nursery"
+            "key":"highway",
+            "value":"living_street"
         },
         {
-            "key": "landuse",
-            "value": "vineyard"
+            "key":"highway",
+            "value":"track"
         },
         {
-            "key": "landuse",
-            "value": "grass"
+            "key":"highway",
+            "value":"motorway_junction"
         },
         {
-            "key": "landuse",
-            "value": "grassland"
+            "key":"highway",
+            "value":"motorway"
         },
         {
-            "key": "landuse",
-            "value": "meadow"
+            "key":"highway",
+            "value":"construction"
         },
         {
-            "key": "landuse",
-            "value": "industrial"
+            "key":"highway",
+            "value":"tertiary_link"
         },
         {
-            "key": "landuse",
-            "value": "park"
+            "key":"highway",
+            "value":"trunk"
         },
         {
-            "key": "landuse",
-            "value": "village_green"
+            "key":"highway",
+            "value":"path"
         },
         {
-            "key": "landuse",
-            "value": "recreation_ground"
+            "key":"highway",
+            "value":"secondary"
         },
         {
-            "key": "landuse",
-            "value": "forest"
+            "key":"highway",
+            "value":"footway"
         },
         {
-            "key": "landuse",
-            "value": "cemetery"
+            "key":"highway",
+            "value":"unclassified"
         },
         {
-            "key": "landuse",
-            "value": "beach"
+            "key":"highway",
+            "value":"bus_stop"
         },
         {
-            "key": "landuse",
-            "value": "basin"
+            "key":"highway",
+            "value":"steps"
         },
         {
-            "key": "landuse",
-            "value": "reservoir"
+            "key":"highway",
+            "value":"crossing"
         },
         {
-            "key": "landuse",
-            "value": "pond"
+            "key":"highway",
+            "value":"raceway"
         },
         {
-            "key": "landuse",
-            "value": "cemetery"
+            "key":"highway",
+            "value":"road"
         },
         {
-            "key": "landuse",
-            "value": "cemetery"
+            "key":"barrier",
+            "value":"lift_gate"
         },
         {
-            "key": "wetland",
-            "value": "marsh"
+            "key":"barrier",
+            "value":"fence"
         },
         {
-            "key": "wetland",
-            "value": "swamp"
+            "key":"barrier",
+            "value":"sally_port"
         },
         {
-            "key": "wetland",
-            "value": "tidalflat"
+            "key":"barrier",
+            "value":"wall"
         },
         {
-            "key": "wetland",
-            "value": "bog"
+            "key":"barrier",
+            "value":"stile"
         },
         {
-            "key": "railway",
-            "value": "service"
+            "key":"barrier",
+            "value":"cable_barrier"
         },
         {
-            "key": "railway",
-            "value": "railway"
+            "key":"barrier",
+            "value":"yes"
         },
         {
-            "key": "railway",
-            "value": "station"
+            "key":"barrier",
+            "value":"ditch"
         },
         {
-            "key": "railway",
-            "value": "platform"
+            "key":"barrier",
+            "value":"toll_booth"
         },
         {
-            "key": "railway",
-            "value": "halt"
+            "key":"barrier",
+            "value":"wire_fence"
         },
         {
-            "key": "railway",
-            "value": "tram_stop"
+            "key":"barrier",
+            "value":"cycle_barrier"
         },
         {
-            "key": "railway",
-            "value": "crossing"
+            "key":"barrier",
+            "value":"retaining_wall"
         },
         {
-            "key": "railway",
-            "value": "level_crossing"
+            "key":"barrier",
+            "value":"bollard"
         },
         {
-            "key": "railway",
-            "value": "subway_entrance"
+            "key":"barrier",
+            "value":"gate"
         },
         {
-            "key": "railway",
-            "value": "station"
+            "key":"barrier",
+            "value":"entrance"
         },
         {
-            "key": "railway",
-            "value": "platform"
+            "key":"barrier",
+            "value":"jersey_barrier"
         },
         {
-            "key": "railway",
-            "value": "halt"
+            "key":"barrier",
+            "value":"city_wall"
         },
         {
-            "key": "railway",
-            "value": "tram_stop"
+            "key":"barrier",
+            "value":"guard_rail"
         },
         {
-            "key": "railway",
-            "value": "crossing"
+            "key":"barrier",
+            "value":"hedge"
         },
         {
-            "key": "railway",
-            "value": "level_crossing"
+            "key":"barrier",
+            "value":"spikes"
         },
         {
-            "key": "railway",
-            "value": "subway_entrance"
+            "key":"barrier",
+            "value":"rope"
         },
         {
-            "key": "cemetery",
-            "value": "__any__"
+            "key":"barrier",
+            "value":"border_control"
         },
         {
-            "key": "natural",
-            "value": "cliff"
+            "key":"barrier",
+            "value":"kissing_gate"
         },
         {
-            "key": "natural",
-            "value": "cliff"
+            "key":"barrier",
+            "value":"hedge_bank"
         },
         {
-            "key": "natural",
-            "value": "glacier"
+            "key":"leisure",
+            "value":"dog_park"
         },
         {
-            "key": "natural",
-            "value": "sand"
+            "key":"leisure",
+            "value":"water_park"
         },
         {
-            "key": "natural",
-            "value": "wood"
+            "key":"leisure",
+            "value":"nature_reserve"
         },
         {
-            "key": "natural",
-            "value": "scrub"
+            "key":"leisure",
+            "value":"swimming_area"
         },
         {
-            "key": "natural",
-            "value": "wetland"
+            "key":"leisure",
+            "value":"garden"
         },
         {
-            "key": "natural",
-            "value": "mud"
+            "key":"leisure",
+            "value":"marina"
         },
         {
-            "key": "natural",
-            "value": "water"
+            "key":"leisure",
+            "value":"golf_course"
         },
         {
-            "key": "natural",
-            "value": "bay"
+            "key":"leisure",
+            "value":"park"
         },
         {
-            "key": "tourism",
-            "value": "zoo"
+            "key":"leisure",
+            "value":"miniature_golf"
         },
         {
-            "key": "tourism",
-            "value": "camp_site"
+            "key":"leisure",
+            "value":"swimming_pool"
         },
         {
-            "key": "tourism",
-            "value": "attraction"
+            "key":"leisure",
+            "value":"ice_rink"
         },
         {
-            "key": "tourism",
-            "value": "artwork"
+            "key":"leisure",
+            "value":"playground"
         },
         {
-            "key": "tourism",
-            "value": "gallery"
+            "key":"leisure",
+            "value":"stadium"
         },
         {
-            "key": "tourism",
-            "value": "hotel"
+            "key":"leisure",
+            "value":"pitch"
         },
         {
-            "key": "tourism",
-            "value": "motel"
+            "key":"leisure",
+            "value":"sports_centre"
         },
         {
-            "key": "tourism",
-            "value": "bed_and_breakfast"
+            "key":"leisure",
+            "value":"recreation_ground"
         },
         {
-            "key": "tourism",
-            "value": "guest_house"
+            "key":"leisure",
+            "value":"common"
         },
         {
-            "key": "tourism",
-            "value": "hostel"
+            "key":"historic",
+            "value":"monument"
         },
         {
-            "key": "tourism",
-            "value": "chalet"
+            "key":"tourism",
+            "value":"information"
         },
         {
-            "key": "tourism",
-            "value": "camp_site"
+            "key":"tourism",
+            "value":"chalet"
         },
         {
-            "key": "tourism",
-            "value": "alpine_hut"
+            "key":"tourism",
+            "value":"alpine_hut"
         },
         {
-            "key": "tourism",
-            "value": "caravan_site"
+            "key":"tourism",
+            "value":"viewpoint"
         },
         {
-            "key": "tourism",
-            "value": "museum"
+            "key":"tourism",
+            "value":"museum"
         },
         {
-            "key": "tourism",
-            "value": "viewpoint"
+            "key":"tourism",
+            "value":"theme_park"
         },
         {
-            "key": "tourism",
-            "value": "zoo"
+            "key":"tourism",
+            "value":"motel"
         },
         {
-            "key": "tourism",
-            "value": "theme_park"
+            "key":"tourism",
+            "value":"hotel"
         },
         {
-            "key": "tourism",
-            "value": "attraction"
+            "key":"tourism",
+            "value":"zoo"
         },
         {
-            "key": "tourism",
-            "value": "artwork"
+            "key":"tourism",
+            "value":"caravan_site"
         },
         {
-            "key": "tourism",
-            "value": "gallery"
+            "key":"tourism",
+            "value":"attraction"
         },
         {
-            "key": "tourism",
-            "value": "hotel"
+            "key":"tourism",
+            "value":"picnic_site"
         },
         {
-            "key": "tourism",
-            "value": "motel"
+            "key":"tourism",
+            "value":"artwork"
         },
         {
-            "key": "tourism",
-            "value": "bed_and_breakfast"
+            "key":"tourism",
+            "value":"bed_and_breakfast"
         },
         {
-            "key": "tourism",
-            "value": "guest_house"
+            "key":"tourism",
+            "value":"guest_house"
         },
         {
-            "key": "tourism",
-            "value": "hostel"
+            "key":"tourism",
+            "value":"gallery"
         },
         {
-            "key": "tourism",
-            "value": "chalet"
+            "key":"tourism",
+            "value":"camp_site"
         },
         {
-            "key": "tourism",
-            "value": "camp_site"
+            "key":"tourism",
+            "value":"hostel"
         },
         {
-            "key": "tourism",
-            "value": "alpine_hut"
+            "key":"building",
+            "value":"__any__"
         },
         {
-            "key": "tourism",
-            "value": "caravan_site"
+            "key":"natural",
+            "value":"scree"
         },
         {
-            "key": "tourism",
-            "value": "museum"
+            "key":"natural",
+            "value":"earth_bank"
         },
         {
-            "key": "tourism",
-            "value": "viewpoint"
+            "key":"natural",
+            "value":"scrub"
         },
         {
-            "key": "tourism",
-            "value": "zoo"
+            "key":"natural",
+            "value":"glacier"
         },
         {
-            "key": "tourism",
-            "value": "theme_park"
+            "key":"natural",
+            "value":"bay"
         },
         {
-            "key": "shop",
-            "value": "accessories"
+            "key":"natural",
+            "value":"water"
         },
         {
-            "key": "shop",
-            "value": "alcohol"
+            "key":"natural",
+            "value":"mud"
         },
         {
-            "key": "shop",
-            "value": "antiques"
+            "key":"natural",
+            "value":"sand"
         },
         {
-            "key": "shop",
-            "value": "art"
+            "key":"natural",
+            "value":"wood"
         },
         {
-            "key": "shop",
-            "value": "bag"
+            "key":"natural",
+            "value":"wetland"
         },
         {
-            "key": "shop",
-            "value": "bakery"
+            "key":"natural",
+            "value":"peak"
         },
         {
-            "key": "shop",
-            "value": "beauty"
+            "key":"natural",
+            "value":"rock"
         },
         {
-            "key": "shop",
-            "value": "bed"
+            "key":"natural",
+            "value":"grassland"
         },
         {
-            "key": "shop",
-            "value": "beverages"
+            "key":"natural",
+            "value":"volcano"
         },
         {
-            "key": "shop",
-            "value": "bicycle"
+            "key":"natural",
+            "value":"heath"
         },
         {
-            "key": "shop",
-            "value": "books"
+            "key":"natural",
+            "value":"beach"
         },
         {
-            "key": "shop",
-            "value": "boutique"
+            "key":"natural",
+            "value":"bare_rock"
         },
         {
-            "key": "shop",
-            "value": "butcher"
+            "key":"natural",
+            "value":"fell"
         },
         {
-            "key": "shop",
-            "value": "car"
+            "key":"natural",
+            "value":"cliff"
         },
         {
-            "key": "shop",
-            "value": "car_repair"
+            "key":"route",
+            "value":"mtb"
         },
         {
-            "key": "shop",
-            "value": "carpet"
+            "key":"route",
+            "value":"ferry"
         },
         {
-            "key": "shop",
-            "value": "charity"
+            "key":"route",
+            "value":"piste"
         },
         {
-            "key": "shop",
-            "value": "chemist"
+            "key":"route",
+            "value":"hiking"
         },
         {
-            "key": "shop",
-            "value": "chocolate"
+            "key":"aeroway",
+            "value":"apron"
         },
         {
-            "key": "shop",
-            "value": "clothes"
+            "key":"aeroway",
+            "value":"heliport"
         },
         {
-            "key": "shop",
-            "value": "coffee"
+            "key":"aeroway",
+            "value":"runway"
         },
         {
-            "key": "shop",
-            "value": "computer"
+            "key":"aeroway",
+            "value":"taxiway"
         },
         {
-            "key": "shop",
-            "value": "confectionery"
+            "key":"aeroway",
+            "value":"helipad"
         },
         {
-            "key": "shop",
-            "value": "convenience"
+            "key":"aeroway",
+            "value":"aerodrome"
         },
         {
-            "key": "shop",
-            "value": "copyshop"
+            "key":"place",
+            "value":"town"
         },
         {
-            "key": "shop",
-            "value": "cosmetics"
+            "key":"place",
+            "value":"city"
         },
         {
-            "key": "shop",
-            "value": "garden_centre"
+            "key":"place",
+            "value":"island"
         },
         {
-            "key": "shop",
-            "value": "deli"
+            "key":"place",
+            "value":"isolated_dwelling"
         },
         {
-            "key": "shop",
-            "value": "delicatessen"
+            "key":"place",
+            "value":"hamlet"
         },
         {
-            "key": "shop",
-            "value": "department_store"
+            "key":"place",
+            "value":"archipelago"
         },
         {
-            "key": "shop",
-            "value": "doityourself"
+            "key":"place",
+            "value":"suburb"
         },
         {
-            "key": "shop",
-            "value": "dry_cleaning"
+            "key":"place",
+            "value":"village"
         },
         {
-            "key": "shop",
-            "value": "video"
+            "key":"place",
+            "value":"islet"
         },
         {
-            "key": "shop",
-            "value": "electronics"
+            "key":"place",
+            "value":"neighbourhood"
         },
         {
-            "key": "shop",
-            "value": "erotic"
+            "key":"railway",
+            "value":"halt"
         },
         {
-            "key": "shop",
-            "value": "fabric"
+            "key":"railway",
+            "value":"rail"
         },
         {
-            "key": "shop",
-            "value": "florist"
+            "key":"railway",
+            "value":"subway_entrance"
         },
         {
-            "key": "shop",
-            "value": "furniture"
+            "key":"railway",
+            "value":"tram_stop"
         },
         {
-            "key": "shop",
-            "value": "video_games"
+            "key":"railway",
+            "value":"station"
         },
         {
-            "key": "shop",
-            "value": "general"
+            "key":"railway",
+            "value":"light_rail"
         },
         {
-            "key": "shop",
-            "value": "gift"
+            "key":"railway",
+            "value":"subway"
         },
         {
-            "key": "shop",
-            "value": "greengrocer"
+            "key":"landuse",
+            "value":"greenhouse_horticulture"
         },
         {
-            "key": "shop",
-            "value": "hairdresser"
+            "key":"landuse",
+            "value":"industrial"
         },
         {
-            "key": "shop",
-            "value": "hardware"
+            "key":"landuse",
+            "value":"meadow"
         },
         {
-            "key": "shop",
-            "value": "hearing_aids"
+            "key":"landuse",
+            "value":"reservoir"
         },
         {
-            "key": "shop",
-            "value": "hifi"
+            "key":"landuse",
+            "value":"brownfield"
         },
         {
-            "key": "shop",
-            "value": "ice_cream"
+            "key":"landuse",
+            "value":"allotments"
         },
         {
-            "key": "shop",
-            "value": "interior_decoration"
+            "key":"landuse",
+            "value":"plant_nursery"
         },
         {
-            "key": "shop",
-            "value": "jewelry"
+            "key":"landuse",
+            "value":"village_green"
         },
         {
-            "key": "shop",
-            "value": "kiosk"
+            "key":"landuse",
+            "value":"recreation_ground"
         },
         {
-            "key": "shop",
-            "value": "lamps"
+            "key":"landuse",
+            "value":"greenfield"
         },
         {
-            "key": "shop",
-            "value": "laundry"
+            "key":"landuse",
+            "value":"winter_sports"
         },
         {
-            "key": "shop",
-            "value": "mall"
+            "key":"landuse",
+            "value":"residential"
         },
         {
-            "key": "shop",
-            "value": "massage"
+            "key":"landuse",
+            "value":"cemetery"
         },
         {
-            "key": "shop",
-            "value": "mobile_phone"
+            "key":"landuse",
+            "value":"vineyard"
         },
         {
-            "key": "shop",
-            "value": "motorcycle"
+            "key":"landuse",
+            "value":"forest"
         },
         {
-            "key": "shop",
-            "value": "music"
+            "key":"landuse",
+            "value":"basin"
         },
         {
-            "key": "shop",
-            "value": "musical_instrument"
+            "key":"landuse",
+            "value":"beach"
         },
         {
-            "key": "shop",
-            "value": "newsagent"
+            "key":"landuse",
+            "value":"quarry"
         },
         {
-            "key": "shop",
-            "value": "optician"
+            "key":"landuse",
+            "value":"retail"
         },
         {
-            "key": "shop",
-            "value": "outdoor"
+            "key":"landuse",
+            "value":"farm"
         },
         {
-            "key": "shop",
-            "value": "perfumery"
+            "key":"landuse",
+            "value":"commercial"
         },
         {
-            "key": "shop",
-            "value": "perfume"
+            "key":"landuse",
+            "value":"park"
         },
         {
-            "key": "shop",
-            "value": "pet"
+            "key":"landuse",
+            "value":"farmyard"
         },
         {
-            "key": "shop",
-            "value": "photo"
+            "key":"landuse",
+            "value":"farmland"
         },
         {
-            "key": "shop",
-            "value": "second_hand"
+            "key":"landuse",
+            "value":"orchard"
         },
         {
-            "key": "shop",
-            "value": "shoes"
+            "key":"landuse",
+            "value":"landfill"
         },
         {
-            "key": "shop",
-            "value": "sports"
+            "key":"landuse",
+            "value":"salt_pond"
         },
         {
-            "key": "shop",
-            "value": "stationery"
+            "key":"landuse",
+            "value":"grassland"
         },
         {
-            "key": "shop",
-            "value": "supermarket"
+            "key":"landuse",
+            "value":"military"
         },
         {
-            "key": "shop",
-            "value": "tailor"
+            "key":"landuse",
+            "value":"railway"
         },
         {
-            "key": "shop",
-            "value": "tattoo"
-        },
-        {
-            "key": "shop",
-            "value": "ticket"
-        },
-        {
-            "key": "shop",
-            "value": "tobacco"
-        },
-        {
-            "key": "shop",
-            "value": "toys"
-        },
-        {
-            "key": "shop",
-            "value": "travel_agency"
-        },
-        {
-            "key": "shop",
-            "value": "watches"
-        },
-        {
-            "key": "shop",
-            "value": "weapons"
-        },
-        {
-            "key": "shop",
-            "value": "wholesale"
-        },
-        {
-            "key": "shop",
-            "value": "wine"
-        },
-        {
-            "key": "shop",
-            "value": "accessories"
-        },
-        {
-            "key": "shop",
-            "value": "alcohol"
-        },
-        {
-            "key": "shop",
-            "value": "antiques"
-        },
-        {
-            "key": "shop",
-            "value": "art"
-        },
-        {
-            "key": "shop",
-            "value": "bag"
-        },
-        {
-            "key": "shop",
-            "value": "bakery"
-        },
-        {
-            "key": "shop",
-            "value": "beauty"
-        },
-        {
-            "key": "shop",
-            "value": "bed"
-        },
-        {
-            "key": "shop",
-            "value": "beverages"
-        },
-        {
-            "key": "shop",
-            "value": "bicycle"
-        },
-        {
-            "key": "shop",
-            "value": "books"
-        },
-        {
-            "key": "shop",
-            "value": "boutique"
-        },
-        {
-            "key": "shop",
-            "value": "butcher"
-        },
-        {
-            "key": "shop",
-            "value": "car"
-        },
-        {
-            "key": "shop",
-            "value": "car_repair"
-        },
-        {
-            "key": "shop",
-            "value": "carpet"
-        },
-        {
-            "key": "shop",
-            "value": "charity"
-        },
-        {
-            "key": "shop",
-            "value": "chemist"
-        },
-        {
-            "key": "shop",
-            "value": "chocolate"
-        },
-        {
-            "key": "shop",
-            "value": "clothes"
-        },
-        {
-            "key": "shop",
-            "value": "coffee"
-        },
-        {
-            "key": "shop",
-            "value": "computer"
-        },
-        {
-            "key": "shop",
-            "value": "confectionery"
-        },
-        {
-            "key": "shop",
-            "value": "convenience"
-        },
-        {
-            "key": "shop",
-            "value": "copyshop"
-        },
-        {
-            "key": "shop",
-            "value": "cosmetics"
-        },
-        {
-            "key": "shop",
-            "value": "garden_centre"
-        },
-        {
-            "key": "shop",
-            "value": "deli"
-        },
-        {
-            "key": "shop",
-            "value": "delicatessen"
-        },
-        {
-            "key": "shop",
-            "value": "department_store"
-        },
-        {
-            "key": "shop",
-            "value": "doityourself"
-        },
-        {
-            "key": "shop",
-            "value": "dry_cleaning"
-        },
-        {
-            "key": "shop",
-            "value": "video"
-        },
-        {
-            "key": "shop",
-            "value": "electronics"
-        },
-        {
-            "key": "shop",
-            "value": "erotic"
-        },
-        {
-            "key": "shop",
-            "value": "fabric"
-        },
-        {
-            "key": "shop",
-            "value": "florist"
-        },
-        {
-            "key": "shop",
-            "value": "furniture"
-        },
-        {
-            "key": "shop",
-            "value": "video_games"
-        },
-        {
-            "key": "shop",
-            "value": "general"
-        },
-        {
-            "key": "shop",
-            "value": "gift"
-        },
-        {
-            "key": "shop",
-            "value": "greengrocer"
-        },
-        {
-            "key": "shop",
-            "value": "hairdresser"
-        },
-        {
-            "key": "shop",
-            "value": "hardware"
-        },
-        {
-            "key": "shop",
-            "value": "hearing_aids"
-        },
-        {
-            "key": "shop",
-            "value": "hifi"
-        },
-        {
-            "key": "shop",
-            "value": "ice_cream"
-        },
-        {
-            "key": "shop",
-            "value": "interior_decoration"
-        },
-        {
-            "key": "shop",
-            "value": "jewelry"
-        },
-        {
-            "key": "shop",
-            "value": "kiosk"
-        },
-        {
-            "key": "shop",
-            "value": "lamps"
-        },
-        {
-            "key": "shop",
-            "value": "laundry"
-        },
-        {
-            "key": "shop",
-            "value": "mall"
-        },
-        {
-            "key": "shop",
-            "value": "massage"
-        },
-        {
-            "key": "shop",
-            "value": "mobile_phone"
-        },
-        {
-            "key": "shop",
-            "value": "motorcycle"
-        },
-        {
-            "key": "shop",
-            "value": "music"
-        },
-        {
-            "key": "shop",
-            "value": "musical_instrument"
-        },
-        {
-            "key": "shop",
-            "value": "newsagent"
-        },
-        {
-            "key": "shop",
-            "value": "optician"
-        },
-        {
-            "key": "shop",
-            "value": "outdoor"
-        },
-        {
-            "key": "shop",
-            "value": "perfumery"
-        },
-        {
-            "key": "shop",
-            "value": "perfume"
-        },
-        {
-            "key": "shop",
-            "value": "pet"
-        },
-        {
-            "key": "shop",
-            "value": "photo"
-        },
-        {
-            "key": "shop",
-            "value": "second_hand"
-        },
-        {
-            "key": "shop",
-            "value": "shoes"
-        },
-        {
-            "key": "shop",
-            "value": "sports"
-        },
-        {
-            "key": "shop",
-            "value": "stationery"
-        },
-        {
-            "key": "shop",
-            "value": "supermarket"
-        },
-        {
-            "key": "shop",
-            "value": "tailor"
-        },
-        {
-            "key": "shop",
-            "value": "tattoo"
-        },
-        {
-            "key": "shop",
-            "value": "ticket"
-        },
-        {
-            "key": "shop",
-            "value": "tobacco"
-        },
-        {
-            "key": "shop",
-            "value": "toys"
-        },
-        {
-            "key": "shop",
-            "value": "travel_agency"
-        },
-        {
-            "key": "shop",
-            "value": "watches"
-        },
-        {
-            "key": "shop",
-            "value": "weapons"
-        },
-        {
-            "key": "shop",
-            "value": "wholesale"
-        },
-        {
-            "key": "shop",
-            "value": "wine"
-        },
-        {
-            "key": "aerialway",
-            "value": "chair_lift"
-        },
-        {
-            "key": "aerialway",
-            "value": "mixed_lift"
-        },
-        {
-            "key": "aerialway",
-            "value": "drag_lift"
-        },
-        {
-            "key": "aerialway",
-            "value": "platter"
-        },
-        {
-            "key": "aerialway",
-            "value": "t-bar"
-        },
-        {
-            "key": "aerialway",
-            "value": "magic_carpet"
-        },
-        {
-            "key": "aerialway",
-            "value": "gondola"
-        },
-        {
-            "key": "aerialway",
-            "value": "cable_car"
-        },
-        {
-            "key": "aerialway",
-            "value": "rope_tow"
-        },
-        {
-            "key": "aerialway",
-            "value": "zip_line"
-        },
-        {
-            "key": "aerialway",
-            "value": "j-bar"
-        },
-        {
-            "key": "aerialway",
-            "value": "canopy"
-        },
-        {
-            "key": "aerialway",
-            "value": "chair_lift"
-        },
-        {
-            "key": "aerialway",
-            "value": "mixed_lift"
-        },
-        {
-            "key": "aerialway",
-            "value": "drag_lift"
-        },
-        {
-            "key": "aerialway",
-            "value": "platter"
-        },
-        {
-            "key": "aerialway",
-            "value": "t-bar"
-        },
-        {
-            "key": "aerialway",
-            "value": "magic_carpet"
-        },
-        {
-            "key": "aerialway",
-            "value": "gondola"
-        },
-        {
-            "key": "aerialway",
-            "value": "cable_car"
-        },
-        {
-            "key": "aerialway",
-            "value": "rope_tow"
-        },
-        {
-            "key": "aerialway",
-            "value": "zip_line"
-        },
-        {
-            "key": "aerialway",
-            "value": "j-bar"
-        },
-        {
-            "key": "aerialway",
-            "value": "canopy"
-        },
-        {
-            "key": "water",
-            "value": "swimming_pool"
-        },
-        {
-            "key": "barrier",
-            "value": "city_wall"
-        },
-        {
-            "key": "barrier",
-            "value": "fence"
-        },
-        {
-            "key": "barrier",
-            "value": "hedge"
-        },
-        {
-            "key": "barrier",
-            "value": "hedge_bank"
-        },
-        {
-            "key": "barrier",
-            "value": "retaining_wall"
-        },
-        {
-            "key": "barrier",
-            "value": "wall"
-        },
-        {
-            "key": "barrier",
-            "value": "bollard"
-        },
-        {
-            "key": "barrier",
-            "value": "gate"
-        },
-        {
-            "key": "barrier",
-            "value": "spikes"
-        },
-        {
-            "key": "barrier",
-            "value": "lift_gate"
-        },
-        {
-            "key": "barrier",
-            "value": "kissing_gate"
-        },
-        {
-            "key": "barrier",
-            "value": "yes"
-        },
-        {
-            "key": "barrier",
-            "value": "wire_fence"
-        },
-        {
-            "key": "barrier",
-            "value": "stile"
-        },
-        {
-            "key": "barrier",
-            "value": "entrance"
-        },
-        {
-            "key": "barrier",
-            "value": "cable_barrier"
-        },
-        {
-            "key": "barrier",
-            "value": "jersey_barrier"
-        },
-        {
-            "key": "barrier",
-            "value": "rope"
-        },
-        {
-            "key": "barrier",
-            "value": "guard_rail"
-        },
-        {
-            "key": "barrier",
-            "value": "ditch"
-        },
-        {
-            "key": "barrier",
-            "value": "city_wall"
-        },
-        {
-            "key": "barrier",
-            "value": "fence"
-        },
-        {
-            "key": "barrier",
-            "value": "hedge"
-        },
-        {
-            "key": "barrier",
-            "value": "hedge_bank"
-        },
-        {
-            "key": "barrier",
-            "value": "retaining_wall"
-        },
-        {
-            "key": "barrier",
-            "value": "wall"
-        },
-        {
-            "key": "barrier",
-            "value": "bollard"
-        },
-        {
-            "key": "barrier",
-            "value": "gate"
-        },
-        {
-            "key": "barrier",
-            "value": "spikes"
-        },
-        {
-            "key": "barrier",
-            "value": "lift_gate"
-        },
-        {
-            "key": "barrier",
-            "value": "kissing_gate"
-        },
-        {
-            "key": "barrier",
-            "value": "yes"
-        },
-        {
-            "key": "barrier",
-            "value": "wire_fence"
-        },
-        {
-            "key": "barrier",
-            "value": "stile"
-        },
-        {
-            "key": "barrier",
-            "value": "entrance"
-        },
-        {
-            "key": "barrier",
-            "value": "cable_barrier"
-        },
-        {
-            "key": "barrier",
-            "value": "jersey_barrier"
-        },
-        {
-            "key": "barrier",
-            "value": "rope"
-        },
-        {
-            "key": "barrier",
-            "value": "guard_rail"
-        },
-        {
-            "key": "barrier",
-            "value": "sally_port"
-        },
-        {
-            "key": "barrier",
-            "value": "lift_gate"
-        },
-        {
-            "key": "barrier",
-            "value": "gate"
-        },
-        {
-            "key": "barrier",
-            "value": "bollard"
-        },
-        {
-            "key": "barrier",
-            "value": "stile"
-        },
-        {
-            "key": "barrier",
-            "value": "cycle_barrier"
-        },
-        {
-            "key": "barrier",
-            "value": "toll_booth"
-        },
-        {
-            "key": "barrier",
-            "value": "border_control"
-        },
-        {
-            "key": "barrier",
-            "value": "sally_port"
-        },
-        {
-            "key": "barrier",
-            "value": "lift_gate"
-        },
-        {
-            "key": "barrier",
-            "value": "gate"
-        },
-        {
-            "key": "barrier",
-            "value": "bollard"
-        },
-        {
-            "key": "barrier",
-            "value": "stile"
-        },
-        {
-            "key": "barrier",
-            "value": "cycle_barrier"
-        },
-        {
-            "key": "barrier",
-            "value": "toll_booth"
-        },
-        {
-            "key": "barrier",
-            "value": "border_control"
-        },
-        {
-            "key": "place",
-            "value": "region"
-        },
-        {
-            "key": "place",
-            "value": "county"
-        },
-        {
-            "key": "place",
-            "value": "city"
-        },
-        {
-            "key": "place",
-            "value": "district"
-        },
-        {
-            "key": "place",
-            "value": "town"
-        },
-        {
-            "key": "place",
-            "value": "village"
-        },
-        {
-            "key": "place",
-            "value": "municipality"
-        },
-        {
-            "key": "place",
-            "value": "hamlet"
-        },
-        {
-            "key": "place",
-            "value": "suburb"
-        },
-        {
-            "key": "place",
-            "value": "neighbourhood"
-        },
-        {
-            "key": "place",
-            "value": "locality"
-        },
-        {
-            "key": "place",
-            "value": "dwelling"
-        },
-        {
-            "key": "amenity",
-            "value": "hospital"
-        },
-        {
-            "key": "amenity",
-            "value": "school"
-        },
-        {
-            "key": "amenity",
-            "value": "college"
-        },
-        {
-            "key": "amenity",
-            "value": "university"
-        },
-        {
-            "key": "amenity",
-            "value": "swimming_pool"
-        },
-        {
-            "key": "amenity",
-            "value": "arts_centre"
-        },
-        {
-            "key": "amenity",
-            "value": "police"
-        },
-        {
-            "key": "amenity",
-            "value": "fire_station"
-        },
-        {
-            "key": "amenity",
-            "value": "post_box"
-        },
-        {
-            "key": "amenity",
-            "value": "post_office"
-        },
-        {
-            "key": "amenity",
-            "value": "telephone"
-        },
-        {
-            "key": "amenity",
-            "value": "library"
-        },
-        {
-            "key": "amenity",
-            "value": "townhall"
-        },
-        {
-            "key": "amenity",
-            "value": "courthouse"
-        },
-        {
-            "key": "amenity",
-            "value": "prison"
-        },
-        {
-            "key": "amenity",
-            "value": "place_of_worship"
-        },
-        {
-            "key": "amenity",
-            "value": "embassy"
-        },
-        {
-            "key": "amenity",
-            "value": "community_centre"
-        },
-        {
-            "key": "amenity",
-            "value": "nursing_home"
-        },
-        {
-            "key": "amenity",
-            "value": "arts_centre"
-        },
-        {
-            "key": "amenity",
-            "value": "university"
-        },
-        {
-            "key": "amenity",
-            "value": "school"
-        },
-        {
-            "key": "amenity",
-            "value": "kindergarten"
-        },
-        {
-            "key": "amenity",
-            "value": "college"
-        },
-        {
-            "key": "amenity",
-            "value": "public_building"
-        },
-        {
-            "key": "amenity",
-            "value": "pharmacy"
-        },
-        {
-            "key": "amenity",
-            "value": "hospital"
-        },
-        {
-            "key": "amenity",
-            "value": "doctors"
-        },
-        {
-            "key": "amenity",
-            "value": "dentist"
-        },
-        {
-            "key": "amenity",
-            "value": "veterinary"
-        },
-        {
-            "key": "amenity",
-            "value": "theatre"
-        },
-        {
-            "key": "amenity",
-            "value": "nightclub"
-        },
-        {
-            "key": "amenity",
-            "value": "cinema"
-        },
-        {
-            "key": "amenity",
-            "value": "restaurant"
-        },
-        {
-            "key": "amenity",
-            "value": "recycling"
-        },
-        {
-            "key": "amenity",
-            "value": "fast_food"
-        },
-        {
-            "key": "amenity",
-            "value": "cafe"
-        },
-        {
-            "key": "amenity",
-            "value": "pub"
-        },
-        {
-            "key": "amenity",
-            "value": "bar"
-        },
-        {
-            "key": "amenity",
-            "value": "food_court"
-        },
-        {
-            "key": "amenity",
-            "value": "biergarten"
-        },
-        {
-            "key": "amenity",
-            "value": "swimming_pool"
-        },
-        {
-            "key": "amenity",
-            "value": "shelter"
-        },
-        {
-            "key": "amenity",
-            "value": "grave_yard"
-        },
-        {
-            "key": "amenity",
-            "value": "bank"
-        },
-        {
-            "key": "amenity",
-            "value": "ferry_terminal"
-        },
-        {
-            "key": "amenity",
-            "value": "fuel"
-        },
-        {
-            "key": "amenity",
-            "value": "waste_basket"
-        },
-        {
-            "key": "amenity",
-            "value": "bicycle_rental"
-        },
-        {
-            "key": "amenity",
-            "value": "bbq"
-        },
-        {
-            "key": "amenity",
-            "value": "taxi"
-        },
-        {
-            "key": "amenity",
-            "value": "bus_station"
-        },
-        {
-            "key": "amenity",
-            "value": "arts_centre"
-        },
-        {
-            "key": "amenity",
-            "value": "police"
-        },
-        {
-            "key": "amenity",
-            "value": "fire_station"
-        },
-        {
-            "key": "amenity",
-            "value": "post_box"
-        },
-        {
-            "key": "amenity",
-            "value": "post_office"
-        },
-        {
-            "key": "amenity",
-            "value": "telephone"
-        },
-        {
-            "key": "amenity",
-            "value": "library"
-        },
-        {
-            "key": "amenity",
-            "value": "townhall"
-        },
-        {
-            "key": "amenity",
-            "value": "courthouse"
-        },
-        {
-            "key": "amenity",
-            "value": "prison"
-        },
-        {
-            "key": "amenity",
-            "value": "place_of_worship"
-        },
-        {
-            "key": "amenity",
-            "value": "embassy"
-        },
-        {
-            "key": "amenity",
-            "value": "community_centre"
-        },
-        {
-            "key": "amenity",
-            "value": "nursing_home"
-        },
-        {
-            "key": "amenity",
-            "value": "arts_centre"
-        },
-        {
-            "key": "amenity",
-            "value": "university"
-        },
-        {
-            "key": "amenity",
-            "value": "school"
-        },
-        {
-            "key": "amenity",
-            "value": "kindergarten"
-        },
-        {
-            "key": "amenity",
-            "value": "college"
-        },
-        {
-            "key": "amenity",
-            "value": "public_building"
-        },
-        {
-            "key": "amenity",
-            "value": "pharmacy"
-        },
-        {
-            "key": "amenity",
-            "value": "hospital"
-        },
-        {
-            "key": "amenity",
-            "value": "doctors"
-        },
-        {
-            "key": "amenity",
-            "value": "dentist"
-        },
-        {
-            "key": "amenity",
-            "value": "veterinary"
-        },
-        {
-            "key": "amenity",
-            "value": "theatre"
-        },
-        {
-            "key": "amenity",
-            "value": "nightclub"
-        },
-        {
-            "key": "amenity",
-            "value": "cinema"
-        },
-        {
-            "key": "amenity",
-            "value": "restaurant"
-        },
-        {
-            "key": "amenity",
-            "value": "recycling"
-        },
-        {
-            "key": "amenity",
-            "value": "fast_food"
-        },
-        {
-            "key": "amenity",
-            "value": "cafe"
-        },
-        {
-            "key": "amenity",
-            "value": "pub"
-        },
-        {
-            "key": "amenity",
-            "value": "bar"
-        },
-        {
-            "key": "amenity",
-            "value": "food_court"
-        },
-        {
-            "key": "amenity",
-            "value": "biergarten"
-        },
-        {
-            "key": "amenity",
-            "value": "swimming_pool"
-        },
-        {
-            "key": "amenity",
-            "value": "shelter"
-        },
-        {
-            "key": "amenity",
-            "value": "grave_yard"
-        },
-        {
-            "key": "amenity",
-            "value": "bank"
-        },
-        {
-            "key": "amenity",
-            "value": "ferry_terminal"
-        },
-        {
-            "key": "amenity",
-            "value": "fuel"
-        },
-        {
-            "key": "amenity",
-            "value": "waste_basket"
-        },
-        {
-            "key": "amenity",
-            "value": "bicycle_rental"
-        },
-        {
-            "key": "amenity",
-            "value": "bbq"
-        },
-        {
-            "key": "amenity",
-            "value": "taxi"
-        },
-        {
-            "key": "amenity",
-            "value": "bus_station"
-        },
-        {
-            "key": "highway",
-            "value": "motorway_junction"
-        },
-        {
-            "key": "highway",
-            "value": "turning_circle"
-        },
-        {
-            "key": "highway",
-            "value": "bus_stop"
-        },
-        {
-            "key": "highway",
-            "value": "motorway_junction"
-        },
-        {
-            "key": "highway",
-            "value": "turning_circle"
-        },
-        {
-            "key": "highway",
-            "value": "bus_stop"
+            "key":"landuse",
+            "value":"grass"
         }
     ]
 }
