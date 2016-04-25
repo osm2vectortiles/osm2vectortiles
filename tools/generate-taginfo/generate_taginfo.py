@@ -39,10 +39,11 @@ def find_tables(config):
 
 
 def find_tags(mapping_config):
-    tags = defaultdict(list)
+    tags = defaultdict(set)
     for table in find_tables(mapping_config):
         for osm_key, osm_values in table.mapping:
-            tags[osm_key] += osm_values
+            for osm_value in osm_values:
+                tags[osm_key].add(osm_value)
 
     return tags
 
