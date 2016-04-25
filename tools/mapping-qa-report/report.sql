@@ -21,7 +21,7 @@ WITH vlayers AS (
   )
   UNION SELECT * FROM compare_layer_feature_count(
     'osm_place_*',
-    array['osm_place_geometry'],
+    array['osm_place_point'],
     array['place_label_layer']
   )
   UNION SELECT * FROM compare_layer_feature_count(
