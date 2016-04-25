@@ -316,7 +316,6 @@ system:
     soccer:
     - soccer
     swimming:
-    - swimming_pool
     - swimming_area
     - swimming
     telephone:
