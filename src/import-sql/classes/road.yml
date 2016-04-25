@@ -18,6 +18,8 @@ system:
     - primary_link
     - secondary_link
     - tertiary_link
+    pedestrian:
+    - pedestrian
     street:
     - unclassified
     - residential

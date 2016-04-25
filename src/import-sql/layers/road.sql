@@ -52,12 +52,12 @@ CREATE OR REPLACE VIEW road_z11 AS
 CREATE OR REPLACE VIEW road_z12 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order
     FROM osm_road_geometry
-    WHERE road_type_class(type) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry', 'service', 'link', 'construction', 'street_limited', 'aerialway');
+    WHERE road_type_class(type) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry', 'pedestrian', 'service', 'link', 'construction', 'street_limited', 'aerialway');
 
 CREATE OR REPLACE VIEW road_z13 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order
     FROM osm_road_geometry
-    WHERE road_type_class(type) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry', 'service', 'link', 'construction', 'street_limited', 'aerialway', 'track');
+    WHERE road_type_class(type) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry', 'pedestrian', 'service', 'link', 'construction', 'street_limited', 'aerialway', 'track');
 
 CREATE OR REPLACE VIEW road_z14 AS
     SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order
