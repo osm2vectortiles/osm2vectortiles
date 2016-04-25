@@ -17,8 +17,8 @@ CREATE OR REPLACE FUNCTION road_class(type VARCHAR, service VARCHAR, access VARC
 AS $$
 BEGIN
     RETURN CASE
-        WHEN type = 'rail' AND service IN ('yard', 'siding', 'spur', 'crossover') THEN 'minor_rail'
-        WHEN access IN ('no', 'private') THEN 'street_limited'
+        WHEN road_type_class(type) = 'major_rail' AND service IN ('yard', 'siding', 'spur', 'crossover') THEN 'minor_rail'
+        WHEN road_type_class(type) = 'street' AND access IN ('no', 'private') THEN 'street_limited'
         ELSE road_type_class(type)
     END;
 END;
