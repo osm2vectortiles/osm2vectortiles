@@ -1,3 +1,4 @@
+use_single_id_space: true
 generalized_tables:
   landuse_polygon_gen0:
     source: landuse_polygon_gen1
