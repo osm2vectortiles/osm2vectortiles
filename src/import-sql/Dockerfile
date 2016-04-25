@@ -12,6 +12,7 @@ ENV SQL_FUNCTIONS_FILE=/usr/src/app/functions.sql \
     SQL_GENERATED_FILE=/usr/src/app/gen.sql \
     SQL_TRIGGERS_FILE=/usr/src/app/triggers.sql \
     SQL_XYZ_EXTENT_FILE=/usr/src/app/xyz_extent.sql \
+    SQL_INDIZES_FILE=/usr/src/app/layers/indizes.sql \
     SQL_LAYERS_DIR=/usr/src/app/layers/
 COPY . /usr/src/app
 
