@@ -74,7 +74,7 @@ CREATE OR REPLACE FUNCTION osm_id_linestring(osm_id BIGINT) RETURNS BIGINT AS $$
 BEGIN
     RETURN CASE
         WHEN transform_osm_id(osm_id) >= 0 THEN (transform_osm_id(osm_id) * 10) + 1
-        ELSE (transform_osm_id(osm_id) * 10) + 3
+        ELSE (abs(transform_osm_id(osm_id)) * 10) + 3
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
@@ -85,7 +85,7 @@ CREATE OR REPLACE FUNCTION osm_id_polygon(osm_id BIGINT) RETURNS BIGINT AS $$
 BEGIN
     RETURN CASE
         WHEN transform_osm_id(osm_id) >= 0 THEN (transform_osm_id(osm_id) * 10) + 2
-        ELSE (transform_osm_id(osm_id) * 10) + 4
+        ELSE (abs(transform_osm_id(osm_id)) * 10) + 4
     END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
