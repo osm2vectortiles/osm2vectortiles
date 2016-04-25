@@ -43,7 +43,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_polygon(MAX(osm_id)) AS osm_id, ST_Collect(geometry) AS geometry, landuse_class(type) AS class, type
+          SELECT osm_id_polygon(MAX(osm_id)) AS osm_id, ST_CollectionExtract(ST_Collect(geometry), 3) AS geometry, landuse_class(type) AS class, type
           FROM landuse_z5toz8
           WHERE z(!scale_denominator!) BETWEEN 5 AND 8
             AND geometry && !bbox!
@@ -254,7 +254,8 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry,
+          SELECT osm_id_polygon(max(osm_id)) as osm_id,
+          ST_CollectionExtract(ST_Collect(geometry), 3) AS geometry,
           building_is_underground(underground) AS underground
           FROM (
             SELECT osm_id, geometry, underground
@@ -266,6 +267,7 @@ Layer:
             WHERE z(!scale_denominator!) = 14
           ) AS building
           WHERE geometry && !bbox!
+          GROUP BY underground, ST_YMin(ST_Envelope(geometry))
           ORDER BY ST_YMin(ST_Envelope(geometry)) DESC
         ) AS data
       type: postgis
@@ -344,7 +346,7 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry, type, class, oneway, structure FROM (
-              SELECT osm_id_polygon(MAX(osm_id)) as osm_id, ST_Collect(geometry) AS geometry,
+              SELECT osm_id_polygon(MAX(osm_id)) as osm_id, ST_CollectionExtract(ST_Collect(geometry), 2) AS geometry,
               road_type(road_class(type, NULL, NULL), type, NULL, NULL, NULL) AS type,
               road_class(type, NULL, NULL) AS class, road_oneway(0) AS oneway, 'none' AS structure, NULL AS z_order
               FROM (
@@ -353,6 +355,12 @@ Layer:
                 UNION ALL
                 SELECT * FROM road_z6toz7
                 WHERE z(!scale_denominator!) BETWEEN 6 AND 7
+                UNION ALL
+                SELECT * FROM road_z8toz9
+                WHERE z(!scale_denominator!) BETWEEN 8 AND 9
+                UNION ALL
+                SELECT * FROM road_z10
+                WHERE z(!scale_denominator!) = 10
               ) AS road_grouped_zoom_levels
               WHERE geometry && !bbox!
               GROUP BY type
@@ -361,12 +369,6 @@ Layer:
               road_type(road_class(type, service, access), type, construction, tracktype, service) AS type,
               road_class(type, service, access) AS class, road_oneway(oneway) AS oneway, structure, z_order
                FROM (
-                SELECT * FROM road_z8toz9
-                WHERE z(!scale_denominator!) BETWEEN 8 AND 9
-                UNION ALL
-                SELECT * FROM road_z10
-                WHERE z(!scale_denominator!) = 10
-                UNION ALL
                 SELECT * FROM road_z11
                 WHERE z(!scale_denominator!) = 11
                 UNION ALL
