@@ -16,6 +16,7 @@ system:
     - wine
     attraction:
     - attraction
+    - viewpoint
     amusement-park:
     - theme_park
     bakery:
@@ -24,6 +25,7 @@ system:
     - bank
     bar:
     - bar
+    - nightclub
     beer:
     - biergarten
     - pub
@@ -125,7 +127,6 @@ system:
     - musical_instrument
     park:
     - park
-    - viewpoint
     - bbq
     pharmacy:
     - pharmacy
@@ -187,6 +188,7 @@ system:
     - mall
     - massage
     - motorcycle
+    - mobile_phone
     - newsagent
     - optician
     - outdoor
@@ -223,6 +225,9 @@ system:
     - toilets
     town-hall:
     - townhall
+    - public_building
+    - courthouse
+    - community_centre
     veterinary:
     - veterinary
     zoo:
