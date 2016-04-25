@@ -705,8 +705,6 @@ tables:
     - name: area
       type: pseudoarea
     mapping:
-      leisure:
-      - swimming_pool
       natural:
       - water
       - bay
