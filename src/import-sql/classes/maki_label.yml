@@ -1,8 +1,8 @@
 system:
   name: maki_label
   classes:
-    american-football:
-    - american_football
+    airfield:
+    - station
     art-gallery:
     - accessories
     - antiques
@@ -14,48 +14,33 @@ system:
     - alcohol
     - beverages
     - wine
-    amenity:
-    - courthouse
-    - community_centre
-    - nursing_home
-    - veterinary
-    - nightclub
-    - recycling
-    - food_court
-    barrier:
-    - sally_port
-    - lift_gate
-    - gate
-    - bollard
-    - stile
-    - cycle_barrier
-    - toll_booth
-    - border_control
+    attraction:
+    - attraction
+    - viewpoint
+    amusement-park:
+    - theme_park
     bakery:
     - bakery
     bank:
     - bank
     bar:
     - bar
+    - nightclub
     beer:
     - biergarten
     - pub
-    baseball:
-    - baseball
-    basketball:
-    - basketball
-    building:
-    - public_building
     bus:
     - bus_stop
     - bus_station
     bicycle:
     - bicycle
+    bicycle-share:
     - bicycle_rental
     cafe:
     - cafe
     campsite:
     - camp_site
+    - caravan_site
     car:
     - car
     - car_repair
@@ -75,6 +60,7 @@ system:
     - cricket
     dentist:
     - dentist
+    doctor:
     - doctor
     dog-park:
     - dog_park
@@ -86,14 +72,13 @@ system:
     - ferry_terminal
     fast-food:
     - fast_food
+    - food_court
     fire-station:
     - fire_station
     fuel:
     - fuel
     garden:
     - garden
-    gift:
-    - gift
     golf:
     - golf
     - golf_course
@@ -105,97 +90,19 @@ system:
     - department_store
     - greengrocer
     - marketplace
-    sport:
-    - multi
-    - equestrian
-    - athletics
-    - volleyball
-    - climbing
-    - bowls
-    - skateboard
-    - shooting
-    - skiing
-    - boules
-    - beachvolleyball
-    - cricket
-    - table_tennis
-    - hockey
-    - gymnastics
-    - running
-    - canoe
-    - rugby_union
-    - skating
-    - scuba_diving
-    - motor
-    - horse_racing
-    - handball
-    - team_handball
-    - karting
-    - cycling
-    - archery
-    - motocross
-    - pelota
-    - rugby
-    - gaelic_games
-    - model_aerodrome
-    - netball
-    - rugby_league
-    - free_flying
-    - rowing
-    - chess
-    - australian_football
-    - cricket_nets
-    - racquet
-    - bmx
-    - sailing
-    - ice_stock
-    - badminton
-    - paddle_tennis
-    - dog_racing
-    - fatsal
-    - billiards
-    - ice_hockey
-    - yoga
-    - disc_golf
-    - orienteering
-    - toboggan
-    - horseshoes
-    - paragliding
-    - korfball
-    - diving
-    - rc_car
-    - canadian_football
-    - field_hockey
-    - shooting_range
-    - boxing
-    - curling
-    - surfing
-    - water_ski
-    - judo
-    - croquet
-    - paintball
-    - climbing_adventure
-    - long_jump
-    - table_soccer
-    tourism:
-    - attraction
-    - caravan_site
-    - theme_park
-    hairdresser:
-    - hairdresser
     heliport:
     - helipad
     hospital:
     - hospital
-    highway:
-    - motorway_junction
-    - turning_circle
+    - nursing_home
     harbor:
     - marina
     - dock
     ice-cream:
     - chocolate
     - confectionery
+    information:
+    - information
     laundry:
     - laundry
     - dry_cleaning
@@ -211,13 +118,6 @@ system:
     - chalet
     - alpine_hut
     - camp_site
-    leisure:
-    - sports_centre
-    - water_park
-    - stadium
-    - ice_rink
-    mobilephone:
-    - mobile_phone
     monument:
     - monument
     museum:
@@ -227,12 +127,11 @@ system:
     - musical_instrument
     park:
     - park
-    - viewpoint
     - bbq
     pharmacy:
     - pharmacy
-    pitch:
-    - pitch
+    picnic-site:
+    - picnic-site
     place-of-worship:
     - place_of_worship
     playground:
@@ -289,6 +188,7 @@ system:
     - mall
     - massage
     - motorcycle
+    - mobile_phone
     - newsagent
     - optician
     - outdoor
@@ -309,24 +209,26 @@ system:
     - watches
     - weapons
     - wholesale
-    aerialway:
-    - station
+    stadium:
+    - american_football
+    - stadium
+    - soccer
+    - pitch
     slaughterhouse:
     - butcher
-    soccer:
-    - soccer
     swimming:
     - swimming_area
     - swimming
-    telephone:
-    - telephone
-    tennis:
-    - tennis
     theater:
     - theater
+    toilet:
+    - toilets
     town-hall:
     - townhall
-    waste-basket:
-    - waste_basket
+    - public_building
+    - courthouse
+    - community_centre
+    veterinary:
+    - veterinary
     zoo:
     - zoo

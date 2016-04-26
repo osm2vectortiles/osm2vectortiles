@@ -400,7 +400,7 @@ tables:
       - zoo
       - camp_site
     type: polygon
-  place_geometry:
+  place_point:
     type: geometry
     fields:
     - name: osm_id
@@ -887,6 +887,7 @@ tables:
       - taxi
       - bus_station
       - marketplace
+      - toilets
       leisure:
       - park
       - playground
@@ -906,6 +907,7 @@ tables:
       - cemetery
       - basin
       - reservoir
+      - brownfield
       sport:
       - swimming
       - tennis
@@ -1002,6 +1004,8 @@ tables:
       - viewpoint
       - zoo
       - theme_park
+      - information
+      - picnic_site
       shop:
       - accessories
       - alcohol
@@ -1190,6 +1194,7 @@ tables:
       - taxi
       - bus_station
       - marketplace
+      - toilets
       leisure:
       - park
       - playground
@@ -1209,6 +1214,7 @@ tables:
       - cemetery
       - basin
       - reservoir
+      - brownfield
       sport:
       - swimming
       - tennis
@@ -1305,6 +1311,8 @@ tables:
       - viewpoint
       - zoo
       - theme_park
+      - information
+      - picnic_site
       shop:
       - accessories
       - alcohol
