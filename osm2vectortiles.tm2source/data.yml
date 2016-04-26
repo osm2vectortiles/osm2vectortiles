@@ -11,21 +11,6 @@ center:
   - 12
 description: |-
   Free global vector tiles from OpenStreetMap compatible with Mapbox Streets v7.
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   http://osm2vectortiles.org
 Layer: 
   - id: landuse
@@ -43,7 +28,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_polygon(osm_id) as osm_id, geometry, landuse_class(type) as class, type
+          SELECT osm_ids2mbid(osm_id, true) as osm_id, geometry, landuse_class(type) as class, type
             FROM (
               SELECT osm_id, geometry, type
               FROM landuse_z5toz8
@@ -95,7 +80,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_linestring(osm_id) as osm_id, geometry, type, type as class
+          SELECT osm_ids2mbid(osm_id, false) as osm_id, geometry, type, type as class
           FROM (
             SELECT *
             FROM waterway_z8toz12
@@ -135,7 +120,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry
           FROM (
             SELECT osm_id, geometry
             FROM water_z0
@@ -189,7 +174,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_geometry(osm_id, geometry) as osm_id, geometry, type
+          SELECT osm_ids2mbid(osm_id, is_polygon(geometry)) as osm_id, geometry, type
           FROM (
             SELECT *
             FROM aeroway_z9
@@ -224,7 +209,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_geometry(osm_id, geometry) as osm_id, geometry, barrier_line_class(type) AS class
+          SELECT osm_ids2mbid(osm_id, is_polygon(geometry)) as osm_id, geometry, barrier_line_class(type) AS class
           FROM barrier_line_z14
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) = 14
@@ -252,7 +237,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_polygon(osm_id) as osm_id, geometry, building_is_underground(underground) AS underground
+          SELECT osm_ids2mbid(osm_id, true) as osm_id, geometry, building_is_underground(underground) AS underground
           FROM (
             SELECT osm_id, geometry, underground
             FROM building_z13
@@ -288,7 +273,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_polygon(osm_id) AS osm_id, geometry, landuse_overlay_class(type) AS class, type
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry, landuse_overlay_class(type) AS class, type
           FROM (
             SELECT osm_id, geometry, type FROM landuse_overlay_z5
             WHERE z(!scale_denominator!) = 5
@@ -340,7 +325,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_geometry(osm_id, geometry) as osm_id, geometry,
+          SELECT osm_ids2mbid(osm_id, is_polygon(geometry)) as osm_id, geometry,
           road_type(road_class(type, service, access), type, construction, tracktype, service) AS type,
           road_class(type, service, access) AS class, road_oneway(oneway) AS oneway, structure
           FROM (
@@ -397,7 +382,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id, geometry, admin_level, disputed, maritime
+          SELECT osm_ids2mbid(osm_id, false) AS osm_id, geometry, admin_level, disputed, maritime
           FROM (
             SELECT osm_id, geometry, admin_level, disputed, maritime
             FROM admin_z0
@@ -454,7 +439,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_point(osm_id) AS osm_id, wkb_geometry,
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, wkb_geometry,
           iso3166_1_alpha_2 as code,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
@@ -528,7 +513,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_point(osm_id) as osm_id, wkb_geometry,
+          SELECT osm_ids2mbid(osm_id, true) as osm_id, wkb_geometry,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -592,7 +577,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_point(osm_id) as osm_id, wkb_geometry, abbr,
+          SELECT osm_ids2mbid(osm_id, true) as osm_id, wkb_geometry, abbr,
           area_sqkm as area,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
@@ -642,7 +627,7 @@ Layer:
       srid: ''
       table: |-
         (
-        SELECT osm_id_geometry(osm_id, geometry) as osm_id, topoint(geometry) AS geometry,
+        SELECT osm_ids2mbid(osm_id, true) as osm_id, topoint(geometry) AS geometry,
         name,
         coalesce(NULLIF(name_en, ''), name) AS name_en,
         coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -726,7 +711,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_polygon(osm_id) AS osm_id, geometry AS geometry,
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry AS geometry,
           name,
           area,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
@@ -783,7 +768,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_geometry(osm_id, geometry) AS osm_id, topoint(geometry) AS geometry, ref, name,
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, topoint(geometry) AS geometry, ref, name,
               coalesce(NULLIF(name_en, ''), name) AS name_en,
               coalesce(NULLIF(name_es, ''), name) AS name_es,
               coalesce(NULLIF(name_fr, ''), name) AS name_fr,
@@ -835,7 +820,7 @@ Layer:
         (
           SELECT * FROM
           (
-          SELECT osm_id_linestring(osm_id) AS osm_id,
+          SELECT osm_ids2mbid(osm_id, false) AS osm_id,
             CASE WHEN z(!scale_denominator!) < 11
                  THEN st_startpoint(geometry)
                  ELSE geometry
@@ -914,7 +899,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_linestring(osm_id) AS osm_id, geometry, name,
+          SELECT osm_ids2mbid(osm_id, false) AS osm_id, geometry, name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
@@ -966,7 +951,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT topoint(geometry) AS geometry, osm_id_geometry(osm_id, geometry) as osm_id,
+          SELECT topoint(geometry) AS geometry, osm_ids2mbid(osm_id, true) as osm_id,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -1013,7 +998,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_id_point(osm_id) as osm_id,
+          SELECT geometry, osm_ids2mbid(osm_id, true) as osm_id,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -1063,7 +1048,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_point(osm_id) as osm_id, geometry,
+          SELECT osm_ids2mbid(osm_id, true) as osm_id, geometry,
           meter_to_feet(elevation_m) AS elevation_ft,
           elevation_m,
           mountain_peak_type(type) AS maki,
@@ -1110,7 +1095,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_id_geometry(osm_id, geometry) AS osm_id, topoint(geometry) AS geometry, house_num
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, topoint(geometry) AS geometry, house_num
           FROM housenum_label_z14
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) = 14
