@@ -53,4 +53,4 @@ is available publicly and if you wan't to dig deeper you are welcome
 to read the thesis.
 
 - Study Project Thesis
-  - [Vector Tiles from OpenStreetMap](https://www.sharelatex.com/github/repos/osm2vectortiles/osm2vectortiles-thesis/builds/latest/output.pdf)
+  - [Vector Tiles from OpenStreetMap](http://eprints.hsr.ch/498/1/Vector_Tiles_from%20_OpenStreeMap_Thesis.pdf)
