@@ -109,8 +109,3 @@ function addClickListener(name, url, styleRefString) {
 	}
 }
 </script>
-
-## Bookmarks
-
-We have [bookmarks of several special features and locations](/maps/bookmarks) to visually examin the map quality.
-
