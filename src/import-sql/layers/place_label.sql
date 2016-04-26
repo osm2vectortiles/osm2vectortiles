@@ -18,7 +18,7 @@ CREATE OR REPLACE VIEW place_label_z5 AS (
     SELECT * FROM osm_place_point
     WHERE name <> ''
       AND scalerank IS NOT NULL
-      AND scalerank BETWEEN 0 AND 10
+      AND scalerank BETWEEN 0 AND 8
       AND type = 'city'
 );
 
