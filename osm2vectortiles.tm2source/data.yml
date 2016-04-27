@@ -254,7 +254,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_ids2mbid(osm_id, true) as osm_id, geometry, building_is_underground(underground) AS underground
+          SELECT osm_id_polygon(osm_id) AS osm_id, geometry, building_is_underground(underground) AS underground
           FROM (
             SELECT osm_id, geometry, underground
             FROM building_z13
