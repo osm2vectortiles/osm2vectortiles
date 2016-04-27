@@ -328,7 +328,7 @@ Layer:
       table: |-
         (
           SELECT osm_id, geometry, type, class, oneway, structure FROM (
-              SELECT osm_ids2mbid(MAX(osm_id), is_polygon(geometry)) AS osm_id, ST_CollectionExtract(ST_Collect(geometry), 2) AS geometry,
+              SELECT osm_ids2mbid(MAX(osm_id), false) AS osm_id, ST_CollectionExtract(ST_Collect(geometry), 2) AS geometry,
               road_type(road_class(type, NULL, NULL), type, NULL, NULL, NULL) AS type,
               road_class(type, NULL, NULL) AS class, road_oneway(0) AS oneway, 'none' AS structure, NULL AS z_order
               FROM (
