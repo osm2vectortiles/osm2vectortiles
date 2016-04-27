@@ -85,8 +85,12 @@ Layer:
           SELECT osm_ids2mbid(osm_id, false) as osm_id, geometry, type, type as class
           FROM (
             SELECT *
-            FROM waterway_z8toz12
-            WHERE z(!scale_denominator!) BETWEEN 8 AND 12
+            FROM waterway_z7toz9
+            WHERE z(!scale_denominator!) BETWEEN 7 AND 9
+            UNION ALL
+            SELECT *
+            FROM waterway_z10toz12
+            WHERE z(!scale_denominator!) BETWEEN 10 AND 12
             UNION ALL
             SELECT *
             FROM waterway_z13
@@ -919,9 +923,6 @@ Layer:
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           type, type as class
           FROM (
-            SELECT * FROM waterway_label_z8toz12
-            WHERE z(!scale_denominator!) BETWEEN 8 AND 12
-            UNION ALL
             SELECT * FROM waterway_label_z13
             WHERE z(!scale_denominator!) = 13
             UNION ALL
