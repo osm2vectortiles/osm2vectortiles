@@ -5,6 +5,7 @@ set -o nounset
 
 readonly SQL_FUNCTIONS_FILE=${IMPORT_DATA_DIR:-/usr/src/app/functions.sql}
 readonly SQL_LAYERS_DIR=${IMPORT_DATA_DIR:-/usr/src/app/layers/}
+readonly SQL_CREATE_INDIZES=${SQL_CREATE_INDIZES:-false}
 
 readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
 readonly OSM_DB=${OSM_DB:-osm}
@@ -49,6 +50,13 @@ function main() {
     exec_sql_file "${SQL_LAYERS_DIR}mountain_peak_label.sql"
     exec_sql_file "${SQL_LAYERS_DIR}airport_label.sql"
     exec_sql_file "${SQL_LAYERS_DIR}rail_station_label.sql"
+
+    if [ "$SQL_CREATE_INDIZES" = true ] ; then
+        echo "Create index in $OSM_DB"
+        exec_sql_file "${SQL_INDIZES_FILE}"
+    else
+        echo "Omitting index creation in $OSM_DB"
+    fi
 }
 
 main

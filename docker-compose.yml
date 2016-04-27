@@ -121,6 +121,8 @@ import-sql:
   image: "osm2vectortiles/import-sql"
   links:
    - postgis:db
+  environment:
+    SQL_CREATE_INDIZES: 'false'
 mapbox-studio:
   image: "osm2vectortiles/mapbox-studio"
   volumes:
