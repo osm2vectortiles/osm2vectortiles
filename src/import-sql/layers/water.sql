@@ -41,12 +41,12 @@ CREATE OR REPLACE VIEW water_z8toz10 AS
     FROM osm_water_polygon_gen1;
 
 CREATE OR REPLACE VIEW water_z11toz12 AS
-    SELECT 0 AS osm_id, way AS geometry
+    SELECT 0 AS osm_id, way AS geometry, 0 AS area
     FROM osm_ocean_polygons
     UNION ALL
-    SELECT osm_id, geometry
+    SELECT osm_id, geometry, area
     FROM osm_water_polygon
-    WHERE ST_Area(geometry) > 20000;
+    WHERE area >= 15000;
 
 CREATE OR REPLACE VIEW water_z13toz14 AS
     SELECT 0 AS osm_id, way AS geometry
