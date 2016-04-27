@@ -49,7 +49,7 @@ def create_pyramid_job(x, y, min_zoom, max_zoom, bounds):
         'tile': {
             'x': x,
             'y': y,
-            'min_zoom': z,
+            'min_zoom': min_zoom,
             'max_zoom': max_zoom
         },
         'bounds': {
