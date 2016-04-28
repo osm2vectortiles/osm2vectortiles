@@ -113,7 +113,7 @@ function update_metadata() {
     local extract_center="$3"
     local min_zoom="$4"
     local max_zoom="$5"
-    local attribution='&copy; <a href="http://www.openstreetmap.org/about/">OpenStreetMap contributors</a>'
+    local attribution='<a href="http://www.openstreetmap.org/about/" target="_blank">&copy; OpenStreetMap contributors</a>'
     local filesize="$(wc -c $extract_file)"
 
     insert_metadata_entry "$extract_file" "type" "baselayer"

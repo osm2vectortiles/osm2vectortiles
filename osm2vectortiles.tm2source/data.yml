@@ -4,7 +4,7 @@ _prefs:
   mapid: ''
   rev: ''
   saveCenter: true
-attribution: '&copy; <a href="http://www.openstreetmap.org/about/">OpenStreetMap contributors</a>'
+attribution: '<a href="http://www.openstreetmap.org/about/" target="_blank">&copy; OpenStreetMap contributors</a>'
 center: 
   - 8.5388
   - 47.3434
