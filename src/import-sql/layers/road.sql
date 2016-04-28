@@ -25,32 +25,32 @@ END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
 CREATE OR REPLACE VIEW road_z5 AS
-    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
     FROM osm_road_geometry
     WHERE road_class(type, service, access) IN ('motorway', 'trunk');
 
 CREATE OR REPLACE VIEW road_z6toz7 AS
-    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
     FROM osm_road_geometry
     WHERE road_class(type, service, access) IN ('motorway', 'trunk', 'primary');
 
 CREATE OR REPLACE VIEW road_z8toz9 AS
-    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
     FROM osm_road_geometry
     WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'major_rail');
 
 CREATE OR REPLACE VIEW road_z10 AS
-    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
     FROM osm_road_geometry
     WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail');
 
 CREATE OR REPLACE VIEW road_z11 AS
-    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
     FROM osm_road_geometry
     WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry');
 
 CREATE OR REPLACE VIEW road_z12 AS
-    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none' AS structure, z_order
+    SELECT osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
     FROM osm_road_geometry
     WHERE road_type_class(type) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry', 'pedestrian', 'service', 'link', 'construction', 'street_limited', 'aerialway');
 
