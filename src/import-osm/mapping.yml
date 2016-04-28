@@ -31,9 +31,6 @@ tables:
     - name: maritime
       type: boolint
       key: maritime
-    - name: natural
-      type: string
-      key: natural
     - name: area
       type: pseudoarea
     filters:
