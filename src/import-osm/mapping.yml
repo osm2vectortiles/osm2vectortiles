@@ -31,6 +31,9 @@ tables:
     - name: maritime
       type: boolint
       key: maritime
+    - name: natural
+      type: string
+      key: natural
     - name: area
       type: pseudoarea
     filters:
@@ -43,6 +46,7 @@ tables:
       - [ "admin_level", "8" ]
       - [ "admin_level", "9" ]
       - [ "admin_level", "10" ]
+      - [ "natural", "coastline" ]
     mapping:
       boundary:
       - administrative
