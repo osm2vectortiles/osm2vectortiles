@@ -75,7 +75,6 @@ def create_extract(extract, source_file, extract_file):
     print('Bounds: {}'.format(extract.bounds()))
     cmd = [
         'tilelive-copy',
-        '--concurrency', '20',
         '--bounds={}'.format(extract.bounds()),
         '--minzoom', str(extract.min_zoom),
         '--maxzoom', str(extract.max_zoom),
