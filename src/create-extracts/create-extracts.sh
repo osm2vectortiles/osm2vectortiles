@@ -24,58 +24,6 @@ function upload_extract() {
           --multipart-chunk-size-mb=50
 }
 
-function patch_mbtiles() {
-    local mbtiles_source="$1"
-    local mbtiles_dest="$2"
-    echo "
-    PRAGMA journal_mode=PERSIST;
-    PRAGMA page_size=80000;
-    PRAGMA synchronous=OFF;
-    ATTACH DATABASE '$mbtiles_source' AS source;
-    REPLACE INTO map SELECT * FROM source.map;
-    REPLACE INTO images SELECT * FROM source.images;"\
-    | sqlite3 "$mbtiles_dest"
-}
-
-function create_extract() {
-    local extract_file="$EXTRACT_DIR/$1"
-    local min_longitude="$2"
-    local min_latitude="$3"
-    local max_longitude="$4"
-    local max_latitude="$5"
-    local min_zoom="0"
-    local max_zoom="14"
-    local bounds="${min_longitude},${min_latitude},${max_longitude},${max_latitude}"
-
-    local center_zoom="10"
-    local center_longitude=$(echo "scale = 10; ($min_longitude+$max_longitude)/2.0" | bc)
-    local center_latitude=$(echo "scale = 10; ($min_latitude+$max_latitude)/2.0" | bc)
-    local center="$center_longitude,$center_latitude,$center_zoom"
-
-    echo "Create extract $extract_file"
-
-    echo "Bounds: $bounds"
-    tilelive-copy \
-        --minzoom="$min_zoom" \
-        --maxzoom="$max_zoom" \
-        --bounds="$bounds" \
-        "$WORLD_MBTILES" "$extract_file"
-
-    echo "Update metadata $extract_file"
-    update_metadata "$extract_file" "$bounds" "$center" "$min_zoom" "$max_zoom"
-
-    echo "Patching upper zoom levels $extract_file"
-    patch_mbtiles "$PATCH_MBTILES" "$extract_file"
-
-
-    if [ -z "${S3_ACCESS_KEY}" ]; then
-        echo "Saved extract to $extract_file"
-    else
-        echo "Uploading $extract_file"
-        upload_extract "$extract_file"
-    fi
-}
-
 function create_lower_zoomlevel_extract() {
     local extract_file="$EXTRACT_DIR/$1"
     local min_zoom="$2"
@@ -100,67 +48,6 @@ function create_lower_zoomlevel_extract() {
     upload_extract "$extract_file"
 }
 
-function update_metadata_entry() {
-    local extract_file="$1"
-    local name="$2"
-    local value="$3"
-    local stmt="UPDATE metadata SET VALUE='$value' WHERE name = '$name';"
-    sqlite3 "$extract_file" "$stmt"
-}
-
-function insert_metadata_entry() {
-    local extract_file="$1"
-    local name="$2"
-    local value="$3"
-    local stmt="INSERT OR IGNORE INTO metadata VALUES('$name','$value');"
-    sqlite3 "$extract_file" "$stmt"
-}
-
-function update_metadata() {
-    local extract_file="$1"
-    local extract_bounds="$2"
-    local extract_center="$3"
-    local min_zoom="$4"
-    local max_zoom="$5"
-    local attribution='<a href="http://www.openstreetmap.org/about/">&copy; OpenStreetMap contributors</a>'
-    local filesize="$(wc -c $extract_file)"
-
-    insert_metadata_entry "$extract_file" "type" "baselayer"
-    insert_metadata_entry "$extract_file" "attribution" "$attribution"
-    insert_metadata_entry "$extract_file" "version" "$VERSION"
-    update_metadata_entry "$extract_file" "minzoom" "$min_zoom"
-    update_metadata_entry "$extract_file" "maxzoom" "$max_zoom"
-    update_metadata_entry "$extract_file" "name" "osm2vectortiles"
-    update_metadata_entry "$extract_file" "id" "osm2vectortiles"
-    update_metadata_entry "$extract_file" "description" "Extract from osm2vectortiles.org"
-    update_metadata_entry "$extract_file" "bounds" "$extract_bounds"
-    update_metadata_entry "$extract_file" "center" "$extract_center"
-    update_metadata_entry "$extract_file" "basename" "${extract_file##*/}"
-    update_metadata_entry "$extract_file" "filesize" "$filesize"
-}
-
-function create_extracts_from_tsv() {
-    local tsv_filename="$1"
-}
-
-function create_extracts() {
-    #create_lower_zoomlevel_extract "world_z0-z5.mbtiles" 0 5
-    #create_lower_zoomlevel_extract "world_z0-z8.mbtiles" 0 8
-
-    while IFS=$'\t' read extract country city top left bottom right; do
-        if [[ "$extract" != 'extract' ]]; then
-            create_extract "${extract}.mbtiles" "$left" "$bottom" "$right" "$top"
-        fi
-    done < "$CITIES_TSV"
-
-
-    while IFS=$'\t' read extract country top left bottom right; do
-        if [[ "$extract" != 'extract' ]]; then
-            create_extract "${extract}.mbtiles" "$left" "$bottom" "$right" "$top"
-        fi
-    done < "$COUNTRIES_TSV"
-}
-
 function main() {
     if [ ! -f "$WORLD_MBTILES" ]; then
         echo "$WORLD_MBTILES not found."
@@ -172,7 +59,8 @@ function main() {
         echo 'Specify the S3_ACCESS_KEY and S3_SECRET_KEY to upload extracts.'
     fi
 
-    create_extracts
+    python create_extract.py "$WORLD_MBTILES" "$COUNTRIES_TSV" --target-dir="$EXTRACT_DIR"
+    python create_extract.py "$WORLD_MBTILES" "$CITIES_TSV" --target-dir="$EXTRACT_DIR"
 }
 
 main
