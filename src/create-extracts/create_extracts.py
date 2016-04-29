@@ -9,7 +9,7 @@ Usage:
 Options:
   -h --help                     Show this screen.
   --version                     Show version.
-  --concurrency=<concurrency>   Number of copy processes to use [default: 2].
+  --concurrency=<concurrency>   Number of copy processes to use [default: 4].
   --target-dir=<target-dir>     Target directory to put extracts in [default: ./]
 """
 
@@ -19,6 +19,7 @@ import mbutil
 import csv
 import os.path
 from collections import namedtuple
+from multiprocessing.dummy import Pool as ProcessPool
 from docopt import docopt
 
 ATTRIBUTION = '<a href="http://www.openstreetmap.org/about/" target="_blank">&copy; OpenStreetMap contributors</a>'
@@ -131,13 +132,12 @@ def parse_extracts(tsv_file):
 if __name__ == '__main__':
     args = docopt(__doc__, version='0.1')
 
-    #
     process_count = int(args['--concurrency'])
     target_dir = args['--target-dir']
     source_file = args['<source_file>']
     extracts = list(parse_extracts(args['<tsv_file>']))
 
-    for extract in extracts:
+    def process_extract(extract):
         extract_file = os.path.join(target_dir, extract.extract + '.mbtiles')
 
         print('Create extract {}'.format(extract_file))
@@ -145,3 +145,7 @@ if __name__ == '__main__':
         print('Update metadata {}'.format(extract_file))
         update_metadata(extract_file, extract.metadata(extract_file))
 
+    pool = ProcessPool(process_count)
+    pool.map(process_extract, extracts)
+    pool.close() 
+    pool.join() 
