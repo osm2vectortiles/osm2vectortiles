@@ -5,7 +5,7 @@ set -o nounset
 
 readonly WORLD_MBTILES=${WORLD_MBTILES:-"world.mbtiles"}
 readonly PATCH_MBTILES=${PATCH_MBTILES:-"world_z0-z5.mbtiles"}
-readonly CITIES_TSV=${CITIES_TSV:-"cty_extracts.tsv"}
+readonly CITIES_TSV=${CITIES_TSV:-"city_extracts.tsv"}
 readonly COUNTRIES_TSV=${COUNTRIES_TSV:-"country_extracts.tsv"}
 readonly EXTRACT_DIR=$(dirname "$WORLD_MBTILES")
 readonly VERSION=${VERSION:-1}
@@ -45,7 +45,7 @@ function create_extract() {
     local max_latitude="$5"
     local min_zoom="0"
     local max_zoom="14"
-    local bounds="$min_longitude,$min_latitude,$max_longitude,$max_latitude"
+    local bounds="${min_longitude},${min_latitude},${max_longitude},${max_latitude}"
 
     local center_zoom="10"
     local center_longitude=$(echo "scale = 10; ($min_longitude+$max_longitude)/2.0" | bc)
@@ -53,6 +53,8 @@ function create_extract() {
     local center="$center_longitude,$center_latitude,$center_zoom"
 
     echo "Create extract $extract_file"
+
+    echo "Bounds: $bounds"
     tilelive-copy \
         --minzoom="$min_zoom" \
         --maxzoom="$max_zoom" \
@@ -65,8 +67,13 @@ function create_extract() {
     echo "Patching upper zoom levels $extract_file"
     patch_mbtiles "$PATCH_MBTILES" "$extract_file"
 
-    echo "Uploading $extract_file"
-    upload_extract "$extract_file"
+
+    if [ -z "${S3_ACCESS_KEY}" ]; then
+        echo "Saved extract to $extract_file"
+    else
+        echo "Uploading $extract_file"
+        upload_extract "$extract_file"
+    fi
 }
 
 function create_lower_zoomlevel_extract() {
@@ -132,19 +139,26 @@ function update_metadata() {
     update_metadata_entry "$extract_file" "filesize" "$filesize"
 }
 
+function create_extracts_from_tsv() {
+    local tsv_filename="$1"
+}
+
 function create_extracts() {
-    create_lower_zoomlevel_extract "world_z0-z5.mbtiles" 0 5
-    create_lower_zoomlevel_extract "world_z0-z8.mbtiles" 0 8
+    #create_lower_zoomlevel_extract "world_z0-z5.mbtiles" 0 5
+    #create_lower_zoomlevel_extract "world_z0-z8.mbtiles" 0 8
 
-    IFS="\t"
+    while IFS=$'\t' read extract country city top left bottom right; do
+        if [[ "$extract" != 'extract' ]]; then
+            create_extract "${extract}.mbtiles" "$left" "$bottom" "$right" "$top"
+        fi
+    done < "$CITIES_TSV"
 
-    while read extract country city top left bottom right; do
-        create_extract "${extract}.mbtiles" "$left" "$bottom" "$right" "$top"
-    done < $CITIES_TSV
 
-    while read extract country city top left bottom right; do
-        create_extract "${extract}.mbtiles" "$left" "$bottom" "$right" "$top"
-    done < $COUNTRIES_TSV
+    while IFS=$'\t' read extract country top left bottom right; do
+        if [[ "$extract" != 'extract' ]]; then
+            create_extract "${extract}.mbtiles" "$left" "$bottom" "$right" "$top"
+        fi
+    done < "$COUNTRIES_TSV"
 }
 
 function main() {
@@ -154,8 +168,8 @@ function main() {
     fi
 
     if [ -z "${S3_ACCESS_KEY}" ]; then
-        echo "Specify the S3_ACCESS_KEY and S3_SECRET_KEY to upload extract."
-        exit 30
+        echo 'Omitting upload since no S3_AcCESS_KEY was found.'
+        echo 'Specify the S3_ACCESS_KEY and S3_SECRET_KEY to upload extracts.'
     fi
 
     create_extracts
