@@ -100,7 +100,8 @@ export:
   links:
    - postgis:db
   environment:
-    BBOX: "8.34,47.27,8.75,47.53"
+    # Around zurich
+    BBOX: "8.32,47.21,8.83,47.52"
     MIN_ZOOM: "8"
     MAX_ZOOM: "14"
 export-list:

@@ -55,12 +55,11 @@ function main() {
     fi
 
     if [ -z "${S3_ACCESS_KEY}" ]; then
-        echo 'Omitting upload since no S3_AcCESS_KEY was found.'
-        echo 'Specify the S3_ACCESS_KEY and S3_SECRET_KEY to upload extracts.'
+        echo 'Skip upload since no S3_ACCESS_KEY was found.'
     fi
 
-    python create_extract.py "$WORLD_MBTILES" "$COUNTRIES_TSV" --target-dir="$EXTRACT_DIR"
-    python create_extract.py "$WORLD_MBTILES" "$CITIES_TSV" --target-dir="$EXTRACT_DIR"
+    python create_extracts.py "$WORLD_MBTILES" "$CITIES_TSV" --target-dir="$EXTRACT_DIR"
+    python create_extracts.py "$WORLD_MBTILES" "$COUNTRIES_TSV" --target-dir="$EXTRACT_DIR"
 }
 
 main
