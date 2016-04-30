@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS osm_water_point CASCADE;
 CREATE TABLE osm_water_point AS
-SELECT osm_id,
+SELECT id,
        topoint(geometry) AS geometry,
        timestamp,
        name, name_fr, name_en, name_de,

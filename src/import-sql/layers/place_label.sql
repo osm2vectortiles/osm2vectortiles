@@ -1,5 +1,7 @@
 CREATE OR REPLACE VIEW place_label_z3 AS (
-    SELECT * FROM osm_place_point
+    SELECT id as osm_id, timestamp, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+           type, population, capital, admin_level, scalerank, geometry 
+    FROM osm_place_point
     WHERE name <> ''
       AND scalerank IS NOT NULL
       AND scalerank BETWEEN 0 AND 2
@@ -7,7 +9,9 @@ CREATE OR REPLACE VIEW place_label_z3 AS (
 );
 
 CREATE OR REPLACE VIEW place_label_z4 AS (
-    SELECT * FROM osm_place_point
+    SELECT id as osm_id, timestamp, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+           type, population, capital, admin_level, scalerank, geometry 
+    FROM osm_place_point
     WHERE name <> ''
       AND scalerank IS NOT NULL
       AND scalerank BETWEEN 0 AND 4
@@ -15,7 +19,9 @@ CREATE OR REPLACE VIEW place_label_z4 AS (
 );
 
 CREATE OR REPLACE VIEW place_label_z5 AS (
-    SELECT * FROM osm_place_point
+    SELECT id as osm_id, timestamp, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+           type, population, capital, admin_level, scalerank, geometry  
+    FROM osm_place_point
     WHERE name <> ''
       AND scalerank IS NOT NULL
       AND scalerank BETWEEN 0 AND 7
@@ -23,7 +29,9 @@ CREATE OR REPLACE VIEW place_label_z5 AS (
 );
 
 CREATE OR REPLACE VIEW place_label_z6toz7 AS (
-    SELECT * FROM osm_place_point
+    SELECT id as osm_id, timestamp, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+           type, population, capital, admin_level, scalerank, geometry  
+    FROM osm_place_point
     WHERE name <> ''
       AND scalerank IS NOT NULL
       AND scalerank BETWEEN 0 AND 10
@@ -31,37 +39,49 @@ CREATE OR REPLACE VIEW place_label_z6toz7 AS (
 );
 
 CREATE OR REPLACE VIEW place_label_z8 AS (
-    SELECT * FROM osm_place_point
+    SELECT id as osm_id, timestamp, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+           type, population, capital, admin_level, scalerank, geometry
+    FROM osm_place_point
     WHERE name <> ''
       AND type IN ('city', 'town')
 );
 
 CREATE OR REPLACE VIEW place_label_z9 AS (
-    SELECT * FROM osm_place_point
+    SELECT id as osm_id, timestamp, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+           type, population, capital, admin_level, scalerank, geometry
+    FROM osm_place_point
     WHERE name <> ''
       AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town')
 );
 
 CREATE OR REPLACE VIEW place_label_z10 AS (
-    SELECT * FROM osm_place_point
+    SELECT id as osm_id, timestamp, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+           type, population, capital, admin_level, scalerank, geometry
+    FROM osm_place_point
     WHERE name <> ''
       AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village')
 );
 
 CREATE OR REPLACE VIEW place_label_z11toz12 AS (
-    SELECT * FROM osm_place_point
+    SELECT id as osm_id, timestamp, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+           type, population, capital, admin_level, scalerank, geometry
+    FROM osm_place_point
     WHERE name <> ''
       AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village', 'suburb')
 );
 
 CREATE OR REPLACE VIEW place_label_z13 AS (
-    SELECT * FROM osm_place_point
+    SELECT id as osm_id, timestamp, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+           type, population, capital, admin_level, scalerank, geometry
+    FROM osm_place_point
     WHERE name <> ''
       AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village', 'suburb', 'hamlet')
 );
 
 CREATE OR REPLACE VIEW place_label_z14 AS (
-    SELECT * FROM osm_place_point
+    SELECT id as osm_id, timestamp, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+           type, population, capital, admin_level, scalerank, geometry
+    FROM osm_place_point
     WHERE name <> ''
 );
 

@@ -45,9 +45,9 @@ AS $$
 BEGIN
      IF (TG_OP = 'DELETE') THEN
         EXECUTE format('
-            INSERT INTO %I(osm_id, geometry)
+            INSERT INTO %I(id, geometry)
             VALUES($1, $2)', TG_TABLE_NAME::TEXT || '_delete')
-            USING OLD.osm_id, OLD.geometry;
+            USING OLD.id, OLD.geometry;
         RETURN OLD;
      END IF;
 
@@ -60,7 +60,7 @@ CREATE OR REPLACE FUNCTION create_delete_table(table_name TEXT) returns VOID
 AS $$
 BEGIN
     EXECUTE format('CREATE TABLE IF NOT EXISTS %I (
-        osm_id bigint,
+        id bigint,
         geometry geometry,
         timestamp timestamp
     )', table_name);

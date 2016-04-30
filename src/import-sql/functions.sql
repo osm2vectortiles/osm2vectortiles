@@ -77,9 +77,9 @@ $$ LANGUAGE plpgsql IMMUTABLE;
 
 /*
 -- example call for osm_ids2mbid
-select osm_id
-      ,osm_ids2mbid ( osm_id,   is_polygon( geometry ) )  as from_real_geom
-      ,osm_ids2mbid ( osm_id,   false                  )  as from_fake_geom_false
-      ,osm_ids2mbid ( osm_id,   true                   )  as from_fake_geom_true
+select id
+      ,osm_ids2mbid ( id,   is_polygon( geometry ) )  as from_real_geom
+      ,osm_ids2mbid ( id,   false                  )  as from_fake_geom_false
+      ,osm_ids2mbid ( id,   true                   )  as from_fake_geom_true
 from osm_place_geometry ;
 */
