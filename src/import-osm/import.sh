@@ -41,9 +41,6 @@ function import_pbf() {
     echo "Update osm_place_polygon with point geometry"
     update_place_point
 
-    echo "Create osm_landuse_clustered table"
-    create_osm_landuse_clustered_table
-
     echo "Update scaleranks from Natural Earth data"
     update_scaleranks
 
@@ -64,12 +61,12 @@ function update_scaleranks() {
     exec_sql_file "update_scaleranks.sql"
 }
 
-function create_osm_landuse_clustered_table() {
-    exec_sql_file "landuse_clustered_table.sql"
-}
-
 function create_osm_water_point_table() {
     exec_sql_file "water_point_table.sql"
+}
+
+function update_scaleranks() {
+    exec_sql_file "update_scaleranks.sql"
 }
 
 function create_timestamp_history() {

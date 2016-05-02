@@ -23,6 +23,7 @@ import json
 import humanize
 
 from boto.s3.connection import S3Connection, OrdinaryCallingFormat
+from mbtoolbox.optimize import remove_subpyramids
 
 import pika
 from docopt import docopt
@@ -95,6 +96,10 @@ def render_pyramid_command(source, sink, bounds, min_zoom, max_zoom):
     ]
 
 
+def optimize_mbtiles(mbtiles_file, mask_level=8):
+    remove_subpyramids(mbtiles_file, mask_level, 'tms')
+
+
 def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
                   render_scheme, bucket_name):
     host = os.getenv('AWS_S3_HOST', 'mock-s3')
@@ -145,6 +150,8 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
 
         print('Rendering time: {}'.format(humanize.naturaltime(end - start)))
 
+        print('Optimize MBTiles file size')
+        optimize_mbtiles(mbtiles_file)
         upload_mbtiles(bucket, mbtiles_file)
         os.remove(mbtiles_file)
 

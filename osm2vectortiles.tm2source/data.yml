@@ -4,7 +4,7 @@ _prefs:
   mapid: ''
   rev: ''
   saveCenter: true
-attribution: © OpenStreetMap contributors
+attribution: '<a href="http://www.openstreetmap.org/about/" target="_blank">&copy; OpenStreetMap contributors</a>'
 center: 
   - 8.5388
   - 47.3434
@@ -28,12 +28,14 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_ids2mbid(osm_id, true) as osm_id, geometry, landuse_class(type) as class, type
+          SELECT osm_ids2mbid(MAX(osm_id), true) AS osm_id, ST_CollectionExtract(ST_Collect(geometry), 3) AS geometry, landuse_class(type) AS class, type
+          FROM landuse_z5toz8
+          WHERE z(!scale_denominator!) BETWEEN 5 AND 8
+            AND geometry && !bbox!
+          GROUP BY type
+          UNION ALL
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry, landuse_class(type) AS class, type
             FROM (
-              SELECT osm_id, geometry, type
-              FROM landuse_z5toz8
-              WHERE z(!scale_denominator!) BETWEEN 5 AND 8
-              UNION ALL
               SELECT osm_id, geometry, type
               FROM landuse_z9
               WHERE z(!scale_denominator!) = 9
@@ -80,11 +82,15 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_ids2mbid(osm_id, false) as osm_id, geometry, type, type as class
+          SELECT osm_ids2mbid(osm_id, false) AS osm_id, geometry, type, type AS class
           FROM (
             SELECT *
-            FROM waterway_z8toz12
-            WHERE z(!scale_denominator!) BETWEEN 8 AND 12
+            FROM waterway_z7toz9
+            WHERE z(!scale_denominator!) BETWEEN 7 AND 9
+            UNION ALL
+            SELECT *
+            FROM waterway_z10toz12
+            WHERE z(!scale_denominator!) BETWEEN 10 AND 12
             UNION ALL
             SELECT *
             FROM waterway_z13
@@ -143,8 +149,12 @@ Layer:
             WHERE z(!scale_denominator!) BETWEEN 5 AND 7
             UNION ALL
             SELECT osm_id, geometry
-            FROM water_z8toz12
-            WHERE z(!scale_denominator!) BETWEEN 8 AND 12
+            FROM water_z8toz10
+            WHERE z(!scale_denominator!) BETWEEN 8 AND 10
+            UNION ALL
+            SELECT osm_id, geometry
+            FROM water_z11toz12
+            WHERE z(!scale_denominator!) BETWEEN 11 AND 12
             UNION ALL
             SELECT osm_id, geometry
             FROM water_z13toz14
@@ -174,7 +184,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_ids2mbid(osm_id, is_polygon(geometry)) as osm_id, geometry, type
+          SELECT osm_ids2mbid(osm_id, is_polygon(geometry)) AS osm_id, geometry, type
           FROM (
             SELECT *
             FROM aeroway_z9
@@ -209,7 +219,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_ids2mbid(osm_id, is_polygon(geometry)) as osm_id, geometry, barrier_line_class(type) AS class
+          SELECT osm_ids2mbid(osm_id, is_polygon(geometry)) AS osm_id, geometry, barrier_line_class(type) AS class
           FROM barrier_line_z14
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) = 14
@@ -237,7 +247,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_ids2mbid(osm_id, true) as osm_id, geometry, building_is_underground(underground) AS underground
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry, building_is_underground(underground) AS underground
           FROM (
             SELECT osm_id, geometry, underground
             FROM building_z13
@@ -325,36 +335,45 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_ids2mbid(osm_id, is_polygon(geometry)) as osm_id, geometry,
-          road_type(road_class(type, service, access), type, construction, tracktype, service) AS type,
-          road_class(type, service, access) AS class, road_oneway(oneway) AS oneway, structure
-          FROM (
-            SELECT * FROM road_z5
-            WHERE z(!scale_denominator!) = 5
-            UNION ALL
-            SELECT * FROM road_z6toz7
-            WHERE z(!scale_denominator!) BETWEEN 6 AND 7
-            UNION ALL
-            SELECT * FROM road_z8toz9
-            WHERE z(!scale_denominator!) BETWEEN 8 AND 9
-            UNION ALL
-            SELECT * FROM road_z10
-            WHERE z(!scale_denominator!) = 10
-            UNION ALL
-            SELECT * FROM road_z11
-            WHERE z(!scale_denominator!) = 11
-            UNION ALL
-            SELECT * FROM road_z12
-            WHERE z(!scale_denominator!) = 12
-            UNION ALL
-            SELECT * FROM road_z13
-            WHERE z(!scale_denominator!) = 13
-            UNION ALL
-            SELECT * FROM road_z14
-            WHERE z(!scale_denominator!) = 14
-          ) AS road
-          WHERE geometry && !bbox!
-          ORDER BY z_order ASC
+          SELECT osm_id, geometry, type, class, oneway, structure FROM (
+              SELECT osm_ids2mbid(MAX(osm_id), false) AS osm_id, ST_CollectionExtract(ST_Collect(geometry), 2) AS geometry,
+              road_type(road_class(type, NULL, NULL), type, NULL, NULL, NULL) AS type,
+              road_class(type, NULL, NULL) AS class, road_oneway(0) AS oneway, 'none' AS structure, NULL AS z_order
+              FROM (
+                SELECT * FROM road_z5
+                WHERE z(!scale_denominator!) = 5
+                UNION ALL
+                SELECT * FROM road_z6toz7
+                WHERE z(!scale_denominator!) BETWEEN 6 AND 7
+                UNION ALL
+                SELECT * FROM road_z8toz9
+                WHERE z(!scale_denominator!) BETWEEN 8 AND 9
+                UNION ALL
+                SELECT * FROM road_z10
+                WHERE z(!scale_denominator!) = 10
+              ) AS road_grouped_zoom_levels
+              WHERE geometry && !bbox!
+              GROUP BY type
+              UNION ALL
+              SELECT osm_ids2mbid(osm_id, is_polygon(geometry)) AS osm_id, geometry,
+              road_type(road_class(type, service, access), type, construction, tracktype, service) AS type,
+              road_class(type, service, access) AS class, road_oneway(oneway) AS oneway, structure, z_order
+               FROM (
+                SELECT * FROM road_z11
+                WHERE z(!scale_denominator!) = 11
+                UNION ALL
+                SELECT * FROM road_z12
+                WHERE z(!scale_denominator!) = 12
+                UNION ALL
+                SELECT * FROM road_z13
+                WHERE z(!scale_denominator!) = 13
+                UNION ALL
+                SELECT * FROM road_z14
+                WHERE z(!scale_denominator!) = 14
+               ) AS t2
+              WHERE geometry && !bbox!
+              ORDER BY z_order ASC
+           ) AS ordered_roads
         ) AS data
       type: postgis
       user: osm
@@ -440,7 +459,7 @@ Layer:
       table: |-
         (
           SELECT osm_ids2mbid(osm_id, true) AS osm_id, wkb_geometry,
-          iso3166_1_alpha_2 as code,
+          iso3166_1_alpha_2 AS code,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -448,7 +467,7 @@ Layer:
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh, 
-          rank as scalerank
+          rank AS scalerank
           FROM custom_countries
           WHERE (
             (
@@ -513,7 +532,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_ids2mbid(osm_id, true) as osm_id, wkb_geometry,
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, wkb_geometry,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -522,7 +541,7 @@ Layer:
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh, 
           case when ST_GeometryType(wkb_geometry) = 'ST_LineString' then 'line'
-               else 'point' end as placement,
+               else 'point' end AS placement,
           rank AS labelrank
           FROM custom_seas
           WHERE wkb_geometry && !bbox! AND (
@@ -577,8 +596,8 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_ids2mbid(osm_id, true) as osm_id, wkb_geometry, abbr,
-          area_sqkm as area,
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, wkb_geometry, abbr,
+          area_sqkm AS area,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -627,7 +646,7 @@ Layer:
       srid: ''
       table: |-
         (
-        SELECT osm_ids2mbid(osm_id, true) as osm_id, topoint(geometry) AS geometry,
+        SELECT osm_ids2mbid(osm_id, true) AS osm_id, topoint(geometry) AS geometry,
         name,
         coalesce(NULLIF(name_en, ''), name) AS name_en,
         coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -834,9 +853,9 @@ Layer:
             coalesce(NULLIF(name_zh, ''), name) AS name_zh,
             nullif(ref, '') AS ref,
             nullif(char_length(ref), 0) AS reflen,
-            round(MercLength(geometry)) as len,
+            round(MercLength(geometry)) AS len,
             road_class(type, service, access) AS class,
-            'default' as shield,
+            'default' AS shield,
             rank() OVER (
                 PARTITION BY LabelGrid(geometry, (CASE WHEN z(!scale_denominator!) >= 11
                                                        THEN 300
@@ -906,11 +925,8 @@ Layer:
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
-          type, type as class
+          type, type AS class
           FROM (
-            SELECT * FROM waterway_label_z8toz12
-            WHERE z(!scale_denominator!) BETWEEN 8 AND 12
-            UNION ALL
             SELECT * FROM waterway_label_z13
             WHERE z(!scale_denominator!) = 13
             UNION ALL
@@ -951,7 +967,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT topoint(geometry) AS geometry, osm_ids2mbid(osm_id, true) as osm_id,
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, topoint(geometry) AS geometry,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -998,7 +1014,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT geometry, osm_ids2mbid(osm_id, true) as osm_id,
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry,
           name,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
@@ -1048,7 +1064,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_ids2mbid(osm_id, true) as osm_id, geometry,
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry,
           meter_to_feet(elevation_m) AS elevation_ft,
           elevation_m,
           mountain_peak_type(type) AS maki,

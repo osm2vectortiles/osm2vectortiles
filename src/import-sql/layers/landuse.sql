@@ -1,6 +1,7 @@
 CREATE OR REPLACE VIEW landuse_z5toz8 AS
-    SELECT 0 AS osm_id, geometry, type
-    FROM osm_landuse_clustered;
+    SELECT osm_id, geometry, type
+    FROM osm_landuse_polygon_gen0
+    WHERE type IN ('wood', 'forest');
 
 CREATE OR REPLACE VIEW landuse_z9 AS
     SELECT *

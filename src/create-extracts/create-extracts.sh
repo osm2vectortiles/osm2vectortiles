@@ -9,7 +9,6 @@ readonly WORLD_MBTILES=${WORLD_MBTILES:-"world.mbtiles"}
 readonly EXTRACT_DIR=$(dirname "$WORLD_MBTILES")
 readonly PATCH_SRC="$EXTRACT_DIR/world_z0-z5.mbtiles"
 
-
 function main() {
     if [ ! -f "$WORLD_MBTILES" ]; then
         echo "$WORLD_MBTILES not found."
