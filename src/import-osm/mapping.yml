@@ -43,6 +43,7 @@ tables:
       - [ "admin_level", "8" ]
       - [ "admin_level", "9" ]
       - [ "admin_level", "10" ]
+      - [ "natural", "coastline" ]
     mapping:
       boundary:
       - administrative
@@ -713,7 +714,6 @@ tables:
       - river
       - riverbank
       - stream
-      - stream_intermittent
       - canal
       - drain
       - ditch
@@ -754,7 +754,6 @@ tables:
       - ditch
       waterway:
       - stream
-      - stream_intermittent
       - river
       - canal
       - drain

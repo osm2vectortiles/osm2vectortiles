@@ -132,7 +132,7 @@ mapbox-studio:
   ports:
    - "3000:3000"
 rabbitmq:
-  image: "rabbitmq:3.6.1-management"
+  image: "osm2vectortiles/rabbitmq:management"
   ports:
   - "15672:15672"
   - "5672:5672"

@@ -12,12 +12,12 @@ source sql.sh
 function import_shp() {
 	local shp_file=$1
 	local table_name=$2
-	shp2pgsql -I -g way "$shp_file" "$table_name" | exec_psql | hide_inserts
+	shp2pgsql -s 3857 -I -g geometry "$shp_file" "$table_name" | exec_psql | hide_inserts
 }
 
 function import_water() {
-    local table_name="osm_ocean_polygons"
-    local simplified_table_name="osm_ocean_polygons_gen0"
+    local table_name="osm_ocean_polygon"
+    local simplified_table_name="osm_ocean_polygon_gen0"
 
     drop_table "$table_name"
     import_shp "$WATER_POLYGONS_FILE" "$table_name"
