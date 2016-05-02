@@ -1111,7 +1111,7 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_ids2mbid(osm_id, true) AS osm_id, topoint(geometry) AS geometry, house_num
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, ST_Centroid(geometry) AS geometry, house_num
           FROM housenum_label_z14
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) = 14
