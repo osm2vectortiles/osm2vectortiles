@@ -142,6 +142,7 @@ rabbitmq:
   environment:
     RABBITMQ_DEFAULT_USER: "osm"
     RABBITMQ_DEFAULT_PASS: "osm"
+    RABBITMQ_HEARTBEAT: "0"
 create-extracts:
   image: "osm2vectortiles/create-extracts"
   volumes:
