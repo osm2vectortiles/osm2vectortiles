@@ -676,7 +676,8 @@ Layer:
               ) AS place_label
             WHERE geometry && !bbox!
             ORDER BY population DESC NULLS LAST
-        ) AS t WHERE z(!scale_denominator!) >= 10
+        ) AS t WHERE z(!scale_denominator!) >= 11
+                  OR (z(!scale_denominator!) = 10 AND localrank < 6)
                   OR (z(!scale_denominator!) = 9 AND localrank < 8)
                   OR (z(!scale_denominator!) = 8 AND localrank < 12)
                   OR (z(!scale_denominator!) = 7 AND localrank < 12)
