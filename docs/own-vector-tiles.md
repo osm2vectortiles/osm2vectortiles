@@ -29,41 +29,23 @@ or [Geofabrik](http://download.geofabrik.de/)
 wget https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf
 ```
 
-Now you need to import the PBF files into PostGIS.
+Now you need to import several external data sources.
+Import water polygons from [OpenStreetMapData.com](http://openstreetmapdata.com/data/water-polygons), [Natural Earth](http://www.naturalearthdata.com/) data for lower zoom levels and custom country, sea and state labels.
+
+```
+docker-compose up import-external
+```
+
+Now you need to import the downloaded PBF file into PostGIS.
 
 ```
 docker-compose up import-osm
-```
-
-Now you need to import several external data sources.
-Import water polygons from [OpenStreetMapData.com](http://openstreetmapdata.com/data/water-polygons).
-
-```
-docker-compose up import-water
-```
-
-Import [Natural Earth](http://www.naturalearthdata.com/) data for lower zoom levels.
-
-```
-docker-compose up import-natural-earth
-```
-
-Import custom country, sea and state labels.
-
-```
-docker-compose up import-labels
 ```
 
 Now import custom SQL functions used in the source project.
 
 ```
 docker-compose up import-sql
-```
-
-Update the scaleranks of OSM places with data from Natural Earth.
-
-```
-docker-compose up update-scaleranks
 ```
 
 Edit the `BBOX` environement variable in the docker-compose.yml file to match your desired extract.
@@ -74,11 +56,11 @@ export:
   command: ./export-local.sh
   volumes:
    - ./export:/data/export
-   - ./open-streets.tm2source:/data/tm2source
+   - ./osm2vectortiles.tm2source:/data/tm2source
   links:
-   - pgbouncer:db
+   - postgis:db
   environment:
-    BBOX: "8.4375 46.07323062540838 9.84375 47.040182144806664"
+    BBOX: "8.34,47.27,8.75,47.53"
     MIN_ZOOM: "8"
     MAX_ZOOM: "14"
 ```
