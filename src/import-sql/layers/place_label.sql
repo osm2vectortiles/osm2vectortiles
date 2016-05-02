@@ -37,7 +37,7 @@ CREATE OR REPLACE VIEW place_label_z8 AS (
 CREATE OR REPLACE VIEW place_label_z9 AS (
     SELECT * FROM osm_place_point
     WHERE name <> ''
-      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town')
+      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village')
 );
 
 CREATE OR REPLACE VIEW place_label_z10 AS (
