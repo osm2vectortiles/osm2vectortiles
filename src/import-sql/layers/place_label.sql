@@ -25,8 +25,6 @@ CREATE OR REPLACE VIEW place_label_z5 AS (
 CREATE OR REPLACE VIEW place_label_z6toz7 AS (
     SELECT * FROM osm_place_point
     WHERE name <> ''
-      AND scalerank IS NOT NULL
-      AND scalerank BETWEEN 0 AND 10
       AND type IN ('city', 'town')
 );
 
@@ -39,19 +37,19 @@ CREATE OR REPLACE VIEW place_label_z8 AS (
 CREATE OR REPLACE VIEW place_label_z9 AS (
     SELECT * FROM osm_place_point
     WHERE name <> ''
-      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town')
+      AND type IN ('island', 'aboriginal_lands', 'city', 'town', 'village')
 );
 
 CREATE OR REPLACE VIEW place_label_z10 AS (
     SELECT * FROM osm_place_point
     WHERE name <> ''
-      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village')
+      AND type IN ('island', 'aboriginal_lands', 'city', 'town', 'village', 'suburb')
 );
 
 CREATE OR REPLACE VIEW place_label_z11toz12 AS (
     SELECT * FROM osm_place_point
     WHERE name <> ''
-      AND type IN ('island', 'islet', 'aboriginal_lands', 'city', 'town', 'village', 'suburb')
+      AND type IN ('island', 'aboriginal_lands', 'city', 'town', 'village', 'suburb')
 );
 
 CREATE OR REPLACE VIEW place_label_z13 AS (
