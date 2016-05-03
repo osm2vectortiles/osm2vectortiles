@@ -1,5 +1,5 @@
 CREATE OR REPLACE VIEW road_label_z8toz10 AS
-    SELECT id as osm_id, type, oneway, ref, layer, z_order,
+    SELECT id AS osm_id, type, oneway, ref, layer, z_order,
            is_tunnel, is_bridge, is_ford, construction, tracktype, service, access,
            name, name_fr, name_en, name_de, name_es, name_ru, name_zh, geometry
     FROM osm_road_geometry
@@ -7,7 +7,7 @@ CREATE OR REPLACE VIEW road_label_z8toz10 AS
       AND ref <> '';
 
 CREATE OR REPLACE VIEW road_label_z11 AS
-    SELECT id as osm_id, type, oneway, ref, layer, z_order,
+    SELECT id AS osm_id, type, oneway, ref, layer, z_order,
            is_tunnel, is_bridge, is_ford, construction, tracktype, service, access,
            name, name_fr, name_en, name_de, name_es, name_ru, name_zh, geometry
     FROM osm_road_geometry
@@ -15,7 +15,7 @@ CREATE OR REPLACE VIEW road_label_z11 AS
       AND (name <> '' OR ref <> '');
 
 CREATE OR REPLACE VIEW road_label_z12toz13 AS
-    SELECT id as osm_id, type, oneway, ref, layer, z_order,
+    SELECT id AS osm_id, type, oneway, ref, layer, z_order,
            is_tunnel, is_bridge, is_ford, construction, tracktype, service, access,
            name, name_fr, name_en, name_de, name_es, name_ru, name_zh, geometry
     FROM osm_road_geometry
@@ -24,7 +24,7 @@ CREATE OR REPLACE VIEW road_label_z12toz13 AS
       AND name <> '';
 
 CREATE OR REPLACE VIEW road_label_z14 AS
-    SELECT id as osm_id, type, oneway, ref, layer, z_order,
+    SELECT id AS osm_id, type, oneway, ref, layer, z_order,
            is_tunnel, is_bridge, is_ford, construction, tracktype, service, access,
            name, name_fr, name_en, name_de, name_es, name_ru, name_zh, geometry
     FROM osm_road_geometry

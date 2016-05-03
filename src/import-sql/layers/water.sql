@@ -30,21 +30,21 @@ CREATE OR REPLACE VIEW water_z5toz7 AS
     SELECT 0 AS osm_id, geometry
     FROM osm_ocean_polygon_gen0
     UNION ALL
-    SELECT id as osm_id, geometry
+    SELECT id AS osm_id, geometry
     FROM osm_water_polygon_gen1;
 
 CREATE OR REPLACE VIEW water_z8toz10 AS
     SELECT 0 AS osm_id, geometry
     FROM osm_ocean_polygon
     UNION ALL
-    SELECT id as osm_id, geometry
+    SELECT id AS osm_id, geometry
     FROM osm_water_polygon_gen1;
 
 CREATE OR REPLACE VIEW water_z11toz12 AS
     SELECT 0 AS osm_id, geometry, 0 AS area
     FROM osm_ocean_polygon
     UNION ALL
-    SELECT id as osm_id, geometry, area
+    SELECT id AS osm_id, geometry, area
     FROM osm_water_polygon
     WHERE area >= 15000;
 
@@ -52,7 +52,7 @@ CREATE OR REPLACE VIEW water_z13toz14 AS
     SELECT 0 AS osm_id, geometry
     FROM osm_ocean_polygon
     UNION ALL
-    SELECT id as osm_id, geometry
+    SELECT id AS osm_id, geometry
     FROM osm_water_polygon;
 
 CREATE OR REPLACE VIEW water_layer AS (
