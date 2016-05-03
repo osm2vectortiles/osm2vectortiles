@@ -29,9 +29,16 @@ Layer:
       table: |-
         (
           SELECT osm_ids2mbid(MAX(osm_id), true) AS osm_id, ST_CollectionExtract(ST_Collect(geometry), 3) AS geometry, landuse_class(type) AS class, type
-          FROM landuse_z5toz8
-          WHERE z(!scale_denominator!) BETWEEN 5 AND 8
-            AND geometry && !bbox!
+          FROM (
+            SELECT osm_id, geometry, type
+            FROM landuse_z5toz6
+            WHERE z(!scale_denominator!) BETWEEN 5 AND 6
+            UNION ALL
+            SELECT osm_id, geometry, type
+            FROM landuse_z7toz8
+            WHERE z(!scale_denominator!) BETWEEN 7 AND 8
+          ) AS landuse_z5toz8
+          WHERE geometry && !bbox!
           GROUP BY type
           UNION ALL
           SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry, landuse_class(type) AS class, type
@@ -55,7 +62,7 @@ Layer:
               SELECT osm_id, geometry, type
               FROM landuse_z13toz14
               WHERE z(!scale_denominator!) BETWEEN 13 AND 14
-            ) AS landuse
+            ) AS landuse_z9toz14
             WHERE geometry && !bbox!
         ) AS data
       type: postgis
