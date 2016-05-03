@@ -1,5 +1,6 @@
 CREATE OR REPLACE VIEW mountain_peak_label_z12toz14 AS
-    SELECT *
+    SELECT id AS osm_id, elevation_m, 
+           name, name_fr, name_en, name_de, name_es, name_ru, name_zh, type, geometry
     FROM osm_mountain_peak_point;
 
 CREATE OR REPLACE VIEW mountain_peak_label_layer AS (

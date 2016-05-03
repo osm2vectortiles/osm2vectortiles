@@ -14,7 +14,7 @@ CREATE OR REPLACE VIEW admin_z2 AS
     SELECT 0 AS osm_id, geom AS geometry, 2 AS admin_level, 0 AS disputed, 0 AS maritime
     FROM ne_110m_admin_0_boundary_lines_land
     UNION ALL
-    SELECT osm_id, geometry, admin_level, 0 AS disputed, maritime
+    SELECT id AS osm_id, geometry, admin_level, 0 AS disputed, maritime
     FROM osm_admin_linestring
     WHERE maritime = 1 AND admin_level = 2
     UNION ALL
@@ -26,7 +26,7 @@ CREATE OR REPLACE VIEW admin_z3 AS
     SELECT 0 AS osm_id, geom AS geometry, 2 AS admin_level, 0 AS disputed, 0 AS maritime
     FROM ne_50m_admin_0_boundary_lines_land
     UNION ALL
-    SELECT osm_id, geometry, admin_level, 0 AS disputed, maritime
+    SELECT id AS osm_id, geometry, admin_level, 0 AS disputed, maritime
     FROM osm_admin_linestring
     WHERE maritime = 1 AND admin_level = 2
     UNION ALL
@@ -38,7 +38,7 @@ CREATE OR REPLACE VIEW admin_z4toz5 AS
     SELECT 0 AS osm_id, geom AS geometry, 2 AS admin_level, 0 AS disputed, 0 AS maritime
     FROM ne_10m_admin_0_boundary_lines_land
     UNION ALL
-    SELECT osm_id, geometry, admin_level, 0 AS disputed, maritime
+    SELECT id AS osm_id, geometry, admin_level, 0 AS disputed, maritime
     FROM osm_admin_linestring
     WHERE maritime = 1 AND admin_level = 2
     UNION ALL
@@ -50,7 +50,7 @@ CREATE OR REPLACE VIEW admin_z6 AS
     SELECT 0 AS osm_id, geom AS geometry, 2 AS admin_level, 0 AS disputed, 0 AS maritime
     FROM ne_10m_admin_0_boundary_lines_land
     UNION ALL
-    SELECT osm_id, geometry, admin_level, 0 AS disputed, maritime
+    SELECT id AS osm_id, geometry, admin_level, 0 AS disputed, maritime
     FROM osm_admin_linestring
     WHERE maritime = 1 AND admin_level = 2
     UNION ALL
@@ -59,7 +59,7 @@ CREATE OR REPLACE VIEW admin_z6 AS
     WHERE scalerank BETWEEN 2 AND 9;
 
 CREATE OR REPLACE VIEW admin_z7toz14 AS
-    SELECT osm_id, geometry, admin_level, 0 AS disputed, maritime
+    SELECT id AS osm_id, geometry, admin_level, 0 AS disputed, maritime
     FROM osm_admin_linestring
     WHERE admin_level = 2 OR admin_level = 4
     UNION ALL

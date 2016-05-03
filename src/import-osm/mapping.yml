@@ -19,7 +19,7 @@ generalized_tables:
 tables:
   admin_linestring:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -51,7 +51,7 @@ tables:
     type: linestring
   aero_linestring:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -68,7 +68,7 @@ tables:
     type: linestring
   aero_polygon:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -85,7 +85,7 @@ tables:
     type: polygon
   airport_point:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -139,7 +139,7 @@ tables:
     type: point
   airport_polygon:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -195,7 +195,7 @@ tables:
     type: polygon
   barrier_linestring:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -235,7 +235,7 @@ tables:
     type: linestring
   barrier_polygon:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -275,7 +275,7 @@ tables:
     type: polygon
   building_polygon:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -290,7 +290,7 @@ tables:
     type: polygon
   housenumber_point:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -304,7 +304,7 @@ tables:
     type: point
   housenumber_polygon:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -318,7 +318,7 @@ tables:
     type: polygon
   landuse_polygon:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -404,7 +404,7 @@ tables:
   place_point:
     type: geometry
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -470,7 +470,7 @@ tables:
   road_geometry:
     type: geometry
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -636,7 +636,7 @@ tables:
           - hiking
   rail_station_point:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -677,7 +677,7 @@ tables:
     type: point
   water_polygon:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -720,7 +720,7 @@ tables:
     type: polygon
   water_linestring:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -761,7 +761,7 @@ tables:
     type: linestring
   mountain_peak_point:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -800,7 +800,7 @@ tables:
     type: point
   poi_polygon:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
@@ -1109,7 +1109,7 @@ tables:
     type: polygon
   poi_point:
     fields:
-    - name: osm_id
+    - name: id
       type: id
     - name: geometry
       type: geometry
