@@ -12,7 +12,7 @@ of your country or region. Download it and put it into the `./src/import` contai
 
 ### Import
 
-The **import-osm** component will take the first PBF file in the `./export` folder
+The **import-osm** component will take the first PBF file in the `./import` folder
 and will import it into **postgis**.
 After that it will update the scaleranks using Natural Earth data from **import-external** to update the scaleranks and will create generalized tables based off
 the imported data.

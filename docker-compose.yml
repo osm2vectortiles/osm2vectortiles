@@ -102,7 +102,7 @@ export:
   environment:
     # Around zurich
     BBOX: "8.32,47.21,8.83,47.52"
-    MIN_ZOOM: "8"
+    MIN_ZOOM: "0"
     MAX_ZOOM: "14"
 export-list:
   image: "osm2vectortiles/export"
