@@ -13,12 +13,12 @@ RUN npm install -g \
       tilelive-bridge@2.3.x \
       tilelive-mapnik@0.6.x
 
-RUN npm -g outdated | grep -v npm
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
         sqlite3 \
         bc \
         s3cmd \
+        python \
+        python-pip \
     && rm -rf /var/lib/apt/lists/
 
 VOLUME /data/export
@@ -26,5 +26,7 @@ ENV WORLD_MBTILES=/data/export/world.mbtiles \
     PATCH_MBTILES=/data/export/world_z0-z5.mbtiles \
     S3_CONFIG_FILE=/usr/src/app/.s3cfg
 
+COPY requirements.txt /usr/src/app/requirements.txt
+RUN pip install -r requirements.txt
 COPY . /usr/src/app/
 CMD ["./create-extracts.sh"]

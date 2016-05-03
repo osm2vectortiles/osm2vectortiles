@@ -1,0 +1,2 @@
+-e git://github.com/mapbox/mbutil.git@master#egg=mbutil
+docopt==0.6.2
