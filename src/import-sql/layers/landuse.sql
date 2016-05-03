@@ -4,7 +4,7 @@ CREATE OR REPLACE VIEW landuse_z5toz6 AS
     WHERE landuse_class(type) = 'wood';
 
 CREATE OR REPLACE VIEW landuse_z7toz8 AS
-    SELECT osm_id, geometry, type
+    SELECT id AS osm_id, geometry, type
     FROM osm_landuse_polygon_gen0
     WHERE landuse_class(type) IN ('wood', 'residential')
       AND st_area(geometry) > 1000000;
