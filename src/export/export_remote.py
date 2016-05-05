@@ -92,6 +92,8 @@ def render_pyramid_command(source, sink, bounds, min_zoom, max_zoom):
         '--minzoom', str(min_zoom),
         '--maxzoom', str(max_zoom),
         '--bounds={}'.format(bounds),
+        '--timeout=300000',
+        '--slow=60000',
         source, sink
     ]
 
