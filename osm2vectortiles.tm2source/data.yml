@@ -43,7 +43,7 @@ Layer:
           UNION ALL
           SELECT
             osm_ids2mbid(osm_id, true) AS osm_id,
-            CASE WHEN ST_Area(geometry) > 10000000 AND z(!scale_denominator!) >= 12
+            CASE WHEN ST_Area(geometry) > 10000000
                  THEN ST_Intersection(ST_MakeValid(geometry), !bbox!)
                  ELSE geometry
             END AS geometry,
@@ -141,7 +141,7 @@ Layer:
         (
           SELECT
             osm_ids2mbid(osm_id, true) AS osm_id,
-            CASE WHEN ST_Area(geometry) > 10000000 AND z(!scale_denominator!) >= 12 AND osm_id <> 0
+            CASE WHEN ST_Area(geometry) > 10000000 AND osm_id <> 0
                  THEN ST_Intersection(ST_MakeValid(geometry), !bbox!)
                  ELSE geometry
             END AS geometry
@@ -303,7 +303,7 @@ Layer:
         (
           SELECT
             osm_ids2mbid(osm_id, true) AS osm_id,
-            CASE WHEN ST_Area(geometry) > 10000000 AND z(!scale_denominator!) >= 12
+            CASE WHEN ST_Area(geometry) > 10000000
                  THEN ST_Intersection(ST_MakeValid(geometry), !bbox!)
                  ELSE geometry
             END AS geometry,
