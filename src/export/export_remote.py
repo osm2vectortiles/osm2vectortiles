@@ -146,33 +146,30 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
         else:
             raise ValueError("Message must be either of type pyramid or list")
 
-        start = time.time()
 
         try:
+            start = time.time()
             subprocess.check_call(tilelive_cmd)
+            end = time.time()
+
+            print('Rendering time: {}'.format(humanize.naturaltime(end - start)))
+            print('Optimize MBTiles file size')
+            optimize_mbtiles(mbtiles_file)
+            upload_mbtiles(bucket, mbtiles_file)
+            os.remove(mbtiles_file)
+
+            print('Upload mbtiles {}'.format(mbtiles_file))
+
+            download_link = s3_url(host, port, bucket_name, mbtiles_file)
+            result_msg = create_result_message(task_id, download_link, msg)
+
+            durable_publish(channel, result_queue_name,
+                            body=json.dumps(result_msg))
+            channel.basic_ack(delivery_tag=method.delivery_tag)
         except subprocess.CalledProcessError as e:
             durable_publish(channel, failed_queue_name, body=body)
             channel.basic_ack(delivery_tag=method.delivery_tag)
             raise e
-
-        end = time.time()
-
-        print('Rendering time: {}'.format(humanize.naturaltime(end - start)))
-
-        print('Optimize MBTiles file size')
-        optimize_mbtiles(mbtiles_file)
-        upload_mbtiles(bucket, mbtiles_file)
-        os.remove(mbtiles_file)
-
-        print('Upload mbtiles {}'.format(mbtiles_file))
-
-        download_link = s3_url(host, port, bucket_name, mbtiles_file)
-        result_msg = create_result_message(task_id, download_link, msg)
-
-        durable_publish(channel, result_queue_name,
-                        body=json.dumps(result_msg))
-        channel.basic_ack(delivery_tag=method.delivery_tag)
-
 
     channel.basic_consume(callback, queue=queue_name)
     try:
