@@ -92,7 +92,7 @@ def render_pyramid_command(source, sink, bounds, min_zoom, max_zoom):
         '--minzoom', str(min_zoom),
         '--maxzoom', str(max_zoom),
         '--bounds={}'.format(bounds),
-        '--timeout=300000',
+        '--timeout=120000',
         '--slow=60000',
         source, sink
     ]
@@ -103,7 +103,7 @@ def optimize_mbtiles(mbtiles_file, mask_level=8):
 
 
 def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
-                  render_scheme, bucket_name):
+                  failed_queue_name, render_scheme, bucket_name):
     host = os.getenv('AWS_S3_HOST', 'mock-s3')
     port = int(os.getenv('AWS_S3_PORT', 8080))
 
@@ -147,7 +147,14 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
             raise ValueError("Message must be either of type pyramid or list")
 
         start = time.time()
-        subprocess.check_call(tilelive_cmd)
+
+        try:
+            subprocess.check_call(tilelive_cmd)
+        except subprocess.CalledProcessError:
+            durable_publish(channel, failed_queue_name, body=body)
+            channel.basic_ack(delivery_tag=method.delivery_tag)
+            return
+
         end = time.time()
 
         print('Rendering time: {}'.format(humanize.naturaltime(end - start)))
@@ -208,6 +215,7 @@ def main(args):
         args['<rabbitmq_url>'],
         args['--job-queue'],
         'results',
+        'failed-jobs',
         args['--render_scheme'],
         args['--bucket'],
     )
