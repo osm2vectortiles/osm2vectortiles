@@ -190,6 +190,7 @@ def configure_rabbitmq(channel):
         return channel.queue_declare(queue=queue, durable=True)
 
     queue_declare('jobs')
+    queue_declare('failed-jobs')
     queue_declare('results')
 
 
