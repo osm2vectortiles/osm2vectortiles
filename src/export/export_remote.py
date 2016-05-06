@@ -150,10 +150,10 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
 
         try:
             subprocess.check_call(tilelive_cmd)
-        except subprocess.CalledProcessError:
+        except subprocess.CalledProcessError as e:
             durable_publish(channel, failed_queue_name, body=body)
             channel.basic_ack(delivery_tag=method.delivery_tag)
-            return
+            raise e
 
         end = time.time()
 
