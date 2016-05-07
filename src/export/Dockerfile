@@ -19,6 +19,7 @@ RUN npm -g outdated | grep -v npm
 RUN apt-get update && apt-get install -y --no-install-recommends \
         python \
         python-pip \
+        python-dev \
     && rm -rf /var/lib/apt/lists/
 
 VOLUME /data/tm2source /data/export

@@ -16,17 +16,21 @@ Options:
 
 """
 import time
-import subprocess
+import sys
 import os
 import os.path
 import json
 import humanize
-
-from boto.s3.connection import S3Connection, OrdinaryCallingFormat
-from mbtoolbox.optimize import remove_subpyramids
-
 import pika
+from boto.s3.connection import S3Connection, OrdinaryCallingFormat
+from mbtoolbox.optimize import find_optimizable_tiles, all_descendant_tiles
+from mbtoolbox.mbtiles import MBTiles
 from docopt import docopt
+
+if os.name == 'posix' and sys.version_info[0] < 3:
+    import subprocess32 as subprocess
+else:
+    import subprocess
 
 
 def s3_url(host, port, bucket_name, file_name):
@@ -86,20 +90,24 @@ def render_tile_list_command(source, sink, list_file):
 
 
 def render_pyramid_command(source, sink, bounds, min_zoom, max_zoom):
+    # Slow tiles should timeout as fast as possible so job can fail
     return [
         'tilelive-copy',
         '--scheme', 'pyramid',
         '--minzoom', str(min_zoom),
         '--maxzoom', str(max_zoom),
         '--bounds={}'.format(bounds),
-        '--timeout=120000',
-        '--slow=60000',
+        '--timeout=40000',
         source, sink
     ]
 
 
 def optimize_mbtiles(mbtiles_file, mask_level=8):
-    remove_subpyramids(mbtiles_file, mask_level, 'tms')
+    mbtiles = MBTiles(mbtiles_file, 'tms')
+
+    for tile in find_optimizable_tiles(mbtiles, mask_level, 'tms'):
+        tiles = all_descendant_tiles(x=tile.x, y=tile.y, zoom=tile.z, max_zoom=14)
+        mbtiles.remove_tiles(tiles)
 
 
 def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
@@ -146,10 +154,9 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
         else:
             raise ValueError("Message must be either of type pyramid or list")
 
-
         try:
             start = time.time()
-            subprocess.check_call(tilelive_cmd)
+            subprocess.check_call(tilelive_cmd, timeout=5*60)
             end = time.time()
 
             print('Rendering time: {}'.format(humanize.naturaltime(end - start)))
@@ -166,9 +173,10 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
             durable_publish(channel, result_queue_name,
                             body=json.dumps(result_msg))
             channel.basic_ack(delivery_tag=method.delivery_tag)
-        except subprocess.CalledProcessError as e:
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
             durable_publish(channel, failed_queue_name, body=body)
             channel.basic_ack(delivery_tag=method.delivery_tag)
+            time.sleep(5)  # Give RabbitMQ some time
             raise e
 
     channel.basic_consume(callback, queue=queue_name)
