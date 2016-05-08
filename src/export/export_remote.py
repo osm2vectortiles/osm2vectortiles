@@ -176,6 +176,7 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
         except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
             durable_publish(channel, failed_queue_name, body=body)
             channel.basic_ack(delivery_tag=method.delivery_tag)
+            channel.stop_consuming()
             time.sleep(5)  # Give RabbitMQ some time
             raise e
 
