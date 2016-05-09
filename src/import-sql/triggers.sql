@@ -150,7 +150,7 @@ BEGIN
         UNION
         SELECT * FROM osm_tables_delete
     LOOP
-        EXECUTE format('DROP TABLE %I CASCADE', t.table_name);
+        EXECUTE format('DROP TABLE IF EXISTS %I CASCADE', t.table_name);
     END LOOP;
 END;
 $$ language plpgsql;

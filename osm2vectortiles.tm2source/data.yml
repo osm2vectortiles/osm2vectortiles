@@ -41,7 +41,13 @@ Layer:
           WHERE geometry && !bbox!
           GROUP BY type
           UNION ALL
-          SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry, landuse_class(type) AS class, type
+          SELECT
+            osm_ids2mbid(osm_id, true) AS osm_id,
+            CASE WHEN ST_Area(geometry) > 10000000
+                 THEN ST_Intersection(ST_MakeValid(geometry), !bbox!)
+                 ELSE geometry
+            END AS geometry,
+            landuse_class(type) AS class, type
             FROM (
               SELECT osm_id, geometry, type
               FROM landuse_z9
@@ -133,7 +139,12 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry
+          SELECT
+            osm_ids2mbid(osm_id, true) AS osm_id,
+            CASE WHEN ST_Area(geometry) > 10000000 AND osm_id <> 0
+                 THEN ST_Intersection(ST_MakeValid(geometry), !bbox!)
+                 ELSE geometry
+            END AS geometry
           FROM (
             SELECT osm_id, geometry
             FROM water_z0
@@ -290,7 +301,13 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry, landuse_overlay_class(type) AS class, type
+          SELECT
+            osm_ids2mbid(osm_id, true) AS osm_id,
+            CASE WHEN ST_Area(geometry) > 10000000
+                 THEN ST_Intersection(ST_MakeValid(geometry), !bbox!)
+                 ELSE geometry
+            END AS geometry,
+            landuse_overlay_class(type) AS class, type
           FROM (
             SELECT osm_id, geometry, type FROM landuse_overlay_z5
             WHERE z(!scale_denominator!) = 5

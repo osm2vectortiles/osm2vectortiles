@@ -69,6 +69,8 @@ def merge_results(rabbitmq_url, merge_target, result_queue_name):
 
     connection = pika.BlockingConnection(pika.URLParameters(rabbitmq_url))
     channel = connection.channel()
+    channel.basic_qos(prefetch_count=3)
+    channel.confirm_delivery()
 
     def callback(ch, method, properties, body):
         msg = json.loads(body.decode('utf-8'))

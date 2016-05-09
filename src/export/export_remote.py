@@ -16,17 +16,21 @@ Options:
 
 """
 import time
-import subprocess
+import sys
 import os
 import os.path
 import json
 import humanize
-
-from boto.s3.connection import S3Connection, OrdinaryCallingFormat
-from mbtoolbox.optimize import remove_subpyramids
-
 import pika
+from boto.s3.connection import S3Connection, OrdinaryCallingFormat
+from mbtoolbox.optimize import find_optimizable_tiles, all_descendant_tiles
+from mbtoolbox.mbtiles import MBTiles
 from docopt import docopt
+
+if os.name == 'posix' and sys.version_info[0] < 3:
+    import subprocess32 as subprocess
+else:
+    import subprocess
 
 
 def s3_url(host, port, bucket_name, file_name):
@@ -86,24 +90,28 @@ def render_tile_list_command(source, sink, list_file):
 
 
 def render_pyramid_command(source, sink, bounds, min_zoom, max_zoom):
+    # Slow tiles should timeout as fast as possible so job can fail
     return [
         'tilelive-copy',
         '--scheme', 'pyramid',
         '--minzoom', str(min_zoom),
         '--maxzoom', str(max_zoom),
         '--bounds={}'.format(bounds),
-        '--timeout=300000',
-        '--slow=60000',
+        '--timeout=40000',
         source, sink
     ]
 
 
 def optimize_mbtiles(mbtiles_file, mask_level=8):
-    remove_subpyramids(mbtiles_file, mask_level, 'tms')
+    mbtiles = MBTiles(mbtiles_file, 'tms')
+
+    for tile in find_optimizable_tiles(mbtiles, mask_level, 'tms'):
+        tiles = all_descendant_tiles(x=tile.x, y=tile.y, zoom=tile.z, max_zoom=14)
+        mbtiles.remove_tiles(tiles)
 
 
 def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
-                  render_scheme, bucket_name):
+                  failed_queue_name, render_scheme, bucket_name):
     host = os.getenv('AWS_S3_HOST', 'mock-s3')
     port = int(os.getenv('AWS_S3_PORT', 8080))
 
@@ -146,26 +154,31 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
         else:
             raise ValueError("Message must be either of type pyramid or list")
 
-        start = time.time()
-        subprocess.check_call(tilelive_cmd)
-        end = time.time()
+        try:
+            start = time.time()
+            subprocess.check_call(tilelive_cmd, timeout=5*60)
+            end = time.time()
 
-        print('Rendering time: {}'.format(humanize.naturaltime(end - start)))
+            print('Rendering time: {}'.format(humanize.naturaltime(end - start)))
+            print('Optimize MBTiles file size')
+            optimize_mbtiles(mbtiles_file)
+            upload_mbtiles(bucket, mbtiles_file)
+            os.remove(mbtiles_file)
 
-        print('Optimize MBTiles file size')
-        optimize_mbtiles(mbtiles_file)
-        upload_mbtiles(bucket, mbtiles_file)
-        os.remove(mbtiles_file)
+            print('Upload mbtiles {}'.format(mbtiles_file))
 
-        print('Upload mbtiles {}'.format(mbtiles_file))
+            download_link = s3_url(host, port, bucket_name, mbtiles_file)
+            result_msg = create_result_message(task_id, download_link, msg)
 
-        download_link = s3_url(host, port, bucket_name, mbtiles_file)
-        result_msg = create_result_message(task_id, download_link, msg)
-
-        durable_publish(channel, result_queue_name,
-                        body=json.dumps(result_msg))
-        channel.basic_ack(delivery_tag=method.delivery_tag)
-
+            durable_publish(channel, result_queue_name,
+                            body=json.dumps(result_msg))
+            channel.basic_ack(delivery_tag=method.delivery_tag)
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+            durable_publish(channel, failed_queue_name, body=body)
+            channel.basic_ack(delivery_tag=method.delivery_tag)
+            channel.stop_consuming()
+            time.sleep(5)  # Give RabbitMQ some time
+            raise e
 
     channel.basic_consume(callback, queue=queue_name)
     try:
@@ -183,6 +196,7 @@ def configure_rabbitmq(channel):
         return channel.queue_declare(queue=queue, durable=True)
 
     queue_declare('jobs')
+    queue_declare('failed-jobs')
     queue_declare('results')
 
 
@@ -208,6 +222,7 @@ def main(args):
         args['<rabbitmq_url>'],
         args['--job-queue'],
         'results',
+        'failed-jobs',
         args['--render_scheme'],
         args['--bucket'],
     )

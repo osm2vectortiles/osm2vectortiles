@@ -321,7 +321,7 @@ tables:
     - name: id
       type: id
     - name: geometry
-      type: geometry
+      type: validated_geometry
     - name: timestamp
       type: pbf_timestamp
     - name: type
@@ -680,7 +680,7 @@ tables:
     - name: id
       type: id
     - name: geometry
-      type: geometry
+      type: validated_geometry
     - name: timestamp
       type: pbf_timestamp
     - key: name

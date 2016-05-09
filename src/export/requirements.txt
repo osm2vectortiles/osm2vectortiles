@@ -2,5 +2,6 @@ docopt==0.6.2
 boto==2.38.0
 pika==0.10.0
 humanize==0.5.1
+subprocess32==3.2.7
 -e git+https://github.com/lukasmartinelli/mbtoolbox.git@#egg=mbtoolbox
 -e git+https://github.com/mapbox/mbutil.git@#egg=mbutil-0.2.0beta
