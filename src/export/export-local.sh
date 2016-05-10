@@ -13,10 +13,10 @@ readonly BBOX=${BBOX:-"-180,-85.0511,180,85.0511"}
 function export_local_mbtiles() {
     local mbtiles_name="tiles.mbtiles"
     exec tilelive-copy \
-        --scheme pyramid \
-        --bounds "$BBOX" \
-        --minzoom "$MIN_ZOOM" \
-        --maxzoom "$MAX_ZOOM" \
+        --scheme=pyramid \
+        --bounds="$BBOX" \
+        --minzoom="$MIN_ZOOM" \
+        --maxzoom="$MAX_ZOOM" \
         "tmsource://$DEST_PROJECT_DIR" "mbtiles://$EXPORT_DIR/$mbtiles_name"
 }
 
