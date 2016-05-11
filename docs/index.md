@@ -4,41 +4,25 @@ title: Documentation
 published: true
 ---
 
-## User Documentation
+## Documentation
 
 Get started styling and using vector tiles.
 
 - Getting started
-  - [Display Map with tileserver-mapnik](/docs/start)
   - [Display Map with Mapbox GL](/docs/display-map-with-mapbox-gl)
 - Create your own custom basemap
-  - [Create a Style with Mapbox Studio Classic](/docs/create-map-with-mapbox-studio-classic)
   - [Create a Style with new Mapbox Studio](/docs/create-map-with-mapbox-studio)
 - Hosting
-  - [Serve Raster Tiles with Docker](/docs/serve-raster-tiles-docker)
   - [Serve Vector Tiles](/docs/serve-vector-tiles)
   - [Use public CDN](/docs/use-public-cdn)
-
-## Developer Documentation
-
-Documentation about how to create vector tiles yourself.
-Targeted at people who want to reuse our process or want to contribute.
-
 - Vector Tiles
   - [Create your own Vector Tiles](/docs/own-vector-tiles)
-  - [Layer Reference](/docs/layer-reference)
   - [Create your own Extract](/docs/extracts)
-- Data Source
-  - [Data Sources of OSM Vector Tiles](/docs/data-sources)
-- Import and Export
-  - [Import and Export Process](/docs/import-export-process)
-  - [Database Schema](/docs/database-schema)
-  - [Imposm Mapping](/docs/imposm-schema)
 
 ## Video Tutorial
 
 [Tobin Bradley](http://fuzzytolerance.info/) created an awesome video tutorial series
-that will introduce you into web maps, vector tiles and using osm2vectortiles.
+that will introduce you into web maps, vector tiles and using OSM2VectorTiles.
 
 <iframe width="430" height="242" src="https://www.youtube.com/embed/xI7QkEodCac" frameborder="0" style="display: inline;" allowfullscreen></iframe>
 
