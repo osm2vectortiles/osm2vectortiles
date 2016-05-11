@@ -16,7 +16,7 @@ In order to render your map with Mapbox GL JS you need to set up a simple server
 
 An mbtiles file is essentialy just a sqlite database with a specific schema. The script listens on port 3000 and answers request in the form of `/<mbtiles-name>/<z>/<x>/<y>.pbf` and returns the vector tile at the requested xyz-coordinate.
 
-We have prepared a repository containing all the necessary files for you. Simply clone [this repository](https://github.com/osm2vectortiles/mbtiles-server-example){:target="_blank"}, run `npm install`, [download](osm2vectortiles.org/downloads){:target="_blank"} your desired extract and run `node index.js` and the vector tiles are getting served.
+We have prepared a repository containing all the necessary files for you. Simply clone [this repository](https://github.com/osm2vectortiles/mbtiles-server-example){:target="_blank"}, run `npm install`, [download](http://osm2vectortiles.org/downloads){:target="_blank"} your desired extract and run `node index.js` and the vector tiles are getting served.
 
 ## Display a map in your browser
 

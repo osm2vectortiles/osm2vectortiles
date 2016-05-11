@@ -7,9 +7,9 @@ published: true
 # Create your own vector tiles
 
 We use Docker extensively for development and deployment.
-The easiest way to get started is using [Docker Compose](https://www.docker.com/docker-compose).
+The easiest way to get started is using [Docker Compose](https://www.docker.com/docker-compose){:target="_blank"}.
 
-Clone the [osm2vectortiles](https://github.com/osm2vectortiles/osm2vectortiles) project.
+Clone the [OSM2VectorTiles](https://github.com/osm2vectortiles/osm2vectortiles){:target="_blank"} project.
 
 ```
 git clone https://github.com/osm2vectortiles/osm2vectortiles.git
@@ -22,15 +22,15 @@ docker-compose up -d postgis
 ```
 
 Download a PBF and put it into the local `import` directory.
-You can use extracts from [Mapzen](https://mapzen.com/data/metro-extracts)
-or [Geofabrik](http://download.geofabrik.de/)
+You can use extracts from [Mapzen](https://mapzen.com/data/metro-extracts){:target="_blank"}
+or [Geofabrik](http://download.geofabrik.de/){:target="_blank"}
 
 ```
 wget https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf
 ```
 
 Now you need to import several external data sources.
-Import water polygons from [OpenStreetMapData.com](http://openstreetmapdata.com/data/water-polygons), [Natural Earth](http://www.naturalearthdata.com/) data for lower zoom levels and custom country, sea and state labels.
+Import water polygons from [OpenStreetMapData.com](http://openstreetmapdata.com/data/water-polygons){:target="_blank"}, [Natural Earth](http://www.naturalearthdata.com/){:target="_blank"} data for lower zoom levels and custom country, sea and state labels.
 
 ```
 docker-compose up import-external
@@ -79,7 +79,7 @@ Download lower zoom level extract.
 wget -P ./export/ https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/world_z0-z5.mbtiles
 ```
 
-Download the `patch.sh` script from [the Mapbox mbutil project](https://github.com/mapbox/mbutil).
+Download the `patch.sh` script from [the Mapbox mbutil project](https://github.com/mapbox/mbutil){:target="_blank"}.
 
 ```bash
 wget https://raw.githubusercontent.com/mapbox/mbutil/master/patch
@@ -103,18 +103,3 @@ You can now see extract rendered as `Open Streets v1.0` and if you have
 style projects in your directory the rendered raster map as well.
 
 ![Tessera Overview](/media/local_serve_container_tessera_overview.png)
-
-## Docker Images
-
-The workflow consists of several prebuilt Docker images.
-
-| Image                             | Size                                                                                                               |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| klokantech/tileserver-mapnik      | [![ImageLayers Size](https://img.shields.io/imagelayers/image-size/klokantech/tileserver-mapnik/latest.svg)]()            |
-| osm2vectortiles/export            | [![ImageLayers Size](https://img.shields.io/imagelayers/image-size/osm2vectortiles/export/latest.svg)]()           |
-| osm2vectortiles/import-external   | [![ImageLayers Size](https://img.shields.io/imagelayers/image-size/osm2vectortiles/import-external/latest.svg)]()  |
-| osm2vectortiles/import-sql        | [![ImageLayers Size](https://img.shields.io/imagelayers/image-size/osm2vectortiles/import-sql/latest.svg)]()       |
-| osm2vectortiles/import-osm        | [![ImageLayers Size](https://img.shields.io/imagelayers/image-size/osm2vectortiles/import-osm/latest.svg)]()       |
-| osm2vectortiles/update-scaleranks | [![ImageLayers Size](https://img.shields.io/imagelayers/image-size/osm2vectortiles/update-scaleranks/latest.svg)]() |
-| osm2vectortiles/postgis           | [![ImageLayers Size](https://img.shields.io/imagelayers/image-size/osm2vectortiles/postgis/latest.svg)]()          |
-| osm2vectortiles/pgbouncer         | [![ImageLayers Size](https://img.shields.io/imagelayers/image-size/osm2vectortiles/pgbouncer/latest.svg)]()        |

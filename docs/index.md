@@ -6,13 +6,12 @@ published: true
 
 ## Documentation
 
-Get started styling and using vector tiles.
+The following tutorials explain how you can use the OSM2VectorTiles project. Feel free to submit an [issue](https://github.com/osm2vectortiles/osm2vectortiles/issues/new), if you think something is missing.
 
 - [Getting started](/docs/getting-started)
-- [Create a Style with new Mapbox Studio](/docs/create-map-with-mapbox-studio)
-- Vector Tiles
-  - [Create your own Vector Tiles](/docs/own-vector-tiles)
-  - [Create your own Extract](/docs/extracts)
+- [Create your personal map style with Mapbox Studio](/docs/create-map-with-mapbox-studio)
+- [Create your own Vector Tiles](/docs/own-vector-tiles)
+- [Create your own Extract](/docs/extracts)
 
 ## Video Tutorial
 
