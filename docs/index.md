@@ -8,13 +8,9 @@ published: true
 
 Get started styling and using vector tiles.
 
-- Getting started
-  - [Display Map with Mapbox GL](/docs/display-map-with-mapbox-gl)
-- Create your own custom basemap
-  - [Create a Style with new Mapbox Studio](/docs/create-map-with-mapbox-studio)
-- Hosting
-  - [Serve Vector Tiles](/docs/serve-vector-tiles)
-  - [Use public CDN](/docs/use-public-cdn)
+- [Getting started](/docs/getting-started)
+- [Create a Style with new Mapbox Studio](/docs/create-map-with-mapbox-studio)
+- [Use public CDN](/docs/use-public-cdn)
 - Vector Tiles
   - [Create your own Vector Tiles](/docs/own-vector-tiles)
   - [Create your own Extract](/docs/extracts)
