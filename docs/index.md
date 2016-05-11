@@ -10,7 +10,6 @@ Get started styling and using vector tiles.
 
 - [Getting started](/docs/getting-started)
 - [Create a Style with new Mapbox Studio](/docs/create-map-with-mapbox-studio)
-- [Use public CDN](/docs/use-public-cdn)
 - Vector Tiles
   - [Create your own Vector Tiles](/docs/own-vector-tiles)
   - [Create your own Extract](/docs/extracts)
