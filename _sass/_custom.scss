@@ -139,13 +139,6 @@ body{
   }
 }
 
-#searchField {
-  height: 2.5em;
-  line-height: 2.5em;
-  padding: 0 8px;
-  font-size: 1em;
-}
-
 .contributors {
     img {
         max-width: 100%;
@@ -172,4 +165,44 @@ body{
   &:hover{
     text-decoration: none;
   }
+}
+
+.search-field {
+  font-size: 1.5em;
+  line-hight: 1.5em !important;
+  border: 2px solid #53b985 !important;
+  height: 2em !important;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.download-section:hover {
+  cursor: pointer;
+  background-color: white;
+}
+
+.download-item {
+  background-color: white;
+  color: 44A886;
+  font-size: 0.9em;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  border: 2px solid #53b985;
+  padding: 5px 5px;
+  margin-bottom: 5px;
+}
+
+.download-item:hover {
+  cursor: pointer;
+  background-color: #44A886;
+  color: white;
+}
+
+.download-title {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+#country, #city {
+  display: none;
+  padding: 0px 0px !important;
 }
