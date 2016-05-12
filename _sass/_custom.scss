@@ -169,16 +169,42 @@ body{
 
 .search-field {
   font-size: 1.5em;
-  line-hight: 1.5em !important;
   border: 2px solid #53b985 !important;
   height: 2em !important;
   width: 100%;
   margin-bottom: 5px;
 }
 
+.download-section {
+  display: -webkit-flex; /* Safari */
+  -webkit-align-items: center; /* Safari 7.0+ */
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+}
+
 .download-section:hover {
   cursor: pointer;
   background-color: white;
+}
+
+.download-section-circle {
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    border: 6px solid black;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+
+    @media(max-width: 841px){
+        width: 150px;
+        height: 150px;
+        border-radius: 75px;
+        -webkit-border-radius: 75px;
+        -moz-border-radius: 75px;
+    }
 }
 
 .download-item {

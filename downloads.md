@@ -6,26 +6,25 @@ published: true
 
 # Downloads
 
-The rendered vector tiles provided as download are under
+You can download the entire planet, country or even city extracts. All the extracts contain some world data on lower zoom levels. This lets your map look great without having to download the entire planet. We want you to use our vector tiles to build great stuff. Therefore the vector tiles are under
 the [Open Database License](https://tldrlegal.com/license/odc-open-database-license-(odbl)) the same license [OpenStreetMap is using](https://www.openstreetmap.org/copyright).
-The OSM data is from the planet file of [15th of November 2015](http://planet.osm.org/planet/2015/planet-151116.osm.bz2) rendered using [osm2vectortiles **v1.0**](https://github.com/osm2vectortiles/osm2vectortiles/releases/tag/v1.0). The  next rendering will take place in May 2016.
+
+- Don’t see your country or city listed below? Contribute by submitting a pull request on our list of [countries](https://github.com/osm2vectortiles/osm2vectortiles/blob/master/src/create-extracts/country_extracts.tsv){:target="_blank"} or [cities](https://github.com/osm2vectortiles/osm2vectortiles/blob/master/src/create-extracts/city_extracts.tsv){:target="_blank"}, or [just ask by opening a new issue](https://github.com/osm2vectortiles/osm2vectortiles/issues/new){:target="_blank"}.
+- Need help? [Check out the documentation](/docs/)
 
 <div class="row">
   <div class="col12">
 	  <div class="col4 download-section" onclick="showPlanet()">
+	    <div class="download-section-circle" style="background-image: url(/img/planet.png)"></div>
 	    <h2>Planet</h2>
-	    <p>Vector tile data of the entire planet in one file.
-	    </p>
 	  </div>
 	  <div class="col4 download-section" onclick="showCountry()">
-	    <h2>Country Extracts</h2>
-	    <p>All country extracts consist of a bounding box of the country containing all details down to zoom level 14. At lower zoom levels (z0 to z8) there is still some world data to make maps look good.
-	    </p>
+	  	<div class="download-section-circle" style="background-image: url(/img/country.png);"></div>
+	    <h2>Country</h2>
 	  </div>
 	  <div class="col4 download-section" onclick="showCity()">
-	    <h2>City Extracts</h2>
-	    <p>All city extracts consist of a bounding box of the city containing all details down to zoom level 14. At lower zoom levels (z0 to z8) there is still some world data to make maps look good.
-	    </p>
+	  	<div class="download-section-circle" style="background-image: url(/img/city.png)"></div>
+	    <h2>City</h2>
 	  </div>
 	</div>
 </div>
