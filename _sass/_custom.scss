@@ -228,11 +228,6 @@ body{
   font-weight: bold;
 }
 
-#country, #city {
-  display: none;
-  padding: 0px 0px !important;
-}
-
 .clipboard {
   display: flex;
   display: -webkit-flex; /* Safari */
@@ -291,4 +286,13 @@ body{
   height: 15px;
   width: inherit;
   margin: 0px !important;
+}
+
+#country, #city {
+  display: none;
+  padding: 0px 0px !important;
+}
+
+#basic, #streets {
+  display: none;
 }
