@@ -215,6 +215,12 @@ body{
   border: 2px solid #53b985;
   padding: 5px 5px;
   margin-bottom: 5px;
+  display: -webkit-flex; /* Safari */
+  -webkit-align-items: center; /* Safari 7.0+ */
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  align-items: center;
 }
 
 .download-item:hover {
@@ -242,6 +248,7 @@ body{
   border-bottom-right-radius: 0;
   border-color: rgb(213, 213, 213);
   color: black;
+  font-size: 0.9em;
 }
 
 .clipboard-input:focus {
@@ -252,6 +259,7 @@ body{
   position: relative;
   display: inline-block;
   padding: 6px 12px;
+  margin-left: -1px;
   cursor: pointer;
   background-color: #eee;
   background-image: linear-gradient(#fcfcfc, #eee);
@@ -263,8 +271,6 @@ body{
   -moz-user-select: none;
   user-select: none;
   -webkit-appearence: none;
-  height: 37px;
-  width: auto;
 }
 
 .clipboard-button:focus {
