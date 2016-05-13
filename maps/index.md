@@ -4,19 +4,21 @@ title: Collection of Map
 published: true
 ---
 
-<div id="vector-style-reference"></div>
+<div>Choose between the following map styles, copy the html code below the map and display it in your browser.
+</div>
+
 <br />
 <div id="map-container">
 	<button id="vector-bright" class="map-button">Bright</button
 	><button id="vector-basic" class="map-button">Basic</button
-	><button id="vector-streets" class="map-button">Streets</button>
+	><button id="vector-streets" class="map-button">Streets</button
+	><button id="vector-dark" class="map-button">Dark</button
+	><button id="vector-light" class="map-button">Light</button>
 </div>
 <div id="vector-map" class="map-preview"></div>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.css' rel='stylesheet' />
 <script>
-	var vectorStyleReference = document.getElementById("vector-style-reference");
-	vectorStyleReference.innerHTML = 'The map below uses the following style project: <a href="https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/bright-v9.json" target="_blank">Bright</a>';
 	if (!mapboxgl.supported()) {
 		var vectorMapContainer = document.getElementById("vector-map");
 		vectorMapContainer.innerHTML = 'Your browser does not support Mapbox GL. Either your browser does not support WebGL or it is disabled, please check <a href="https://get.webgl.org/">http://get.webgl.org</a> for more information.'
@@ -35,30 +37,55 @@ published: true
 		e.preventDefault();
         e.stopPropagation();
         vectorMap.setStyle('https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/bright-v9.json');
-		vectorStyleReference.innerHTML = 'The map above uses the following style project: <a href="https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/bright-v9.json" target="_blank">Bright</a>';
 		document.querySelector("#bright").style.display = "block";
 		document.querySelector("#basic").style.display = "none";
 		document.querySelector("#streets").style.display = "none";
+		document.querySelector("#dark").style.display = "none";
+		document.querySelector("#light").style.display = "none";
 	}
 	var basic = document.getElementById("vector-basic");
 	basic.onclick = function(e) {
 		e.preventDefault();
         e.stopPropagation();
         vectorMap.setStyle('https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/basic-v9.json');
-		vectorStyleReference.innerHTML = 'The map above uses the following style project: <a href="https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/basic-v9.json" target="_blank">Basic</a>';
 		document.querySelector("#bright").style.display = "none";
 		document.querySelector("#basic").style.display = "block";
 		document.querySelector("#streets").style.display = "none";
+		document.querySelector("#dark").style.display = "none";
+		document.querySelector("#light").style.display = "none";
 	}
 	var streets = document.getElementById("vector-streets");
 	streets.onclick = function(e) {
 		e.preventDefault();
         e.stopPropagation();
         vectorMap.setStyle('https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/streets-v9.json');
-		vectorStyleReference.innerHTML = 'The map above uses the following style project: <a href="https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/streets-v9.json" target="_blank">Streets</a>';
 		document.querySelector("#bright").style.display = "none";
 		document.querySelector("#basic").style.display = "none";
 		document.querySelector("#streets").style.display = "block";
+		document.querySelector("#dark").style.display = "none";
+		document.querySelector("#light").style.display = "none";
+	}
+	var dark = document.getElementById("vector-dark");
+	dark.onclick = function(e) {
+		e.preventDefault();
+        e.stopPropagation();
+        vectorMap.setStyle('https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/dark-v9.json');
+		document.querySelector("#bright").style.display = "none";
+		document.querySelector("#basic").style.display = "none";
+		document.querySelector("#streets").style.display = "none";
+		document.querySelector("#dark").style.display = "block";
+		document.querySelector("#light").style.display = "none";
+	}
+	var light = document.getElementById("vector-light");
+	light.onclick = function(e) {
+		e.preventDefault();
+        e.stopPropagation();
+        vectorMap.setStyle('https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/light-v9.json');
+		document.querySelector("#bright").style.display = "none";
+		document.querySelector("#basic").style.display = "none";
+		document.querySelector("#streets").style.display = "none";
+		document.querySelector("#dark").style.display = "none";
+		document.querySelector("#light").style.display = "block";
 	}
 </script>
 <div>
@@ -70,5 +97,11 @@ published: true
 	</div>
 	<div id="streets">
 		<script src="https://gist.github.com/manuelroth/d0e37ef2e8f8e7080317c779044979d7.js"></script>
+	</div>
+	<div id="dark">
+		<script src="https://gist.github.com/manuelroth/80cb27ff4eecd822661baf3abeab6150.js"></script>
+	</div>
+	<div id="light">
+		<script src="https://gist.github.com/manuelroth/fdb546e2abf91ec1b3b3f9b7b253aec3.js"></script>
 	</div>
 </div>
