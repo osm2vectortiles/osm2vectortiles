@@ -10,7 +10,7 @@ You can download the entire planet, country or even city extracts. All the extra
 the [Open Database License](https://tldrlegal.com/license/odc-open-database-license-(odbl)) the same license [OpenStreetMap is using](https://www.openstreetmap.org/copyright).
 
 - Don’t see your country or city listed below? Contribute by submitting a pull request on our list of [countries](https://github.com/osm2vectortiles/osm2vectortiles/blob/master/src/create-extracts/country_extracts.tsv){:target="_blank"} or [cities](https://github.com/osm2vectortiles/osm2vectortiles/blob/master/src/create-extracts/city_extracts.tsv){:target="_blank"}, or [just ask by opening a new issue](https://github.com/osm2vectortiles/osm2vectortiles/issues/new){:target="_blank"}.
-- Need help? [Check out the documentation](/docs/)
+- Need any help? [Check out the documentation](/docs/)
 
 <div class="row">
   <div class="col12">

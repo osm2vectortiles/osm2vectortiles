@@ -4,10 +4,15 @@ title: Collection of Map
 published: true
 ---
 
-<div>Choose between the following map styles, copy the html code below the map and display it in your browser.
+<div id="map-text">
+	<p>
+		Choose between the following map styles, copy the html code below the map and display it in your browser.
+	</p>
+	<li style="list-style-type: square">
+		Need any help? <a href="/docs">Check out the documentation</a>
+	</li>
 </div>
 
-<br />
 <div id="map-container">
 	<button id="vector-bright" class="map-button">Bright</button
 	><button id="vector-basic" class="map-button">Basic</button
