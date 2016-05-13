@@ -40,6 +40,27 @@ function init() {
     };
   }
 
+  function getData(url, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+          var data = [];
+          var rowArray = xmlHttp.responseText.split('\n');
+          for (var i = 1; i < rowArray.length; i++) {
+              var currentRow = rowArray[i].split('\t');
+              data.push({
+                "extract" : currentRow[0],
+                "country" : currentRow[1],
+                "city" : currentRow[2]
+              });
+          }
+          callback(data);
+        }
+    }
+    xmlHttp.open("GET", url, true); // true for asynchronous
+    xmlHttp.send(null);
+  }
+
   var search_countries = document.querySelector('#search_countries');
   if (search_countries) {
     search_countries.onkeyup = function() {
@@ -61,8 +82,7 @@ function init() {
   if(country) {
     var template = '<div class="col12 download-item"><div class="col4 download-title" onclick="{{{ link }}}">{{ title }}</div><div class="col2" onclick="{{{ link }}}">{{ size }}</div><div class="col6 clipboard"><input id="{{ extract_name }}" class="clipboard-input" value="{{ url }}"><button class="clipboard-button" data-clipboard-target="#{{ extract_name }}"><img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard"></button></div></div>';
     Mustache.parse(template);
-    d3.tsv("https://raw.githubusercontent.com/osm2vectortiles/osm2vectortiles/master/src/create-extracts/country_extracts.tsv", function(error, data) {
-      if (error) throw error;
+    getData("https://raw.githubusercontent.com/osm2vectortiles/osm2vectortiles/master/src/create-extracts/country_extracts.tsv", function(data) {
       data.forEach(function(d) {
         var data = {
           "link": "location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/" + d.extract + ".mbtiles'",
@@ -99,8 +119,7 @@ function init() {
   if(city) {
     var template = '<div class="col12 download-item"><div class="col4 download-title" onclick="{{{ link }}}">{{ title }}</div><div class="col2" onclick="{{{ link }}}">{{ size }}</div><div class="col6 clipboard"><input id="{{ extract_name }}" class="clipboard-input" value="{{ url }}"><button class="clipboard-button" data-clipboard-target="#{{ extract_name }}"><img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard"></button></div></div>';
     Mustache.parse(template);
-    d3.tsv("https://raw.githubusercontent.com/osm2vectortiles/osm2vectortiles/master/src/create-extracts/city_extracts.tsv", function(error, data) {
-      if (error) throw error;
+    getData("https://raw.githubusercontent.com/osm2vectortiles/osm2vectortiles/master/src/create-extracts/city_extracts.tsv", function(data) {
       data.forEach(function(d) {
         var data = {
           "link": "location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/" + d.extract + ".mbtiles'",

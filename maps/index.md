@@ -118,7 +118,7 @@ published: true
 	</div>
 </div>
 <div id="map-clipboard">
-	<button class="map-clipboard-button" aria-label="bla">
+	<button class="map-clipboard-button">
 	    <img src="/img/clipboard-white.svg" class="map-clipboard-img" alt="Copy to clipboard">
 	    <div>Copy example</div>
 	</button>
