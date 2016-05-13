@@ -25,7 +25,7 @@ published: true
 	} else {
 		var vectorMap = new mapboxgl.Map({
 		    container: 'vector-map',
-		    style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/bright-v9.json',
+		    style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json',
 		    center: [8.5456, 47.3739],
 		    zoom: 11
 		}).addControl(new mapboxgl.Navigation());
@@ -36,7 +36,7 @@ published: true
 	bright.onclick = function(e) {
 		e.preventDefault();
         e.stopPropagation();
-        vectorMap.setStyle('https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/bright-v9.json');
+        vectorMap.setStyle('https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json');
 		document.querySelector("#bright").style.display = "block";
 		document.querySelector("#basic").style.display = "none";
 		document.querySelector("#streets").style.display = "none";
@@ -47,7 +47,7 @@ published: true
 	basic.onclick = function(e) {
 		e.preventDefault();
         e.stopPropagation();
-        vectorMap.setStyle('https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/basic-v9.json');
+        vectorMap.setStyle('https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/basic-v9-cdn.json');
 		document.querySelector("#bright").style.display = "none";
 		document.querySelector("#basic").style.display = "block";
 		document.querySelector("#streets").style.display = "none";
@@ -58,7 +58,7 @@ published: true
 	streets.onclick = function(e) {
 		e.preventDefault();
         e.stopPropagation();
-        vectorMap.setStyle('https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/streets-v9.json');
+        vectorMap.setStyle('https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/streets-v9-cdn.json');
 		document.querySelector("#bright").style.display = "none";
 		document.querySelector("#basic").style.display = "none";
 		document.querySelector("#streets").style.display = "block";
@@ -69,7 +69,7 @@ published: true
 	dark.onclick = function(e) {
 		e.preventDefault();
         e.stopPropagation();
-        vectorMap.setStyle('https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/dark-v9.json');
+        vectorMap.setStyle('https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/dark-v9-cdn.json');
 		document.querySelector("#bright").style.display = "none";
 		document.querySelector("#basic").style.display = "none";
 		document.querySelector("#streets").style.display = "none";
@@ -80,7 +80,7 @@ published: true
 	light.onclick = function(e) {
 		e.preventDefault();
         e.stopPropagation();
-        vectorMap.setStyle('https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/light-v9.json');
+        vectorMap.setStyle('https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/light-v9-cdn.json');
 		document.querySelector("#bright").style.display = "none";
 		document.querySelector("#basic").style.display = "none";
 		document.querySelector("#streets").style.display = "none";

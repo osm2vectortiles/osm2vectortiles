@@ -57,7 +57,7 @@ for visually examining osm2vectortiles.
 		var zoom = parseFloat(div.getAttribute("data-zoom"));
 		var vectorMap = new mapboxgl.Map({
 		    container: div,
-		    style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/bright-v9.json',
+		    style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json',
 		    center: [lon, lat],
 		    zoom: zoom
 		});
