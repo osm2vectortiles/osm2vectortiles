@@ -7,6 +7,20 @@ city extracts as specified in the CSV files from the latest planet MBTiles file.
 
 ## Usage
 
+### Submit new Extract
+
+You can modify the `city_extracts.tsv` and `country_extracts.tsv` directly in GitHub and create a PR.
+
+### Python
+
+You can use the `create_extracts.py` Python script yourself to generate an extract and optionally upload it to S3.
+
+```bash
+# Create extracts limited by a bounding box specified in the TSV file
+python create_extracts.py bbox planet.mbtiles city_extracts.tsv
+```
+
+
 ### Docker
 
 To use **create-extracts** inside the Docker Compose workflow you need to have
