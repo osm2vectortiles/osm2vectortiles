@@ -209,7 +209,7 @@ body{
 
 .download-item {
   background-color: white;
-  color: 44A886;
+  color: #44A886;
   font-size: 0.9em;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   border: 2px solid #53b985;
@@ -294,11 +294,51 @@ body{
   margin: 0px !important;
 }
 
+.map-clipboard-button {
+  width: 100%;
+  height: 50px;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 0 0 3px 3px;
+  border: none;
+  background-color: #44A886;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  display: -webkit-flex; /* Safari */
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-clipboard-button:hover {
+  cursor: pointer;
+  background-color: #59C39F;
+}
+
+.map-clipboard-img {
+  height: 15px;
+  width: 15px;
+  margin: 0px !important;
+  margin-right: 7px !important;
+}
+
 #country, #city {
   display: none;
   padding: 0px 0px !important;
 }
 
-#basic, #streets {
+#basic, #streets, #dark, #light {
   display: none;
+}
+
+.gist-meta {
+  display: none;
+}
+
+.gist-file {
+  margin-bottom: 0 !important;
+  border-bottom: 0 !important;
+  border-radius: 0 !important;
 }

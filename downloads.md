@@ -51,7 +51,7 @@ the [Open Database License](https://tldrlegal.com/license/odc-open-database-lice
 		<div class="col6 clipboard">
 			<input id="world_z0-z5" class="clipboard-input" value="https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/world_z0-z5.mbtiles">
 			<button class="clipboard-button" data-clipboard-target="#world_z0-z5">
-			    <img src="/img/clippy.svg" class="clipboard-img" alt="Copy to clipboard">
+			    <img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard">
 			</button>
 		</div>
 	</div>
@@ -65,7 +65,7 @@ the [Open Database License](https://tldrlegal.com/license/odc-open-database-lice
 		<div class="col6 clipboard">
 			<input id="world_z0-z8" class="clipboard-input" value="https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/world_z0-z8.mbtiles">
 			<button class="clipboard-button" data-clipboard-target="#world_z0-z8">
-			    <img src="/img/clippy.svg" class="clipboard-img" alt="Copy to clipboard">
+			    <img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard">
 			</button>
 		</div>
 	</div>

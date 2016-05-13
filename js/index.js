@@ -59,7 +59,7 @@ function init() {
 
   var country = document.querySelector('#country');
   if(country) {
-    var template = '<div class="col12 download-item"><div class="col4 download-title" onclick="{{{ link }}}">{{ title }}</div><div class="col2" onclick="{{{ link }}}">{{ size }}</div><div class="col6 clipboard"><input id="{{ extract_name }}" class="clipboard-input" value="{{ url }}"><button class="clipboard-button" data-clipboard-target="#{{ extract_name }}"><img src="/img/clippy.svg" class="clipboard-img" alt="Copy to clipboard"></button></div></div>';
+    var template = '<div class="col12 download-item"><div class="col4 download-title" onclick="{{{ link }}}">{{ title }}</div><div class="col2" onclick="{{{ link }}}">{{ size }}</div><div class="col6 clipboard"><input id="{{ extract_name }}" class="clipboard-input" value="{{ url }}"><button class="clipboard-button" data-clipboard-target="#{{ extract_name }}"><img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard"></button></div></div>';
     Mustache.parse(template);
     d3.tsv("https://raw.githubusercontent.com/osm2vectortiles/osm2vectortiles/master/src/create-extracts/country_extracts.tsv", function(error, data) {
       if (error) throw error;
@@ -97,7 +97,7 @@ function init() {
 
   var city = document.querySelector('#city');
   if(city) {
-    var template = '<div class="col12 download-item"><div class="col4 download-title" onclick="{{{ link }}}">{{ title }}</div><div class="col2" onclick="{{{ link }}}">{{ size }}</div><div class="col6 clipboard"><input id="{{ extract_name }}" class="clipboard-input" value="{{ url }}"><button class="clipboard-button" data-clipboard-target="#{{ extract_name }}"><img src="/img/clippy.svg" class="clipboard-img" alt="Copy to clipboard"></button></div></div>';
+    var template = '<div class="col12 download-item"><div class="col4 download-title" onclick="{{{ link }}}">{{ title }}</div><div class="col2" onclick="{{{ link }}}">{{ size }}</div><div class="col6 clipboard"><input id="{{ extract_name }}" class="clipboard-input" value="{{ url }}"><button class="clipboard-button" data-clipboard-target="#{{ extract_name }}"><img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard"></button></div></div>';
     Mustache.parse(template);
     d3.tsv("https://raw.githubusercontent.com/osm2vectortiles/osm2vectortiles/master/src/create-extracts/city_extracts.tsv", function(error, data) {
       if (error) throw error;
@@ -116,7 +116,7 @@ function init() {
     });
   }
 
-  // instantiate clipboard
+  // instantiate download clipboard
   new Clipboard('.clipboard-button');
 }
 window.onload = init;

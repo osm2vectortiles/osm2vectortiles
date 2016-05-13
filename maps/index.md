@@ -30,6 +30,7 @@ published: true
 		    zoom: 11
 		}).addControl(new mapboxgl.Navigation());
 		vectorMap.scrollZoom.disable();
+		var selectedStyle = 0;
 	}
 
 	var bright = document.getElementById("vector-bright");
@@ -42,6 +43,7 @@ published: true
 		document.querySelector("#streets").style.display = "none";
 		document.querySelector("#dark").style.display = "none";
 		document.querySelector("#light").style.display = "none";
+		selectedStyle = 0;
 	}
 	var basic = document.getElementById("vector-basic");
 	basic.onclick = function(e) {
@@ -53,6 +55,7 @@ published: true
 		document.querySelector("#streets").style.display = "none";
 		document.querySelector("#dark").style.display = "none";
 		document.querySelector("#light").style.display = "none";
+		selectedStyle = 1;
 	}
 	var streets = document.getElementById("vector-streets");
 	streets.onclick = function(e) {
@@ -64,6 +67,7 @@ published: true
 		document.querySelector("#streets").style.display = "block";
 		document.querySelector("#dark").style.display = "none";
 		document.querySelector("#light").style.display = "none";
+		selectedStyle = 2;
 	}
 	var dark = document.getElementById("vector-dark");
 	dark.onclick = function(e) {
@@ -75,6 +79,7 @@ published: true
 		document.querySelector("#streets").style.display = "none";
 		document.querySelector("#dark").style.display = "block";
 		document.querySelector("#light").style.display = "none";
+		selectedStyle = 3;
 	}
 	var light = document.getElementById("vector-light");
 	light.onclick = function(e) {
@@ -86,7 +91,14 @@ published: true
 		document.querySelector("#streets").style.display = "none";
 		document.querySelector("#dark").style.display = "none";
 		document.querySelector("#light").style.display = "block";
+		selectedStyle = 4;
 	}
+	// instantiate map clipboard
+	  new Clipboard('.map-clipboard-button', {
+	    text: function(trigger) {
+	        return document.getElementsByClassName("gist-data")[selectedStyle].innerText;
+	    }
+	});
 </script>
 <div>
 	<div id="bright">
@@ -104,4 +116,10 @@ published: true
 	<div id="light">
 		<script src="https://gist.github.com/manuelroth/fdb546e2abf91ec1b3b3f9b7b253aec3.js"></script>
 	</div>
+</div>
+<div id="map-clipboard">
+	<button class="map-clipboard-button" aria-label="bla">
+	    <img src="/img/clipboard-white.svg" class="map-clipboard-img" alt="Copy to clipboard">
+	    <div>Copy example</div>
+	</button>
 </div>
