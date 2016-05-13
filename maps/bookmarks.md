@@ -49,8 +49,6 @@ for visually examining osm2vectortiles.
 <div class="map-preview" data-lat="48.3535" data-lon="11.7918" data-zoom="13"></div>
 
 <script>
-	mapboxgl.accessToken = 'pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w';
-
 	var divs = document.querySelectorAll('.map-preview');
 
 	[].forEach.call(divs, function(div) {
@@ -59,7 +57,7 @@ for visually examining osm2vectortiles.
 		var zoom = parseFloat(div.getAttribute("data-zoom"));
 		var vectorMap = new mapboxgl.Map({
 		    container: div,
-		    style: '/styles/bright-v8.json',
+		    style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-js-example/master/bright-v9.json',
 		    center: [lon, lat],
 		    zoom: zoom
 		});
