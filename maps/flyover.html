@@ -15,19 +15,6 @@
 <div id='map'></div>
 <script>
 
-// function rotator(){
-//   map.easeTo({bearing:60, duration:10000, pitch:55, zoom:18});
-//   window.setTimeout(function(){
-//     map.easeTo({bearing:180, duration:10000, pitch:0, zoom:14});
-//     window.setTimeout(function(){
-//       map.easeTo({bearing:300, duration:10000, pitch:30, zoom:16});
-//       window.setTimeout(function(){
-//         rotator()
-//       }, 10000)
-//     }, 10000)
-//   }, 10000)
-// }
-
 mapboxgl.accessToken = 'pk.eyJ1IjoicGV0ZXJxbGl1IiwiYSI6ImpvZmV0UEEifQ._D4bRmVcGfJvo1wjuOpA1g';
 if (!mapboxgl.supported()) {
 		var vectorMapContainer = document.getElementById("vector-map");
@@ -39,13 +26,8 @@ if (!mapboxgl.supported()) {
 		center: [8.54137, 47.36840],
 		zoom: 14.66
 	});
-
-	// map.on('load', function(){
- //    if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
- //      //mobile devices are usually to weak for rendering the flyover
- //      rotator()
- //    }
-	// });
+  map.scrollZoom.disable();
+  map.addControl(new mapboxgl.Navigation());
 }
 </script>
 
