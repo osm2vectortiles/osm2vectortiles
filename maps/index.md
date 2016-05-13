@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Collection of Map
+title: Map Styles
 published: true
 ---
 
