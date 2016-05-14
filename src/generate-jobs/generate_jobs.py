@@ -110,24 +110,6 @@ def pyramid_jobs(x, y, z, job_zoom):
                                  max_zoom=14, bounds=bounds)
 
 
-def quad_tree(tx, ty, zoom):
-    """
-    Converts XYZ tile coordinates to Microsoft QuadTree
-    http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/
-    """
-    quad_key = ''
-    for i in range(zoom, 0, -1):
-        digit = 0
-        mask = 1 << (i-1)
-        if (tx & mask) != 0:
-            digit += 1
-        if (ty & mask) != 0:
-            digit += 2
-        quad_key  += str(digit)
-
-    return quad_key
-
-
 if __name__ == '__main__':
     args = docopt(__doc__, version='0.1')
 
@@ -146,18 +128,10 @@ if __name__ == '__main__':
 
         def convert_line_to_tile(line):
             z, x, y = line.split('/')
-            return {
-                'x': int(x),
-                'y': int(y),
-                'z': int(z)
-            }
+            return { 'x': int(x), 'y': int(y), 'z': int(z) }
 
         with open(args['<list_file>'], "r") as file_handle:
-            tiles = [convert_line_to_tile(l) for l in file_handle]
-
-            # Sorting the tiles should result in besser job
-            # locality when dividing it into batches
-            tiles.sort(key=lambda t: quad_tree(t['z'], t['x'], t['y']))
+            tiles = (convert_line_to_tile(l) for l in file_handle)
 
             for job in split_tiles_into_batch_jobs(tiles, batch_size):
                 print(json.dumps(job), flush=True)
