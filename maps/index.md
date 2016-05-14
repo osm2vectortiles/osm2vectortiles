@@ -99,11 +99,19 @@ published: true
 		selectedStyle = 4;
 	}
 	// instantiate map clipboard
-	  new Clipboard('.map-clipboard-button', {
+	new Clipboard('.map-clipboard-button', {
 	    text: function(trigger) {
 	        return document.getElementsByClassName("gist-data")[selectedStyle].innerText;
 	    }
 	});
+
+	function showCopiedHint() {
+		var mapClipboardText = document.querySelector("#map-clipboard-text")
+		mapClipboardText.innerText = "Copied to clipboard!";
+		setTimeout(function(){
+			mapClipboardText.innerText = "Copy example";
+		}, 800);
+	}
 </script>
 <div>
 	<div id="bright">
@@ -123,8 +131,8 @@ published: true
 	</div>
 </div>
 <div id="map-clipboard">
-	<button class="map-clipboard-button">
+	<button class="map-clipboard-button" onclick="showCopiedHint()">
 	    <img src="/img/clipboard-white.svg" class="map-clipboard-img" alt="Copy to clipboard">
-	    <div>Copy example</div>
+	    <div id="map-clipboard-text">Copy example</div>
 	</button>
 </div>

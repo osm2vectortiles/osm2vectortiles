@@ -80,7 +80,7 @@ function init() {
 
   var country = document.querySelector('#country');
   if(country) {
-    var template = '<div class="col12 download-item"><div class="col4 download-title" onclick="{{{ link }}}">{{ title }}</div><div class="col2" onclick="{{{ link }}}">{{ size }}</div><div class="col6 clipboard"><input id="{{ extract_name }}" class="clipboard-input" value="{{ url }}"><button class="clipboard-button" data-clipboard-target="#{{ extract_name }}"><img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard"></button></div></div>';
+    var template = '<div class="col12 download-item"><div class="col4 download-title" onclick="{{{ link }}}">{{ title }}</div><div class="col2" onclick="{{{ link }}}">{{ size }}</div><div class="col6 clipboard"><input id="{{ extract_name }}" class="clipboard-input" value="{{ url }}"><button class="clipboard-button hint--bottom hint--rounded" data-clipboard-target="#{{ extract_name }}" onclick="setHint(this, \'Copied!\')" onmouseout="setHint(this, \'Copy to clipboard\')"><img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard"></button></div></div>';
     Mustache.parse(template);
     getData("https://raw.githubusercontent.com/osm2vectortiles/osm2vectortiles/master/src/create-extracts/country_extracts.tsv", function(data) {
       data.forEach(function(d) {
@@ -117,7 +117,7 @@ function init() {
 
   var city = document.querySelector('#city');
   if(city) {
-    var template = '<div class="col12 download-item"><div class="col4 download-title" onclick="{{{ link }}}">{{ title }}</div><div class="col2" onclick="{{{ link }}}">{{ size }}</div><div class="col6 clipboard"><input id="{{ extract_name }}" class="clipboard-input" value="{{ url }}"><button class="clipboard-button" data-clipboard-target="#{{ extract_name }}"><img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard"></button></div></div>';
+    var template = '<div class="col12 download-item"><div class="col4 download-title" onclick="{{{ link }}}">{{ title }}</div><div class="col2" onclick="{{{ link }}}">{{ size }}</div><div class="col6 clipboard"><input id="{{ extract_name }}" class="clipboard-input" value="{{ url }}"><button class="clipboard-button hint--bottom hint--rounded" data-clipboard-target="#{{ extract_name }}" onclick="setHint(this, \'Copied!\')" onmouseout="setHint(this, \'Copy to clipboard\')"><img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard"></button></div></div>';
     Mustache.parse(template);
     getData("https://raw.githubusercontent.com/osm2vectortiles/osm2vectortiles/master/src/create-extracts/city_extracts.tsv", function(data) {
       data.forEach(function(d) {
@@ -156,4 +156,8 @@ function showCity() {
   document.querySelector("#city").style.display = "block";
   document.querySelector("#country").style.display = "none";
   document.querySelector("#planet").style.display = "none";
+}
+
+function setHint(element, hint) {
+  element.setAttribute("data-hint", hint)
 }
