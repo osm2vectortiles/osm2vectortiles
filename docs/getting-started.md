@@ -6,42 +6,59 @@ published: true
 
 # Getting Started
 
-In this tutorial you will learn how to serve vector tiles from an mbtiles file and how to display them in your browser. 
+In this tutorial you will learn how to serve vector tiles from a MBTiles file and how to display them in your browser.
 
 ## Serve Vector Tiles
 
-In order to render your map with Mapbox GL JS you need to set up a simple server which serves the vector tiles. The following script does exactly that it takes an mbtiles file and serves the containing vector tiles.
+In order to render your map with Mapbox GL JS you need install a simple tileserver
+that supports serving vector tiles.
 
-<script src="https://gist.github.com/manuelroth/8c03fe64bb2926e7f96e688c6bb1353c.js"></script>
-
-An mbtiles file is essentialy just a sqlite database with a specific schema. The script listens on port 3000 and answers request in the form of `/<mbtiles-name>/<z>/<x>/<y>.pbf` and returns the vector tile at the requested xyz-coordinate.
-
-We have prepared a repository containing all the necessary files for you. Simply run the follwoing commands and the vector tiles are getting served. Other extracts can be found under the [downloads section](http://osm2vectortiles.org/downloads){:target="_blank"}.
 
 ```bash
-git clone https://github.com/osm2vectortiles/mbtiles-server-example
-npm install
-wget https://osm2vectortiles/downloads/zurich.mbtiles
-node index.js
+npm install -g tileserver-vector
 ```
+
+Apart from the vector tiles you also need to serve the fonts and icons needed in your styles.
+We prepared a repository containing Mapbox GL example styles and the necessary font and icon files.
+
+```bash
+git clone https://github.com/osm2vectortiles/mapbox-gl-styles.git
+cd mapbox-gl-styles
+```
+
+The most essential part is choosing the vector tiles you want to serve.
+Head over to the [Downloads]() section and choose your country or city extract or even the entire planet.
+The vector tiles are stored in the MBTiles SQLite database you downloaded now.
+Download the MBTiles file into the same directory and name it `osm2vectortiles.mbtiles`.
+
+```bash
+curl -o osm2vectortiles.mbtiles https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/zurich.mbtiles
+```
+
+Now start the tileserver in the same directory.
+
+```bash
+tileserver-vector
+```
+
+If you visit `localhost:3000` you will be greeted with the following page.
+
+![Image of tileserver gl]()
 
 ## Display a map in your browser
 
-Now that the vector tiles are getting served, we can move on to display a map in your browser. The following HTML file defines a full screen map using a custom map style.
+Now that the vector tiles are available, we can move on to display a map in your browser.
+The following HTML file defines a full-screen map using a custom Mapbox GL style.
 
 <script src="https://gist.github.com/manuelroth/06380f112ff31a9b8f65b4971f1ee910.js"></script>
 
-The `bright-v9.json` file defines how each feature of the map should be styled and where the assets like vector tiles, fonts and icons should come from. Following you can see a simplified version of the style. The vector tiles server we created before is referenced as the source for the vector tiles.
+The `bright-v9.json` file defines how each feature of the map should be styled and where the assets like vector tiles, fonts and icons are stored.
+Following you can see a simplified version of the style.
+The vector tiles server we created before is now referenced as the source.
 
 <script src="https://gist.github.com/manuelroth/d67f1ae67dddbb659ff17a7bb854096d.js"></script>
 
-To get you started quickly we have created a repository with the necessary files and assets. Run the following commands and you should see the map in your browser.
-
-```bash
-git clone https://github.com/osm2vectortiles/mapbox-gl-js-example
-npm install http-server -g
-http-server
-```
+You can open the HTML file with your browser to checkout the webmap.
 
 ## Use our Public CDN for serving vector tiles
 
