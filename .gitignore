@@ -4,6 +4,8 @@ __pycache__/
 *$py.class
 
 # Data files
+import/
+export/
 *.mbtiles
 *.pbf
 *.gz
