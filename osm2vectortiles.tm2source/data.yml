@@ -4,6 +4,16 @@ _prefs:
   mapid: ''
   rev: ''
   saveCenter: true
+# Various parts to be included later on
+_parts:
+  database: &database
+    host: db
+    type: postgis
+    dbname: osm
+    user: osm
+    password: osm
+    port: 5432
+    extent: -20037508.34,-20037508.34,20037508.34,20037508.34
 attribution: '<a href="http://www.openstreetmap.org/about/" target="_blank">&copy; OpenStreetMap contributors</a>'
 center: 
   - 8.5388
@@ -15,16 +25,12 @@ description: |-
 Layer: 
   - id: landuse
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: geometry
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -71,8 +77,6 @@ Layer:
             ) AS landuse_z9toz14
             WHERE geometry && !bbox!
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       class: "One of: agriculture, cemetery, glacier, grass, hospital, industrial, park, parking, piste, pitch, rock, sand, school, scrub, wood, aboriginal lands"
@@ -82,16 +86,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: waterway
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: ''
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -115,8 +115,6 @@ Layer:
           ) AS waterway
           WHERE geometry && !bbox!
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       class: "One of: river, canal, stream, stream_intermittent, ditch, drain"
@@ -126,16 +124,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: water
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: ''
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -180,8 +174,6 @@ Layer:
           ) AS water
           WHERE geometry && !bbox!
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: {}
     properties: 
@@ -189,16 +181,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: aeroway
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: geometry
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -214,8 +202,6 @@ Layer:
           ) AS aeroway
           WHERE geometry && !bbox!
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       type: "One of: runway, taxiway, apron"
@@ -224,16 +210,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: barrier_line
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: ''
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -242,8 +224,6 @@ Layer:
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) = 14
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       class: "One of: fence, hedge, cliff, gate"
@@ -252,16 +232,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: building
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: geometry
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -278,8 +254,6 @@ Layer:
           WHERE geometry && !bbox!
           ORDER BY ST_YMin(ST_Envelope(geometry)) DESC
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       underground: "Text. Whether building is underground. One of: 'true', 'false'"
@@ -288,16 +262,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: landuse_overlay
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: geometry
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -335,8 +305,6 @@ Layer:
           ) AS landuse_overlay
           WHERE geometry && !bbox!
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       class: "One of: national_park, wetland, wetland_noveg"
@@ -346,16 +314,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: road
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: geometry
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -399,8 +363,6 @@ Layer:
               ORDER BY z_order ASC
            ) AS ordered_roads
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       class: "One of: 'motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'link', 'street', 'street_limited', 'pedestrian', 'construction', 'track', 'service', 'ferry', 'path', 'golf'"
@@ -412,16 +374,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: admin
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: ''
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -457,8 +415,6 @@ Layer:
           ) AS admin
           WHERE geometry && !bbox!
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       admin_level: The OSM administrative level of the boundary
@@ -469,16 +425,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: country_label
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: wkb_geometry
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -525,8 +477,6 @@ Layer:
             )
           )
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       code: ISO 3166-1 Alpha-2 code
@@ -543,16 +493,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: marine_label
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: ''
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -589,8 +535,6 @@ Layer:
             )
           )
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       labelrank: Number, 1-6. Useful for styling text sizes.
@@ -607,16 +551,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: state_label
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: ''
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -639,8 +579,6 @@ Layer:
             )
           )
         ) AS states
-      type: postgis
-      user: osm
     description: ''
     fields: 
       abbr: Abbreviated state name
@@ -657,16 +595,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: place_label
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: geometry
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         ( SELECT * FROM (
@@ -727,8 +661,6 @@ Layer:
                   OR (z(!scale_denominator!) = 6 AND localrank < 8)
                   OR z(!scale_denominator!) <= 5
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       capital: "Admin level the city is a capital of, if any. One of: 2, 3, 4, 5, 6, null"
@@ -748,16 +680,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: water_label
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: ''
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -788,8 +716,6 @@ Layer:
           ) AS water_label
           WHERE geometry && !bbox!
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       area: The area of the water polygon in Mercator meters²
@@ -805,16 +731,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: poi_label
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: ''
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -834,8 +756,6 @@ Layer:
             WHERE z(!scale_denominator!) = 14
               AND geometry && !bbox!
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       localrank: Number. Priority relative to nearby POIs. Useful for limiting label density.
@@ -855,16 +775,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: road_label
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: geometry
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -914,8 +830,6 @@ Layer:
              OR (z(!scale_denominator!) BETWEEN 11 AND 12 AND localrank < 5)
              OR (z(!scale_denominator!) BETWEEN 13 AND 14)
         ) AS t2
-      type: postgis
-      user: osm
     description: ''
     fields: 
       class: "One of: motorway, motorway_link, 'trunk', 'primary', 'secondary', 'tertiary', 'link', 'street', 'street_limited', 'pedestrian', 'construction', 'track', 'service', 'ferry', 'path', 'golf'"
@@ -936,16 +850,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: waterway_label
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: geometry
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -967,8 +877,6 @@ Layer:
           WHERE geometry && !bbox!
           AND linelabel(z(!scale_denominator!), name, geometry)
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       class: "One of: river, canal, stream, stream_intermittent"
@@ -985,16 +893,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: airport_label
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: geometry
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -1013,8 +917,6 @@ Layer:
           WHERE geometry && !bbox!
           AND z(!scale_denominator!) BETWEEN 9 AND 14
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       maki: "One of: airport, airfield, heliport, rocket"
@@ -1032,16 +934,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: rail_station_label
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: geometry
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -1064,8 +962,6 @@ Layer:
           ) AS t
           WHERE geometry && !bbox!
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       maki: "One of: rail, rail-metro, rail-light, entrance"
@@ -1082,16 +978,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: mountain_peak_label
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: ''
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -1110,8 +1002,6 @@ Layer:
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) BETWEEN 12 AND 14
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       elevation_ft: Integer elevation in feet
@@ -1129,16 +1019,12 @@ Layer:
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: housenum_label
     Datasource: 
-      dbname: osm
-      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      <<: *database
       geometry_field: ''
       geometry_table: ''
-      host: db
       key_field: osm_id
       key_field_as_attribute: false
       max_size: 512
-      password: osm
-      port: 5432
       srid: ''
       table: |-
         (
@@ -1147,8 +1033,6 @@ Layer:
           WHERE geometry && !bbox!
             AND z(!scale_denominator!) = 14
         ) AS data
-      type: postgis
-      user: osm
     description: ''
     fields: 
       house_num: House number
