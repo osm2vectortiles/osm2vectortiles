@@ -1,4 +1,4 @@
-function init() {
+document.addEventListener("DOMContentLoaded", function() {
 	function getExtractMetadata(url, callback) {
 		var xmlHttp = new XMLHttpRequest();
 		xmlHttp.onreadystatechange = function() {
@@ -131,8 +131,7 @@ function init() {
 
 	// instantiate download clipboard
 	new Clipboard('.clipboard-button');
-}
-window.onload = init;
+});
 
 function showPlanet() {
   document.querySelector("#city").style.display = "none";

@@ -1,6 +1,4 @@
-/* Navbar-top */
-
-function init() {
+document.addEventListener("DOMContentLoaded", function() {
   /* Navbar Hamburger */
   var navsideBtn = document.querySelector('.navside-btn');
   if (navsideBtn) {
@@ -39,5 +37,4 @@ function init() {
       }
     };
   }
-}
-window.onload = init;
+});
