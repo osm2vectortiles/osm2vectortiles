@@ -49,83 +49,61 @@ document.addEventListener("DOMContentLoaded", function() {
 		return "0 MB";
 	}
 
-	var search_countries = document.querySelector('#search_countries');
-	if (search_countries) {
-		search_countries.onkeyup = function() {
-		  var searchText = search_countries.value.toLowerCase();
-		  var countries = document.querySelector('#country').children;
-		  for(var i = 1; i <= countries.length - 1; ++i) {
-		    var element = countries[i];
-		    var countryName = element.children[0].children[0].textContent.toLowerCase();
-		    if(!( countryName.indexOf(searchText) != -1 )) {
-		      element.style.display = 'none';
+	function addKeyupEventListener(element, selector) {
+		element.onkeyup = function() {
+		  var searchText = element.value.toLowerCase();
+		  var items = document.querySelector(selector).children;
+		  for(var i = 1; i <= items.length - 1; ++i) {
+		    var item = items[i];
+		    var itemName = item.children[0].children[0].textContent.toLowerCase();
+		    if(!( itemName.indexOf(searchText) != -1 )) {
+		      item.style.display = 'none';
 		    } else {
-		      element.style.display = 'block';
+		      item.style.display = 'block';
 		    }
 		  }
 		}
 	}
 
-	var country = document.querySelector('#country');
-	if(country) {
-		var url = "https://s3-eu-west-1.amazonaws.com/osm2vectortiles-downloads/metadata.xml"; // https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/?prefix=v1.0/extracts/
-		getBucketMetadata(url, function(bucketMetadata) {
-			var template = '<div class="col12 download-item"><div class="col4 download-title" onclick="{{{ link }}}">{{ title }}</div><div class="col2" onclick="{{{ link }}}">{{ size }}</div><div class="col6 clipboard"><input id="{{ extract_name }}" class="clipboard-input" value="{{ url }}"><button class="clipboard-button hint--bottom hint--rounded" data-clipboard-target="#{{ extract_name }}" onclick="setHint(this, \'Copied!\')" onmouseout="setHint(this, \'Copy to clipboard\')"><img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard"></button></div></div>';
-			Mustache.parse(template);
-			getExtractMetadata("https://raw.githubusercontent.com/osm2vectortiles/osm2vectortiles/master/src/create-extracts/country_extracts.tsv", function(data) {
-				data.forEach(function(d) {
-					var data = {
-					  "link": "location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/" + d.extract + ".mbtiles'",
-					  "url": "https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/" + d.extract + ".mbtiles",
-					  "extract_name": d.extract,
-					  "title": d.country,
-					  "size": getSizeByExtractName(bucketMetadata, "v1.0/extracts/" + d.extract + ".mbtiles")
-					};
-					var element = document.createElement("div");
-					element.innerHTML = Mustache.render(template, data);
-					document.querySelector("#country").appendChild(element);
-				});
+	function renderItems(url, template, bucketMetadata, selector) {
+		getExtractMetadata(url, function(data) {
+			data.forEach(function(d) {
+				if(selector === "#city") {
+					var title = d.country + ", " + d.city;
+				} else {
+					var title = d.country;
+				}
+				var data = {
+				  "link": "location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/" + d.extract + ".mbtiles'",
+				  "url": "https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/" + d.extract + ".mbtiles",
+				  "extract_name": d.extract,
+				  "title": title,
+				  "size": getSizeByExtractName(bucketMetadata, "v1.0/extracts/" + d.extract + ".mbtiles")
+				};
+				var element = document.createElement("div");
+				element.innerHTML = Mustache.render(template, data);
+				document.querySelector(selector).appendChild(element);
 			});
 		});
 	}
 
+	var search_countries = document.querySelector('#search_countries');
 	var search_cities = document.querySelector('#search_cities');
-	if (search_cities) {
-		search_cities.onkeyup = function() {
-		  var searchText = search_cities.value.toLowerCase();
-		  var cities = document.querySelector('#city').children;
-		  for(var i = 1; i <= cities.length - 1; ++i) {
-		    var element = cities[i];
-		    var countryName = element.children[0].children[0].textContent.toLowerCase();
-		    if(!( countryName.indexOf(searchText) != -1 )) {
-		      element.style.display = 'none';
-		    } else {
-		      element.style.display = 'block';
-		    }
-		  }
-		}
+	if (search_cities && search_countries) {
+		addKeyupEventListener(search_countries, "#country");
+		addKeyupEventListener(search_cities, "#city");
 	}
 
+	var country = document.querySelector('#country');
 	var city = document.querySelector('#city');
-	if(city) {
-		var url = "https://s3-eu-west-1.amazonaws.com/osm2vectortiles-downloads/metadata.xml";
-		getBucketMetadata(url, function(bucketMetadata) {
+	if(city && country) {
+		var metadataUrl = "https://s3-eu-west-1.amazonaws.com/osm2vectortiles-downloads/metadata.xml"; // https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/?prefix=v1.0/extracts/
+		getBucketMetadata(metadataUrl, function(bucketMetadata) {
 			var template = '<div class="col12 download-item"><div class="col4 download-title" onclick="{{{ link }}}">{{ title }}</div><div class="col2" onclick="{{{ link }}}">{{ size }}</div><div class="col6 clipboard"><input id="{{ extract_name }}" class="clipboard-input" value="{{ url }}"><button class="clipboard-button hint--bottom hint--rounded" data-clipboard-target="#{{ extract_name }}" onclick="setHint(this, \'Copied!\')" onmouseout="setHint(this, \'Copy to clipboard\')"><img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard"></button></div></div>';
 			Mustache.parse(template);
-			getExtractMetadata("https://raw.githubusercontent.com/osm2vectortiles/osm2vectortiles/master/src/create-extracts/city_extracts.tsv", function(data) {
-				data.forEach(function(d) {
-					var data = {
-					  "link": "location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/" + d.extract + ".mbtiles'",
-					  "url": "https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/" + d.extract + ".mbtiles",
-					  "extract_name": d.extract,
-					  "title": d.country + ", " + d.city,
-					  "size": getSizeByExtractName(bucketMetadata, "v1.0/extracts/" + d.extract + ".mbtiles")
-					};
-					var element = document.createElement("div");
-					element.innerHTML = Mustache.render(template, data);
-					document.querySelector("#city").appendChild(element);
-				});
-			});
+			var extractUrl = "https://raw.githubusercontent.com/osm2vectortiles/osm2vectortiles/master/src/create-extracts/";
+			renderItems(extractUrl + "country_extracts.tsv", template, bucketMetadata, "#country");
+			renderItems(extractUrl + "city_extracts.tsv", template, bucketMetadata, "#city");
 		});
 	}
 
