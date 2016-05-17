@@ -14,15 +14,15 @@ the [Open Database License](https://tldrlegal.com/license/odc-open-database-lice
 
 <div class="row">
   <div class="col12">
-	  <div class="col4 download-section" onclick="showPlanet()">
+	  <div class="col4 download-section" onclick="showSection('planet')">
 	    <div class="download-section-circle" style="background-image: url(/img/planet.png)"></div>
 	    <h2>Planet</h2>
 	  </div>
-	  <div class="col4 download-section" onclick="showCountry()">
+	  <div class="col4 download-section" onclick="showSection('country')">
 	  	<div class="download-section-circle" style="background-image: url(/img/country.png);"></div>
 	    <h2>Country</h2>
 	  </div>
-	  <div class="col4 download-section" onclick="showCity()">
+	  <div class="col4 download-section" onclick="showSection('city')">
 	  	<div class="download-section-circle" style="background-image: url(/img/city.png)"></div>
 	    <h2>City</h2>
 	  </div>

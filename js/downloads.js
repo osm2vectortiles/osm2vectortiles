@@ -111,22 +111,15 @@ document.addEventListener("DOMContentLoaded", function() {
 	new Clipboard('.clipboard-button');
 });
 
-function showPlanet() {
-  document.querySelector("#city").style.display = "none";
-  document.querySelector("#country").style.display = "none";
-  document.querySelector("#planet").style.display = "block";
-}
-
-function showCountry() {
-  document.querySelector("#city").style.display = "none";
-  document.querySelector("#country").style.display = "block";
-  document.querySelector("#planet").style.display = "none";
-}
-
-function showCity() {
-  document.querySelector("#city").style.display = "block";
-  document.querySelector("#country").style.display = "none";
-  document.querySelector("#planet").style.display = "none";
+var downloadSections = ["city", "country", "planet"];
+function showSection(selectedSection) {
+	downloadSections.forEach(function(downloadSection) {
+		if(selectedSection === downloadSection) {
+			document.querySelector("#" + downloadSection).style.display = "block";
+		} else {
+			document.querySelector("#" + downloadSection).style.display = "none";
+		}
+	});
 }
 
 function setHint(element, hint) {
