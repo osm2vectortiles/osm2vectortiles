@@ -21,12 +21,19 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+DROP TABLE IF EXISTS grid_z9 CASCADE;
+CREATE TABLE grid_z9 AS
+SELECT tile_x AS x, tile_y AS y, tile_z AS z, tile_geometry AS geometry
+FROM zoom_level_grid(9);
+
+CREATE INDEX ON grid_z9 USING gist (geometry);
+
 DROP TABLE IF EXISTS osm_landuse_split_polygon CASCADE;
 CREATE TABLE osm_landuse_split_polygon AS
 SELECT id, type, timestamp,
-       ST_Intersection(p.geometry, grid.tile_geometry) AS geometry
+       ST_Intersection(p.geometry, grid.geometry) AS geometry
 FROM osm_landuse_polygon AS p
-LEFT OUTER JOIN zoom_level_grid(8) AS grid ON (ST_Intersects(p.geometry, grid.tile_geometry))
+LEFT OUTER JOIN grid_z9 AS grid ON (p.geometry && grid.geometry)
 WHERE ST_Area(p.geometry) > 1000000000;
 
 CREATE INDEX ON osm_landuse_split_polygon USING gist (geometry);
