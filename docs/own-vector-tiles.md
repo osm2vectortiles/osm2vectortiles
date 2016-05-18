@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Create your own Vector Tiles
+title: Generate your own Vector Tiles
 published: true
 ---
 
-# Create your own vector tiles
+# Generate your own vector tiles
 
 We use Docker extensively for development and deployment.
 The easiest way to get started is using [Docker Compose](https://www.docker.com/docker-compose){:target="_blank"}.

@@ -177,16 +177,27 @@ body{
 
 .download-section {
   display: -webkit-flex; /* Safari */
-  -webkit-align-items: center; /* Safari 7.0+ */
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
+  -webkit-align-items: center; /* Safari 7.0+ */
   align-items: center;
+
+  @media(max-width: 479px){
+      -webkit-flex-direction: row;
+      flex-direction: row;
+  }
+
+  h2 {
+    @media(max-width: 479px){
+      margin-left: 40px;
+    }
+  }
 }
 
 .download-section:hover {
   cursor: pointer;
-  background-color: white;
+  background-color: #F3F3F3;
 }
 
 .download-section-circle {
@@ -205,6 +216,14 @@ body{
         -webkit-border-radius: 75px;
         -moz-border-radius: 75px;
     }
+
+    @media(max-width: 770px){
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
+    }
 }
 
 .download-item {
@@ -221,6 +240,11 @@ body{
   -webkit-flex-direction: row;
   flex-direction: row;
   align-items: center;
+
+  @media(max-width: 479px) {
+      -webkit-flex-direction: row;
+      flex-direction: row;
+  }
 }
 
 .download-item:hover {
@@ -322,6 +346,11 @@ body{
   width: 15px;
   margin: 0px !important;
   margin-right: 7px !important;
+}
+
+.docs-section:hover {
+  cursor: pointer;
+  background-color: #F3F3F3;
 }
 
 #country, #city {
