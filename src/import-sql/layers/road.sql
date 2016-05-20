@@ -103,7 +103,6 @@ BEGIN
         WHEN class = 'track' THEN road_type_value(class, tracktype)
         WHEN class = 'service' THEN road_type_value(class, service)
         WHEN class = 'golf' THEN 'golf'
-        WHEN class IN ('major_rail', 'minor_rail') THEN 'rail'
         WHEN class = 'mtb' THEN 'mountain_bike'
         WHEN class = 'aerialway' AND type IN ('gondola', 'mixed_lift', 'chair_lift') THEN road_type_value(class, type)
         WHEN class = 'aerialway' AND type = 'cable_car' THEN 'aerialway:cablecar'
