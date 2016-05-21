@@ -42,20 +42,6 @@ the [Open Database License](https://tldrlegal.com/license/odc-open-database-lice
 		</div>
 	</div>
 	<div class="col12 download-item">
-		<div class="col4 download-title" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z5.mbtiles'">
-			Planet from zoom level 0 to 5
-		</div>
-		<div class="col2" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z5.mbtiles'">
-			20 MB
-		</div>
-		<div class="col6 clipboard">
-			<input id="world_z0-z5" class="clipboard-input" value="https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z5.mbtiles">
-			<button class="clipboard-button hint--bottom hint--rounded" data-hint="Copy to clipboard" data-clipboard-target="#world_z0-z5" onclick="setHint(this, 'Copied!')" onmouseout="setHint(this, 'Copy to clipboard')">
-			    <img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard">
-			</button>
-		</div>
-	</div>
-	<div class="col12 download-item">
 		<div class="col4 download-title" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z8.mbtiles'">
 			Planet from zoom level 0 to 8
 		</div>
@@ -65,6 +51,20 @@ the [Open Database License](https://tldrlegal.com/license/odc-open-database-lice
 		<div class="col6 clipboard">
 			<input id="world_z0-z8" class="clipboard-input" value="https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z8.mbtiles">
 			<button class="clipboard-button hint--bottom hint--rounded" data-clipboard-target="#world_z0-z8" onclick="setHint(this, 'Copied!')" onmouseout="setHint(this, 'Copy to clipboard')">
+			    <img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard">
+			</button>
+		</div>
+	</div>
+	<div class="col12 download-item">
+		<div class="col4 download-title" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z5.mbtiles'">
+			Planet from zoom level 0 to 5
+		</div>
+		<div class="col2" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z5.mbtiles'">
+			10 MB
+		</div>
+		<div class="col6 clipboard">
+			<input id="world_z0-z5" class="clipboard-input" value="https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z5.mbtiles">
+			<button class="clipboard-button hint--bottom hint--rounded" data-hint="Copy to clipboard" data-clipboard-target="#world_z0-z5" onclick="setHint(this, 'Copied!')" onmouseout="setHint(this, 'Copy to clipboard')">
 			    <img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard">
 			</button>
 		</div>
