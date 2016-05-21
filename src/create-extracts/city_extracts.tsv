@@ -69,7 +69,7 @@ novisad_serbia.mbtiles	serbia	novisad	45.472	19.651	45.180	19.968
 klaipeda_lithuania.mbtiles	lithuania	klaipeda	55.797	21.075	55.613	21.241
 vilnius_lithuania.mbtiles	lithuania	vilnius	54.796	25.004	54.569	25.480
 brasov_romania.mbtiles	romania	brasov	45.746	25.380	45.300	25.800
-wieluń_poland.mbtiles	poland	wieluń	51.249	18.532	51.201	18.606
+wielun_poland.mbtiles	poland	wielun	51.249	18.532	51.201	18.606
 lviv_ukraine.mbtiles	ukraine	lviv	50.148	23.587	49.573	24.433
 dnipropetrovsk_ukraine.mbtiles	ukraine	dnipropetrovsk	48.595	34.747	48.335	35.274
 kirovograd_ukraine.mbtiles	ukraine	kirovograd	48.760	31.923	48.281	32.623
@@ -101,7 +101,7 @@ oradea_romania.mbtiles	romania	oradea	47.145	21.839	47.008	22.038
 brno_czech-republic.mbtiles	czech-republic	brno	49.357	16.268	48.951	16.940
 katowice_poland.mbtiles	poland	katowice	50.706	18.115	50.055	19.604
 trondheim_norway.mbtiles	norway	trondheim	63.631	9.869	62.995	11.767
-bodø_norway.mbtiles	norway	bodø	67.356	14.232	67.247	14.672
+bodo_norway.mbtiles	norway	bodo	67.356	14.232	67.247	14.672
 lund_sweden.mbtiles	sweden	lund	55.740	13.140	55.678	13.263
 malmo_sweden.mbtiles	sweden	malmo	55.680	12.715	55.485	13.167
 oslo_norway.mbtiles	norway	oslo	60.424	9.691	58.938	11.493
@@ -370,7 +370,7 @@ marburg_germany.mbtiles	germany	marburg	50.884	8.599	50.732	8.863
 regensburg_germany.mbtiles	germany	regensburg	49.076	12.028	48.966	12.192
 copenhagen_denmark.mbtiles	denmark	copenhagen	55.950	11.894	55.491	13.147
 galway_ireland.mbtiles	ireland	galway	53.306	-9.138	53.252	-8.934
-münster_germany.mbtiles	germany	münster	52.060	7.473	51.840	7.774
+munster_germany.mbtiles	germany	münster	52.060	7.473	51.840	7.774
 brighton_england.mbtiles	england	brighton	50.883	-0.251	50.775	-0.047
 cuneo_italy.mbtiles	italy	cuneo	44.530	7.398	44.308	7.718
 erfurt_germany.mbtiles	germany	erfurt	51.080	10.854	50.890	11.174
@@ -380,7 +380,7 @@ bern_switzerland.mbtiles	switzerland	bern	47.023	7.330	46.885	7.561
 hof_germany.mbtiles	germany	hof	50.355	11.806	50.267	11.972
 dijon_france.mbtiles	france	dijon	47.364	4.974	47.256	5.114
 odense_denmark.mbtiles	denmark	odense	55.691	9.753	54.931	10.875
-gießen_germany.mbtiles	germany	gießen	50.635	8.555	50.526	8.764
+giessen_germany.mbtiles	germany	giessen	50.635	8.555	50.526	8.764
 southampton_england.mbtiles	england	southampton	50.956	-1.479	50.877	-1.322
 leipzig_germany.mbtiles	germany	leipzig	51.459	12.179	51.227	12.600
 ingolstadt_germany.mbtiles	germany	ingolstadt	48.822	11.254	48.683	11.504
@@ -677,7 +677,7 @@ portland_oregon.mbtiles	oregon	portland	45.897	-123.521	45.096	-122.110
 sioux-city_iowa.mbtiles	iowa	sioux-city	42.578	-96.507	42.367	-96.283
 boston_massachusetts.mbtiles	massachusetts	boston	42.420	-71.191	42.228	-70.923
 oklahoma-city_oklahoma.mbtiles	oklahoma	oklahoma-city	35.713	-97.811	35.274	-97.278
-juaréz_mexico.mbtiles	mexico	juaréz	31.784	-106.592	31.524	-106.294
+juarez_mexico.mbtiles	mexico	juaréz	31.784	-106.592	31.524	-106.294
 chattanooga_tennessee.mbtiles	tennessee	chattanooga	35.844	-86.385	34.252	-82.979
 allentown_pennsylvania.mbtiles	pennsylvania	allentown	40.623	-75.543	40.550	-75.418
 sacramento_california.mbtiles	california	sacramento	38.955	-121.821	38.395	-120.995
