@@ -74,11 +74,11 @@ document.addEventListener("DOMContentLoaded", function() {
 					var title = d.country;
 				}
 				var data = {
-				  "link": "location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/" + d.extract + ".mbtiles'",
-				  "url": "https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/" + d.extract + ".mbtiles",
+				  "link": "location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/extracts/" + d.extract + ".mbtiles'",
+				  "url": "https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/extracts/" + d.extract + ".mbtiles",
 				  "extract_name": d.extract,
 				  "title": title,
-				  "size": getSizeByExtractName(bucketMetadata, "v1.0/extracts/" + d.extract + ".mbtiles")
+				  "size": getSizeByExtractName(bucketMetadata, "v2.0/extracts/" + d.extract + ".mbtiles")
 				};
 				var element = document.createElement("div");
 				element.innerHTML = Mustache.render(template, data);
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var country = document.querySelector('#country');
 	var city = document.querySelector('#city');
 	if(country && city) {
-		var metadataUrl = "https://s3-eu-west-1.amazonaws.com/osm2vectortiles-downloads/metadata.xml"; // https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/?prefix=v1.0/extracts/
+		var metadataUrl = "https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/?prefix=v2.0/extracts/";
 		getBucketMetadata(metadataUrl, function(bucketMetadata) {
 			var template = '<div class="col12 download-item"><div class="col4 download-title" onclick="{{{ link }}}">{{ title }}</div><div class="col2" onclick="{{{ link }}}">{{ size }}</div><div class="col6 clipboard"><input id="{{ extract_name }}" class="clipboard-input" value="{{ url }}"><button class="clipboard-button hint--bottom hint--rounded" data-clipboard-target="#{{ extract_name }}" onclick="setHint(this, \'Copied!\')" onmouseout="setHint(this, \'Copy to clipboard\')"><img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard"></button></div></div>';
 			Mustache.parse(template);
