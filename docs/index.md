@@ -10,24 +10,32 @@ The following tutorials explain how you can use the OSM2VectorTiles project. Fee
 
 <div class="row">
 	<div class="col12">
-		<div class="col6 docs-section" onclick="location.href='/docs/getting-started'">
+        <a href="/docs/getting-started" class="docs-section">
+		<div class="col6">
 			<h2>Getting Started</h2>
-			<p>Quickly get started using OSM2VectorTiles to display beautiful maps in your browser. This tutorial explains how to serve the downloadable Vector Tiles and show them in your browser.</p>
+			<p>Quickly get started using OSM2VectorTiles to display maps in your browser. This tutorial explains how to serve downloaded Vector Tiles and use them in your browser.</p>
 		</div>
-		<div class="col6 docs-section" onclick="location.href='/docs/create-map-with-mapbox-studio'">
+        </a>
+        <a href="/docs/create-map-with-mapbox-studio" class="docs-section">
+		<div class="col6">
 			<h2>Design beautiful maps with Mapbox Studio</h2>
 			<p>Design beautiful maps in Mapbox Studio and use it together with OSM2VectorTiles to host your own map.</p>
 		</div>
+        </a>
 	</div>
 	<div class="col12">
-		<div class="col6 docs-section" onclick="location.href='/docs/own-vector-tiles'">
+        <a href="/docs/own-vector-tiles" class="docs-section">
+		<div class="col6">
 			<h2>Generate your own Vector Tiles</h2>
 			<p>Run the process to generate Vector Tiles yourself. In this tutorial you will learn how to use OSM2VectorTiles to create Vector Tiles for your disired region.</p>
 		</div>
-		<div class="col6 docs-section" onclick="location.href='/docs/extracts'">
+        </a>
+        <a href="/docs/extracts" class="docs-section">
+		<div class="col6">
 			<h2>Create your own Extract</h2>
 			<p>Can't find your desired region in the downloads section? No problem, this tutorial will show you how to create your own extract.</p>
 		</div>
+        </a>
     </div>
 </div>
 

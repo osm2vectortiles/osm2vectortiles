@@ -348,9 +348,12 @@ body{
   margin-right: 7px !important;
 }
 
-.docs-section:hover {
-  cursor: pointer;
+.docs-section:hover > div {
   background-color: #F3F3F3;
+}
+
+.docs-section {
+  color: #606c71;
 }
 
 #country, #city {
