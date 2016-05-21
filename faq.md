@@ -14,7 +14,7 @@ Because the data is derived from OpenStreetMap [you are required to credit OpenS
 
 ## Will the Extracts and Planet download be updated with new OSM data?
 
-We plan to provide weekly updates of the open vector tile data with the newest sources of the OpenStreetMap planet dump.
+We provide weekly updates of the open vector tile data with the newest sources of the OpenStreetMap planet dump.
 
 ## Where should I report bugs in the map?
 
