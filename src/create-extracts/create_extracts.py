@@ -17,17 +17,16 @@ Options:
   --target-dir=<target-dir>     Target directory to put extracts in [default: ./]
 """
 
-import json
+import shutil
 import subprocess
 import sqlite3
 import csv
 import os.path
-from collections import namedtuple
 from multiprocessing.dummy import Pool as ProcessPool
 from docopt import docopt
 
 ATTRIBUTION = '<a href="http://www.openstreetmap.org/about/" target="_blank">&copy; OpenStreetMap contributors</a>'
-VERSION = '1.5'
+VERSION = '2.0'
 
 
 class Extract(object):
@@ -83,6 +82,7 @@ def create_extract(extract, source_file, extract_file):
         '--bounds={}'.format(extract.bounds()),
         '--minzoom', str(extract.min_zoom),
         '--maxzoom', str(extract.max_zoom),
+        '--timeout=200000',
         source, sink
     ]
 
@@ -102,20 +102,6 @@ def update_metadata(mbtiles_file, metadata):
 
     for key, value in metadata.items():
         upsert_entry(key, value)
-
-
-def patch_mbtiles(source_file, target_file):
-    conn = sqlite3.connect(mbtiles_file)
-    conn.executescript(
-        """
-        PRAGMA journal_mode=PERSIST;
-        PRAGMA page_size=80000;
-        PRAGMA synchronous=OFF;
-        ATTACH DATABASE '{}' AS source;
-        REPLACE INTO map SELECT * FROM source.map;
-        REPLACE INTO images SELECT * FROM source.images;
-        """.format(source_file)
-    )
 
 
 def parse_extracts(tsv_file):
@@ -144,7 +130,7 @@ def upload_mbtiles(mbtiles_file):
     access_key = os.environ['S3_ACCESS_KEY']
     secret_key = os.environ['S3_SECRET_KEY']
     bucket_name = os.getenv('S3_BUCKET_NAME', 'osm2vectortiles-downloads')
-    prefix = os.getenv('S3_PREFIX', '{}/{}/'.format(VERSION, 'extracts'))
+    prefix = os.getenv('S3_PREFIX', 'v{}/{}/'.format(VERSION, 'extracts'))
 
     subprocess.check_call([
         's3cmd',
@@ -166,22 +152,24 @@ if __name__ == '__main__':
     source_file = args['<source_file>']
 
     def process_extract(extract):
-        patch_src = args['--patch-from']
 
         extract_file = os.path.join(target_dir, extract.extract + '.mbtiles')
         print('Create extract {}'.format(extract_file))
+
+        # Instead of patching copy over the patch source as target and
+        # write directly to it (since that works concurrently).
+        patch_src = args['--patch-from']
+        if patch_src:
+            print('Use patch from {} as base'.format(patch_src))
+            shutil.copyfile(patch_src, extract_file)
+
         create_extract(extract, source_file, extract_file)
         print('Update metadata {}'.format(extract_file))
         update_metadata(extract_file, extract.metadata(extract_file))
 
-        if patch_src:
-            print('Patch from {}'.format(patch_src))
-            patch_mbtiles(patch_src, extract_file)
-
         if upload:
             print('Upload file {}'.format(extract_file))
             upload_mbtiles(extract_file)
-
 
     if args['bbox']:
         process_count = int(args['--concurrency'])
