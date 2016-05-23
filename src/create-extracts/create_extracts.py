@@ -19,7 +19,7 @@ Options:
 
 import json
 import subprocess
-import mbutil
+import sqlite3
 import csv
 import os.path
 from collections import namedtuple
@@ -94,7 +94,7 @@ def update_metadata(mbtiles_file, metadata):
     Update metadata key value pairs inside the MBTiles file
     with the provided metadata
     """
-    conn = mbutil.mbtiles_connect(mbtiles_file)
+    conn = sqlite3.connect(mbtiles_file)
 
     def upsert_entry(key, value):
         conn.execute("DELETE FROM metadata WHERE name='{}'".format(key))
@@ -105,7 +105,7 @@ def update_metadata(mbtiles_file, metadata):
 
 
 def patch_mbtiles(source_file, target_file):
-    conn = mbutil.mbtiles_connect(target_file)
+    conn = sqlite3.connect(mbtiles_file)
     conn.executescript(
         """
         PRAGMA journal_mode=PERSIST;
