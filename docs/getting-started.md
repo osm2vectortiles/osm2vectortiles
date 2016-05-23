@@ -28,7 +28,7 @@ curl -o zurich.mbtiles https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch
 Start the tileserver in the same directory.
 
 ```bash
-tileserver-gl-light
+tileserver-gl-light zurich.mbtiles
 ```
 
 ## Display a map in your browser

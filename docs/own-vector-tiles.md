@@ -76,7 +76,7 @@ Optional: Merge lower zoom levels (z0 to z5) into extract (prerequisite: sqlite3
 Download lower zoom level extract.
 
 ```bash
-wget -P ./export/ https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/world_z0-z5.mbtiles
+wget -P ./export/ https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z5.mbtiles
 ```
 
 Download the `patch.sh` script from [the Mapbox mbutil project](https://github.com/mapbox/mbutil){:target="_blank"}.
@@ -89,7 +89,7 @@ chmod +x patch
 Merge lower zoom levels into extract.
 
 ```bash
-./patch "./export/world_z0-z5.mbtiles" "./export/zurich.mbtiles"
+./patch "./export/planet_z0-z5.mbtiles" "./export/zurich.mbtiles"
 ```
 
 Serve the tiles as raster tiles from `export` directory.
