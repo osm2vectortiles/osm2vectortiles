@@ -103,6 +103,9 @@ def update_metadata(mbtiles_file, metadata):
     for key, value in metadata.items():
         upsert_entry(key, value)
 
+    conn.commit()
+    conn.close()
+
 
 def parse_extracts(tsv_file):
     with open(args['<tsv_file>'], "r") as file_handle:
