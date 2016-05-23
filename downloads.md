@@ -30,15 +30,18 @@ the [Open Database License](https://tldrlegal.com/license/odc-open-database-lice
 </div>
 
 <div id="planet">
-	<div class="col12 download-item" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet.mbtiles'">
-		<div class="col4 download-title">
-			Full Planet
+	<div class="col12 download-item">
+		<div class="col4 download-title" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet.mbtiles'">
+			Full Planet <br/><small>MD5: a426f297c4936f97f2a14fc5a386e3dd</small>
 		</div>
-		<div class="col2">
+		<div class="col2" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet.mbtiles'">
 			50 GB
 		</div>
-		<div class="col6">
-			MD5: 8f72dc1279d27f0b3e29d27957c7ad7a
+		<div class="col6 clipboard">
+			<input id="world" class="clipboard-input" value="https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet.mbtiles">
+			<button class="clipboard-button hint--bottom hint--rounded" data-clipboard-target="#world" onclick="setHint(this, 'Copied!')" onmouseout="setHint(this, 'Copy to clipboard')">
+			    <img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard">
+			</button>
 		</div>
 	</div>
 	<div class="col12 download-item">

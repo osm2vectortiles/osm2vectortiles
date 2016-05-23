@@ -241,9 +241,18 @@ body{
   flex-direction: row;
   align-items: center;
 
+  small {
+    font-size: 70%;
+  }
+
   @media(max-width: 479px) {
       -webkit-flex-direction: row;
       flex-direction: row;
+
+  }
+
+  @media(max-width: 920px) {
+      small { display: none; }
   }
 }
 
