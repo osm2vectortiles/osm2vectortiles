@@ -31,4 +31,11 @@ Once you are satisfied with your personal map you can download the
 ## Deploy your Map
 
 Once you've downloaded the Mapbox GL Style JSON you need to modify it
-to work together with OSM2VectorTiles. The [getting started tutorial](/docs/getting-started){:target="_blank"} explains how this can be done.
+to work together with OSM2VectorTiles.
+
+Ensure you are serving vector tiles as explained in the [getting started tutorial](/docs/getting-started/).
+
+The MapboxGL style JSON you just downloaded defines how each feature of the map should be styled and where the assets like vector tiles, fonts and icons are stored.
+You need to point the vector tile source to the new location of your own vector tile server.
+
+<script src="https://gist.github.com/manuelroth/d67f1ae67dddbb659ff17a7bb854096d.js"></script>
