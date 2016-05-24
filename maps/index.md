@@ -42,7 +42,6 @@ published: true
 </div>
 <div id="map-clipboard">
 	<button class="map-clipboard-button" onclick="showCopiedHint()">
-	    <img src="/img/clipboard-white.svg" class="map-clipboard-img" alt="Copy to clipboard">
-	    <div id="map-clipboard-text">Copy example</div>
+		<span id="map-clipboard-text" class="map-clipboard-img">Copy example</spam>
 	</button>
 </div>
