@@ -6,265 +6,76 @@ published: true
 
 # Downloads
 
-The rendered vector tiles provided as download are under
+You can download the entire planet, country or even city extracts. All the extracts contain some world data on lower zoom levels. This lets your map look great without having to download the entire planet. We want you to use our vector tiles to build great stuff. Therefore the vector tiles are under
 the [Open Database License](https://tldrlegal.com/license/odc-open-database-license-(odbl)) the same license [OpenStreetMap is using](https://www.openstreetmap.org/copyright).
-The OSM data is from the planet file of [15th of November 2015](http://planet.osm.org/planet/2015/planet-151116.osm.bz2) rendered using [osm2vectortiles **v1.0**](https://github.com/osm2vectortiles/osm2vectortiles/releases/tag/v1.0). The  next rendering will take place in May 2016.
 
-## Planet
+- Don’t see your country or city listed below? Contribute by submitting a pull request on our list of [countries](https://github.com/osm2vectortiles/osm2vectortiles/blob/master/src/create-extracts/country_extracts.tsv){:target="_blank"} or [cities](https://github.com/osm2vectortiles/osm2vectortiles/blob/master/src/create-extracts/city_extracts.tsv){:target="_blank"}, or [just ask by opening a new issue](https://github.com/osm2vectortiles/osm2vectortiles/issues/new){:target="_blank"}.
+- Need any help? [Check out the documentation](/docs/)
 
-- **[Full planet (62GB)](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/world.mbtiles)** <small>MD5: 8f72dc1279d27f0b3e29d27957c7ad7a</small>
-- [Planet from z0 to z5 (20MB)](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/world_z0-z5.mbtiles)
-- [Planet from z0 to z8 (411MB)](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/world_z0-z8.mbtiles)
+<div class="row">
+  <div class="col12">
+	  <div class="col4 download-section" onclick="showSection('planet')">
+	    <div class="download-section-circle" style="background-image: url(/img/planet.png)"></div>
+	    <h2>Planet</h2>
+	  </div>
+	  <div class="col4 download-section" onclick="showSection('country')">
+	  	<div class="download-section-circle" style="background-image: url(/img/country.png);"></div>
+	    <h2>Country</h2>
+	  </div>
+	  <div class="col4 download-section" onclick="showSection('city')">
+	  	<div class="download-section-circle" style="background-image: url(/img/city.png)"></div>
+	    <h2>City</h2>
+	  </div>
+	</div>
+</div>
 
-
-## City Extracts
-
-All city extracts consist of a bounding box of the city containing all details down to zoom level 14.
-At lower zoom levels there is still some world data to make maps look good.
-
-- [Zurich](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/zurich.mbtiles)
-- [London](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/london.mbtiles)
-- [Paris](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/paris.mbtiles)
-- [Berlin](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/berlin.mbtiles)
-- [Moscow](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/moscow.mbtiles)
-- [Istanbul](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/istanbul.mbtiles)
-- [New York](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/new_york.mbtiles)
-- [San Francisco](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/san_francisco.mbtiles)
-- [Montreal](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/montreal.mbtiles)
-- [Rio de Janeiro](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/rio_de_janeiro.mbtiles)
-- [Mexico City](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/mexico_city.mbtiles)
-- [Bogota](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/bogota.mbtiles)
-- [Melbourne](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/melbourne.mbtiles)
-- [Singapore](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/singapore.mbtiles)
-- [Beijing](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/beijing.mbtiles)
-- [Tokyo](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/tokyo.mbtiles)
-- [Seoul](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/seoul.mbtiles)
-- [Delhi](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/delhi.mbtiles)
-- [Cairo](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/cairo.mbtiles)
-- [Lagos](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/lagos.mbtiles)
-
-## Country Extracts
-
-All country extracts consist of a bounding box of the country containing all details down to zoom level 14.
-At lower zoom levels there is still some world data to make maps look good.
-
-<input type="text" id="searchField" placeholder="Switzerland" alt="Search countries"/>
-
-- [Afghanistan](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/afghanistan.mbtiles)
-- [Albania](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/albania.mbtiles)
-- [Algeria](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/algeria.mbtiles)
-- [Andorra](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/andorra.mbtiles)
-- [Angola](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/angola.mbtiles)
-- [Anguilla](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/anguilla.mbtiles)
-- [Argentina](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/argentina.mbtiles)
-- [Armenia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/armenia.mbtiles)
-- [Australia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/australia.mbtiles)
-- [Austria](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/austria.mbtiles)
-- [Azerbaijan](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/azerbaijan.mbtiles)
-- [Bahrain](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/bahrain.mbtiles)
-- [Bangladesh](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/bangladesh.mbtiles)
-- [Barbados](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/barbados.mbtiles)
-- [Belarus](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/belarus.mbtiles)
-- [Belgium](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/belgium.mbtiles)
-- [Belize](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/belize.mbtiles)
-- [Benin](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/benin.mbtiles)
-- [Bermuda](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/bermuda.mbtiles)
-- [Bhutan](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/bhutan.mbtiles)
-- [Bolivia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/bolivia.mbtiles)
-- [Bosnia and Herzegovina](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/bosnia_and_herzegovina.mbtiles)
-- [Botswana](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/botswana.mbtiles)
-- [Brazil](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/brazil.mbtiles)
-- [British Indian Ocean Territory](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/british_indian_ocean_territory.mbtiles)
-- [British Virgin Islands](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/british_virgin_islands.mbtiles)
-- [Brunei](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/brunei.mbtiles)
-- [Bulgaria](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/bulgaria.mbtiles)
-- [Burkina Faso](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/burkina_faso.mbtiles)
-- [Burundi](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/burundi.mbtiles)
-- [Cote d'ivoire](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/cote_d_ivoire.mbtiles)
-- [Cambodia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/cambodia.mbtiles)
-- [Cameroon](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/cameroon.mbtiles)
-- [Canada](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/canada.mbtiles)
-- [Cape Verde](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/cape_verde.mbtiles)
-- [Cayman Islands](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/cayman_islands.mbtiles)
-- [Central African Republic](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/central_african_republic.mbtiles)
-- [Chad](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/chad.mbtiles)
-- [Chile](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/chile.mbtiles)
-- [China](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/china.mbtiles)
-- [Colombia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/colombia.mbtiles)
-- [Comoros](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/comoros.mbtiles)
-- [Congo-Brazzaville](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/congo-brazzaville.mbtiles)
-- [Congo-Kinshasa](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/congo-kinshasa.mbtiles)
-- [Cook Islands](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/cook_islands.mbtiles)
-- [Costa Rica](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/costa_rica.mbtiles)
-- [Croatia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/croatia.mbtiles)
-- [Cuba](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/cuba.mbtiles)
-- [Cyprus](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/cyprus.mbtiles)
-- [Czech Republic](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/czech_republic.mbtiles)
-- [Denmark](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/denmark.mbtiles)
-- [Djibouti](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/djibouti.mbtiles)
-- [Dominica](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/dominica.mbtiles)
-- [Dominican Republic](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/dominican_republic.mbtiles)
-- [East Timor](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/east_timor.mbtiles)
-- [Ecuador](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/ecuador.mbtiles)
-- [Egypt](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/egypt.mbtiles)
-- [El Salvador](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/el_salvador.mbtiles)
-- [Equatorial Guinea](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/equatorial_guinea.mbtiles)
-- [Eritrea](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/eritrea.mbtiles)
-- [Estonia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/estonia.mbtiles)
-- [Ethiopia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/ethiopia.mbtiles)
-- [Falkland Islands](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/falkland_islands.mbtiles)
-- [Faroe Islands](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/faroe_islands.mbtiles)
-- [Federated States of Micronesia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/federated_states_of_micronesia.mbtiles)
-- [Fiji](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/fiji.mbtiles)
-- [Finland](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/finland.mbtiles)
-- [France](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/france.mbtiles)
-- [Gabon](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/gabon.mbtiles)
-- [Georgia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/georgia.mbtiles)
-- [Germany](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/germany.mbtiles)
-- [Ghana](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/ghana.mbtiles)
-- [Greece](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/greece.mbtiles)
-- [Greenland](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/greenland.mbtiles)
-- [Grenada](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/grenada.mbtiles)
-- [Guatemala](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/guatemala.mbtiles)
-- [Guernsey](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/guernsey.mbtiles)
-- [Guinea-Bissau](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/guinea-bissau.mbtiles)
-- [Guinea](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/guinea.mbtiles)
-- [Guyana](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/guyana.mbtiles)
-- [Haiti](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/haiti.mbtiles)
-- [Honduras](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/honduras.mbtiles)
-- [Hungary](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/hungary.mbtiles)
-- [Iceland](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/iceland.mbtiles)
-- [India](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/india.mbtiles)
-- [Indonesia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/indonesia.mbtiles)
-- [Iran](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/iran.mbtiles)
-- [Iraq](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/iraq.mbtiles)
-- [Ireland](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/ireland.mbtiles)
-- [Isle of Man](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/isle_of_man.mbtiles)
-- [Israel](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/israel.mbtiles)
-- [Italy](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/italy.mbtiles)
-- [Jamaica](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/jamaica.mbtiles)
-- [Japan](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/japan.mbtiles)
-- [Jersey](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/jersey.mbtiles)
-- [Jordan](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/jordan.mbtiles)
-- [Kazakhstan](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/kazakhstan.mbtiles)
-- [Kenya](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/kenya.mbtiles)
-- [Kiribati](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/kiribati.mbtiles)
-- [Kuwait](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/kuwait.mbtiles)
-- [Kyrgyzstan](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/kyrgyzstan.mbtiles)
-- [Laos](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/laos.mbtiles)
-- [Latvia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/latvia.mbtiles)
-- [Lebanon](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/lebanon.mbtiles)
-- [Lesotho](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/lesotho.mbtiles)
-- [Liberia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/liberia.mbtiles)
-- [Libya](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/libya.mbtiles)
-- [Liechtenstein](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/liechtenstein.mbtiles)
-- [Lithuania](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/lithuania.mbtiles)
-- [Luxemburg](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/luxemburg.mbtiles)
-- [Macedonia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/macedonia.mbtiles)
-- [Madagascar](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/madagascar.mbtiles)
-- [Malawi](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/malawi.mbtiles)
-- [Malaysia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/malaysia.mbtiles)
-- [Maldives](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/maldives.mbtiles)
-- [Mali](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/mali.mbtiles)
-- [Malta](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/malta.mbtiles)
-- [Marshall Islands](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/marshall_islands.mbtiles)
-- [Mauritania](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/mauritania.mbtiles)
-- [Mauritius](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/mauritius.mbtiles)
-- [Mexico](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/mexico.mbtiles)
-- [Moldova](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/moldova.mbtiles)
-- [Monaco](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/monaco.mbtiles)
-- [Mongolia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/mongolia.mbtiles)
-- [Montenegro](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/montenegro.mbtiles)
-- [Montserrat](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/montserrat.mbtiles)
-- [Morocco](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/morocco.mbtiles)
-- [Mozambique](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/mozambique.mbtiles)
-- [Myanmar](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/myanmar.mbtiles)
-- [Namibia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/namibia.mbtiles)
-- [Nauru](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/nauru.mbtiles)
-- [Nepal](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/nepal.mbtiles)
-- [New Zealand](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/new_zealand.mbtiles)
-- [Nicaragua](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/nicaragua.mbtiles)
-- [Niger](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/niger.mbtiles)
-- [Nigeria](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/nigeria.mbtiles)
-- [Niue](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/niue.mbtiles)
-- [North Korea](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/north_korea.mbtiles)
-- [Norway](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/norway.mbtiles)
-- [Oman](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/oman.mbtiles)
-- [Pakistan](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/pakistan.mbtiles)
-- [Palau](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/palau.mbtiles)
-- [Palestine](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/palestine.mbtiles)
-- [Panama](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/panama.mbtiles)
-- [Papua New gUinea](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/papua_new_guinea.mbtiles)
-- [Paraguay](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/paraguay.mbtiles)
-- [Peru](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/peru.mbtiles)
-- [Philippies](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/philippines.mbtiles)
-- [Pitcairn Islands](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/pitcairn_islands.mbtiles)
-- [Poland](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/poland.mbtiles)
-- [Portugal](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/portugal.mbtiles)
-- [Puerto Rico](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/puerto_rico.mbtiles)
-- [Qatar](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/qatar.mbtiles)
-- [Republic of China](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/republic_of_china.mbtiles)
-- [Republic of Kosovo](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/republic_of_kosovo.mbtiles)
-- [Romania](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/romania.mbtiles)
-- [Russian Federation](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/russian_federation.mbtiles)
-- [Rwanda](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/rwanda.mbtiles)
-- [Sao Tome and Principe](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/sao_tome_and_principe.mbtiles)
-- [Sahrawi Arab Democratic Republic](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/sahrawi_arab_democratic_republic.mbtiles)
-- [Saint Helena/Ascension and Tristan da Cunha](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/saint_helena/ascension_and_tristan_da_cunha.mbtiles)
-- [Saint Kitts and Nevis](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/saint_kitts_and_nevis.mbtiles)
-- [Saint Lucia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/saint_lucia.mbtiles)
-- [Saint Vincent and the Grenadines](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/saint_vincent_and_the_grenadines.mbtiles)
-- [Samoa](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/samoa.mbtiles)
-- [San Marino](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/san_marino.mbtiles)
-- [Saudi Arabia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/saudi_arabia.mbtiles)
-- [Senegal](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/senegal.mbtiles)
-- [Serbia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/serbia.mbtiles)
-- [Seychelles](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/seychelles.mbtiles)
-- [Sierra Leone](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/sierra_leone.mbtiles)
-- [Singapore](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/singapore.mbtiles)
-- [Slovakia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/slovakia.mbtiles)
-- [Slovenia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/slovenia.mbtiles)
-- [Solomon Islands](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/solomon_islands.mbtiles)
-- [Somalia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/somalia.mbtiles)
-- [South Africa](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/south_africa.mbtiles)
-- [South Georgia and the South Sandwich Islands](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/south_georgia_and_the_south_sandwich_islands.mbtiles)
-- [South Korea](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/south_korea.mbtiles)
-- [South Sudan](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/south_sudan.mbtiles)
-- [Spain](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/spain.mbtiles)
-- [Sri Lanka](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/sri_lanka.mbtiles)
-- [Sudan](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/sudan.mbtiles)
-- [Suriname](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/suriname.mbtiles)
-- [Swaziland](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/swaziland.mbtiles)
-- [Sweden](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/sweden.mbtiles)
-- [Switzerland](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/switzerland.mbtiles)
-- [Syria](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/syria.mbtiles)
-- [Tajikistan](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/tajikistan.mbtiles)
-- [Tanzania](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/tanzania.mbtiles)
-- [Thailand](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/thailand.mbtiles)
-- [The Bahamas](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/the_bahamas.mbtiles)
-- [The Gambia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/the_gambia.mbtiles)
-- [The Netherlands](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/the_netherlands.mbtiles)
-- [Togo](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/togo.mbtiles)
-- [Tokelau](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/tokelau.mbtiles)
-- [Tonga](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/tonga.mbtiles)
-- [Trinidad and Tobago](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/trinidad_and_tobago.mbtiles)
-- [Tunisia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/tunisia.mbtiles)
-- [Turkey](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/turkey.mbtiles)
-- [Turkmenistan](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/turkmenistan.mbtiles)
-- [Turks and Caicos Islands](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/turks_and_caicos_islands.mbtiles)
-- [Tuvalu](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/tuvalu.mbtiles)
-- [Uganda](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/uganda.mbtiles)
-- [Ukraine](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/ukraine.mbtiles)
-- [United Arab Emirates](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/united_arab_emirates.mbtiles)
-- [United Kingdom](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/united_kingdom.mbtiles)
-- [United States of America](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/united_states_of_america.mbtiles)
-- [Uruguay](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/uruguay.mbtiles)
-- [Uzbekistan](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/uzbekistan.mbtiles)
-- [Vanuatu](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/vanuatu.mbtiles)
-- [Vatican City](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/vatican_city.mbtiles)
-- [Venezuela](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/venezuela.mbtiles)
-- [Vietnam](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/vietnam.mbtiles)
-- [Yemen](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/yemen.mbtiles)
-- [Zambales](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/zambales.mbtiles)
-- [Zambia](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/zambia.mbtiles)
-- [Zimbabwe](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/zimbabwe.mbtiles)
+<div id="planet">
+	<div class="col12 download-item">
+		<div class="col4 download-title" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet.mbtiles'">
+			Full Planet <br/><small>MD5: a426f297c4936f97f2a14fc5a386e3dd</small>
+		</div>
+		<div class="col2" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet.mbtiles'">
+			50 GB
+		</div>
+		<div class="col6 clipboard">
+			<input id="world" class="clipboard-input" value="https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet.mbtiles">
+			<button class="clipboard-button hint--bottom hint--rounded" data-clipboard-target="#world" onclick="setHint(this, 'Copied!')" onmouseout="setHint(this, 'Copy to clipboard')">
+			    <img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard">
+			</button>
+		</div>
+	</div>
+	<div class="col12 download-item">
+		<div class="col4 download-title" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z8.mbtiles'">
+			Planet from zoom level 0 to 8
+		</div>
+		<div class="col2" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z8.mbtiles'">
+			261 MB
+		</div>
+		<div class="col6 clipboard">
+			<input id="world_z0-z8" class="clipboard-input" value="https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z8.mbtiles">
+			<button class="clipboard-button hint--bottom hint--rounded" data-clipboard-target="#world_z0-z8" onclick="setHint(this, 'Copied!')" onmouseout="setHint(this, 'Copy to clipboard')">
+			    <img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard">
+			</button>
+		</div>
+	</div>
+	<div class="col12 download-item">
+		<div class="col4 download-title" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z5.mbtiles'">
+			Planet from zoom level 0 to 5
+		</div>
+		<div class="col2" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z5.mbtiles'">
+			10 MB
+		</div>
+		<div class="col6 clipboard">
+			<input id="world_z0-z5" class="clipboard-input" value="https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z5.mbtiles">
+			<button class="clipboard-button hint--bottom hint--rounded" data-hint="Copy to clipboard" data-clipboard-target="#world_z0-z5" onclick="setHint(this, 'Copied!')" onmouseout="setHint(this, 'Copy to clipboard')">
+			    <img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard">
+			</button>
+		</div>
+	</div>
+</div>
+<div id="country" class="col12">
+	<input type="text" id="search_countries" class="search-field" placeholder="Search..." alt="Search countries"/>
+</div>
+<div id="city" class="col12">
+	<input type="text" id="search_cities" class="search-field" placeholder="Search..." alt="Search cities"/>
+</div>

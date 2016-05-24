@@ -1,6 +1,4 @@
-/* Navbar-top */
-
-function init() {
+document.addEventListener("DOMContentLoaded", function() {
   /* Navbar Hamburger */
   var navsideBtn = document.querySelector('.navside-btn');
   if (navsideBtn) {
@@ -39,23 +37,4 @@ function init() {
       }
     };
   }
-
-  /* Search field in downloads section */
-  var searchField = document.querySelector('#searchField');
-  if (searchField) {
-    searchField.onkeyup = function() {
-      var searchText = searchField.value.toLowerCase();
-      var countries = document.querySelector('#searchField').parentNode.nextElementSibling.children;
-      for(var i = 0; i <= countries.length - 1; ++i) {
-        var element = countries[i];
-        var countryName = element.textContent.toLowerCase();
-        if(!( countryName.indexOf(searchText) != -1 )) {
-          element.style.display = 'none';
-        } else {
-          element.style.display = 'list-item';
-        }
-      }
-    }
-  }
-}
-window.onload = init;
+});

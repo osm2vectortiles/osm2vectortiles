@@ -4,41 +4,45 @@ title: Documentation
 published: true
 ---
 
-## User Documentation
+## Documentation
 
-Get started styling and using vector tiles.
+The following tutorials explain how you can use the OSM2VectorTiles project. Feel free to submit an [issue](https://github.com/osm2vectortiles/osm2vectortiles/issues/new), if you think something is missing.
 
-- Getting started
-  - [Display Map with tileserver-mapnik](/docs/start)
-  - [Display Map with Mapbox GL](/docs/display-map-with-mapbox-gl)
-- Create your own custom basemap
-  - [Create a Style with Mapbox Studio Classic](/docs/create-map-with-mapbox-studio-classic)
-  - [Create a Style with new Mapbox Studio](/docs/create-map-with-mapbox-studio)
-- Hosting
-  - [Serve Raster Tiles with Docker](/docs/serve-raster-tiles-docker)
-  - [Serve Vector Tiles](/docs/serve-vector-tiles)
-  - [Use public CDN](/docs/use-public-cdn)
-
-## Developer Documentation
-
-Documentation about how to create vector tiles yourself.
-Targeted at people who want to reuse our process or want to contribute.
-
-- Vector Tiles
-  - [Create your own Vector Tiles](/docs/own-vector-tiles)
-  - [Layer Reference](/docs/layer-reference)
-  - [Create your own Extract](/docs/extracts)
-- Data Source
-  - [Data Sources of OSM Vector Tiles](/docs/data-sources)
-- Import and Export
-  - [Import and Export Process](/docs/import-export-process)
-  - [Database Schema](/docs/database-schema)
-  - [Imposm Mapping](/docs/imposm-schema)
+<div class="row">
+	<div class="col12">
+        <a href="/docs/getting-started" class="docs-section">
+		<div class="col6">
+			<h2>Getting Started</h2>
+			<p>Quickly get started using OSM2VectorTiles to display maps in your browser. This tutorial explains how to serve downloaded Vector Tiles and use them in your browser.</p>
+		</div>
+        </a>
+        <a href="/docs/create-map-with-mapbox-studio" class="docs-section">
+		<div class="col6">
+			<h2>Design beautiful maps with Mapbox Studio</h2>
+			<p>Design beautiful maps in Mapbox Studio and use it together with OSM2VectorTiles to host your own map.</p>
+		</div>
+        </a>
+	</div>
+	<div class="col12">
+        <a href="/docs/own-vector-tiles" class="docs-section">
+		<div class="col6">
+			<h2>Generate your own Vector Tiles</h2>
+			<p>Run the process to generate Vector Tiles yourself. In this tutorial you will learn how to use OSM2VectorTiles to create Vector Tiles for your disired region.</p>
+		</div>
+        </a>
+        <a href="/docs/extracts" class="docs-section">
+		<div class="col6">
+			<h2>Create your own Extract</h2>
+			<p>Can't find your desired region in the downloads section? No problem, this tutorial will show you how to create your own extract.</p>
+		</div>
+        </a>
+    </div>
+</div>
 
 ## Video Tutorial
 
 [Tobin Bradley](http://fuzzytolerance.info/) created an awesome video tutorial series
-that will introduce you into web maps, vector tiles and using osm2vectortiles.
+that will introduce you into web maps, vector tiles and using OSM2VectorTiles.
 
 <iframe width="430" height="242" src="https://www.youtube.com/embed/xI7QkEodCac" frameborder="0" style="display: inline;" allowfullscreen></iframe>
 

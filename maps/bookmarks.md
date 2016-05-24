@@ -9,8 +9,8 @@ published: true
 A collection of global feature bookmarks
 for visually examining osm2vectortiles.
 
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.15.0/mapbox-gl.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.15.0/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.css' rel='stylesheet' />
 
 ## Cities
 
@@ -49,8 +49,6 @@ for visually examining osm2vectortiles.
 <div class="map-preview" data-lat="48.3535" data-lon="11.7918" data-zoom="13"></div>
 
 <script>
-	mapboxgl.accessToken = 'pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w';
-
 	var divs = document.querySelectorAll('.map-preview');
 
 	[].forEach.call(divs, function(div) {
@@ -59,7 +57,7 @@ for visually examining osm2vectortiles.
 		var zoom = parseFloat(div.getAttribute("data-zoom"));
 		var vectorMap = new mapboxgl.Map({
 		    container: div,
-		    style: '/styles/bright-v8.json',
+		    style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json',
 		    center: [lon, lat],
 		    zoom: zoom
 		});

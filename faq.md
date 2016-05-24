@@ -14,7 +14,7 @@ Because the data is derived from OpenStreetMap [you are required to credit OpenS
 
 ## Will the Extracts and Planet download be updated with new OSM data?
 
-We plan to provide weekly updates of the open vector tile data with the newest sources of the OpenStreetMap planet dump.
+We provide weekly updates of the open vector tile data with the newest sources of the OpenStreetMap planet dump.
 
 ## Where should I report bugs in the map?
 
@@ -50,10 +50,9 @@ For extensive use it is recommended to install your own tileserver or use a paid
 
 We are big fans of Kartotherian and Mapzen, but believe not only the process to produce vector tiles should be open, but also the rendered data to make it really easy for everyone to create and host
 their own maps.
-These projects provide public vector tile servers as well, but do not provide the vector tiles downloads.
-Additionally our projects has close compatibility to Mapbox Streets v5 and v6, which allows
-using the superior tooling from Mapbox for creating maps (such as open-source [MapBox Studio Classic](https://www.mapbox.com/mapbox-studio-classic/)).
-We are looking forward to contribute back to used open-source projects, and would love to see our tiles and styles (.tm2source) adopted in other projects like Kartotherian, and improved by the community.
+These projects provide public vector tile servers as well, but do not provide the vector tiles as download.
+Additionally our projects has close compatibility to Mapbox Streets v7, which allows
+using the superior tooling from Mapbox for creating maps (such as [Mapbox Studio](https://www.mapbox.com/mapbox-studio/)).
 
 ## Who is behind this project?
 

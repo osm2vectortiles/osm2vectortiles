@@ -46,7 +46,7 @@ input, select, button {
 input, textarea{
   display: block;
   padding: $input-padding-y $input-padding-x;
-  line-height: $input-line-height;
+  /*line-height: $input-line-height;*/
   color: $input-color;
   background-color: $input-bg;
   background-image: none;
