@@ -52,8 +52,7 @@ We are big fans of Kartotherian and Mapzen, but believe not only the process to 
 their own maps.
 These projects provide public vector tile servers as well, but do not provide the vector tiles as download.
 Additionally our projects has close compatibility to Mapbox Streets v7, which allows
-using the superior tooling from Mapbox for creating maps (such as [MapBox Studio](https://www.mapbox.com/mapbox-studio/)).
-We are looking forward to contribute back to used open-source projects, and would love to see our tiles and styles (.tm2source) adopted in other projects like Kartotherian, and improved by the community.
+using the superior tooling from Mapbox for creating maps (such as [Mapbox Studio](https://www.mapbox.com/mapbox-studio/)).
 
 ## Who is behind this project?
 
