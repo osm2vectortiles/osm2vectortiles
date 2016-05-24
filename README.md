@@ -8,6 +8,12 @@ This is the easiest way how to switch to OSM thanks to [MapBox](https://github.c
 
 ![Create vector tiles from OpenStreetMap data](http://osm2vectortiles.org/img/home-banner-icons.png)
 
+## Docs
+
+
+- **[Getting Started](http://osm2vectortiles.org/docs/getting-started/):** Quickly get started using OSM2VectorTiles to display maps in your browser. This tutorial explains how to serve downloaded Vector Tiles and use them in your browser.
+- **[Create new Mapbox GL style](http://osm2vectortiles.org/docs/create-map-with-mapbox-studio/):** Design beautiful maps with the new Mapbox Studio and use them together with osm2vectortiles. 
+
 ## Downloads
 
 Download the entire world, city or country extracts from http://osm2vectortiles.org/downloads.
