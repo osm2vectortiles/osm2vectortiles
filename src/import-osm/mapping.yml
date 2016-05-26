@@ -367,6 +367,7 @@ tables:
       - recreation_ground
       - sports_centre
       - pitch
+      - track
       natural:
       - glacier
       - sand
