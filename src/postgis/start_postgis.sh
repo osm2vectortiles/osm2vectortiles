@@ -3,7 +3,7 @@ cd
 
 echo "Install necessary tools"
 apt-get update
-apt-get install -y --no-install-recommends postgis wget ca-certificates postgresql 
+apt-get install -y --no-install-recommends postgis-2.1 wget ca-certificates postgresql postgresql-contrib postgresql-9.3-postgis-2.1
 
 export CARTODB_DIR=/opt/cartodb-postgresql
 export VT_UTIL_DIR=/opt/postgis-vt-util 
@@ -27,16 +27,15 @@ echo "Getting PostGIS-vt-util"
 mkdir -p /opt/postgis-vt-util
 wget -P /opt/postgis-vt-util --quiet "$VT_UTIL_URL"
 
-echo "Install PGtune" 
+echo "Install and run PGtune" 
 wget https://github.com/elitwin/pgtune/tarball/master
 tar -xzf master
 mv elitwin* pgtune
-rm -rf master elitwin*
+rm -rf master elitwin* pgtune
 python pgtune/pgtune --version 9.3 --connections 30 --type DW  --input-config $PGDATA/postgresql.conf --output-config $PGDATA/postgresql.conf.pgtune
 
 mv $PGDATA/postgresql.conf $PGDATA/postgresql.conf.backup
 mv $PGDATA/postgresql.conf.pgtune $PGDATA/postgresql.conf
-
 echo "listen_addresses='*'" >> $PGDATA/postgresql.conf
 
 service postgresql restart
@@ -47,7 +46,7 @@ function create_template_postgis() {
 }
 
 function execute_sql_into_template() {
-    psql -U $POSTGRES_USER -h localhost -d "template_postgis" -f "$sql_file"
+    psql -U $POSTGRES_USER -h localhost -d "template_postgis" -f "$1"
 }
 
 function install_vt_util() {
@@ -55,13 +54,12 @@ function install_vt_util() {
 }
 
 function create_postgis_extensions() {
-    psql -U $POSTGRES_USER -d $OSM_DB -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology; CREATE EXTENSION hstore; CREATE EXTENSION pgcrypto;"
-    psql -U $POSTGRES_USER -d template_postgis -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology; CREATE EXTENSION hstore; CREATE EXTENSION pgcrypto;"
+    psql -U $POSTGRES_USER -h localhost  -d template_postgis -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology; CREATE EXTENSION hstore; CREATE EXTENSION pgcrypto;"
 }
 
 function create_osm_db() {
-    psql -U $POSTGRES_USER -d "$POSTGRES_DB" -c "CREATE USER $OSM_USER WITH PASSWORD '$OSM_PASSWORD';"
-    psql -U $POSTGRES_USER -c "CREATE DATABASE $OSM_DB WITH TEMPLATE template_postgis OWNER $OSM_USER;"
+    psql -U $POSTGRES_USER -h localhost -c "CREATE USER $OSM_USER WITH PASSWORD '$OSM_PASSWORD';"
+    psql -U $POSTGRES_USER -h localhost  -c "CREATE DATABASE $OSM_DB WITH TEMPLATE template_postgis OWNER $OSM_USER;"
 }
 
 echo "Creating Template"
