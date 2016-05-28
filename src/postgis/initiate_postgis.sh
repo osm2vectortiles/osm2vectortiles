@@ -1,15 +1,24 @@
 # Intended for Ubuntu 14.04
-
-export POSTGIS_MAJOR=2.2
-export POSTGIS_VERSION=2.2.2+dfsg-1.pgdg80+1
+cd
 
 apt-get update
-apt-get install -y --no-install-recommends postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR=$POSTGIS_VERSION postgis=$POSTGIS_VERSION \
-apt-get install -y --no-install-recommends wget ca-certificates postgresql 
+apt-get install -y --no-install-recommends postgresql-9.3-postgis wget ca-certificates postgresql 
 
 export CARTODB_DIR=/opt/cartodb-postgresql
 export VT_UTIL_DIR=/opt/postgis-vt-util 
 export VT_UTIL_URL="https://raw.githubusercontent.com/mapbox/postgis-vt-util/v1.0.0/postgis-vt-util.sql"
+export PG_MAJOR=9.3
+export PGDATA=/etc/postgresql/$PG_MAJOR/main/
+export POSTGIS_MAJOR=2.2
+export POSTGRES_USER=postgres
+export POSTGRES_DB=osm
+
+echo "local all all peer" > $PGDATA/pg_hba.conf
+echo "host all all 127.0.0.1/32 trust" >> $PGDATA/pg_hba.conf
+echo "host all all ::1/128 trust" >> $PGDATA/pg_hba.conf
+echo "host all all 192.168.0.0/16 trust" >> $PGDATA/pg_hba.conf
+
+service postgresql restart
 
 mkdir -p /opt/postgis-vt-util
 wget -P /opt/postgis-vt-util --quiet "$VT_UTIL_URL"
@@ -18,9 +27,9 @@ wget -P /opt/postgis-vt-util --quiet "$VT_UTIL_URL"
 wget https://github.com/elitwin/pgtune/tarball/master
 tar -xzf master
 mv elitwin* pgtune
-rm -rf master
+rm -rf master elitwin*
 
-python /pgtune/pgtune --version 9.3 --connections 30 --type DW  --input-config $PGDATA/postgresql.conf --output-config $PGDATA/postgresql.conf.pgtune
+python pgtune/pgtune --version 9.3 --connections 30 --type DW  --input-config $PGDATA/postgresql.conf --output-config $PGDATA/postgresql.conf.pgtune
 
 function create_template_postgis() {
     PGUSER="$POSTGRES_USER" psql --dbname="$POSTGRES_DB" <<-'EOSQL'
@@ -51,7 +60,7 @@ function create_postgis_extensions() {
 			CREATE EXTENSION pgcrypto;
 		EOSQL
     done
-    }
+}
 
 create_template_postgis
 create_postgis_extensions
