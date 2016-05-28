@@ -6,10 +6,10 @@ system:
     rail-metro:
     - stop
     - subway
-    - tram_stop
     rail-light:
     - light_rail
     - halt
+    - tram_stop
     entrance:
     - subway_entrance
     

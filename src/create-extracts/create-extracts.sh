@@ -21,11 +21,11 @@ function main() {
         echo 'Skip upload since no S3_ACCESS_KEY was found.'
     fi
 
-    # Generate patch sources first
+    # Generate patch sources first but do not upload them
     python create_extracts.py zoom-level "$WORLD_MBTILES" \
-        --max-zoom=5 --target-dir="$EXTRACT_DIR" $upload_flag
+        --max-zoom=5 --target-dir="$EXTRACT_DIR"
     python create_extracts.py zoom-level "$WORLD_MBTILES" \
-        --max-zoom=8 --target-dir="$EXTRACT_DIR" $upload_flag
+        --max-zoom=8 --target-dir="$EXTRACT_DIR"
 
     python create_extracts.py bbox "$WORLD_MBTILES" "$CITIES_TSV" \
         --patch-from="$PATCH_SRC" --target-dir="$EXTRACT_DIR" $upload_flag
