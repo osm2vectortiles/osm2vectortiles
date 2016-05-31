@@ -8,7 +8,7 @@ published: true
 
 <div class="row pady-4 bordertop-block">
     <div class="col8">
-<p><a href="http://osm2vectortiles.org">OSM2VectorTiles</a> is a project simplifying installation of free world maps powered by OpenStreetMap. It offers freely downloadable OSM vector tiles, and <a href="github.com/osm2vectortiles/osm2vectortiles">a set of open-source tools</a> for use and generating of the maps.
+<p><a href="http://osm2vectortiles.org">OSM2VectorTiles</a> is a project simplifying installation of free world maps powered by OpenStreetMap. It offers freely downloadable OSM vector tiles, and <a href="https://github.com/osm2vectortiles/osm2vectortiles">a set of open-source tools</a> for use and generating of the maps.
 </p>
 
 <p>
