@@ -197,7 +197,7 @@ body{
 
 .download-section:hover {
   cursor: pointer;
-  background-color: #F3F3F3;
+  background-color: #F3F3F3 !important;
 }
 
 .download-section-circle {
@@ -361,9 +361,13 @@ body{
   color: #606c71;
 }
 
-#country, #city {
+#country-list, #city-list {
   display: none;
   padding: 0px 0px !important;
+}
+
+#planet-nav {
+  background-color: #F3F3F3;
 }
 
 #basic, #streets, #dark, #light {
