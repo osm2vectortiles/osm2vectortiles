@@ -9,8 +9,17 @@ published: true
 You can download the entire planet, country or even city extracts. All the extracts contain some world data on lower zoom levels. This lets your map look great without having to download the entire planet. We want you to use our vector tiles to build great stuff. Therefore the vector tiles are under
 the [Open Database License](https://tldrlegal.com/license/odc-open-database-license-(odbl)) the same license [OpenStreetMap is using](https://www.openstreetmap.org/copyright).
 
-- Don’t see your country or city listed below? Contribute by submitting a pull request on our list of [countries](https://github.com/osm2vectortiles/osm2vectortiles/blob/master/src/create-extracts/country_extracts.tsv){:target="_blank"} or [cities](https://github.com/osm2vectortiles/osm2vectortiles/blob/master/src/create-extracts/city_extracts.tsv){:target="_blank"}, or [just ask by opening a new issue](https://github.com/osm2vectortiles/osm2vectortiles/issues/new){:target="_blank"}.
-- Need any help? [Check out the documentation](/docs/)
+<ul>
+  <li>
+    Don’t see your country or city listed below? Contribute by submitting a pull request on our list of <a href="https://github.com/osm2vectortiles/osm2vectortiles/blob/master/src/create-extracts/country_extracts.tsv" target="_blank">countries</a> or <a href="https://github.com/osm2vectortiles/osm2vectortiles/blob/master/src/create-extracts/city_extracts.tsv" target="_blank">cities</a>, or <a href="https://github.com/osm2vectortiles/osm2vectortiles/issues/new" target="_blank">just ask by opening a new issue</a>.
+  </li>
+  <li>
+    Need any help? <a href="/docs/">Check out the documentation</a>
+  </li>
+  <li>
+    Full Planet and extracts were last updated on <span id="timestamp"></span>
+  </li>
+</ul>
 
 <div class="row">
   <div class="col12">

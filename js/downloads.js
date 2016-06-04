@@ -39,6 +39,13 @@ document.addEventListener("DOMContentLoaded", function() {
 	    return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
 	};
 
+	function formatTimestamp(timestampString) {
+		var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+		var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		var date = new Date(timestampString);
+		return weekdays[date.getUTCDay()] + ", " + date.getUTCDate() + " " + months[date.getUTCMonth()] + " " + date.getUTCFullYear() + " at " + date.getUTCHours() + ":" + date.getUTCMinutes() + " UTC";
+	}
+
 	function getSizeByExtractName(bucketMetadata, extractName) {
 		for(var i = 0; i < bucketMetadata.length; i++) {
 			var bucketMetadataName = bucketMetadata[i].children[0].innerHTML;
@@ -99,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	if(country && city) {
 		var metadataUrl = "https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/?prefix=v2.0/extracts/";
 		getBucketMetadata(metadataUrl, function(bucketMetadata) {
+			document.querySelector("#timestamp").innerHTML = formatTimestamp(bucketMetadata[0].children[1].innerHTML);
 			var template = '<div class="col12 download-item"><div class="col4 download-title" onclick="{{{ link }}}">{{ title }}</div><div class="col2" onclick="{{{ link }}}">{{ size }}</div><div class="col6 clipboard"><input id="{{ extract_name }}" class="clipboard-input" value="{{ url }}"><button class="clipboard-button hint--bottom hint--rounded" data-clipboard-target="#{{ extract_name }}" onclick="setHint(this, \'Copied!\')" onmouseout="setHint(this, \'Copy to clipboard\')"><img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard"></button></div></div>';
 			Mustache.parse(template);
 			var extractUrl = "https://raw.githubusercontent.com/osm2vectortiles/osm2vectortiles/master/src/create-extracts/";
