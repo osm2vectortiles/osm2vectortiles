@@ -53,7 +53,7 @@ class Extract(object):
     def center(self):
         center_lon = (self.min_lon + self.max_lon) / 2.0
         center_lat = (self.min_lat + self.max_lat) / 2.0
-        return '{},{},{}'.format(center_lat, center_lon, self.center_zoom)
+        return '{},{},{}'.format(center_lon, center_lat, self.center_zoom)
 
     def metadata(self, extract_file):
         return {

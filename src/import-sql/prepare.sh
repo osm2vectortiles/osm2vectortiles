@@ -57,6 +57,13 @@ function main() {
     else
         echo "Omitting index creation in $OSM_DB"
     fi
+
+    if [ "$SQL_SPLIT_POLYGON" = true ] ; then
+        echo "Split polygons for $OSM_DB"
+        exec_sql_file "${SQL_SPLIT_POLYGON_FILE}"
+    else
+        echo "Omitting splitting polygon for $OSM_DB"
+    fi
 }
 
 main
