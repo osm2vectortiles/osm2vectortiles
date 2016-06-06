@@ -42,6 +42,13 @@ published: true
 </div>
 <div id="map-clipboard">
 	<button class="map-clipboard-button" onclick="showCopiedHint()">
-		<span id="map-clipboard-text" class="map-clipboard-img">Copy example</spam>
+		<span id="map-clipboard-text" class="map-clipboard-img">Copy example</span>
 	</button>
+</div>
+<div class="container">
+  <div class="row pady-2">
+      <p>
+      The <a href="https://github.com/osm2vectortiles/mapbox-gl-styles">example styles</a> are derived from <a href="https://github.com/mapbox/mapbox-gl-styles">Mapbox Open Styles</a> and are copyright (c) 2014, Mapbox, all rights reserved.
+      </p>
+  </div>
 </div>
