@@ -1,5 +1,5 @@
 extract	country	city	top	left	bottom	right
-udine_italy Italy Udine 13.162,46.008,13.3,46.128
+udine_italy	Italy	Udine	13.162,46.008,13.3,46.128
 gaborone_botswana	Botswana	Gaborone	-24.488	25.757	-24.728	26.054
 annaba_algeria	Algeria	Annaba	36.970	7.695	36.866	7.793
 lilongwe_malawi	Malawi	Lilongwe	-13.860	33.652	-14.092	33.906
