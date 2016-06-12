@@ -38,9 +38,6 @@ function import_pbf() {
     echo "Create osm_water_point table with precalculated centroids"
     create_osm_water_point_table
 
-    echo "Split very large landuse polygons"
-    create_osm_landuse_split_polygon_table
-
     echo "Update osm_place_polygon with point geometry"
     update_points
 
@@ -62,10 +59,6 @@ function update_points() {
 
 function update_scaleranks() {
     exec_sql_file "update_scaleranks.sql"
-}
-
-function create_osm_landuse_split_polygon_table() {
-    exec_sql_file "landuse_split_polygon_table.sql"
 }
 
 function create_osm_water_point_table() {
@@ -177,9 +170,6 @@ function import_pbf_diffs() {
 
     echo "Create osm_water_point table with precalculated centroids"
     create_osm_water_point_table
-
-    echo "Split very large landuse polygons"
-    create_osm_landuse_split_polygon_table
 
     echo "Update osm_place_polygon with point geometry"
     update_points
