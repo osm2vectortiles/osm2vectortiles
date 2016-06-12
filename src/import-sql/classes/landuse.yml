@@ -43,6 +43,7 @@ system:
     - athletics
     - chess
     - pitch
+    - track
     rock:
     - rock
     - bare_rock

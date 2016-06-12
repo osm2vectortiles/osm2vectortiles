@@ -13,7 +13,8 @@ ENV SQL_FUNCTIONS_FILE=/usr/src/app/functions.sql \
     SQL_TRIGGERS_FILE=/usr/src/app/triggers.sql \
     SQL_XYZ_EXTENT_FILE=/usr/src/app/xyz_extent.sql \
     SQL_INDIZES_FILE=/usr/src/app/indizes.sql \
-    SQL_LAYERS_DIR=/usr/src/app/layers/
+    SQL_LAYERS_DIR=/usr/src/app/layers/ \
+    SQL_SPLIT_POLYGON_FILE=/usr/src/app/landuse_split_polygon_table.sql
 COPY . /usr/src/app
 
 # Generate class functions

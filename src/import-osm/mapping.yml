@@ -367,6 +367,7 @@ tables:
       - recreation_ground
       - sports_centre
       - pitch
+      - track
       natural:
       - glacier
       - sand
@@ -666,14 +667,14 @@ tables:
     - name: type
       type: mapping_value
     mapping:
+      station:
+      - subway
+      - light_rail
       railway:
       - station
       - halt
       - tram_stop
       - subway_entrance
-      station:
-      - subway
-      - light_rail
     type: point
   water_polygon:
     fields:
