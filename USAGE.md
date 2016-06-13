@@ -2,7 +2,7 @@
 
 If you've gotten this far, you've already explored the [documentation](http://osm2vectortiles.org/docs/) and likely have imported
 a smaller extract of the planet. If you're looking to adapt OSM2VectorTiles for your own purposes
-or run the process yourself this usage documentation is for you.
+or run the process yourself this usage documentation is for you. Many thanks to @stirringhalo for much of the usage documentation.
 
 ## Requirements
 
@@ -119,4 +119,18 @@ To work with the message queues and jobs we recommend using [pipecat](https://gi
 
 ### Merge MBtiles
 
+Please take a look at the component documentation of **[merge-jobs]((/src/merge-jobs))**.
+If you are using a public S3 url merging the job results is fairly straightforward.
 
+1. Ensure you have `export/planet.mbtiles` file present to merge the jobs into. Reuse a low level zoom extract generated earlier or download an existing low level zoom extract from http://osm2vectortiles.org/downloads/
+2. Merge jobs into planet file `docker-compose run merge-jobs`
+
+TODO: Check how it works with mock s3.
+
+### Apply Diff Updates
+
+Updates are performed on a rolling basis, where diffs are applied.
+
+### Render Diff Updates
+
+TODO: Detailed explanation how to do diff updates
