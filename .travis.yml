@@ -20,3 +20,6 @@ script:
   - docker-compose run update-osm-diff
   - docker-compose run import-osm-diff
   - docker-compose run changed-tiles
+  - docker-compose run generate-diff-jobs
+  - docker-compose run export-worker
+  - docker-compose run merge-jobs
