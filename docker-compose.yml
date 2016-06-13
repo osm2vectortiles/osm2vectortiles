@@ -124,7 +124,7 @@ import-sql:
    - postgis:db
   environment:
     SQL_CREATE_INDIZES: 'false'
-    SQL_SPLIT_POLYGON: 'false'
+    SQL_SPLIT_POLYGON: 'true'
 mapbox-studio:
   image: "osm2vectortiles/mapbox-studio"
   volumes:
