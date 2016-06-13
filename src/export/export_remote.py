@@ -145,7 +145,7 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
         elif msg['type'] == 'list':
             list_file = '/tmp/tiles.txt'
             with open(list_file, 'w') as fh:
-                write_list_file(fh)
+                write_list_file(fh, msg['tiles'])
 
             tilelive_cmd = render_tile_list_command(
                 source, sink,
@@ -173,12 +173,12 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
             durable_publish(channel, result_queue_name,
                             body=json.dumps(result_msg))
             channel.basic_ack(delivery_tag=method.delivery_tag)
-        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+        except:
             durable_publish(channel, failed_queue_name, body=body)
             channel.basic_ack(delivery_tag=method.delivery_tag)
             channel.stop_consuming()
             time.sleep(5)  # Give RabbitMQ some time
-            raise e
+            raise
 
     channel.basic_consume(callback, queue=queue_name)
     try:
