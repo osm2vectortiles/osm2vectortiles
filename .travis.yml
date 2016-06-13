@@ -14,12 +14,14 @@ script:
   - docker-compose run import-external
   - docker-compose run import-osm
   - docker-compose run import-sql
-  # Test export
+  # Test local export
   - docker-compose run export
   # Test changed tiles
   - docker-compose run update-osm-diff
   - docker-compose run import-osm-diff
   - docker-compose run changed-tiles
   - docker-compose run generate-diff-jobs
-  - docker-compose run export-worker
+  - docker-compose scale export-worker=1
+  - sleep 30
+  - docker-compose scale export-worker=0
   - docker-compose run merge-jobs
