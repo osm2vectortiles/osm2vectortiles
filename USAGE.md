@@ -117,7 +117,7 @@ To work with the message queues and jobs we recommend using [pipecat](https://gi
 7. Scale up the workers `docker-compose scale export-worker=4`
 8. Watch progress at RabbitMQ management interface at http://localhost:15672
 
-### Merge MBtiles
+### Merge MBTiles
 
 Please take a look at the component documentation of **[merge-jobs]((/src/merge-jobs))**.
 If you are using a public S3 url merging the job results is fairly straightforward.
@@ -130,7 +130,19 @@ TODO: Check how it works with mock s3.
 ### Apply Diff Updates
 
 Updates are performed on a rolling basis, where diffs are applied.
+At this stage we assume you have successfully imported the PBF into the database
+and rendered the planet once.
+
+1. Download latest OSM changelogs.
+  1. If you are working with the planet remove the `OSM_UPDATE_BASEURL` from the `environment` section in `update-osm-diff`.
+  2. Execute `docker-compose run update-osm-diff` to download latest changelogs **since the last change date of the planet.pbf**.
+2. Now import the downloaded OSM diffs in `export/latest.osc.gz` into the database with `docker-compose run import-osm-diff`. This may take up to half a day. 
+
+After that you have successfully applied the diff updates to the database and you can either rerender the entire planet or just the tiles that have changed.
+
 
 ### Render Diff Updates
 
-TODO: Detailed explanation how to do diff updates
+1. Calculate the changed tiles since the last diff import with `docker-compose up changed-tiles`. This will store the changed tiles in `export/tiles.txt`.
+2. TODO: Create job list
+3. Now schedule the jobs (similar to scheduling the entire planet).
