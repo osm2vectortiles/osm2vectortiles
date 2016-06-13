@@ -30,7 +30,7 @@ However to run the workflow at global scale you need significant infrastructure.
 The architecture of the project is structured into the import phase (ETL process),
 the changed tiles detection phase and the export phase (render vector tiles).
 
-![/src/etl_components.png](Workflow structured into components)
+![Workflow structured into components](/src/etl_components.png)
 
 ### Component Overview
 
@@ -49,8 +49,8 @@ Documentation for each component can be find in the respective source directory.
 
 **Changed Tile Detection Components**
 
-- **[update-osm-diff](/src/import-osm-diff)**: Download diffs from OpenStreetMap based on imported planet file.
-- **[import-osm-diff](/src/import-osm-diff)**: Import OpenStreetMap diff file created by **update-osm-diff**.
-- **[merge-osm-diff](/src/merge-osm-diff)**: Merge latest diff file into the old planet file.
 - **[changed-tiles](/src/changed-tiles)**: Calculate list of changed tiles
 - **[generate-jobs](/src/generate-jobs)**: Responsible for creating JSON jobs for rendering the planet initially or jobs for updating the planet.
+- **[update-osm-diff](/src/import-osm)**: Download diffs from OpenStreetMap based on imported planet file.
+- **[import-osm-diff](/src/import-osm)**: Import OpenStreetMap diff file created by **update-osm-diff**.
+- **[merge-osm-diff](/src/import-osm)**: Merge latest diff file into the old planet file.
