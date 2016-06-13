@@ -31,6 +31,14 @@ function main() {
     echo "Creating generated functions in $OSM_DB"
     exec_sql_file "$SQL_GENERATED_FILE"
     echo "Creating triggers in $OSM_DB"
+
+    if [ "$SQL_SPLIT_POLYGON" = true ] ; then
+        echo "Split polygons for $OSM_DB"
+        exec_sql_file "${SQL_SPLIT_POLYGON_FILE}"
+    else
+        echo "Omitting splitting polygon for $OSM_DB"
+    fi
+
     exec_sql_file "$SQL_TRIGGERS_FILE"
     echo "Creating layers in $OSM_DB"
     exec_sql_file "${SQL_LAYERS_DIR}admin.sql"
@@ -57,13 +65,6 @@ function main() {
         exec_sql_file "${SQL_INDIZES_FILE}"
     else
         echo "Omitting index creation in $OSM_DB"
-    fi
-
-    if [ "$SQL_SPLIT_POLYGON" = true ] ; then
-        echo "Split polygons for $OSM_DB"
-        exec_sql_file "${SQL_SPLIT_POLYGON_FILE}"
-    else
-        echo "Omitting splitting polygon for $OSM_DB"
     fi
 }
 
