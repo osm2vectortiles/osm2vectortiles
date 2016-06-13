@@ -30,6 +30,17 @@ However to run the workflow at global scale you need significant infrastructure.
 The architecture of the project is structured into the import phase (ETL process),
 the changed tiles detection phase and the export phase (render vector tiles).
 
+If you run the distributed workflow yourself, the following steps take place.
+A detailed explanation follows afterwards.
+
+1. Import external data sources into PostGIS
+2. Import OSM PBF into PostGIS
+3. Create a low level global extract from z0 to z8
+4. Generate jobs to render entire planet and submit them to message queue (RabbitMQ)
+5. Start rendering processes to work through submitted jobs
+6. Merge job results together into previous low level extract resulting in the final planet MBTiles
+7. Create country and city extracts from MBTiles
+
 ![Workflow structured into components](/src/etl_components.png)
 
 ### Component Overview
@@ -54,3 +65,58 @@ Documentation for each component can be find in the respective source directory.
 - **[update-osm-diff](/src/import-osm)**: Download diffs from OpenStreetMap based on imported planet file.
 - **[import-osm-diff](/src/import-osm)**: Import OpenStreetMap diff file created by **update-osm-diff**.
 - **[merge-osm-diff](/src/import-osm)**: Merge latest diff file into the old planet file.
+
+## Processing Steps
+
+### Prepare
+
+1. `git clone https://github.com/osm2vectortiles/osm2vectortiles.git`
+2. `cd osm2vectortiles`
+3. If you want to build the containers yourself execute `make fast` or `make`. Otherwise you will reuse the public prebuilt Docke rimages.
+4. Start and initialize database `docker-compose up -d postgis`
+5. Import external data sources `docker-compose run import-external``
+
+### Import OSM
+
+1. Download planet file or extract from [Planet OSM](http://planet.osm.org/) or [Geofabrik](https://www.geofabrik.de/data/download.html) and store it in `import` folder.
+  ```
+  wget http://planet.osm.org/pbf/planet-latest.osm.pbf
+  ```
+2. Import OSM with `docker-compose run import-osm`. Since the import happens in diff mode this can take up to 14hrs for the full planet
+3. Provision SQL needed to render the different layers with `docker-compose run import-sql`
+
+### Create Extract using Local Worker
+
+You are now able to use a single local worker to render a extract. This can be used to create a extract
+for a specific reason or generating low level vector tiles.
+
+1. Edit the `docker-compose.yml`.
+  1. If you want to create a low level extract from z0 to z8 set  `BBOX="-180, -85, 180, 85"` and `MIN_ZOOM=0` and `MAX_ZOOM=8`.
+  2. If you want to render only a specific reson set `BBOX` to your desired bounding box and `MAX_ZOOM=14`.
+2. Run `docker-compose export` which will store the resulting MBTiles in `export/tiles.mbtiles`
+
+
+### Distributed Planet Export
+
+You need to distribute the jobs to multiple workers for rendering the entire planet.
+To work with the message queues and jobs we recommend using [pipecat](https://github.com/lukasmartinelli/pipecat).
+
+1. Divide the planet into jobs from z8 down to z14. This will take some time. Save the `jobs.json` file for later so you don't need to regenerate if you need to do a full re-rendering.
+  ```
+  docker-compose run generate-jobs python generate_jobs.py pyramid 0 0 0 --job-zoom=8 > jobs.jso
+  ```
+2. Start up message queue server with `docker-compose up -d rabbitmq`
+3. Now configure the message queue endpoint to the host where your message queue is running. By default the message queue is exposed on the local port `5672`. If you are running it on a separate server you need to change the host.
+  ```
+  export AMQP_URI=amqp://osm:osm@localhost:5672/
+  ```
+5. Install pipecat ([installation docs](https://github.com/lukasmartinelli/pipecat#install))
+   1. `wget -O pipecat https://github.com/lukasmartinelli/pipecat/releases/download/v0.2/pipecat_linux_amd64`
+   2. `chmod +x pipecat`
+6. `cat jobs.json | ./pipecat publish jobs`
+7. Scale up the workers `docker-compose scale export-worker=4`
+8. Watch progress at RabbitMQ management interface at http://localhost:15672
+
+### Merge MBtiles
+
+
