@@ -24,6 +24,11 @@ will get you started.
 
 Download the entire world, city or country extracts from http://osm2vectortiles.org/downloads.
 
+## Develop
+
+You want to hack on OSM2VectorTiles yourself or are interested in running or adapting the workflow yourself.
+Take a look at the [detailed usage guide](USAGE.md) which explains the workflow and the components.
+
 ## License
 
 The project is under the MIT license while the data downloads use the [Open Database License](http://wiki.openstreetmap.org/wiki/Open_Database_License) from OpenStreetMap.
