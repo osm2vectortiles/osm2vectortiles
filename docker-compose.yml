@@ -41,14 +41,12 @@ update-osm-diff:
   volumes:
    - ./import:/data/import
   environment:
-     OSM_UPDATE_BASEURL: "http://download.geofabrik.de/europe/switzerland-updates/"
+     OSM_UPDATE_BASEURL: "http://download.geofabrik.de/europe/liechtenstein-updates/"
 merge-osm-diff:
   image: "osm2vectortiles/import-osm"
   command: ./import-mergediffs.sh
   volumes:
    - ./import:/data/import
-  environment:
-     OSM_UPDATE_BASEURL: "http://download.geofabrik.de/europe/switzerland-updates/"
 import-external:
   image: "osm2vectortiles/import-external"
   links:

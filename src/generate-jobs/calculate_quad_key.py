@@ -10,7 +10,7 @@ Options:
   -h --help                    Show this screen.
   --version                    Show version.
 """
-import system
+import sys
 import csv
 from docopt import docopt
 
@@ -36,12 +36,12 @@ def quad_tree(tx, ty, zoom):
 if __name__ == '__main__':
     args = docopt(__doc__, version='0.1')
 
-    writer = csv.writer(system.out)
+    writer = csv.writer(sys.stdout, delimiter=' ')
     with open(args['<list_file>'], "r") as file_handle:
         for line in file_handle:
             z, x, y = line.split('/')
 
             writer.writerow([
-                line,
+                line.strip(),
                 quad_tree(int(x), int(y), int(z))]
             )

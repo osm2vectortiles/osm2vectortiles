@@ -3,7 +3,7 @@ language: bash
 services:
   - docker
 before_install:
-  - wget -nc -P "$TRAVIS_BUILD_DIR/import" "http://download.geofabrik.de/europe/liechtenstein-160401.osm.pbf"
+  - wget -nc -P "$TRAVIS_BUILD_DIR/import" "http://download.geofabrik.de/europe/liechtenstein-160601.osm.pbf"
   - docker-compose pull import-external export import-osm postgis
   # Avoid building really expensive images
   - make fast
