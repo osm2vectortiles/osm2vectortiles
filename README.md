@@ -15,14 +15,14 @@ The following tutorials are targeted at users of the OSM2VectorTiles project.
 - **[Getting Started](http://osm2vectortiles.org/docs/getting-started/):** Quickly get started using OSM2VectorTiles to display maps in your browser. This tutorial explains how to serve downloaded Vector Tiles and use them in your browser.
 - **[Create new Mapbox GL style](http://osm2vectortiles.org/docs/create-map-with-mapbox-studio/):** Design beautiful maps with the new Mapbox Studio and use them together with osm2vectortiles.
 
+If you want to adapt the OSM2VectorTiles workflow to create vector tiles yourself the detailed usage guide
+will get you started.
+
+- **[Detailed Usage Guide](/USAGE.md)**: Create your own planet scale vector tiles with a distributed workflow using the OSM2VectorTiles components.
+
 ## Downloads
 
 Download the entire world, city or country extracts from http://osm2vectortiles.org/downloads.
-
-## Develop
-
-You want to hack on OSM2VectorTiles yourself or are interested in running or adapting the workflow yourself.
-Take a look at the [detailed usage guide](USAGE.md) which explains the workflow and the components.
 
 ## License
 
