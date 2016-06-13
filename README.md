@@ -30,7 +30,7 @@ The project is under the MIT license while the data downloads use the [Open Data
 
 ## Contribute
 
-The purpose of this project is to make OSM data more accessible to anybody. Any feedback or improvement is greatly appreciated. So feel free to submit a pull request or file a bug. You can also post feedback as GitHub issue.
+The purpose of this project is to make OSM data more accessible to anybody. Any feedback or improvement is greatly appreciated. So feel free to submit a pull request or file a bug. You can also post feedback as GitHub issue. A list of current contributors can be found in the [CONTRIBUTORS](/CONTRIBUTORS.md) file.
 
 You can help us to improve the documentation by editing the Markdown files and creating a pull request.
 The documentation is based on GitHub pages and is in the `gh-pages` branch.
