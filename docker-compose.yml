@@ -78,6 +78,15 @@ generate-jobs:
   image: "osm2vectortiles/generate-jobs"
   volumes:
    - ./export:/data/export
+  links:
+   - rabbitmq:rabbitmq
+generate-diff-jobs:
+  image: "osm2vectortiles/generate-jobs"
+  command: ./generate_list_jobs.sh
+  volumes:
+   - ./export:/data/export
+  links:
+   - rabbitmq:rabbitmq
 merge-jobs:
   image: "osm2vectortiles/merge-jobs"
   volumes:
