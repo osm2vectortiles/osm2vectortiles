@@ -51,7 +51,8 @@ def test_postgis_startup():
     dc = DockerCompose()
     dc.remove_all()
     dc.up('postgis')
-    time.sleep(5)
+    # PostGIS can take a long time to get ready
+    time.sleep(10)
 
 
 @pytest.mark.run(order=2)
