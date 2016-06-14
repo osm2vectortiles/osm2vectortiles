@@ -1,37 +1,16 @@
 sudo: required
-language: bash
+language: python
+python:
+  - "3.4"
 services:
   - docker
 before_install:
-  - wget -nc -P "$TRAVIS_BUILD_DIR/import" "http://download.geofabrik.de/europe/liechtenstein-160601.osm.pbf"
+  - wget -nc -P "$TRAVIS_BUILD_DIR/import" "http://download.geofabrik.de/europe/albania-160601.osm.pbf"
+  - wget -nc -O "planet.mbtiles" -P "$TRAVIS_BUILD_DIR/export" "https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z5.mbtiles"
   - docker-compose pull import-external export import-osm postgis
   # Avoid building really expensive images
   - make fast
+install: "pip install -r ./tools/integration-test/requirements.txt"
 script:
   # Test import
-  - docker-compose up -d postgis rabbitmq mock-s3
-  - sleep 10
-  - docker-compose run import-external
-  - docker-compose run import-osm
-  - docker-compose run import-sql
-  # Test local export
-  - docker-compose run export && mv export/tiles.mbtiles export/planet.mbtiles
-  # Test distributed export
-  - docker-compose run -e TILE_X=539 -e TILE_Y=359 -e TILE_Z=10 -e JOB_ZOOM=11 generate-jobs
-  - docker-compose scale export-worker=2
-  - sleep 60
-  - docker-compose scale export-worker=0
-  - docker-compose run -d merge-jobs
-  - sleep 10
-  - docker-compose stop merge-jobs
-  # Test changed tiles
-  - docker-compose run update-osm-diff
-  - docker-compose run import-osm-diff
-  - docker-compose run changed-tiles
-  - docker-compose run generate-diff-jobs
-  - docker-compose scale export-worker=1
-  - sleep 30
-  - docker-compose scale export-worker=0
-  - docker-compose run merge-jobs
-  - sleep 10
-  - docker-compose stop merge-jobs
+  - py.test -x ./tools/integration-test/integration_test.py

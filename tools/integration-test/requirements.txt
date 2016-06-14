@@ -1,0 +1,4 @@
+pytest==2.9.1
+docker-compose==1.7.1
+pytest-ordering==0.4
+-e git+https://github.com/lukasmartinelli/mbtoolbox.git@#egg=mbtoolbox
