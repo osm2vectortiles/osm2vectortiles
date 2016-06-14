@@ -42,12 +42,10 @@ def s3_url(host, port, bucket_name, file_name):
 
 
 def connect_s3(host, port, bucket_name):
-    # import boto
-    # boto.set_stream_logger('paws')
     is_secure = port == 443
     conn = S3Connection(
-        os.getenv('AWS_ACCESS_KEY_ID', 'dummy'),
-        os.getenv('AWS_SECRET_ACCESS_KEY', 'dummy'),
+        os.environ['AWS_ACCESS_KEY_ID'],
+        os.environ['AWS_SECRET_ACCESS_KEY'],
         is_secure=is_secure,
         port=port,
         host=host,
@@ -106,22 +104,31 @@ def optimize_mbtiles(mbtiles_file, mask_level=8):
     mbtiles = MBTiles(mbtiles_file, 'tms')
 
     for tile in find_optimizable_tiles(mbtiles, mask_level, 'tms'):
-        tiles = all_descendant_tiles(x=tile.x, y=tile.y, zoom=tile.z, max_zoom=14)
+        tiles = all_descendant_tiles(x=tile.x, y=tile.y,
+                                     zoom=tile.z, max_zoom=14)
         mbtiles.remove_tiles(tiles)
 
 
 def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
                   failed_queue_name, render_scheme, bucket_name):
-    host = os.getenv('AWS_S3_HOST', 'mock-s3')
-    port = int(os.getenv('AWS_S3_PORT', 8080))
 
+    if 'AWS_S3_HOST' not in os.environ:
+        sys.stderr.write('You need to specify the AWS_S3_HOST')
+        sys.exit(1)
+
+    host = os.environ['AWS_S3_HOST']
+    port = int(os.getenv('AWS_S3_PORT', 443))
+
+    print('Connect with S3 bucket {} at {}:{}'.format(
+        bucket_name, host, port
+    ))
     bucket = connect_s3(host, port, bucket_name)
 
     connection = pika.BlockingConnection(pika.URLParameters(rabbitmq_url))
     channel = connection.channel()
     channel.basic_qos(prefetch_count=1)
-    channel.confirm_delivery()
     configure_rabbitmq(channel)
+    print('Connect with RabbitMQ server {}'.format(rabbitmq_url))
 
     def callback(ch, method, properties, body):
         msg = json.loads(body.decode('utf-8'))
@@ -136,6 +143,12 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
             pyramid = msg['pyramid']
             tileinfo = pyramid['tile']
 
+            print('Render pyramid {}/{} from z{} down to z{}'.format(
+                tileinfo['x'],
+                tileinfo['y'],
+                tileinfo['min_zoom'],
+                tileinfo['max_zoom'],
+            ))
             tilelive_cmd = render_pyramid_command(
                 source, sink,
                 bounds=create_tilelive_bbox(pyramid['bounds']),
@@ -147,6 +160,9 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
             with open(list_file, 'w') as fh:
                 write_list_file(fh, msg['tiles'])
 
+            print('Render {} tiles from list job'.format(
+                len(msg['tiles']),
+            ))
             tilelive_cmd = render_tile_list_command(
                 source, sink,
                 list_file=list_file,

@@ -17,6 +17,9 @@ PROJECT_DIR = os.path.abspath(os.getenv('PROJECT_DIR', PARENT_PROJECT_DIR))
 ALBANIA_BBOX = '19.6875,40.97989806962015,20.390625,41.50857729743933'
 ALBANIA_TIRANA_TILE = (284, 191, 9)
 
+BUCKET = os.getenv('BUCKET', 'osm2vectortiles-testing')
+AWS_REGION = os.getenv('AWS_S3_HOST', 'os.zhdk.cloud.switch.ch')
+
 
 class DockerCompose(object):
     def __init__(self, project_dir=PROJECT_DIR):
@@ -125,9 +128,9 @@ def test_distributed_worker():
     job_zoom = tile_z + 1
     schedule_tile_jobs(tile_x, tile_y, tile_z, job_zoom)
 
+    dc.run(['-d', '-e', 'BUCKET_NAME={}'.format(BUCKET), 'export-worker'])
     dc.up('merge-jobs')
-    dc.up('export-worker')
-    time.sleep(120)
+    time.sleep(240)
 
     dc.stop('export-worker')
     dc.stop('merge-jobs')
@@ -136,8 +139,8 @@ def test_distributed_worker():
     # if MBTiles contains all the Albania tiles at job zoom level
     # the export was successful
     exported_mbtiles = os.path.join(PROJECT_DIR, 'export/planet.mbtiles')
-    tiles = find_missing_tiles(exported_mbtiles, tile_x, tile_y, job_zoom, 13)
-    assert tiles == []
+    tiles = find_missing_tiles(exported_mbtiles, tile_x, tile_y, tile_z, 13)
+    assert [t for t in tiles if t.z > tile_z] == []
 
 
 @pytest.mark.run(order=7)
@@ -172,10 +175,3 @@ def test_diff_jobs():
     dc.up('merge-jobs')
     time.sleep(10)
     dc.stop('merge-jobs')
-
-    # Test if the MBTiles is still complete
-    # This does not verify whether new data has been added successfully
-    exported_mbtiles = os.path.join(PROJECT_DIR, 'export/planet.mbtiles')
-    tile_x, tile_y, tile_z = ALBANIA_TIRANA_TILE
-    tiles = find_missing_tiles(exported_mbtiles, tile_x, tile_y, tile_z, 13)
-    assert tiles == []
