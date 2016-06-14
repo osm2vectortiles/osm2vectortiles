@@ -1,5 +1,5 @@
 extract	country	city	top	left	bottom	right
-udine_italy	Italy	Udine	13.162	46.008	13.3	46.128
+udine_italy	Italy	Udine	46.118	13.184	46.001	13.295
 gaborone_botswana	Botswana	Gaborone	-24.488	25.757	-24.728	26.054
 annaba_algeria	Algeria	Annaba	36.970	7.695	36.866	7.793
 lilongwe_malawi	Malawi	Lilongwe	-13.860	33.652	-14.092	33.906
@@ -88,6 +88,7 @@ istanbul_turkey	Turkey	Istanbul	41.421	28.313	40.738	29.678
 minsk_belarus	Belarus	Minsk	53.972	27.375	53.796	28.064
 sarajevo_bosnia	Bosnia	Sarajevo	43.987	18.115	43.702	18.631
 vienna_austria	Austria	Vienna	48.386	16.137	48.048	16.714
+salzburg_austria	Austria	Salzburg	47.855	12.985	47.751	13.128
 riga_latvia	Latvia	Riga	57.300	23.469	56.579	24.789
 krasnokutsk_ukraine	Ukraine	Krasnokutsk	50.085	35.097	50.027	35.198
 gdansk_poland	Poland	Gdansk	54.870	18.174	54.007	19.113
