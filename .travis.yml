@@ -9,13 +9,21 @@ before_install:
   - make fast
 script:
   # Test import
-  - docker-compose up -d postgis
+  - docker-compose up -d postgis rabbitmq mock-s3
   - sleep 10
   - docker-compose run import-external
   - docker-compose run import-osm
   - docker-compose run import-sql
   # Test local export
-  - docker-compose run export
+  - docker-compose run export && mv export/tiles.mbtiles export/planet.mbtiles
+  # Test distributed export
+  - docker-compose run -e TILE_X=539 -e TILE_Y=359 -e TILE_Z=10 -e JOB_ZOOM=11 generate-jobs
+  - docker-compose scale export-worker=2
+  - sleep 60
+  - docker-compose scale export-worker=0
+  - docker-compose run -d merge-jobs
+  - sleep 10
+  - docker-compose stop merge-jobs
   # Test changed tiles
   - docker-compose run update-osm-diff
   - docker-compose run import-osm-diff
@@ -25,3 +33,5 @@ script:
   - sleep 30
   - docker-compose scale export-worker=0
   - docker-compose run merge-jobs
+  - sleep 10
+  - docker-compose stop merge-jobs
