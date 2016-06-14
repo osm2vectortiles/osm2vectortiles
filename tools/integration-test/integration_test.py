@@ -119,24 +119,24 @@ def test_distributed_worker():
         ])
 
     dc.up('rabbitmq')
-    dc.up('mock-s3')
     time.sleep(5)
 
     tile_x, tile_y, tile_z = ALBANIA_TIRANA_TILE
-    schedule_tile_jobs(tile_x, tile_y, tile_z, tile_z + 2)
-
-    dc.scale('export-worker', 2)
-    time.sleep(60)
-    dc.scale('export-worker', 0)
+    job_zoom = tile_z + 1
+    schedule_tile_jobs(tile_x, tile_y, tile_z, job_zoom)
 
     dc.up('merge-jobs')
-    time.sleep(10)
+    dc.up('export-worker')
+    time.sleep(120)
+
+    dc.stop('export-worker')
     dc.stop('merge-jobs')
 
     # Merge jobs will merge all results into the existing planet.mbtiles
-    # if MBTiles contains all the Albania tiles the export was successful
+    # if MBTiles contains all the Albania tiles at job zoom level
+    # the export was successful
     exported_mbtiles = os.path.join(PROJECT_DIR, 'export/planet.mbtiles')
-    tiles = find_missing_tiles(exported_mbtiles, tile_x, tile_y, tile_z, 13)
+    tiles = find_missing_tiles(exported_mbtiles, tile_x, tile_y, job_zoom, 13)
     assert tiles == []
 
 
@@ -165,9 +165,9 @@ def test_diff_jobs():
     # Schedule changed tiles as jobs
     dc.run(['generate-diff-jobs'])
 
-    dc.scale('export-worker', 2)
+    dc.up('export-worker')
     time.sleep(60)
-    dc.scale('export-worker', 0)
+    dc.stop('export-worker')
 
     dc.up('merge-jobs')
     time.sleep(10)

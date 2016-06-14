@@ -47,11 +47,6 @@ merge-osm-diff:
   command: ./import-mergediffs.sh
   volumes:
    - ./import:/data/import
-integration-test:
-  image: "osm2vectortiles/integration-test"
-  volumes:
-   - /var/run/docker.sock:/var/run/docker.sock:ro
-   - ./:/usr/src/osm2vectortiles
 import-external:
   image: "osm2vectortiles/import-external"
   links:
