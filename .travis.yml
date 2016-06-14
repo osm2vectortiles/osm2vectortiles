@@ -7,7 +7,7 @@ services:
 before_install:
   - wget -nc -P "$TRAVIS_BUILD_DIR/import" "http://download.geofabrik.de/europe/albania-160601.osm.pbf"
   - wget -nc -O "planet.mbtiles" -P "$TRAVIS_BUILD_DIR/export" "https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z5.mbtiles"
-  - docker-compose pull import-external export import-osm postgis
+  - docker-compose pull import-external export import-osm postgis rabbitmq
   # Avoid building really expensive images
   - make fast
 install: "pip install -r ./tools/integration-test/requirements.txt"
