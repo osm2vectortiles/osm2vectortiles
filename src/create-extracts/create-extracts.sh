@@ -22,14 +22,14 @@ function main() {
     fi
 
     # Generate patch sources first but do not upload them
-    python create_extracts.py zoom-level "$WORLD_MBTILES" \
+    python -u create_extracts.py zoom-level "$WORLD_MBTILES" \
         --max-zoom=5 --target-dir="$EXTRACT_DIR"
-    python create_extracts.py zoom-level "$WORLD_MBTILES" \
+    python -u create_extracts.py zoom-level "$WORLD_MBTILES" \
         --max-zoom=8 --target-dir="$EXTRACT_DIR"
 
-    python create_extracts.py bbox "$WORLD_MBTILES" "$CITIES_TSV" \
+    python -u create_extracts.py bbox "$WORLD_MBTILES" "$CITIES_TSV" \
         --patch-from="$PATCH_SRC" --target-dir="$EXTRACT_DIR" $upload_flag
-    python create_extracts.py bbox "$WORLD_MBTILES" "$COUNTRIES_TSV" \
+    python -u create_extracts.py bbox "$WORLD_MBTILES" "$COUNTRIES_TSV" \
         --patch-from="$PATCH_SRC" --target-dir="$EXTRACT_DIR" $upload_flag
 }
 

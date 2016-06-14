@@ -42,7 +42,7 @@ class DockerCompose(object):
 
     def remove_all(self):
         self.compose(['stop'])
-        self.compose(['rm', '-v', '--all', '--force'])
+        self.compose(['rm', '-v', '--force'])
 
 
 @pytest.mark.run(order=1)

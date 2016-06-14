@@ -13,4 +13,4 @@ before_install:
 install: "pip install -r ./tools/integration-test/requirements.txt"
 script:
   # Test import
-  - py.test -x ./tools/integration-test/integration_test.py
+  - py.test -xv ./tools/integration-test/integration_test.py
