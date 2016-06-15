@@ -131,7 +131,6 @@ def test_distributed_worker():
     job_zoom = tile_z + 1
     schedule_tile_jobs(tile_x, tile_y, tile_z, job_zoom)
 
-    dc.up('merge-jobs')
     dc.run([
         '-e', 'BUCKET_NAME={}'.format(BUCKET),
         '-e', 'AWS_ACCESS_KEY_ID={}'.format(AWS_ACCESS_KEY_ID),
@@ -139,6 +138,11 @@ def test_distributed_worker():
         '-e', 'AWS_S3_HOST={}'.format(AWS_S3_HOST),
         'export-worker'
     ])
+
+    # Give time to merge jobs together
+    dc.up('merge-jobs')
+    time.sleep(20)
+    dc.stop('merge-jobs')
 
     # Merge jobs will merge all results into the existing planet.mbtiles
     # if MBTiles contains all the Albania tiles at job zoom level
