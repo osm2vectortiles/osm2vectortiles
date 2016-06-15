@@ -125,7 +125,7 @@ def test_distributed_worker():
         ])
 
     dc.up('rabbitmq')
-    time.sleep(5)
+    time.sleep(10)
 
     tile_x, tile_y, tile_z = ALBANIA_TIRANA_TILE
     job_zoom = tile_z + 1
@@ -174,5 +174,3 @@ def test_diff_jobs():
 
     # Schedule changed tiles as jobs
     dc.run(['generate-diff-jobs'])
-    dc.up('merge-jobs')
-    dc.run(['-e', 'BUCKET_NAME={}'.format(BUCKET), 'export-worker'])
