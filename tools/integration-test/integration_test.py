@@ -129,17 +129,18 @@ def test_distributed_worker():
     job_zoom = tile_z + 1
     schedule_tile_jobs(tile_x, tile_y, tile_z, job_zoom)
 
-    dc.run(['-d', '-e', 'BUCKET_NAME={}'.format(BUCKET), 'export-worker'])
-    dc.up('merge-jobs')
-    time.sleep(240)
+    dc.run(['-e', 'BUCKET_NAME={}'.format(BUCKET), 'export-worker'])
 
-    dc.stop('export-worker')
+    # Wait until all results have been merged
+    dc.up('merge-jobs')
+    time.sleep(20)
     dc.stop('merge-jobs')
 
     # Merge jobs will merge all results into the existing planet.mbtiles
     # if MBTiles contains all the Albania tiles at job zoom level
     # the export was successful
     exported_mbtiles = os.path.join(PROJECT_DIR, 'export/planet.mbtiles')
+    print('Checking {} for missing tiles'.format(exported_mbtiles))
     tiles = find_missing_tiles(exported_mbtiles, tile_x, tile_y, tile_z, 13)
     assert [t for t in tiles if t.z > tile_z] == []
 
@@ -158,6 +159,7 @@ def test_diff_update():
 
     # Read and verify that at least one tile is marked dirty
     tile_file = os.path.join(PROJECT_DIR, 'export/tiles.txt')
+    print('Checking {} for changed tiles'.format(tile_file))
     num_lines = sum(1 for line in open(tile_file))
     assert num_lines > 0
 
