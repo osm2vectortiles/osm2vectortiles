@@ -18,7 +18,9 @@ ALBANIA_BBOX = '19.6875,40.97989806962015,20.390625,41.50857729743933'
 ALBANIA_TIRANA_TILE = (284, 191, 9)
 
 BUCKET = os.getenv('BUCKET', 'osm2vectortiles-testing')
-AWS_REGION = os.getenv('AWS_S3_HOST', 'os.zhdk.cloud.switch.ch')
+AWS_S3_HOST = os.getenv('AWS_S3_HOST', 'os.zhdk.cloud.switch.ch')
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 
 
 class DockerCompose(object):
@@ -129,12 +131,14 @@ def test_distributed_worker():
     job_zoom = tile_z + 1
     schedule_tile_jobs(tile_x, tile_y, tile_z, job_zoom)
 
-    dc.run(['-e', 'BUCKET_NAME={}'.format(BUCKET), 'export-worker'])
-
-    # Wait until all results have been merged
     dc.up('merge-jobs')
-    time.sleep(20)
-    dc.stop('merge-jobs')
+    dc.run([
+        '-e', 'BUCKET_NAME={}'.format(BUCKET),
+        '-e', 'AWS_ACCESS_KEY_ID={}'.format(AWS_ACCESS_KEY_ID),
+        '-e', 'AWS_SECRET_ACCESS_KEY={}'.format(AWS_SECRET_ACCESS_KEY),
+        '-e', 'AWS_S3_HOST={}'.format(AWS_S3_HOST),
+        'export-worker'
+    ])
 
     # Merge jobs will merge all results into the existing planet.mbtiles
     # if MBTiles contains all the Albania tiles at job zoom level
@@ -170,11 +174,5 @@ def test_diff_jobs():
 
     # Schedule changed tiles as jobs
     dc.run(['generate-diff-jobs'])
-
-    dc.up('export-worker')
-    time.sleep(60)
-    dc.stop('export-worker')
-
     dc.up('merge-jobs')
-    time.sleep(10)
-    dc.stop('merge-jobs')
+    dc.run(['-e', 'BUCKET_NAME={}'.format(BUCKET), 'export-worker'])
