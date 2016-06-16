@@ -52,9 +52,9 @@ that will introduce you into web maps, vector tiles and using OSM2VectorTiles.
 
 ## Academic Material
 
-OSM2VectorTiles arose from a study project. The original thesis
+OSM2VectorTiles arose from a bachelor project. The original thesis
 is available publicly and if you wan't to dig deeper you are welcome
 to read the thesis.
 
-- Study Project Thesis
-  - [Vector Tiles from OpenStreetMap](http://eprints.hsr.ch/498/1/Vector_Tiles_from%20_OpenStreeMap_Thesis.pdf)
+- Bachelor Thesis
+  - [Updatable Vector Tiles from OpenStreetMap](https://cdn.rawgit.com/osm2vectortiles/bachelor-thesis/master/thesis.pdf)
