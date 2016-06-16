@@ -35,8 +35,6 @@ City extracts are limited to the boundaries of a city and do not allow zooming o
 All country extracts consist of a bounding box of the country containing all details down to zoom level 14.
 At lower zoom levels there is still some world data to make maps look good.
 
-<input type="text" id="searchField" placeholder="Switzerland" alt="Search countries"/>
-
 - [Afghanistan](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/afghanistan.mbtiles)
 - [Albania](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/albania.mbtiles)
 - [Algeria](https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/algeria.mbtiles)
