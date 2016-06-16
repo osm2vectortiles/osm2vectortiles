@@ -17,17 +17,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 	var basic = document.getElementById("vector-basic");
-	var streets = document.getElementById("vector-streets");
-	var dark = document.getElementById("vector-dark");
-	var light = document.getElementById("vector-light");
-	if(bright && basic && streets && dark && light) {
-		var styles = ["#bright", "#basic", "#streets", "#dark", "#light"];
+	if(bright && basic) {
+		var styles = ["#bright", "#basic"];
 		var styleUrl = "https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/";
 		addOnClickEventListener(bright, vectorMap, styleUrl + "bright-v9-cdn.json", 0, styles);
 		addOnClickEventListener(basic, vectorMap, styleUrl + "basic-v9-cdn.json", 1, styles);
-		addOnClickEventListener(streets, vectorMap, styleUrl + "streets-v9-cdn.json", 2, styles);
-		addOnClickEventListener(dark, vectorMap, styleUrl + "dark-v9-cdn.json", 3, styles);
-		addOnClickEventListener(light, vectorMap, styleUrl + "light-v9-cdn.json", 4, styles);
 	}
 
 	// instantiate map clipboard
