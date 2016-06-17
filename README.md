@@ -8,32 +8,26 @@ This is the easiest way how to switch to OSM thanks to [MapBox](https://github.c
 
 ![Create vector tiles from OpenStreetMap data](http://osm2vectortiles.org/img/home-banner-icons.png)
 
+## Docs
+
+The following tutorials are targeted at users of the OSM2VectorTiles project.
+
+- **[Getting Started](http://osm2vectortiles.org/docs/getting-started/):** Quickly get started using OSM2VectorTiles to display maps in your browser. This tutorial explains how to serve downloaded Vector Tiles and use them in your browser.
+- **[Create new Mapbox GL style](http://osm2vectortiles.org/docs/create-map-with-mapbox-studio/):** Design beautiful maps with the new Mapbox Studio and use them together with osm2vectortiles.
+
+If you want to adapt the OSM2VectorTiles workflow to create vector tiles yourself the detailed usage guide
+will get you started.
+
+- **[Detailed Usage Guide](/USAGE.md)**: Create your own planet scale vector tiles with a distributed workflow using the OSM2VectorTiles components.
+
 ## Downloads
 
 Download the entire world, city or country extracts from http://osm2vectortiles.org/downloads.
 
-## Documentation
+## Develop
 
-- Getting started
-  - [Display map with Mapnik and Tessera](http://osm2vectortiles.org/docs/start)
-  - [Display map with Mapbox GL](http://osm2vectortiles.org/docs/display-map-with-mapbox-gl)
-- Create your own custom basemap
-  - [Create a style with Mapbox Studio Classic](http://osm2vectortiles.org/docs/create-map-with-mapbox-studio-classic)
-  - [Create a style with new Mapbox Studio](http://osm2vectortiles.org/docs/create-map-with-mapbox-studio)
-- Hosting
-  - [Serve raster tiles with Docker](http://osm2vectortiles.org/docs/serve-raster-tiles-docker)
-  - [Serve vector tiles](http://osm2vectortiles.org/docs/serve-vector-tiles)
-  - [Use public CDN](http://osm2vectortiles.org/docs/use-public-cdn)
-- Vector Tiles
-  - [Create your own vector tiles](http://osm2vectortiles.org/docs/own-vector-tiles)
-  - [Layer Reference](http://osm2vectortiles.org/docs/layer-reference)
-  - [Create your own extract](http://osm2vectortiles.org/docs/extracts)
-- Data Source
-  - [Data Sources of OSM Vector Tiles](http://osm2vectortiles.org/docs/data-sources)
-- Import and Export
-  - [Import and Export Process](http://osm2vectortiles.org/docs/import-export-process)
-  - [Database Schema and Layers](http://osm2vectortiles.org/docs/database-schema/)
-  - [Imposm Mapping Schema](http://osm2vectortiles.org/docs/imposm-schema)
+You want to hack on OSM2VectorTiles yourself or are interested in running or adapting the workflow yourself.
+Take a look at the [detailed usage guide](USAGE.md) which explains the workflow and the components.
 
 ## License
 
@@ -41,7 +35,7 @@ The project is under the MIT license while the data downloads use the [Open Data
 
 ## Contribute
 
-The purpose of this project is to make OSM data more accessible to anybody. Any feedback or improvement is greatly appreciated. So feel free to submit a pull request or file a bug. You can also post feedback as GitHub issue.
+The purpose of this project is to make OSM data more accessible to anybody. Any feedback or improvement is greatly appreciated. So feel free to submit a pull request or file a bug. You can also post feedback as GitHub issue. A list of current contributors can be found in the [CONTRIBUTORS](/CONTRIBUTORS.md) file.
 
 You can help us to improve the documentation by editing the Markdown files and creating a pull request.
 The documentation is based on GitHub pages and is in the `gh-pages` branch.

@@ -1,0 +1,9 @@
+# integration-test
+
+Integration test for entire OSM2VectorTiles workflow.
+Primary purpose is to verify that everything works together
+not to verify correctness.
+
+Take a look at the `.travis.yml` file to see how it is called.
+The setup requires a working S3 endpoint to test the distributed
+workflow.

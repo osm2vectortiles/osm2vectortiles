@@ -71,9 +71,11 @@ def merge_results(rabbitmq_url, merge_target, result_queue_name):
     channel = connection.channel()
     channel.basic_qos(prefetch_count=3)
     channel.confirm_delivery()
+    print('Connect with RabbitMQ server {}'.format(rabbitmq_url))
 
     def callback(ch, method, properties, body):
         msg = json.loads(body.decode('utf-8'))
+        print('Download {}'.format(msg['url']))
         merge_source = download_mbtiles(msg['url'])
         action = functools.partial(merge_mbtiles, merge_source, merge_target)
         diff_size = compare_file_after_action(merge_target, action)

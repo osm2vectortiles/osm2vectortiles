@@ -19,9 +19,10 @@ import time
 import sys
 import os
 import os.path
+import functools
 import json
-import humanize
 import pika
+from humanize import naturaltime, naturalsize
 from boto.s3.connection import S3Connection, OrdinaryCallingFormat
 from mbtoolbox.optimize import find_optimizable_tiles, all_descendant_tiles
 from mbtoolbox.mbtiles import MBTiles
@@ -42,12 +43,10 @@ def s3_url(host, port, bucket_name, file_name):
 
 
 def connect_s3(host, port, bucket_name):
-    # import boto
-    # boto.set_stream_logger('paws')
     is_secure = port == 443
     conn = S3Connection(
-        os.getenv('AWS_ACCESS_KEY_ID', 'dummy'),
-        os.getenv('AWS_SECRET_ACCESS_KEY', 'dummy'),
+        os.environ['AWS_ACCESS_KEY_ID'],
+        os.environ['AWS_SECRET_ACCESS_KEY'],
         is_secure=is_secure,
         port=port,
         host=host,
@@ -106,85 +105,132 @@ def optimize_mbtiles(mbtiles_file, mask_level=8):
     mbtiles = MBTiles(mbtiles_file, 'tms')
 
     for tile in find_optimizable_tiles(mbtiles, mask_level, 'tms'):
-        tiles = all_descendant_tiles(x=tile.x, y=tile.y, zoom=tile.z, max_zoom=14)
+        tiles = all_descendant_tiles(x=tile.x, y=tile.y,
+                                     zoom=tile.z, max_zoom=14)
         mbtiles.remove_tiles(tiles)
+
+
+def render_pyramid(msg, source, sink):
+    pyramid = msg['pyramid']
+    tileinfo = pyramid['tile']
+
+    print('Render pyramid {}/{} from z{} down to z{}'.format(
+        tileinfo['x'],
+        tileinfo['y'],
+        tileinfo['min_zoom'],
+        tileinfo['max_zoom'],
+    ))
+    return render_pyramid_command(
+        source, sink,
+        bounds=create_tilelive_bbox(pyramid['bounds']),
+        min_zoom=tileinfo['min_zoom'],
+        max_zoom=tileinfo['max_zoom']
+    )
+
+
+def render_list(msg, source, sink):
+    list_file = '/tmp/tiles.txt'
+    with open(list_file, 'w') as fh:
+        write_list_file(fh, msg['tiles'])
+
+    print('Render {} tiles from list job'.format(
+        len(msg['tiles']),
+    ))
+    return render_tile_list_command(
+        source, sink,
+        list_file=list_file,
+    )
+
+
+def timing(f, *args, **kwargs):
+    start = time.time()
+    ret = f(*args, **kwargs)
+    end = time.time()
+    return ret, end - start
+
+
+def handle_message(tm2source, bucket, s3_url, body):
+    msg = json.loads(body.decode('utf-8'))
+    task_id = msg['id']
+    mbtiles_file = task_id + '.mbtiles'
+
+    source = 'tmsource://' + os.path.abspath(tm2source)
+    sink = 'mbtiles://' + os.path.abspath(mbtiles_file)
+
+    tilelive_cmd = []
+    if msg['type'] == 'pyramid':
+        tilelive_cmd = render_pyramid(msg, source, sink)
+    elif msg['type'] == 'list':
+        tilelive_cmd = render_list(msg, source, sink)
+    else:
+        raise ValueError("Message must be either of type pyramid or list")
+
+    _, render_time = timing(subprocess.check_call, tilelive_cmd, timeout=5*60)
+    print('Render MBTiles: {}'.format(naturaltime(render_time)))
+
+    _, optimize_time = timing(optimize_mbtiles, mbtiles_file)
+    print('Optimize MBTiles: {}'.format(naturaltime(optimize_time)))
+
+    _, upload_time = timing(upload_mbtiles, bucket, mbtiles_file)
+    print('Upload MBTiles : {}'.format(naturaltime(upload_time)))
+
+    download_link = s3_url(mbtiles_file)
+    print('Uploaded {} to {}'.format(
+        naturalsize(os.path.getsize(mbtiles_file)),
+        download_link
+    ))
+
+    os.remove(mbtiles_file)
+
+    return create_result_message(task_id, download_link, msg)
 
 
 def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
                   failed_queue_name, render_scheme, bucket_name):
-    host = os.getenv('AWS_S3_HOST', 'mock-s3')
-    port = int(os.getenv('AWS_S3_PORT', 8080))
 
+    if 'AWS_S3_HOST' not in os.environ:
+        sys.stderr.write('You need to specify the AWS_S3_HOST')
+        sys.exit(1)
+
+    host = os.environ['AWS_S3_HOST']
+    port = int(os.getenv('AWS_S3_PORT', 443))
+
+    print('Connect with S3 bucket {} at {}:{}'.format(
+        bucket_name, host, port
+    ))
     bucket = connect_s3(host, port, bucket_name)
 
     connection = pika.BlockingConnection(pika.URLParameters(rabbitmq_url))
     channel = connection.channel()
     channel.basic_qos(prefetch_count=1)
-    channel.confirm_delivery()
     configure_rabbitmq(channel)
+    print('Connect with RabbitMQ server {}'.format(rabbitmq_url))
 
-    def callback(ch, method, properties, body):
-        msg = json.loads(body.decode('utf-8'))
-        task_id = msg['id']
-        mbtiles_file = task_id + '.mbtiles'
+    while True:
+        method_frame, header_frame, body = channel.basic_get(queue_name)
 
-        source = 'tmsource://' + os.path.abspath(tm2source)
-        sink = 'mbtiles://' + os.path.abspath(mbtiles_file)
-        tilelive_cmd = []
-
-        if msg['type'] == 'pyramid':
-            pyramid = msg['pyramid']
-            tileinfo = pyramid['tile']
-
-            tilelive_cmd = render_pyramid_command(
-                source, sink,
-                bounds=create_tilelive_bbox(pyramid['bounds']),
-                min_zoom=tileinfo['min_zoom'],
-                max_zoom=tileinfo['max_zoom']
-            )
-        elif msg['type'] == 'list':
-            list_file = '/tmp/tiles.txt'
-            with open(list_file, 'w') as fh:
-                write_list_file(fh)
-
-            tilelive_cmd = render_tile_list_command(
-                source, sink,
-                list_file=list_file,
-            )
-        else:
-            raise ValueError("Message must be either of type pyramid or list")
+        # Consumer should stop if there are no more message to receive
+        if not body:
+            channel.stop_consuming()
+            print('No message received - stop consuming')
+            break
 
         try:
-            start = time.time()
-            subprocess.check_call(tilelive_cmd, timeout=5*60)
-            end = time.time()
-
-            print('Rendering time: {}'.format(humanize.naturaltime(end - start)))
-            print('Optimize MBTiles file size')
-            optimize_mbtiles(mbtiles_file)
-            upload_mbtiles(bucket, mbtiles_file)
-            os.remove(mbtiles_file)
-
-            print('Upload mbtiles {}'.format(mbtiles_file))
-
-            download_link = s3_url(host, port, bucket_name, mbtiles_file)
-            result_msg = create_result_message(task_id, download_link, msg)
+            result_msg = handle_message(
+                tm2source, bucket,
+                functools.partial(s3_url, host, port, bucket_name),
+                body
+            )
 
             durable_publish(channel, result_queue_name,
                             body=json.dumps(result_msg))
-            channel.basic_ack(delivery_tag=method.delivery_tag)
-        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+            channel.basic_ack(delivery_tag=method_frame.delivery_tag)
+        except:
             durable_publish(channel, failed_queue_name, body=body)
-            channel.basic_ack(delivery_tag=method.delivery_tag)
+            channel.basic_ack(delivery_tag=method_frame.delivery_tag)
             channel.stop_consuming()
             time.sleep(5)  # Give RabbitMQ some time
-            raise e
-
-    channel.basic_consume(callback, queue=queue_name)
-    try:
-        channel.start_consuming()
-    except KeyboardInterrupt:
-        channel.stop_consuming()
+            raise
 
     connection.close()
 
