@@ -11,7 +11,7 @@ cache:
   volumes:
   - /data/cache
 postgis:
-  image: "osm2vectortiles/postgis"
+  build: "src/postgis"
   volumes_from:
    - pgdata
   ports:
@@ -114,7 +114,7 @@ export:
    - postgis:db
   environment:
     # Around zurich
-    BBOX: "8.32,47.21,8.83,47.52"
+    BBOX: "-22.5,79.6871841545,-21.09375,79.9359182463"
     MIN_ZOOM: "0"
     MAX_ZOOM: "14"
 export-list:
@@ -132,12 +132,12 @@ serve:
   ports:
    - "8080:80"
 import-sql:
-  image: "osm2vectortiles/import-sql"
+  build: "src/import-sql"
   links:
    - postgis:db
   environment:
     SQL_CREATE_INDIZES: 'false'
-    SQL_SPLIT_POLYGON: 'true'
+    SQL_SPLIT_POLYGON: 'false'
 mapbox-studio:
   image: "osm2vectortiles/mapbox-studio"
   volumes:
