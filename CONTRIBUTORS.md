@@ -9,11 +9,11 @@ OSM2VectorTiles Contributors (sorted historically)
 - **[Manuel Roth](https://github.com/mroth)**
   - Maintainer and main contributor
 
-- **[Stefan Keller](https://github.com/sfkeller)**
-  - Bachelor and study thesis supervisor
-
 - **[Petr Pridal](https://github.com/klokan)**
   - Technical advisor
+
+- **[Stefan Keller](https://github.com/sfkeller)**
+  - Bachelor and study thesis supervisor
 
 - **[Imre Samu](https://github.com/ImreSamu)**
   - QA scripts and control
@@ -31,9 +31,7 @@ OSM2VectorTiles Contributors (sorted historically)
 - **[stirringhalo](https://github.com/stirringhalo)**
   - Improve documentation
   - Integrate polygon splitting
-
-- **[Stefan Keller](https://github.com/sfkeller)**
-  - Maintainer and main contributor
+  - Research reasons for non performant planet regions
 
 ## Organizations
 
@@ -42,7 +40,7 @@ OSM2VectorTiles Contributors (sorted historically)
   - Initial design of OSM2VectorTiles website
   - Distributing "OSM2VectorTiles" USB stick
 
-- **[HSR University of Applied Science](geometalab.hsr.ch)
+- **[HSR University of Applied Science](geometalab.hsr.ch)**
   - University involved in maintaining project
-  - Supervising Study and Bachlor thesis around OSM2VectorTiles
+  - Supervising Study and Bachelor thesis around OSM2VectorTiles
   - Sponsoring S3 download store
