@@ -88,18 +88,11 @@ def test_local_export():
             'export'
         ])
 
-    def verify_no_tiles_missing(x, y, min_z, max_z):
-        exported_mbtiles = os.path.join(PROJECT_DIR, 'export/tiles.mbtiles')
-        mbtiles = MBTiles(exported_mbtiles, 'tms')
-        required_tiles = list_required_tiles(x, y, min_z, max_z)
-        assert list(missing_tiles(mbtiles, required_tiles)) == []
-
     tile_x, tile_y, tile_z = ALBANIA_TIRANA_TILE
     export_bbox(ALBANIA_BBOX, tile_z, 14)
 
     # There are missing tiles on z14 because
     # Albania does not have data at some places
-    verify_no_tiles_missing(tile_x, tile_y, tile_z, 13)
     exported_mbtiles = os.path.join(PROJECT_DIR, 'export/tiles.mbtiles')
     tiles = find_missing_tiles(exported_mbtiles, tile_x, tile_y, tile_z, 13)
     assert tiles == []
