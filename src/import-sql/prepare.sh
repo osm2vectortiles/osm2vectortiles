@@ -7,7 +7,7 @@ readonly SQL_FUNCTIONS_FILE=${IMPORT_DATA_DIR:-/usr/src/app/functions.sql}
 readonly SQL_LAYERS_DIR=${IMPORT_DATA_DIR:-/usr/src/app/layers/}
 readonly SQL_CREATE_INDIZES=${SQL_CREATE_INDIZES:-false}
 readonly SQL_SPLIT_POLYGON_FILE=${SQL_SPLIT_POLYGON_FILE:-/usr/src/app/landuse_split_polygon_table.sql}
-readonly SQL_SUBDIVIDE_POLYGON_FILE=${SQL_SPLIT_POLYGON_FILE:-/usr/src/app/subdivide_polygons.sql}
+readonly SQL_SUBDIVIDE_POLYGON_FILE=${SQL_SUBDIVIDE_POLYGON_FILE:-/usr/src/app/subdivide_polygons.sql}
 
 readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
 readonly OSM_DB=${OSM_DB:-osm}
