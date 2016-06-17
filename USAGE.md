@@ -12,6 +12,7 @@ OSM2VectorTiles workflow.
 
 - Install [Docker](https://docs.docker.com/engine/installation/)
 - Install [Docker Compose](https://docs.docker.com/compose/install/)
+- Setup a S3 bucket (or compatible object storage)
 
 We assume a single machine setup for this purpose and later go into detail
 how to run the workflow in a distributed manner.
@@ -70,62 +71,95 @@ Documentation for each component can be find in the respective source directory.
 
 ### Prepare
 
-1. `git clone https://github.com/osm2vectortiles/osm2vectortiles.git`
-2. `cd osm2vectortiles`
-3. If you want to build the containers yourself execute `make fast` or `make`. Otherwise you will reuse the public prebuilt Docke rimages.
-4. Start and initialize database `docker-compose up -d postgis`
-5. Import external data sources `docker-compose run import-external``
+1. Clone repository `git clone https://github.com/osm2vectortiles/osm2vectortiles.git && cd osm2vectortiles`.
+2. If you want to build the containers yourself execute `make fast` or `make`. Otherwise you will use the public prebuilt Docker images by default.
+3. Start and initialize database `docker-compose up -d postgis`
+4. Import external data sources `docker-compose run import-external`
 
 ### Import OSM
 
-1. Download planet file or extract from [Planet OSM](http://planet.osm.org/) or [Geofabrik](https://www.geofabrik.de/data/download.html) and store it in `import` folder.
-  ```
-  wget http://planet.osm.org/pbf/planet-latest.osm.pbf
-  ```
-2. Import OSM with `docker-compose run import-osm`. Since the import happens in diff mode this can take up to 14hrs for the full planet
-3. Provision SQL needed to render the different layers with `docker-compose run import-sql`
+**Download planet file or extract** from [Planet OSM](http://planet.osm.org/) or [Geofabrik](https://www.geofabrik.de/data/download.html) and store it in `import` folder.
+
+```bash
+wget http://planet.osm.org/pbf/planet-latest.osm.pbf
+```
+
+**Import OSM** into PostGIS. Since the import happens in diff mode this can take up to 14hrs for the full planet.
+
+```bash
+docker-compose run import-osm
+```
+
+**Provision SQL** needed to render the different layers.
+
+```bash
+docker-compose run import-sql
+```
 
 ### Create Extract using Local Worker
 
 You are now able to use a single local worker to render a extract. This can be used to create a extract
 for a specific reason or generating low level vector tiles.
 
-1. Edit the `docker-compose.yml`.
-  1. If you want to create a low level extract from z0 to z8 set  `BBOX="-180, -85, 180, 85"` and `MIN_ZOOM=0` and `MAX_ZOOM=8`.
-  2. If you want to render only a specific reson set `BBOX` to your desired bounding box and `MAX_ZOOM=14`.
-2. Run `docker-compose export` which will store the resulting MBTiles in `export/tiles.mbtiles`
+1. First **choose a specific bounding box** or export global bounding box from http://tools.geofabrik.de/calc/.
+2. **Run the local export** which will store the resulting MBTiles in `export/tiles.mbtiles`
 
+```bash
+# Create low level extract from z0 to z8 for entire planet
+docker-compose run \
+  -e BBOX="-180, -85, 180, 85" \
+  -e MIN_ZOOM="0" \
+  -e MAX_ZOOM="8" \
+  export
+# Create extract for Albania from z10 to z14
+docker-compose run \
+  -e BBOX="19.6875,40.97989806962015,20.390625,41.50857729743933" \
+  -e MIN_ZOOM="10" \
+  -e MAX_ZOOM="14" \
+  export
+```
 
 ### Distributed Planet Export
 
 You need to distribute the jobs to multiple workers for rendering the entire planet.
 To work with the message queues and jobs we recommend using [pipecat](https://github.com/lukasmartinelli/pipecat).
 
-1. Divide the planet into jobs from z8 down to z14. This will take some time. Save the `jobs.json` file for later so you don't need to regenerate if you need to do a full re-rendering.
-  ```
-  docker-compose run generate-jobs python generate_jobs.py pyramid 0 0 0 --job-zoom=8 > jobs.jso
-  ```
-2. Start up message queue server with `docker-compose up -d rabbitmq`
-3. Now configure the message queue endpoint to the host where your message queue is running. By default the message queue is exposed on the local port `5672`. If you are running it on a separate server you need to change the host.
-  ```
-  export AMQP_URI=amqp://osm:osm@localhost:5672/
-  ```
-5. Install pipecat ([installation docs](https://github.com/lukasmartinelli/pipecat#install))
-   1. `wget -O pipecat https://github.com/lukasmartinelli/pipecat/releases/download/v0.2/pipecat_linux_amd64`
-   2. `chmod +x pipecat`
-6. `cat jobs.json | ./pipecat publish jobs`
-7. Scale up the workers `docker-compose scale export-worker=4`
-8. Watch progress at RabbitMQ management interface at http://localhost:15672
+**Start up message queue server**. The message queue server will track the jobs and results.
+
+```bash
+docker-compose up -d rabbitmq
+```
+
+**Divide the planet into jobs** from z8 down to z14 and publish the jobs to RabbitMQ.
+To render the entire planet choose the top level tile `0/0/0` and choose job zoom level `8`.
+
+```bash
+docker-compose run \
+  -e TILE_X=0 -e TILE_Y=0 -e TILE_Z=0 \
+  -e JOB_ZOOM=8 \
+  generate-jobs
+```
+
+**Scale up the workers** to render the jobs. Make sure the `BUCKET_NAME`, `AWS_ACCESS_KEY`, `AWS_SECRET_ACCESS_KEY` and `AWS_S3_HOST` are configured correctly in order for the worker to upload the results to S3.
+
+```bash
+docker-compose scale export-worker=4
+```
+
+Watch progress at RabbitMQ management interface. Check the exposed external Docker port of the RabbitMQ management interface at port `15672`.
+
 
 ### Merge MBTiles
 
 Please take a look at the component documentation of **[merge-jobs]((/src/merge-jobs))**.
 If you are using a public S3 url merging the job results is fairly straightforward.
 
-1. Ensure you have `export/planet.mbtiles` file present to merge the jobs into. Reuse a low level zoom extract generated earlier or download an existing low level zoom extract from http://osm2vectortiles.org/downloads/
-2. Merge jobs into planet file `docker-compose run merge-jobs`
+1. Ensure you have `export/planet.mbtiles` file present to merge the jobs into. Reuse a low level zoom extract generated earlier or download an existing low level zoom extract from http://osm2vectortiles.org/downloads/.
+2. **Merge jobs** into planet file
 
-TODO: Check how it works with mock s3.
+```bash
+docker-compose run merge-jobs
+```
 
 ### Apply Diff Updates
 
@@ -133,16 +167,44 @@ Updates are performed on a rolling basis, where diffs are applied.
 At this stage we assume you have successfully imported the PBF into the database
 and rendered the planet once.
 
-1. Download latest OSM changelogs.
-  1. If you are working with the planet remove the `OSM_UPDATE_BASEURL` from the `environment` section in `update-osm-diff`.
-  2. Execute `docker-compose run update-osm-diff` to download latest changelogs **since the last change date of the planet.pbf**.
-2. Now import the downloaded OSM diffs in `export/latest.osc.gz` into the database with `docker-compose run import-osm-diff`. This may take up to half a day. 
+**Download latest OSM changelogs**. If you are working with the planet remove the `OSM_UPDATE_BASEURL` from the `environment` section in `update-osm-diff`. If you are using a custom extract from Geofabrik you can specify a custom update url there.
+
+Download latest changelogs **since the last change date of the planet.pbf**.
+
+```bash
+docker-compose run update-osm-diff
+```
+
+Now **import the downloaded OSM diffs** in `export/latest.osc.gz` into the database. This may take up to half a day. 
+
+```bash
+docker-compose run import-osm-diff
+``` 
 
 After that you have successfully applied the diff updates to the database and you can either rerender the entire planet or just the tiles that have changed.
 
+After importing the diffs **you can reapply the diffs to the original PBF** file to keep it up to date.
+
+```bash
+docker-compose run merge-osm-diff
+```
 
 ### Render Diff Updates
 
-1. Calculate the changed tiles since the last diff import with `docker-compose up changed-tiles`. This will store the changed tiles in `export/tiles.txt`.
-2. TODO: Create job list
-3. Now schedule the jobs (similar to scheduling the entire planet).
+**Calculate the changed tiles** since the last diff import. This will store the changed tiles in `export/tiles.txt`.
+
+```bash
+docker-compose run changed-tiles
+```
+
+**Create batch jobs** from the large text file and publish them to RabbitMQ.
+
+```bash
+docker-compose run generate-diff-jobs
+```
+
+**Now schedule the workers** again (similar to scheduling the entire planet) and **merge the results**.
+```bash
+docker-compose scale export-worker=4
+docker-compose run merge-jobs
+```
