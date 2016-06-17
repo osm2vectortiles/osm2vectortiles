@@ -67,6 +67,6 @@ RUN wget https://github.com/elitwin/pgtune/tarball/master \
 
 # copy new initdb file which enables the hstore extension and Mapbox vt-util functions
 RUN rm -f /docker-entrypoint-initdb.d/postgis.sh
-#COPY ./osmdw_pgtune.sh /docker-entrypoint-initdb.d/05_osmdw_pgtune.sh
+COPY ./osmdw_pgtune.sh /docker-entrypoint-initdb.d/05_osmdw_pgtune.sh
 COPY ./initdb-postgis.sh /docker-entrypoint-initdb.d/10_postgis.sh
 COPY ./initdb-osm.sh /docker-entrypoint-initdb.d/20_osm.sh
