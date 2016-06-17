@@ -21,7 +21,7 @@ OSM2VectorTiles Contributors (sorted historically)
   - Automatic PostGIS tuning
   - Technical advisor
 
-- **[Hannes Junila](https://github.com/hannesj)**
+- **[Hannes Junnila](https://github.com/hannesj)**
   - Support for additional tags focused on public transport
   - Support road area polygons
 
