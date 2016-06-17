@@ -31,22 +31,10 @@ RUN wget http://download.osgeo.org/geos/geos-3.5.0.tar.bz2; \
     cd ..; \
     rm -rf geos-3.5.0*
 
-#latest sfcgal
-RUN wget https://github.com/Oslandia/SFCGAL/archive/v1.2.0.tar.gz; \
-    tar vzxf v1.2.0.tar.gz; \
-    cd SFCGAL-1.2.0; \
-    cmake .; \
-    make -j 2; \
-    make install; \
-    cd ..; \
-    chmod 755 /usr/local/lib/libSFCGAL.*; \
-    rm -rf v1.2.0.tar.gz; \
-    rm -rf SFCGAL-1.2.0
-
 RUN wget http://download.osgeo.org/postgis/source/postgis-2.2.0.tar.gz; \
     tar xvzf postgis-2.2.0.tar.gz; \
     cd postgis-2.2.0; \
-    ./configure --with-raster --with-topology --with-sfcgal=/usr/local; \
+    ./configure --with-raster --with-topology \
     make -j; \
     make install; \
     cd ..; \
