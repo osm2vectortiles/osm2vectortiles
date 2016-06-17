@@ -5,10 +5,10 @@ set -o nounset
 
 readonly EXPORT_DIR=${EXPORT_DIR:-/data/export}
 readonly MERGE_TARGET=${MERGE_TARGET:-"$EXPORT_DIR/planet.mbtiles"}
-readonly RABBITMQ_URI=${RABBITMQ_URI:-"amqp://osm:osm@rabbitmq:5672/"}
+readonly RABBITMQ_URI=${RABBITMQ_URI:-"amqp://osm:osm@rabbitmq:5672/?blocked_connection_timeout=1200&heartbeat=0"}
 
 function export_remote_mbtiles() {
-    exec python merge-jobs.py "$RABBITMQ_URI" \
+    exec python -u merge-jobs.py "$RABBITMQ_URI" \
         --merge-target="$MERGE_TARGET"
 }
 

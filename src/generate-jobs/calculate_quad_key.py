@@ -35,8 +35,7 @@ def quad_tree(tx, ty, zoom):
 
 if __name__ == '__main__':
     args = docopt(__doc__, version='0.1')
-
-    writer = csv.writer(sys.stdout, delimiter='\t')
+    writer = csv.writer(sys.stdout, delimiter=' ')
     with open(args['<list_file>'], "r") as file_handle:
         for line in file_handle:
             z, x, y = line.split('/')

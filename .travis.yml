@@ -1,22 +1,16 @@
 sudo: required
-language: bash
+language: python
+python:
+  - "3.4"
 services:
   - docker
 before_install:
-  - wget -nc -P "$TRAVIS_BUILD_DIR/import" "http://download.geofabrik.de/europe/liechtenstein-160401.osm.pbf"
-  - docker-compose pull import-external export import-osm postgis
+  - wget -nc -P "$TRAVIS_BUILD_DIR/import" "http://download.geofabrik.de/europe/albania-160601.osm.pbf"
+  - wget -nc -O "$TRAVIS_BUILD_DIR/export/planet.mbtiles" "https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_z0-z5.mbtiles"
+  - docker-compose pull import-external export import-osm postgis rabbitmq merge-jobs
   # Avoid building really expensive images
   - make fast
+install: "pip install -r ./tools/integration-test/requirements.txt"
 script:
   # Test import
-  - docker-compose up -d postgis
-  - sleep 10
-  - docker-compose run import-external
-  - docker-compose run import-osm
-  - docker-compose run import-sql
-  # Test export
-  - docker-compose run export
-  # Test changed tiles
-  - docker-compose run update-osm-diff
-  - docker-compose run import-osm-diff
-  - docker-compose run changed-tiles
+  - py.test -xv ./tools/integration-test/integration_test.py
