@@ -21,7 +21,7 @@ function install_vt_util() {
 }
 
 function create_postgis_extensions() {
-    cd "/usr/share/postgresql/$PG_MAJOR/contrib/postgis-$POSTGIS_MAJOR"
+    cd "/usr/share/postgresql/*/contrib/postgis-*"
     local db
     for db in template_postgis "$POSTGRES_DB"; do
         echo "Loading PostGIS into $db"
