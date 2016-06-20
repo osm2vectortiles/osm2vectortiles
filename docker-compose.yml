@@ -11,7 +11,7 @@ cache:
   volumes:
   - /data/cache
 postgis:
-  build: "src/postgis"
+  image: "osm2vectortiles/postgis"
   volumes_from:
    - pgdata
   ports:
