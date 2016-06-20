@@ -7,82 +7,42 @@ $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE VIEW landuse_overlay_z5 AS
     SELECT id AS osm_id, type, geometry
-    FROM (
-        SELECT id, geometry, type FROM osm_landuse_polygon_gen0
-        WHERE ST_Area(geometry) BETWEEN 300000000 AND 1000000000
-        UNION ALL
-        SELECT id, geometry, type FROM osm_landuse_split_polygon
-    ) AS t
-    WHERE is_landuse_overlay(type);
+    FROM osm_landuse_polygon_gen0
+    WHERE is_landuse_overlay(type) AND st_area(geometry) > 300000000;
 
 CREATE OR REPLACE VIEW landuse_overlay_z6 AS
     SELECT id AS osm_id, type, geometry
-    FROM (
-        SELECT id, geometry, type FROM osm_landuse_polygon_gen0
-        WHERE ST_Area(geometry) BETWEEN 100000000 AND 1000000000
-        UNION ALL
-        SELECT id, geometry, type FROM osm_landuse_split_polygon
-    ) AS t
-    WHERE is_landuse_overlay(type);
+    FROM osm_landuse_polygon_gen0
+    WHERE is_landuse_overlay(type) AND st_area(geometry) > 100000000;
 
 CREATE OR REPLACE VIEW landuse_overlay_z7 AS
     SELECT id AS osm_id, type, geometry
-    FROM (
-        SELECT id, geometry, type FROM osm_landuse_polygon_gen0
-        WHERE ST_Area(geometry) BETWEEN 20000000 AND 1000000000
-        UNION ALL
-        SELECT id, geometry, type FROM osm_landuse_split_polygon
-    ) AS t
-    WHERE is_landuse_overlay(type);
+    FROM osm_landuse_polygon_gen0
+    WHERE is_landuse_overlay(type) AND st_area(geometry) > 20000000;
 
 CREATE OR REPLACE VIEW landuse_overlay_z8 AS
     SELECT id AS osm_id, type, geometry
-    FROM (
-        SELECT id, geometry, type FROM osm_landuse_polygon_gen0
-        WHERE ST_Area(geometry) BETWEEN 6000000 AND 1000000000
-        UNION ALL
-        SELECT id, geometry, type FROM osm_landuse_split_polygon
-    ) AS t
-    WHERE is_landuse_overlay(type);
+    FROM osm_landuse_polygon_gen0
+    WHERE is_landuse_overlay(type) AND st_area(geometry) > 6000000;
 
 CREATE OR REPLACE VIEW landuse_overlay_z9 AS
     SELECT id AS osm_id, type, geometry
-    FROM (
-        SELECT id, geometry, type FROM osm_landuse_polygon_gen0
-        WHERE ST_Area(geometry) BETWEEN 2000000 AND 1000000000
-        UNION ALL
-        SELECT id, geometry, type FROM osm_landuse_split_polygon
-    ) AS t
-    WHERE is_landuse_overlay(type);
+    FROM osm_landuse_polygon_gen0
+    WHERE is_landuse_overlay(type) AND st_area(geometry) > 2000000;
 
 CREATE OR REPLACE VIEW landuse_overlay_z10 AS
     SELECT id AS osm_id, type, geometry
-    FROM (
-        SELECT id, geometry, type FROM osm_landuse_polygon_gen0
-        WHERE ST_Area(geometry) BETWEEN 500000 AND 1000000000
-        UNION ALL
-        SELECT id, geometry, type FROM osm_landuse_split_polygon
-    ) AS t
-    WHERE is_landuse_overlay(type);
+    FROM osm_landuse_polygon_gen0
+    WHERE is_landuse_overlay(type) AND st_area(geometry) > 500000;
 
 CREATE OR REPLACE VIEW landuse_overlay_z11toz12 AS
     SELECT id AS osm_id, type, geometry
-    FROM (
-        SELECT id, geometry, type FROM osm_landuse_polygon_gen1
-        WHERE ST_Area(geometry) < 1000000000
-        UNION ALL
-        SELECT id, geometry, type FROM osm_landuse_split_polygon
-    ) AS t
+    FROM osm_landuse_polygon_gen1
     WHERE is_landuse_overlay(type);
 
 CREATE OR REPLACE VIEW landuse_overlay_z13toz14 AS
     SELECT id AS osm_id, type, geometry
-    FROM (
-        SELECT id, geometry, type FROM osm_landuse_polygon
-        WHERE ST_Area(geometry) < 1000000000
-        UNION ALL
-        SELECT id, geometry, type FROM osm_landuse_split_polygon
-    ) AS t
+    FROM osm_landuse_polygon
     WHERE is_landuse_overlay(type);
 
 CREATE OR REPLACE VIEW landuse_overlay_layer AS (
