@@ -89,14 +89,13 @@ def render_tile_list_command(source, sink, list_file):
 
 
 def render_pyramid_command(source, sink, bounds, min_zoom, max_zoom):
-    # Slow tiles should timeout as fast as possible so job can fail
     return [
         'tilelive-copy',
         '--scheme', 'pyramid',
         '--minzoom', str(min_zoom),
         '--maxzoom', str(max_zoom),
         '--bounds={}'.format(bounds),
-        '--timeout=40000',
+        '--timeout=1800000',
         source, sink
     ]
 
@@ -165,7 +164,7 @@ def handle_message(tm2source, bucket, s3_url, body):
     else:
         raise ValueError("Message must be either of type pyramid or list")
 
-    _, render_time = timing(subprocess.check_call, tilelive_cmd, timeout=5*60)
+    _, render_time = timing(subprocess.check_call, tilelive_cmd, timeout=3600)
     print('Render MBTiles: {}'.format(naturaltime(render_time)))
 
     _, optimize_time = timing(optimize_mbtiles, mbtiles_file)
