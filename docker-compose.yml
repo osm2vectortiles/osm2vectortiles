@@ -92,7 +92,7 @@ merge-jobs:
   links:
    - rabbitmq:rabbitmq
 export-worker:
-  image: "osm2vectortiles/export"
+  build: "src/export"
   command: ./export-worker.sh
   volumes:
    - ./osm2vectortiles.tm2source:/data/tm2source
@@ -105,7 +105,7 @@ export-worker:
     AWS_S3_HOST: "${AWS_S3_HOST}"
     BUCKET_NAME: "osm2vectortiles-testing"
 export:
-  image: "osm2vectortiles/export"
+  build: "src/export"
   command: ./export-local.sh
   volumes:
    - ./export:/data/export
