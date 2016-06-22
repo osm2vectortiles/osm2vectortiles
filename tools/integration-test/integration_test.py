@@ -114,6 +114,7 @@ def test_distributed_worker():
             '-e', 'TILE_Y={}'.format(y),
             '-e', 'TILE_Z={}'.format(z),
             '-e', 'JOB_ZOOM={}'.format(job_zoom),
+            '-e', 'WORLD_JOB=false',
             'generate-jobs'
         ])
 
