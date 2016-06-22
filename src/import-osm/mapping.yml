@@ -835,9 +835,6 @@ tables:
       type: mapping_value
     - name: area
       type: pseudoarea
-    filters:
-      exclude_tags:
-      - [ "name", "__nil__" ]
     mapping:
       amenity:
       - arts_centre
@@ -1142,9 +1139,6 @@ tables:
       type: string
     - name: type
       type: mapping_value
-    filters:
-      exclude_tags:
-      - [ "name", "__nil__" ]
     mapping:
       amenity:
       - arts_centre
