@@ -29,6 +29,7 @@ function import_pbf() {
     drop_tables
     create_timestamp_history
     if [ "$NO_DIFFS" = false ]; then
+    echo "Importing in diff mode"
     imposm3 import \
         -connection "$PG_CONNECT" \
         -mapping "$MAPPING_YAML" \
@@ -38,6 +39,7 @@ function import_pbf() {
         -dbschema-import="${DB_SCHEMA}" \
         -write -optimize -diff
     else
+    echo "Importing in normal mode"
     imposm3 import \
         -connection "$PG_CONNECT" \
         -mapping "$MAPPING_YAML" \
