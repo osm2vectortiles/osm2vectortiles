@@ -7,7 +7,7 @@ readonly IMPORT_DATA_DIR=${IMPORT_DATA_DIR:-/data/import}
 readonly IMPOSM_CACHE_DIR=${IMPOSM_CACHE_DIR:-/data/cache}
 readonly MAPPING_JSON=${MAPPING_JSON:-/usr/src/app/mapping.json}
 
-readonly NO_DIFFS=${NO_DIFFS:-false}
+readonly DIFFS=${DIFFS:-true}
 
 readonly OSM_DB=${OSM_DB:-osm}
 readonly OSM_USER=${OSM_USER:-osm}
@@ -28,7 +28,7 @@ function import_pbf() {
     local pbf_file="$1"
     drop_tables
     create_timestamp_history
-    if [ "$NO_DIFFS" = false ]; then
+    if [ "$DIFFS" = true ]; then
     echo "Importing in diff mode"
     imposm3 import \
         -connection "$PG_CONNECT" \
