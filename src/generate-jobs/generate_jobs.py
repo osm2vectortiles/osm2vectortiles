@@ -109,6 +109,8 @@ def pyramid_jobs(x, y, z, job_zoom):
         yield create_pyramid_job(tile.x, tile.y, min_zoom=tile.z,
                                  max_zoom=14, bounds=bounds)
 
+    bounds = mercantile.bounds(0 , 0 , 0)
+    yield create_pyramid_job(0, 0, min_zoom=0, max_zoom=job_zoom-1, bounds=bounds)
 
 if __name__ == '__main__':
     args = docopt(__doc__, version='0.1')
