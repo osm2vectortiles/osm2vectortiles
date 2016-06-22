@@ -127,12 +127,6 @@ export-list:
    - ./osm2vectortiles.tm2source:/data/tm2source
   links:
    - postgis:db
-serve:
-  image: "klokantech/tileserver-mapnik"
-  volumes:
-   - ./export:/data
-  ports:
-   - "8080:80"
 import-sql:
   image: "osm2vectortiles/import-sql"
   links:
