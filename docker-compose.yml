@@ -25,6 +25,8 @@ import-osm:
    - cache
   links:
    - postgis:db
+  environment:
+     DIFFS: 'true'
 import-osm-diff:
   image: "osm2vectortiles/import-osm"
   command: ./import-diff.sh
