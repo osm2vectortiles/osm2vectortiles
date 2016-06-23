@@ -9,12 +9,18 @@ readonly TILE_X=${TILE_X:-"0"}
 readonly TILE_Y=${TILE_Y:-"0"}
 readonly TILE_Z=${TILE_Z:-"0"}
 readonly JOB_ZOOM=${JOB_ZOOM:-"8"}
+readonly WORLD_JOB=${WORLD_JOB:-"true"}
 
 function generate_world_jobs() {
     local jobs_file="$EXPORT_DATA_DIR/world_jobs.txt"
     local jobs_queue="jobs"
 
     python generate_jobs.py pyramid "$TILE_X" "$TILE_Y" "$TILE_Z" --job-zoom="$JOB_ZOOM" > $jobs_file
+
+    if [ "$WORLD_JOB" = true ] ; then
+        python generate_jobs.py pyramid "0" "0" "0" --job-zoom="0" --max-zoom="$((JOB_ZOOM-1))" >> $jobs_file
+    fi
+
     pipecat publish --amqpuri="$AMQP_URI" "$jobs_queue" < $jobs_file
 }
 
