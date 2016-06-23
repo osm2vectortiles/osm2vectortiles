@@ -106,7 +106,7 @@ export-worker:
     AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
     AWS_S3_HOST: "${AWS_S3_HOST}"
     BUCKET_NAME: "osm2vectortiles-testing"
-    RENDER_TIMEOUT: "1200"
+    RENDER_TIMEOUT: "300"
 export:
   image: "osm2vectortiles/export"
   command: ./export-local.sh

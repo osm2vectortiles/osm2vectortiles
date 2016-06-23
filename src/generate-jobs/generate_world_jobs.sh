@@ -17,7 +17,7 @@ function generate_world_jobs() {
 
     python generate_jobs.py pyramid "$TILE_X" "$TILE_Y" "$TILE_Z" --job-zoom="$JOB_ZOOM" > $jobs_file
 
-    if [ "$WORLD_JOB" = true ] ; then
+    if [ "$WORLD_JOB" == "true" ] ; then
         python generate_jobs.py pyramid "0" "0" "0" --job-zoom="0" --max-zoom="$((JOB_ZOOM-1))" >> $jobs_file
     fi
 
