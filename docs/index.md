@@ -57,4 +57,4 @@ is available publicly and if you wan't to dig deeper you are welcome
 to read the thesis.
 
 - Bachelor Thesis
-  - [Updatable Vector Tiles from OpenStreetMap](https://cdn.rawgit.com/osm2vectortiles/bachelor-thesis/master/thesis.pdf)
+  - [Updatable Vector Tiles from OpenStreetMap](https://cdn.rawgit.com/osm2vectortiles/bachelor-thesis/882a46977f7b984fc59be188335127d62921c44c/thesis.pdf)
