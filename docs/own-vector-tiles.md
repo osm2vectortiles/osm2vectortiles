@@ -6,13 +6,13 @@ published: true
 
 # Generate your own vector tiles
 
-We use Docker extensively for development and deployment.
-The easiest way to get started is using [Docker Compose](https://www.docker.com/docker-compose){:target="_blank"}.
+In this tutorial you will learn how to create your own vector tiles with the help of the OSM2VectorTiles toolset. In order to run through the following steps you need to have [docker](https://docs.docker.com/engine/installation/){:target="_blank"} and [docker-compose](https://docs.docker.com/compose/install/){:target="_blank"} installed.
 
-Clone the [OSM2VectorTiles](https://github.com/osm2vectortiles/osm2vectortiles){:target="_blank"} project.
+Clone the [OSM2VectorTiles](https://github.com/osm2vectortiles/osm2vectortiles){:target="_blank"} repository and change directory to it.
 
 ```
 git clone https://github.com/osm2vectortiles/osm2vectortiles.git
+cd ./osm2vectortiles
 ```
 
 Start up your PostGIS container with the data container attached.
@@ -26,7 +26,7 @@ You can use extracts from [Mapzen](https://mapzen.com/data/metro-extracts){:targ
 or [Geofabrik](http://download.geofabrik.de/){:target="_blank"}
 
 ```
-wget https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf
+wget https://s3.amazonaws.com/metro-extracts.mapzen.com/zurich_switzerland.osm.pbf -P ./import
 ```
 
 Now you need to import several external data sources.
@@ -36,19 +36,19 @@ Import water polygons from [OpenStreetMapData.com](http://openstreetmapdata.com/
 docker-compose up import-external
 ```
 
-Now you need to import the downloaded PBF file into PostGIS.
+With the next command the downloaded PBF file gets imported into PostGIS.
 
 ```
 docker-compose up import-osm
 ```
 
-Now import custom SQL functions used in the source project.
+The following command imports custom SQL utilities such as functions and views, which are needed to create the vector tiles.
 
 ```
 docker-compose up import-sql
 ```
 
-Edit the `BBOX` environement variable in the docker-compose.yml file to match your desired extract.
+**Important:** Edit the `BBOX` environement variable in the docker-compose.yml file to match your desired extract.
 
 ```
 export:
@@ -65,13 +65,15 @@ export:
     MAX_ZOOM: "14"
 ```
 
-Export the data as MBTiles file to the `export` directory.
+Finally, the following command generates the vector tiles and creates an MBTiles file in the `export` directory.
 
 ```
 docker-compose up export
 ```
 
-Optional: Merge lower zoom levels (z0 to z5) into extract (prerequisite: sqlite3 installed)
+In order to display your vector tiles follow the [getting started](/docs/getting-started) tutorial.
+
+**Optional:** Merge lower zoom levels (z0 to z5) into extract (_prerequisite:_ sqlite3 installed)
 
 Download lower zoom level extract.
 
@@ -91,15 +93,3 @@ Merge lower zoom levels into extract.
 ```bash
 ./patch "./export/planet_z0-z5.mbtiles" "./export/zurich.mbtiles"
 ```
-
-Serve the tiles as raster tiles from `export` directory.
-
-```
-docker-compose up serve
-```
-
-The tile server will no be visible on the docker host on port `8080`.
-You can now see extract rendered as `Open Streets v1.0` and if you have
-style projects in your directory the rendered raster map as well.
-
-![Tessera Overview](/media/local_serve_container_tessera_overview.png)
