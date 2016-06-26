@@ -95,7 +95,7 @@ def render_pyramid_command(source, sink, bounds, min_zoom, max_zoom):
         '--minzoom', str(min_zoom),
         '--maxzoom', str(max_zoom),
         '--bounds={}'.format(bounds),
-        '--timeout=1800000',
+        '--timeout={}'.format(int(os.getenv('TILE_TIMEOUT', 10 * 60))),
         source, sink
     ]
 

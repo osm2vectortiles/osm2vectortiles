@@ -107,6 +107,7 @@ export-worker:
     AWS_S3_HOST: "${AWS_S3_HOST}"
     BUCKET_NAME: "osm2vectortiles-testing"
     RENDER_TIMEOUT: "300"
+    TILE_TIMEOUT: "1800000"
 export:
   image: "osm2vectortiles/export"
   command: ./export-local.sh
