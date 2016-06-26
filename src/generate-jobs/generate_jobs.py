@@ -2,7 +2,7 @@
 """Generate jobs for rendering tiles in pyramid and list format in JSON format
 
 Usage:
-  generate_jobs.py pyramid <x> <y> <z> --job-zoom=<job-zoom>
+  generate_jobs.py pyramid <x> <y> <z> --job-zoom=<job-zoom> [--max-zoom=<max-zoom>]
   generate_jobs.py list <list_file> --batch-size=<batch_size>
   generate_jobs.py (-h | --help)
   generate_jobs.py --version
@@ -10,7 +10,8 @@ Usage:
 Options:
   -h --help                    Show this screen.
   --version                    Show version.
-  --job-zoom=<job-zoom>        Max zoom level for pyramid jobs.
+  --job-zoom=<job-zoom>        Job zoom level for pyramid jobs.
+  --max-zoom=<max-zoom>        Max zoom level for pyramid jobs. [default: 14]
   --batch-size=<batch_size>    Amount of tiles for list jobs.
 """
 
@@ -87,7 +88,7 @@ def split_tiles_into_batch_jobs(tiles, batch_size):
     yield create_list_batch_job(tiles_batch)
 
 
-def pyramid_jobs(x, y, z, job_zoom):
+def pyramid_jobs(x, y, z, job_zoom, max_zoom):
     """
     Generate pyramid jobs for a given job_zoom level
     starting at with the parent tile defined by x, y, z.
@@ -96,7 +97,7 @@ def pyramid_jobs(x, y, z, job_zoom):
         bounds = mercantile.bounds(x, y, z)
         yield create_pyramid_job(
             x=x, y=y,
-            min_zoom=z, max_zoom=14,
+            min_zoom=z, max_zoom=max_zoom,
             bounds=bounds
         )
         return
@@ -107,7 +108,7 @@ def pyramid_jobs(x, y, z, job_zoom):
     for tile in pyramid_zoom_level_tiles:
         bounds = mercantile.bounds(tile.x, tile.y, tile.z)
         yield create_pyramid_job(tile.x, tile.y, min_zoom=tile.z,
-                                 max_zoom=14, bounds=bounds)
+                                 max_zoom=max_zoom, bounds=bounds)
 
 
 if __name__ == '__main__':
@@ -115,12 +116,13 @@ if __name__ == '__main__':
 
     if args['pyramid']:
         job_zoom = int(args['--job-zoom'])
+        max_zoom = int(args['--max-zoom'])
 
         x = int(args['<x>'])
         y = int(args['<y>'])
         z = int(args['<z>'])
 
-        for job in pyramid_jobs(x, y, z, job_zoom):
+        for job in pyramid_jobs(x, y, z, job_zoom=job_zoom, max_zoom=max_zoom):
             print(json.dumps(job), flush=True)
 
     if args['list']:

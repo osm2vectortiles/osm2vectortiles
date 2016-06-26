@@ -7,6 +7,8 @@ readonly IMPORT_DATA_DIR=${IMPORT_DATA_DIR:-/data/import}
 readonly IMPOSM_CACHE_DIR=${IMPOSM_CACHE_DIR:-/data/cache}
 readonly MAPPING_JSON=${MAPPING_JSON:-/usr/src/app/mapping.json}
 
+readonly DIFFS=${DIFFS:-true}
+
 readonly OSM_DB=${OSM_DB:-osm}
 readonly OSM_USER=${OSM_USER:-osm}
 readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
@@ -26,6 +28,8 @@ function import_pbf() {
     local pbf_file="$1"
     drop_tables
     create_timestamp_history
+    if [ "$DIFFS" = true ]; then
+    echo "Importing in diff mode"
     imposm3 import \
         -connection "$PG_CONNECT" \
         -mapping "$MAPPING_YAML" \
@@ -34,6 +38,17 @@ function import_pbf() {
         -read "$pbf_file" \
         -dbschema-import="${DB_SCHEMA}" \
         -write -optimize -diff
+    else
+    echo "Importing in normal mode"
+    imposm3 import \
+        -connection "$PG_CONNECT" \
+        -mapping "$MAPPING_YAML" \
+        -overwritecache \
+        -cachedir "$IMPOSM_CACHE_DIR" \
+        -read "$pbf_file" \
+        -dbschema-import="${DB_SCHEMA}" \
+        -write -optimize
+    fi
 
     echo "Create osm_water_point table with precalculated centroids"
     create_osm_water_point_table

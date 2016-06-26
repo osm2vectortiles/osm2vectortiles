@@ -164,7 +164,9 @@ def handle_message(tm2source, bucket, s3_url, body):
     else:
         raise ValueError("Message must be either of type pyramid or list")
 
-    _, render_time = timing(subprocess.check_call, tilelive_cmd, timeout=3600)
+    render_timeout = int(os.getenv('RENDER_TIMEOUT', 5 * 60))
+    _, render_time = timing(subprocess.check_call, tilelive_cmd,
+                            timeout=render_timeout)
     print('Render MBTiles: {}'.format(naturaltime(render_time)))
 
     _, optimize_time = timing(optimize_mbtiles, mbtiles_file)

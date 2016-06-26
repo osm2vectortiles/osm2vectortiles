@@ -25,6 +25,8 @@ import-osm:
    - cache
   links:
    - postgis:db
+  environment:
+     DIFFS: 'true'
 import-osm-diff:
   image: "osm2vectortiles/import-osm"
   command: ./import-diff.sh
@@ -104,6 +106,7 @@ export-worker:
     AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
     AWS_S3_HOST: "${AWS_S3_HOST}"
     BUCKET_NAME: "osm2vectortiles-testing"
+    RENDER_TIMEOUT: "300"
 export:
   image: "osm2vectortiles/export"
   command: ./export-local.sh
@@ -125,12 +128,6 @@ export-list:
    - ./osm2vectortiles.tm2source:/data/tm2source
   links:
    - postgis:db
-serve:
-  image: "klokantech/tileserver-mapnik"
-  volumes:
-   - ./export:/data
-  ports:
-   - "8080:80"
 import-sql:
   build: "src/import-sql"
   links:
