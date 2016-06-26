@@ -442,6 +442,9 @@ tables:
     - key: capital
       name: capital
       type: integer
+    - key: capital
+      name: is_capital
+      type: bool
     - key: admin_level
       name: admin_level
       type: integer

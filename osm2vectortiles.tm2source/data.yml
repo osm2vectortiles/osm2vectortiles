@@ -675,7 +675,7 @@ Layer:
             coalesce(NULLIF(name_ru, ''), name) AS name_ru,
             coalesce(NULLIF(name_zh, ''), name) AS name_zh,
             type,
-            capital,
+            CASE WHEN is_capital THEN 2 ELSE capital END AS capital,
             NULL AS ldir,
             normalize_scalerank(scalerank) AS scalerank,
             row_number() OVER (PARTITION BY LabelGrid(geometry, 85 * !pixel_width!)
