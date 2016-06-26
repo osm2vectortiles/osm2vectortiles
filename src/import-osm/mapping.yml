@@ -473,6 +473,23 @@ tables:
         - residential
         boundary:
         - aboriginal_lands
+  motorway_junction_point:
+    type: point
+    fields:
+    - name: id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: timestamp
+      type: pbf_timestamp
+    - name: type
+      type: mapping_value
+    - key: ref
+      name: ref
+      type: string
+    - name: name
+      key: name
+      type: string
   road_geometry:
     type: geometry
     fields:
