@@ -16,7 +16,8 @@ the [Open Database License](https://tldrlegal.com/license/odc-open-database-lice
   <li>
     Need any help? <a href="/docs/">Check out the documentation</a>
   </li>
-  <li>These tiles are OSM2VectorTiles V2 tiles - compatible with styles for MapBox Streets V7 (typically GL JSON styles). The older OSM2VectorTiles V1, compatible with styles for MapBox Streets V5 (typically MapBox Studio Classic .tm2 with CartoCSS for Mapnik), are available at <a href="/downloads-v1/">Downloads V1</a>. The V1 is deprecated, and not updated anymore, you should upgrade your map styles to the new version of the tiles.
+  <li>These tiles are <a href="https://github.com/osm2vectortiles/osm2vectortiles/releases/latest">OSM2VectorTiles v2 tiles</a> - compatible with styles for MapBox Streets v7 (typically GL JSON styles).
+  The older <a href="https://github.com/osm2vectortiles/osm2vectortiles/releases/tag/v1.0">OSM2VectorTiles v1</a>, compatible with styles for MapBox Streets v5 (typically MapBox Studio Classic projects with CartoCSS for Mapnik), are available at <a href="/downloads-v1/">Downloads v1</a>. v1 is deprecated, and is no longer maintained, please upgrade your map styles to the new version of the tiles.
   </li>
   <li>
     Full Planet and extracts were last updated on <span id="timestamp"></span>
@@ -46,7 +47,7 @@ the [Open Database License](https://tldrlegal.com/license/odc-open-database-lice
 			Full Planet <br/><small>MD5: a426f297c4936f97f2a14fc5a386e3dd</small>
 		</div>
 		<div class="col2" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet.mbtiles'">
-			50 GB
+			56 GB
 		</div>
 		<div class="col6 clipboard">
 			<input id="world" class="clipboard-input" value="https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet.mbtiles">
