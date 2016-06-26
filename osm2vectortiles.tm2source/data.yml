@@ -825,7 +825,7 @@ Layer:
               poi_label_scalerank(type, area) AS scalerank,
               coalesce(NULLIF(maki_label_class(type), ''), 'marker') AS maki,
               rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
-                           ORDER BY poi_label_localrank(type) ASC) AS localrank
+                           ORDER BY poi_label_localrank(type, name) ASC) AS localrank
             FROM poi_label_z14
             WHERE z(!scale_denominator!) = 14
               AND geometry && !bbox!
