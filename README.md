@@ -1,16 +1,13 @@
 # OSM2VectorTiles [![Build Status](https://travis-ci.org/osm2vectortiles/osm2vectortiles.svg?branch=master)](https://travis-ci.org/osm2vectortiles/osm2vectortiles) [![MIT and ODbL licensed](https://img.shields.io/badge/license-MIT/ODbL-blue.svg)](https://github.com/osm2vectortiles/osm2vectortiles#license)
 
-
 OSM2VectorTiles makes is possible to create vector tiles from OpenStreetMap data. For a detailed documentation, please visit our [project website](http://osm2vectortiles.org/docs/).
 
 Create a custom base map in minutes with our free vector tiles from [OpenStreetMap](http://openstreetmap.org) data. 
 This is the easiest way how to switch to OSM thanks to [MapBox](https://github.com/mapbox) open-source tools. Design your own map of world or country, serve raster or vector tiles from any virtual server or your own infrastructure, even offline behind a firewall.
 
-![Create vector tiles from OpenStreetMap data](http://osm2vectortiles.org/img/home-banner-icons.png)
-
 ## Introduction
 
-Video introduction into vector tiles, the project and how to use provided vector tiles to create your own styles and maps.
+Video introduction to vector tiles, the project and how to use OSM2VectorTiles to create your own styles and maps.
 
 **https://www.youtube.com/watch?v=Wh--DHRULkE**
 
