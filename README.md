@@ -8,6 +8,14 @@ This is the easiest way how to switch to OSM thanks to [MapBox](https://github.c
 
 ![Create vector tiles from OpenStreetMap data](http://osm2vectortiles.org/img/home-banner-icons.png)
 
+## Introduction
+
+Video introduction into vector tiles, the project and how to use provided vector tiles to create your own styles and maps.
+
+**https://www.youtube.com/watch?v=Wh--DHRULkE**
+
+[![Vector tiles from OpenStreetMap](https://img.youtube.com/vi/Wh--DHRULkE/0.jpg)](https://www.youtube.com/watch?v=Wh--DHRULkE)
+
 ## Docs
 
 The following tutorials are targeted at users of the OSM2VectorTiles project.
