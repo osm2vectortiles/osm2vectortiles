@@ -39,10 +39,17 @@ The following tutorials explain how you can use the OSM2VectorTiles project. Fee
     </div>
 </div>
 
-## Video Tutorial
+## Introduction Video
+
+[Video introduction](https://www.youtube.com/watch?v=Wh--DHRULkE) to vector tiles, the project and how to use provided vector tiles to create your own styles and maps.
+We recommend watching this video to get a broad overview what can be done with OSM2VectorTiles and then dig into the tutorials.
+
+<iframe style="width: 728px; height: 410px; margin: 0 auto; display: block;" src="https://www.youtube.com/embed/Wh--DHRULkE" frameborder="0" allowfullscreen></iframe>
+
+## Vector Tile Video Series
 
 [Tobin Bradley](http://fuzzytolerance.info/) created an awesome video tutorial series
-that will introduce you into web maps, vector tiles and using OSM2VectorTiles.
+that will educate you more in-depth about web maps, vector tiles and using OSM2VectorTiles.
 
 <iframe width="430" height="242" src="https://www.youtube.com/embed/xI7QkEodCac" frameborder="0" style="display: inline;" allowfullscreen></iframe>
 
