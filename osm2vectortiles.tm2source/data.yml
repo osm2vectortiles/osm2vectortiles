@@ -822,7 +822,9 @@ Layer:
               coalesce(NULLIF(name_ru, ''), name) AS name_ru,
               coalesce(NULLIF(name_zh, ''), name) AS name_zh,
               format_type(type) AS type,
-              poi_label_scalerank(type, area) AS scalerank,
+              CASE WHEN name = '' THEN NULL
+                   ELSE poi_label_scalerank(type, area)
+              END AS scalerank,
               coalesce(NULLIF(maki_label_class(type), ''), 'marker') AS maki,
               rank() OVER (PARTITION BY LabelGrid(geometry, 128 * !pixel_width!)
                            ORDER BY poi_label_localrank(type, name) ASC) AS localrank
