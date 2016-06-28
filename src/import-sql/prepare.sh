@@ -26,13 +26,6 @@ function exec_sql_file() {
 }
 
 function main() {
-    if [ "$SQL_SUBDIVIDE_POLYGON" = true ] ; then
-        echo "Subdividing polygons in $OSM_DB"
-        exec_sql_file "$SQL_SUBDIVIDE_POLYGON_FILE"
-    else
-        echo "Omitting subdividing polygons for $OSM_DB"
-    fi
-
     echo "Creating functions in $OSM_DB"
     exec_sql_file "$SQL_FUNCTIONS_FILE"
     exec_sql_file "$SQL_XYZ_EXTENT_FILE"
