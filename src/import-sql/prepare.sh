@@ -26,24 +26,19 @@ function exec_sql_file() {
 }
 
 function main() {
-	
-    echo "Subdividing polygons in $OSM_DB"
-    exec_sql_file "$SQL_SUBDIVIDE_POLYGON_FILE" 
-	
+    if [ "$SQL_SUBDIVIDE_POLYGON" = true ] ; then
+        echo "Subdividing polygons in $OSM_DB"
+        exec_sql_file "$SQL_SUBDIVIDE_POLYGON_FILE"
+    else
+        echo "Omitting subdividing polygons for $OSM_DB"
+    fi
+
     echo "Creating functions in $OSM_DB"
     exec_sql_file "$SQL_FUNCTIONS_FILE"
     exec_sql_file "$SQL_XYZ_EXTENT_FILE"
     echo "Creating generated functions in $OSM_DB"
     exec_sql_file "$SQL_GENERATED_FILE"
     echo "Creating triggers in $OSM_DB"
-
-    if [ "$SQL_SPLIT_POLYGON" = true ] ; then
-        echo "Split polygons for $OSM_DB"
-        exec_sql_file "${SQL_SPLIT_POLYGON_FILE}"
-    else
-        echo "Omitting splitting polygon for $OSM_DB"
-    fi
-
     exec_sql_file "$SQL_TRIGGERS_FILE"
     echo "Creating layers in $OSM_DB"
     exec_sql_file "${SQL_LAYERS_DIR}admin.sql"
