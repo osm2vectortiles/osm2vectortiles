@@ -77,5 +77,5 @@ tables:
     max_zoom: 14
   motorway_junction_point:
     buffer: 8
-    min_zoom: 11
+    min_zoom: 12
     max_zoom: 14
