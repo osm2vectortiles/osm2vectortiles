@@ -4,13 +4,16 @@ _prefs:
   mapid: ''
   rev: ''
   saveCenter: true
-attribution: '<a href="http://www.openstreetmap.org/about/" target="_blank">&copy; OpenStreetMap contributors</a>'
+attribution: "<a href=\"http://www.openstreetmap.org/about/\" target=\"_blank\">&copy; OpenStreetMap contributors</a>"
 center: 
-  - 8.5388
-  - 47.3434
-  - 12
+  - 8.5391
+  - 47.3439
+  - 10
 description: |-
   Free global vector tiles from OpenStreetMap compatible with Mapbox Streets v7.
+  
+  
+  
   http://osm2vectortiles.org
 Layer: 
   - id: landuse
@@ -929,6 +932,49 @@ Layer:
       ref: Route number of the road
       reflen: Number. How many characters long the ref tag is. Useful for shield styling.
       shield: "The shield style to use. One of: default, mx-federal, mx-state, us-highway, us-highway-alternate, us-highway-business, us-highway-duplex, us-interstate, us-interstate-business, us-interstate-duplex, us-interstate-truck, us-state"
+    properties: 
+      "buffer-size": 8
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+  - id: motorway_junction
+    Datasource: 
+      dbname: osm
+      extent: -20037508.34,-20037508.34,20037508.34,20037508.34
+      geometry_field: geometry
+      geometry_table: ''
+      host: db
+      key_field: osm_id
+      key_field_as_attribute: false
+      max_size: 512
+      password: osm
+      port: 5432
+      srid: ''
+      table: |-
+        (
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id,
+          geometry,
+          name,
+          NULLIF(ref, '') AS ref,
+          NULLIF(char_length(ref), 0) AS reflen,
+          type,
+          road_class(type, NULL, NULL) AS class
+          FROM (
+            SELECT * FROM motorway_junction_z11
+            WHERE z(!scale_denominator!) = 11
+            UNION ALL
+            SELECT * FROM motorway_junction_z12toz14
+            WHERE z(!scale_denominator!) BETWEEN 12 AND 14
+          ) AS t
+          WHERE geometry && !bbox!
+        ) AS data
+      type: postgis
+      user: osm
+    description: This layer contains point geometries for labeling motorway junctions (aka highway exits). Classes and types match the types in the road layer.
+    fields: 
+      class: The class of road the junction is on. Matches the classes in the road layer.
+      name: A longer name
+      ref: A short identifier
+      reflen: Number
+      type: The type of road the junction is on. Matches the types in the road layer.
     properties: 
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
