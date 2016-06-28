@@ -11,7 +11,7 @@ cache:
   volumes:
   - /data/cache
 postgis:
-  build: "src/postgis"
+  image: "osm2vectortiles/postgis"
   volumes_from:
    - pgdata
   ports:
@@ -130,7 +130,7 @@ export-list:
   links:
    - postgis:db
 import-sql:
-  build: "src/import-sql"
+  image: "osm2vectortiles/import-sql"
   links:
    - postgis:db
   environment:
