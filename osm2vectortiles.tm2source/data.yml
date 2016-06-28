@@ -955,12 +955,9 @@ Layer:
           name,
           NULLIF(ref, '') AS ref,
           NULLIF(char_length(ref), 0) AS reflen,
-          type,
-          road_class(type, NULL, NULL) AS class
+          junction_type(type) AS type,
+          road_type_class(junction_type(type)) AS class
           FROM (
-            SELECT * FROM motorway_junction_z11
-            WHERE z(!scale_denominator!) = 11
-            UNION ALL
             SELECT * FROM motorway_junction_z12toz14
             WHERE z(!scale_denominator!) BETWEEN 12 AND 14
           ) AS t

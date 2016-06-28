@@ -490,6 +490,12 @@ tables:
     - name: name
       key: name
       type: string
+    mapping:
+      highway:
+      - motorway_junction
+    filters:
+      exclude_tags:
+      - [ "ref", "__nil__" ]
   road_geometry:
     type: geometry
     fields:
