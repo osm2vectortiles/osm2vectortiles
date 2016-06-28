@@ -9,7 +9,7 @@ RUN npm install -g \
           mapnik@3.5.x \
           mbtiles@0.8.x \
           tilelive@5.12.x \
-          tilelive-tmsource@0.4.x \
+          tilelive-tmsource@0.5.x \
           tilelive-vector@3.9.x \
           tilelive-bridge@2.3.x \
           tilelive-mapnik@0.6.x
