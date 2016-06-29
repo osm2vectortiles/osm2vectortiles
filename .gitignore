@@ -6,6 +6,7 @@ __pycache__/
 # Data files
 import/
 export/
+wrk/
 *.mbtiles
 *.pbf
 *.gz
