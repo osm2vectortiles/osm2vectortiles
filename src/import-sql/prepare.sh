@@ -7,6 +7,7 @@ readonly SQL_FUNCTIONS_FILE=${IMPORT_DATA_DIR:-/usr/src/app/functions.sql}
 readonly SQL_LAYERS_DIR=${IMPORT_DATA_DIR:-/usr/src/app/layers/}
 readonly SQL_CREATE_INDIZES=${SQL_CREATE_INDIZES:-false}
 readonly SQL_SPLIT_POLYGON_FILE=${SQL_SPLIT_POLYGON_FILE:-/usr/src/app/landuse_split_polygon_table.sql}
+readonly SQL_SUBDIVIDE_POLYGON_FILE=${SQL_SUBDIVIDE_POLYGON_FILE:-/usr/src/app/subdivide_polygons.sql}
 
 readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
 readonly OSM_DB=${OSM_DB:-osm}
@@ -31,14 +32,6 @@ function main() {
     echo "Creating generated functions in $OSM_DB"
     exec_sql_file "$SQL_GENERATED_FILE"
     echo "Creating triggers in $OSM_DB"
-
-    if [ "$SQL_SPLIT_POLYGON" = true ] ; then
-        echo "Split polygons for $OSM_DB"
-        exec_sql_file "${SQL_SPLIT_POLYGON_FILE}"
-    else
-        echo "Omitting splitting polygon for $OSM_DB"
-    fi
-
     exec_sql_file "$SQL_TRIGGERS_FILE"
     echo "Creating layers in $OSM_DB"
     exec_sql_file "${SQL_LAYERS_DIR}admin.sql"
@@ -59,6 +52,7 @@ function main() {
     exec_sql_file "${SQL_LAYERS_DIR}mountain_peak_label.sql"
     exec_sql_file "${SQL_LAYERS_DIR}airport_label.sql"
     exec_sql_file "${SQL_LAYERS_DIR}rail_station_label.sql"
+    exec_sql_file "${SQL_LAYERS_DIR}motorway_junction.sql"
 
     if [ "$SQL_CREATE_INDIZES" = true ] ; then
         echo "Create index in $OSM_DB"

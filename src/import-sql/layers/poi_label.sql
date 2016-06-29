@@ -8,17 +8,20 @@ CREATE OR REPLACE VIEW poi_label_z14 AS (
         name_de, name_ru, name_zh, type, area
         FROM osm_poi_polygon
     ) AS poi_geoms
-    WHERE name IS NOT NULL AND name <> ''
+    -- Nameless POIs must have distinct maki label not the generic default
+    WHERE maki_label_class(type) <> '' OR name <> ''
 );
 
 CREATE OR REPLACE VIEW poi_label_layer AS (
     SELECT osm_id FROM poi_label_z14
 );
 
-CREATE OR REPLACE FUNCTION poi_label_localrank(type VARCHAR) RETURNS INTEGER
+CREATE OR REPLACE FUNCTION poi_label_localrank(type VARCHAR, name VARCHAR) RETURNS INTEGER
 AS $$
 BEGIN
     RETURN CASE
+        -- Nameless POIs should have the maximal localrank and least priority
+        WHEN name = '' THEN 2000
         WHEN type IN ('station', 'subway_entrance', 'park', 'cemetery', 'bank', 'supermarket', 'car', 'library', 'university', 'college', 'police', 'townhall', 'courthouse') THEN 2
         WHEN type IN ('nature_reserve', 'garden', 'public_building') THEN 3
         WHEN type IN ('stadium') THEN 90

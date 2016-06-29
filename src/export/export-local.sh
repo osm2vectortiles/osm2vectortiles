@@ -15,6 +15,7 @@ function export_local_mbtiles() {
     exec tilelive-copy \
         --scheme=pyramid \
         --bounds="$BBOX" \
+        --timeout=1800000 \
         --minzoom="$MIN_ZOOM" \
         --maxzoom="$MAX_ZOOM" \
         "tmsource://$DEST_PROJECT_DIR" "mbtiles://$EXPORT_DIR/$mbtiles_name"

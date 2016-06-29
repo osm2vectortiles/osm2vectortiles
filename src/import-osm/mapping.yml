@@ -2,15 +2,15 @@ use_single_id_space: true
 generalized_tables:
   landuse_polygon_gen0:
     source: landuse_polygon_gen1
-    sql_filter: ST_Area(geometry)>500000.000000
+    sql_filter: area>500000.000000
     tolerance: 200.0
   landuse_polygon_gen1:
     source: landuse_polygon
-    sql_filter: ST_Area(geometry)>50000.000000
+    sql_filter: area>50000.000000
     tolerance: 50.0
   water_polygon_gen1:
     source: water_polygon
-    sql_filter: ST_Area(geometry)>40000.000000
+    sql_filter: area>40000.000000
     tolerance: 30.0
   building_polygon_gen0:
     source: building_polygon
@@ -326,6 +326,8 @@ tables:
       type: pbf_timestamp
     - name: type
       type: mapping_value
+    - name: area
+      type: pseudoarea
     mapping:
       landuse:
       - allotments
@@ -440,6 +442,9 @@ tables:
     - key: capital
       name: capital
       type: integer
+    - key: capital
+      name: is_capital
+      type: bool
     - key: admin_level
       name: admin_level
       type: integer
@@ -468,6 +473,29 @@ tables:
         - residential
         boundary:
         - aboriginal_lands
+  motorway_junction_point:
+    type: point
+    fields:
+    - name: id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: timestamp
+      type: pbf_timestamp
+    - name: type
+      type: mapping_value
+    - key: ref
+      name: ref
+      type: string
+    - name: name
+      key: name
+      type: string
+    mapping:
+      highway:
+      - motorway_junction
+    filters:
+      exclude_tags:
+      - [ "ref", "__nil__" ]
   road_geometry:
     type: geometry
     fields:
@@ -835,9 +863,6 @@ tables:
       type: mapping_value
     - name: area
       type: pseudoarea
-    filters:
-      exclude_tags:
-      - [ "name", "__nil__" ]
     mapping:
       amenity:
       - arts_centre
@@ -1142,9 +1167,6 @@ tables:
       type: string
     - name: type
       type: mapping_value
-    filters:
-      exclude_tags:
-      - [ "name", "__nil__" ]
     mapping:
       amenity:
       - arts_centre

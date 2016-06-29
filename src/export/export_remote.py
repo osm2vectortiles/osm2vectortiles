@@ -89,14 +89,13 @@ def render_tile_list_command(source, sink, list_file):
 
 
 def render_pyramid_command(source, sink, bounds, min_zoom, max_zoom):
-    # Slow tiles should timeout as fast as possible so job can fail
     return [
         'tilelive-copy',
         '--scheme', 'pyramid',
         '--minzoom', str(min_zoom),
         '--maxzoom', str(max_zoom),
         '--bounds={}'.format(bounds),
-        '--timeout=40000',
+        '--timeout={}'.format(int(os.getenv('TILE_TIMEOUT', 10 * 60))),
         source, sink
     ]
 

@@ -56,6 +56,9 @@ function import_pbf() {
     echo "Update osm_place_polygon with point geometry"
     update_points
 
+    echo "Subdividing polygons in $OSM_DB"
+    subdivide_polygons
+
     echo "Update scaleranks from Natural Earth data"
     update_scaleranks
 
@@ -78,6 +81,10 @@ function update_scaleranks() {
 
 function create_osm_water_point_table() {
     exec_sql_file "water_point_table.sql"
+}
+
+function subdivide_polygons() {
+    exec_sql_file "subdivide_polygons.sql"
 }
 
 function update_scaleranks() {
@@ -188,6 +195,9 @@ function import_pbf_diffs() {
 
     echo "Update osm_place_polygon with point geometry"
     update_points
+
+    echo "Subdividing polygons in $OSM_DB"
+    subdivide_polygons
 
     local timestamp=$(extract_timestamp "$diffs_file")
     echo "Set $timestamp for latest updates from $diffs_file"
