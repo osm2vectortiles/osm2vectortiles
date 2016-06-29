@@ -25,6 +25,8 @@ will get you started.
 
 - **[Detailed Usage Guide](/USAGE.md)**: Create your own planet scale vector tiles with a distributed workflow using the OSM2VectorTiles components.
 
+You should also check out our associated bachelor thesis **[Updatable Vector Tiles from OpenStreetMap](https://cdn.rawgit.com/osm2vectortiles/bachelor-thesis/882a46977f7b984fc59be188335127d62921c44c/thesis.pdf)** if you like a more scientific approach to the project.
+
 ## Downloads
 
 Download the entire world, city or country extracts from http://osm2vectortiles.org/downloads.
