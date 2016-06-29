@@ -51,8 +51,6 @@ For extensive use it is recommended to install your own tileserver or use a paid
 We are big fans of Kartotherian and Mapzen, but believe not only the process to produce vector tiles should be open, but also the rendered data to make it really easy for everyone to create and host
 their own maps.
 These projects provide public vector tile servers as well, but do not provide the vector tiles as download.
-Additionally our projects has close compatibility to Mapbox Streets v7, which allows
-using the superior tooling from Mapbox for creating maps (such as [Mapbox Studio](https://www.mapbox.com/mapbox-studio/)).
 
 ## Who is behind this project?
 

@@ -22,7 +22,7 @@ supported and made possible by <a href="http://www.klokantech.com/">Klokan Techn
 </p>
 
 <p>
-A open-source workflow for producing vector tiles from OpenStreetMap data is publicly available and documented. Everyone can adapt the workflow to create their own custom vector tiles. The workflow is scalable across multiple hosts and the produced vector tiles are compatible with Mapbox Streets. Due to the compatibility it is possible to reuse any existing Mapbox Studio Classic projects and simply switch the source to the free and open-source vector tiles.
+A open-source workflow for producing vector tiles from OpenStreetMap data is publicly available and documented. Everyone can adapt the workflow to create their own custom vector tiles. The workflow is scalable across multiple hosts and the produced vector tiles are compatible with Mapbox Streets.
 Because the vector tiles are available as download it is possible to create an offline version of OpenStreetMap for Desktop and Mobile. This will provide new possibilities for mobile developers that want to create applications that need a local state of the art map.
 </p>
 

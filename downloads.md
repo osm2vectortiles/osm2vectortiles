@@ -16,8 +16,8 @@ the [Open Database License](https://tldrlegal.com/license/odc-open-database-lice
   <li>
     Need any help? <a href="/docs/">Check out the documentation</a>
   </li>
-  <li>These tiles are <a href="https://github.com/osm2vectortiles/osm2vectortiles/releases/latest">OSM2VectorTiles v2 tiles</a> - compatible with styles for MapBox Streets v7 (typically GL JSON styles).
-  The older <a href="https://github.com/osm2vectortiles/osm2vectortiles/releases/tag/v1.0">OSM2VectorTiles v1</a>, compatible with styles for MapBox Streets v5 (typically MapBox Studio Classic projects with CartoCSS for Mapnik), are available at <a href="/downloads-v1/">Downloads v1</a>. v1 is deprecated, and is no longer maintained, please upgrade your map styles to the new version of the tiles.
+  <li>These tiles are <a href="https://github.com/osm2vectortiles/osm2vectortiles/releases/latest">OSM2VectorTiles v2 tiles</a> meant for use with Mapbox GL JSON styles.
+  The older <a href="https://github.com/osm2vectortiles/osm2vectortiles/releases/tag/v1.0">OSM2VectorTiles v1 tiles</a> (typically used in MapBox Studio Classic projects with CartoCSS for Mapnik), are available at <a href="/downloads-v1/">Downloads v1</a>. v1 is deprecated, and is no longer maintained, please upgrade your map styles to the new version of the tiles.
   </li>
   <li>
     Full Planet and extracts were last updated on <span id="timestamp"></span>
