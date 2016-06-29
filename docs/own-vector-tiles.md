@@ -48,21 +48,14 @@ The following command imports custom SQL utilities such as functions and views, 
 docker-compose up import-sql
 ```
 
-**Important:** Edit the `BBOX` environement variable in the docker-compose.yml file to match your desired extract.
+Now export a MBTiles file by passing the bounding box you want your desired extract for.
 
 ```
-export:
-  image: "osm2vectortiles/export"
-  command: ./export-local.sh
-  volumes:
-   - ./export:/data/export
-   - ./osm2vectortiles.tm2source:/data/tm2source
-  links:
-   - postgis:db
-  environment:
-    BBOX: "8.34,47.27,8.75,47.53"
-    MIN_ZOOM: "8"
-    MAX_ZOOM: "14"
+docker-compose run \
+  -e BBOX="8.34,47.27,8.75,47.53" \
+  -e MIN_ZOOM="8" \
+  -e MAX_ZOOM="14" \
+  export
 ```
 
 Finally, the following command generates the vector tiles and creates an MBTiles file in the `export` directory.
