@@ -1,0 +1,31 @@
+       id       |                                                                                 ver                                                                                  
+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ ReportName   : | O2V-QA-R000 Environment  
+ ReportVersion: | v0.0.1/2016-jun-29
+ RunTime      : | 2016-06-29 16:40:46.036106+00
+ postgis      : | POSTGIS="2.2.0 r14208" GEOS="3.5.0-CAPI-1.9.0 r4084" PROJ="Rel. 4.8.0, 6 March 2012" GDAL="GDAL 1.10.1, released 2013/08/26" LIBXML="2.9.1" LIBJSON="0.11.99" RASTER
+ postgresql   : | PostgreSQL 9.5.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 4.9.2-10) 4.9.2, 64-bit
+(5 rows)
+
+#--------------------------------------------
+# md5sum ./import/* 
+22a1861e2b0e30364306763178356fd4  ./import/switzerland-160601.osm.pbf
+#--------------------------------------------
+#
+# git show --summary 
+commit 2904e5a949e05959210b33261f5a6ff4a3dab3cd
+Merge: 80f7c18 806a5d9
+Author: Lukas Martinelli <me@lukasmartinelli.ch>
+Date:   Wed Jun 29 15:54:33 2016 +0200
+
+    Merge pull request #367 from osm2vectortiles/new-import-v3
+    
+    New import schema
+
+#--------------------------------------------
+#
+# docker images      
+2904e5a_osm2vectortiles/import-external   latest              c11d5dc430d4        44 hours ago        1.258 GB
+2904e5a_osm2vectortiles/import-osm        latest              280dc47171c2        15 hours ago        639.9 MB
+2904e5a_osm2vectortiles/import-sql        latest              25bb05a978c3        15 hours ago        699 MB
+2904e5a_osm2vectortiles/postgis           latest              1e6134385228        38 hours ago        1.348 GB
