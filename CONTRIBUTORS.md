@@ -6,7 +6,7 @@ OSM2VectorTiles Contributors (sorted historically)
 - **[Lukas Martinelli](https://github.com/lukasmartinelli)**
   - Maintainer and main contributor
 
-- **[Manuel Roth](https://github.com/mroth)**
+- **[Manuel Roth](https://github.com/manuelroth)**
   - Maintainer and main contributor
 
 - **[Petr Pridal](https://github.com/klokan)**
