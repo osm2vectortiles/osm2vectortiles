@@ -1,7 +1,8 @@
 CREATE OR REPLACE VIEW landuse_z5toz6 AS
     SELECT id AS osm_id, geometry, type
     FROM osm_landuse_polygon_subdivided_gen0
-    WHERE landuse_class(type) = 'wood';
+    WHERE landuse_class(type) = 'wood'
+      AND area > 10000000;
 
 CREATE OR REPLACE VIEW landuse_z7toz8 AS
     SELECT id AS osm_id, geometry, type
