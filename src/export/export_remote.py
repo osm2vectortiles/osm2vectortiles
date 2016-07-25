@@ -223,16 +223,13 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
                 functools.partial(s3_url, host, port, bucket_name),
                 body
             )
-
             durable_publish(channel, result_queue_name,
                             body=json.dumps(result_msg))
-
         except:
             durable_publish(channel, failed_queue_name, body=body)
             channel.stop_consuming()
             time.sleep(5)  # Give RabbitMQ some time
             raise
-
     connection.close()
 
 
