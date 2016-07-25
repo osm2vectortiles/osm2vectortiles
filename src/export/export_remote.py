@@ -215,7 +215,8 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
             channel.stop_consuming()
             print('No message received - stop consuming')
             break
-
+          
+        channel.basic_ack(delivery_tag=method_frame.delivery_tag)
         try:
             result_msg = handle_message(
                 tm2source, bucket,
@@ -225,10 +226,9 @@ def export_remote(tm2source, rabbitmq_url, queue_name, result_queue_name,
 
             durable_publish(channel, result_queue_name,
                             body=json.dumps(result_msg))
-            channel.basic_ack(delivery_tag=method_frame.delivery_tag)
+
         except:
             durable_publish(channel, failed_queue_name, body=body)
-            channel.basic_ack(delivery_tag=method_frame.delivery_tag)
             channel.stop_consuming()
             time.sleep(5)  # Give RabbitMQ some time
             raise
