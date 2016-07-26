@@ -691,6 +691,6 @@ kingston_jamaica	Jamaica	Kingston	18.089	-76.859	17.921	-76.692
 memphis_tennessee	Tennessee	Memphis	35.655	-90.409	34.551	-89.011
 charlotte_north-carolina	North Carolina	Charlotte	35.476	-81.307	34.919	-80.396
 south-lake-tahoe_california	California	South Lake Tahoe	39.450	-120.368	38.705	-119.654
-toledo_ohio Ohio    Toledo  41.722  -83.785 41.518  -83.360
-youngstown_ohio Ohio    Youngstown  41.134  -80.712 41.046  -80.560
-kent_ohio   Ohio    Kent    41.188  -81.389 41.133 -81.283
+toledo_ohio	Ohio	toledo_ohio	41.722	-83.785	41.518	-83.360
+youngstown_ohio	Ohio	Youngstown	41.134	-80.712	41.046	-80.560
+kent_ohio	Ohio	Kent	41.188	-81.389	41.133	-81.283
