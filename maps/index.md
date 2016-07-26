@@ -18,8 +18,8 @@ published: true
 	><button id="vector-basic" class="map-button">Basic</button>
 </div>
 <div id="vector-map" class="map-preview"></div>
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
 <div>
 	<div id="bright">
 		<script src="https://gist.github.com/manuelroth/33e471c9ecd4977dee6bf4839ff9488a.js"></script>
