@@ -13,6 +13,9 @@ export-mbtiles:
 import-osm:
 	docker build -t osm2vectortiles/import-osm src/import-osm
 
+import-osm2pgsql:
+	docker build -t osm2vectortiles/import-osm2pgsql src/import-osm2pgsql
+
 import-external:
 	docker build -t osm2vectortiles/import-external src/import-external
 
