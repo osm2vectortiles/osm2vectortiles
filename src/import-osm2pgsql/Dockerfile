@@ -9,6 +9,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
       unzip \
       npm \
       git \
+      make \
+      postgresql-contrib \
 && echo "deb https://deb.nodesource.com/node_4.x xenial main" >> /etc/apt/sources.list.d/nodejs.list \
 && echo "deb-src https://deb.nodesource.com/node_4.x xenial main" >> /etc/apt/sources.list.d/nodejs.list \
 && apt-get -qq update \
