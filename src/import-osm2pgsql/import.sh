@@ -13,7 +13,7 @@ readonly PG_CONNECT="postgis://$OSM_USER:$OSM_PASSWORD@$DB_HOST/$OSM_DB"
 
 function import_all() {
     local pbf_file="$1"
-    osm2pgsql -d "$OSM_DB" "$pbf_file" --create --slim --cache 1000 --number-process 2 --hstore --multi-geometry --style openstreetmap-carto.style
+    osm2pgsql -d "$OSM_DB" -U "$OSM_USER" -W "$OSM_PASSWORD" -H "$DB_HOST" "$pbf_file" --create --slim --cache 1000 --number-process 2 --hstore --multi-geometry --style openstreetmap-carto.style
 
     ./get-shapefiles.sh
 
