@@ -2,6 +2,7 @@ FROM ubuntu:16.04
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+      apt-transport-https \
       osm2pgsql \
       curl \
       wget \
