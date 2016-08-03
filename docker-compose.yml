@@ -127,7 +127,7 @@ export:
    - postgis:db
   environment:
     # Around zurich
-    BBOX: "-22.5,79.6871841545,-21.09375,79.9359182463"
+    BBOX: "44,8.4,49.2,10.65"
     MIN_ZOOM: "0"
     MAX_ZOOM: "14"
 export-list:
