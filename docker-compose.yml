@@ -16,6 +16,15 @@ postgis:
    - pgdata
   ports:
    - "5432"
+import-osm2pgsql:
+  image: "osm2vectortiles/import-osm2pgsql"
+  command: ./import-osm2pgsql.sh
+  volumes:
+   - ./import:/data/import
+  volumes_from:
+   - cache
+  links:
+   - postgis:db
 import-osm:
   image: "osm2vectortiles/import-osm"
   command: ./import-pbf.sh
@@ -118,7 +127,7 @@ export:
    - postgis:db
   environment:
     # Around zurich
-    BBOX: "-22.5,79.6871841545,-21.09375,79.9359182463"
+    BBOX: "44,8.4,49.2,10.65"
     MIN_ZOOM: "0"
     MAX_ZOOM: "14"
 export-list:
