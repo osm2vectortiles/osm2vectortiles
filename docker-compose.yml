@@ -21,7 +21,6 @@ import-osm2pgsql:
   command: ./import-osm2pgsql.sh
   volumes:
    - ./import:/data/import
-  volumes:
    - ./osm2vectortiles.tm2source:/data/tm2source
   volumes_from:
    - cache
@@ -85,7 +84,7 @@ changed-tiles:
    - ./export:/data/export
   links:
   - postgis:db
-generate-jobs:
+generate-tm2source:
   image: "osm2vectortiles/generate-tm2source"
   volumes:
    - ./osm2vectortiles.tm2source:/data/tm2source
@@ -133,7 +132,7 @@ export:
    - postgis:db
   environment:
     # Around zurich
-    BBOX: "44,8.4,49.2,10.65"
+    BBOX: "9.4,47,9.65,47.2"
     MIN_ZOOM: "0"
     MAX_ZOOM: "14"
 export-list:

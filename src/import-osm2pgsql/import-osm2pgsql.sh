@@ -3,8 +3,6 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-readonly PBF_DOWNLOAD_URL=${PBF_DOWNLOAD_URL:-false}
-
 source import.sh
 
 function main() {
