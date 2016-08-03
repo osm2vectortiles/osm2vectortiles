@@ -1,3 +1,3 @@
 FROM ubuntu:16.04
 
-RUN ls
+CMD ["./generate_tm2source.sh"]

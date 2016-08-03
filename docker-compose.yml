@@ -21,6 +21,8 @@ import-osm2pgsql:
   command: ./import-osm2pgsql.sh
   volumes:
    - ./import:/data/import
+  volumes:
+   - ./osm2vectortiles.tm2source:/data/tm2source
   volumes_from:
    - cache
   links:
@@ -83,6 +85,10 @@ changed-tiles:
    - ./export:/data/export
   links:
   - postgis:db
+generate-jobs:
+  image: "osm2vectortiles/generate-tm2source"
+  volumes:
+   - ./osm2vectortiles.tm2source:/data/tm2source
 generate-jobs:
   image: "osm2vectortiles/generate-jobs"
   volumes:

@@ -26,6 +26,8 @@ function import_all() {
     echo "Done indexing"
 
     bash /openstreetmap-carto-vector-tiles/get-shapefiles.sh # Might need to put this into db
-    make install-node-modules
     make reindexshapefiles #Might need to put this into db
+    make install-node-modules
+    mkdir /data/tm2source/data
+    mv /openstreetmap-carto-vectortiles/data/* /data/tm2source/data
 }

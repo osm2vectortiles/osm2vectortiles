@@ -31,6 +31,9 @@ changed-tiles:
 generate-jobs:
 	docker build -t osm2vectortiles/generate-jobs src/generate-jobs
 
+generate-tm2source:
+	docker build -t osm2vectortiles/generate-tm2source src/generate-tm2source
+
 merge-jobs:
 	docker build -t osm2vectortiles/merge-jobs src/merge-jobs
 
