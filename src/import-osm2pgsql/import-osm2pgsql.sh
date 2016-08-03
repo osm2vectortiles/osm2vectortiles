@@ -8,10 +8,6 @@ readonly PBF_DOWNLOAD_URL=${PBF_DOWNLOAD_URL:-false}
 source import.sh
 
 function main() {
-    if ! [ "$PBF_DOWNLOAD_URL" = false ]; then
-        download_pbf "$PBF_DOWNLOAD_URL"
-    fi
-
     if [ "$(ls -A $IMPORT_DATA_DIR/*.pbf 2> /dev/null)" ]; then
         local pbf_file
         for pbf_file in "$IMPORT_DATA_DIR"/*.pbf; do
