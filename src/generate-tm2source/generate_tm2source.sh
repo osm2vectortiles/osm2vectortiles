@@ -14,4 +14,6 @@ sed -i 's/20037508/20037508.34/g' /data/tm2source/data.yml
 sed -i '/metatile/d' /data/tm2source/data.yml
 sed -i '/scale: 1/d' /data/tm2source/data.yml
 sed -i '/format:/d' /data/tm2source/data.yml
+echo 'attribution: "<a href=\"http://www.openstreetmap.org/about/\" target=\"_blank\">&copy; OpenStreetMap contributors</a>"' >> /data/tm2source/data.yml 
+
 #sed -i '/bounds: *id001/d' /data/tm2source/data.yml
