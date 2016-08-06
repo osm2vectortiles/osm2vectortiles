@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
     function updatePlanetInfo() {
-        var planetUrl = document.querySelector("#world").value;
+        var planetDownload = document.querySelector("#world");
+        if(!planetDownload) {
+            return;
+        }
+        var planetUrl = planetDownload.value;
         var segments = planetUrl.split('_').reverse();
         var hash = segments[1];
         var date = segments[2];
