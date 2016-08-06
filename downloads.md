@@ -43,14 +43,14 @@ the [Open Database License](https://tldrlegal.com/license/odc-open-database-lice
 
 <div id="planet-list">
 	<div class="col12 download-item">
-		<div class="col4 download-title" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_2016-06-20_7088ce06a738dcb3104c769adc11ac2c_z0-z14.mbtiles'">
+		<div class="col4 download-title" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_2016-06-20_3d4cb571d3d0d828d230aac185281e97_z0-z14.mbtiles'">
 			Full Planet <br/><small>MD5: <span id="md5sum"></span></small>
 		</div>
-		<div class="col2" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_2016-06-20_7088ce06a738dcb3104c769adc11ac2c_z0-z14.mbtiles'">
-			53 GB
+		<div class="col2" onclick="location.href='https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_2016-06-20_3d4cb571d3d0d828d230aac185281e97_z0-z14.mbtiles'">
+			54 GB
 		</div>
 		<div class="col6 clipboard">
-			<input id="world" class="clipboard-input" value="https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_2016-06-20_7088ce06a738dcb3104c769adc11ac2c_z0-z14.mbtiles">
+			<input id="world" class="clipboard-input" value="https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_2016-06-20_3d4cb571d3d0d828d230aac185281e97_z0-z14.mbtiles">
 			<button class="clipboard-button hint--bottom hint--rounded" data-clipboard-target="#world" onclick="setHint(this, 'Copied!')" onmouseout="setHint(this, 'Copy to clipboard')">
 			    <img src="/img/clipboard-black.svg" class="clipboard-img" alt="Copy to clipboard">
 			</button>
