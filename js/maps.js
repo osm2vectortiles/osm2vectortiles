@@ -17,11 +17,13 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 	var basic = document.getElementById("vector-basic");
-	if(bright && basic) {
-		var styles = ["#bright", "#basic"];
+	var liberty = document.getElementById("vector-liberty");
+	if(bright && basic && liberty) {
+		var styles = ["#bright", "#liberty", "#basic"];
 		var styleUrl = "https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/";
 		addOnClickEventListener(bright, vectorMap, styleUrl + "bright-v9-cdn.json", 0, styles);
-		addOnClickEventListener(basic, vectorMap, styleUrl + "basic-v9-cdn.json", 1, styles);
+		addOnClickEventListener(liberty, vectorMap, 'http://osm-liberty.lukasmartinelli.ch/osm-liberty.json', 1, styles);
+		addOnClickEventListener(basic, vectorMap, styleUrl + "basic-v9-cdn.json", 2, styles);
 	}
 
 	// instantiate map clipboard
