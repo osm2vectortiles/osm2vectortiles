@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var date = segments[2];
 
         var dateSegments = date.split('-');
-        var planetRenderDate = new Date(dateSegments[0], dateSegments[1], dateSegments[2]);
+        var planetRenderDate = new Date(parseInt(dateSegments[0]), parseInt(dateSegments[1]) - 1, parseInt(dateSegments[2]));
 
         document.querySelector("#md5sum").innerHTML = hash;
         document.querySelector("#timestamp").innerHTML = planetRenderDate.toLocaleDateString();
