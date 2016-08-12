@@ -431,12 +431,8 @@ Layer:
             WHERE z(!scale_denominator!) = 0
             UNION ALL
             SELECT osm_id, geometry, admin_level, disputed, maritime
-            FROM admin_z1
-            WHERE z(!scale_denominator!) = 1
-            UNION ALL
-            SELECT osm_id, geometry, admin_level, disputed, maritime
-            FROM admin_z2
-            WHERE z(!scale_denominator!) = 2
+            FROM admin_z1toz2
+            WHERE z(!scale_denominator!) BETWEEN 1 AND 2
             UNION ALL
             SELECT osm_id, geometry, admin_level, disputed, maritime
             FROM admin_z3
