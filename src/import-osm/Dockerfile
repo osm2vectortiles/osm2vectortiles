@@ -15,7 +15,7 @@ WORKDIR $GOPATH/src/github.com/omniscale/imposm3
 RUN go get github.com/tools/godep \
  && git clone https://github.com/osm2vectortiles/imposm3 \
         $GOPATH/src/github.com/omniscale/imposm3 \
- && git reset --hard 060f4111fcaf459e8b09a0351836dfe8eb4dc943 \
+ && git reset --hard 93537a867246322f2d249da86c854f66d85dabc7 \
  && go get \
  && go install
 
