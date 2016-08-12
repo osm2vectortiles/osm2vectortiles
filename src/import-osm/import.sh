@@ -26,7 +26,6 @@ function download_pbf() {
 
 function import_pbf() {
     local pbf_file="$1"
-    drop_tables
     create_timestamp_history
     if [ "$DIFFS" = true ]; then
     echo "Importing in diff mode"
@@ -131,12 +130,6 @@ function create_delete_tables() {
 
 function create_tracking_triggers() {
     exec_sql "SELECT create_tracking_triggers()"
-}
-
-function drop_tables() {
-    # if drop function does not exist
-    # the tables don't exist yet as well
-    exec_sql "SELECT drop_tables()" || true
 }
 
 function cleanup_osm_changes() {
