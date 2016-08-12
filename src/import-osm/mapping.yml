@@ -8,7 +8,7 @@ generalized_tables:
     source: landuse_polygon
     sql_filter: area>50000.000000
     tolerance: 50.0
-  water_polygon_gen1:
+  water_polygon_gen0:
     source: water_polygon
     sql_filter: area>40000.000000
     tolerance: 30.0
