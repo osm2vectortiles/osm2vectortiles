@@ -431,12 +431,8 @@ Layer:
             WHERE z(!scale_denominator!) = 0
             UNION ALL
             SELECT osm_id, geometry, admin_level, disputed, maritime
-            FROM admin_z1
-            WHERE z(!scale_denominator!) = 1
-            UNION ALL
-            SELECT osm_id, geometry, admin_level, disputed, maritime
-            FROM admin_z2
-            WHERE z(!scale_denominator!) = 2
+            FROM admin_z1toz2
+            WHERE z(!scale_denominator!) BETWEEN 1 AND 2
             UNION ALL
             SELECT osm_id, geometry, admin_level, disputed, maritime
             FROM admin_z3
@@ -489,17 +485,17 @@ Layer:
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
-          coalesce(NULLIF(name_zh, ''), name) AS name_zh, 
+          coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           rank AS scalerank
           FROM custom_countries
           WHERE (
             (
-              rank <= 1
+              rank <= 2
               AND z(!scale_denominator!) = 1 AND wkb_geometry && !bbox!
             )
             OR
             (
-              rank <= 2
+              rank <= 3
               AND z(!scale_denominator!) >= 2 AND wkb_geometry && !bbox!
             )
             OR
