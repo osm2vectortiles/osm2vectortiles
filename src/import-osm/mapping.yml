@@ -735,7 +735,12 @@ tables:
       type: string
     - name: area
       type: pseudoarea
+    filters:
+      exclude_tags:
+      - [ "covered", "yes" ]
     mapping:
+      landuse:
+      - reservoir
       natural:
       - water
       - bay
