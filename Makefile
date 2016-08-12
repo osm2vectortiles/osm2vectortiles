@@ -2,7 +2,7 @@
 
 all: postgis export-mbtiles import-osm import-external import-sql create-extracts changed-tiles generate-jobs merge-jobs compare-visual mapping-qa-report
 
-fast: postgis export-mbtiles import-osm import-sql create-extracts changed-tiles generate-jobs merge-jobs
+fast: export-mbtiles import-osm import-sql create-extracts changed-tiles generate-jobs merge-jobs
 
 postgis:
 	docker build -t osm2vectortiles/postgis src/postgis
