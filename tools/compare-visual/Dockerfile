@@ -9,7 +9,7 @@ RUN npm install -g \
           tilelive-mapnik@0.6.x \
           tessera@0.9.x
 
-COPY bright-v8.json index.html /usr/local/lib/node_modules/tessera/public/
+COPY bright-v9.json index.html /usr/local/lib/node_modules/tessera/public/
 VOLUME /data/tm2source
 EXPOSE 3030
 CMD ["tessera", "tmsource:///data/tm2source", "--port", "3030"]
