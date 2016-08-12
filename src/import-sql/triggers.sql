@@ -141,16 +141,3 @@ BEGIN
     END LOOP;
 END;
 $$ language plpgsql;
-
-CREATE OR REPLACE FUNCTION drop_tables() returns VOID AS $$
-DECLARE t osm_tables%ROWTYPE;
-BEGIN
-    FOR t IN
-        SELECT * FROM osm_tables
-        UNION
-        SELECT * FROM osm_tables_delete
-    LOOP
-        EXECUTE format('DROP TABLE IF EXISTS %I CASCADE', t.table_name);
-    END LOOP;
-END;
-$$ language plpgsql;
