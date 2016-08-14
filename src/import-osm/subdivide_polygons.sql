@@ -35,4 +35,4 @@ SELECT UpdateGeometrySRID('ne_50m_lakes','geom',3857);
 SELECT UpdateGeometrySRID('ne_10m_lakes','geom',3857);
 
 SELECT UpdateGeometrySRID('osm_water_polygon','geometry',3857);
-SELECT UpdateGeometrySRID('osm_water_polygon_gen1','geometry',3857);
+SELECT UpdateGeometrySRID('osm_water_polygon_gen0','geometry',3857);
