@@ -31,7 +31,7 @@ CREATE OR REPLACE VIEW water_z5toz7 AS
     FROM osm_ocean_polygon_gen1
     UNION ALL
     SELECT id AS osm_id, geometry
-    FROM osm_water_polygon_gen1;
+    FROM osm_water_polygon_gen0;
 
 CREATE OR REPLACE VIEW water_z8toz10 AS
     SELECT 0 AS osm_id, geometry

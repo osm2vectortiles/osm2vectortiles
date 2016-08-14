@@ -31,6 +31,7 @@ function import_water() {
     drop_table "$simplified_table_name"
     import_shp "$SIMPLIFIED_WATER_POLYGONS_FILE" "$simplified_table_name"
 
+    generalize_water
 }
 
 import_water
