@@ -15,6 +15,7 @@ function drop_table() {
 }
 
 function clean_natural_earth() {
+    drop_table 'ne_10m_ocean'
     drop_table 'ne_10m_admin_0_antarctic_claim_limit_lines'
     drop_table 'ne_10m_admin_0_antarctic_claims'
     drop_table 'ne_10m_admin_0_map_subunits'
@@ -68,6 +69,7 @@ function clean_natural_earth() {
     drop_table 'ne_10m_urban_areas_landscan'
     drop_table 'ne_10m_admin_1_states_provinces_lakes_shp'
     drop_table 'ne_10m_admin_1_states_provinces_shp'
+    drop_table 'ne_50m_ocean'
     drop_table 'ne_50m_admin_0_boundary_lines_disputed_areas'
     drop_table 'ne_50m_admin_1_states_provinces_shp'
     drop_table 'ne_50m_admin_0_countries_lakes'
@@ -106,6 +108,7 @@ function clean_natural_earth() {
     drop_table 'ne_10m_admin_1_seams'
     drop_table 'ne_10m_land'
     drop_table 'ne_10m_ocean_scale_rank'
+    drop_table 'ne_110m_ocean'
     drop_table 'ne_110m_admin_0_sovereignty'
     drop_table 'ne_110m_admin_0_tiny_countries'
     drop_table 'ne_110m_admin_1_states_provinces_lakes_shp'
