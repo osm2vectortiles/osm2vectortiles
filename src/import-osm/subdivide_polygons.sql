@@ -27,12 +27,3 @@ CREATE INDEX ON osm_landuse_polygon_subdivided USING gist (geometry);
 ANALYZE osm_landuse_polygon_subdivided_gen0;
 ANALYZE osm_landuse_polygon_subdivided_gen1;
 ANALYZE osm_landuse_polygon_subdivided;
-
-/* Update SRID for lakes and water polygons */
-
-SELECT UpdateGeometrySRID('ne_110m_lakes','geom',3857);
-SELECT UpdateGeometrySRID('ne_50m_lakes','geom',3857);
-SELECT UpdateGeometrySRID('ne_10m_lakes','geom',3857);
-
-SELECT UpdateGeometrySRID('osm_water_polygon','geometry',3857);
-SELECT UpdateGeometrySRID('osm_water_polygon_gen0','geometry',3857);
