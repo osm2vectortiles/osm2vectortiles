@@ -28,20 +28,6 @@ ANALYZE osm_landuse_polygon_subdivided_gen0;
 ANALYZE osm_landuse_polygon_subdivided_gen1;
 ANALYZE osm_landuse_polygon_subdivided;
 
-/* OSM Ocean Polygons */
-
-DROP TABLE IF EXISTS osm_ocean_polygon_subdivided CASCADE;
-
-CREATE TABLE osm_ocean_polygon_subdivided AS SELECT gid,fid,st_subdivide(geometry,1024) AS geometry FROM osm_ocean_polygon;
-
-SELECT UpdateGeometrySRID('osm_ocean_polygon_subdivided','geometry',3857);
-
-CREATE INDEX ON osm_ocean_polygon_subdivided USING btree (gid);
-
-CREATE INDEX ON osm_ocean_polygon_subdivided USING gist (geometry);
-
-ANALYZE osm_ocean_polygon_subdivided;
-
 /* Update SRID for lakes and water polygons */
 
 SELECT UpdateGeometrySRID('ne_110m_lakes','geom',3857);
