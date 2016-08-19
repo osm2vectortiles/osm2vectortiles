@@ -26,3 +26,9 @@ docker-compose run import-external
 ### Details
 
 ![Flow Diagram](import-external-detail-flow-diagram.png)
+
+## Sources
+
+### Seas
+
+The [seas.geojson](seas.geojson) file is derived from OpenStreetMap data and licensed under the ODbL. The file was created by taking `place=ocean` and `place=sea` nodes and drawing lines by hand to replace some of the points.
