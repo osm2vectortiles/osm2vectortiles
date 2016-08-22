@@ -23,3 +23,5 @@ docker-compose run import-contour
 ```
 
 `import-contour` should be used before `import-sql`.  
+
+Note that `import-contour` must be called even if you are not using contour files. When there is no ZIP files in `import/contour` folder, the script creates empty tables in order to avoid errors when exporting tiles. 
