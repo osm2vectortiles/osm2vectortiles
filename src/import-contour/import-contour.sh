@@ -29,11 +29,20 @@ function generalize_contour() {
 	echo $gen_command | exec_psql
 }
 
+function create_empty_table() {
+	local table=$1
+	
+	local create_command="CREATE TABLE $table(id integer, height double precision, geometry geometry);"
+	echo $create_command | exec_psql
+}
+
 function import_contour() {
 
     local table_name="contour_lines"
 	local table_name_gen0=${table_name}_gen0
 	local table_name_gen1=${table_name}_gen1
+
+	drop_table_cascade "$table_name"
     drop_table_cascade "$table_name_gen0"
     drop_table_cascade "$table_name_gen1"
 
@@ -55,17 +64,24 @@ function import_contour() {
 			# this parameter means adding shapefile into existing table, set for every next file
 			a_parameter='-a'
         done
+
+		# for zoom 11 and lower
+		generalize_contour $table_name $table_name_gen0 30.0
+
+		# for zooms 13 and 12
+		generalize_contour $table_name $table_name_gen1 10.0
+
+
     else
         echo "No ZIP files found in contour folder."
-        echo "Please mount the $IMPORT_CONTOUR_DIR volume to a folder containing ZIP files with contour shapefiles."
-        exit 404
+		echo "Creating empty tables for contour data"
+
+		create_empty_table $table_name
+		create_empty_table $table_name_gen0
+		create_empty_table $table_name_gen1
+
     fi
 
-	# for zoom 11 and lower
-	generalize_contour $table_name $table_name_gen0 30.0
-
-	# for zooms 13 and 12
-	generalize_contour $table_name $table_name_gen1 10.0
 
 
 }
