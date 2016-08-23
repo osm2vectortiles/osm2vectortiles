@@ -150,10 +150,10 @@ $scale: $navbar-top-small-height / $navbar-top-height;
   li a{display: block; width: 100%;}
 }
 #nav-mobile-btn{ min-height: 34px; cursor: pointer;}
-@media (min-width: 768px) { 
+@media (min-width: $sc-medium) {
   #nav-mobile-btn{display: none;}
 }
-@media (max-width: 768px) { 
+@media (max-width: $sc-medium) {
   #nav-mobile-nav.active{ display: block; }  
   #navbar-kl .nav, #mt-nav ul{display: none;}
 }
