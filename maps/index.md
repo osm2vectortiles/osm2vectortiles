@@ -14,9 +14,9 @@ published: true
 </div>
 
 <div id="map-container">
-	<button id="vector-bright" class="map-button">Bright</button>
-    <button id="vector-liberty" class="map-button">Liberty</button>
-    <button id="vector-basic" class="map-button">Basic</button>
+	<button id="vector-bright" class="map-button">Bright
+	</button><button id="vector-liberty" class="map-button">Liberty
+	</button><button id="vector-basic" class="map-button">Basic</button>
 </div>
 <div id="vector-map" class="map-preview"></div>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
