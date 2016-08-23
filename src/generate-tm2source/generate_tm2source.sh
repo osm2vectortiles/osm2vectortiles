@@ -5,7 +5,7 @@ set -o nounset
 
 git clone https://github.com/stirringhalo/openstreetmap-carto-vector-tiles.git
 
-rm /data/tm2source/data.yml
+rm -f /data/tm2source/data.yml
 
 cd openstreetmap-carto-vector-tiles && python convert_ymls.py --input project.yaml --tm2source --output /data/tm2source/data.yml
 
