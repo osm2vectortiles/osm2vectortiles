@@ -25,9 +25,9 @@ function import_all() {
     PGOPTIONS='--client-min-messages=fatal' psql -d "$OSM_DB" -h "$DB_HOST" -U "$OSM_USER" -f add-indexes.sql || true
     echo "Done indexing"
 
-    bash /openstreetmap-carto-vector-tiles/get-shapefiles.sh # Might need to put this into db
-    make install-node-modules
-    make reindexshapefiles #Might need to put this into db
+    bash /openstreetmap-carto-vector-tiles/get-shapefiles.sh
+    npm install mapnik tilelive-tmsource tilelive-tmstyle tilejson tilelive-http tilelive-vector tessera
+    make reindexshapefiles
 
     rm -rf /data/tm2source/data
     mkdir /data/tm2source/data
