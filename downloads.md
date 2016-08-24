@@ -11,7 +11,7 @@ the [Open Database License](https://tldrlegal.com/license/odc-open-database-lice
 
 <ul>
   <li>
-    <strong>OpenStreetMap data in the full planet and extract last updated on <span id="timestamp"></span></strong>
+    <strong>The vector tiles contain OpenStreetMap data from <span id="timestamp"></span></strong>
   </li>
   <li>The <a href="https://github.com/osm2vectortiles/osm2vectortiles/releases/latest">OSM2VectorTiles v2 tiles</a> are meant for use with Mapbox GL JSON styles and Mapbox GL.<br/>
   The no longer maintained <a href="https://github.com/osm2vectortiles/osm2vectortiles/releases/tag/v1.0">OSM2VectorTiles v1 tiles</a> (for use with CartoCSS and Mapnik) are available at <a href="/downloads-v1/">Downloads v1</a>.
