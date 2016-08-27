@@ -66,6 +66,12 @@ to read the thesis.
 - Bachelor Thesis
   - [Updatable Vector Tiles from OpenStreetMap](https://cdn.rawgit.com/osm2vectortiles/bachelor-thesis/882a46977f7b984fc59be188335127d62921c44c/thesis.pdf)
 
+## FOSS4G
+
+[English presentation of OSM2VectorTiles](https://youtu.be/D7mmXonFIqA) at FOSS4G 2016 in Bonn describing the process of creating vector tiles based on OpenStreetMap data, what to look out for and how people can create their custom vector tile set.
+
+<iframe style="width: 728px; height: 410px; margin: 0 auto; display: block;" src="https://www.youtube.com/embed/D7mmXonFIqA" frameborder="0" allowfullscreen></iframe>
+
 ## FOSSGIS
 
 [German presentation of OSM2VectorTiles](https://www.youtube.com/watch?v=lG7atynI8Pk) at FOSSGIS 2016 showing a general introduction into vector tiles and
