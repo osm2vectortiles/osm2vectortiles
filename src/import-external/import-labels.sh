@@ -33,4 +33,9 @@ function import_labels() {
     import_geojson "$COUNTRIES_GEOJSON" "custom_countries"
 }
 
+function import_lakelines() {
+    import_geojson "$LAKELINES_GEOJSON" "custom_lakeline"
+}
+
 import_labels
+import_lakelines
