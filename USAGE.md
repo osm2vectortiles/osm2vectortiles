@@ -151,7 +151,7 @@ Watch progress at RabbitMQ management interface. Check the exposed external Dock
 
 ### Merge MBTiles
 
-Please take a look at the component documentation of **[merge-jobs]((/src/merge-jobs))**.
+Please take a look at the component documentation of **[merge-jobs](/src/merge-jobs)**.
 If you are using a public S3 url merging the job results is fairly straightforward.
 
 1. Ensure you have `export/planet.mbtiles` file present to merge the jobs into. Reuse a low level zoom extract generated earlier or download an existing low level zoom extract from http://osm2vectortiles.org/downloads/.
