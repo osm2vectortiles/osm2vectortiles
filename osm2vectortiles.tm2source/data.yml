@@ -758,7 +758,6 @@ Layer:
         (
           SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry AS geometry,
           name,
-          area,
           coalesce(NULLIF(name_en, ''), name) AS name_en,
           coalesce(NULLIF(name_es, ''), name) AS name_es,
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
