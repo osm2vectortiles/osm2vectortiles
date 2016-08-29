@@ -72,9 +72,7 @@ to read the thesis.
 
 <iframe style="width: 728px; height: 410px; margin: 0 auto; display: block;" src="https://www.youtube.com/embed/D7mmXonFIqA" frameborder="0" allowfullscreen></iframe>
 
-<p>
 The presentation of [TileServer GL - hosting vector tile maps on your own server](https://youtu.be/rOg4VnSAnI4) at FOSS4G 2016 in Bonn - on serving the OSM2VectorTiles as vector tiles for web and mobile apps, and as raster tiles for legacy clients like Leaflet and for GIS map service (WMTS) via the server side raster rendering.
-</p>
 
 <iframe style="width: 728px; height: 410px; margin: 0 auto; display: block;" src="https://www.youtube.com/embed/rOg4VnSAnI4" frameborder="0" allowfullscreen></iframe>
 
