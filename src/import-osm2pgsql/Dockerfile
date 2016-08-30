@@ -11,15 +11,15 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
       git \
       make \
       postgresql-contrib \
-&& echo "deb https://deb.nodesource.com/node_4.x xenial main" >> /etc/apt/sources.list.d/nodejs.list \
-&& echo "deb-src https://deb.nodesource.com/node_4.x xenial main" >> /etc/apt/sources.list.d/nodejs.list \
+&& echo "deb https://deb.nodesource.com/node_5.x xenial main" >> /etc/apt/sources.list.d/nodejs.list \
+&& echo "deb-src https://deb.nodesource.com/node_5.x xenial main" >> /etc/apt/sources.list.d/nodejs.list \
 && apt-get -qq update \
 && DEBIAN_FRONTEND=noninteractive apt-get -y --allow-unauthenticated install \
     nodejs \
 && rm /etc/apt/sources.list.d/nodejs.list \
 && apt-get clean
 
-RUN git clone https://github.com/geofabrik/openstreetmap-carto-vector-tiles.git
+RUN git clone https://github.com/stirringhalo/openstreetmap-carto-vector-tiles.git
 
 VOLUME /data/import /data/cache
 ENV IMPORT_DATA_DIR=/data/import
