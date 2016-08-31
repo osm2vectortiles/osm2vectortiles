@@ -66,16 +66,6 @@ function update_scaleranks() {
     exec_sql_file "update_scaleranks.sql"
 }
 
-function exec_sql() {
-	local sql_cmd="$1"
-	PG_PASSWORD=$OSM_PASSWORD psql \
-        --host="$DB_HOST" \
-        --port=5432 \
-        --dbname="$OSM_DB" \
-        --username="$OSM_USER" \
-        -c "$sql_cmd"
-}
-
 function exec_sql_file() {
     local sql_file=$1
     PG_PASSWORD=$OSM_PASSWORD psql \
