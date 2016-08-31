@@ -2,7 +2,6 @@
 """Generate SQL functions from custom YAML definitions
 Usage:
   generate_sql.py class <yaml-source>
-  generate_sql.py changed_tiles <yaml-source>
   generate_sql.py tables <yaml-source>
   generate_sql.py (-h | --help)
 Options:
@@ -50,35 +49,6 @@ def find_classes(config):
 Table = namedtuple('Table', ['name', 'buffer', 'min_zoom', 'max_zoom'])
 
 
-def generate_changed_tiles(
-        tables,
-        func_name='changed_tiles',
-        func_changed_tiles_query='changed_tiles_table'
-    ):
-
-
-    def gen_select_stmt(table):
-        return "SELECT * FROM {0}('{1}', ts, {2}, {3}, {4})".format(
-            func_changed_tiles_query,
-            table.name,
-            table.buffer,
-            table.min_zoom,
-            table.max_zoom,
-        )
-
-    stmts = [2 * SQL_INDENT + gen_select_stmt(t) for t in tables]
-    separator = '\n' + 2 * SQL_INDENT + 'UNION\n'
-    return """CREATE OR REPLACE FUNCTION {0}(ts timestamp)
-RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
-BEGIN
-    RETURN QUERY (
-{1}
-    );
-END;
-$$ language plpgsql;
-    """.format(func_name, separator.join(stmts))
-
-
 def generate_static_table_view(tables, view_name='osm_tables'):
 
     def gen_select_stmt(table):
@@ -122,7 +92,5 @@ if __name__ == '__main__':
         source = yaml.load(f)
         if args['class']:
             print(generate_sql_class(source))
-        if args['changed_tiles']:
-            print(generate_changed_tiles(find_tables_with_deletes(source)))
         if args['tables']:
             print(generate_static_table_view(find_tables(source)))

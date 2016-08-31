@@ -4,9 +4,9 @@ DROP TABLE IF EXISTS osm_landuse_polygon_subdivided_gen0 CASCADE;
 DROP TABLE IF EXISTS osm_landuse_polygon_subdivided_gen1 CASCADE;
 DROP TABLE IF EXISTS osm_landuse_polygon_subdivided CASCADE;
 
-CREATE TABLE osm_landuse_polygon_subdivided_gen0 AS SELECT id,timestamp,type,area,st_subdivide(geometry,1024) AS geometry FROM osm_landuse_polygon_gen0;
-CREATE TABLE osm_landuse_polygon_subdivided_gen1 AS SELECT id,timestamp,type,area,st_subdivide(geometry,1024) AS geometry FROM osm_landuse_polygon_gen1;
-CREATE TABLE osm_landuse_polygon_subdivided AS SELECT id,timestamp,type,area,st_subdivide(geometry,1024) AS geometry FROM osm_landuse_polygon;
+CREATE TABLE osm_landuse_polygon_subdivided_gen0 AS SELECT id,type,area,st_subdivide(geometry,1024) AS geometry FROM osm_landuse_polygon_gen0;
+CREATE TABLE osm_landuse_polygon_subdivided_gen1 AS SELECT id,type,area,st_subdivide(geometry,1024) AS geometry FROM osm_landuse_polygon_gen1;
+CREATE TABLE osm_landuse_polygon_subdivided AS SELECT id,type,area,st_subdivide(geometry,1024) AS geometry FROM osm_landuse_polygon;
 
 SELECT UpdateGeometrySRID('osm_landuse_polygon_subdivided_gen0','geometry',3857);
 SELECT UpdateGeometrySRID('osm_landuse_polygon_subdivided_gen1','geometry',3857);
