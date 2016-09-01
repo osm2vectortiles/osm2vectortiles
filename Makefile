@@ -34,5 +34,5 @@ merge-jobs:
 compare-visual:
 	docker build -t osm2vectortiles/compare-visual tools/compare-visual
 
-mapping-qa-report:
+mapping-qa-report: import-osm
 	docker build -t osm2vectortiles/mapping-qa-report tools/mapping-qa-report

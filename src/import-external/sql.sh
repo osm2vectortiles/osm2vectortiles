@@ -3,15 +3,16 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-readonly PGCONN="dbname=$POSTGRES_ENV_POSTGRES_DB user=$POSTGRES_ENV_POSTGRES_USER host=$POSTGRES_PORT_5432_TCP_ADDR port=5432"
+readonly POSTGRES_HOST=${POSTGRES_HOST:-"postgres"}
+readonly PGCONN="dbname=$POSTGRES_DB user=$POSTGRES_USER host=$POSTGRES_HOST password=$POSTGRES_PASSWORD port=5432"
 
 function exec_psql() {
-    PGPASSWORD=$POSTGRES_ENV_POSTGRES_PASSWORD psql \
+    PGPASSWORD="$POSTGRES_PASSWORD" psql \
         -v ON_ERROR_STOP=1 \
-        --host="$POSTGRES_PORT_5432_TCP_ADDR" \
+        --host="$POSTGRES_HOST" \
         --port="5432" \
-        --dbname="$POSTGRES_ENV_POSTGRES_DB" \
-        --username="$POSTGRES_ENV_POSTGRES_USER"
+        --dbname="$POSTGRES_DB" \
+        --username="$POSTGRES_USER"
 }
 
 function exec_sql_file() {

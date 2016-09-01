@@ -4,7 +4,7 @@ set -o pipefail
 set -o nounset
 
 source import.sh
-readonly TILELIST=${TILELIST:-/data/export/tiles.txt}
+readonly TILELIST="$IMPOSM_TILE_DIR/tiles.txt"
 
 function main() {
     if [ "$(ls -A $IMPORT_DATA_DIR/*.osc.gz 2> /dev/null)" ]; then

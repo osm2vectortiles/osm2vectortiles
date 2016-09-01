@@ -26,7 +26,7 @@ function import_geojson() {
 }
 
 function import_labels() {
-    echo "Inserting labels into $OSM_DB"
+    echo "Inserting labels"
 
     import_geojson "$SEAS_GEOJSON" "custom_seas"
     import_geojson "$STATES_GEOJSON" "custom_states"

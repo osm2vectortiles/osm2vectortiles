@@ -1,0 +1,34 @@
+version: '2'
+services:
+  import-osm-diff:
+    image: "osm2vectortiles/import-osm"
+    command: ./import-diff.sh
+    env_file: .env
+    volumes:
+     - ./export:/export
+     - ./import:/import
+     - cache:/cache
+    links:
+     - postgres
+  update-osm-diff:
+    image: "osm2vectortiles/import-osm"
+    command: ./import-osmupdate.sh
+    volumes:
+     - ./import:/import
+    environment:
+       OSM_UPDATE_BASEURL: "http://download.geofabrik.de/europe/liechtenstein-updates/"
+  merge-osm-diff:
+    image: "osm2vectortiles/import-osm"
+    command: ./import-mergediffs.sh
+    volumes:
+     - ./import:/import
+  export-expired-tiles:
+    image: "osm2vectortiles/export"
+    env_file: .env
+    command: ./export-list.sh
+    volumes:
+    - ./import:/import
+    - ./export:/export
+    - ./osm2vectortiles.tm2source:/tm2source
+    links:
+     - postgres

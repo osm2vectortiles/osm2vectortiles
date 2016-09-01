@@ -18,8 +18,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python-dev \
     && rm -rf /var/lib/apt/lists/
 
-VOLUME /data/tm2source /data/export
-ENV SOURCE_PROJECT_DIR=/data/tm2source EXPORT_DIR=/data/export TILELIVE_BIN=tl
+VOLUME /tm2source /export
+ENV SOURCE_PROJECT_DIR=/tm2source EXPORT_DIR=/export TILELIVE_BIN=tl
 
 COPY requirements.txt /usr/src/app/requirements.txt
 RUN pip install -r requirements.txt

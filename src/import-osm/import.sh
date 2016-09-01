@@ -3,9 +3,7 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-readonly IMPOSM_DIFF_DIR=${IMPOSM_DIFF_DIR:-/data/import}
-readonly IMPOSM_CACHE_DIR=${IMPOSM_CACHE_DIR:-/data/cache}
-readonly PG_CONNECT="postgis://$POSTGRES_ENV_POSTGRES_USER:$POSTGRES_ENV_POSTGRES_PASSWORD@$POSTGRES_PORT_5432_TCP_ADDR/$POSTGRES_ENV_POSTGRES_DB"
+readonly PG_CONNECT="postgis://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST/$POSTGRES_DB"
 
 function import_pbf() {
     local pbf_file="$1"
@@ -25,6 +23,17 @@ function import_pbf() {
     update_scaleranks
 }
 
+function exec_sql_file() {
+    local file_name="$1"
+    PGPASSWORD="$POSTGRES_PASSWORD" psql \
+        -v ON_ERROR_STOP=1 \
+        --host="$POSTGRES_HOST" \
+        --port="5432" \
+        --dbname="$POSTGRES_DB" \
+        --username="$POSTGRES_USER" \
+        -f "$file_name"
+}
+
 function update_points() {
     echo "Update osm_place_polygon with point geometry"
     exec_sql_file "point_update.sql"
@@ -32,7 +41,7 @@ function update_points() {
 
 function update_scaleranks() {
     echo "Update scaleranks from Natural Earth data"
-    exec_sql_file "update_scaleranks.sql"
+    exec_sql_file "update_scaleranks.sql" || echo 'No NaturalEarth data found in database' && exit 500
 }
 
 function create_osm_water_point_table() {
@@ -41,11 +50,9 @@ function create_osm_water_point_table() {
 }
 
 function subdivide_polygons() {
-    echo "Subdividing polygons in $OSM_DB"
+    echo "Subdividing polygons"
     exec_sql_file "subdivide_polygons.sql"
 }
-
-
 
 function import_pbf_diffs() {
     local diffs_file="$1"

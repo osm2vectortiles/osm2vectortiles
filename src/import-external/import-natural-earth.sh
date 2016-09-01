@@ -5,9 +5,6 @@ set -o nounset
 
 source sql.sh
 
-readonly IMPORT_DATA_DIR=${IMPORT_DATA_DIR:-/data/import}
-readonly NATURAL_EARTH_SQLITE_FILE="$IMPORT_DATA_DIR/natural_earth_vector.sqlite"
-
 function import_natural_earth() {
     echo "Importing Natural Earth to PostGIS"
     PGCLIENTENCODING=LATIN1 ogr2ogr \
@@ -21,7 +18,7 @@ function import_natural_earth() {
     -lco DIM=2 \
     -nlt GEOMETRY \
     -overwrite \
-    "$NATURAL_EARTH_SQLITE_FILE"
+    "$NATURAL_EARTH_DB"
 }
 
 import_natural_earth

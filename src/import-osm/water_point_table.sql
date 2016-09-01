@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS osm_water_point CASCADE;
 CREATE TABLE osm_water_point AS
 SELECT id,
-       topoint(geometry) AS geometry,
+       ST_PointOnSurface(geometry) AS geometry,
        name, name_fr, name_en, name_de,
        name_es, name_ru, name_zh,
        area

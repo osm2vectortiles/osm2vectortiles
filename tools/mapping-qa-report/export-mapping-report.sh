@@ -3,23 +3,15 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
-readonly DB_PORT=$DB_PORT_5432_TCP_PORT
-readonly OSM_NAME=${OSM_NAME:-osm}
-readonly OSM_USER=${OSM_USER:-osm}
-readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
-
-readonly EXPORT_DIR=${EXPORT_DIR:-"/data/"}
-
 function exec_sql_file() {
-	local sql_file=$1
-	PG_PASSWORD=$OSM_PASSWORD psql \
-        --host="$DB_HOST" \
-        --port=5432 \
-        --dbname="$OSM_NAME" \
-        --username="$OSM_USER" \
+    local file_name="$1"
+    PGPASSWORD="$POSTGRES_PASSWORD" psql \
         -v ON_ERROR_STOP=1 \
-        -a -f "$sql_file"
+        --host="$POSTGRES_HOST" \
+        --port="5432" \
+        --dbname="$POSTGRES_DB" \
+        --username="$POSTGRES_USER" \
+        -f "$file_name"
 }
 
 function export_tsv() {

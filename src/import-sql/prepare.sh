@@ -7,12 +7,12 @@ readonly SQL_CREATE_INDIZES=${SQL_CREATE_INDIZES:-false}
 
 function exec_sql_file() {
     local file_name="$1"
-    PGPASSWORD=$POSTGRES_ENV_POSTGRES_PASSWORD psql \
+    PGPASSWORD="$POSTGRES_PASSWORD" psql \
         -v ON_ERROR_STOP=1 \
-        --host="$POSTGRES_PORT_5432_TCP_ADDR" \
+        --host="$POSTGRES_HOST" \
         --port="5432" \
-        --dbname="$POSTGRES_ENV_POSTGRES_DB" \
-        --username="$POSTGRES_ENV_POSTGRES_USER" \
+        --dbname="$POSTGRES_DB" \
+        --username="$POSTGRES_USER" \
         -f "$file_name"
 }
 
@@ -23,7 +23,7 @@ function main() {
     exec_sql_file "$SQL_FUNCTIONS_FILE"
     echo "Creating generated functions"
     exec_sql_file "$SQL_GENERATED_FILE"
-    echo "Creating layers in $OSM_DB"
+    echo "Creating layers"
     exec_sql_file "${SQL_LAYERS_DIR}admin.sql"
     exec_sql_file "${SQL_LAYERS_DIR}aeroway.sql"
     exec_sql_file "${SQL_LAYERS_DIR}barrier_line.sql"
@@ -45,10 +45,10 @@ function main() {
     exec_sql_file "${SQL_LAYERS_DIR}motorway_junction.sql"
 
     if [ "$SQL_CREATE_INDIZES" = true ] ; then
-        echo "Create index in $OSM_DB"
+        echo "Create additional expression indizes"
         exec_sql_file "${SQL_INDIZES_FILE}"
     else
-        echo "Omitting index creation in $OSM_DB"
+        echo "Omitting index creation"
     fi
 }
 

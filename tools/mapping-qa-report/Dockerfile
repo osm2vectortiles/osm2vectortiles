@@ -1,4 +1,4 @@
-FROM golang:1.5.3
+FROM osm2vectortiles/import-osm
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends postgresql-client \

@@ -1,0 +1,51 @@
+version: '2'
+services:
+  generate-jobs:
+    image: "osm2vectortiles/generate-jobs"
+    env_file: .env
+    volumes:
+     - ./export:/data/export
+    links:
+     - rabbitmq:rabbitmq
+  generate-diff-jobs:
+    image: "osm2vectortiles/generate-jobs"
+    env_file: .env
+    command: ./generate_list_jobs.sh
+    links:
+     - rabbitmq:rabbitmq
+  merge-jobs:
+    image: "osm2vectortiles/merge-jobs"
+    env_file: .env
+    volumes:
+     - ./export:/data/export
+    links:
+     - rabbitmq:rabbitmq
+  export-worker:
+    image: "osm2vectortiles/rabbitmq:management"
+    env_file: .env
+    command: ./export-worker.sh
+    links:
+     - rabbitmq:rabbitmq
+    env_file: .env
+    environment:
+      RENDER_TIMEOUT: "300"
+      TILE_TIMEOUT: "1800000"
+  rabbitmq:
+    image: "osm2vectortiles/rabbitmq:management"
+    env_file: .env
+    ports:
+    - "15672"
+    - "5672"
+    volumes:
+     - rabbitdata:/var/lib/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: "osm"
+      RABBITMQ_DEFAULT_PASS: "osm"
+      RABBITMQ_HEARTBEAT: "600"
+  create-extracts:
+    image: "osm2vectortiles/create-extracts"
+    env_file: .env
+    volumes:
+     - ./export:/data/export
+volumes:
+  rabbitdata:

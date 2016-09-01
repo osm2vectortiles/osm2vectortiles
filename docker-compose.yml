@@ -1,176 +1,46 @@
-pgdata:
-  image: "tianon/true"
-  volumes:
-  - /var/lib/postgresql/data
-rabbitdata:
-  image: "tianon/true"
-  volumes:
-  - /var/lib/rabbitmq
-cache:
-  image: "tianon/true"
-  volumes:
-  - /data/cache
-postgres:
-  image: "osm2vectortiles/postgis"
-  volumes_from:
-   - pgdata
-  ports:
-   - "5432"
-  environment:
-    POSTGRES_DB: osm
-    POSTGRES_USER: osm
-    POSTGRES_PASSWORD: osm
-import-osm:
-  image: "osm2vectortiles/import-osm"
-  command: ./import-pbf.sh
-  volumes:
-   - ./import:/data/import
-  volumes_from:
-   - cache
-  links:
-   - postgres:postgres
-  environment:
-     DIFFS: 'true'
-import-osm-diff:
-  image: "osm2vectortiles/import-osm"
-  command: ./import-diff.sh
-  volumes:
-   - ./import:/data/import
-   - ./export:/data/export
-   - ./src/import-osm:/usr/src/app
-  volumes_from:
-   - cache
-  links:
-   - postgres:postgres
-update-osm-diff:
-  image: "osm2vectortiles/import-osm"
-  command: ./import-osmupdate.sh
-  volumes:
-   - ./import:/data/import
-  environment:
-     OSM_UPDATE_BASEURL: "http://download.geofabrik.de/europe/liechtenstein-updates/"
-merge-osm-diff:
-  image: "osm2vectortiles/import-osm"
-  command: ./import-mergediffs.sh
-  volumes:
-   - ./import:/data/import
-import-external:
-  image: "osm2vectortiles/import-external"
-  links:
-  - postgres:postgres
-import-labels:
-  image: "osm2vectortiles/import-external"
-  command: ./import-labels.sh
-  links:
-  - postgres:postgres
-import-natural-earth:
-  image: "osm2vectortiles/import-external"
-  command: ./import-natural-earth.sh
-  links:
-  - postgres:postgres
-import-water:
-  image: "osm2vectortiles/import-external"
-  command: ./import-water.sh
-  links:
-  - postgres:postgres
-generate-jobs:
-  image: "osm2vectortiles/generate-jobs"
-  volumes:
-   - ./export:/data/export
-  links:
-   - rabbitmq:rabbitmq
-generate-diff-jobs:
-  image: "osm2vectortiles/generate-jobs"
-  command: ./generate_list_jobs.sh
-  volumes:
-   - ./export:/data/export
-  links:
-   - rabbitmq:rabbitmq
-merge-jobs:
-  image: "osm2vectortiles/merge-jobs"
-  volumes:
-   - ./export:/data/export
-  links:
-   - rabbitmq:rabbitmq
-export-worker:
-  image: "osm2vectortiles/export"
-  command: ./export-worker.sh
-  volumes:
-   - ./osm2vectortiles.tm2source:/data/tm2source
-  links:
-   - postgres:postgres
-   - rabbitmq:rabbitmq
-  environment:
-    AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
-    AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
-    AWS_S3_HOST: "${AWS_S3_HOST}"
-    BUCKET_NAME: "osm2vectortiles-testing"
-    RENDER_TIMEOUT: "300"
-    TILE_TIMEOUT: "1800000"
-export:
-  image: "osm2vectortiles/export"
-  command: ./export-local.sh
-  volumes:
-   - ./export:/data/export
-   - ./osm2vectortiles.tm2source:/data/tm2source
-  links:
-   - postgres:postgres
-  environment:
-    # Around zurich
-    BBOX: "-22.5,79.6871841545,-21.09375,79.9359182463"
-    MIN_ZOOM: "0"
-    MAX_ZOOM: "14"
-export-list:
-  image: "osm2vectortiles/export"
-  command: ./export-list.sh
-  volumes:
-   - ./export:/data/export
-   - ./osm2vectortiles.tm2source:/data/tm2source
-  links:
-   - postgres:postgres
-import-sql:
-  image: "osm2vectortiles/import-sql"
-  links:
-   - postgres:postgres
-  environment:
-    SQL_CREATE_INDIZES: 'false'
-mapbox-studio:
-  image: "osm2vectortiles/mapbox-studio"
-  volumes:
-   - ./osm2vectortiles.tm2source:/projects/osm2vectortiles.tm2source
-  links:
-   - postgres:db
-  ports:
-   - "3000:3000"
-rabbitmq:
-  image: "osm2vectortiles/rabbitmq:management"
-  ports:
-  - "15672"
-  - "5672"
-  volumes_from:
-   - rabbitdata
-  environment:
-    RABBITMQ_DEFAULT_USER: "osm"
-    RABBITMQ_DEFAULT_PASS: "osm"
-    RABBITMQ_HEARTBEAT: "600"
-create-extracts:
-  image: "osm2vectortiles/create-extracts"
-  volumes:
-   - ./export:/data/export
-  environment:
-    S3_ACCESS_KEY: "${AWS_ACCESS_KEY_ID}"
-    S3_SECRET_KEY: "${AWS_SECRET_ACCESS_KEY}"
-compare-visual:
-  image: "osm2vectortiles/compare-visual"
-  ports:
-   - "3030:3030"
-  volumes:
-   - ./osm2vectortiles.tm2source:/data/tm2source
-  links:
-   - postgres:db
-mapping-qa-report:
-  image: "osm2vectortiles/mapping-qa-report"
-  links:
-   - postgres:db
-  volumes:
-   - ./export:/data
+version: '2'
+services:
+  postgres:
+    image: "osm2vectortiles/postgis"
+    volumes:
+     - pgdata:/var/lib/postgresql/data
+    ports:
+     - "5432"
+    env_file: .env
+  import-osm:
+    image: "osm2vectortiles/import-osm"
+    command: ./import-pbf.sh
+    env_file: .env
+    volumes:
+     - ./import:/import
+     - cache:/cache
+    links:
+    - postgres:postgres
+  import-external:
+    image: "osm2vectortiles/import-external"
+    env_file: .env
+    links:
+    - postgres:postgres
+  export-mbtiles:
+    image: "osm2vectortiles/export"
+    command: ./export-local.sh
+    volumes:
+    - ./export:/export
+    - ./osm2vectortiles.tm2source:/tm2source
+    links:
+    - postgres:postgres
+    env_file: .env
+    environment:
+      BBOX: "-22.5,79.6871841545,-21.09375,79.9359182463"
+      MIN_ZOOM: "0"
+      MAX_ZOOM: "14"
+  import-sql:
+    image: "osm2vectortiles/import-sql"
+    env_file: .env
+    links:
+    - postgres:postgres
+    environment:
+      SQL_CREATE_INDIZES: 'false'
+volumes:
+  pgdata:
+  cache:

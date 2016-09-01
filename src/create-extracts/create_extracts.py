@@ -130,10 +130,10 @@ def upload_mbtiles(mbtiles_file):
     """
     config_file = os.getenv('S3_CONFIG_FILE',
                             os.path.join(os.environ['HOME'], '.s3cfg'))
-    access_key = os.environ['S3_ACCESS_KEY']
-    secret_key = os.environ['S3_SECRET_KEY']
-    bucket_name = os.getenv('S3_BUCKET_NAME', 'osm2vectortiles-downloads')
-    prefix = os.getenv('S3_PREFIX', 'v{}/{}/'.format(VERSION, 'extracts'))
+    access_key = os.environ['AWS_ACCESS_KEY_ID']
+    secret_key = os.environ['AWS_SECRET_ACCESS_KEY']
+    bucket_name = os.getenv('AWS_S3_DOWNLOAD_BUCKET_NAME', 'osm2vectortiles-downloads')
+    prefix = os.getenv('AWS_S3_PREFIX', 'v{}/{}/'.format(VERSION, 'extracts'))
 
     subprocess.check_call([
         's3cmd',

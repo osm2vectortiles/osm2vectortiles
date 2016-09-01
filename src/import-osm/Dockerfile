@@ -1,4 +1,4 @@
-FROM golang:1.4
+FROM golang:1.5.3
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -26,9 +26,11 @@ RUN apt-get purge -y --auto-remove \
     g++ gcc libc6-dev make git \
     && rm -rf /var/lib/apt/lists/*
 
-VOLUME /data/import /data/cache
-ENV IMPORT_DATA_DIR=/data/import \
-    IMPOSM_CACHE_DIR=/data/cache \
+VOLUME /import /cache
+ENV IMPORT_DATA_DIR=/import \
+    IMPOSM_CACHE_DIR=/cache \
+    IMPOSM_DIFF_DIR=/import \
+    IMPOSM_TILE_DIR=/import \
     MAPPING_YAML=/usr/src/app/mapping.yml
 
 WORKDIR /usr/src/app

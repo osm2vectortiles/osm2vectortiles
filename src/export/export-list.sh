@@ -5,7 +5,7 @@ set -o nounset
 
 source utils.sh
 
-readonly LIST_FILE=${RENDER_SCHEME:-"$EXPORT_DIR/tiles.txt"}
+readonly LIST_FILE="$EXPORT_DIR/tiles.txt"
 
 function export_local_mbtiles() {
     local mbtiles_name="tiles.mbtiles"

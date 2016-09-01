@@ -1,6 +1,6 @@
 FROM osm2vectortiles/postgis
-ENV IMPORT_DATA_DIR=/data/import \
-    NATURAL_EARTH_DB=/data/import/natural_earth_vector.sqlite
+ENV IMPORT_DATA_DIR=/import \
+    NATURAL_EARTH_DB=/import/natural_earth_vector.sqlite
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
       wget \
@@ -21,10 +21,9 @@ RUN wget --quiet http://data.openstreetmapdata.com/simplified-water-polygons-com
 WORKDIR /usr/src/app
 COPY ./clean-natural-earth.sh /usr/src/app/
 RUN wget --quiet http://naciscdn.org/naturalearth/packages/natural_earth_vector.sqlite.zip \
-    && unzip -oj natural_earth_vector.sqlite.zip -d /data/import \
+    && unzip -oj natural_earth_vector.sqlite.zip -d /import \
     && rm natural_earth_vector.sqlite.zip \
-    && ./usr/src/app/clean-natural-earth.sh
+    && /usr/src/app/clean-natural-earth.sh
 
 COPY . /usr/src/app
-
 CMD ["./import.sh"]

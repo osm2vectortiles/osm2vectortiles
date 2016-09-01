@@ -1,0 +1,43 @@
+version: '2'
+services:
+  import-labels:
+    image: "osm2vectortiles/import-external"
+    command: ./import-labels.sh
+    env_file: .env
+    links:
+    - postgres
+  import-natural-earth:
+    image: "osm2vectortiles/import-external"
+    command: ./import-natural-earth.sh
+    env_file: .env
+    links:
+    - postgres
+  import-water:
+    image: "osm2vectortiles/import-external"
+    command: ./import-water.sh
+    env_file: .env
+    links:
+    - postgres
+  mapbox-studio:
+    image: "osm2vectortiles/mapbox-studio"
+    volumes:
+     - ./osm2vectortiles.tm2source:/projects/osm2vectortiles.tm2source
+    links:
+     - postgres:db
+    ports:
+     - "3000:3000"
+  compare-visual:
+    image: "osm2vectortiles/compare-visual"
+    ports:
+     - "3030:3030"
+    volumes:
+     - ./osm2vectortiles.tm2source:/data/tm2source
+    links:
+     - postgres:db
+  mapping-qa-report:
+    image: "osm2vectortiles/mapping-qa-report"
+    env_file: .env
+    links:
+     - postgres:db
+    volumes:
+     - ./export:/data
