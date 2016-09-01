@@ -8,5 +8,8 @@ WORKDIR /usr/src/app
 COPY requirements.txt /usr/src/app/
 RUN pip install --no-cache-dir -r requirements.txt
 
+VOLUME /jobs
+ENV JOBS_DIR=/jobs
+
 COPY . /usr/src/app
 CMD ["./generate_world_jobs.sh"]

@@ -16,17 +16,17 @@ function exec_sql_file() {
 
 function export_tsv() {
     local tsv_filename="$1"
-    local tsv_file="$EXPORT_DIR/$tsv_filename"
+    local tsv_file="$QA_DIR/$tsv_filename"
     local sql_file="$2"
 
     pgclimb \
         -f "$sql_file" \
         -o "$tsv_file" \
-        -dbname "$OSM_NAME" \
-        --username "$OSM_USER" \
-        --host "$DB_HOST" \
-        --port "$DB_PORT" \
-        --pass "$OSM_PASSWORD" \
+        -dbname "$POSTGRES_DB" \
+        --username "$POSTGRES_USER" \
+        --host "$POSTGRES_HOST" \
+        --port "5432" \
+        --pass "$POSTGRES_PASSWORD" \
     tsv --header
 }
 

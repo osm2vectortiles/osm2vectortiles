@@ -12,7 +12,7 @@ services:
     command: ./import-pbf.sh
     env_file: .env
     volumes:
-     - ./import:/import
+     - ./data:/import
      - cache:/cache
     links:
     - postgres:postgres
@@ -25,7 +25,7 @@ services:
     image: "osm2vectortiles/export"
     command: ./export-local.sh
     volumes:
-    - ./export:/export
+    - ./data:/export
     - ./osm2vectortiles.tm2source:/tm2source
     links:
     - postgres:postgres

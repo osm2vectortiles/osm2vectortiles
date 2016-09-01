@@ -4,7 +4,6 @@ set -o pipefail
 set -o nounset
 
 readonly AMQP_URI=${AMQP_URI:-"amqp://osm:osm@rabbitmq:5672/"}
-readonly EXPORT_DATA_DIR=${EXPORT_DATA_DIR:-"/data/export"}
 readonly TILE_X=${TILE_X:-"0"}
 readonly TILE_Y=${TILE_Y:-"0"}
 readonly TILE_Z=${TILE_Z:-"0"}

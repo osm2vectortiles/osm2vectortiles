@@ -4,7 +4,7 @@ services:
     image: "osm2vectortiles/generate-jobs"
     env_file: .env
     volumes:
-     - ./export:/data/export
+     - ./data:/jobs
     links:
      - rabbitmq:rabbitmq
   generate-diff-jobs:
@@ -17,7 +17,7 @@ services:
     image: "osm2vectortiles/merge-jobs"
     env_file: .env
     volumes:
-     - ./export:/data/export
+     - ./data:/export
     links:
      - rabbitmq:rabbitmq
   export-worker:
@@ -46,6 +46,6 @@ services:
     image: "osm2vectortiles/create-extracts"
     env_file: .env
     volumes:
-     - ./export:/data/export
+     - ./data:/export
 volumes:
   rabbitdata:

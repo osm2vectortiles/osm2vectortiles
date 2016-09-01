@@ -40,4 +40,4 @@ services:
     links:
      - postgres:db
     volumes:
-     - ./export:/data
+     - ./data:/qa
