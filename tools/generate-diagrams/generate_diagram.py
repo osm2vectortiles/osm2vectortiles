@@ -72,9 +72,9 @@ def find_tables(config):
     for table_name, table_value in config['tables'].items():
         fields = table_value.get('fields')
 
-        if table_value.get('mappings'):
+        if 'mappings' in table_value:
             mapping = list(merge_grouped_mappings(table_value['mappings']))
-        else:
+        elif 'mapping' in table_value:
             mapping = table_value.get('mapping').items()
 
         if mapping and fields:
