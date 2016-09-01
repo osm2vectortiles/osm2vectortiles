@@ -5,8 +5,6 @@ set -o nounset
 
 readonly IMPORT_DATA_DIR=${IMPORT_DATA_DIR:-/data/import}
 readonly IMPOSM_CACHE_DIR=${IMPOSM_CACHE_DIR:-/data/cache}
-readonly TILELIST=${TILELIST:-/data/export/tiles.txt}
-readonly DIFFS=${DIFFS:-true}
 
 readonly OSM_DB=${OSM_DB:-osm}
 readonly OSM_USER=${OSM_USER:-osm}
@@ -15,11 +13,6 @@ readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
 readonly DB_SCHEMA=${OSM_SCHEMA:-public}
 readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
 readonly PG_CONNECT="postgis://$OSM_USER:$OSM_PASSWORD@$DB_HOST/$OSM_DB"
-
-function download_pbf() {
-    local pbf_url=$1
-	wget -q  --directory-prefix "$IMPORT_DATA_DIR" --no-clobber "$pbf_url"
-}
 
 function import_pbf() {
     local pbf_file="$1"
@@ -33,37 +26,30 @@ function import_pbf() {
         -dbschema-import="${DB_SCHEMA}" \
         -write -optimize -diff
 
-    echo "Create osm_water_point table with precalculated centroids"
     create_osm_water_point_table
-
-    echo "Update osm_place_polygon with point geometry"
     update_points
-
-    echo "Subdividing polygons in $OSM_DB"
     subdivide_polygons
-
-    echo "Update scaleranks from Natural Earth data"
     update_scaleranks
 }
 
 function update_points() {
+    echo "Update osm_place_polygon with point geometry"
     exec_sql_file "point_update.sql"
 }
 
 function update_scaleranks() {
+    echo "Update scaleranks from Natural Earth data"
     exec_sql_file "update_scaleranks.sql"
 }
 
 function create_osm_water_point_table() {
+    echo "Create osm_water_point table with precalculated centroids"
     exec_sql_file "water_point_table.sql"
 }
 
 function subdivide_polygons() {
+    echo "Subdividing polygons in $OSM_DB"
     exec_sql_file "subdivide_polygons.sql"
-}
-
-function update_scaleranks() {
-    exec_sql_file "update_scaleranks.sql"
 }
 
 function exec_sql_file() {
@@ -78,12 +64,12 @@ function exec_sql_file() {
 }
 
 function import_pbf_diffs() {
-    local pbf_file="$1"
-    local diffs_file="$IMPORT_DATA_DIR/latest.osc.gz"
+    local diffs_file="$1"
+    local tile_list="$2"
 
     echo "Import changes from $diffs_file"
     imposm3 diff \
-        -tilelist "$TILELIST" \
+        -tilelist "$tile_list" \
         -maxzoom "14" \
         -connection "$PG_CONNECT" \
         -mapping "$MAPPING_YAML" \
@@ -92,12 +78,7 @@ function import_pbf_diffs() {
         -dbschema-import "${DB_SCHEMA}" \
         "$diffs_file"
 
-    echo "Create osm_water_point table with precalculated centroids"
     create_osm_water_point_table
-
-    echo "Update osm_place_polygon with point geometry"
     update_points
-
-    echo "Subdividing polygons in $OSM_DB"
     subdivide_polygons
 }

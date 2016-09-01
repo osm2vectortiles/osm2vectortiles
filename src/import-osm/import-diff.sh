@@ -4,12 +4,13 @@ set -o pipefail
 set -o nounset
 
 source import.sh
+readonly TILELIST=${TILELIST:-/data/export/tiles.txt}
 
 function main() {
-    if [ "$(ls -A $IMPORT_DATA_DIR/*.pbf 2> /dev/null)" ]; then
-        local pbf_file
-        for pbf_file in "$IMPORT_DATA_DIR"/*.pbf; do
-            import_pbf_diffs "$pbf_file"
+    if [ "$(ls -A $IMPORT_DATA_DIR/*.osc.gz 2> /dev/null)" ]; then
+        local diff_file
+        for diff_file in "$IMPORT_DATA_DIR"/*.osc.gz; do
+            import_pbf_diffs "$diff_file" "$TILELIST"
             break
         done
     else
