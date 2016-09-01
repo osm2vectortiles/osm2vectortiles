@@ -10,12 +10,16 @@ cache:
   image: "tianon/true"
   volumes:
   - /data/cache
-postgis:
+postgres:
   image: "osm2vectortiles/postgis"
   volumes_from:
    - pgdata
   ports:
    - "5432"
+  environment:
+    POSTGRES_DB: osm
+    POSTGRES_USER: osm
+    POSTGRES_PASSWORD: osm
 import-osm:
   image: "osm2vectortiles/import-osm"
   command: ./import-pbf.sh
@@ -24,7 +28,7 @@ import-osm:
   volumes_from:
    - cache
   links:
-   - postgis:db
+   - postgres:postgres
   environment:
      DIFFS: 'true'
 import-osm-diff:
@@ -37,7 +41,7 @@ import-osm-diff:
   volumes_from:
    - cache
   links:
-   - postgis:db
+   - postgres:postgres
 update-osm-diff:
   image: "osm2vectortiles/import-osm"
   command: ./import-osmupdate.sh
@@ -53,22 +57,22 @@ merge-osm-diff:
 import-external:
   image: "osm2vectortiles/import-external"
   links:
-  - postgis:db
+  - postgres:postgres
 import-labels:
   image: "osm2vectortiles/import-external"
   command: ./import-labels.sh
   links:
-  - postgis:db
+  - postgres:postgres
 import-natural-earth:
   image: "osm2vectortiles/import-external"
   command: ./import-natural-earth.sh
   links:
-  - postgis:db
+  - postgres:postgres
 import-water:
   image: "osm2vectortiles/import-external"
   command: ./import-water.sh
   links:
-  - postgis:db
+  - postgres:postgres
 generate-jobs:
   image: "osm2vectortiles/generate-jobs"
   volumes:
@@ -94,7 +98,7 @@ export-worker:
   volumes:
    - ./osm2vectortiles.tm2source:/data/tm2source
   links:
-   - postgis:db
+   - postgres:postgres
    - rabbitmq:rabbitmq
   environment:
     AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
@@ -110,7 +114,7 @@ export:
    - ./export:/data/export
    - ./osm2vectortiles.tm2source:/data/tm2source
   links:
-   - postgis:db
+   - postgres:postgres
   environment:
     # Around zurich
     BBOX: "-22.5,79.6871841545,-21.09375,79.9359182463"
@@ -123,11 +127,11 @@ export-list:
    - ./export:/data/export
    - ./osm2vectortiles.tm2source:/data/tm2source
   links:
-   - postgis:db
+   - postgres:postgres
 import-sql:
   image: "osm2vectortiles/import-sql"
   links:
-   - postgis:db
+   - postgres:postgres
   environment:
     SQL_CREATE_INDIZES: 'false'
 mapbox-studio:
@@ -135,7 +139,7 @@ mapbox-studio:
   volumes:
    - ./osm2vectortiles.tm2source:/projects/osm2vectortiles.tm2source
   links:
-   - postgis:db
+   - postgres:db
   ports:
    - "3000:3000"
 rabbitmq:
@@ -163,10 +167,10 @@ compare-visual:
   volumes:
    - ./osm2vectortiles.tm2source:/data/tm2source
   links:
-   - postgis:db
+   - postgres:db
 mapping-qa-report:
   image: "osm2vectortiles/mapping-qa-report"
   links:
-   - postgis:db
+   - postgres:db
   volumes:
    - ./export:/data

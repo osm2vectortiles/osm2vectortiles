@@ -20,7 +20,7 @@ function import_geojson() {
     -f Postgresql \
     -s_srs EPSG:4326 \
     -t_srs EPSG:3857 \
-    PG:"dbname=$OSM_DB user=$OSM_USER host=$DB_HOST port=$DB_PORT" \
+    PG:"$PGCONN" \
     "$geojson_file" \
     -nln "$table_name"
 }

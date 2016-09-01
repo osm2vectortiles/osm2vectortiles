@@ -1,4 +1,4 @@
-FROM mdillon/postgis:9.4
+FROM osm2vectortiles/postgis
 ENV IMPORT_DATA_DIR=/data/import \
     NATURAL_EARTH_DB=/data/import/natural_earth_vector.sqlite
 
@@ -18,6 +18,7 @@ RUN wget --quiet http://data.openstreetmapdata.com/simplified-water-polygons-com
     && unzip -oj simplified-water-polygons-complete-3857.zip -d $IMPORT_DATA_DIR \
     && rm simplified-water-polygons-complete-3857.zip
 
+WORKDIR /usr/src/app
 COPY ./clean-natural-earth.sh /usr/src/app/
 RUN wget --quiet http://naciscdn.org/naturalearth/packages/natural_earth_vector.sqlite.zip \
     && unzip -oj natural_earth_vector.sqlite.zip -d /data/import \
@@ -25,6 +26,5 @@ RUN wget --quiet http://naciscdn.org/naturalearth/packages/natural_earth_vector.
     && ./usr/src/app/clean-natural-earth.sh
 
 COPY . /usr/src/app
-WORKDIR /usr/src/app
 
 CMD ["./import.sh"]

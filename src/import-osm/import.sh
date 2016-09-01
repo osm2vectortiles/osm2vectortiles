@@ -3,16 +3,9 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-readonly IMPORT_DATA_DIR=${IMPORT_DATA_DIR:-/data/import}
+readonly IMPOSM_DIFF_DIR=${IMPOSM_DIFF_DIR:-/data/import}
 readonly IMPOSM_CACHE_DIR=${IMPOSM_CACHE_DIR:-/data/cache}
-
-readonly OSM_DB=${OSM_DB:-osm}
-readonly OSM_USER=${OSM_USER:-osm}
-readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
-
-readonly DB_SCHEMA=${OSM_SCHEMA:-public}
-readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
-readonly PG_CONNECT="postgis://$OSM_USER:$OSM_PASSWORD@$DB_HOST/$OSM_DB"
+readonly PG_CONNECT="postgis://$POSTGRES_ENV_POSTGRES_USER:$POSTGRES_ENV_POSTGRES_PASSWORD@$POSTGRES_PORT_5432_TCP_ADDR/$POSTGRES_ENV_POSTGRES_DB"
 
 function import_pbf() {
     local pbf_file="$1"
@@ -23,7 +16,7 @@ function import_pbf() {
         -overwritecache \
         -cachedir "$IMPOSM_CACHE_DIR" \
         -read "$pbf_file" \
-        -dbschema-import="${DB_SCHEMA}" \
+        -deployproduction \
         -write -optimize -diff
 
     create_osm_water_point_table
@@ -52,16 +45,7 @@ function subdivide_polygons() {
     exec_sql_file "subdivide_polygons.sql"
 }
 
-function exec_sql_file() {
-    local sql_file=$1
-    PG_PASSWORD=$OSM_PASSWORD psql \
-        --host="$DB_HOST" \
-        --port=5432 \
-        --dbname="$OSM_DB" \
-        --username="$OSM_USER" \
-        -v ON_ERROR_STOP=1 \
-        -a -f "$sql_file"
-}
+
 
 function import_pbf_diffs() {
     local diffs_file="$1"
@@ -74,8 +58,7 @@ function import_pbf_diffs() {
         -connection "$PG_CONNECT" \
         -mapping "$MAPPING_YAML" \
         -cachedir "$IMPOSM_CACHE_DIR" \
-        -diffdir "$IMPORT_DATA_DIR" \
-        -dbschema-import "${DB_SCHEMA}" \
+        -diffdir "$IMPOSM_DIFF_DIR" \
         "$diffs_file"
 
     create_osm_water_point_table

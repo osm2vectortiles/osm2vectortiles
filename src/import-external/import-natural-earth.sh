@@ -16,7 +16,7 @@ function import_natural_earth() {
     -s_srs EPSG:4326 \
     -t_srs EPSG:3857 \
     -clipsrc -180.1 -85.0511 180.1 85.0511 \
-    PG:"dbname=$OSM_DB user=$OSM_USER host=$DB_HOST port=$DB_PORT" \
+    PG:"$PGCONN" \
     -lco GEOMETRY_NAME=geom \
     -lco DIM=2 \
     -nlt GEOMETRY \

@@ -3,32 +3,25 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-readonly SQL_FUNCTIONS_FILE=${IMPORT_DATA_DIR:-/usr/src/app/functions.sql}
-readonly SQL_LAYERS_DIR=${IMPORT_DATA_DIR:-/usr/src/app/layers/}
 readonly SQL_CREATE_INDIZES=${SQL_CREATE_INDIZES:-false}
-readonly SQL_SPLIT_POLYGON_FILE=${SQL_SPLIT_POLYGON_FILE:-/usr/src/app/landuse_split_polygon_table.sql}
-readonly SQL_SUBDIVIDE_POLYGON_FILE=${SQL_SUBDIVIDE_POLYGON_FILE:-/usr/src/app/subdivide_polygons.sql}
-
-readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
-readonly OSM_DB=${OSM_DB:-osm}
-readonly OSM_USER=${OSM_USER:-osm}
-readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
 
 function exec_sql_file() {
-	local sql_file=$1
-	PG_PASSWORD=$OSM_PASSWORD psql \
-        --host="$DB_HOST" \
-        --port=5432 \
-        --dbname="$OSM_DB" \
-        --username="$OSM_USER" \
+    local file_name="$1"
+    PGPASSWORD=$POSTGRES_ENV_POSTGRES_PASSWORD psql \
         -v ON_ERROR_STOP=1 \
-        -a -f "$sql_file"
+        --host="$POSTGRES_PORT_5432_TCP_ADDR" \
+        --port="5432" \
+        --dbname="$POSTGRES_ENV_POSTGRES_DB" \
+        --username="$POSTGRES_ENV_POSTGRES_USER" \
+        -f "$file_name"
 }
 
 function main() {
-    echo "Creating functions in $OSM_DB"
+    echo "Create vector tile utility functions"
+    exec_sql_file "$VT_UTIL_FILE"
+    echo "Creating functions"
     exec_sql_file "$SQL_FUNCTIONS_FILE"
-    echo "Creating generated functions in $OSM_DB"
+    echo "Creating generated functions"
     exec_sql_file "$SQL_GENERATED_FILE"
     echo "Creating layers in $OSM_DB"
     exec_sql_file "${SQL_LAYERS_DIR}admin.sql"

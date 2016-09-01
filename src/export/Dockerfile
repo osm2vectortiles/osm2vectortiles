@@ -1,9 +1,7 @@
 FROM node:5
 MAINTAINER Lukas Martinelli <me@lukasmartinelli.ch>
 
-RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-
 RUN npm install -g \
           tl@0.8.x \
           mapnik@3.5.x \
@@ -13,8 +11,6 @@ RUN npm install -g \
           tilelive-vector@3.9.x \
           tilelive-bridge@2.3.x \
           tilelive-mapnik@0.6.x
-
-RUN npm -g outdated | grep -v npm
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         python \

@@ -13,7 +13,7 @@ export-mbtiles:
 import-osm:
 	docker build -t osm2vectortiles/import-osm src/import-osm
 
-import-external:
+import-external: postgis
 	docker build -t osm2vectortiles/import-external src/import-external
 
 import-sql:

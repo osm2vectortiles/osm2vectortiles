@@ -3,26 +3,26 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-readonly DB_HOST=$DB_PORT_5432_TCP_ADDR
-readonly DB_PORT=$DB_PORT_5432_TCP_PORT
-
-readonly OSM_DB=${OSM_DB:-osm}
-readonly OSM_USER=${OSM_USER:-osm}
-readonly OSM_PASSWORD=${OSM_PASSWORD:-osm}
+readonly PGCONN="dbname=$POSTGRES_ENV_POSTGRES_DB user=$POSTGRES_ENV_POSTGRES_USER host=$POSTGRES_PORT_5432_TCP_ADDR port=5432"
 
 function exec_psql() {
-    PG_PASSWORD=$OSM_PASSWORD psql --host="$DB_HOST" --port=5432 --dbname="$OSM_DB" --username="$OSM_USER"
+    PGPASSWORD=$POSTGRES_ENV_POSTGRES_PASSWORD psql \
+        -v ON_ERROR_STOP=1 \
+        --host="$POSTGRES_PORT_5432_TCP_ADDR" \
+        --port="5432" \
+        --dbname="$POSTGRES_ENV_POSTGRES_DB" \
+        --username="$POSTGRES_ENV_POSTGRES_USER"
 }
 
 function exec_sql_file() {
 	local sql_file=$1
-    cat "$sql_file" | exec_psql
+    exec_psql < "$sql_file"
 }
 
 function drop_table() {
     local table=$1
 	local drop_command="DROP TABLE IF EXISTS $table;"
-	echo $drop_command | exec_psql
+	echo "$drop_command" | exec_psql
 }
 
 function hide_inserts() {

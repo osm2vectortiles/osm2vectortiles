@@ -1,72 +1,32 @@
-##### From https://github.com/gordlea/docker-postgis #####
 FROM postgres:9.5
+MAINTAINER "Lukas Martinelli <me@lukasmartinelli.ch>"
+ENV POSTGIS_MAJOR=2.2 \
+    POSTGIS_VERSION=2.2.2 \
+    GEOS_VERSION=3.5.0
 
-MAINTAINER "Gord Lea <jgordonlea@gmail.com>"
-
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    postgresql-server-dev-9.5 \
-    libxml2-dev \
-    libgdal-dev \
-    libproj-dev \
-    libjson0-dev \
-    xsltproc \
-    docbook-xsl \
-    docbook-mathml \
-    libpcre3-dev \
-    cmake \
-    libcgal-dev \
-    openscenegraph \
-    libopenscenegraph-dev \
-    imagemagick \
-    wget
-
-#latest osgeo
-RUN wget http://download.osgeo.org/geos/geos-3.5.0.tar.bz2; \
-    tar xfj geos-3.5.0.tar.bz2; \
-    cd geos-3.5.0; \
-    ./configure; \
-    make -j; \
-    make install; \
-    cd ..; \
-    rm -rf geos-3.5.0*
-
-RUN wget http://download.osgeo.org/postgis/source/postgis-2.2.0.tar.gz; \
-    tar xvzf postgis-2.2.0.tar.gz; \
-    cd postgis-2.2.0; \
-    ./configure --with-raster --with-topology \
-    make -j; \
-    make install; \
-    cd ..; \
-    rm -rf postgis-2.2.0*
-
-RUN ldconfig
-
-#ADD update-pgconf.sh /docker-entrypoint-initdb.d/
-
-############################################
-
-RUN apt-get update \
- && apt-get install -y --no-install-recommends \
-      wget \
-      ca-certificates \
+RUN apt-get -y update \
+ && apt-get -y --no-install-recommends install \
+        curl \
+        build-essential cmake \
+        # PostGIS build dependencies
+		postgresql-server-dev-$PG_MAJOR libxml2-dev libjson0-dev libproj-dev libgdal-dev \
  && rm -rf /var/lib/apt/lists/*
 
-ENV CARTODB_DIR=/opt/cartodb-postgresql \
-    VT_UTIL_DIR=/opt/postgis-vt-util \
-    VT_UTIL_URL="https://raw.githubusercontent.com/mapbox/postgis-vt-util/v1.0.0/postgis-vt-util.sql"
+WORKDIR /opt/geos
+RUN curl -o /opt/geos.tar.bz2 http://download.osgeo.org/geos/geos-$GEOS_VERSION.tar.bz2 \
+ && tar xf /opt/geos.tar.bz2 -C /opt/geos/ --strip-components=1 \
+ && ./configure \
+ && make -j \
+ && make install \
+ && rm -rf /opt/geos*
 
-RUN mkdir -p /opt/postgis-vt-util \
- && wget -P /opt/postgis-vt-util --quiet "$VT_UTIL_URL"
+WORKDIR /opt/postgis
+RUN curl -o /opt/postgis.tar.gz http://download.osgeo.org/postgis/source/postgis-$POSTGIS_VERSION.tar.gz \
+ && tar xf /opt/postgis.tar.gz -C /opt/postgis --strip-components=1 \
+ && ./configure --with-raster --with-topology \
+ && make \
+ && make install \
+ && ldconfig
 
-# install github.com/elitwin/pgtune 
-RUN wget https://github.com/elitwin/pgtune/tarball/master \
-   && tar -xzf master \
-   && mv elitwin* pgtune \
-   && rm -rf master
-
-# copy new initdb file which enables the hstore extension and Mapbox vt-util functions
-RUN rm -f /docker-entrypoint-initdb.d/postgis.sh
-#COPY ./osmdw_pgtune.sh /docker-entrypoint-initdb.d/05_osmdw_pgtune.sh
+ ##&& (cd /opt/postgis/extensions/postgis && make -j && make install) \
 COPY ./initdb-postgis.sh /docker-entrypoint-initdb.d/10_postgis.sh
-COPY ./initdb-osm.sh /docker-entrypoint-initdb.d/20_osm.sh
