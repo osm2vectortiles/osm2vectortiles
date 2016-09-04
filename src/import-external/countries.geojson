@@ -2094,7 +2094,7 @@
     {
       "type": "Feature",
       "properties": {
-        "osm_id": "424311890",
+        "osm_id": 424311890,
         "iso3166_1_alpha_2": "VE",
         "name": "Venezuela",
         "name_en": "Venezuela",
