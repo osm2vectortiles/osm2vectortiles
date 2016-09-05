@@ -15,7 +15,7 @@ WORKDIR $GOPATH/src/github.com/omniscale/imposm3
 RUN go get github.com/tools/godep \
  && git clone https://github.com/osm2vectortiles/imposm3 \
         $GOPATH/src/github.com/omniscale/imposm3 \
- && git reset --hard 93537a867246322f2d249da86c854f66d85dabc7 \
+ && git checkout tile_expiration_better \
  && go get \
  && go install
 

@@ -32,6 +32,7 @@ import-osm-diff:
   command: ./import-diff.sh
   volumes:
    - ./import:/data/import
+   - ./export:/data/export
    - ./src/import-osm:/usr/src/app
   volumes_from:
    - cache
@@ -66,12 +67,6 @@ import-natural-earth:
 import-water:
   image: "osm2vectortiles/import-external"
   command: ./import-water.sh
-  links:
-  - postgis:db
-changed-tiles:
-  image: "osm2vectortiles/changed-tiles"
-  volumes:
-   - ./export:/data/export
   links:
   - postgis:db
 generate-jobs:
