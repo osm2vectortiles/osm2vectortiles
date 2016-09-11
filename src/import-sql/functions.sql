@@ -1,26 +1,30 @@
-CREATE OR REPLACE FUNCTION overlapping_tiles(
-    geom geometry,
-    max_zoom_level INTEGER,
-    buffer_size INTEGER
+CREATE OR REPLACE FUNCTION overlapping_tiles (
+  geom geometry,
+  max_zoom_level INTEGER,
+  buffer_size INTEGER
 ) RETURNS TABLE (
-    tile_z INTEGER,
-    tile_x INTEGER,
-    tile_y INTEGER
+  tile_z INTEGER,
+  tile_x INTEGER,
+  tile_y INTEGER
 ) AS $$
-BEGIN
-    RETURN QUERY
-        WITH RECURSIVE tiles(x, y, z, e) AS (
-            SELECT 0, 0, 0, geom && XYZ_Extent(0, 0, 0, buffer_size)
-            UNION ALL
-            SELECT x*2 + xx, y*2 + yy, z+1,
-                   geom && XYZ_Extent(x*2 + xx, y*2 + yy, z+1, buffer_size)
-            FROM tiles,
-            (VALUES (0, 0), (0, 1), (1, 1), (1, 0)) as c(xx, yy)
-            WHERE e AND z < max_zoom_level
-        )
-        SELECT z, x, y FROM tiles WHERE e;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
+WITH RECURSIVE tiles(x, y, z, e) AS (
+  SELECT
+      0,
+      0,
+      0,
+      geom && XYZ_Extent(0, 0, 0, buffer_size)
+  UNION ALL
+  SELECT
+      x*2 + xx,
+      y*2 + yy,
+      z+1,
+      geom && XYZ_Extent(x*2 + xx, y*2 + yy, z+1, buffer_size)
+  FROM tiles,
+    (VALUES (0, 0), (0, 1), (1, 1), (1, 0)) as c(xx, yy)
+  WHERE e AND z < max_zoom_level
+)
+SELECT z, x, y FROM tiles WHERE e;
+$$ LANGUAGE SQL IMMUTABLE;
 
 CREATE OR REPLACE FUNCTION changed_tiles_latest_timestamp()
 RETURNS TABLE (x INTEGER, y INTEGER, z INTEGER) AS $$
@@ -55,24 +59,20 @@ $$ LANGUAGE plpgsql;
 -- specification : https://www.mapbox.com/vector-tiles/mapbox-streets-v7/
 -- osm_ids :  imposm3 with use_single_id_space:true
 CREATE OR REPLACE FUNCTION osm_ids2mbid (osm_ids BIGINT, is_polygon bool ) RETURNS BIGINT AS $$
-BEGIN
- RETURN CASE
-   WHEN                      (osm_ids >=     0 )                    THEN (      osm_ids         * 10)       -- +0 point
-   WHEN (NOT is_polygon) AND (osm_ids >= -1e17 ) AND (osm_ids < 0 ) THEN ( (abs(osm_ids)      ) * 10) + 1   -- +1 way linestring
-   WHEN (    is_polygon) AND (osm_ids >= -1e17 ) AND (osm_ids < 0 ) THEN ( (abs(osm_ids)      ) * 10) + 2   -- +2 way poly
-   WHEN (NOT is_polygon) AND (osm_ids <  -1e17 )                    THEN ( (abs(osm_ids) -1e17) * 10) + 3   -- +3 relations linestring
-   WHEN (    is_polygon) AND (osm_ids <  -1e17 )                    THEN ( (abs(osm_ids) -1e17) * 10) + 4   -- +4 relations poly
-   ELSE 0
- END;
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
+  SELECT CASE
+    WHEN                      (osm_ids >=     0::BIGINT )                    THEN ( (    osm_ids                ) * 10)       -- +0 point
+    WHEN (NOT is_polygon) AND (osm_ids >= -1e17::BIGINT ) AND (osm_ids < 0 ) THEN ( (abs(osm_ids)               ) * 10) + 1   -- +1 way linestring
+    WHEN (    is_polygon) AND (osm_ids >= -1e17::BIGINT ) AND (osm_ids < 0 ) THEN ( (abs(osm_ids)               ) * 10) + 2   -- +2 way poly
+    WHEN (NOT is_polygon) AND (osm_ids <  -1e17::BIGINT )                    THEN ( (abs(osm_ids) - 1e17::bigint) * 10) + 3   -- +3 relations linestring
+    WHEN (    is_polygon) AND (osm_ids <  -1e17::BIGINT )                    THEN ( (abs(osm_ids) - 1e17::bigint) * 10) + 4   -- +4 relations poly
+    ELSE 0
+  END;
+$$ LANGUAGE SQL IMMUTABLE;
 
 
-CREATE OR REPLACE FUNCTION is_polygon( geom geometry) RETURNS bool AS $$
-BEGIN
-    RETURN ST_GeometryType(geom) IN ('ST_Polygon', 'ST_MultiPolygon');
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
+CREATE OR REPLACE FUNCTION is_polygon(geom geometry) RETURNS bool AS $$
+  SELECT ST_GeometryType(geom) IN ('ST_Polygon', 'ST_MultiPolygon');
+$$ LANGUAGE SQL IMMUTABLE;
 
 
 /*
