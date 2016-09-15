@@ -27,8 +27,8 @@ function exec_sql_file() {
 
 function main() {
     echo "Creating functions in $OSM_DB"
-    exec_sql_file "$SQL_FUNCTIONS_FILE"
     exec_sql_file "$SQL_XYZ_EXTENT_FILE"
+    exec_sql_file "$SQL_FUNCTIONS_FILE"
     echo "Creating generated functions in $OSM_DB"
     exec_sql_file "$SQL_GENERATED_FILE"
     echo "Creating triggers in $OSM_DB"

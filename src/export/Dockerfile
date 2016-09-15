@@ -5,14 +5,14 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 RUN npm install -g \
-          tl@0.8.x \
-          mapnik@3.5.x \
-          mbtiles@0.8.x \
-          tilelive@5.12.x \
-          tilelive-tmsource@0.5.x \
-          tilelive-vector@3.9.x \
-          tilelive-bridge@2.3.x \
-          tilelive-mapnik@0.6.x
+          tl@0.8.1 \
+          mapnik@3.5.13 \
+          mbtiles@0.8.2 \
+          tilelive@5.12.2 \
+          tilelive-tmsource@0.5.0 \
+          tilelive-vector@3.9.3 \
+          tilelive-bridge@2.3.1 \
+          tilelive-mapnik@0.6.18
 
 RUN npm -g outdated | grep -v npm
 
