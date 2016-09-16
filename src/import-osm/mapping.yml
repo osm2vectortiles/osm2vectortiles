@@ -1,3 +1,17 @@
+# -------------------------------------------------------------------------------------------
+#
+# imposm3 mapping file for the osm2vectortiles project
+# 
+# Be careful!  
+# This mapping file is only working with the https://github.com/osm2vectortiles/imposm3
+# see the actual build command ->  ./src/import-osm/Dockerfile
+#
+# We have some extended syntax compare to the official https://imposm.org 
+#  - `pbf_timestamp` field mapping   
+#  - extended `exclude_tags` filters 
+#
+# -------------------------------------------------------------------------------------------
+
 use_single_id_space: true
 generalized_tables:
   landuse_polygon_gen0:
