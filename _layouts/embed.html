@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+
+    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }}</title>
+
+    <meta name="author" content="{{ site.name }}" />
+    <meta name="description" content="{{ site.description }}" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.2.1/hint.min.css" />
+    <link href="/base.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript" src="/js/maps.js"></script>
+    <script type="text/javascript" src="/js/downloads.js"></script>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <style>
+      body{
+        background: #fff !important;
+      }
+      .clipboard{
+        display: none;
+      }
+      .download-item{
+        margin-bottom: -2px;
+        border-left: 0;
+        border-right: 0;
+      }
+      .download-item .col4, .download-item .col2{
+        width: 50%;
+      }
+      .download-item .col2{
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+
+    {{ content }}
+
+  </body>
+</html>
