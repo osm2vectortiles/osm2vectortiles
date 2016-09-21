@@ -5,6 +5,8 @@ OSM2VectorTiles makes is possible to create vector tiles from OpenStreetMap data
 Create a custom base map in minutes with our free vector tiles from [OpenStreetMap](http://openstreetmap.org) data. 
 This is the easiest way how to switch to OSM thanks to [MapBox](https://github.com/mapbox) open-source tools. Design your own map of world or country, serve raster or vector tiles from any virtual server or your own infrastructure, even offline behind a firewall.
 
+[**Please also check out Maputnik - the free Mapbox Studio alternative**](https://github.com/maputnik/editor)
+
 ## Introduction
 
 Video introduction to vector tiles, the project and how to use OSM2VectorTiles to create your own styles and maps.
