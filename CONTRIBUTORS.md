@@ -39,7 +39,7 @@ OSM2VectorTiles Contributors (sorted historically)
   - Sponsoring rendering infrastructure
   - Initial design of OSM2VectorTiles website
   - Operating free CDN service with vector tiles
-  - Development of servers for vector tiles [TileServer GL](https://github.com/klokantech/tileserver-gl), [TileServer Mapnik]](https://github.com/klokantech/tileserver-mapnik) and [TileServer PHP](https://github.com/klokantech/tileserver-php)
+  - Development of servers for vector tiles [TileServer GL](https://github.com/klokantech/tileserver-gl), [TileServer Mapnik](https://github.com/klokantech/tileserver-mapnik) and [TileServer PHP](https://github.com/klokantech/tileserver-php)
   - Distributing "OSM2VectorTiles" USB stick
   - Running reference implementation of the maps: http://maps.klokantech.com/
 
