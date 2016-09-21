@@ -10,7 +10,7 @@ OSM2VectorTiles Contributors (sorted historically)
   - Maintainer and main contributor
 
 - **[Petr Pridal](https://github.com/klokan)**
-  - Technical advisor
+  - Technical advisor and architect
 
 - **[Stefan Keller](https://github.com/sfkeller)**
   - Bachelor and study thesis supervisor
@@ -38,7 +38,10 @@ OSM2VectorTiles Contributors (sorted historically)
 - **[Klokan Technologies](https://www.klokantech.com/)**
   - Sponsoring rendering infrastructure
   - Initial design of OSM2VectorTiles website
+  - Operating free CDN service with vector tiles
+  - Development of servers for vector tiles [TileServer GL](https://github.com/klokantech/tileserver-gl), [TileServer Mapnik]](https://github.com/klokantech/tileserver-mapnik) and [TileServer PHP](https://github.com/klokantech/tileserver-php)
   - Distributing "OSM2VectorTiles" USB stick
+  - Running reference implementation of the maps: http://maps.klokantech.com/
 
 - **[HSR University of Applied Science](geometalab.hsr.ch)**
   - University involved in maintaining project
