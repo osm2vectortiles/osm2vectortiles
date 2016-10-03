@@ -24,43 +24,51 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
-CREATE OR REPLACE VIEW road_z5 AS
-    SELECT id AS osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
+DROP VIEW road_z5 CASCADE;
+CREATE VIEW road_z5 AS
+    SELECT id AS osm_id, ST_Simplify(geometry, 2444) as geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
     FROM osm_road_geometry
     WHERE road_class(type, service, access) IN ('motorway', 'trunk');
 
-CREATE OR REPLACE VIEW road_z6toz7 AS
-    SELECT id AS osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
+DROP VIEW road_z6toz7 CASCADE;
+CREATE VIEW road_z6toz7 AS
+    SELECT id AS osm_id, ST_Simplify(geometry, 916) as geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
     FROM osm_road_geometry
     WHERE road_class(type, service, access) IN ('motorway', 'trunk', 'primary');
 
-CREATE OR REPLACE VIEW road_z8toz9 AS
-    SELECT id AS osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
+DROP VIEW road_z8toz9 CASCADE;
+CREATE VIEW road_z8toz9 AS
+    SELECT id AS osm_id, ST_Simplify(geometry, 229) as geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
     FROM osm_road_geometry
     WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'major_rail');
 
-CREATE OR REPLACE VIEW road_z10 AS
-    SELECT id AS osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
+DROP VIEW road_z10 CASCADE;
+CREATE VIEW road_z10 AS
+    SELECT id AS osm_id, ST_Simplify(geometry, 77) as geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
     FROM osm_road_geometry
     WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail');
 
-CREATE OR REPLACE VIEW road_z11 AS
-    SELECT id AS osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
+DROP VIEW road_z11 CASCADE;
+CREATE VIEW road_z11 AS
+    SELECT id AS osm_id, ST_Simplify(geometry, 38) as geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
     FROM osm_road_geometry
     WHERE road_class(type, service, access) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry');
 
-CREATE OR REPLACE VIEW road_z12 AS
-    SELECT id AS osm_id, geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
+DROP VIEW road_z12 CASCADE;
+CREATE VIEW road_z12 AS
+    SELECT id AS osm_id, ST_Simplify(geometry, 19) as geometry, type, construction, tracktype, service, access, oneway, 'none'::varchar(4) AS structure, z_order
     FROM osm_road_geometry
     WHERE road_type_class(type) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry', 'pedestrian', 'service', 'link', 'construction', 'street_limited', 'aerialway');
 
-CREATE OR REPLACE VIEW road_z13 AS
-    SELECT id AS osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order
+DROP VIEW road_z13 CASCADE;
+CREATE VIEW road_z13 AS
+    SELECT id AS osm_id, ST_Simplify(geometry, 9) as geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order
     FROM osm_road_geometry
     WHERE road_type_class(type) IN ('motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'major_rail', 'street', 'ferry', 'pedestrian', 'service', 'link', 'construction', 'street_limited', 'aerialway', 'track');
 
-CREATE OR REPLACE VIEW road_z14 AS
-    SELECT id AS osm_id, geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order
+DROP VIEW road_z14 CASCADE;
+CREATE VIEW road_z14 AS
+    SELECT id AS osm_id, ST_Simplify(geometry, 0.1) as geometry, type, construction, tracktype, service, access, oneway, road_structure(is_tunnel, is_bridge, is_ford) AS structure, z_order
     FROM osm_road_geometry;
 
 CREATE OR REPLACE VIEW road_layer AS (
