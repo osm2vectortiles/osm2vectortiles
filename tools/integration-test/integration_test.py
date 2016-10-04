@@ -19,9 +19,8 @@ ALBANIA_TIRANA_TILE = (284, 191, 9)
 
 BUCKET = os.getenv('BUCKET', 'osm2vectortiles-testing')
 AWS_S3_HOST = os.getenv('AWS_S3_HOST', 'os.zhdk.cloud.switch.ch')
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', '')
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID', '')
 
 class DockerCompose(object):
     def __init__(self, project_dir=PROJECT_DIR):
