@@ -293,6 +293,16 @@ tables:
       type: id
     - name: geometry
       type: geometry
+    - name: height
+      type: integer
+    - name: min_height
+      type: integer
+    - name: levels
+      key: building:levels
+      type: integer
+    - name: min_level
+      key: building:min_level
+      type: integer
     - name: underground
       key: building:levels:underground
       type: integer
