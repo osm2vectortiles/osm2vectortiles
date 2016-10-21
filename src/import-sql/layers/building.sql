@@ -1,9 +1,9 @@
 CREATE OR REPLACE VIEW building_z13 AS
-    SELECT id AS osm_id, underground, geometry, height, levels, min_height, min_level
+    SELECT id AS osm_id, underground, geometry, height, levels, min_height, min_level, roof_shape,roof_orientation,roof_height,roof_angle,roof_levels,roof_direction,building_colour,roof_colour,building_material,roof_material
     FROM osm_building_polygon_gen0;
 
 CREATE OR REPLACE VIEW building_z14 AS
-    SELECT id AS osm_id, underground, geometry, height, levels, min_height, min_level
+    SELECT id AS osm_id, underground, geometry, height, levels, min_height, min_level, roof_shape,roof_orientation,roof_height,roof_angle,roof_levels,roof_direction,building_colour,roof_colour,building_material,roof_material
     FROM osm_building_polygon;
 
 CREATE OR REPLACE VIEW building_layer AS (

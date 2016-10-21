@@ -310,6 +310,36 @@ tables:
       type: integer
     - name: timestamp
       type: pbf_timestamp
+    - name: roof_shape
+      key: roof:shape
+      type: string
+    - name: roof_orientation
+      key: roof:orientation
+      type: string
+    - name: roof_height
+      key: roof:height
+      type: integer
+    - name: roof_angle
+      key: roof:angle
+      type: integer
+    - name: roof_levels
+      key: roof:levels
+      type: integer
+    - name: roof_direction
+      key: roof:direction
+      type: integer
+    - name: building_colour
+      key: building:colour
+      type: string
+    - name: roof_colour
+      key: roof:colour
+      type: string
+    - name: building_material
+      key: building:material
+      type: string
+    - name: roof_material
+      key: root:material
+      type: string
     mapping:
       building:part:
       - __any__
