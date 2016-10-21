@@ -12,6 +12,16 @@ CREATE OR REPLACE VIEW building_layer AS (
     SELECT osm_id FROM building_z14
 );
 
+CREATE OR REPLACE FUNCTION default_colour(colour VARCHAR) RETURNS VARCHAR
+AS $$
+BEGIN
+    IF colour = '' THEN
+        RETURN 'grey';
+    ELSE
+        RETURN colour;
+    END IF;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
 
 CREATE OR REPLACE FUNCTION default_building_height(levels INTEGER) RETURNS INTEGER
 AS $$
