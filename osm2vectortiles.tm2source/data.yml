@@ -672,6 +672,10 @@ Layer:
             coalesce(NULLIF(name_fr, ''), name) AS name_fr,
             coalesce(NULLIF(name_de, ''), name) AS name_de,
             coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+            coalesce(NULLIF(name_be, ''), name) AS name_be,
+            coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
+            coalesce(NULLIF(name_be, ''), name) AS name_uk,
+            coalesce(NULLIF(name_be, ''), name) AS name_pl,
             coalesce(NULLIF(name_zh, ''), name) AS name_zh,
             type,
             CASE WHEN is_capital THEN 2 ELSE capital END AS capital,
@@ -735,6 +739,10 @@ Layer:
       name_es: Spanish name of the place
       name_fr: French name of the place
       name_ru: Russian name of the place
+      name_be: Belarusian name of the place
+      name_be_tarask: Taraskievica name of the place
+      name_uk: Ukrainian name of the place
+      name_pl: Polish name of the place
       name_zh: Chinese name of the place
       scalerank: Number, 0-9 or null. Useful for styling text & marker sizes.
       type: "One of: city, town, village, hamlet, suburb, neighbourhood, island, islet, archipelago, residential, aboriginal_lands"
@@ -764,6 +772,10 @@ Layer:
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+          coalesce(NULLIF(name_be, ''), name) AS name_be,
+          coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
+          coalesce(NULLIF(name_be, ''), name) AS name_uk,
+          coalesce(NULLIF(name_be, ''), name) AS name_pl,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh
           FROM (
             SELECT * FROM water_label_z10
@@ -794,6 +806,10 @@ Layer:
       name_es: Spanish name of the water body
       name_fr: French name of the water body
       name_ru: Russian name of the water body
+      name_be: Belarusian name of the water body
+      name_be_tarask: Taraskievica name of the water body
+      name_uk: Ukrainian name of the water body
+      name_pl: Polish name of the water body
       name_zh: Chinese name of the water body
     properties: 
       "buffer-size": 64
@@ -819,6 +835,10 @@ Layer:
               coalesce(NULLIF(name_fr, ''), name) AS name_fr,
               coalesce(NULLIF(name_de, ''), name) AS name_de,
               coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+              coalesce(NULLIF(name_be, ''), name) AS name_be,
+              coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
+              coalesce(NULLIF(name_be, ''), name) AS name_uk,
+              coalesce(NULLIF(name_be, ''), name) AS name_pl,
               coalesce(NULLIF(name_zh, ''), name) AS name_zh,
               format_type(type) AS type,
               CASE WHEN name = '' THEN NULL
@@ -843,6 +863,10 @@ Layer:
       name_es: Spanish name of the POI
       name_fr: French name of the POI
       name_ru: Russian name of the POI
+      name_be: Belarusian name of the POI
+      name_be_tarask: Taraskievica name of the POI
+      name_uk: Ukrainian name of the POI
+      name_pl: Polish name of the POI
       name_zh: Chinese name of the POI
       ref: Short reference code, if any
       scalerank: Number. 1-5. Useful for styling icon sizes and minimum zoom levels.
@@ -878,6 +902,10 @@ Layer:
             coalesce(NULLIF(name_fr, ''), name) AS name_fr,
             coalesce(NULLIF(name_de, ''), name) AS name_de,
             coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+            coalesce(NULLIF(name_be, ''), name) AS name_be,
+            coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
+            coalesce(NULLIF(name_be, ''), name) AS name_uk,
+            coalesce(NULLIF(name_be, ''), name) AS name_pl,
             coalesce(NULLIF(name_zh, ''), name) AS name_zh,
             nullif(ref, '') AS ref,
             nullif(char_length(ref), 0) AS reflen,
@@ -924,6 +952,10 @@ Layer:
       name_es: Spanish name of the road
       name_fr: French name of the road
       name_ru: Russian name of the road
+      name_be: Belarusian name of the road
+      name_be_tarask: Taraskievica name of the road
+      name_uk: Ukrainian name of the road
+      name_pl: Polish name of the road
       name_zh: Chinese name of the road
       ref: Route number of the road
       reflen: Number. How many characters long the ref tag is. Useful for shield styling.
@@ -992,6 +1024,10 @@ Layer:
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+          coalesce(NULLIF(name_be, ''), name) AS name_be,
+          coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
+          coalesce(NULLIF(name_be, ''), name) AS name_uk,
+          coalesce(NULLIF(name_be, ''), name) AS name_pl,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           type, type AS class
           FROM (
@@ -1015,6 +1051,10 @@ Layer:
       name_es: Spanish name of the waterway
       name_fr: French name of the waterway
       name_ru: Russian name of the waterway
+      name_be: Belarusian name of the waterway
+      name_be_tarask: Taraskievica name of the waterway
+      name_uk: Ukrainian name of the waterway
+      name_pl: Polish name of the waterway
       name_zh: Chinese name of the waterway
       type: "One of: river, canal, stream"
     properties: 
@@ -1042,6 +1082,10 @@ Layer:
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+          coalesce(NULLIF(name_be, ''), name) AS name_be,
+          coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
+          coalesce(NULLIF(name_be, ''), name) AS name_uk,
+          coalesce(NULLIF(name_be, ''), name) AS name_pl,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           coalesce(NULLIF(iata, ''), NULLIF(ref, ''), NULLIF(icao, ''), faa) AS ref,
           airport_label_class(kind, type) AS maki,
@@ -1061,6 +1105,10 @@ Layer:
       name_es: Spanish name of the airport
       name_fr: French name of the airport
       name_ru: Russian name of the airport
+      name_be: Belarusian name of the airport
+      name_be_tarask: Taraskievica name of the airport
+      name_uk: Ukrainian name of the airport
+      name_pl: Polish name of the airport
       name_zh: Chinese name of the airport
       ref: A 3-4 character IATA, FAA, ICAO, or other reference code
       scalerank: Number 1-4. Useful for styling icon sizes.
@@ -1089,6 +1137,10 @@ Layer:
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+          coalesce(NULLIF(name_be, ''), name) AS name_be,
+          coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
+          coalesce(NULLIF(name_be, ''), name) AS name_uk,
+          coalesce(NULLIF(name_be, ''), name) AS name_pl,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           rail_station_class(type) AS maki,
           rail_station_class(type) AS network
@@ -1112,6 +1164,10 @@ Layer:
       name_es: Spanish name of the rail station
       name_fr: French name of the rail station
       name_ru: Russian name of the rail station
+      name_be: Belarusian name of the rail station
+      name_be_tarask: Taraskievica name of the rail station
+      name_uk: Ukrainian name of the rail station
+      name_pl: Polish name of the rail station
       name_zh: Chinese name of the rail station
       network: The network(s) that the station serves. Useful for icon styling.
     properties: 
@@ -1142,6 +1198,10 @@ Layer:
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
+          coalesce(NULLIF(name_be, ''), name) AS name_be,
+          coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
+          coalesce(NULLIF(name_be, ''), name) AS name_uk,
+          coalesce(NULLIF(name_be, ''), name) AS name_pl,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh
           FROM mountain_peak_label_z12toz14
           WHERE geometry && !bbox!
@@ -1160,6 +1220,10 @@ Layer:
       name_es: Spanish name of the mountain peak
       name_fr: French name of the mountain peak
       name_ru: Russian name of the mountain peak
+      name_be: Belarusian name of the mountain peak
+      name_be_tarask: Taraskievica name of the mountain peak
+      name_uk: Ukrainian name of the mountain peak
+      name_pl: Polish name of the mountain peak
       name_zh: Chinese name of the mountain peak
     properties: 
       "buffer-size": 64
