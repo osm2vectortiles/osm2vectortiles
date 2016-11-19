@@ -674,8 +674,8 @@ Layer:
             coalesce(NULLIF(name_ru, ''), name) AS name_ru,
             coalesce(NULLIF(name_be, ''), name) AS name_be,
             coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
-            coalesce(NULLIF(name_be, ''), name) AS name_uk,
-            coalesce(NULLIF(name_be, ''), name) AS name_pl,
+            coalesce(NULLIF(name_uk, ''), name) AS name_uk,
+            coalesce(NULLIF(name_pl, ''), name) AS name_pl,
             coalesce(NULLIF(name_zh, ''), name) AS name_zh,
             type,
             CASE WHEN is_capital THEN 2 ELSE capital END AS capital,
@@ -774,8 +774,8 @@ Layer:
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_be, ''), name) AS name_be,
           coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
-          coalesce(NULLIF(name_be, ''), name) AS name_uk,
-          coalesce(NULLIF(name_be, ''), name) AS name_pl,
+          coalesce(NULLIF(name_uk, ''), name) AS name_uk,
+          coalesce(NULLIF(name_pl, ''), name) AS name_pl,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh
           FROM (
             SELECT * FROM water_label_z10
@@ -837,8 +837,8 @@ Layer:
               coalesce(NULLIF(name_ru, ''), name) AS name_ru,
               coalesce(NULLIF(name_be, ''), name) AS name_be,
               coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
-              coalesce(NULLIF(name_be, ''), name) AS name_uk,
-              coalesce(NULLIF(name_be, ''), name) AS name_pl,
+              coalesce(NULLIF(name_uk, ''), name) AS name_uk,
+              coalesce(NULLIF(name_pl, ''), name) AS name_pl,
               coalesce(NULLIF(name_zh, ''), name) AS name_zh,
               format_type(type) AS type,
               CASE WHEN name = '' THEN NULL
@@ -904,8 +904,8 @@ Layer:
             coalesce(NULLIF(name_ru, ''), name) AS name_ru,
             coalesce(NULLIF(name_be, ''), name) AS name_be,
             coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
-            coalesce(NULLIF(name_be, ''), name) AS name_uk,
-            coalesce(NULLIF(name_be, ''), name) AS name_pl,
+            coalesce(NULLIF(name_uk, ''), name) AS name_uk,
+            coalesce(NULLIF(name_pl, ''), name) AS name_pl,
             coalesce(NULLIF(name_zh, ''), name) AS name_zh,
             nullif(ref, '') AS ref,
             nullif(char_length(ref), 0) AS reflen,
@@ -1026,8 +1026,8 @@ Layer:
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_be, ''), name) AS name_be,
           coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
-          coalesce(NULLIF(name_be, ''), name) AS name_uk,
-          coalesce(NULLIF(name_be, ''), name) AS name_pl,
+          coalesce(NULLIF(name_uk, ''), name) AS name_uk,
+          coalesce(NULLIF(name_pl, ''), name) AS name_pl,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           type, type AS class
           FROM (
@@ -1084,8 +1084,8 @@ Layer:
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_be, ''), name) AS name_be,
           coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
-          coalesce(NULLIF(name_be, ''), name) AS name_uk,
-          coalesce(NULLIF(name_be, ''), name) AS name_pl,
+          coalesce(NULLIF(name_uk, ''), name) AS name_uk,
+          coalesce(NULLIF(name_pl, ''), name) AS name_pl,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           coalesce(NULLIF(iata, ''), NULLIF(ref, ''), NULLIF(icao, ''), faa) AS ref,
           airport_label_class(kind, type) AS maki,
@@ -1139,8 +1139,8 @@ Layer:
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_be, ''), name) AS name_be,
           coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
-          coalesce(NULLIF(name_be, ''), name) AS name_uk,
-          coalesce(NULLIF(name_be, ''), name) AS name_pl,
+          coalesce(NULLIF(name_uk, ''), name) AS name_uk,
+          coalesce(NULLIF(name_pl, ''), name) AS name_pl,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           rail_station_class(type) AS maki,
           rail_station_class(type) AS network
@@ -1200,8 +1200,8 @@ Layer:
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
           coalesce(NULLIF(name_be, ''), name) AS name_be,
           coalesce(NULLIF(name_be_tarask, ''), NULLIF(name_be, ''), name) AS name_be_tarask,
-          coalesce(NULLIF(name_be, ''), name) AS name_uk,
-          coalesce(NULLIF(name_be, ''), name) AS name_pl,
+          coalesce(NULLIF(name_uk, ''), name) AS name_uk,
+          coalesce(NULLIF(name_pl, ''), name) AS name_pl,
           coalesce(NULLIF(name_zh, ''), name) AS name_zh
           FROM mountain_peak_label_z12toz14
           WHERE geometry && !bbox!
