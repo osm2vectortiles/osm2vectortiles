@@ -3,7 +3,7 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-git clone https://github.com/stirringhalo/openstreetmap-carto-vector-tiles.git
+git clone -b custom_roads_layer https://github.com/stirringhalo/openstreetmap-carto-vector-tiles.git
 
 rm -f /data/tm2source/data.yml
 

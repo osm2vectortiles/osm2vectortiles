@@ -19,7 +19,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
 && rm /etc/apt/sources.list.d/nodejs.list \
 && apt-get clean
 
-RUN git clone https://github.com/stirringhalo/openstreetmap-carto-vector-tiles.git
+RUN git clone -b custom_roads_layer https://github.com/stirringhalo/openstreetmap-carto-vector-tiles.git
 
 VOLUME /data/import /data/cache
 ENV IMPORT_DATA_DIR=/data/import
