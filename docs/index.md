@@ -46,17 +46,6 @@ We recommend watching this video to get a broad overview what can be done with O
 
 <iframe style="width: 728px; height: 410px; margin: 0 auto; display: block;" src="https://www.youtube.com/embed/Wh--DHRULkE" frameborder="0" allowfullscreen></iframe>
 
-## Vector Tile Video Series
-
-[Tobin Bradley](http://fuzzytolerance.info/) created an awesome video tutorial series
-that will educate you more in-depth about web maps, vector tiles and using OSM2VectorTiles.
-
-<iframe width="430" height="242" src="https://www.youtube.com/embed/xI7QkEodCac" frameborder="0" style="display: inline;" allowfullscreen></iframe>
-
-<iframe width="430" height="242" src="https://www.youtube.com/embed/GPArNrRL79Q" frameborder="0" style="display: inline;" allowfullscreen></iframe>
-
-<iframe width="430" height="242" src="https://www.youtube.com/embed/6nLZVdbmSYw" frameborder="0" style="display: inline;" allowfullscreen></iframe>
-
 ## Academic Material
 
 OSM2VectorTiles arose from a bachelor project. The original thesis
@@ -88,3 +77,14 @@ The presentation of [TileServer GL - hosting vector tile maps on your own server
 a demo how to serve your own vector tiles and create your own style.
 
 <iframe style="width: 728px; height: 410px; margin: 0 auto; display: block;" src="https://www.youtube.com/embed/lG7atynI8Pk" frameborder="0" allowfullscreen></iframe>
+
+## Vector Tile Video Series
+
+[Tobin Bradley](http://fuzzytolerance.info/) created an awesome video tutorial series
+that will educate you more in-depth about web maps, vector tiles and using OSM2VectorTiles.
+
+<iframe width="430" height="242" src="https://www.youtube.com/embed/xI7QkEodCac" frameborder="0" style="display: inline;" allowfullscreen></iframe>
+
+<iframe width="430" height="242" src="https://www.youtube.com/embed/GPArNrRL79Q" frameborder="0" style="display: inline;" allowfullscreen></iframe>
+
+<iframe width="430" height="242" src="https://www.youtube.com/embed/6nLZVdbmSYw" frameborder="0" style="display: inline;" allowfullscreen></iframe>
