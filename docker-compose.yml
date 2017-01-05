@@ -17,7 +17,8 @@ postgis:
   ports:
    - "5432"
 import-osm:
-  image: "osm2vectortiles/import-osm"
+#  image: "osm2vectortiles/import-osm"
+  build: src/import-osm
   command: ./import-pbf.sh
   volumes:
    - ./import:/data/import
@@ -130,7 +131,8 @@ export-list:
   links:
    - postgis:db
 import-sql:
-  image: "osm2vectortiles/import-sql"
+  # image: "osm2vectortiles/import-sql"
+  build: src/import-sql
   links:
    - postgis:db
   environment:
