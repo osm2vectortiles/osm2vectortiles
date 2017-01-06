@@ -6,15 +6,17 @@ published: true
 
 # FAQ
 
-## Can I use the OSM Vector Tiles for commercial purposes?
+## Can I use the OSM2VectorTiles for commercial purposes?
 
-The project to create the vectortiles is under the [MIT license](https://tldrlegal.com/license/mit-license) and you are therefore free to take the workflow as you want and create your own vector tiles and use them commercially.
+We advise against using the OSM2VectorTiles MBTiles for commercial purpose due to copyright infringement claims. You should switch over to [openmaptiles.org](http://openmaptiles.org) for production setups.
+
+You can however still use the code for commercial purposes. The project to create the vectortiles is under the [MIT license](https://tldrlegal.com/license/mit-license) and you are therefore free to take the workflow as you want and create your own vector tiles and use them commercially.
 The rendered vector tiles provided as download are under the [Open Database License](https://tldrlegal.com/license/odc-open-database-license-(odbl)) the same license [OpenStreetMap is using](https://www.openstreetmap.org/copyright).
 Because the data is derived from OpenStreetMap [you are required to credit OpenStreetMap](http://www.openstreetmap.org/copyright) and add the attribution "© OpenStreetMap contributors" to your maps. Apart from that OSM2VectorTiles **not** require any attribution for the rendered vector tiles.
 
 ## Will the Extracts and Planet download be updated with new OSM data?
 
-We provide weekly updates of the open vector tile data with the newest sources of the OpenStreetMap planet dump.
+We no longer provide updates for the vector tiles. You are able to purchase an update service from the [openmaptiles.org](http://openmaptiles.org) successor project.
 
 ## Where should I report bugs in the map?
 
@@ -24,25 +26,15 @@ Please report any bugs you experience on the [GitHub issue tracker](https://gith
 
 The purpose of this project is to make OSM data more accessible to anybody. Any feedback or improvement is greatly appreciated. So feel free to submit a pull request or file a bug or suggestion on [GitHub](https://github.com/osm2vectortiles/).
 
-## Can I use my custom Base Map in other GIS tools like QGIS or ArcGIS?
-
-The [recommended raster tile server](/docs/start/) supports other GIS clients and also supports WMTS. You can therefore use the rendered raster tiles from our vector tiles in QGIS, ArcGIS, uDig and also different web mapping libraries like Google Maps, Leaflet, OpenLayers, MapBox JS and ArcGIS JavaScript API.
-
-Support for styling vector tiles in the Mapbox Vector Tile Specification is built into Mapbox Studio and Mapbox Studio Classic.
-Esri plans [to support vector tiles in ArcGIS](http://blogs.esri.com/esri/arcgis/2015/07/20/vector-tiles-preview/) and the Geometa Lab is working on a QGIS plugin for loading vector tiles directly. Map libraries like Mapbox GL JS and OpenLayers also support
-direct rendering of vector tiles on the client side.
-
-Our OSM2VectorTiles tiles can also be used in native applications on Android and iOS using the native Mapbox GL components.
-
 ## What is the future Roadmap of this Project?
 
-Geometa Lab and Klokan Technologies are willing to support this project in the future and provide it with regular updates. The roadmap is public and we welcome you to contribute on the [GitHub issue tracker](https://github.com/osm2vectortiles/osm2vectortiles/issues).
+OSM2VectorTiles will no longer be maintained in the future. However Klokan Technologies is willing to support the successor project [openmaptiles.org](http://openmaptiles.org) in the future and provide it with regular updates.
 
 ## What are the restrictions on using the CDN?
 
 A [public and fast vector tile server](http://osm2vectortiles.tileserver.com/v1.json) is available for everyone for testing, evaluation, development and non-commercial use.
 
-If you work on a real application we ask you kindly to [create a free access key](http://maps.klokantech.com/) and use the vector tiles together with the access keys so we can guarantee the performance of the service.
+Production setup should switch over to the successor project [openmaptiles.org](http://openmaptiles.org) which provides an updated CDN of the new vector tiles.
 
 For extensive use it is recommended to install your own tileserver or use a paid tile service.
 
@@ -54,7 +46,7 @@ These projects provide public vector tile servers as well, but do not provide th
 
 ## Who is behind this project?
 
-The OSM2VectorTiles project is the ongoing result of the bachelor thesis of Manuel Roth and Lukas Martinelli
+The OSM2VectorTiles project is the finished result of the bachelor thesis of Manuel Roth and Lukas Martinelli
 from the [University of Applied Sciences Rapperswil, Switzerland](http://hsr.ch/geometalab)
 supported and made possible by [Klokan Technologies GmbH](http://www.klokantech.com/).
 We are map enthusiasts who want to make OpenStreetMap accessible for everyone again.
