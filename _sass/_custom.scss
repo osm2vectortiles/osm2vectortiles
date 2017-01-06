@@ -385,3 +385,37 @@ body{
   border-bottom: 0 !important;
   border-radius: 0 !important;
 }
+
+.download-redirect {
+    margin: 0 auto;
+    margin-top: 60px;
+    max-width: 580px;
+    display: block;
+    background-color: #3f9a6c;
+    padding: 10px;
+    border-radius: 4px;
+    img {
+      margin-left: 10px;
+      vertical-align: middle;
+      display: inline;
+      max-width: 80px;
+      @media(max-width: 841px){
+        display: none;
+      }
+    }
+    h2 {
+      margin-left: 10px;
+      vertical-align: middle;
+      display: inline;
+      color: white;
+      @media(max-width: 841px){
+        margin-left: 0px;
+        font-size: 16px;
+      }
+    }
+
+    &:hover {
+      background-color: lighten(#3f9a6c, 7%);
+      text-decoration: none;
+    }
+}
