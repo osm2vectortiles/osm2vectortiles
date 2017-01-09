@@ -264,13 +264,13 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry, height, min_height, building_is_underground(underground) AS underground
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry, infer_building_height(height, building_levels) as height, min_height, building_is_underground(underground) AS underground
           FROM (
-            SELECT osm_id, geometry, underground, height
+            SELECT osm_id, geometry, underground, height, min_height, building_levels
             FROM building_z13
             WHERE z(!scale_denominator!) = 13
             UNION ALL
-            SELECT osm_id, geometry, underground, height
+            SELECT osm_id, geometry, underground, height, min_height, building_levels
             FROM building_z14
             WHERE z(!scale_denominator!) = 14
           ) AS building

@@ -302,6 +302,9 @@ tables:
     - name: min_height
       key: min_height
       type: integer
+    - name: building_levels
+      key: building:levels
+      type: integer
     - name: timestamp
       type: pbf_timestamp
     mapping:
