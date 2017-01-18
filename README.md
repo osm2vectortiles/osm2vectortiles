@@ -1,4 +1,6 @@
-# OSM2VectorTiles [![Build Status](https://travis-ci.org/osm2vectortiles/osm2vectortiles.svg?branch=master)](https://travis-ci.org/osm2vectortiles/osm2vectortiles) [![MIT and ODbL licensed](https://img.shields.io/badge/license-MIT/ODbL-blue.svg)](https://github.com/osm2vectortiles/osm2vectortiles#license)
+# OSM2VectorTiles [![Build Status](https://travis-ci.org/osm2vectortiles/osm2vectortiles.svg?branch=master)](https://travis-ci.org/osm2vectortiles/osm2vectortiles)
+
+:warning: *OSM2VectorTiles is no longer maintained. Please switch to the successor project* **https://openmaptiles.org**.
 
 OSM2VectorTiles makes is possible to create vector tiles from OpenStreetMap data. For a detailed documentation, please visit our [project website](http://osm2vectortiles.org/docs/).
 
@@ -30,6 +32,8 @@ will get you started.
 You should also check out our associated bachelor thesis **[Updatable Vector Tiles from OpenStreetMap](https://cdn.rawgit.com/osm2vectortiles/bachelor-thesis/882a46977f7b984fc59be188335127d62921c44c/thesis.pdf)** if you like a more scientific approach to the project.
 
 ## Downloads
+
+:warning: *The original vector tile downloads are no longer active and should not be used in production due to copyright infringement claims. Please download the new vector tiles from* **https://openmaptiles.org/downloads**.
 
 Download the entire world, city or country extracts from http://osm2vectortiles.org/downloads.
 
