@@ -5,7 +5,7 @@ python:
 services:
   - docker
 before_install:
-  - wget -nc -P "$TRAVIS_BUILD_DIR/import" "http://download.geofabrik.de/europe/albania-160901.osm.pbf"
+  - wget -nc -P "$TRAVIS_BUILD_DIR/import" "http://download.geofabrik.de/europe/albania-170101.osm.pbf"
   - wget -nc -O "$TRAVIS_BUILD_DIR/export/planet.mbtiles" "https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v2.0/planet_2016-06-20_7088ce06a738dcb3104c769adc11ac2c_z0-z5.mbtiles"
   - docker-compose pull import-external export import-osm postgis rabbitmq merge-jobs
   # Avoid building really expensive images
