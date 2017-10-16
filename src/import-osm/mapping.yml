@@ -1,14 +1,14 @@
 # -------------------------------------------------------------------------------------------
 #
 # imposm3 mapping file for the osm2vectortiles project
-# 
-# Be careful!  
+#
+# Be careful!
 # This mapping file is only working with the https://github.com/osm2vectortiles/imposm3
 # see the actual build command ->  ./src/import-osm/Dockerfile
 #
-# We have some extended syntax compare to the official https://imposm.org 
-#  - `pbf_timestamp` field mapping   
-#  - extended `exclude_tags` filters 
+# We have some extended syntax compare to the official https://imposm.org
+#  - `pbf_timestamp` field mapping
+#  - extended `exclude_tags` filters
 #
 # -------------------------------------------------------------------------------------------
 
@@ -295,6 +295,18 @@ tables:
       type: geometry
     - name: underground
       key: building:levels:underground
+      type: integer
+    - name: height
+      key: height
+      type: integer
+    - name: min_height
+      key: min_height
+      type: integer
+    - name: levels
+      key: building:levels
+      type: integer
+    - name: min_level
+      key: building:min_level
       type: integer
     - name: timestamp
       type: pbf_timestamp

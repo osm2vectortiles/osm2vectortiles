@@ -1,23 +1,23 @@
-_prefs: 
+_prefs:
   disabled: []
   inspector: false
   mapid: ''
   rev: ''
   saveCenter: true
 attribution: "<a href=\"http://www.openstreetmap.org/about/\" target=\"_blank\">&copy; OpenStreetMap contributors</a>"
-center: 
+center:
   - 8.5391
   - 47.3439
   - 10
 description: |-
   Free global vector tiles from OpenStreetMap compatible with Mapbox Streets v7.
-  
-  
-  
+
+
+
   http://osm2vectortiles.org
-Layer: 
+Layer:
   - id: landuse
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
@@ -73,14 +73,14 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       class: "One of: agriculture, cemetery, glacier, grass, hospital, industrial, park, parking, piste, pitch, rock, sand, school, scrub, wood, aboriginal lands"
       type: OSM tag, more specific than class
-    properties: 
+    properties:
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: waterway
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
@@ -117,14 +117,14 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       class: "One of: river, canal, stream, stream_intermittent, ditch, drain"
       type: "One of: river, canal, stream, ditch, drain"
-    properties: 
+    properties:
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: water
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
@@ -183,11 +183,11 @@ Layer:
       user: osm
     description: ''
     fields: {}
-    properties: 
+    properties:
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: aeroway
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
@@ -216,13 +216,13 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       type: "One of: runway, taxiway, apron"
-    properties: 
+    properties:
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: barrier_line
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
@@ -244,13 +244,13 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       class: "One of: fence, hedge, cliff, gate"
-    properties: 
+    properties:
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: building
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
@@ -264,13 +264,13 @@ Layer:
       srid: ''
       table: |-
         (
-          SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry, building_is_underground(underground) AS underground
+          SELECT osm_ids2mbid(osm_id, true) AS osm_id, geometry, infer_height(height, levels) as height, infer_min_height(min_height, min_level) as min_height, building_is_underground(underground) AS underground
           FROM (
-            SELECT osm_id, geometry, underground
+            SELECT osm_id, geometry, underground, height, min_height, levels, min_level
             FROM building_z13
             WHERE z(!scale_denominator!) = 13
             UNION ALL
-            SELECT osm_id, geometry, underground
+            SELECT osm_id, geometry, underground, height, min_height, levels, min_level
             FROM building_z14
             WHERE z(!scale_denominator!) = 14
           ) AS building
@@ -280,13 +280,15 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       underground: "Text. Whether building is underground. One of: 'true', 'false'"
-    properties: 
+      height: "Integer. Height of building from its base."
+      min_height: "Integer. Height of building's base."
+    properties:
       "buffer-size": 2
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: landuse_overlay
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
@@ -337,14 +339,14 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       class: "One of: national_park, wetland, wetland_noveg"
       type: OSM tag, more specific than class
-    properties: 
+    properties:
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: road
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
@@ -401,16 +403,16 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       class: "One of: 'motorway', 'motorway_link', 'trunk', 'primary', 'secondary', 'tertiary', 'link', 'street', 'street_limited', 'pedestrian', 'construction', 'track', 'service', 'ferry', 'path', 'golf'"
       oneway: "Text. Whether traffic on the road is one-way. One of: 'true', 'false'"
       structure: "Text. One of: 'none', 'bridge', 'tunnel', 'ford'. Available from zoom level 13+."
       type: In most cases, values will be that of the primary key from OpenStreetMap tags.
-    properties: 
+    properties:
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: admin
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
@@ -455,15 +457,15 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       admin_level: The OSM administrative level of the boundary
       disputed: Number. Disputed boundaries are 1, all others are 0.
       maritime: Number. Maritime boundaries are 1, all others are 0.
-    properties: 
+    properties:
       "buffer-size": 4
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: country_label
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: wkb_geometry
@@ -523,7 +525,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       code: ISO 3166-1 Alpha-2 code
       name: Local name of the country
       name_de: German name of the country
@@ -533,11 +535,11 @@ Layer:
       name_ru: Russian name of the country
       name_zh: Chinese name of the country
       scalerank: Number, 1-6. Useful for styling text sizes.
-    properties: 
+    properties:
       "buffer-size": 256
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: marine_label
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
@@ -558,7 +560,7 @@ Layer:
           coalesce(NULLIF(name_fr, ''), name) AS name_fr,
           coalesce(NULLIF(name_de, ''), name) AS name_de,
           coalesce(NULLIF(name_ru, ''), name) AS name_ru,
-          coalesce(NULLIF(name_zh, ''), name) AS name_zh, 
+          coalesce(NULLIF(name_zh, ''), name) AS name_zh,
           case when ST_GeometryType(wkb_geometry) = 'ST_LineString' then 'line'
                else 'point' end AS placement,
           rank AS labelrank
@@ -587,7 +589,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       labelrank: Number, 1-6. Useful for styling text sizes.
       name: Local name of the sea
       name_de: German name of the sea
@@ -597,11 +599,11 @@ Layer:
       name_ru: Russian name of the sea
       name_zh: Chinese name of the sea
       placement: "One of: point, line"
-    properties: 
+    properties:
       "buffer-size": 256
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: state_label
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
@@ -637,7 +639,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       abbr: Abbreviated state name
       area: The area of the state in kilometers²
       name: Local name of the state
@@ -647,11 +649,11 @@ Layer:
       name_fr: French name of the state
       name_ru: Russian name of the state
       name_zh: Chinese name of the state
-    properties: 
+    properties:
       "buffer-size": 256
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: place_label
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
@@ -725,7 +727,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       capital: "Admin level the city is a capital of, if any. One of: 2, 3, 4, 5, 6, null"
       ldir: "A hint for label placement at low zoom levels. One of: N, E, S, W, NE, SE, SW, NW, null"
       localrank: Number. Priority relative to nearby places. Useful for limiting label density.
@@ -738,11 +740,11 @@ Layer:
       name_zh: Chinese name of the place
       scalerank: Number, 0-9 or null. Useful for styling text & marker sizes.
       type: "One of: city, town, village, hamlet, suburb, neighbourhood, island, islet, archipelago, residential, aboriginal_lands"
-    properties: 
+    properties:
       "buffer-size": 128
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: water_label
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
@@ -786,7 +788,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       area: The area of the water polygon in Mercator meters²
       name: Local name of the water body
       name_de: German name of the water body
@@ -795,11 +797,11 @@ Layer:
       name_fr: French name of the water body
       name_ru: Russian name of the water body
       name_zh: Chinese name of the water body
-    properties: 
+    properties:
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: poi_label
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
@@ -834,7 +836,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       localrank: Number. Priority relative to nearby POIs. Useful for limiting label density.
       maki: The name of the Maki icon that should be used for the POI
       name: Local name of the POI
@@ -847,11 +849,11 @@ Layer:
       ref: Short reference code, if any
       scalerank: Number. 1-5. Useful for styling icon sizes and minimum zoom levels.
       type: The original OSM tag value
-    properties: 
+    properties:
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: road_label
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
@@ -887,7 +889,7 @@ Layer:
             rank() OVER (
                 PARTITION BY LabelGrid(geometry, (CASE WHEN z(!scale_denominator!) >= 11
                                                        THEN 300
-                                                       ELSE 200 
+                                                       ELSE 200
                                                    END) * !pixel_width!)
                 ORDER BY road_localrank(type) ASC, round(MercLength(geometry)) DESC
             ) AS localrank
@@ -914,7 +916,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       class: "One of: motorway, motorway_link, 'trunk', 'primary', 'secondary', 'tertiary', 'link', 'street', 'street_limited', 'pedestrian', 'construction', 'track', 'service', 'ferry', 'path', 'golf'"
       len: Number. Approximate length of the road segment in Mercator meters.
       localrank: Number. Used for shield points only. Priority relative to nearby shields. Useful for limiting shield density.
@@ -928,11 +930,11 @@ Layer:
       ref: Route number of the road
       reflen: Number. How many characters long the ref tag is. Useful for shield styling.
       shield: "The shield style to use. One of: default, mx-federal, mx-state, us-highway, us-highway-alternate, us-highway-business, us-highway-duplex, us-interstate, us-interstate-business, us-interstate-duplex, us-interstate-truck, us-state"
-    properties: 
+    properties:
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: motorway_junction
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
@@ -962,17 +964,17 @@ Layer:
       type: postgis
       user: osm
     description: This layer contains point geometries for labeling motorway junctions (aka highway exits). Classes and types match the types in the road layer.
-    fields: 
+    fields:
       class: The class of road the junction is on. Matches the classes in the road layer.
       name: A longer name
       ref: A short identifier
       reflen: Number
       type: The type of road the junction is on. Matches the types in the road layer.
-    properties: 
+    properties:
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: waterway_label
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
@@ -1007,7 +1009,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       class: "One of: river, canal, stream, stream_intermittent"
       name: Local name of the waterway
       name_de: German name of the waterway
@@ -1017,11 +1019,11 @@ Layer:
       name_ru: Russian name of the waterway
       name_zh: Chinese name of the waterway
       type: "One of: river, canal, stream"
-    properties: 
+    properties:
       "buffer-size": 8
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: airport_label
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
@@ -1053,7 +1055,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       maki: "One of: airport, airfield, heliport, rocket"
       name: Local name of the airport
       name_de: German name of the airport
@@ -1064,11 +1066,11 @@ Layer:
       name_zh: Chinese name of the airport
       ref: A 3-4 character IATA, FAA, ICAO, or other reference code
       scalerank: Number 1-4. Useful for styling icon sizes.
-    properties: 
+    properties:
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: rail_station_label
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: geometry
@@ -1104,7 +1106,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       maki: "One of: rail, rail-metro, rail-light, entrance"
       name: Local name of the rail station
       name_de: German name of the rail station
@@ -1114,11 +1116,11 @@ Layer:
       name_ru: Russian name of the rail station
       name_zh: Chinese name of the rail station
       network: The network(s) that the station serves. Useful for icon styling.
-    properties: 
+    properties:
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: mountain_peak_label
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
@@ -1150,7 +1152,7 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       elevation_ft: Integer elevation in feet
       elevation_m: Integer elevation in meters
       maki: "One of: 'mountain', 'volcano'"
@@ -1161,11 +1163,11 @@ Layer:
       name_fr: French name of the mountain peak
       name_ru: Russian name of the mountain peak
       name_zh: Chinese name of the mountain peak
-    properties: 
+    properties:
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
   - id: housenum_label
-    Datasource: 
+    Datasource:
       dbname: osm
       extent: -20037508.34,-20037508.34,20037508.34,20037508.34
       geometry_field: ''
@@ -1187,9 +1189,9 @@ Layer:
       type: postgis
       user: osm
     description: ''
-    fields: 
+    fields:
       house_num: House number
-    properties: 
+    properties:
       "buffer-size": 64
     srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
 maxzoom: 14
