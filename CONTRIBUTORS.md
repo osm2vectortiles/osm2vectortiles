@@ -33,6 +33,9 @@ OSM2VectorTiles Contributors (sorted historically)
   - Integrate polygon splitting
   - Research reasons for non performant planet regions
 
+- **[Roman Shuvalov](https://github.com/romanshuvalov)**
+  - Contour lines
+
 ## Organizations
 
 - **[Klokan Technologies](https://www.klokantech.com/)**

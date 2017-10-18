@@ -31,6 +31,10 @@ tables:
     buffer: 2
     min_zoom: 13
     max_zoom: 14
+  contour_linestring:
+    buffer: 128
+    min_zoom: 8
+    max_zoom: 14
   housenumber_point:
     buffer: 64
     min_zoom: 14

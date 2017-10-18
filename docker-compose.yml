@@ -68,6 +68,12 @@ import-water:
   command: ./import-water.sh
   links:
   - postgis:db
+import-contour:
+  image: "osm2vectortiles/import-contour"
+  volumes:
+   - ./import:/data/import
+  links:
+  - postgis:db
 changed-tiles:
   image: "osm2vectortiles/changed-tiles"
   volumes:

@@ -1,6 +1,6 @@
 .PHONY: all
 
-all: postgis export-mbtiles import-osm import-external import-sql create-extracts changed-tiles generate-jobs merge-jobs compare-visual mapping-qa-report
+all: postgis export-mbtiles import-osm import-external import-contour import-sql create-extracts changed-tiles generate-jobs merge-jobs compare-visual mapping-qa-report
 
 fast: export-mbtiles import-osm import-sql create-extracts changed-tiles generate-jobs merge-jobs
 
@@ -15,6 +15,9 @@ import-osm:
 
 import-external:
 	docker build -t osm2vectortiles/import-external src/import-external
+
+import-contour:
+	docker build -t osm2vectortiles/import-contour src/import-contour
 
 import-sql:
 	docker build -t osm2vectortiles/import-sql src/import-sql
