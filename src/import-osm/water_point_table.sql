@@ -4,7 +4,7 @@ SELECT id,
        topoint(geometry) AS geometry,
        timestamp,
        name, name_fr, name_en, name_de,
-       name_es, name_ru, name_zh,
+       name_es, name_ru, name_be, name_be_tarask, name_uk, name_pl, name_zh,
        area
 FROM osm_water_polygon;
 

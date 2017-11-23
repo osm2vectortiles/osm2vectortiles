@@ -1,5 +1,5 @@
 CREATE OR REPLACE VIEW place_label_z3 AS (
-    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_be, name_be_tarask, name_uk, name_pl, name_zh, 
            type, population, is_capital, capital, admin_level, scalerank, geometry 
     FROM osm_place_point
     WHERE name <> ''
@@ -9,7 +9,7 @@ CREATE OR REPLACE VIEW place_label_z3 AS (
 );
 
 CREATE OR REPLACE VIEW place_label_z4 AS (
-    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_be, name_be_tarask, name_uk, name_pl, name_zh, 
            type, population, is_capital, capital, admin_level, scalerank, geometry 
     FROM osm_place_point
     WHERE name <> ''
@@ -19,7 +19,7 @@ CREATE OR REPLACE VIEW place_label_z4 AS (
 );
 
 CREATE OR REPLACE VIEW place_label_z5 AS (
-    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_be, name_be_tarask, name_uk, name_pl, name_zh, 
            type, population, is_capital, capital, admin_level, scalerank, geometry  
     FROM osm_place_point
     WHERE name <> ''
@@ -29,7 +29,7 @@ CREATE OR REPLACE VIEW place_label_z5 AS (
 );
 
 CREATE OR REPLACE VIEW place_label_z6toz7 AS (
-    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_be, name_be_tarask, name_uk, name_pl, name_zh, 
            type, population, is_capital, capital, admin_level, scalerank, geometry  
     FROM osm_place_point
     WHERE name <> ''
@@ -37,7 +37,7 @@ CREATE OR REPLACE VIEW place_label_z6toz7 AS (
 );
 
 CREATE OR REPLACE VIEW place_label_z8 AS (
-    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_be, name_be_tarask, name_uk, name_pl, name_zh, 
            type, population, is_capital, capital, admin_level, scalerank, geometry
     FROM osm_place_point
     WHERE name <> ''
@@ -45,7 +45,7 @@ CREATE OR REPLACE VIEW place_label_z8 AS (
 );
 
 CREATE OR REPLACE VIEW place_label_z9 AS (
-    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_be, name_be_tarask, name_uk, name_pl, name_zh, 
            type, population, is_capital, capital, admin_level, scalerank, geometry
     FROM osm_place_point
     WHERE name <> ''
@@ -53,7 +53,7 @@ CREATE OR REPLACE VIEW place_label_z9 AS (
 );
 
 CREATE OR REPLACE VIEW place_label_z10 AS (
-    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_be, name_be_tarask, name_uk, name_pl, name_zh, 
            type, population, is_capital, capital, admin_level, scalerank, geometry
     FROM osm_place_point
     WHERE name <> ''
@@ -61,7 +61,7 @@ CREATE OR REPLACE VIEW place_label_z10 AS (
 );
 
 CREATE OR REPLACE VIEW place_label_z11toz12 AS (
-    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_be, name_be_tarask, name_uk, name_pl, name_zh, 
            type, population, is_capital, capital, admin_level, scalerank, geometry
     FROM osm_place_point
     WHERE name <> ''
@@ -69,7 +69,7 @@ CREATE OR REPLACE VIEW place_label_z11toz12 AS (
 );
 
 CREATE OR REPLACE VIEW place_label_z13 AS (
-    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_be, name_be_tarask, name_uk, name_pl, name_zh, 
            type, population, is_capital, capital, admin_level, scalerank, geometry
     FROM osm_place_point
     WHERE name <> ''
@@ -77,7 +77,7 @@ CREATE OR REPLACE VIEW place_label_z13 AS (
 );
 
 CREATE OR REPLACE VIEW place_label_z14 AS (
-    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_zh, 
+    SELECT id AS osm_id, name, name_fr, name_en, name_de, name_es, name_ru, name_be, name_be_tarask, name_uk, name_pl, name_zh, 
            type, population, is_capital, capital, admin_level, scalerank, geometry
     FROM osm_place_point
     WHERE name <> ''

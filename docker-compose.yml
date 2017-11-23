@@ -43,7 +43,7 @@ update-osm-diff:
   volumes:
    - ./import:/data/import
   environment:
-     OSM_UPDATE_BASEURL: "http://download.geofabrik.de/europe/liechtenstein-updates/"
+     OSM_UPDATE_BASEURL: "http://download.geofabrik.de/europe/belarus-updates/"
 merge-osm-diff:
   image: "osm2vectortiles/import-osm"
   command: ./import-mergediffs.sh
@@ -117,8 +117,8 @@ export:
   links:
    - postgis:db
   environment:
-    # Around zurich
-    BBOX: "-22.5,79.6871841545,-21.09375,79.9359182463"
+    # Belarus
+    BBOX: "23.13,51.22,32.82,56.21"
     MIN_ZOOM: "0"
     MAX_ZOOM: "14"
 export-list:

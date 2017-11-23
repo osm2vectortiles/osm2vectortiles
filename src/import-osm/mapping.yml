@@ -123,6 +123,18 @@ tables:
     - name: name_ru
       key: name:ru
       type: string
+    - name: name_be
+      key: name:be
+      type: string
+    - name: name_be_tarask
+      key: name:be-tarask
+      type: string
+    - name: name_uk
+      key: name:uk
+      type: string
+    - name: name_pl
+      key: name:pl
+      type: string
     - name: name_zh
       key: name:zh
       type: string
@@ -176,6 +188,18 @@ tables:
       type: string
     - name: name_ru
       key: name:ru
+      type: string
+    - name: name_be
+      key: name:be
+      type: string
+    - name: name_be_tarask
+      key: name:be-tarask
+      type: string
+    - name: name_uk
+      key: name:uk
+      type: string
+    - name: name_pl
+      key: name:pl
       type: string
     - name: name_zh
       key: name:zh
@@ -445,6 +469,18 @@ tables:
     - name: name_ru
       key: name:ru
       type: string
+    - name: name_be
+      key: name:be
+      type: string
+    - name: name_be_tarask
+      key: name:be-tarask
+      type: string
+    - name: name_uk
+      key: name:uk
+      type: string
+    - name: name_pl
+      key: name:pl
+      type: string
     - name: name_zh
       key: name:zh
       type: string
@@ -570,6 +606,18 @@ tables:
       type: string
     - name: name_ru
       key: name:ru
+      type: string
+    - name: name_be
+      key: name:be
+      type: string
+    - name: name_be_tarask
+      key: name:be-tarask
+      type: string
+    - name: name_uk
+      key: name:uk
+      type: string
+    - name: name_pl
+      key: name:pl
       type: string
     - name: name_zh
       key: name:zh
@@ -703,6 +751,18 @@ tables:
     - name: name_ru
       key: name:ru
       type: string
+    - name: name_be
+      key: name:be
+      type: string
+    - name: name_be_tarask
+      key: name:be-tarask
+      type: string
+    - name: name_uk
+      key: name:uk
+      type: string
+    - name: name_pl
+      key: name:pl
+      type: string
     - name: name_zh
       key: name:zh
       type: string
@@ -743,6 +803,18 @@ tables:
       type: string
     - name: name_ru
       key: name:ru
+      type: string
+    - name: name_be
+      key: name:be
+      type: string
+    - name: name_be_tarask
+      key: name:be-tarask
+      type: string
+    - name: name_uk
+      key: name:uk
+      type: string
+    - name: name_pl
+      key: name:pl
       type: string
     - name: name_zh
       key: name:zh
@@ -792,6 +864,18 @@ tables:
     - name: name_ru
       key: name:ru
       type: string
+    - name: name_be
+      key: name:be
+      type: string
+    - name: name_be_tarask
+      key: name:be-tarask
+      type: string
+    - name: name_uk
+      key: name:uk
+      type: string
+    - name: name_pl
+      key: name:pl
+      type: string
     - name: name_zh
       key: name:zh
       type: string
@@ -836,6 +920,18 @@ tables:
     - name: name_ru
       key: name:ru
       type: string
+    - name: name_be
+      key: name:be
+      type: string
+    - name: name_be_tarask
+      key: name:be-tarask
+      type: string
+    - name: name_uk
+      key: name:uk
+      type: string
+    - name: name_pl
+      key: name:pl
+      type: string
     - name: name_zh
       key: name:zh
       type: string
@@ -871,6 +967,18 @@ tables:
       type: string
     - name: name_ru
       key: name:ru
+      type: string
+    - name: name_be
+      key: name:be
+      type: string
+    - name: name_be_tarask
+      key: name:be-tarask
+      type: string
+    - name: name_uk
+      key: name:uk
+      type: string
+    - name: name_pl
+      key: name:pl
       type: string
     - name: name_zh
       key: name:zh
@@ -1177,6 +1285,18 @@ tables:
       type: string
     - name: name_ru
       key: name:ru
+      type: string
+    - name: name_be
+      key: name:be
+      type: string
+    - name: name_be_tarask
+      key: name:be-tarask
+      type: string
+    - name: name_uk
+      key: name:uk
+      type: string
+    - name: name_pl
+      key: name:pl
       type: string
     - name: name_zh
       key: name:zh

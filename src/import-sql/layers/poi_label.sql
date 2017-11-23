@@ -1,11 +1,11 @@
 CREATE OR REPLACE VIEW poi_label_z14 AS (
     SELECT * FROM (
         SELECT geometry, id AS osm_id, ref, name, name_en, name_es, name_fr,
-        name_de, name_ru, name_zh, type, 0 AS area
+        name_de, name_ru, name_be, name_be_tarask, name_uk, name_pl, name_zh, type, 0 AS area
         FROM osm_poi_point
         UNION ALL
         SELECT geometry, id AS osm_id, ref, name, name_en, name_es, name_fr,
-        name_de, name_ru, name_zh, type, area
+        name_de, name_ru, name_be, name_be_tarask, name_uk, name_pl, name_zh, type, area
         FROM osm_poi_polygon
     ) AS poi_geoms
     -- Nameless POIs must have distinct maki label not the generic default
