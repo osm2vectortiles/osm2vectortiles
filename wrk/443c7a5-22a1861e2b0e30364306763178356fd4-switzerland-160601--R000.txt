@@ -1,0 +1,28 @@
+       id       |                                                                                 ver                                                                                  
+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ ReportName   : | O2V-QA-R000 Environment  
+ ReportVersion: | v0.0.1/2016-jun-29
+ RunTime      : | 2016-06-29 16:05:41.004066+00
+ postgis      : | POSTGIS="2.2.2 r14797" GEOS="3.4.2-CAPI-1.8.2 r3921" PROJ="Rel. 4.8.0, 6 March 2012" GDAL="GDAL 1.10.1, released 2013/08/26" LIBXML="2.9.1" LIBJSON="0.11.99" RASTER
+ postgresql   : | PostgreSQL 9.4.7 on x86_64-unknown-linux-gnu, compiled by gcc (Debian 4.9.2-10) 4.9.2, 64-bit
+(5 rows)
+
+#--------------------------------------------
+# md5sum ./import/* 
+22a1861e2b0e30364306763178356fd4  ./import/switzerland-160601.osm.pbf
+#--------------------------------------------
+#
+# git show --summary 
+commit 443c7a53f9984fcb2480b3fdee8bbd355d2c46a7
+Author: Lukas Martinelli <me@lukasmartinelli.ch>
+Date:   Mon Jun 27 19:01:46 2016 +0200
+
+    Move video introduction up
+
+#--------------------------------------------
+#
+# docker images      
+443c7a5_osm2vectortiles/import-external   latest              c11d5dc430d4        43 hours ago        1.258 GB
+443c7a5_osm2vectortiles/import-osm        latest              f686f7fbda17        43 hours ago        639.9 MB
+443c7a5_osm2vectortiles/import-sql        latest              20d4b7140c02        43 hours ago        699 MB
+443c7a5_osm2vectortiles/postgis           latest              8484cfc9bb86        44 hours ago        590.8 MB

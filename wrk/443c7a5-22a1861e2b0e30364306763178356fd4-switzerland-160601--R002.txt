@@ -1,0 +1,248 @@
+       id       |                                                                                 ver                                                                                  
+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ ReportName   : | O2V-QA-R002 System info - Geometry tables & indexes
+ ReportVersion: | v0.0.1/2016-jun-29
+ RunTime      : | 2016-06-29 16:13:01.513833+00
+ postgis      : | POSTGIS="2.2.2 r14797" GEOS="3.4.2-CAPI-1.8.2 r3921" PROJ="Rel. 4.8.0, 6 March 2012" GDAL="GDAL 1.10.1, released 2013/08/26" LIBXML="2.9.1" LIBJSON="0.11.99" RASTER
+ postgresql   : | PostgreSQL 9.4.7 on x86_64-unknown-linux-gnu, compiled by gcc (Debian 4.9.2-10) 4.9.2, 64-bit
+(5 rows)
+
+                  table_name                  | table_type | n_columns | geomvar_name | typevar_name | idvar_name | n_index | full_total_size | total_relation_size | table_size | indexes_size 
+----------------------------------------------+------------+-----------+--------------+--------------+------------+---------+-----------------+---------------------+------------+--------------
+ admin_z0                                     | VIEW       |         5 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ admin_z1                                     | VIEW       |         5 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ admin_z2                                     | VIEW       |         5 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ admin_z3                                     | VIEW       |         5 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ admin_z4toz5                                 | VIEW       |         5 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ admin_z6                                     | VIEW       |         5 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ admin_z7toz14                                | VIEW       |         5 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ aeroway_z10toz14                             | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ aeroway_z9                                   | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ airport_label_z9toz14                        | VIEW       |        17 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ barrier_line_z14                             | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ building_z13                                 | VIEW       |         3 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ building_z14                                 | VIEW       |         3 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ custom_countries                             | BASE TABLE |        12 | wkb_geometry |              | ogc_fid    |       2 | 96 kB           |               98304 |      73728 |        24576
+ custom_countries                             | BASE TABLE |        12 | wkb_geometry |              | osm_id     |       2 | 96 kB           |               98304 |      73728 |        24576
+ custom_seas                                  | BASE TABLE |        17 | wkb_geometry |              | ogc_fid    |       2 | 88 kB           |               90112 |      65536 |        24576
+ custom_seas                                  | BASE TABLE |        17 | wkb_geometry |              | osm_id     |       2 | 88 kB           |               90112 |      65536 |        24576
+ custom_states                                | BASE TABLE |        13 | wkb_geometry |              | ogc_fid    |       2 | 80 kB           |               81920 |      57344 |        24576
+ custom_states                                | BASE TABLE |        13 | wkb_geometry |              | osm_id     |       2 | 80 kB           |               81920 |      57344 |        24576
+ grid_z9                                      | BASE TABLE |         4 | geometry     |              |            |       1 | 53 MB           |            55500800 |   43835392 |     11665408
+ housenum_label_z14                           | VIEW       |         3 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ landuse_overlay_z10                          | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ landuse_overlay_z11toz12                     | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ landuse_overlay_z13toz14                     | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ landuse_overlay_z5                           | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ landuse_overlay_z6                           | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ landuse_overlay_z7                           | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ landuse_overlay_z8                           | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ landuse_overlay_z9                           | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ landuse_z10                                  | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ landuse_z11                                  | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ landuse_z12                                  | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ landuse_z13toz14                             | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ landuse_z5toz6                               | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ landuse_z7toz8                               | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ landuse_z9                                   | VIEW       |         3 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ mountain_peak_label_z12toz14                 | VIEW       |        11 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ ne_10m_admin_0_boundary_lines_disputed_areas | BASE TABLE |        20 | geom         |              | ogc_fid    |       2 | 136 kB          |              139264 |     114688 |        24576
+ ne_10m_admin_0_boundary_lines_land           | BASE TABLE |        17 | geom         | type         | ogc_fid    |       2 | 1632 kB         |             1671168 |    1597440 |        73728
+ ne_10m_admin_1_states_provinces_lines_shp    | BASE TABLE |        20 | geom         |              | ogc_fid    |       2 | 7984 kB         |             8175616 |    7618560 |       557056
+ ne_10m_lakes                                 | BASE TABLE |        12 | geom         |              | ogc_fid    |       2 | 2624 kB         |             2686976 |    2555904 |       131072
+ ne_10m_ocean                                 | BASE TABLE |         4 | geom         |              | ogc_fid    |       2 | 6744 kB         |             6905856 |    6881280 |        24576
+ ne_10m_populated_places                      | BASE TABLE |        94 | geom         |              | ogc_fid    |       2 | 6384 kB         |             6537216 |    5980160 |       557056
+ ne_110m_admin_0_boundary_lines_land          | BASE TABLE |         6 | geom         |              | ogc_fid    |       2 | 128 kB          |              131072 |     106496 |        24576
+ ne_110m_lakes                                | BASE TABLE |         7 | geom         |              | ogc_fid    |       2 | 72 kB           |               73728 |      49152 |        24576
+ ne_110m_ocean                                | BASE TABLE |         4 | geom         |              | ogc_fid    |       2 | 160 kB          |              163840 |     139264 |        24576
+ ne_50m_admin_0_boundary_lines_land           | BASE TABLE |         5 | geom         |              | ogc_fid    |       2 | 480 kB          |              491520 |     442368 |        49152
+ ne_50m_admin_1_states_provinces_lines        | BASE TABLE |         9 | geom         |              | ogc_fid    |       2 | 208 kB          |              212992 |     188416 |        24576
+ ne_50m_lakes                                 | BASE TABLE |         8 | geom         |              | ogc_fid    |       2 | 456 kB          |              466944 |     425984 |        40960
+ ne_50m_ocean                                 | BASE TABLE |         4 | geom         |              | ogc_fid    |       2 | 1072 kB         |             1097728 |    1073152 |        24576
+ osm_admin_linestring                         | BASE TABLE |         6 | geometry     |              | id         |       3 | 1616 kB         |             1654784 |    1458176 |       196608
+ osm_aero_linestring                          | BASE TABLE |         4 | geometry     | type         | id         |       3 | 352 kB          |              360448 |     229376 |       131072
+ osm_aero_polygon                             | BASE TABLE |         4 | geometry     | type         | id         |       3 | 168 kB          |              172032 |     114688 |        57344
+ osm_airport_point                            | BASE TABLE |        17 | geometry     | type         | id         |       3 | 56 kB           |               57344 |      16384 |        40960
+ osm_airport_polygon                          | BASE TABLE |        18 | geometry     | type         | id         |       3 | 72 kB           |               73728 |      32768 |        40960
+ osm_barrier_linestring                       | BASE TABLE |         4 | geometry     | type         | id         |       3 | 12 MB           |            12812288 |    8183808 |      4628480
+ osm_barrier_polygon                          | BASE TABLE |         4 | geometry     | type         | id         |       3 | 3856 kB         |             3948544 |    2818048 |      1130496
+ osm_building_polygon                         | BASE TABLE |         4 | geometry     |              | id         |       3 | 556 MB          |           582590464 |  381755392 |    200835072
+ osm_building_polygon_gen0                    | BASE TABLE |         4 | geometry     |              | id         |       3 | 25 MB           |            25837568 |   19021824 |      6815744
+ osm_housenumber_point                        | BASE TABLE |         4 | geometry     |              | id         |       3 | 26 MB           |            27492352 |   10919936 |     16572416
+ osm_housenumber_polygon                      | BASE TABLE |         4 | geometry     |              | id         |       3 | 243 MB          |           254705664 |  136634368 |    118071296
+ osm_landuse_polygon                          | BASE TABLE |         4 | geometry     | type         | id         |       3 | 205 MB          |           214663168 |  182738944 |     31924224
+ osm_landuse_polygon_gen0                     | BASE TABLE |         4 | geometry     | type         | id         |       3 | 8288 kB         |             8486912 |    7110656 |      1376256
+ osm_landuse_polygon_gen1                     | BASE TABLE |         4 | geometry     | type         | id         |       3 | 33 MB           |            34340864 |   27926528 |      6414336
+ osm_landuse_split_polygon                    | BASE TABLE |         4 | geometry     | type         | id         |       2 | 176 kB          |              180224 |     155648 |        24576
+ osm_mountain_peak_point                      | BASE TABLE |        12 | geometry     | type         | id         |       3 | 888 kB          |              909312 |     425984 |       483328
+ osm_ocean_polygon                            | BASE TABLE |         3 | geometry     |              | gid        |       2 | 610 MB          |           639967232 |  636813312 |      3153920
+ osm_ocean_polygon_gen0                       | BASE TABLE |         3 | geometry     |              | gid        |       2 | 33 MB           |            35061760 |   31154176 |      3907584
+ osm_place_point                              | BASE TABLE |        15 | geometry     | type         | id         |       3 | 3960 kB         |             4055040 |    2367488 |      1687552
+ osm_poi_point                                | BASE TABLE |        12 | geometry     | type         | id         |       3 | 19 MB           |            20398080 |    9682944 |     10715136
+ osm_poi_polygon                              | BASE TABLE |        13 | geometry     | type         | id         |       3 | 15 MB           |            15261696 |    9674752 |      5586944
+ osm_rail_station_point                       | BASE TABLE |        11 | geometry     | type         | id         |       3 | 672 kB          |              688128 |     303104 |       385024
+ osm_road_geometry                            | BASE TABLE |        22 | geometry     | type         | id         |       3 | 381 MB          |           399106048 |  280363008 |    118743040
+ osm_water_linestring                         | BASE TABLE |        11 | geometry     | type         | id         |       3 | 27 MB           |            27787264 |   20971520 |      6815744
+ osm_water_point                              | BASE TABLE |        11 | geometry     |              | id         |       2 | 2184 kB         |             2236416 |    1089536 |      1146880
+ osm_water_polygon                            | BASE TABLE |        11 | geometry     |              | id         |       3 | 8816 kB         |             9027584 |    7643136 |      1384448
+ osm_water_polygon_gen1                       | BASE TABLE |        11 | geometry     |              | id         |       3 | 872 kB          |              892928 |     737280 |       155648
+ place_label_z10                              | VIEW       |        14 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ place_label_z11toz12                         | VIEW       |        14 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ place_label_z13                              | VIEW       |        14 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ place_label_z14                              | VIEW       |        14 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ place_label_z3                               | VIEW       |        14 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ place_label_z4                               | VIEW       |        14 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ place_label_z5                               | VIEW       |        14 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ place_label_z6toz7                           | VIEW       |        14 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ place_label_z8                               | VIEW       |        14 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ place_label_z9                               | VIEW       |        14 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ poi_label_z14                                | VIEW       |        12 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ rail_station_label_z13                       | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ rail_station_label_z14                       | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ road_label_z11                               | VIEW       |        21 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ road_label_z12toz13                          | VIEW       |        21 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ road_label_z14                               | VIEW       |        21 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ road_label_z8toz10                           | VIEW       |        21 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ road_z10                                     | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ road_z11                                     | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ road_z12                                     | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ road_z13                                     | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ road_z14                                     | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ road_z5                                      | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ road_z6toz7                                  | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ road_z8toz9                                  | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ water_label_z10                              | VIEW       |        10 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ water_label_z11                              | VIEW       |        10 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ water_label_z12                              | VIEW       |        10 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ water_label_z13                              | VIEW       |        10 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ water_label_z14                              | VIEW       |        10 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ waterway_label_z13                           | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ waterway_label_z14                           | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ waterway_z10toz12                            | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ waterway_z13                                 | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ waterway_z14                                 | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ waterway_z7toz9                              | VIEW       |        10 | geometry     | type         | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ water_z0                                     | VIEW       |         2 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ water_z1                                     | VIEW       |         2 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ water_z11toz12                               | VIEW       |         3 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ water_z13toz14                               | VIEW       |         2 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ water_z2toz3                                 | VIEW       |         2 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ water_z4                                     | VIEW       |         2 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ water_z5toz7                                 | VIEW       |         2 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+ water_z8toz10                                | VIEW       |         2 | geometry     |              | osm_id     |         | 0 bytes         |                   0 |          0 |            0
+(121 rows)
+
+                   relname                    |                     indexrelname                      | idx_scan | idx_tup_read | idx_tup_fetch | pg_size_pretty 
+----------------------------------------------+-------------------------------------------------------+----------+--------------+---------------+----------------
+ custom_countries                             | custom_countries_geom_idx                             |        0 |            0 |             0 | 8192 bytes
+ custom_countries                             | custom_countries_pkey                                 |        0 |            0 |             0 | 16 kB
+ custom_seas                                  | custom_seas_geom_idx                                  |        0 |            0 |             0 | 8192 bytes
+ custom_seas                                  | custom_seas_pkey                                      |        0 |            0 |             0 | 16 kB
+ custom_states                                | custom_states_geom_idx                                |        0 |            0 |             0 | 8192 bytes
+ custom_states                                | custom_states_pkey                                    |        0 |            0 |             0 | 16 kB
+ grid_z9                                      | grid_z9_geometry_idx                                  |        3 |           12 |            12 | 11 MB
+ ne_10m_admin_0_boundary_lines_disputed_areas | ne_10m_admin_0_boundary_lines_disputed_areas_geom_idx |        0 |            0 |             0 | 8192 bytes
+ ne_10m_admin_0_boundary_lines_disputed_areas | ne_10m_admin_0_boundary_lines_disputed_areas_pkey     |        0 |            0 |             0 | 16 kB
+ ne_10m_admin_0_boundary_lines_land           | ne_10m_admin_0_boundary_lines_land_geom_idx           |        0 |            0 |             0 | 40 kB
+ ne_10m_admin_0_boundary_lines_land           | ne_10m_admin_0_boundary_lines_land_pkey               |        0 |            0 |             0 | 32 kB
+ ne_10m_admin_1_states_provinces_lines_shp    | ne_10m_admin_1_states_provinces_lines_shp_geom_idx    |        0 |            0 |             0 | 368 kB
+ ne_10m_admin_1_states_provinces_lines_shp    | ne_10m_admin_1_states_provinces_lines_shp_pkey        |        0 |            0 |             0 | 176 kB
+ ne_10m_lakes                                 | ne_10m_lakes_geom_idx                                 |        0 |            0 |             0 | 80 kB
+ ne_10m_lakes                                 | ne_10m_lakes_pkey                                     |        0 |            0 |             0 | 48 kB
+ ne_10m_ocean                                 | ne_10m_ocean_geom_idx                                 |        0 |            0 |             0 | 8192 bytes
+ ne_10m_ocean                                 | ne_10m_ocean_pkey                                     |        0 |            0 |             0 | 16 kB
+ ne_10m_populated_places                      | ne_10m_populated_places_geom_idx                      |     3732 |        11684 |         11684 | 368 kB
+ ne_10m_populated_places                      | ne_10m_populated_places_pkey                          |        0 |            0 |             0 | 176 kB
+ ne_110m_admin_0_boundary_lines_land          | ne_110m_admin_0_boundary_lines_land_geom_idx          |        0 |            0 |             0 | 8192 bytes
+ ne_110m_admin_0_boundary_lines_land          | ne_110m_admin_0_boundary_lines_land_pkey              |        0 |            0 |             0 | 16 kB
+ ne_110m_lakes                                | ne_110m_lakes_geom_idx                                |        0 |            0 |             0 | 8192 bytes
+ ne_110m_lakes                                | ne_110m_lakes_pkey                                    |        0 |            0 |             0 | 16 kB
+ ne_110m_ocean                                | ne_110m_ocean_geom_idx                                |        0 |            0 |             0 | 8192 bytes
+ ne_110m_ocean                                | ne_110m_ocean_pkey                                    |        0 |            0 |             0 | 16 kB
+ ne_50m_admin_0_boundary_lines_land           | ne_50m_admin_0_boundary_lines_land_geom_idx           |        0 |            0 |             0 | 32 kB
+ ne_50m_admin_0_boundary_lines_land           | ne_50m_admin_0_boundary_lines_land_pkey               |        0 |            0 |             0 | 16 kB
+ ne_50m_admin_1_states_provinces_lines        | ne_50m_admin_1_states_provinces_lines_geom_idx        |        0 |            0 |             0 | 8192 bytes
+ ne_50m_admin_1_states_provinces_lines        | ne_50m_admin_1_states_provinces_lines_pkey            |        0 |            0 |             0 | 16 kB
+ ne_50m_lakes                                 | ne_50m_lakes_geom_idx                                 |        0 |            0 |             0 | 24 kB
+ ne_50m_lakes                                 | ne_50m_lakes_pkey                                     |        0 |            0 |             0 | 16 kB
+ ne_50m_ocean                                 | ne_50m_ocean_geom_idx                                 |        0 |            0 |             0 | 8192 bytes
+ ne_50m_ocean                                 | ne_50m_ocean_pkey                                     |        0 |            0 |             0 | 16 kB
+ osm_admin_linestring                         | osm_admin_linestring_geom                             |        0 |            0 |             0 | 80 kB
+ osm_admin_linestring                         | osm_admin_linestring_geom_geohash                     |        1 |         1703 |          1703 | 56 kB
+ osm_admin_linestring                         | osm_admin_linestring_id_idx                           |        0 |            0 |             0 | 56 kB
+ osm_aero_linestring                          | osm_aero_linestring_geom                              |        0 |            0 |             0 | 48 kB
+ osm_aero_linestring                          | osm_aero_linestring_geom_geohash                      |        1 |          935 |           935 | 40 kB
+ osm_aero_linestring                          | osm_aero_linestring_id_idx                            |        0 |            0 |             0 | 40 kB
+ osm_aero_polygon                             | osm_aero_polygon_geom                                 |        0 |            0 |             0 | 24 kB
+ osm_aero_polygon                             | osm_aero_polygon_geom_geohash                         |        1 |          312 |           312 | 16 kB
+ osm_aero_polygon                             | osm_aero_polygon_id_idx                               |        0 |            0 |             0 | 16 kB
+ osm_airport_point                            | osm_airport_point_geom                                |        0 |            0 |             0 | 8192 bytes
+ osm_airport_point                            | osm_airport_point_geom_geohash                        |        0 |            0 |             0 | 16 kB
+ osm_airport_point                            | osm_airport_point_id_idx                              |        0 |            0 |             0 | 16 kB
+ osm_airport_polygon                          | osm_airport_polygon_geom                              |        0 |            0 |             0 | 8192 bytes
+ osm_airport_polygon                          | osm_airport_polygon_geom_geohash                      |        0 |            0 |             0 | 16 kB
+ osm_airport_polygon                          | osm_airport_polygon_id_idx                            |        0 |            0 |             0 | 16 kB
+ osm_barrier_linestring                       | osm_barrier_linestring_geom                           |        0 |            0 |             0 | 2440 kB
+ osm_barrier_linestring                       | osm_barrier_linestring_geom_geohash                   |        1 |        45598 |         45598 | 1064 kB
+ osm_barrier_linestring                       | osm_barrier_linestring_id_idx                         |        0 |            0 |             0 | 1016 kB
+ osm_barrier_polygon                          | osm_barrier_polygon_geom                              |        0 |            0 |             0 | 576 kB
+ osm_barrier_polygon                          | osm_barrier_polygon_geom_geohash                      |        1 |        11105 |         11105 | 264 kB
+ osm_barrier_polygon                          | osm_barrier_polygon_id_idx                            |        0 |            0 |             0 | 264 kB
+ osm_building_polygon                         | osm_building_polygon_geom                             |        0 |            0 |             0 | 105 MB
+ osm_building_polygon                         | osm_building_polygon_geom_geohash                     |        1 |      1966497 |       1966497 | 44 MB
+ osm_building_polygon                         | osm_building_polygon_id_idx                           |        0 |            0 |             0 | 42 MB
+ osm_building_polygon_gen0                    | osm_building_polygon_gen0_geom                        |        0 |            0 |             0 | 3664 kB
+ osm_building_polygon_gen0                    | osm_building_polygon_gen0_geom_geohash                |        1 |        67612 |         67612 | 1496 kB
+ osm_building_polygon_gen0                    | osm_building_polygon_gen0_id_idx                      |        0 |            0 |             0 | 1496 kB
+ osm_housenumber_point                        | osm_housenumber_point_geom                            |        0 |            0 |             0 | 7512 kB
+ osm_housenumber_point                        | osm_housenumber_point_geom_geohash                    |        1 |       139946 |        139946 | 5576 kB
+ osm_housenumber_point                        | osm_housenumber_point_id_idx                          |        0 |            0 |             0 | 3096 kB
+ osm_housenumber_polygon                      | osm_housenumber_polygon_geom                          |        0 |            0 |             0 | 48 MB
+ osm_housenumber_polygon                      | osm_housenumber_polygon_geom_geohash                  |        1 |       478885 |        478885 | 42 MB
+ osm_housenumber_polygon                      | osm_housenumber_polygon_id_idx                        |        0 |            0 |             0 | 23 MB
+ osm_landuse_polygon                          | osm_landuse_polygon_geom                              |        0 |            0 |             0 | 21 MB
+ osm_landuse_polygon                          | osm_landuse_polygon_geom_geohash                      |        1 |       225059 |        225059 | 5000 kB
+ osm_landuse_polygon                          | osm_landuse_polygon_id_idx                            |        0 |            0 |             0 | 4960 kB
+ osm_landuse_polygon_gen0                     | osm_landuse_polygon_gen0_geom                         |        0 |            0 |             0 | 800 kB
+ osm_landuse_polygon_gen0                     | osm_landuse_polygon_gen0_geom_geohash                 |        1 |        11392 |         11392 | 272 kB
+ osm_landuse_polygon_gen0                     | osm_landuse_polygon_gen0_id_idx                       |        0 |            0 |             0 | 272 kB
+ osm_landuse_polygon_gen1                     | osm_landuse_polygon_gen1_geom                         |        0 |            0 |             0 | 4056 kB
+ osm_landuse_polygon_gen1                     | osm_landuse_polygon_gen1_geom_geohash                 |        1 |        49573 |         49573 | 1104 kB
+ osm_landuse_polygon_gen1                     | osm_landuse_polygon_gen1_id_idx                       |        0 |            0 |             0 | 1104 kB
+ osm_landuse_split_polygon                    | osm_landuse_split_polygon_geometry_idx                |        0 |            0 |             0 | 8192 bytes
+ osm_landuse_split_polygon                    | osm_landuse_split_polygon_st_geohash_idx              |        0 |            0 |             0 | 16 kB
+ osm_mountain_peak_point                      | osm_mountain_peak_point_geom                          |        0 |            0 |             0 | 192 kB
+ osm_mountain_peak_point                      | osm_mountain_peak_point_geom_geohash                  |        1 |         3939 |          3939 | 176 kB
+ osm_mountain_peak_point                      | osm_mountain_peak_point_id_idx                        |        0 |            0 |             0 | 104 kB
+ osm_ocean_polygon                            | osm_ocean_polygon_geometry_idx                        |        0 |            0 |             0 | 2264 kB
+ osm_ocean_polygon                            | osm_ocean_polygon_pkey                                |        0 |            0 |             0 | 816 kB
+ osm_ocean_polygon_gen0                       | osm_ocean_polygon_gen0_geometry_idx                   |        0 |            0 |             0 | 3664 kB
+ osm_ocean_polygon_gen0                       | osm_ocean_polygon_gen0_pkey                           |        0 |            0 |             0 | 152 kB
+ osm_place_point                              | osm_place_point_geom                                  |        0 |            0 |             0 | 728 kB
+ osm_place_point                              | osm_place_point_geom_geohash                          |        1 |        12653 |         12653 | 600 kB
+ osm_place_point                              | osm_place_point_id_idx                                |       32 |           32 |            32 | 320 kB
+ osm_poi_point                                | osm_poi_point_geom                                    |        0 |            0 |             0 | 5000 kB
+ osm_poi_point                                | osm_poi_point_geom_geohash                            |        1 |        88122 |         88122 | 3520 kB
+ osm_poi_point                                | osm_poi_point_id_idx                                  |        0 |            0 |             0 | 1944 kB
+ osm_poi_polygon                              | osm_poi_polygon_geom                                  |        0 |            0 |             0 | 2432 kB
+ osm_poi_polygon                              | osm_poi_polygon_geom_geohash                          |        1 |        22162 |         22162 | 1984 kB
+ osm_poi_polygon                              | osm_poi_polygon_id_idx                                |        0 |            0 |             0 | 1040 kB
+ osm_rail_station_point                       | osm_rail_station_point_geom                           |        0 |            0 |             0 | 168 kB
+ osm_rail_station_point                       | osm_rail_station_point_geom_geohash                   |        1 |         2805 |          2805 | 128 kB
+ osm_rail_station_point                       | osm_rail_station_point_id_idx                         |        0 |            0 |             0 | 80 kB
+ osm_road_geometry                            | osm_road_geometry_geom                                |        0 |            0 |             0 | 71 MB
+ osm_road_geometry                            | osm_road_geometry_geom_geohash                        |        1 |       978767 |        978767 | 22 MB
+ osm_road_geometry                            | osm_road_geometry_id_idx                              |        0 |            0 |             0 | 21 MB
+ osm_water_linestring                         | osm_water_linestring_geom                             |        0 |            0 |             0 | 4112 kB
+ osm_water_linestring                         | osm_water_linestring_geom_geohash                     |        1 |        56379 |         56379 | 1288 kB
+ osm_water_linestring                         | osm_water_linestring_id_idx                           |        0 |            0 |             0 | 1256 kB
+ osm_water_point                              | osm_water_point_geometry_idx                          |        0 |            0 |             0 | 648 kB
+ osm_water_point                              | osm_water_point_st_geohash_idx                        |        0 |            0 |             0 | 472 kB
+ osm_water_polygon                            | osm_water_polygon_geom                                |        0 |            0 |             0 | 800 kB
+ osm_water_polygon                            | osm_water_polygon_geom_geohash                        |        1 |        11419 |         11419 | 280 kB
+ osm_water_polygon                            | osm_water_polygon_id_idx                              |        0 |            0 |             0 | 272 kB
+ osm_water_polygon_gen1                       | osm_water_polygon_gen1_geom                           |        0 |            0 |             0 | 72 kB
+ osm_water_polygon_gen1                       | osm_water_polygon_gen1_geom_geohash                   |        1 |         1023 |          1023 | 40 kB
+ osm_water_polygon_gen1                       | osm_water_polygon_gen1_id_idx                         |        0 |            0 |             0 | 40 kB
+(110 rows)
+
